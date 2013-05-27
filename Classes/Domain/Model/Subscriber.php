@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -84,6 +84,21 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	 * @validate NotEmpty
 	 */
 	protected $editcode;
+
+	/**
+	 * Creation Date
+	 *
+	 * @var DateTime
+	 */
+	protected $crdate;
+
+	/**
+	 * event
+	 *
+	 * @var Tx_SlubEvents_Domain_Model_Event
+	 * @lazy
+	 */
+	protected $event;
 
 	/**
 	 * Returns the name
@@ -225,6 +240,35 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function setMessage($message) {
 		$this->message = $message;
+	}
+
+	/**
+	 * Returns the crdate
+	 *
+	 * @return DateTime $crdate
+	 */
+	public function getCrdate() {
+		return $this->crdate;
+	}
+
+	/**
+	 * Sets the crdate
+	 *
+	 * @param DateTime $crdate
+	 * @return void
+	 */
+	public function setCrdate($crdate) {
+		$this->crdate = $crdate;
+	}
+
+	/**
+	 * Sets the event
+	 *
+	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @return void
+	 */
+	public function setEvent(Tx_SlubEvents_Domain_Model_Event $event) {
+		$this->event = $event;
 	}
 
 }

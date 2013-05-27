@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_slubevents_domain_model_subscriber'] = array(
 	'ctrl' => $TCA['tx_slubevents_domain_model_subscriber']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, email, telephone, customerid, number, message, editcode',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, email, telephone, customerid, number, message, editcode, crdate, event',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, email, telephone, customerid, number, message, editcode,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, email, telephone, customerid, number, message, editcode, crdate, event,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -155,6 +155,34 @@ $TCA['tx_slubevents_domain_model_subscriber'] = array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim,required'
+			),
+		),
+		'crdate' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_subscriber.crdate',
+			'config' => array(
+				'type' => 'input',
+				'size' => 10,
+				'eval' => 'datetime',
+				'checkbox' => 1,
+				'default' => time()
+			),
+		),
+		'event' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_subscriber.event',
+			'config' => array(
+				'type' => 'inline',
+				'foreign_table' => 'tx_slubevents_domain_model_event',
+				'minitems' => 0,
+				'maxitems' => 1,
+				'appearance' => array(
+					'collapseAll' => 0,
+					'levelLinksPosition' => 'top',
+					'showSynchronizationLink' => 1,
+					'showPossibleLocalizationRecords' => 1,
+					'showAllLocalizationLink' => 1
+				),
 			),
 		),
 		'event' => array(

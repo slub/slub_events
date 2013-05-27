@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-17T08:30:09Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-27T12:49:32Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -44,6 +44,14 @@
 		<trans-unit id="paginate_previous" approved="yes" xml:space="preserve">
 			<source>Previous</source>
 			<target>Vorherige</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.be.eventmanagement" approved="yes" xml:space="preserve">
+			<source>Event Management</source>
+			<target>SLUB Veranstaltungsmanagement</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.be.subscriberlist" approved="yes" xml:space="preserve">
+			<source>List of Subscribers</source>
+			<target>Anmeldungen</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents.gb.we_consult_you" approved="yes" xml:space="preserve">
 			<source>We Consult You</source>

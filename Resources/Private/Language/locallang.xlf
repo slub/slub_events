@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-05-17T08:30:09Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-05-27T12:49:32Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -40,6 +40,12 @@
 		</trans-unit>
 		<trans-unit id="paginate_previous" xml:space="preserve">
 			<source>Previous</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.be.eventmanagement" xml:space="preserve">
+			<source>Event Management</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.be.subscriberlist" xml:space="preserve">
+			<source>List of Subscribers</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents.gb.we_consult_you" xml:space="preserve">
 			<source>We Consult You</source>

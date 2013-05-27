@@ -30,13 +30,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:section name="content">
 {namespace se=Tx_SlubEvents_ViewHelpers}
 
-<h1><f:translate key="tx_slubevents.be.eventmanagement" /></h1>
+<h1><f:translate key="tx_slubevents.be.subscriberlist" /></h1>
 
 <f:flashMessages />
 
 <f:form action="beList" name="searchParameter" method="post">
 
-<table class="tx_slubevents" >
+<table  class="tx_slubevents" >
 	<tr>
 		<th><label for="selectedStartDateStamp">
 				<f:translate key="tx_slubevents_domain_model_event.start_date_time" />
@@ -66,33 +66,18 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <table class="tx_slubevents">
 	<tr>
-		<th><se:be.functionBar icon="new" /></th>
+		<th><f:translate key="tx_slubevents_domain_model_subscriber.name" /></th>
+		<th><f:translate key="tx_slubevents_domain_model_subscriber.crdate" /></th>
 		<th><f:translate key="tx_slubevents_domain_model_event.title" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_category" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_event.start_date_time" /></th>
-		<th>frei / max</th>
-		<th> </th>
-		<th> </th>
-		<th> </th>
+		<th><f:translate key="tx_slubevents_domain_model_subscriber.number" /></th>
 	</tr>
-
-	<f:for each="{events}" as="event" iteration="eventIterator">
-		<tr class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
-			<td><se:be.functionBar icon="edit" event="{event}" /></td>
-			<td><se:be.functionBar icon="geniusbar" event="{event}" />
-				<span class="eventtitle" title="<se:format.stripTags htmlString='{event.description}' />">{event.title}</span><br />
-				<span class="eventcontact">{event.contact.name}: <f:link.email email="{event.contact.email}" /></span>
-			</td>
-			<td><f:for each="{event.categories}" as="category">
-				<span class="categorytitle" title="<se:format.stripTags htmlString='{category.description}' />">{category.title}</span><br />
-			</f:for>
-			</td>
-			<td><se:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M" /></td>
-			<td><span class="green"><se:format.freePlacesLeft event="{event}" /></span> / {event.maxSubscriber}</td>
-			<td><f:if condition="{event.hidden} == 0"><f:then><f:be.buttons.icon icon="actions-edit-copy" uri="{f:uri.action(action:'beCopy' arguments:'{event:event}')}" title="<f:translate key='be.copyEvent' />" /></f:then></f:if></td>
-			<td><se:be.functionBar icon="hide" event="{event}" /></td>
-			<td><f:link.action action="beIcsInvitation" controller="Subscriber" title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}" arguments="{event : event}"><f:translate key='be.icsInvitation' /></f:link.action></td>
-		</tr>
+	<f:for each="{subscribers}" as="subscriber"  iteration="subscriberIterator">
+	<tr class="">
+		<td><span class="subscriber"><f:link.email email="{subscriber.email}">{subscriber.name}</f:link.email></span></td>
+		<td><se:format.date date="{subscriber.crdate}" format="%d.%m.%Y %H:%M" /></td>
+		<td><span class="eventtitle" title="<se:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">{subscriber.event.title}</span></td>
+		<td>{subscriber.number}</td>
+	</tr>
 	</f:for>
 </table>
 

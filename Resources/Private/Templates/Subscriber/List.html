@@ -25,6 +25,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th><f:translate key="tx_slubevents_domain_model_subscriber.number" /></th>
 		<th><f:translate key="tx_slubevents_domain_model_subscriber.message" /></th>
 		<th><f:translate key="tx_slubevents_domain_model_subscriber.editcode" /></th>
+		<th><f:translate key="tx_slubevents_domain_model_subscriber.crdate" /></th>
 		<th> </th>
 		<th> </th>
 	</tr>
@@ -38,6 +39,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:link.action action="show" arguments="{subscriber : subscriber}"> {subscriber.number}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{subscriber : subscriber}"> {subscriber.message}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{subscriber : subscriber}"> {subscriber.editcode}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{subscriber : subscriber}"> {subscriber.crdate -> f:format.date()}</f:link.action></td>
 			<td><f:link.action action="edit" arguments="{subscriber : subscriber}">Edit</f:link.action></td>
 			<td><f:link.action action="delete" arguments="{subscriber : subscriber}">Delete</f:link.action></td>
 		</tr>

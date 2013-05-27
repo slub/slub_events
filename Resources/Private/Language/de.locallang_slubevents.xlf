@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-27T12:57:05Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="mlang_labels_tabdescr" approved="yes" xml:space="preserve">
+			<source>List, edit and remove events in Backend</source>
+			<target>Veranstaltungen bearbeiten, hinzufügen und löschen im Backend</target>
+		</trans-unit>
+		<trans-unit id="mlang_labels_tablabel" approved="yes" xml:space="preserve">
+			<source>Event Mangement</source>
+			<target>Veranstaltungsmanagement</target>
+		</trans-unit>
+		<trans-unit id="mlang_tabs_tab" approved="yes" xml:space="preserve">
+			<source>Event Management</source>
+			<target>Veranstaltungen</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

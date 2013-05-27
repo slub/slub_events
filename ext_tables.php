@@ -6,7 +6,7 @@ if (!defined('TYPO3_MODE')) {
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventlist',
-	'SLUB: Veranstaltungen'
+	'SLUB: Events: Listing'
 );
 
 $pluginSignature = str_replace('_','',$_EXTKEY) . '_eventlist';
@@ -16,7 +16,7 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventsubscribe',
-	'SLUB: Veranstaltungen: Registrierung'
+	'SLUB: Events: Registration'
 );
 
 $pluginSignature = str_replace('_','',$_EXTKEY) . '_eventsubscribe';
@@ -26,7 +26,7 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventuserpanel',
-	'SLUB: Veranstaltungen: Nutzer-Verwaltung'
+	'SLUB: Events: User Panel'
 );
 
 $pluginSignature = str_replace('_','',$_EXTKEY) . '_eventuserpanel';
@@ -36,7 +36,7 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventgeniusbar',
-	'SLUB: Veranstaltungen: Wissensbar'
+	'SLUB: Events: Wissensbar'
 );
 
 $pluginSignature = str_replace('_','',$_EXTKEY) . '_eventgeniusbar';
@@ -54,7 +54,7 @@ if (TYPO3_MODE === 'BE') {
 		'slubevents',	// Submodule key
 		'',						// Position
 		array(
-			'Event' => 'beList, beCopy, show, new, create, edit, update, delete, listOwn','Category' => '','Subscriber' => 'beIcsInvitation, list, show, new, create, delete','Location' => '',
+			'Event' => 'beList, beCopy, show, new, create, edit, update, delete, listOwn','Category' => '','Subscriber' => 'beIcsInvitation, list, beList','Location' => '',
 		),
 		array(
 			'access' => 'user,group',

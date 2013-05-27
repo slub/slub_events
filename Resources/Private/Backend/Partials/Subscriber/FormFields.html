@@ -26,3 +26,7 @@
 	<f:translate key="tx_slubevents_domain_model_subscriber.editcode" /> <span class="required">(required)</span>
 </label><br />
 	<f:form.textfield property="editcode" /><br />
+<label for="crdate">
+	<f:translate key="tx_slubevents_domain_model_subscriber.crdate" />
+</label><br />
+	<f:form.textfield property="crdate"  value="{subscriber.crdate->f:format.date()}" /><br />

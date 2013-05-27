@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-04-11T12:57:05Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-05-27T16:06:05Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -133,6 +133,9 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber" xml:space="preserve">
 			<source>Subscriber</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" xml:space="preserve">
+			<source>Subscription Date</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" xml:space="preserve">
 			<source>Customerid</source>

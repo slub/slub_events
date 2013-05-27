@@ -174,5 +174,25 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
 		);
 	}
 	
+	/**
+	 * @test
+	 */
+	public function getCrdateReturnsInitialValueForDateTime() { }
+
+	/**
+	 * @test
+	 */
+	public function setCrdateForDateTimeSetsCrdate() { }
+	
+	/**
+	 * @test
+	 */
+	public function getEventReturnsInitialValueForTx_SlubEvents_Domain_Model_Event() { }
+
+	/**
+	 * @test
+	 */
+	public function setEventForTx_SlubEvents_Domain_Model_EventSetsEvent() { }
+	
 }
 ?>

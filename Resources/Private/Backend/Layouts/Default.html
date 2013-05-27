@@ -21,6 +21,11 @@
 			<div id="typo3-docheader-row2">
 				<div class="docheader-row2-left">
 					<f:be.buttons.csh />
+					<f:be.menus.actionMenu>
+						<f:be.menus.actionMenuItem label="<f:translate key='tx_slubevents.be.eventmanagement' />" controller="" action="beList" />
+						<f:be.menus.actionMenuItem label="<f:translate key='tx_slubevents.be.subscriberlist' />" controller="Subscriber" action="beList" />
+					</f:be.menus.actionMenu>
+
 				</div>
 				<div class="docheader-row2-right">
 					<f:be.pagePath />
