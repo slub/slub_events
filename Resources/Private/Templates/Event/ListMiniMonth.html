@@ -1,0 +1,65 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+<p>List Mini Month</p>
+
+<div class="slub-event-minimonth">
+
+	
+	<f:for each="{weeks}" as="week" key="kw" iteration="weekIterator">
+		<f:if condition="{weekIterator.isFirst}">
+			<f:then>
+				<ul class="navigation">
+					<li class="kw">&nbsp;</li>
+					<li>&lt;---</li>
+					<li class="day-{id}"><se:format.date date="@{firstDayOfMonth}" format="%B" /></li>
+					<li>---&gt;</li>
+				</ul>
+				<ul class="daynames">
+					<li class="kw">&nbsp;</li>
+					<f:for each="{week}" as="day" key="id" iteration="dayIterator">
+									<li class="day-{id}"><se:format.date date="@{day.timestamp}" format="%a" /></li>
+					</f:for>
+				</ul>
+			</f:then>
+		</f:if>
+	</f:for>
+
+	
+	<f:for each="{weeks}" as="week" key="kw" iteration="weekIterator">
+		<ul class="week">
+			<li class="kw">{kw}</li>
+			<f:for each="{week}" as="day" key="id" iteration="dayIterator">
+					<f:if condition="{day.events -> f:count()} > 0">
+						<f:then>
+							<li class="day-{id}-{day.active}">
+								<f:link.action action="list" controller="Event" pluginName="Eventlist" title="" pageUid="{settings.pidList}" arguments="{event : day.events}">
+									<f:format.date format="d">@{day.timestamp}</f:format.date>
+								</f:link.action>
+							</li>
+						</f:then>
+						<f:else>
+							<li class="day-{id}-{day.active}"><f:format.date format="d">@{day.timestamp}</f:format.date></li>
+						</f:else>
+					</f:if>
+			
+			</f:for>
+		</ul>
+	</f:for>
+	
+</div>
+
+</f:section>

@@ -1,0 +1,29 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+Sehr geehrte(r) {event.contact.name},
+
+die folgende Veranstaltung hat die maximale Teilnehmerzahl von {event.maxSubscriber} erreicht und ist jetzt ausgebucht:
+
+*{event.title}*
+
+<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+
+<f:if condition="{helper.location}"><f:then>*Veranstaltungsort:*
+{helper.location}</f:then></f:if>
+
+
+*Teilnehmerliste*
+
+<f:for each="{subscribers}" as="subscriber">
+	<f:if condition="{subscriber.number} == 1">
+		<f:then>- {subscriber.name}, {subscriber.email}, {subscriber.customerid}, {subscriber.number} Person</f:then>
+		<f:else>- {subscriber.name}, {subscriber.email}, {subscriber.customerid}, {subscriber.number} Personen</f:else>
+	</f:if>
+</f:for>
+
+Bitte bedenken Sie, dass sich die Teilnehmerliste durch Ab- und Anmeldungen noch ändern kann.
+
+Mit freundlichen Grüßen
+
+
+SLUB Dresden
+

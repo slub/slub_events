@@ -1,0 +1,53 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<p>Sehr geehrte(r) {subscriber.name},</p>
+
+<p>vielen Dank für Ihre Anmeldung zu folgender Veranstaltung:</p>
+
+<p><b>{event.title}</b></p>
+
+<p>
+<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />" />
+</p>
+
+<f:if condition="{helper.location}">
+	<f:then>
+<p><b>Veranstaltungsort: </b><br />{helper.location}</p>
+<f:format.html>{event.location.description}</f:format.html>
+	</f:then>
+</f:if>
+
+<p>Folgende Daten haben wir von Ihnen gespeichert:</p>
+
+<ul>
+<li><f:translate key="tx_slubevents_domain_model_subscriber.name" />: {subscriber.name}</li>
+<li><f:translate key="tx_slubevents_domain_model_subscriber.email" />: {subscriber.email}</li>
+<li><f:translate key="tx_slubevents_domain_model_subscriber.customerid" />: {subscriber.customerid}</li>
+<li><f:translate key="tx_slubevents_domain_model_subscriber.number" />: {subscriber.number}</li>
+<f:if condition="{subscriber.message}">
+<li><f:translate key="tx_slubevents_domain_model_subscriber.message" />: {subscriber.message}</li>
+</f:if>
+</ul>
+
+
+<p><b>Beschreibung: </b></p>
+<f:format.html>{event.description}</f:format.html>
+
+<f:if condition="{subscriber.customerid}">
+	<f:then>
+<p>Eine Liste Ihrer Veranstaltungen an der SLUB finden Sie unter folgendem Link:<br />
+	<f:link.action absolute="1" class="slub-event-link" action="listOwn" controller="Event" pageUid="{settings.pidListOwn}" pluginName="Eventuserpanel"><f:translate key="view_my_events" /></f:link.action>
+</p>
+	</f:then>
+</f:if>
+
+
+<p>Sie können sich über folgenden Link wieder abmelden: <br />
+	<f:link.action absolute="1" class="slub-event-link" action="delete" controller="Subscriber" pageUid="{settings.pidUnSubscribeForm}" pluginName="Eventsubscribe" arguments="{event : event, editcode : subscriber.editcode}"><f:translate key="tx_slubevents_domain_model_event.unsubscribe" /></f:link.action>
+</p>
+
+<p>Mit freundlichen Grüßen</p>
+
+<p>&nbsp;</p>
+
+<p>{event.contact.name} <br />SLUB Dresden</p>
+

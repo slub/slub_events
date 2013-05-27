@@ -1,0 +1,138 @@
+table.tx_slubevents, div.tx_slubevents {
+	border: 1px dotted red;
+	padding: 10px;
+	border-spacing: 0;
+}
+table.tx_slubevents th {
+	font-size: 12pt;
+	font-weight: bold;
+	padding: 4px;
+}
+
+table.tx_slubevents td {
+	font-size: 11pt;
+	font-weight: normal;
+	padding: 4px;
+}
+
+table.tx_slubevents td span.green {
+	color: green;
+}
+
+table.tx_slubevents td span.eventcontact {
+	font-size: 70%;
+}
+
+table.tx_slubevents td span.geniusbar {
+	color: red;
+	cursor: pointer;
+}
+
+table.tx_slubevents tr.Even{
+	background-color: #dedede;
+}
+
+div.tx_slubevents p, div.tx_slubevents div {
+	font-size: 11pt;
+	font-weight: normal;
+	padding: 4px;
+}
+
+div.tx_slubevents h3 {
+	font-size: 12pt;
+	font-weight: bold;
+	padding: 4px;
+}
+
+table.tx_slubevents ul {
+	padding: 3px 0 3px 1.5em;
+}
+
+/*
+ *------
+ * ...
+ * -----
+ * 
+ * */
+.slub-event-list {
+	background: transparent;
+}
+#leftcol .slub-event-list ul {
+	margin: 0px;
+
+}
+
+.slub-event-list li {
+	margin: 0.2em 0;
+	padding: 0.3em 0.5em;
+	border: 1px solid #bdd;
+	vertical-align: middle;
+	text-align: left;
+	list-style: none;
+}
+
+.slub-event-list li.heading {
+	list-style: none;
+	border: none;
+}
+
+.slub-event-list ul.f3-widget-paginator {
+	width: 100%;
+	padding: 0.3em 0;
+	border: 1px solid #bdd;
+	vertical-align: middle;
+	text-align: left;
+	height: 22px;
+	margin: 0px;
+}
+.slub-event-list ul.f3-widget-paginator li {
+	float: left;
+	list-style: none;
+	border: none;
+	margin: 0;
+	padding: 0.2em 0.4em;
+}
+
+.slub-event-list li.Odd {
+}
+.slub-event-list li.Even {
+	background: #e1f4f7;
+}
+
+.slub-event-list div.subscription {
+	float: right;
+}
+.slub-event-list div.teaser {
+	float: left;
+}
+.slub-event-list div.clear {
+	clear: both;
+}
+
+.slub-event-register ul.slub-event-error {
+	padding: 1em 1em 1em 2em;
+	border: 1px solid red;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+.slub-event-register form label.error {
+	color: red;
+	font-weight: bold;
+}
+
+#leftcol .slub-event-register form input.error[type="text"] {
+	border-bottom: 1px solid red;
+}
+
+.slub-event-register .event-short ul {
+	margin: 0.2em 0;
+	padding: 0.3em 0.5em;
+	border: 1px solid #bdd;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.slub-event-register .event-short ul li {
+	list-style: none;
+}

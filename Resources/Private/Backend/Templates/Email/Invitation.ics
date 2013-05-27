@@ -1,0 +1,50 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+PRODID:-//CALENDAR SLUB//DE
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+BEGIN:DAYLIGHT
+DTSTART:20130331T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+TZNAME:CEST
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20131027T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+TZNAME:CET
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+ORGANIZER;CN="{event.contact.name}":MAILTO:{event.contact.email}
+DESCRIPTION:{helper.description}
+SUMMARY:{event.title}
+UID:{event.uid}-event-slub-dresden
+<f:if condition="{helper.allDay} == 1"><f:then>
+DTSTART;VALUE=DATE:<f:format.date date="@{helper.start}" format="Ymd" />
+<f:if condition="{helper.end}"><f:then>
+DTEND;VALUE=DATE:<f:format.date date="@{helper.end}" format="Ymd" />
+</f:then></f:if>
+X-MICROSOFT-CDO-ALLDAYEVENT:TRUE</f:then><f:else>
+DTSTART;TZID=Europe/Berlin:<f:format.date date="@{helper.start}" format="Ymd\THis" />
+<f:if condition="{helper.end}"><f:then>
+DTEND;TZID=Europe/Berlin:<f:format.date date="@{helper.end}" format="Ymd\THis" />
+</f:then></f:if>
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+</f:else></f:if>
+DTSTAMP:<f:format.date date="@{helper.now}" format="Ymd\THis" />
+LAST-MODIFIED:<f:format.date date="@{helper.now}" format="Ymd\THis" />
+SEQUENCE:0
+CLASS:PUBLIC
+LOCATION:{helper.locationics}
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+X-MICROSOFT-CDO-BUSYSTATUS:FREE
+X-MICROSOFT-CDO-IMPORTANCE:1
+END:VEVENT
+END:VCALENDAR
+

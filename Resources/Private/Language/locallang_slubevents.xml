@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for backend module Veranstaltungen belonging to extension 'slub_events'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+		<label index="mlang_tabs_tab">Veranstaltungen</label>
+			<label index="mlang_labels_tabdescr">List all events in Backend</label>
+			<label index="mlang_labels_tablabel">Veranstaltungen</label>
+		</languageKey>
+	</data>
+</T3locallang>

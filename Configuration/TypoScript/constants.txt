@@ -1,0 +1,30 @@
+plugin.tx_slubevents {
+	view {
+		# cat=plugin.tx_slubevents/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:slub_events/Resources/Private/Templates/
+		# cat=plugin.tx_slubevents/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:slub_events/Resources/Private/Partials/
+		# cat=plugin.tx_slubevents/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:slub_events/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_slubevents//a; type=string; label=Default storage PID
+		storagePid = 
+	}
+}
+
+module.tx_slubevents {
+	view {
+		# cat=module.tx_slubevents/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:slub_events/Resources/Private/Backend/Templates/
+		# cat=module.tx_slubevents/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:slub_events/Resources/Private/Backend/Partials/
+		# cat=module.tx_slubevents/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:slub_events/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_slubevents//a; type=string; label=Default storage PID
+		storagePid = 
+	}
+}
+## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder

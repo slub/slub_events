@@ -1,0 +1,7 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<se:format.date date="{event.startDateTime}" format="%a, %x" /><f:if condition="{event.isAllday} !=1 "> <f:then> <se:format.date
+date="{event.startDateTime}" format="%H:%M" /> <f:if condition="{event.endDateTime}"> <f:then> <f:if condition="{0:
+event.startDate} != {0: event.endDate}"> <f:then> Uhr bis <se:format.date date="{event.endDateTime}" format="%a, %x" /><f:if
+condition="{event.endTime}"> <f:then> <se:format.date date="{event.endDateTime}" format="%H:%M" /> Uhr </f:then> </f:if>
+</f:then> <f:else> <f:if condition="{event.endDateTime}"> <f:then> - <se:format.date date="{event.endDateTime}" format="%H:%M" /> Uhr
+</f:then> </f:if> </f:else> </f:if> </f:then> <f:else> Uhr </f:else> </f:if> </f:then> </f:if>

@@ -1,0 +1,68 @@
+plugin.tx_slubevents {
+	view {
+		templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
+		partialRootPath = {$plugin.tx_slubevents.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_slubevents.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_slubevents.persistence.storagePid}
+	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		# rewrittenPropertyMapper = 1
+	}
+
+	settings {
+		# --------------
+		#  List
+		# --------------
+		list {
+			# Paginate configuration.
+			paginate {
+				itemsPerPage = 10
+				insertAbove = TRUE
+				insertBelow = TRUE
+				lessPages = TRUE
+				forcedNumberOfLinks = 5
+				pagesBefore = 3
+				pagesAfter = 3
+			}
+		}
+	}
+}
+
+plugin.tx_slubevents._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-slub-events table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-slub-events table th {
+		font-weight:bold;
+	}
+
+	.tx-slub-events table td {
+		vertical-align:top;
+	}
+)
+
+ # Module configuration
+module.tx_slubevents {
+	persistence {
+		storagePid = {$module.tx_slubevents.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_slubevents.view.templateRootPath}
+		partialRootPath = {$module.tx_slubevents.view.partialRootPath}
+		layoutRootPath = {$module.tx_slubevents.view.layoutRootPath}
+	}
+}
+## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
+
+page.includeCSS.slubevents = EXT:slub_events/Resources/Public/Css/slub-event-basic.css
+page.includeCSS.slubeventsgb = EXT:slub_events/Resources/Public/Css/slub-event-gb.css

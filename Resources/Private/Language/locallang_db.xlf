@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-04-11T12:57:05Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="tx_slubevents_domain_model_category" xml:space="preserve">
+			<source>Category</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.parent" xml:space="preserve">
+			<source>Parent Category</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact" xml:space="preserve">
+			<source>Contact Details</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.email" xml:space="preserve">
+			<source>Email</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.name" xml:space="preserve">
+			<source>Name</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.photo" xml:space="preserve">
+			<source>Photo</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.telephone" xml:space="preserve">
+			<source>Telephone</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_discipline" xml:space="preserve">
+			<source>Discipline</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_discipline.name" xml:space="preserve">
+			<source>Name</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event" xml:space="preserve">
+			<source>Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.all_day" xml:space="preserve">
+			<source>Is Allday</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience" xml:space="preserve">
+			<source>Audience</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience.I.0" xml:space="preserve">
+			<source>Öffentlichkeit</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience.I.1" xml:space="preserve">
+			<source>SchülerInnen</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience.I.2" xml:space="preserve">
+			<source>Studierende</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience.I.3" xml:space="preserve">
+			<source>SeniorInnen</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience.I.4" xml:space="preserve">
+			<source>Promovierende/Mitarbeiter TU</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience.I.5" xml:space="preserve">
+			<source>AbsolventInnen</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.cancelled" xml:space="preserve">
+			<source>is cancelled</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.categories" xml:space="preserve">
+			<source>Categories</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.contact" xml:space="preserve">
+			<source>Contact</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.discipline" xml:space="preserve">
+			<source>Discipline</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date_time" xml:space="preserve">
+			<source>End of Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" xml:space="preserve">
+			<source>Genius-Bar Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.location" xml:space="preserve">
+			<source>Location</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" xml:space="preserve">
+			<source>Max Subscriber</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" xml:space="preserve">
+			<source>Min Subscriber</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" xml:space="preserve">
+			<source>Start of Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end" xml:space="preserve">
+			<source>End of Subscription</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_info_sent" xml:space="preserve">
+			<source>End of Subscription Information is already sent.</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time" xml:space="preserve">
+			<source>End of Subscription</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.subscribers" xml:space="preserve">
+			<source>Subscribers</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.teaser" xml:space="preserve">
+			<source>Teaser</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location" xml:space="preserve">
+			<source>Location</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.link" xml:space="preserve">
+			<source>Link</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.name" xml:space="preserve">
+			<source>Name</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.parent" xml:space="preserve">
+			<source>Parent Location</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber" xml:space="preserve">
+			<source>Subscriber</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" xml:space="preserve">
+			<source>Customerid</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.editcode" xml:space="preserve">
+			<source>Editcode</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.email" xml:space="preserve">
+			<source>Email</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.message" xml:space="preserve">
+			<source>Message</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.name" xml:space="preserve">
+			<source>Name</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.number" xml:space="preserve">
+			<source>Number</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" xml:space="preserve">
+			<source>Telephone</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

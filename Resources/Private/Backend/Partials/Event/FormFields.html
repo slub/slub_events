@@ -1,0 +1,52 @@
+<label for="title">
+	<f:translate key="tx_slubevents_domain_model_event.title" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="title" /><br />
+<label for="startDateTime">
+	<f:translate key="tx_slubevents_domain_model_event.start_date_time" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="startDateTime"  value="{event.startDateTime->f:format.date()}" /><br />
+<label for="allDay">
+	<f:translate key="tx_slubevents_domain_model_event.all_day" />
+</label><br />
+	<f:form.checkbox property="allDay" value="1" /><br />
+<label for="endDateTime">
+	<f:translate key="tx_slubevents_domain_model_event.end_date_time" />
+</label><br />
+	<f:form.textfield property="endDateTime"  value="{event.endDateTime->f:format.date()}" /><br />
+<label for="subEndDateTime">
+	<f:translate key="tx_slubevents_domain_model_event.sub_end_date_time" />
+</label><br />
+	<f:form.textfield property="subEndDateTime"  value="{event.subEndDateTime->f:format.date()}" /><br />
+<label for="teaser">
+	<f:translate key="tx_slubevents_domain_model_event.teaser" />
+</label><br />
+	<f:form.textarea property="teaser" cols="40" rows="15" /><br />
+<label for="description">
+	<f:translate key="tx_slubevents_domain_model_event.description" />
+</label><br />
+	<f:form.textarea property="description" cols="40" rows="15" /><br />
+<label for="minSubscriber">
+	<f:translate key="tx_slubevents_domain_model_event.min_subscriber" />
+</label><br />
+	<f:form.textfield property="minSubscriber" /><br />
+<label for="maxSubscriber">
+	<f:translate key="tx_slubevents_domain_model_event.max_subscriber" />
+</label><br />
+	<f:form.textfield property="maxSubscriber" /><br />
+<label for="audience">
+	<f:translate key="tx_slubevents_domain_model_event.audience" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="audience" /><br />
+<label for="subEndDateInfoSent">
+	<f:translate key="tx_slubevents_domain_model_event.sub_end_date_info_sent" />
+</label><br />
+	<f:form.checkbox property="subEndDateInfoSent" value="1" /><br />
+<label for="geniusBar">
+	<f:translate key="tx_slubevents_domain_model_event.genius_bar" />
+</label><br />
+	<f:form.checkbox property="geniusBar" value="1" /><br />
+<label for="cancelled">
+	<f:translate key="tx_slubevents_domain_model_event.cancelled" />
+</label><br />
+	<f:form.checkbox property="cancelled" value="1" /><br />

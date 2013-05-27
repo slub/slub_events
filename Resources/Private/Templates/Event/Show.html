@@ -1,0 +1,90 @@
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+
+<div class="slub-event-show">
+	<f:if condition="{event}">
+		<f:then>
+			<h3>{event.title}</h3>
+			<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+			
+			<f:format.html>{event.description}</f:format.html>
+
+			<div class="location">
+			<f:translate key="tx_slubevents_domain_model_location" />:
+			<f:if condition="{event.location.link}">
+				<f:then>
+					<f:if condition="<se:link.islocal link='{event.location.link}' />">
+						<f:then>
+							<f:link.page pageUid="{event.location.link}">{event.location.name}</f:link.page>
+						</f:then>
+						<f:else>
+							<f:link.external uri="{event.location.link}">{event.location.name}</f:link.external>
+						</f:else>
+					</f:if>
+				</f:then>
+				<f:else>
+					{event.location.name}
+				</f:else>
+			</f:if>
+			<f:format.html>{event.location.description}</f:format.html>
+			</div>
+			
+			<div class="subscription">
+				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
+					<f:then>
+						Mindestteilnehmerzahl: {event.minsubscriber} <br />
+						<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 1">
+							<f:then>
+								<f:translate key="tx_slubevents_domain_model_event.oneFreePlace" />
+							</f:then>
+							<f:else>
+								<se:format.freePlacesLeft event="{event}" /> <f:translate key="tx_slubevents_domain_model_event.freeplaces" />
+							</f:else>
+						</f:if>
+						--> 
+						<f:link.action action="new" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
+					</f:then>
+					<f:else>
+						<f:if condition="{event.maxSubscriber} > 0">
+						<f:then>
+							<f:if condition="{event.maxSubscriber} <= <f:count subject='{event.subscribers}' />">
+								<f:then>Die maximale Teilnehmerzahl von {event.maxSubscriber} ist erreicht.</f:then>
+								<f:else>Es ist keine Anmeldung mehr möglich.</f:else>
+							</f:if>
+						</f:then>
+						<f:else>Keine Anmeldung erforderlich.</f:else>
+						</f:if>
+					</f:else>
+				</f:if>
+			</div>
+		
+			<div class="category"><f:translate key="tx_slubevents_domain_model_category" />:
+			<f:for each="{event.categories}" as="category">
+				{category.title} <br />
+			</f:for>
+			</div>
+			
+		</f:then>
+		<f:else>
+			<p>Leider konnten wir die gesuchte Veranstaltung nicht finden.</p>
+		</f:else>
+	</f:if>
+</div>
+
+<f:link.action action="list" pageUid="{settings.pidListing}">Zurück zur Übersicht</f:link.action><br />
+</f:section>

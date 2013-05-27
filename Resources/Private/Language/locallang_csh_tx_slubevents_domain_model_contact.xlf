@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-05-24T08:58:24Z" product-name="slub_events">
+		<header/>
+		<body>
+
+			<trans-unit id="name.description">
+				<source>Name of Contact</source>
+			</trans-unit>
+			<trans-unit id="email.description">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="telephone.description">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>Description Field</source>
+			</trans-unit>
+			<trans-unit id="photo.description">
+				<source>Photo of Contact Person</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

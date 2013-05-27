@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-17T07:23:23Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="link.description" approved="yes" xml:space="preserve">
+			<source>Link to further information. This link may be the local page id as integer value or a full link with http://.</source>
+			<target>Link zu weiteren Informationen.  Die Angabe kann folgendes enthalten:&lt;br /&gt;&lt;br /&gt;- eine Seiten-ID im lokalen TYPO3 Baum&lt;br /&gt;- ein vollständiger Link mit http://&lt;br /&gt;&lt;br /&gt;Im Fall des 3D-Modells mit der Domain 3d.slub-dresden.de wird ein zusätzliches Icon  beim Link angezeigt.</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

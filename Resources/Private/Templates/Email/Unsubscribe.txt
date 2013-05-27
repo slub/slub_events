@@ -1,0 +1,22 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+Sehr geehrte(r) {subscriber.name},
+
+Sie haben sich erfolgreich von der folgenden Veranstaltung abgemeldet:
+
+*{event.title}*
+<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+<f:if condition="{helper.location}"><f:then>*Veranstaltungsort:*
+{helper.location}</f:then></f:if>
+
+<f:if condition="{subscriber.customerid}">
+	<f:then>
+Eine Liste Ihrer Veranstaltungen an der SLUB finden Sie unter folgendem Link:
+	<f:uri.action absolute="1" action="listOwn" controller="Event" pageUid="{settings.pidListOwn}" pluginName="Eventuserpanel"><f:translate key="view_my_events" /></f:uri.action>
+	</f:then>
+</f:if>
+
+Mit freundlichen Grüßen
+
+{event.contact.name}
+SLUB Dresden
+

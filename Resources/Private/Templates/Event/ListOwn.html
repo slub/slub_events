@@ -1,0 +1,61 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+<div>
+<f:if condition="{subscribers}">
+	<f:then>
+	<ul>
+	<f:if condition="{events}">
+		<f:then>
+			<f:for each="{events}" as="event">
+				<li>
+					<f:link.action action="show" arguments="{event : event}"> {event.title}</f:link.action> <br />
+					<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+					<ul>
+					<f:for each="{event.subscribers}" as="lsub">
+						<f:for each="{subscribers}" as="subscriber">
+							<f:if condition="{0:subscriber.editcode} == {0:lsub.editcode}">
+								<f:then>
+								<li>
+									<div class="subscription">
+										<f:link.action action="delete" controller="Subscriber" pageUid="{settings.pidUnsubscribeForm}" pluginName="Eventsubscribe" arguments="{event : event, editcode : subscriber.editcode}"><f:translate key="tx_slubevents_domain_model_event.unsubscribe" /></f:link.action>
+									</div>
+								</li>
+								</f:then>
+							</f:if>
+						</f:for>
+					</f:for>
+					</ul>
+				</li>
+			</f:for>
+		</f:then>
+		<f:else>
+			<p>Sie sind zu keiner Veranstaltung angemeldet.</p>
+		</f:else>
+	</f:if>
+	</ul>
+	</f:then>
+	<f:else>
+	<div class="hint">
+		<p class="extrabox">Bitte melden Sie sich <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zu "<f:translate key="view_my_events" />" zurückgeleitet.</p>
+	</div>
+	</f:else>
+</f:if>
+	
+</div>
+
+</f:section>

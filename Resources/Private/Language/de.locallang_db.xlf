@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-04-11T12:57:05Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="tx_slubevents_domain_model_category" approved="yes" xml:space="preserve">
+			<source>Category</source>
+			<target>Kategorie</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes" xml:space="preserve">
+			<source>Title</source>
+			<target>Titel</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_discipline" approved="yes" xml:space="preserve">
+			<source>Discipline</source>
+			<target>Fachdisziplin</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_discipline.name" approved="yes" xml:space="preserve">
+			<source>Name</source>
+			<target>Bezeichnung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event" approved="yes" xml:space="preserve">
+			<source>Event</source>
+			<target>Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.all_day" approved="yes" xml:space="preserve">
+			<source>Is Allday</source>
+			<target>ganztägig</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.audience" approved="yes" xml:space="preserve">
+			<source>Audience</source>
+			<target>Zielgruppe</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.cancelled" approved="yes" xml:space="preserve">
+			<source>is cancelled</source>
+			<target>abgesagt</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes" xml:space="preserve">
+			<source>Categories</source>
+			<target>Kategorie</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.contact" approved="yes" xml:space="preserve">
+			<source>Contact</source>
+			<target>Ansprechpartner</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.contact_email" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>E-Mail-Adresse</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.contact_name" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Name</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes" xml:space="preserve">
+			<source>Description</source>
+			<target>Beschreibungstext (lang)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.discipline" approved="yes" xml:space="preserve">
+			<source>Discipline</source>
+			<target>Fachdisziplin</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Ende</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Datum Ende</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date_time" approved="yes" xml:space="preserve">
+			<source>End of Event</source>
+			<target>Ende der Veranstaltung (Datum + Uhrzeit)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_time" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Uhrzeit Ende</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes" xml:space="preserve">
+			<source>Genius-Bar Event</source>
+			<target>Wissensbar-Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.location" approved="yes" xml:space="preserve">
+			<source>Location</source>
+			<target>Ort</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" approved="yes" xml:space="preserve">
+			<source>Max Subscriber</source>
+			<target>Maximale Teilnehmerzahl</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes" xml:space="preserve">
+			<source>Min Subscriber</source>
+			<target>Mindesteilnehmerzahl</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Beginn</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start_date" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Datum Beginn</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes" xml:space="preserve">
+			<source>Start of Event</source>
+			<target>Beginn</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start_time" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Uhrzeit Beginn</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end" approved="yes" xml:space="preserve">
+			<source>End of Subscription</source>
+			<target>Anmeldefrist</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Datum</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_info_sent" approved="yes" xml:space="preserve">
+			<source>End of Subscription Information is already sent.</source>
+			<target>Benachrichtigung über abgelaufene Anmeldefrist wurde bereits versendet.</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time" approved="yes" xml:space="preserve">
+			<source>End of Subscription</source>
+			<target>Anmeldefrist (Datum + Uhrzeit)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_time" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Uhrzeit</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.subscribers" approved="yes" xml:space="preserve">
+			<source>Subscribers</source>
+			<target>Teilnehmer</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes" xml:space="preserve">
+			<source>Teaser</source>
+			<target>Kurzankündigung (Teaser)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.title" approved="yes" xml:space="preserve">
+			<source>Title</source>
+			<target>Titel</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location" approved="yes" xml:space="preserve">
+			<source>Location</source>
+			<target>Ort</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.description" approved="yes" xml:space="preserve">
+			<source>Description</source>
+			<target>Beschreibung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.link" approved="yes" xml:space="preserve">
+			<source>Link</source>
+			<target>Link</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.name" approved="yes" xml:space="preserve">
+			<source>Name</source>
+			<target>Bezeichnung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes" xml:space="preserve">
+			<source>Subscriber</source>
+			<target>Teilnehmer</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes" xml:space="preserve">
+			<source>Customerid</source>
+			<target>Benutzernummer</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes" xml:space="preserve">
+			<source>Email</source>
+			<target>Email-Adresse</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes" xml:space="preserve">
+			<source>Name</source>
+			<target>Name</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes" xml:space="preserve">
+			<source>Number</source>
+			<target>Anzahl</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" approved="yes" xml:space="preserve">
+			<source>Telephone</source>
+			<target>Telefonnummer</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-04-11T12:58:23Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="all_day.description" xml:space="preserve">
+			<source>This is an Allday-Event (Time is ignored)</source>
+		</trans-unit>
+		<trans-unit id="audience.description" xml:space="preserve">
+			<source>Target Audience</source>
+		</trans-unit>
+		<trans-unit id="cancelled.description" xml:space="preserve">
+			<source>This will mark the event as cancelled. This flag is automatically set by cronjob. The cronjob sents a cancellation email to all subscribers.</source>
+		</trans-unit>
+		<trans-unit id="categories.description" xml:space="preserve">
+			<source>Please select ONE category.</source>
+		</trans-unit>
+		<trans-unit id="contact.description" xml:space="preserve">
+			<source>Contact</source>
+		</trans-unit>
+		<trans-unit id="description.description" xml:space="preserve">
+			<source>description</source>
+		</trans-unit>
+		<trans-unit id="discipline.description" xml:space="preserve">
+			<source>Discipline Id</source>
+		</trans-unit>
+		<trans-unit id="end_date_time.description" xml:space="preserve">
+			<source>End of Event</source>
+		</trans-unit>
+		<trans-unit id="location.description" xml:space="preserve">
+			<source>Location Ids</source>
+		</trans-unit>
+		<trans-unit id="max_subscriber.description" xml:space="preserve">
+			<source>Maximum of Subscribers</source>
+		</trans-unit>
+		<trans-unit id="min_subscriber.description" xml:space="preserve">
+			<source>Minimum of Subscribers</source>
+		</trans-unit>
+		<trans-unit id="start_date_time.description" xml:space="preserve">
+			<source>Start of Event</source>
+		</trans-unit>
+		<trans-unit id="sub_end.description" xml:space="preserve">
+			<source>End of Subscription. Up to this date and time the subscription is possible. Leafe time empty or 0:00 to stop subscription _before_ the given day.</source>
+		</trans-unit>
+		<trans-unit id="sub_end_date_info_sent.description" xml:space="preserve">
+			<source>This option is checked automatically after the information mail was sent. To resent the mail on next cronjob run, remove the flag. If you do not want a notification, check this option.</source>
+		</trans-unit>
+		<trans-unit id="sub_end_date_time.description" xml:space="preserve">
+			<source>End of Subscription</source>
+		</trans-unit>
+		<trans-unit id="subscribers.description" xml:space="preserve">
+			<source>Category Ids</source>
+		</trans-unit>
+		<trans-unit id="teaser.description" xml:space="preserve">
+			<source>teaser</source>
+		</trans-unit>
+		<trans-unit id="title.description" xml:space="preserve">
+			<source>title</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

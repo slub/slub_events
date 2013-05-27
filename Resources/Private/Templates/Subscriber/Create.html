@@ -1,0 +1,32 @@
+<f:layout name="Default" />
+
+This template displays a NEW form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        New.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+<div class="event-short">
+	<h4><f:translate key="tx_slubevents_domain_model_event" />: {event.title}</h4>
+	<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+</div>
+
+<div class="hint">
+	<p>Vielen Dank für Ihre Anmeldung. Sie erhalten eine E-Mail an Ihre Adresse <b>{subscriber.email}</b>.</p>
+
+	<p>Hier finden Sie <f:link.action absolute="1" action="listOwn" controller="Event" pageUid="{settings.pidListOwn}" pluginName="Eventuserpanel"><f:translate key="view_my_events" /></f:link.action>. Sie können sich darüber auch einfach wieder abmelden.</p>
+</div>
+
+
+
+
+</f:section>
+

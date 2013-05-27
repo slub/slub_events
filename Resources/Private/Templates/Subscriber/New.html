@@ -1,0 +1,94 @@
+<f:layout name="Default" />
+
+This template displays a NEW form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        New.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+<div class="slub-event-register">
+
+<div class="event-short">
+	<f:if condition="{event.geniusBar}">
+		<f:then>
+			<h4><f:translate key="tx_slubevents_domain_model_event.individual_appointment" />: {category.title}</h4>
+		</f:then>
+		<f:else>
+			<h4><f:translate key="tx_slubevents_domain_model_event" />: {event.title}</h4>
+		</f:else>
+	</f:if>
+	<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+	<div class="location" title="<se:format.stripTags htmlString='{event.location.description}' />">
+	<f:translate key="tx_slubevents_domain_model_location" />:
+	<f:if condition="{event.location.link}">
+		<f:then>
+			<f:if condition="<se:link.islocal link='{event.location.link}' />">
+				<f:then>
+					<f:link.page pageUid="{event.location.link}">{event.location.name}</f:link.page>
+				</f:then>
+				<f:else>
+					<f:if condition="<se:link.is3dModel link='{event.location.link}' />">
+					<f:then>
+						<f:link.external class="threed" uri="{event.location.link}">{event.location.name}</f:link.external>
+					</f:then>
+					<f:else>
+						<f:link.external uri="{event.location.link}">{event.location.name}</f:link.external>
+					</f:else>
+					</f:if>
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			{event.location.name}
+		</f:else>
+	</f:if>
+	
+	</div>
+</div>
+
+<f:if condition="{loggedIn}">
+	<f:then>	</f:then>
+	<f:else>
+<div class="hint">
+	<p class="extrabox">Haben Sie bereits ein SLUB-Nutzerkonto? Dann melden Sie sich bitte <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zur Veranstaltungsanmeldung zurückgeleitet.</p>
+</div>
+</f:else>
+</f:if>
+
+
+<f:render partial="FormErrors" />
+
+<f:form action="create" name="newSubscriber" object="{newSubscriber}">
+
+	<f:if condition="{event.geniusBar}">
+		<f:then>
+			<f:render partial="Subscriber/FormFieldsGb"  arguments="{subscriber : subscriber, readonly : loggedIn, event : event, errors : errors}" />
+		</f:then>
+		<f:else>
+			<f:render partial="Subscriber/FormFields"  arguments="{subscriber : subscriber, readonly : loggedIn, event : event, errors : errors}" />
+		</f:else>
+	</f:if>
+
+	<f:form.hidden name="event" value="{event}"/>
+	<f:form.hidden name="category" value="{category}"/>
+	<div class="submit">
+		<f:form.submit class="button submit" value="<f:translate key='tx_slubevents_domain_model_subscriber.submit_registration' />" />
+		<f:link.external class="button linkback" uri="javascript:history.back();"><f:translate key="paginate_back" /></f:link.external>
+	</div>
+	
+</f:form>
+
+
+</div>
+
+</f:section>
+

@@ -1,0 +1,47 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+
+<li class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
+	<h4><f:link.action action="show" controller="Event" pluginName="Eventlist" title="<se:format.stripTags htmlString='{event.description}' />" pageUid="{settings.pidDetails}" arguments="{event : event}">{event.title}</f:link.action></h4>
+	<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+
+	<div class="clear"></div>
+	<div class="teaser">
+		<f:if condition="{event.cancelled}">
+			<f:then>
+				<h4>Die Veranstaltung wurde abgesagt.</h4>
+			</f:then>
+			<f:else>
+				<f:format.html>{event.teaser}</f:format.html>
+			</f:else>
+		</f:if>
+	</div>
+	<div class="subscription">
+		<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
+			<f:then>
+				<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 1">
+					<f:then>
+						<f:translate key="tx_slubevents_domain_model_event.oneFreePlace" />
+					</f:then>
+					<f:else>
+						<se:format.freePlacesLeft event="{event}" /> <f:translate key="tx_slubevents_domain_model_event.freeplaces" />
+					</f:else>
+				</f:if>
+				-->
+				<f:link.action action="new" class="button submit" controller="Subscriber" pageUid="{settings.pidSubscribeForm}" arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
+			</f:then>
+			<f:else>
+				<f:if condition="{event.maxSubscriber} > 0">
+				<f:then>
+					<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 0">
+						<f:then>Die maximale Teilnehmerzahl von {event.maxSubscriber} ist erreicht.</f:then>
+						<f:else>Es ist keine Anmeldung mehr möglich.</f:else>
+					</f:if>
+				</f:then>
+				<f:else><!-- keine Anmeldung noetig oder moeglich --></f:else>
+				</f:if>
+			</f:else>
+		</f:if>
+	</div>
+	<div class="clear"></div>
+</li>

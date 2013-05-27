@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-02-28T17:04:28Z" product-name="slub_events">
+		<header/>
+		<body>
+
+			<trans-unit id="title.description">
+				<source>Name of the Category</source>
+			</trans-unit>
+			<trans-unit id="parent.description">
+				<source>Parent Category</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

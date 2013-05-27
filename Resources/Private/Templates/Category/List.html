@@ -1,0 +1,54 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="categoryTree">
+	<ul>
+		<f:for each="{categories}" key="id" as="category">
+				<f:render partial="Category/Item" arguments="{category: category, settings:settings, label:label, view:'list'}"/>
+
+				<f:if condition="{category.children}">
+					<f:render section="categoryTree" arguments="{categories: category.children, categoriesSelected: categoriesSelected}" />
+				</f:if>
+				</li>
+		</f:for>
+	</ul>
+</f:section>
+
+<f:section name="rootline">
+	<ol class="rootline">
+	<f:for each="{categoriesRootline}" as="catRoot" reverse="TRUE">
+		<f:if condition="{catRoot}=={category}">
+		<f:then>
+			<li>{catRoot.title}</li>
+		</f:then>
+		<f:else>
+			<li><f:link.action action="list" controller="Category" arguments="{category : catRoot}">{catRoot.title}</f:link.action></li>
+		</f:else>
+		</f:if>
+	</f:for>
+	</ol>
+	
+	<div class="clear"></div>
+</f:section>
+
+<f:section name="main">
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+<div class="slub-category-list">
+
+	<f:if condition="{categories}">
+		<f:render section="categoryTree" arguments="{categories: categories}" />
+	</f:if>
+
+</div>
+</f:section>

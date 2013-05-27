@@ -1,0 +1,83 @@
+<T3DataStructure>
+ <sheets>
+  <sDEF>
+   <ROOT>
+     <TCEforms>
+      <sheetTitle>Funktion</sheetTitle>
+     </TCEforms>
+     <type>array</type>
+     <el>
+      <switchableControllerActions>
+       <TCEforms>
+         <label>Select function</label>
+         <config>
+          <type>select</type>
+          <items>
+            
+            <numIndex index="0">
+             <numIndex index="0">Anmelden</numIndex>
+             <numIndex index="1">Subscriber->new;Subscriber->create;</numIndex>
+            </numIndex>
+            
+            <numIndex index="1">
+             <numIndex index="0">Abmelden</numIndex>
+             <numIndex index="1">Subscriber->delete;</numIndex>
+            </numIndex>
+            
+           </items>
+         </config>
+       </TCEforms>
+      </switchableControllerActions>
+
+		<settings.pidListOwn>
+			<TCEforms>
+				<exclude>1</exclude>
+				<label>List Own Events</label>
+				<config>
+					<type>group</type>
+					<internal_type>db</internal_type>
+					<allowed>pages</allowed>
+					<size>1</size>
+					<maxitems>1</maxitems>
+					<minitems>0</minitems>
+					<show_thumbs>1</show_thumbs>
+				</config>
+			</TCEforms>
+		</settings.pidListOwn>
+
+		<settings.pidSubscribeForm>
+			<TCEforms>
+				<exclude>1</exclude>
+				<label>Subscribe Form</label>
+				<config>
+					<type>group</type>
+					<internal_type>db</internal_type>
+					<allowed>pages</allowed>
+					<size>1</size>
+					<maxitems>1</maxitems>
+					<minitems>0</minitems>
+					<show_thumbs>1</show_thumbs>
+				</config>
+			</TCEforms>
+		</settings.pidSubscribeForm>
+
+		<settings.pidUnSubscribeForm>
+			<TCEforms>
+				<exclude>1</exclude>
+				<label>Unsubscribe Form</label>
+				<config>
+					<type>group</type>
+					<internal_type>db</internal_type>
+					<allowed>pages</allowed>
+					<size>1</size>
+					<maxitems>1</maxitems>
+					<minitems>0</minitems>
+					<show_thumbs>1</show_thumbs>
+				</config>
+			</TCEforms>
+		</settings.pidUnSubscribeForm>
+     </el>
+   </ROOT>
+  </sDEF>
+ </sheets>
+</T3DataStructure>

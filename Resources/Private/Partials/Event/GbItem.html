@@ -1,0 +1,12 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+
+<li class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
+	<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+
+	<div class="subscription">
+		<f:link.action action="new" class="button submit" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  title="Anmelden bei {event.contact.name}" arguments="{event : event, category: category}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
+		
+	</div>
+	<div class="clear"></div>
+</li>

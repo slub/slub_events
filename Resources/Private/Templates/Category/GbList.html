@@ -1,0 +1,102 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+<div class="slub-event-gblist">
+
+	<f:if condition="{events}">
+	<f:then>
+
+		<h4>{category.title}</h4>
+		<div class="category-description"><f:format.html>{category.description}</f:format.html></div>
+
+		<div class="contacts sidebar">
+		<p><f:translate key="tx_slubevents.gb.we_consult_you" /></p>
+		<f:groupedFor each="{events}" as="cevent" groupBy="contact" groupKey="contact">
+			<div class="single-contact">
+				<f:if condition="{contact.photo}">
+					<f:then>
+						<div class="photo">
+							<f:image src='uploads/tx_slubevents/{contact.photo}' alt="Porträt von {contact.name}" title="<se:format.stripTags htmlString='{contact.name}' />" maxWidth="100" />
+						</div>
+						<div class="description"><span class="name">{contact.name}</span><f:format.html>{contact.description}</f:format.html></div>
+					</f:then>
+				</f:if>
+			</div>
+		</f:groupedFor>
+		<div class="clear"></div>
+		</div>
+		
+		<f:if condition="{settings.hidePagination}">
+			<f:then>
+				<ul>
+				<f:for each="{events}" as="event" key="label" iteration="eventIterator">
+					<f:if condition="{event.geniusBar}">
+						<f:then>
+							<f:if condition="<se:format.freePlacesLeft event='{event}' /> >= 1">
+								<f:then>
+									<f:if condition="<se:format.newMonthTitle events='{events}' index='{label}' />">
+										<f:then>
+											<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
+										</f:then>
+									</f:if>
+									<f:render partial="Event/GbItem" arguments="{event: event, category: category, eventIterator:eventIterator}"/>
+								</f:then>
+							</f:if>
+						</f:then>
+					</f:if>
+				</f:for>
+				</ul>
+			</f:then>
+			<f:else>
+				<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
+					<ul>
+					<f:for each="{paginatedEvents}" as="event" key="label" iteration="eventIterator">
+					<f:if condition="{event.geniusBar}">
+						<f:then>
+							<f:if condition="<se:format.freePlacesLeft event='{event}' /> >= 1">
+								<f:then>
+									<f:if condition="<se:format.newMonthTitle events='{paginatedEvents}' index='{label}' />">
+										<f:then>
+											<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{paginatedEvents}' index='{label}' />" format="%B %Y" /></h4></li>
+										</f:then>
+									</f:if>
+									<f:render partial="Event/GbItem" arguments="{event: event, category: category, eventIterator:eventIterator}"/>
+								</f:then>
+							</f:if>
+						</f:then>
+					</f:if>
+					</f:for>
+					</ul>
+				</f:widget.paginate>
+			</f:else>
+		</f:if>
+	</f:then>
+	<f:else>
+		<ul>
+		<li>
+			Zur Zeit haben wir zu diesem Thema leider keine Angebote.
+		</li>
+		</ul>
+	</f:else>	
+</f:if>
+
+	<div class="submit">
+		<f:link.action action="list" class="button linkback" controller="Category" arguments="{category : parentcategory}"><f:translate key="paginate_back" /></f:link.action>
+	</div>
+
+</div>
+
+</f:section>

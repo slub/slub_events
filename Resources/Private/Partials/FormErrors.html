@@ -1,0 +1,7 @@
+<f:form.errors>
+	<ul class="slub-event-error">
+		<f:for each="{error.errors}" as="singleError">
+			<li><f:translate key="validationerror_{singleError.message}" /></li>
+		</f:for>
+	</ul>
+</f:form.errors>

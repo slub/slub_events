@@ -1,0 +1,67 @@
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+<f:flashMessages />
+
+<f:be.container
+	pageTitle="Veranstaltungsmanagement"
+	enableJumpToUrl="true"
+	enableClickMenu="true"
+	loadPrototype="true"
+	loadExtJs="true"
+	loadExtJsTheme="true"
+	extJsAdapter="ext-all"
+	enableExtJsDebug="false"
+	addCssFile="{f:uri.resource(path:'Css/slub-event-backend.css')}">
+
+
+<h1>Termineinladung versendet...</h1>
+
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+
+<div class="tx_slubevents">
+<p>Folgende Einladung wurde an <b>{event.contact.name} ({event.contact.email})</b> gesendet:</p>
+	<h3>{event.title}</h3>
+	<p><f:render partial="Event/DateFromTo" arguments="{event : event}" /></p>
+	
+	<p><f:format.html>{event.description}</f:format.html></p>
+
+	<div class="category"><f:translate key="tx_slubevents_domain_model_category" />: {event.categories.title}</div>
+	<div class="location"><f:translate key="tx_slubevents_domain_model_location" />:
+	<f:if condition="{event.location.link}">
+		<f:then>
+			<f:if condition="<se:link.islocal link='{event.location.link}' />">
+				<f:then>
+					<f:link.page pageUid="{event.location.link}">{event.location.name}</f:link.page>
+				</f:then>
+				<f:else>
+					<f:link.external uri="{event.location.link}">{event.location.name}</f:link.external>
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			{event.location.name}
+		</f:else>
+	</f:if>
+	</div>
+</div>
+
+<p>
+<f:link.action controller="Event" action="beList">Zurück zur Übersicht</f:link.action><br />
+</p>
+
+</f:be.container>
+
+</f:section>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-03-15T10:30:01Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="number.description" approved="yes" xml:space="preserve">
+			<source>Number of Subscribers</source>
+			<target>Anzahl der angemeldeten Teilnehmer.</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

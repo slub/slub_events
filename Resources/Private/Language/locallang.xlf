@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-05-17T08:30:09Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="be.copyEvent" xml:space="preserve">
+			<source>Copy Event</source>
+		</trans-unit>
+		<trans-unit id="be.editEvent" xml:space="preserve">
+			<source>Edit</source>
+		</trans-unit>
+		<trans-unit id="be.hideEvent" xml:space="preserve">
+			<source>Hide Event</source>
+		</trans-unit>
+		<trans-unit id="be.icsInvitation" xml:space="preserve">
+			<source>ICS Invitation</source>
+		</trans-unit>
+		<trans-unit id="be.newEvent" xml:space="preserve">
+			<source>New Event</source>
+		</trans-unit>
+		<trans-unit id="be.scheduler.checkevents" xml:space="preserve">
+			<source>Event Check and Report Task</source>
+		</trans-unit>
+		<trans-unit id="be.scheduler.checkevents.description" xml:space="preserve">
+			<source>Long description of Task &quot;Check and Report&quot;</source>
+		</trans-unit>
+		<trans-unit id="be.sendIcsInvitationTo" xml:space="preserve">
+			<source>Send ICS Invitation to:</source>
+		</trans-unit>
+		<trans-unit id="be.unhideEvent" xml:space="preserve">
+			<source>Unhide Event</source>
+		</trans-unit>
+		<trans-unit id="paginate_back" xml:space="preserve">
+			<source>back</source>
+		</trans-unit>
+		<trans-unit id="paginate_next" xml:space="preserve">
+			<source>Next</source>
+		</trans-unit>
+		<trans-unit id="paginate_previous" xml:space="preserve">
+			<source>Previous</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.we_consult_you" xml:space="preserve">
+			<source>We Consult You</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category" xml:space="preserve">
+			<source>Event Category</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.title" xml:space="preserve">
+			<source>title</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event" xml:space="preserve">
+			<source>Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.categories" xml:space="preserve">
+			<source>Category Ids</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.description" xml:space="preserve">
+			<source>description</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date" xml:space="preserve">
+			<source>endDate</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_time" xml:space="preserve">
+			<source>endTime</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.freeplaces" xml:space="preserve">
+			<source>free places</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.individual_appointment" xml:space="preserve">
+			<source>Indivdual Appointment</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" xml:space="preserve">
+			<source>Maximum of Subscribers</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" xml:space="preserve">
+			<source>Minimum of Subscribers</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" xml:space="preserve">
+			<source>one free place</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start_date" xml:space="preserve">
+			<source>startDate</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" xml:space="preserve">
+			<source>Start of Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.start_time" xml:space="preserve">
+			<source>startTime</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.subscribe" xml:space="preserve">
+			<source>Subscribe</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.subscribers" xml:space="preserve">
+			<source>Category Ids</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.teaser" xml:space="preserve">
+			<source>teaser</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.title" xml:space="preserve">
+			<source>title</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.unsubscribe" xml:space="preserve">
+			<source>Unsubscribe</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location" xml:space="preserve">
+			<source>Location</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber" xml:space="preserve">
+			<source>Subscriber Details</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" xml:space="preserve">
+			<source>customerid</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.email" xml:space="preserve">
+			<source>email</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.message" xml:space="preserve">
+			<source>message</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.name" xml:space="preserve">
+			<source>name</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.number" xml:space="preserve">
+			<source>Number</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.number_max" xml:space="preserve">
+			<source>Number of Persons (max. %1$s)</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.submit_registration" xml:space="preserve">
+			<source>Submit Registration</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" xml:space="preserve">
+			<source>telephone</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_customerid" xml:space="preserve">
+			<source>The given customer id is not valid.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_editcode" xml:space="preserve">
+			<source>Please start the registration from the beginning.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_email" xml:space="preserve">
+			<source>Please enter a valid email-address.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_event_cancelled" xml:space="preserve">
+			<source>Sorry, the event has been cancelled.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_event_overbooked" xml:space="preserve">
+			<source>Sorry, the event is already complete.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_event_reacheddeadline" xml:space="preserve">
+			<source>Sorry, the deadline for subscription is already reached.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_name" xml:space="preserve">
+			<source>Please enter your name.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_number" xml:space="preserve">
+			<source>The given amount of subscribers is not valid.</source>
+		</trans-unit>
+		<trans-unit id="view_my_events" xml:space="preserve">
+			<source>My Events</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

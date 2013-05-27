@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-03-15T10:30:01Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="customerid.description" xml:space="preserve">
+			<source>customerid</source>
+		</trans-unit>
+		<trans-unit id="editcode.description" xml:space="preserve">
+			<source>Edit Code</source>
+		</trans-unit>
+		<trans-unit id="email.description" xml:space="preserve">
+			<source>email</source>
+		</trans-unit>
+		<trans-unit id="name.description" xml:space="preserve">
+			<source>name</source>
+		</trans-unit>
+		<trans-unit id="number.description" xml:space="preserve">
+			<source>Number of Subscribers</source>
+		</trans-unit>
+		<trans-unit id="telephone.description" xml:space="preserve">
+			<source>telephone</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

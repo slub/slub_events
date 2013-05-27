@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the SLUB: Event Registration extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_slubevents_domain_model_event">Event</label>
+			<label index="tx_slubevents_domain_model_event.title">title</label>
+			<label index="tx_slubevents_domain_model_event.start_date">startDate</label>
+			<label index="tx_slubevents_domain_model_event.start_time">startTime</label>
+			<label index="tx_slubevents_domain_model_event.end_date">endDate</label>
+			<label index="tx_slubevents_domain_model_event.end_time">endTime</label>
+			<label index="tx_slubevents_domain_model_event.teaser">teaser</label>
+			<label index="tx_slubevents_domain_model_event.description">description</label>
+			<label index="tx_slubevents_domain_model_event.min_subscriber">Minimum of Subscribers</label>
+			<label index="tx_slubevents_domain_model_event.max_subscriber">Maximum of Subscribers</label>
+			<label index="tx_slubevents_domain_model_event.categories">Category Ids</label>
+			<label index="tx_slubevents_domain_model_event.subscribers">Category Ids</label>
+			<label index="tx_slubevents_domain_model_category">Event Category</label>
+			<label index="tx_slubevents_domain_model_category.title">title</label>
+			<label index="tx_slubevents_domain_model_subscriber">Subscriber Details</label>
+			<label index="tx_slubevents_domain_model_subscriber.name">name</label>
+			<label index="tx_slubevents_domain_model_subscriber.email">email</label>
+			<label index="tx_slubevents_domain_model_subscriber.telephone">telephone</label>
+			<label index="tx_slubevents_domain_model_subscriber.customerid">customerid</label>
+		</languageKey>
+	</data>
+</T3locallang>
