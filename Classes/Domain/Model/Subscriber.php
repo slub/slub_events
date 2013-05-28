@@ -96,7 +96,6 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	 * event
 	 *
 	 * @var Tx_SlubEvents_Domain_Model_Event
-	 * @lazy
 	 */
 	protected $event;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-27T12:49:32Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-27T16:21:05Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -96,6 +96,10 @@
 		<trans-unit id="tx_slubevents_domain_model_location" approved="yes" xml:space="preserve">
 			<source>Location</source>
 			<target>Ort</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes" xml:space="preserve">
+			<source>Subscription Date</source>
+			<target>Anmeldezeitpunkt</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes" xml:space="preserve">
 			<source>customerid</source>

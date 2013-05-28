@@ -16,13 +16,21 @@
 			<li class="previous">
 				<f:if condition="{pagination.previousPage} > 1">
 					<f:then>
-						<f:widget.link arguments="{currentPage: pagination.previousPage}"><f:translate key="LLL:EXT:slub_events/Resources/Private/Language/locallang.xml:paginate_previous" /></f:widget.link>
+						<f:widget.link arguments="{currentPage: pagination.previousPage}"><f:translate key="widget.pagination.previous" /></f:widget.link>
 					</f:then>
 					<f:else>
-						<f:widget.link><f:translate key="LLL:EXT:slub_events/Resources/Private/Language/locallang.xml:paginate_previous" /></f:widget.link>
+						<f:widget.link><f:translate key="widget.pagination.previous" /></f:widget.link>
 					</f:else>
 				</f:if>
 			</li>
+		</f:if>
+		<f:if condition="{pagination.displayRangeStart} > 1">
+			<li class="first">
+				<f:widget.link>1</f:widget.link>
+			</li>
+		</f:if>
+		<f:if condition="{pagination.hasLessPages}">
+			<li>...</li>
 		</f:if>
 		<f:for each="{pagination.pages}" as="page">
 			<f:if condition="{page.isCurrent}">
@@ -38,19 +46,27 @@
 								<f:widget.link arguments="{currentPage: page.number}">{page.number}</f:widget.link>
 							</f:then>
 							<f:else>
-								<f:widget.link>{page.number}</f:widget.link>
+								<f:widget.link action="index">{page.number}</f:widget.link>
 							</f:else>
 						</f:if>
 					</li>
 				</f:else>
 			</f:if>
 		</f:for>
+		<f:if condition="{pagination.hasMorePages}">
+			<li>...</li>
+		</f:if>
+		<f:if condition="{pagination.displayRangeEnd} < {pagination.numberOfPages}">
+			<li class="last">
+				<f:widget.link arguments="{currentPage: pagination.numberOfPages}">{pagination.numberOfPages}</f:widget.link>
+			</li>
+		</f:if>
 		<f:if condition="{pagination.nextPage}">
 			<li class="next">
-				<f:widget.link arguments="{currentPage: pagination.nextPage}"><f:translate key="LLL:EXT:slub_events/Resources/Private/Language/locallang.xml:paginate_next" /></f:widget.link>
+				<f:widget.link arguments="{currentPage: pagination.nextPage}"><f:translate key="widget.pagination.next" /></f:widget.link>
 			</li>
 		</f:if>
 	</ul>
 	</f:then>
-	</f:if>	
+	</f:if>
 </f:section>

@@ -381,7 +381,7 @@ $TCA['tx_slubevents_domain_model_event']['columns']['categories'] = array(
 						'showHeader' => FALSE,
 						'width' => '400px',
 					),
-					
+
 				),
 				'size' => 10,
 				'autoSizeMax' => 30,
@@ -398,7 +398,7 @@ $TCA['tx_slubevents_domain_model_event']['columns']['location'] = array(
 		'type' => 'select',
 		'foreign_table' => 'tx_slubevents_domain_model_location',
 		'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_location.sorting',
-		
+
 		'renderMode' => 'tree',
 		'subType' => 'db',
 		'treeConfig' => array(
@@ -420,7 +420,9 @@ $TCA['tx_slubevents_domain_model_event']['columns']['contact'] = array(
 		'foreign_table' => 'tx_slubevents_domain_model_contact',
 		'minitems' => 1,
 		'maxitems' => 2, // this forces a working required select box! stupid but true...
-		'size' => 2, // it should be one but... no chance to get a required select box without it in TYPO3 4.6
+		'size' => 6, // it should be one but... no chance to get a required select box without it in TYPO3 4.6
+		'selectedListStyle' => 'width:400px;',
+		'itemListStyle' => 'width:400px;',
 	),
 );
 

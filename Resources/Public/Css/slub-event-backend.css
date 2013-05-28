@@ -1,6 +1,9 @@
 table.tx_slubevents, div.tx_slubevents {
+	width: 80%;
+
 	border: 1px dotted red;
 	padding: 10px;
+	margin: 2px;
 	border-spacing: 0;
 }
 table.tx_slubevents th {
@@ -52,7 +55,7 @@ table.tx_slubevents ul {
  *------
  * ...
  * -----
- * 
+ *
  * */
 .slub-event-list {
 	background: transparent;
@@ -64,8 +67,6 @@ table.tx_slubevents ul {
 
 .slub-event-list li {
 	margin: 0.2em 0;
-	padding: 0.3em 0.5em;
-	border: 1px solid #bdd;
 	vertical-align: middle;
 	text-align: left;
 	list-style: none;
@@ -77,36 +78,29 @@ table.tx_slubevents ul {
 }
 
 .slub-event-list ul.f3-widget-paginator {
-	width: 100%;
-	padding: 0.3em 0;
-	border: 1px solid #bdd;
-	vertical-align: middle;
-	text-align: left;
-	height: 22px;
-	margin: 0px;
+	width: 80%;
+	border: 1px dotted red;
+	display: inline-block;
+	margin: 2px;
 }
 .slub-event-list ul.f3-widget-paginator li {
 	float: left;
+	font-size: 140%;
 	list-style: none;
 	border: none;
 	margin: 0;
-	padding: 0.2em 0.4em;
+	padding: 0.5em;
 }
-
+.slub-event-list ul.f3-widget-paginator li:hover {
+	background-color: #dedede;
+}
+.slub-event-list ul.f3-widget-paginator li.current {
+	background-color: #dedede;
+}
 .slub-event-list li.Odd {
 }
 .slub-event-list li.Even {
 	background: #e1f4f7;
-}
-
-.slub-event-list div.subscription {
-	float: right;
-}
-.slub-event-list div.teaser {
-	float: left;
-}
-.slub-event-list div.clear {
-	clear: both;
 }
 
 .slub-event-register ul.slub-event-error {

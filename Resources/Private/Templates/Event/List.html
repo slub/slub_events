@@ -11,6 +11,19 @@ in /Configuration/ExtensionBuilder/settings.yaml:
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
+<f:section name="eventListing">
+	<ul>
+	<f:for each="{events}" as="event" key="label" iteration="eventIterator">
+		<f:if condition="<se:format.newMonthTitle events='{events}' index='{label}' />">
+			<f:then>
+				<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
+			</f:then>
+		</f:if>
+		<f:render partial="Event/Item" arguments="{event: event, settings:settings, label:label, eventIterator:eventIterator, view:'list'}"/>
+	</f:for>
+	</ul>
+</f:section>
+
 <f:section name="main">
 {namespace se=Tx_SlubEvents_ViewHelpers}
 
@@ -18,29 +31,11 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:if condition="{settings.hidePagination}">
 	<f:then>
-		<ul>
-		<f:for each="{events}" as="event" key="label" iteration="eventIterator">
-			<f:if condition="<se:format.newMonthTitle events='{events}' index='{label}' />">
-				<f:then>
-					<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
-				</f:then>
-			</f:if>
-			<f:render partial="Event/Item" arguments="{event: event, settings:settings, label:label, eventIterator:eventIterator, view:'list'}"/>
-		</f:for>
-		</ul>
+		<f:render section="eventListing" arguments="{events: events}" />
 	</f:then>
 	<f:else>
 		<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-			<ul>
-			<f:for each="{paginatedEvents}" as="event" key="label" iteration="eventIterator">
-				<f:if condition="<se:format.newMonthTitle events='{paginatedEvents}' index='{label}' />">
-					<f:then>
-						<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{paginatedEvents}' index='{label}' />" format="%B %Y" /></h4></li>
-					</f:then>
-				</f:if>
-				<f:render partial="Event/Item" arguments="{event: event, settings:settings, label:label, eventIterator:eventIterator, view:'list'}"/>
-			</f:for>
-			</ul>
+			<f:render section="eventListing" arguments="{events: paginatedEvents}" />
 		</f:widget.paginate>
 	</f:else>
 </f:if>

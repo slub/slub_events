@@ -26,16 +26,48 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</ul>
 </f:section>
 
+<f:section name="eventListing">
+<table class="tx_slubevents">
+	<tr>
+		<th><se:be.functionBar icon="new" /></th>
+		<th><f:translate key="tx_slubevents_domain_model_event.title" /></th>
+		<th><f:translate key="tx_slubevents_domain_model_category" /></th>
+		<th><f:translate key="tx_slubevents_domain_model_event.start_date_time" /></th>
+		<th>frei / max</th>
+		<th> </th>
+		<th> </th>
+		<th> </th>
+	</tr>
+	<f:for each="{events}" as="event" iteration="eventIterator">
+		<tr class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
+			<td><se:be.functionBar icon="edit" event="{event}" /></td>
+			<td><se:be.functionBar icon="geniusbar" event="{event}" />
+				<span class="eventtitle" title="<se:format.stripTags htmlString='{event.description}' />">{event.title}</span><br />
+				<span class="eventcontact">{event.contact.name}: <f:link.email email="{event.contact.email}" /></span>
+			</td>
+			<td><f:for each="{event.categories}" as="category">
+				<span class="categorytitle" title="<se:format.stripTags htmlString='{category.description}' />">{category.title}</span><br />
+			</f:for>
+			</td>
+			<td><se:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M" /></td>
+			<td><span class="green"><se:format.freePlacesLeft event="{event}" /></span> / {event.maxSubscriber}</td>
+			<td><f:if condition="{event.hidden} == 0"><f:then><f:be.buttons.icon icon="actions-edit-copy" uri="{f:uri.action(action:'beCopy' arguments:'{event:event}')}" title="<f:translate key='be.copyEvent' />" /></f:then></f:if></td>
+			<td><se:be.functionBar icon="hide" event="{event}" /></td>
+			<td><f:link.action action="beIcsInvitation" controller="Subscriber" title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}" arguments="{event : event}"><f:translate key='be.icsInvitation' /></f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+</f:section>
 
 <f:section name="content">
 {namespace se=Tx_SlubEvents_ViewHelpers}
 
+<div class="slub-event-list">
 <h1><f:translate key="tx_slubevents.be.eventmanagement" /></h1>
 
 <f:flashMessages />
 
 <f:form action="beList" name="searchParameter" method="post">
-
 <table class="tx_slubevents" >
 	<tr>
 		<th><label for="selectedStartDateStamp">
@@ -64,37 +96,16 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</tr>
 </f:form>
 
-<table class="tx_slubevents">
-	<tr>
-		<th><se:be.functionBar icon="new" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_event.title" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_category" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_event.start_date_time" /></th>
-		<th>frei / max</th>
-		<th> </th>
-		<th> </th>
-		<th> </th>
-	</tr>
+<f:if condition="{settings.hidePagination}">
+	<f:then>
+		<f:render section="eventListing" arguments="{events: events}" />
+	</f:then>
+	<f:else>
+		<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
+			<f:render section="eventListing" arguments="{events: paginatedEvents}" />
+		</f:widget.paginate>
+	</f:else>
+</f:if>
 
-	<f:for each="{events}" as="event" iteration="eventIterator">
-		<tr class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
-			<td><se:be.functionBar icon="edit" event="{event}" /></td>
-			<td><se:be.functionBar icon="geniusbar" event="{event}" />
-				<span class="eventtitle" title="<se:format.stripTags htmlString='{event.description}' />">{event.title}</span><br />
-				<span class="eventcontact">{event.contact.name}: <f:link.email email="{event.contact.email}" /></span>
-			</td>
-			<td><f:for each="{event.categories}" as="category">
-				<span class="categorytitle" title="<se:format.stripTags htmlString='{category.description}' />">{category.title}</span><br />
-			</f:for>
-			</td>
-			<td><se:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M" /></td>
-			<td><span class="green"><se:format.freePlacesLeft event="{event}" /></span> / {event.maxSubscriber}</td>
-			<td><f:if condition="{event.hidden} == 0"><f:then><f:be.buttons.icon icon="actions-edit-copy" uri="{f:uri.action(action:'beCopy' arguments:'{event:event}')}" title="<f:translate key='be.copyEvent' />" /></f:then></f:if></td>
-			<td><se:be.functionBar icon="hide" event="{event}" /></td>
-			<td><f:link.action action="beIcsInvitation" controller="Subscriber" title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}" arguments="{event : event}"><f:translate key='be.icsInvitation' /></f:link.action></td>
-		</tr>
-	</f:for>
-</table>
-
-
+</div>
 </f:section>
