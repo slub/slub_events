@@ -25,9 +25,9 @@
 /**
  * Command Controller for CLI
  *
- * note: scheduler task is working from extbase 4.7 (TYPO3 4.7) only :-(
+ * note: scheduler task is working from extbase 4.7
  *
- * 
+ *
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_Controller_CommandController {
@@ -77,7 +77,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	 * @return
 	 */
 	protected function initializeAction() {
-			
+
 		// TYPO3 doesn't set locales for backend-users --> so do it manually like this...
 		// is needed with strftime
 		setlocale(LC_ALL, 'de_DE.utf8');
@@ -85,7 +85,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 	/**
 	 * injectConfigurationManager
-	 * 
+	 *
 	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
 	 * @return void
 	*/
@@ -96,32 +96,35 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$this->settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
 	}
 
-    public function checkForSubscriptionEndCommand() {
+	/**
+	 * checkForSubscriptionEndCommand
+	 *
+	 * @param int stroagePid
+	 * @param string senderEmailAddress
+	 * @return int number of sent mails
+	*/
+    public function checkForSubscriptionEndCommand($storagePid, $senderEmailAddress='webmaster@example.com') {
 
 		$this->initializeAction();
 
-		// get storagePid from CLI parameter...
-        foreach ($_SERVER["argv"] as $id => $argument) {
-			if (stristr($argument, 'storagePid')) {
-				$storagePidArray = preg_split('/=/', $argument, -1, PREG_SPLIT_NO_EMPTY);
-				if (intval($storagePidArray[1]) > 0)
-					$storagePid = intval($storagePidArray[1]);
-			}
-        }
-
 		// abort if no storagePid is found
 		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
-			echo "\n\nNO storagePid found! \n\nUsage: ./cli_dispatch.phpsh extbase checkevents:checkforsubscriptionend storagepid=7357 (no spaces!)\n\n";
+			echo "NO storagePid given. Please enter the storagePid in the scheduler task.";
+			exit(1);
+		}
+		// abort if no storagePid is found
+		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
+			echo "NO storagePid given. Please enter the storagePid in the scheduler task.";
 			exit(1);
 		}
 
 		// set storagePid to point extbase to the right repositories
-		$configurationArray = array( 
-			'persistence' => array( 
-				'storagePid' => $storagePid 
-			) 
-		); 
-		$this->configurationManager->setConfiguration($configurationArray); 
+		$configurationArray = array(
+			'persistence' => array(
+				'storagePid' => $storagePid
+			)
+		);
+		$this->configurationManager->setConfiguration($configurationArray);
 
 		// start the work...
 
@@ -129,7 +132,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$allevents = $this->eventRepository->findAllSubscriptionEnded();
 
 		foreach($allevents as $event) {
-		
+
 			// startDateTime may never be empty
 			$helper['start'] = $event->getStartDateTime()->getTimestamp();
 			// endDateTime may be empty
@@ -137,7 +140,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 				$helper['end'] = $event->getEndDateTime()->getTimestamp();
 			else
 				$helper['end'] = $helper['start'];
-	
+
 			if ($event->isAllDay()) {
 				$helper['allDay'] = 1;
 			}
@@ -154,7 +157,6 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 				// email to all subscribers
 				foreach($event->getSubscribers() as $subscriber) {
-//~ print_r($event->getUid(). ':'. $subscriber->getName() . $subscriber->getEmail() . "\n");
 					$out = $this->sendTemplateEmail(
 						array($subscriber->getEmail() => $subscriber->getName()),
 						array($event->getContact()->getEmail() => $event->getContact()->getName()),
@@ -167,12 +169,10 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 					);
 				}
 
-//~ print_r($event->getUid(). ':'. $event->getContact()->getName() . $event->getContact()->getEmail() . "\n");
-//~ print_r($event->getSubscribers());
 				// email to event owner
 				$out = $this->sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
-					array('webmaster@slub-dresden.de' => 'SLUB Veranstaltungen - noreply'),
+					array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
 					'Absage der Veranstaltung: ' . $event->getTitle(),
 					'CancellEvent',
 					array(	'event' => $event,
@@ -186,11 +186,10 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 				}
 			} else {
 				// event takes place but subscription is not possible anymore...
-//~ print_r($event->getUid(). ':'. $event->getContact()->getName() . $event->getContact()->getEmail() . "\n");
 				// email to event owner
 				$out = $this->sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
-					array('webmaster@slub-dresden.de' => 'SLUB Veranstaltungen - noreply'),
+					array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
 					'Veranstaltung Anmeldefrist abgelaufen: ' . $event->getTitle(),
 					'DeadlineReached',
 					array(	'event' => $event,
@@ -228,7 +227,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$ics->getRequest()->setControllerExtensionName($this->extensionName);
 		$ics->setFormat('ics');
 		$ics->assignMultiple($variables);
-		
+
 
 		$templateRootPath =  PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
 		$partialRootPath =  PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
@@ -246,23 +245,20 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$message = t3lib_div::makeInstance('t3lib_mail_Message');
 		$message->setTo($recipient)
 				->setFrom($sender)
-				->setBcc(array('linux@bigga.de' => 'Alexander Bigga - Debugging'))
 				->setCharset('utf-8')
 				->setSubject($subject);
-
 
 		// attach ICS-File
 		$message->attach(Swift_Attachment::fromPath($eventIcsFile)
 							->setFilename('invite.ics')
 							->setContentType('application/ics'));
-  
 
 		// Plain text example
 		$emailTextHTML = $emailViewHTML->render();
 		$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
 
 		$message->addPart($ics->render(), 'text/calendar', 'utf-8');
-		
+
 		// HTML Email
 		$message->addPart($emailTextHTML, 'text/html');
 
@@ -270,7 +266,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 		return $message->isSent();
 	}
-	
+
 	/**
 	 * Function foldline folds the line after 73 signs
 	 * rfc2445.txt: lines SHOULD NOT be longer than 75 octets
@@ -299,7 +295,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$text = str_replace("\n", '\n', $text);
 		// semicolumns are not allowed
 		$text = str_replace(';', '\;', $text);
-		
+
 		$firstline = substr($text, 0, (75-12));
 		$restofline = implode("\n ", str_split(trim(substr($text, (75-12), strlen($text))), 73) );
 
@@ -315,31 +311,31 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	 * @return
 	 */
 	public function html2rest($text) {
-	
-				$text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
-				// header is getting **
-				$text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', "**", $text);
-				// bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
-				$text = preg_replace('/<b>|<\/b>/', "*", $text);
-				// get away links but preserve href with class slub-event-link
-				$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
-				// Remove separator characters (like non-breaking spaces...)
-				$text = preg_replace( '/\p{Z}/u', ' ', $text );
-				$text = str_replace('<br />', "\n", $text);
-				// get away paragraphs including class, title etc.
-				$text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
-				$text = str_replace('<li>', "- ", $text);
-				$text = str_replace('</li>', "\n", $text);
-				// remove multiple spaces
-				$text = preg_replace('/[\ ]{2,}/', '', $text);
-				// remove multiple tabs
-				$text = preg_replace('/[\t]{1,}/', '', $text);
-				// remove more than one empty line
-				$text = preg_replace('/[\n]{3,}/', "\n\n", $text);
-				// remove all remaining html tags
-				$text = strip_tags($text);
-		
-				return $text;
+
+		$text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
+		// header is getting **
+		$text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', "**", $text);
+		// bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
+		$text = preg_replace('/<b>|<\/b>/', "*", $text);
+		// get away links but preserve href with class slub-event-link
+		$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
+		// Remove separator characters (like non-breaking spaces...)
+		$text = preg_replace( '/\p{Z}/u', ' ', $text );
+		$text = str_replace('<br />', "\n", $text);
+		// get away paragraphs including class, title etc.
+		$text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
+		$text = str_replace('<li>', "- ", $text);
+		$text = str_replace('</li>', "\n", $text);
+		// remove multiple spaces
+		$text = preg_replace('/[\ ]{2,}/', '', $text);
+		// remove multiple tabs
+		$text = preg_replace('/[\t]{1,}/', '', $text);
+		// remove more than one empty line
+		$text = preg_replace('/[\n]{3,}/', "\n\n", $text);
+		// remove all remaining html tags
+		$text = strip_tags($text);
+
+		return $text;
 	}
 
 }
