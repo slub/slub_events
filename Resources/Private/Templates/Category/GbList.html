@@ -66,7 +66,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</f:then>
 			<f:else>
 				<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-					<f:render section="eventListing" arguments="{events: paginatedEvents}" />
+					<f:render section="eventListing" arguments="{events: paginatedEvents, category: category}" />
 				</f:widget.paginate>
 			</f:else>
 		</f:if>

@@ -101,7 +101,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	 *
 	 * @param int stroagePid
 	 * @param string senderEmailAddress
-	 * @return int number of sent mails
+	 * @return void
 	*/
     public function checkForSubscriptionEndCommand($storagePid, $senderEmailAddress='webmaster@example.com') {
 
@@ -156,6 +156,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 				// email to all subscribers
 				foreach($event->getSubscribers() as $subscriber) {
+					$cronLog .= 'Absage an Teilnehmer: ' . $event->getTitle() . ': '. strftime('%A %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $subscriber->getEmail() ."\n";
 					$out = $this->sendTemplateEmail(
 						array($subscriber->getEmail() => $subscriber->getName()),
 						array($event->getContact()->getEmail() => $event->getContact()->getName()),
@@ -168,6 +169,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 					);
 				}
 
+				$cronLog .= 'Absage an Veranstalter: ' . $event->getTitle() . ': '. strftime('%A %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
 				// email to event owner
 				$out = $this->sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
@@ -186,6 +188,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			} else {
 				// event takes place but subscription is not possible anymore...
 				// email to event owner
+				$cronLog .= 'Anmeldefrist abgelaufen an Veranstalter: ' . $event->getTitle() . ': '. strftime('%A %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
 				$out = $this->sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
 					array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
@@ -201,7 +204,9 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			}
 		}
 
-		echo count($allevents);
+		echo $cronLog;
+		//~ echo count($allevents);
+		//~ return;
     }
 
 	/**
