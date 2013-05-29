@@ -112,9 +112,9 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			echo "NO storagePid given. Please enter the storagePid in the scheduler task.";
 			exit(1);
 		}
-		// abort if no storagePid is found
-		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
-			echo "NO storagePid given. Please enter the storagePid in the scheduler task.";
+		// abort if no senderEmailAddress is found
+		if (empty($senderEmailAddress)) {
+			echo "NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.";
 			exit(1);
 		}
 
@@ -149,7 +149,6 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			$helper['description'] = $this->foldline($event->getDescription());
 			$helper['location'] = $event->getLocation()->getName();
 			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
-
 
 			// check if we have to cancel the event
 			if ($this->subscriberRepository->countAllByEvent($event) < $event->getMinSubscriber()) {

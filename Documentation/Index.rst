@@ -13,12 +13,12 @@ Extension Name
 
 :Extension name: SLUB: Event Registration
 :Extension key: slub_events
-:Version: 1.0.1
+:Version: 1.0.2
 :Description: manuals covering TYPO3 extension "SLUB: Event Registration"
 :Language: en
 :Author: Alexander Bigga
-:Creation: 2013-05-28
-:Generation: 16:46
+:Creation: 2013-05-29
+:Generation: 09:35
 :Licence: Open Content License available from `www.opencontent.org/opl.shtml <http://www.opencontent.org/opl.shtml>`_
 
 The content of this document is related to TYPO3, a GNU/GPL CMS/Framework available from `www.typo3.org
