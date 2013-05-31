@@ -46,7 +46,7 @@ overwriteSettings:
 
   Configuration:
     TCA: merge
-    TypoScript: keep
+    TypoScript: merge
     FlexForms: keep
 
   Resources:

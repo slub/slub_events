@@ -51,7 +51,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			{event.location.name}
 		</f:else>
 	</f:if>
-	
+
 	</div>
 </div>
 
@@ -72,6 +72,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<f:if condition="{event.geniusBar}">
 		<f:then>
 			<f:render partial="Subscriber/FormFieldsGb"  arguments="{subscriber : subscriber, readonly : loggedIn, event : event, errors : errors}" />
+			<f:form.hidden name="category" value="{category}"/>
 		</f:then>
 		<f:else>
 			<f:render partial="Subscriber/FormFields"  arguments="{subscriber : subscriber, readonly : loggedIn, event : event, errors : errors}" />
@@ -79,12 +80,11 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</f:if>
 
 	<f:form.hidden name="event" value="{event}"/>
-	<f:form.hidden name="category" value="{category}"/>
 	<div class="submit">
 		<f:form.submit class="button submit" value="<f:translate key='tx_slubevents_domain_model_subscriber.submit_registration' />" />
 		<f:link.external class="button linkback" uri="javascript:history.back();"><f:translate key="paginate_back" /></f:link.external>
 	</div>
-	
+
 </f:form>
 
 

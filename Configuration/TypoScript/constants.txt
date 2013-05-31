@@ -9,7 +9,7 @@ plugin.tx_slubevents {
 	}
 	persistence {
 		# cat=plugin.tx_slubevents//a; type=string; label=Default storage PID
-		storagePid = 
+		storagePid =
 	}
 }
 
@@ -24,7 +24,7 @@ module.tx_slubevents {
 	}
 	persistence {
 		# cat=module.tx_slubevents//a; type=string; label=Default storage PID
-		storagePid = 
+		storagePid =
 	}
 }
 ## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
