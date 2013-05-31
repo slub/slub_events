@@ -156,7 +156,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 				// email to all subscribers
 				foreach($event->getSubscribers() as $subscriber) {
-					$cronLog .= 'Absage an Teilnehmer: ' . $event->getTitle() . ': '. strftime('%A %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $subscriber->getEmail() ."\n";
+					$cronLog .= 'Absage an Teilnehmer: ' . $event->getTitle() . ': '. strftime('%x %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $subscriber->getEmail() ."\n";
 					$out = $this->sendTemplateEmail(
 						array($subscriber->getEmail() => $subscriber->getName()),
 						array($event->getContact()->getEmail() => $event->getContact()->getName()),
@@ -169,7 +169,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 					);
 				}
 
-				$cronLog .= 'Absage an Veranstalter: ' . $event->getTitle() . ': '. strftime('%A %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
+				$cronLog .= 'Absage an Veranstalter: ' . $event->getTitle() . ': '. strftime('%x %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
 				// email to event owner
 				$out = $this->sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
@@ -188,7 +188,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			} else {
 				// event takes place but subscription is not possible anymore...
 				// email to event owner
-				$cronLog .= 'Anmeldefrist abgelaufen an Veranstalter: ' . $event->getTitle() . ': '. strftime('%A %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
+				$cronLog .= 'Anmeldefrist abgelaufen an Veranstalter: ' . $event->getTitle() . ': '. strftime('%x %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
 				$out = $this->sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
 					array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
@@ -322,7 +322,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		// bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
 		$text = preg_replace('/<b>|<\/b>/', "*", $text);
 		// get away links but preserve href with class slub-event-link
-		$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
+		$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
 		// Remove separator characters (like non-breaking spaces...)
 		$text = preg_replace( '/\p{Z}/u', ' ', $text );
 		$text = str_replace('<br />', "\n", $text);
