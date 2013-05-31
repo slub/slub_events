@@ -139,7 +139,7 @@ $TCA['tx_slubevents_domain_model_contact'] = array(
 					)
 				)
 			),
-			'defaultExtras' => 'richtext[]',
+			'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
 		),
 		'photo' => array(
 			'exclude' => 0,

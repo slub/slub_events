@@ -162,7 +162,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 					)
 				)
 			),
-			'defaultExtras' => 'richtext[]',
+			'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
 		),
 		'description' => array(
 			'exclude' => 0,
@@ -183,7 +183,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 					)
 				)
 			),
-			'defaultExtras' => 'richtext[]',
+			'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
 		),
 		'min_subscriber' => array(
 			'exclude' => 0,
@@ -418,6 +418,7 @@ $TCA['tx_slubevents_domain_model_event']['columns']['contact'] = array(
 		'allowed' => 'pages',
 		'type' => 'select',
 		'foreign_table' => 'tx_slubevents_domain_model_contact',
+		'foreign_table_where' => ' ORDER BY tx_slubevents_domain_model_contact.sorting',
 		'minitems' => 1,
 		'maxitems' => 2, // this forces a working required select box! stupid but true...
 		'size' => 6, // it should be one but... no chance to get a required select box without it in TYPO3 4.6
