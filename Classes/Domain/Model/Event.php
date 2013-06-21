@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -44,7 +44,6 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	 * title
 	 *
 	 * @var string
-	 * @validate NotEmpty
 	 */
 	protected $title;
 
@@ -138,6 +137,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	 * Category Id
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category>
+	 * @lazy
 	 */
 	protected $categories;
 
@@ -145,6 +145,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	 * Subscriber Ids
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Subscriber>
+	 * @lazy
 	 */
 	protected $subscribers;
 
@@ -267,7 +268,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 		 * You may modify the constructor of this class instead
 		 */
 		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
-		
+
 		$this->subscribers = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 
@@ -403,6 +404,15 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function setLocation(Tx_SlubEvents_Domain_Model_Location $location) {
 		$this->location = $location;
+	}
+
+	/**
+	 * Returns the contact
+	 *
+	 * @return Tx_SlubEvents_Domain_Model_Event $event
+	 */
+	public function getEvent() {
+		return $this->event;
 	}
 
 	/**

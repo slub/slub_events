@@ -68,7 +68,7 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	 *
 	 * @var integer
 	 */
-	protected $number;
+	protected $number = 2;
 
 	/**
 	 * Message by the Customer

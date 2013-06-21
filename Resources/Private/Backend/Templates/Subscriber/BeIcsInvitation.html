@@ -33,12 +33,25 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <div class="tx_slubevents">
 <p>Folgende Einladung wurde an <b>{event.contact.name} ({event.contact.email})</b> gesendet:</p>
-	<h3>{event.title}</h3>
+	<f:if condition="{event.geniusBar}">
+		<f:then>
+			<h3><f:translate key="tx_slubevents_domain_model_event.individual_appointment" /></h3>
+		</f:then>
+		<f:else>
+			<h3><f:translate key="tx_slubevents_domain_model_event" />: {event.title}</h3>
+		</f:else>
+	</f:if>
+
 	<p><f:render partial="Event/DateFromTo" arguments="{event : event}" /></p>
-	
+	<p><div class="location" title="<se:format.stripTags htmlString='{event.location.description}' />"></p>
+
 	<p><f:format.html>{event.description}</f:format.html></p>
 
-	<div class="category"><f:translate key="tx_slubevents_domain_model_category" />: {event.categories.title}</div>
+	<div class="category"><f:translate key="tx_slubevents_domain_model_category" />:
+	    <f:for each="{event.categories}" as="category">
+				<span class="categorytitle" title="<se:format.stripTags htmlString='{category.description}' />">{category.title}</span><br />
+			</f:for>
+	</div>
 	<div class="location"><f:translate key="tx_slubevents_domain_model_location" />:
 	<f:if condition="{event.location.link}">
 		<f:then>

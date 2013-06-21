@@ -64,9 +64,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 </f:else>
 </f:if>
 
+<f:render partial="FormErrors" arguments="{obj: 'newSubscriber'}" />
 
-<f:render partial="FormErrors" />
-
+<ul>
+<f:for each="{feuserdata}" as="data" key="label">
+    <li>{label}: {data}</li>
+</f:for>
+</ul>
 <f:form action="create" name="newSubscriber" object="{newSubscriber}">
 
 	<f:if condition="{event.geniusBar}">
@@ -75,11 +79,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<f:form.hidden name="category" value="{category}"/>
 		</f:then>
 		<f:else>
-			<f:render partial="Subscriber/FormFields"  arguments="{subscriber : subscriber, readonly : loggedIn, event : event, errors : errors}" />
+		    <f:render partial="Subscriber/FormFields"  arguments="{readonly : loggedIn, event : event}" />
 		</f:else>
 	</f:if>
 
-	<f:form.hidden name="event" value="{event}"/>
+	<f:form.hidden property="event" value="{event}" />
+	<f:form.hidden name="event" value="{event}" />
+
 	<div class="submit">
 		<f:form.submit class="button submit" value="<f:translate key='tx_slubevents_domain_model_subscriber.submit_registration' />" />
 		<f:link.external class="button linkback" uri="javascript:history.back();"><f:translate key="paginate_back" /></f:link.external>

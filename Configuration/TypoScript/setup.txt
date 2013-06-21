@@ -84,4 +84,8 @@ module.tx_slubevents {
 	view {
 		widget.Tx_Fluid_ViewHelpers_Widget_PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
 	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		rewrittenPropertyMapper = 1
+	}
 }

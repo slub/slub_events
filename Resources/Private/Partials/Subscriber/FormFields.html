@@ -1,26 +1,26 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
 
-<label for="name" class="{errors.val_name}">
+<label for="name">
 	<f:translate key="tx_slubevents_domain_model_subscriber.name" /> <span class="required">*</span>
 </label>
-	<f:form.textfield class="{readonly} {errors.val_name}" property="name" value="{subscriber.name}"/><br />
-<label for="email" class="{errors.val_email}">
+	<f:form.textfield readonly="{readonly}" required="required" property="name" /><br />
+<label for="email">
 	<f:translate key="tx_slubevents_domain_model_subscriber.email" /> <span class="required">*</span>
 </label>
-	<f:form.textfield class="{readonly} {errors.val_email}" property="email"  value="{subscriber.email}"/><br />
+	<f:form.textfield readonly="{readonly}" required="required" property="email" /><br />
 
-<label for="customerid" class="{errors.val_customerid}">
+<label for="customerid">
 	<f:translate key="tx_slubevents_domain_model_subscriber.customerid" />
 </label>
-	<f:form.textfield class="{readonly} {errors.val_customerid}" property="customerid" value="{subscriber.customerid}" /><br />
+	<f:form.textfield readonly="{readonly}" property="customerid" /><br />
 
-<label for="number" class="{errors.val_number}">
+<label for="number">
 <f:format.printf arguments="{0: '<se:format.freePlacesLeft event=\'{event}\' />'}">
 		<f:translate key="tx_slubevents_domain_model_subscriber.number_max" />
-</f:format.printf>
+</f:format.printf> <span class="required">*</span>
 </label>
-	<f:form.textfield class="{readonly} {errors.val_number}" property="number" value="{subscriber.number}" /><br />
 
-<f:form.hidden property="editcode" value="{subscriber.editcode}"/>
+<f:form.textfield property="number" required="required" />
+<f:form.hidden property="editcode" value="<se:format.editCode event='{event}' />"/>
 
 

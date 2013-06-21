@@ -52,6 +52,7 @@ class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_Abstra
 	 * Parent Category
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category>
+	 * @lazy
 	 */
 	protected $parent;
 

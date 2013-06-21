@@ -59,6 +59,7 @@ class Tx_SlubEvents_Domain_Model_Location extends Tx_Extbase_DomainObject_Abstra
 	 * parent
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Location>
+	 * @lazy
 	 */
 	protected $parent;
 

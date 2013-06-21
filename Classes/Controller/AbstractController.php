@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,6 +37,7 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	 * eventRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
+	 * @inject
 	 */
 	protected $eventRepository;
 
@@ -44,6 +45,7 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	 * categoryRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
+	 * @inject
 	 */
 	protected $categoryRepository;
 
@@ -51,6 +53,7 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	 * subscriberRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @inject
 	 */
 	protected $subscriberRepository;
 
@@ -60,38 +63,8 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	protected $configurationManager;
 
 	/**
-	 * injectSubscriberRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository
-	 * @return void
-	 */
-	public function injectSubscriberRepository(Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository) {
-		$this->subscriberRepository = $subscriberRepository;
-	}
-
-	/**
-	 * injectEventRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository
-	 * @return void
-	 */
-	public function injectEventRepository(Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository) {
-		$this->eventRepository = $eventRepository;
-	}
-	
-	/**
-	 * injectCategoryRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository
-	 * @return void
-	 */
-	public function injectCategoryRepository(Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository) {
-		$this->categoryRepository = $categoryRepository;
-	}
-
-	/**
 	 * injectConfigurationManager
-	 * 
+	 *
 	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
 	 * @return void
 	*/
@@ -101,14 +74,25 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 		$this->contentObj = $this->configurationManager->getContentObject();
 		$this->settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
 	}
-	
+
 	/**
+	 * Get session data
+	 *
+	 * @return
+	 */
+	public function getSessionData($key) {
+
+		return $GLOBALS["TSFE"]->fe_user->getKey("ses", $key);
+
+	}
+
+	 /**
 	 * initializeAction
 	 *
 	 * @return
 	 */
 	protected function initializeAction() {
-			
+
 		global $BE_USER;
 
 		// TYPO3 doesn't set locales for backend-users --> so do it manually like this...

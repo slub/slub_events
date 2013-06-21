@@ -65,50 +65,44 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 * action new
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
-	 * @oaram Tx_SlubEvents_Domain_Model_Event $event
-	 * @oaram Tx_SlubEvents_Domain_Model_Category $category
-	 * @dontvalidate $newSubscriber
+	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @ignorevalidation $newSubscriber
+	 * @ignorevalidation $event
+	 * @ignorevalidation $category
 	 * @dontvalidate $event
-	 * @dontvalidate $category
 	 * @return void
 	 */
 	public function newAction(Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber = NULL, Tx_SlubEvents_Domain_Model_Event $event = NULL, Tx_SlubEvents_Domain_Model_Category $category = NULL) {
 		
-				// this is only done to get some css-class in the form in case of errors
-				// --> seems rather complicate :-(
-				$errors = $this->request->getErrors();
-				if($errors){
-				   foreach ($errors as $error){
-					 foreach($error->getErrors() as $e){
-							$errorsCss[$e->getMessage()] = 'error';
+					    // this is a little stupid with the rewritten property mapper from
+					    // extbase 1.4, because the object is never NULL!
+					    // anyway we can set default values here which are overwritten if
+					    // already POST values exists. extbase vodoo ;-)
+					    if($newSubscriber === NULL) {
+		
+						$newSubscriber = t3lib_div::makeInstance('Tx_SlubEvents_Domain_Model_Subscriber');
+						$newSubscriber->setNumber(1);
+		
+						if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
+		
+				    		    $newSubscriber->setCustomerid($GLOBALS['TSFE']->fe_user->user['username']);
+						    $loggedIn = 'readonly'; // css class for form
+						} else
+						    $loggedIn = ''; // css class for form
+		
+						if (!empty($GLOBALS['TSFE']->fe_user->user['name']))
+							$newSubscriber->setName($GLOBALS['TSFE']->fe_user->user['name']);
+		
+						if (!empty($GLOBALS['TSFE']->fe_user->user['email']))
+							$newSubscriber->setEmail($GLOBALS['TSFE']->fe_user->user['email']);
+		
 						}
-					}
-				}
 		
-				if ($newSubscriber == NULL) {
-					$newSubscriber = t3lib_div::makeInstance('Tx_SlubEvents_Domain_Model_Subscriber');
-		
-					if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
-						$newSubscriber->setCustomerid($GLOBALS['TSFE']->fe_user->user['username']);
-						$loggedIn = 'readonly'; // css class for form
-					}
-					if (!empty($GLOBALS['TSFE']->fe_user->user['name']))
-						$newSubscriber->setName($GLOBALS['TSFE']->fe_user->user['name']);
-					if (!empty($GLOBALS['TSFE']->fe_user->user['email']))
-						$newSubscriber->setEmail($GLOBALS['TSFE']->fe_user->user['email']);
-		
-					$newSubscriber->setNumber(1);
-					// set editcode-dummy for Spam/Form-double-sent protection
-					$editCodeDummy = hash('sha256', rand().$event->getTitle().time().'dummy');
-					$newSubscriber->setEditcode($editCodeDummy);
-					$this->setSessionData('editcode', $editCodeDummy);
-				}
-		
-				$this->view->assign('event', $event);
-				$this->view->assign('category', $category);
-				$this->view->assign('subscriber', $newSubscriber);
-				$this->view->assign('loggedIn', $loggedIn);
-				$this->view->assign('errors', $errorsCss);
+						$this->view->assign('event', $event);
+						$this->view->assign('category', $category);
+						$this->view->assign('newSubscriber', $newSubscriber);
+						$this->view->assign('loggedIn', $loggedIn);
 	}
 
 	/**
@@ -116,93 +110,82 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 * // gets validated automatically if name is like this: ...Tx_SlubEvents_Domain_Validator_SubscriberValidator
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
-	 * @oaram Tx_SlubEvents_Domain_Model_Event $event
-	 * @oaram Tx_SlubEvents_Domain_Model_Category $category
+	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param Tx_SlubEvents_Domain_Model_Category $category
 	 * @validate $event Tx_SlubEvents_Domain_Validator_EventSubscriptionAllowedValidator
-	 * @dontvalidate $category
+	 * @ignorevalidation $category
 	 * @return void
 	 */
 	public function createAction(Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber, Tx_SlubEvents_Domain_Model_Event $event, Tx_SlubEvents_Domain_Model_Category $category = NULL) {
 		
-				// limit reached already --> overbooked --> this should be done in validator but I cannot access event AND subscribers in one validator :-(
-				if ($this->subscriberRepository->countAllByEvent($event)+$newSubscriber->getNumber() > $event->getMaxSubscriber()) {
+						// add subscriber to event
+						$editcode = hash('sha256', rand().$newSubscriber->getEmail().time());
+						$newSubscriber->setEditcode($editcode);
+						$event->addSubscriber($newSubscriber);
 		
-					// set error-message which is usually the duty of validators...
-					$error = t3lib_div::makeInstance('Tx_Extbase_MVC_Controller_ArgumentError');
-					$error->addErrors(array(t3lib_div::makeInstance('Tx_Extbase_Validation_Error', 'val_number', '1361204596')));
-					$this->request->setErrors(array($error));
+						// Genius Bar Specials:
+						if ($event->getGeniusBar()) {
+							$event->setTitle($category->getTitle());
+							$event->setDescription($category->getDescription());
+						}
 		
-					$this->forward('new', 'Subscriber', 'SlubEvents', array('newSubscriber' => $newSubscriber, 'event' => $event));
-				}
+						// send email(s)
+						$helper['now'] = time();
+						// rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
+						$helper['description'] = $this->foldline($event->getDescription());
+						$helper['location'] = $event->getLocation()->getName();
+						$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+						$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $newSubscriber->getName()));
 		
-				// add subscriber to event
-				$editcode = hash('sha256', rand().$newSubscriber->getEmail().time());
-				$newSubscriber->setEditcode($editcode);
-				$event->addSubscriber($newSubscriber);
+						// startDateTime may never be empty
+						$helper['start'] = $event->getStartDateTime()->getTimestamp();
+						// endDateTime may be empty
+						if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
+							$helper['end'] = $event->getEndDateTime()->getTimestamp();
 		
-				// Genius Bar Specials:
-				if ($event->getGeniusBar()) {
-					$event->setTitle($category->getTitle());
-					$event->setDescription($category->getDescription());
-				}
+						if ($event->isAllDay()) {
+							$helper['allDay'] = 1;
+						}
 		
-				// send email(s)
-				$helper['now'] = time();
-				// rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
-				$helper['description'] = $this->foldline($event->getDescription());
-				$helper['location'] = $event->getLocation()->getName();
-				$helper['locationics'] = $this->foldline($event->getLocation()->getName());
-				$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $newSubscriber->getName()));
+						// email to customer
+						$this->sendTemplateEmail(
+							array($newSubscriber->getEmail() => $newSubscriber->getName()),
+							array($event->getContact()->getEmail() => $event->getContact()->getName()),
+							'Ihre Anmeldung: ' . $event->getTitle(),
+							'Subscribe',
+							array(	'event' => $event,
+									'subscriber' => $newSubscriber,
+									'helper' => $helper,
+									'settings' => $this->settings,
+							)
+						);
 		
-				// startDateTime may never be empty
-				$helper['start'] = $event->getStartDateTime()->getTimestamp();
-				// endDateTime may be empty
-				if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
-					$helper['end'] = $event->getEndDateTime()->getTimestamp();
+						// only send, if maximum is reached...
+						if (($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()) {
+							$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 		
-				if ($event->isAllDay()) {
-					$helper['allDay'] = 1;
-				}
+							// email to event owner
+							$this->sendTemplateEmail(
+								array($event->getContact()->getEmail() => $event->getContact()->getName()),
+								array('webmaster@slub-dresden.de' => 'SLUB Veranstaltungen - noreply'),
+								'Veranstaltung ausgebucht: ' . $event->getTitle(),
+								'Maximumreached',
+								array(	'event' => $event,
+										'subscribers' => $event->getSubscribers(),
+										'helper' => $helper,
+										'settings' => $this->settings,
+								)
+							);
+						}
 		
-				// email to customer
-				$this->sendTemplateEmail(
-					array($newSubscriber->getEmail() => $newSubscriber->getName()),
-					array($event->getContact()->getEmail() => $event->getContact()->getName()),
-					'Ihre Anmeldung: ' . $event->getTitle(),
-					'Subscribe',
-					array(	'event' => $event,
-							'subscriber' => $newSubscriber,
-							'helper' => $helper,
-							'settings' => $this->settings,
-					)
-				);
+						// reset session data
+						$this->setSessionData('editcode', '');
 		
-				// only send, if maximum is reached...
-				if (($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()) {
-					$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
-		
-					// email to event owner
-					$this->sendTemplateEmail(
-						array($event->getContact()->getEmail() => $event->getContact()->getName()),
-						array('webmaster@slub-dresden.de' => 'SLUB Veranstaltungen - noreply'),
-						'Veranstaltung ausgebucht: ' . $event->getTitle(),
-						'Maximumreached',
-						array(	'event' => $event,
-								'subscribers' => $event->getSubscribers(),
-								'helper' => $helper,
-								'settings' => $this->settings,
-						)
-					);
-				}
-		
-				// reset session data
-				$this->setSessionData('editcode', '');
-		
-				// clear cache on all cached list pages
-				$this->clearAllEventListCache();
-				$this->view->assign('event', $event);
-				$this->view->assign('category', $category);
-				$this->view->assign('subscriber', $newSubscriber);
+						// clear cache on all cached list pages
+						$this->clearAllEventListCache();
+						$this->view->assign('event', $event);
+						$this->view->assign('category', $category);
+						$this->view->assign('newSubscriber', $newSubscriber);
 	}
 
 	/**
@@ -217,52 +200,52 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	protected function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array()) {
 		
-				$emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-				$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
-				$emailViewHTML->setFormat('html');
-				$emailViewHTML->assignMultiple($variables);
+					    $emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+					    $emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
+					    $emailViewHTML->setFormat('html');
+					    $emailViewHTML->assignMultiple($variables);
 		
-				$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-				$ics->getRequest()->setControllerExtensionName($this->extensionName);
-				$ics->setFormat('ics');
-				$ics->assignMultiple($variables);
+					    $ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+					    $ics->getRequest()->setControllerExtensionName($this->extensionName);
+					    $ics->setFormat('ics');
+					    $ics->assignMultiple($variables);
 		
-				$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-				$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-				$partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+					    $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+					    $templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+					    $partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
 		
-				$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
-				$emailViewHTML->setPartialRootPath($partialRootPath);
+					    $emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
+					    $emailViewHTML->setPartialRootPath($partialRootPath);
 		
-				$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
+					    $ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 		
-				$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
-				t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+					    $eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
+					    t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 		
-				$message = t3lib_div::makeInstance('t3lib_mail_Message');
-				$message->setTo($recipient)
-						->setFrom($sender)
-						->setCharset('utf-8')
-						->setSubject($subject);
+					    $message = t3lib_div::makeInstance('t3lib_mail_Message');
+					    $message->setTo($recipient)
+							    ->setFrom($sender)
+							    ->setCharset('utf-8')
+							    ->setSubject($subject);
 		
-				// attach ICS-File
-				$message->attach(Swift_Attachment::fromPath($eventIcsFile)
-									->setFilename('invite.ics')
-									->setContentType('application/ics'));
+					    // attach ICS-File
+					    $message->attach(Swift_Attachment::fromPath($eventIcsFile)
+										    ->setFilename('invite.ics')
+										    ->setContentType('application/ics'));
 		
-				// Plain text example
-				//~ $message->setBody($emailView->render(), 'text/plain');
-				$emailTextHTML = $emailViewHTML->render();
-				$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
+					    // Plain text example
+					    //~ $message->setBody($emailView->render(), 'text/plain');
+					    $emailTextHTML = $emailViewHTML->render();
+					    $message->setBody($this->html2rest($emailTextHTML), 'text/plain');
 		
-				$message->addPart($ics->render(), 'text/calendar', 'utf-8');
+					    $message->addPart($ics->render(), 'text/calendar', 'utf-8');
 		
-				// HTML Email
-				$message->addPart($emailTextHTML, 'text/html');
+					    // HTML Email
+					    $message->addPart($emailTextHTML, 'text/html');
 		
-				$message->send();
+					    $message->send();
 		
-				return $message->isSent();
+					    return $message->isSent();
 	}
 
 	/**
@@ -274,30 +257,30 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	private function foldline($content) {
 		
-				$text = trim(strip_tags( html_entity_decode($content), '<br>,<p>,<li>'));
-				$text = preg_replace('/<p[\ \w\=\"]{0,}>/', '', $text);
-				$text = preg_replace('/<li[\ \w\=\"]{0,}>/', '- ', $text);
-				// make newline formated (yes, really write \n into the text!
-				$text = str_replace('</p>', '\n', $text);
-				$text = str_replace('</li>', '\n', $text);
-				// remove tabs
-				$text = str_replace("\t", ' ', $text);
-				// remove multiple spaces
-				$text = preg_replace('/[\ ]{2,}/', '', $text);
-				$text = str_replace('<br />', '\n', $text);
-				// remove more than one empty line
-				$text = preg_replace('/[\n]{3,}/', '\n\n', $text);
-				// remove windows linkebreak
-				$text = preg_replace('/[\r]/', '', $text);
-				// newlines are not allowed
-				$text = str_replace("\n", '\n', $text);
-				// semicolumns are not allowed
-				$text = str_replace(';', '\;', $text);
+					    $text = trim(strip_tags( html_entity_decode($content), '<br>,<p>,<li>'));
+					    $text = preg_replace('/<p[\ \w\=\"]{0,}>/', '', $text);
+					    $text = preg_replace('/<li[\ \w\=\"]{0,}>/', '- ', $text);
+					    // make newline formated (yes, really write \n into the text!
+					    $text = str_replace('</p>', '\n', $text);
+					    $text = str_replace('</li>', '\n', $text);
+					    // remove tabs
+					    $text = str_replace("\t", ' ', $text);
+					    // remove multiple spaces
+					    $text = preg_replace('/[\ ]{2,}/', '', $text);
+					    $text = str_replace('<br />', '\n', $text);
+					    // remove more than one empty line
+					    $text = preg_replace('/[\n]{3,}/', '\n\n', $text);
+					    // remove windows linkebreak
+					    $text = preg_replace('/[\r]/', '', $text);
+					    // newlines are not allowed
+					    $text = str_replace("\n", '\n', $text);
+					    // semicolumns are not allowed
+					    $text = str_replace(';', '\;', $text);
 		
-				$firstline = substr($text, 0, (75-12));
-				$restofline = implode("\n ", str_split(trim(substr($text, (75-12), strlen($text))), 73) );
+					    $firstline = substr($text, 0, (75-12));
+					    $restofline = implode("\n ", str_split(trim(substr($text, (75-12), strlen($text))), 73) );
 		
-				return $firstline . "\n ". $restofline;
+					    return $firstline . "\n ". $restofline;
 	}
 
 	/**
@@ -310,30 +293,30 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function html2rest($text) {
 		
-				$text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
-				// header is getting **
-				$text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', "**", $text);
-				// bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
-				$text = preg_replace('/<b>|<\/b>/', "*", $text);
-				// get away links but preserve href with class slub-event-link
-				$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
-				// Remove separator characters (like non-breaking spaces...)
-				$text = preg_replace( '/\p{Z}/u', ' ', $text );
-				$text = str_replace('<br />', "\n", $text);
-				// get away paragraphs including class, title etc.
-				$text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
-				$text = str_replace('<li>', "- ", $text);
-				$text = str_replace('</li>', "\n", $text);
-				// remove multiple spaces
-				$text = preg_replace('/[\ ]{2,}/', '', $text);
-				// remove multiple tabs
-				$text = preg_replace('/[\t]{1,}/', '', $text);
-				// remove more than one empty line
-				$text = preg_replace('/[\n]{3,}/', "\n\n", $text);
-				// remove all remaining html tags
-				$text = strip_tags($text);
+					    $text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
+					    // header is getting **
+					    $text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', "**", $text);
+					    // bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
+					    $text = preg_replace('/<b>|<\/b>/', "*", $text);
+					    // get away links but preserve href with class slub-event-link
+					    $text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
+					    // Remove separator characters (like non-breaking spaces...)
+					    $text = preg_replace( '/\p{Z}/u', ' ', $text );
+					    $text = str_replace('<br />', "\n", $text);
+					    // get away paragraphs including class, title etc.
+					    $text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
+					    $text = str_replace('<li>', "- ", $text);
+					    $text = str_replace('</li>', "\n", $text);
+					    // remove multiple spaces
+					    $text = preg_replace('/[\ ]{2,}/', '', $text);
+					    // remove multiple tabs
+					    $text = preg_replace('/[\t]{1,}/', '', $text);
+					    // remove more than one empty line
+					    $text = preg_replace('/[\n]{3,}/', "\n\n", $text);
+					    // remove all remaining html tags
+					    $text = strip_tags($text);
 		
-				return $text;
+					    return $text;
 	}
 
 	/**
@@ -345,9 +328,9 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function setSessionData($key, $data) {
 		
-				$GLOBALS["TSFE"]->fe_user->setKey("ses", $key, $data);
+					    $GLOBALS["TSFE"]->fe_user->setKey("ses", $key, $data);
 		
-				return;
+					    return;
 	}
 
 	/**
@@ -358,7 +341,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function getSessionData($key) {
 		
-										return $GLOBALS["TSFE"]->fe_user->getKey("ses", $key);
+					    return $GLOBALS["TSFE"]->fe_user->getKey("ses", $key);
 	}
 
 	/**
@@ -389,49 +372,49 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Event $event
 	 * @param string $subscriber
-	 * @dontvalidate $event
-	 * @dontvalidate $editcode
+	 * @ignorevalidation $event
+	 * @ignorevalidation $editcode
 	 * @return void
 	 */
 	public function deleteAction(Tx_SlubEvents_Domain_Model_Event $event, $editcode) {
 		
-				// delete for which subscriber?
-				$subscriber = $this->subscriberRepository->findAllByEditcode($editcode)->getFirst();
+						// delete for which subscriber?
+						$subscriber = $this->subscriberRepository->findAllByEditcode($editcode)->getFirst();
 		
-				$event->removeSubscriber($subscriber);
-		//~ t3lib_utility_Debug::debug(str_split('\n\r', trim(strip_tags(html_entity_decode($event->getDescription())))), 'sendTemplateEmail: extbaseFrameworkConfiguration... ');
-				// some helper timestamps for ics-file
-				$helper['now'] = time();
-				$helper['isdelete'] = 1;
-				$helper['description'] = $this->foldline($event->getDescription());
-				$helper['location'] = $event->getLocation()->getName();
-				$helper['locationics'] = $this->foldline($event->getLocation()->getName());
-				$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $subscriber->getName()));
+						$event->removeSubscriber($subscriber);
 		
-				$helper['start'] = $event->getStartDateTime()->getTimestamp();
-				// endDate may be empty
-				if (is_object($event->getEndDateTime()) || ($event->getStartDateTime() != $event->getEndDateTime()))
-					$helper['end'] = $event->getEndDateTime()->getTimestamp();
+						// some helper timestamps for ics-file
+						$helper['now'] = time();
+						$helper['isdelete'] = 1;
+						$helper['description'] = $this->foldline($event->getDescription());
+						$helper['location'] = $event->getLocation()->getName();
+						$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+						$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $subscriber->getName()));
 		
-				if ($event->isAllDay()) {
-					$helper['allDay'] = 1;
-				}
+						$helper['start'] = $event->getStartDateTime()->getTimestamp();
+						// endDate may be empty
+						if (is_object($event->getEndDateTime()) || ($event->getStartDateTime() != $event->getEndDateTime()))
+							$helper['end'] = $event->getEndDateTime()->getTimestamp();
 		
-				$this->sendTemplateEmail(
-					array($subscriber->getEmail() => $subscriber->getName()),
-					array($event->getContact()->getEmail() => $event->getContact()->getName()),
-					'Ihre Abmeldung: ' . $event->getTitle(),
-					'Unsubscribe',
-					array(	'event' => $event,
-							'subscriber' => $subscriber,
-							'helper' => $helper,
-							'settings' => $this->settings,
-					)
-				);
+						if ($event->isAllDay()) {
+							$helper['allDay'] = 1;
+						}
 		
-				$this->clearAllEventListCache();
-				$this->view->assign('event', $event);
-				$this->view->assign('subscriber', $subscriber);
+						$this->sendTemplateEmail(
+							array($subscriber->getEmail() => $subscriber->getName()),
+							array($event->getContact()->getEmail() => $event->getContact()->getName()),
+							'Ihre Abmeldung: ' . $event->getTitle(),
+							'Unsubscribe',
+							array(	'event' => $event,
+									'subscriber' => $subscriber,
+									'helper' => $helper,
+									'settings' => $this->settings,
+							)
+						);
+		
+						$this->clearAllEventListCache();
+						$this->view->assign('event', $event);
+						$this->view->assign('subscriber', $subscriber);
 	}
 
 	/**
@@ -440,7 +423,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 * --> see ics template in Resources/Private/Backend/Templates/Email/
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Event $event
-	 * @dontvalidate $event
+	 * @ignorevalidation $event
 	 * @return void
 	 */
 	public function beIcsInvitationAction(Tx_SlubEvents_Domain_Model_Event $event) {
@@ -534,7 +517,6 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 						$this->view->assign('events', $events);
 		
 						$subscribers = $this->subscriberRepository->findAllByEvents($events);
-						//~ t3lib_utility_Debug::debug($subscribers->getFirst(), 'subscribers... ');
 		
 						$this->view->assign('subscribers', $subscribers);
 	}

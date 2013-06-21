@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -132,7 +132,7 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
                                         'id' => 'picker-tceforms-datefield-1'
                                 )
                         );
-                        
+
 			return '<img' . t3lib_iconWorks::skinImg($this->backPath, 'gfx/datepicker.gif', '', 0) . ' style="cursor:pointer; vertical-align:middle;" alt=""' . ' id="picker-tceforms-datetimefield-1" />';
 	}
 
@@ -168,7 +168,7 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 			case 'datepicker': 	$content = $this->getDatePickerIcon();
 				break;
 		}
-			
+
 		return $content;
 
 	}

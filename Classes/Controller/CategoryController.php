@@ -44,28 +44,28 @@ class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controll
 	 * action list
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $category
-	 * @dontvalidate
+	 * @ignorevalidation
 	 * @return void
 	 */
 	public function listAction(Tx_SlubEvents_Domain_Model_Category $category = NULL) {
 		
-				// take the flexform settings by default
-				$category = $this->categoryRepository->findAllByUids(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE))->getFirst();
-				$categoriesRootline[] = $category;
+								// take the flexform settings by default
+								$category = $this->categoryRepository->findAllByUids(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE))->getFirst();
+								$categoriesRootline[] = $category;
 		
-				$categories = $this->categoryRepository->findCurrentBranch($category);
+								$categories = $this->categoryRepository->findCurrentBranch($category);
 		
-				if (count($categories) == 0) {
-					// there are no further child categories --> show events
+								if (count($categories) == 0) {
+									// there are no further child categories --> show events
 		
-					$this->forward('gbList');
-				} else {
-					$this->view->assign('categoriesRootline', $categoriesRootline);
-					$this->view->assign('category', $category);
-					//~ $this->view->assign('parentcategory', $category->getParent()->current());
-					$this->view->assign('categories', $categories);
+									$this->forward('gbList');
+								} else {
+									$this->view->assign('categoriesRootline', $categoriesRootline);
+									$this->view->assign('category', $category);
+									//~ $this->view->assign('parentcategory', $category->getParent()->current());
+									$this->view->assign('categories', $categories);
 		
-				}
+								}
 	}
 
 	/**
@@ -84,19 +84,19 @@ class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controll
 	 * List of genius bar events with category description, contact photo and calendar link
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $category
-	 * @dontvalidate
+	 * @ignorevalidation
 	 * @return void
 	 */
 	public function gbListAction(Tx_SlubEvents_Domain_Model_Category $category = NULL) {
 		
-				if ($category != NULL) {
-					$events = $this->eventRepository->findAllGbByCategory($category);
-				}
+			    if ($category != NULL) {
+				    $events = $this->eventRepository->findAllGbByCategory($category);
+			    }
 		
-				$this->view->assign('events', $events);
-				$this->view->assign('category', $category);
-				//~ $this->view->assign('categoriesRootline', $categoriesRootline);
-				$this->view->assign('parentcategory', $category->getParent()->current());
+			    $this->view->assign('events', $events);
+			    $this->view->assign('category', $category);
+			    //~ $this->view->assign('categoriesRootline', $categoriesRootline);
+			    $this->view->assign('parentcategory', $category->getParent()->current());
 	}
 
 	/**

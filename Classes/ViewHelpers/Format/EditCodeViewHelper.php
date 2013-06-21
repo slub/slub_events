@@ -31,15 +31,21 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_FreePlacesLeftViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_SlubEvents_ViewHelpers_Format_EditCodeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
-	 * subscriberRepository
+	 * Set session data
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
-	 * @inject
+	 * @param $key
+	 * @param $data
+	 * @return
 	 */
-	protected $subscriberRepository;
+	public function setSessionData($key, $data) {
+
+	    $GLOBALS["TSFE"]->fe_user->setKey("ses", $key, $data);
+
+	    return;
+	}
 
 	/**
 	 * Render the supplied DateTime object as a formatted date.
@@ -51,9 +57,12 @@ class Tx_SlubEvents_ViewHelpers_Format_FreePlacesLeftViewHelper extends Tx_Fluid
 	 */
 	public function render($event) {
 
-		$free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
+		// set editcode-dummy for Spam/Form-double-sent protection
+		$editCodeDummy = hash('sha256', rand().$event->getTitle().time().'dummy');
+//		t3lib_utility_Debug::debug($setEditcode, '2setEditcode:!... ');
+		$this->setSessionData('editcode', $editCodeDummy);
 
-		return ($free > 0)? $free : 0;
+	    return $editCodeDummy;
 
 	}
 }

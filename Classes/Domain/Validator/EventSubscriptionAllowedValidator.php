@@ -3,7 +3,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,18 +37,9 @@ class Tx_SlubEvents_Domain_Validator_EventSubscriptionAllowedValidator extends T
 	 * subscriberRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @inject
 	 */
 	protected $subscriberRepository;
-
-	/**
-	 * injectSubscriberRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository
-	 * @return void
-	 */
-	public function injectSubscriberRepository(Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository) {
-		$this->subscriberRepository = $subscriberRepository;
-	}
 
 	/**
 	 * Return variable
@@ -66,7 +57,7 @@ class Tx_SlubEvents_Domain_Validator_EventSubscriptionAllowedValidator extends T
 	public function isValid($event) {
 
 		// limit reached already --> overbooked
-		if ($this->subscriberRepository->countAllByEvent($event)+1 > $event->getMaxSubscriber()) {
+		if ($this->subscriberRepository->countAllByEvent($event) + 1 > $event->getMaxSubscriber()) {
 			$this->isValid = FALSE;
 			$this->addError('val_event_overbooked', 1200);
 		}
