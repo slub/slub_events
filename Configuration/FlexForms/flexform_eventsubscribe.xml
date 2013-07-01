@@ -1,4 +1,7 @@
 <T3DataStructure>
+<meta>
+    <langDisable>1</langDisable>
+</meta>
  <sheets>
   <sDEF>
    <ROOT>
@@ -13,17 +16,17 @@
          <config>
           <type>select</type>
           <items>
-            
+
             <numIndex index="0">
              <numIndex index="0">Anmelden</numIndex>
              <numIndex index="1">Subscriber->new;Subscriber->create;</numIndex>
             </numIndex>
-            
+
             <numIndex index="1">
              <numIndex index="0">Abmelden</numIndex>
              <numIndex index="1">Subscriber->delete;</numIndex>
             </numIndex>
-            
+
            </items>
          </config>
        </TCEforms>

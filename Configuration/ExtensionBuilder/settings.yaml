@@ -45,7 +45,7 @@ overwriteSettings:
       Repository: merge
 
   Configuration:
-    TCA: merge
+    TCA: keep
     TypoScript: merge
     FlexForms: keep
 

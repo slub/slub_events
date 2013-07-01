@@ -137,7 +137,6 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	 * Category Id
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category>
-	 * @lazy
 	 */
 	protected $categories;
 

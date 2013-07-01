@@ -367,6 +367,7 @@ $TCA['tx_slubevents_domain_model_event']['columns']['subscribers'] = array(
 
 $TCA['tx_slubevents_domain_model_event']['columns']['categories'] = array(
 			'exclude' => 0,
+			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.categories',
 			'config' => array(
 				'type' => 'select',
@@ -379,7 +380,8 @@ $TCA['tx_slubevents_domain_model_event']['columns']['categories'] = array(
 					'appearance' => array(
 						'expandAll' => TRUE,
 						'showHeader' => FALSE,
-						'width' => '400px',
+						'maxLevels' => 10,
+						'width' => 400,
 					),
 
 				),

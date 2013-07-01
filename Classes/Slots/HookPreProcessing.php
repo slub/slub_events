@@ -108,8 +108,9 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 					t3lib_FlashMessageQueue::addMessage($message);
 				}
 
+				// warn if subscription deadline is more than 3 days before the event.
 				if ($fieldArray['sub_end_date_time'] > 0 && ($fieldArray['start_date_time']  > $fieldArray['sub_end_date_time'] + (3*86400))) {
-					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['sub_end_date_time']) . ' ==> <b>' . gmstrftime('%e', $fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']). ' Tage</b> vorher!', 'Bitte prüfen:', t3lib_FlashMessage::WARNING, TRUE);
+					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['sub_end_date_time']) . ' ==> <b>' . (int)(($fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']) / 86400). ' Tage</b> vorher!', 'Bitte prüfen:', t3lib_FlashMessage::WARNING, TRUE);
 					t3lib_FlashMessageQueue::addMessage($message);
 				}
 			} else {

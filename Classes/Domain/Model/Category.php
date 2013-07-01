@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -55,6 +55,11 @@ class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_Abstra
 	 * @lazy
 	 */
 	protected $parent;
+
+	/**
+	 * @var integer
+	 */
+	protected $l10nParent;
 
 	/**
 	 * Returns the title
@@ -155,6 +160,15 @@ class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_Abstra
 	 */
 	public function setParent(Tx_Extbase_Persistence_ObjectStorage $parent) {
 		$this->parent = $parent;
+	}
+
+	/**
+	 * Get l10n parent
+	 *
+	 * @return int
+	 */
+	public function getL10nParent() {
+		return $this->l10nParent;
 	}
 
 }

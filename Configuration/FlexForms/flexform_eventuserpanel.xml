@@ -1,4 +1,7 @@
 <T3DataStructure>
+<meta>
+    <langDisable>1</langDisable>
+</meta>
  <sheets>
   <sDEF>
    <ROOT>
@@ -13,7 +16,7 @@
          <config>
           <type>select</type>
           <items>
-            
+
             <numIndex index="0">
              <numIndex index="0">Meine Veranstaltungen</numIndex>
              <numIndex index="1">Event->listOwn;Event->show</numIndex>
