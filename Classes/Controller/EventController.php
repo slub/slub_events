@@ -48,8 +48,6 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function listAction() {
 
-t3lib_utility_Debug::debug($this->settings['categorySelection'], 'listAction: ... ');
-
 		if (!empty($this->settings['categorySelection']))
 			$events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
 		else
