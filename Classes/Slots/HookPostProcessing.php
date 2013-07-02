@@ -37,19 +37,19 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	 * @return
 	 */
 	function clearAllEventListCache() {
-		
+
 		global $GLOBALS;
 
 		$select = 'DISTINCT pages.uid';
 		$table = 'tt_content, pages';
-		$query = 'list_type = \'slubevents_eventlist\' AND pages.uid = tt_content.pid';
+		$query = 'list_type IN(\'slubevents_eventlist\', \'slubevents_eventgeniusbar\') AND pages.uid = tt_content.pid';
 		$query .= ' AND tt_content.hidden = 0 AND pages.hidden = 0';
 		$query .= ' AND tt_content.deleted = 0 AND pages.deleted = 0';
 
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$query);
 
 		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
-		
+
 		while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			$tcemain->clear_cacheCmd($row['uid']);
 		};
@@ -58,7 +58,7 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	}
 
 	/**
-	 * TCEmain hook function 
+	 * TCEmain hook function
 	 *
 	 * @param       string          Status "new" or "update"
 	 * @param       string          Table name
@@ -68,15 +68,16 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	 * @return      void
 	 */
 	function processDatamap_afterDatabaseOperations($status, $table, $idElement, &$fieldArray, &$pObj) {
-		
+
 		// we are only interested in tx_slubevents_domain_model_event
-		
-		if ($table == 'tx_slubevents_domain_model_event' && 
+
+		if ($table == 'tx_slubevents_domain_model_event' &&
 				$pObj->checkValue_currentRecord['hidden'] == '0') {
 
 			$this->clearAllEventListCache();
-			
-		} 
+
+
+		}
 	}
 
 }
