@@ -59,6 +59,20 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	}
 
 	/**
+	 * action initializeShow
+	 *
+	 * @return void
+	 */
+	public function initializeShowAction() {
+
+		$eventId = $this->request->getArgument('event');
+		$event = $this->eventRepository->findByUid($eventId);
+
+		if ($event == NULL)
+			$this->redirect('showNotfound'); // , $controllerName = NULL, $extensionName = NULL, array(), $pageUid = NULL, $delay = 0, 404);
+	}
+
+	/**
 	 * action show
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Event $event
@@ -67,14 +81,25 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function showAction(Tx_SlubEvents_Domain_Model_Event $event = NULL) {
 
-		// fill registers to be used in ts
-		$cObj = t3lib_div::makeInstance('tslib_cObj');
-		$cObj->LOAD_REGISTER(
-			array(
-			    'eventPageTitle' => Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event', 'slub_events') . ': "' . $event->getTitle() . '" - ' . strftime('%a, %x %H:%M', $event->getStartDateTime()->getTimeStamp()),
-			), 'LOAD_REGISTER');
+		if ($event != NULL) {
+			// fill registers to be used in ts
+			$cObj = t3lib_div::makeInstance('tslib_cObj');
+			$cObj->LOAD_REGISTER(
+				array(
+					'eventPageTitle' => Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event', 'slub_events') . ': "' . $event->getTitle() . '" - ' . strftime('%a, %x %H:%M', $event->getStartDateTime()->getTimeStamp()),
+				), 'LOAD_REGISTER');
+		}
 
 		$this->view->assign('event', $event);
+	}
+
+	/**
+	 * action showNotfound
+	 *
+	 * @return void
+	 */
+	public function showNotfoundAction() {
+
 	}
 
 	/**
@@ -85,7 +110,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 * @return void
 	 */
 	public function newAction(Tx_SlubEvents_Domain_Model_Event $newEvent = NULL) {
-			    $this->view->assign('newEvent', $newEvent);
+			$this->view->assign('newEvent', $newEvent);
 	}
 
 	/**
@@ -258,47 +283,47 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function listMiniMonthAction() {
 
-							    if (!empty($this->settings['categorySelection']))
-								    $events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
-							    else
-								    $events = $this->eventRepository->findAll();
+		if (!empty($this->settings['categorySelection']))
+			$events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
+		else
+			$events = $this->eventRepository->findAll();
 
-							    // prepare event array with timestamps for days:
-							    foreach ($events as $event) {
-								    $eventsPerDay[strtotime('today 00:00:00', $event->getStartDateTime()->getTimestamp())][] = $event->getUid();
-							    }
+		// prepare event array with timestamps for days:
+		foreach ($events as $event) {
+			$eventsPerDay[strtotime('today 00:00:00', $event->getStartDateTime()->getTimestamp())][] = $event->getUid();
+		}
 
-							    $startDate = time();
+		$startDate = time();
 
-							    $firstDayOfMonth = strtotime('first day of this month', $startDate);
-							    if (date('w', $firstDayOfMonth) == 1) // last day is Monday
-								    $firstDay = $firstDayOfMonth;
-							    else
-								    $firstDay = strtotime('last monday', $firstDayOfMonth);
+		$firstDayOfMonth = strtotime('first day of this month', $startDate);
+		if (date('w', $firstDayOfMonth) == 1) // last day is Monday
+			$firstDay = $firstDayOfMonth;
+		else
+			$firstDay = strtotime('last monday', $firstDayOfMonth);
 
-							    $lastDayOfMonth = strtotime('last day of this month', $startDate);
-							    if (date('w', $lastDayOfMonth) == 0) // last day is Sunday
-								    $lastDay = $lastDayOfMonth;
-							    else
-								    $lastDay = strtotime('next sunday', $lastDayOfMonth);
+		$lastDayOfMonth = strtotime('last day of this month', $startDate);
+		if (date('w', $lastDayOfMonth) == 0) // last day is Sunday
+			$lastDay = $lastDayOfMonth;
+		else
+			$lastDay = strtotime('next sunday', $lastDayOfMonth);
 
-							    for ($d = $firstDay; $d<=$lastDay; $d = strtotime('+1 day', $d)) {
-								    unset($day);
-								    $day['timestamp'] = $d;
-								    if ($d < $firstDayOfMonth || $d > $lastDayOfMonth)
-									    $day['active'] = 0;
-								    else
-									    $day['active'] = 1;
+		for ($d = $firstDay; $d<=$lastDay; $d = strtotime('+1 day', $d)) {
+			unset($day);
+			$day['timestamp'] = $d;
+			if ($d < $firstDayOfMonth || $d > $lastDayOfMonth)
+				$day['active'] = 0;
+			else
+				$day['active'] = 1;
 
-								    if ($eventsPerDay[$d])
-									    $day['events'][] = $eventsPerDay[$d];
+			if ($eventsPerDay[$d])
+				$day['events'][] = $eventsPerDay[$d];
 
-								    $weeks[date('W', $d)][] = $day;
-							    }
+			$weeks[date('W', $d)][] = $day;
+		}
 
-							    $this->view->assign('firstDayOfMonth', $firstDayOfMonth);
-							    $this->view->assign('events', $events);
-							    $this->view->assign('weeks', $weeks);
+		$this->view->assign('firstDayOfMonth', $firstDayOfMonth);
+		$this->view->assign('events', $events);
+		$this->view->assign('weeks', $weeks);
 	}
 
 	/**
@@ -319,40 +344,40 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function ajaxAction() {
 
-							    $events = $this->eventRepository->findAllByCategoriesAndDateInterval(t3lib_div::intExplode(',', $_GET['categories'], TRUE), $_GET['start'], $_GET['stop']);
+		$events = $this->eventRepository->findAllByCategoriesAndDateInterval(t3lib_div::intExplode(',', $_GET['categories'], TRUE), $_GET['start'], $_GET['stop']);
 
-							    $cObj = $this->configurationManager->getContentObject();
-							    foreach ($events as $event) {
+		$cObj = $this->configurationManager->getContentObject();
+		foreach ($events as $event) {
 
-								    $foundevent = array();
+			$foundevent = array();
 
-								    $foundevent['id'] = $event->getUid();
-								    $foundevent['title'] = $event->getTitle();
-								    $foundevent['start'] = $event->getStartDateTime()->getTimestamp();
-								    if ($event->getEndDateTime() instanceof DateTime)
-									    $foundevent['end'] = $event->getEndDateTime()->getTimestamp();
+			$foundevent['id'] = $event->getUid();
+			$foundevent['title'] = $event->getTitle();
+			$foundevent['start'] = $event->getStartDateTime()->getTimestamp();
+			if ($event->getEndDateTime() instanceof DateTime)
+				$foundevent['end'] = $event->getEndDateTime()->getTimestamp();
 
-								    $conf = array(
-									    // Link to current page
-									    'parameter' => $_GET['detailPid'],
-									    // Set additional parameters
-									    'additionalParams' => '&type=0&tx_slubevents_eventlist%5Bevent%5D='.$event->getUid().'&tx_slubevents_eventlist%5Baction%5D=show&tx_slubevents_eventlist%5Bcontroller%5D=Event',
-									    // We must add cHash because we use parameters
-									    'useCachHash' => true,
-									    // We want link only
-									    'returnLast' => 'url',
-								    );
-								    $url = $cObj->typoLink('', $conf);
-								    //~
-								    $foundevent['url'] = $url;
-								    if ($event->getAllDay())
-									    $foundevent['allDay'] = true;
-								    else
-									    $foundevent['allDay'] = false;
+			$conf = array(
+				// Link to current page
+				'parameter' => $_GET['detailPid'],
+				// Set additional parameters
+				'additionalParams' => '&type=0&tx_slubevents_eventlist%5Bevent%5D='.$event->getUid().'&tx_slubevents_eventlist%5Baction%5D=show&tx_slubevents_eventlist%5Bcontroller%5D=Event',
+				// We must add cHash because we use parameters
+				'useCachHash' => true,
+				// We want link only
+				'returnLast' => 'url',
+			);
+			$url = $cObj->typoLink('', $conf);
+			//~
+			$foundevent['url'] = $url;
+			if ($event->getAllDay())
+				$foundevent['allDay'] = true;
+			else
+				$foundevent['allDay'] = false;
 
-								    $jsonevent[] = $foundevent;
-							    }
-							    return json_encode($jsonevent);
+			$jsonevent[] = $foundevent;
+		}
+		return json_encode($jsonevent);
 	}
 
 	/**

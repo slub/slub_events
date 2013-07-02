@@ -7,7 +7,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Eventlist',
 	array(
-		'Event' => 'list, show, new, update, create, delete, listMiniMonth',
+		'Event' => 'list, show, showNotfound, new, update, create, delete, listMiniMonth',
 
 	),
 	// non-cacheable actions

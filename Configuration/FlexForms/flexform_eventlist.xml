@@ -20,12 +20,12 @@
 
             <numIndex index="0">
              <numIndex index="0">Listenansicht (list + single)</numIndex>
-             <numIndex index="1">Event->list;Event->show</numIndex>
+             <numIndex index="1">Event->list;Event->show;Event->showNotfound</numIndex>
             </numIndex>
 
             <numIndex index="1">
              <numIndex index="0">Einzelansicht (single)</numIndex>
-             <numIndex index="1">Event->show</numIndex>
+             <numIndex index="1">Event->show;Event->showNotfound</numIndex>
             </numIndex>
 
             <numIndex index="2">
