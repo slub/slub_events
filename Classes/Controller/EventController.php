@@ -48,6 +48,8 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function listAction() {
 
+//~ t3lib_utility_Debug::debug($this->settings['categorySelection'], 'listAction: ... ');
+
 		if (!empty($this->settings['categorySelection']))
 			$events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
 		else
@@ -224,7 +226,8 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 
 				foreach ($availableProperties as $propertyName) {
 					if (Tx_Extbase_Reflection_ObjectAccess::isPropertySettable($newEvent, $propertyName)
-						&& !in_array($propertyName, array('uid','pid','subscribers','sub_end_date_time','sub_end_date_info_sent','categories'))) {
+						&& !in_array($propertyName, array('uid','pid','subscribers', 'cancelled', 'subEndDateTime','subEndDateInfoSent','categories'))) {
+
 						$propertyValue = Tx_Extbase_Reflection_ObjectAccess::getProperty($event, $propertyName);
 						Tx_Extbase_Reflection_ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
 					}
