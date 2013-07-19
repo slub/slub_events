@@ -179,6 +179,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 					array(	'event' => $event,
 							'subscribers' => $event->getSubscribers(),
 							'helper' => $helper,
+							'attachSubscriberAsCsv' => TRUE,
 					)
 				);
 				if ($out >= 1) {
@@ -197,6 +198,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 					array(	'event' => $event,
 							'subscribers' => $event->getSubscribers(),
 							'helper' => $helper,
+							'attachSubscriberAsCsv' => TRUE,
 					)
 				);
 				if ($out == 1)
@@ -253,9 +255,27 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 				->setSubject($subject);
 
 		// attach ICS-File
-		$message->attach(Swift_Attachment::fromPath($eventIcsFile)
-							->setFilename('invite.ics')
-							->setContentType('application/ics'));
+		//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
+							//~ ->setFilename('invite.ics')
+							//~ ->setContentType('application/ics'));
+
+		// attach CSV-File
+		if ($variables['attachSubscriberAsCsv'] == TRUE) {
+			$csv = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+			$csv->getRequest()->setControllerExtensionName($this->extensionName);
+			$csv->setFormat('csv');
+			$csv->assignMultiple($variables);
+
+			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
+			$csv->setPartialRootPath($partialRootPath);
+
+			$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
+			t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
+
+			// attach CSV-File
+			$message->attach(Swift_Attachment::fromPath($eventCsvFile)
+						->setContentType('text/csv'));
+		}
 
 		// Plain text example
 		$emailTextHTML = $emailViewHTML->render();

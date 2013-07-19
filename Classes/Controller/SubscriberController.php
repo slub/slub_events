@@ -174,6 +174,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 										'subscribers' => $event->getSubscribers(),
 										'helper' => $helper,
 										'settings' => $this->settings,
+										'attachSubscriberAsCsv' => TRUE,
 								)
 							);
 						}
@@ -200,52 +201,70 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	protected function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array()) {
 
-					    $emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-					    $emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
-					    $emailViewHTML->setFormat('html');
-					    $emailViewHTML->assignMultiple($variables);
+			$emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+			$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
+			$emailViewHTML->setFormat('html');
+			$emailViewHTML->assignMultiple($variables);
 
-					    $ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-					    $ics->getRequest()->setControllerExtensionName($this->extensionName);
-					    $ics->setFormat('ics');
-					    $ics->assignMultiple($variables);
+			$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+			$ics->getRequest()->setControllerExtensionName($this->extensionName);
+			$ics->setFormat('ics');
+			$ics->assignMultiple($variables);
 
-					    $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-					    $templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-					    $partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+			$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+			$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+			$partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
 
-					    $emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
-					    $emailViewHTML->setPartialRootPath($partialRootPath);
+			$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
+			$emailViewHTML->setPartialRootPath($partialRootPath);
 
-					    $ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
+			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
-					    $eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
-					    t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+			$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
+			t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
-					    $message = t3lib_div::makeInstance('t3lib_mail_Message');
-					    $message->setTo($recipient)
-							    ->setFrom($sender)
-							    ->setCharset('utf-8')
-							    ->setSubject($subject);
+			$message = t3lib_div::makeInstance('t3lib_mail_Message');
+			$message->setTo($recipient)
+					->setFrom($sender)
+					->setCharset('utf-8')
+					->setSubject($subject);
 
-					    // attach ICS-File
-					    $message->attach(Swift_Attachment::fromPath($eventIcsFile)
-										    ->setFilename('invite.ics')
-										    ->setContentType('application/ics'));
+			// attach ICS-File
+			//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
+								//~ ->setFilename('invite.ics')
+								//~ ->setDisposition('inline')
+								//~ ->setContentType('text/calendar; charset="utf-8"; method=REQUEST'));
 
-					    // Plain text example
-					    //~ $message->setBody($emailView->render(), 'text/plain');
-					    $emailTextHTML = $emailViewHTML->render();
-					    $message->setBody($this->html2rest($emailTextHTML), 'text/plain');
+			// attach CSV-File
+			if ($variables['attachSubscriberAsCsv'] == TRUE) {
+				$csv = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+				$csv->getRequest()->setControllerExtensionName($this->extensionName);
+				$csv->setFormat('csv');
+				$csv->assignMultiple($variables);
 
-					    $message->addPart($ics->render(), 'text/calendar', 'utf-8');
+				$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
+				$csv->setPartialRootPath($partialRootPath);
 
-					    // HTML Email
-					    $message->addPart($emailTextHTML, 'text/html');
+				$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
+				t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
 
-					    $message->send();
+				$message->attach(Swift_Attachment::fromPath($eventCsvFile)
+							->setContentType('text/csv'));
+			}
 
-					    return $message->isSent();
+			// Plain text example
+			//~ $message->setBody($emailView->render(), 'text/plain');
+			$emailTextHTML = $emailViewHTML->render();
+			$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
+
+			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
+
+			// HTML Email
+			$message->addPart($emailTextHTML, 'text/html');
+
+			$message->send();
+
+			return $message->isSent();
 	}
 
 	/**
@@ -328,9 +347,9 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function setSessionData($key, $data) {
 
-					    $GLOBALS["TSFE"]->fe_user->setKey("ses", $key, $data);
+		$GLOBALS["TSFE"]->fe_user->setKey("ses", $key, $data);
 
-					    return;
+		return;
 	}
 
 	/**
@@ -378,43 +397,43 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function deleteAction(Tx_SlubEvents_Domain_Model_Event $event, $editcode) {
 
-						// delete for which subscriber?
-						$subscriber = $this->subscriberRepository->findAllByEditcode($editcode)->getFirst();
+		// delete for which subscriber?
+		$subscriber = $this->subscriberRepository->findAllByEditcode($editcode)->getFirst();
 
-						$event->removeSubscriber($subscriber);
+		$event->removeSubscriber($subscriber);
 
-						// some helper timestamps for ics-file
-						$helper['now'] = time();
-						$helper['isdelete'] = 1;
-						$helper['description'] = $this->foldline($event->getDescription());
-						$helper['location'] = $event->getLocation()->getName();
-						$helper['locationics'] = $this->foldline($event->getLocation()->getName());
-						$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $subscriber->getName()));
+		// some helper timestamps for ics-file
+		$helper['now'] = time();
+		$helper['isdelete'] = 1;
+		$helper['description'] = $this->foldline($event->getDescription());
+		$helper['location'] = $event->getLocation()->getName();
+		$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+		$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $subscriber->getName()));
 
-						$helper['start'] = $event->getStartDateTime()->getTimestamp();
-						// endDate may be empty
-						if (is_object($event->getEndDateTime()) || ($event->getStartDateTime() != $event->getEndDateTime()))
-							$helper['end'] = $event->getEndDateTime()->getTimestamp();
+		$helper['start'] = $event->getStartDateTime()->getTimestamp();
+		// endDate may be empty
+		if (is_object($event->getEndDateTime()) || ($event->getStartDateTime() != $event->getEndDateTime()))
+			$helper['end'] = $event->getEndDateTime()->getTimestamp();
 
-						if ($event->isAllDay()) {
-							$helper['allDay'] = 1;
-						}
+		if ($event->isAllDay()) {
+			$helper['allDay'] = 1;
+		}
 
-						$this->sendTemplateEmail(
-							array($subscriber->getEmail() => $subscriber->getName()),
-							array($event->getContact()->getEmail() => $event->getContact()->getName()),
-							'Ihre Abmeldung: ' . $event->getTitle(),
-							'Unsubscribe',
-							array(	'event' => $event,
-									'subscriber' => $subscriber,
-									'helper' => $helper,
-									'settings' => $this->settings,
-							)
-						);
+		$this->sendTemplateEmail(
+			array($subscriber->getEmail() => $subscriber->getName()),
+			array($event->getContact()->getEmail() => $event->getContact()->getName()),
+			'Ihre Abmeldung: ' . $event->getTitle(),
+			'Unsubscribe',
+			array(	'event' => $event,
+					'subscriber' => $subscriber,
+					'helper' => $helper,
+					'settings' => $this->settings,
+			)
+		);
 
-						$this->clearAllEventListCache();
-						$this->view->assign('event', $event);
-						$this->view->assign('subscriber', $subscriber);
+		$this->clearAllEventListCache();
+		$this->view->assign('event', $event);
+		$this->view->assign('subscriber', $subscriber);
 	}
 
 	/**
@@ -453,6 +472,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			'Invitation',
 			array(	'event' => $event,
 					'subscribers' => $event->getSubscribers(),
+					'attachSubscriberAsCsv' => TRUE,
 					'helper' => $helper,
 					'settings' => $this->settings,
 			)

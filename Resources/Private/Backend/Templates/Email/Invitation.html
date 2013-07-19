@@ -16,22 +16,8 @@
 
 
 <p><b>Teilnehmerliste </b><br/>
-<ol>
-<f:for each="{subscribers}" as="subscriber">
-		<li>{subscriber.name}, {subscriber.email},
-			<f:if condition="{subscriber.customerid}"><f:then>{subscriber.customerid},</f:then></f:if>
-			<f:if condition="{subscriber.telephone}"><f:then>{subscriber.telephone},</f:then></f:if>
-			<f:if condition="{subscriber.institution}"><f:then>{subscriber.institution},</f:then></f:if>
-			<f:if condition="{subscriber.message}"><f:then>{subscriber.message},</f:then></f:if>
-			{subscriber.number}
-			<f:if condition="{subscriber.number} == 1">
-				<f:then>Person</f:then>
-				<f:else>Personen</f:else>
-			</f:if>
-		</li>
-</f:for>
-</ol>
-
+		<f:render partial="Subscriber/ListAll" arguments="{subscribers: subscribers}"/>
+</p>
 <p>Bitte bedenken Sie, dass sich die Teilnehmerliste durch Ab- und Anmeldungen noch ändern kann.</p>
 
 <p>Mit freundlichen Grüßen</p>

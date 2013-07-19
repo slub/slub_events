@@ -19,14 +19,7 @@
 <p><b>Teilnehmerliste</b><br/>
 <f:if condition="{subscribers}">
 <f:then>
-<ol>
-<f:for each="{subscribers}" as="subscriber">
-	<f:if condition="{subscriber.number} == 1">
-		<f:then><li>{subscriber.name}, {subscriber.email}, {subscriber.customerid}, {subscriber.number} Person</li></f:then>
-		<f:else><li>{subscriber.name}, {subscriber.email}, {subscriber.customerid}, {subscriber.number} Personen</li></f:else>
-	</f:if>
-</f:for>
-</ol>
+		<f:render partial="Subscriber/ListAll" arguments="{subscribers: subscribers}"/>
 </f:then>
 <f:else>--> Es gibt keine Anmeldungen.</f:else>
 </f:if>
