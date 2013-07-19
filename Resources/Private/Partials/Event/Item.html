@@ -2,7 +2,16 @@
 
 
 <li class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
-	<h4><f:link.action action="show" controller="Event" pluginName="Eventlist" title="<se:format.stripTags htmlString='{event.description}' />" pageUid="{settings.pidDetails}" arguments="{event : event}">{event.title}</f:link.action></h4>
+	<h4><f:if condition="{settings.pidDetails}">
+		<f:then>
+			<f:link.action action="show" controller="Event" pluginName="Eventlist" title="<se:format.stripTags htmlString='{event.description}' />" pageUid="{settings.pidDetails}" arguments="{event : event}">{event.title}</f:link.action>
+		</f:then>
+		<f:else>
+			{event.title}
+		</f:else>
+		</f:if>
+        </h4>
+
 	<f:render partial="Event/DateFromTo" arguments="{event : event}" />
 
 	<div class="clear"></div>

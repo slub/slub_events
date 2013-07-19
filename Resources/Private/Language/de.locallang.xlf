@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-27T16:21:05Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-07-18T14:40:38Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -65,6 +65,10 @@
 			<source>Event</source>
 			<target>Veranstaltung</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes" xml:space="preserve">
+			<source>description</source>
+			<target>Beschreibung</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.freeplaces" approved="yes" xml:space="preserve">
 			<source>free places</source>
 			<target>freie Plätze</target>
@@ -106,15 +110,19 @@
 			<target>Benutzernummer</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes" xml:space="preserve">
-			<source>email</source>
+			<source>Email</source>
 			<target>E-Mail</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes" xml:space="preserve">
+			<source>Institution</source>
+			<target>Institution</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.message" approved="yes" xml:space="preserve">
-			<source>message</source>
+			<source>Message</source>
 			<target>Nachricht</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes" xml:space="preserve">
-			<source>name</source>
+			<source>Name</source>
 			<target>Name</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes" xml:space="preserve">

@@ -57,6 +57,13 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	protected $telephone;
 
 	/**
+	 * institution
+	 *
+	 * @var string
+	 */
+	protected $institution;
+
+	/**
 	 * customerid
 	 *
 	 * @var string
@@ -163,6 +170,25 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function setTelephone($telephone) {
 		$this->telephone = $telephone;
+	}
+
+	/**
+	 * Returns the institution
+	 *
+	 * @return string $institution
+	 */
+	public function getInstitution() {
+		return $this->institution;
+	}
+
+	/**
+	 * Sets the institution
+	 *
+	 * @param string $institution
+	 * @return void
+	 */
+	public function setInstitution($institution) {
+		$this->institution = $institution;
 	}
 
 	/**

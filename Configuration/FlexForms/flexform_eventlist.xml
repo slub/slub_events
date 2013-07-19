@@ -28,26 +28,6 @@
              <numIndex index="1">Event->show;Event->showNotfound</numIndex>
             </numIndex>
 
-            <numIndex index="2">
-             <numIndex index="0">Kalender: Minimonat</numIndex>
-             <numIndex index="1">Event->listMiniMonth</numIndex>
-            </numIndex>
-
-            <numIndex index="3">
-             <numIndex index="0">Kalender: Monat</numIndex>
-             <numIndex index="1">Event->listMonth</numIndex>
-            </numIndex>
-
-            <numIndex index="4">
-             <numIndex index="0">Kalender: Woche</numIndex>
-             <numIndex index="1">Event->listWeek</numIndex>
-            </numIndex>
-
-            <numIndex index="5">
-             <numIndex index="0">Kalender: Day</numIndex>
-             <numIndex index="1">Event->listDay</numIndex>
-            </numIndex>
-
            </items>
          </config>
        </TCEforms>
@@ -56,9 +36,7 @@
 		<settings.categorySelection>
 			<TCEforms>
 				<label>Only Show Categories:</label>
-<!--
-				<displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show</displayCond>
--->
+				<displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show;Event->showNotfound</displayCond>
 				<config>
 					<type>select</type>
 					<renderMode>tree</renderMode>

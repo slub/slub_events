@@ -48,7 +48,6 @@ class Tx_SlubEvents_ViewHelpers_IncludeFileViewHelper extends Tx_Fluid_Core_View
 			// CSS
 			} elseif (strtolower(substr($path, -4)) === '.css') {
 				$GLOBALS['TSFE']->getPageRenderer()->addCssFile($path, 'stylesheet', 'all', '', $compress);
-				$GLOBALS['TSFE']->getPageRenderer()->addCssFile($path, 'stylesheet', 'all', '', $compress);
 			}
 		}
 	}

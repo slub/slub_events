@@ -29,12 +29,12 @@ This extension is developped and used in production at the Saxony State and Univ
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '1.0.11',
+	'version' => '1.0.12',
 	'constraints' => array(
 		'depends' => array(
 			'extbase' => '1.5',
 			'fluid' => '1.5',
-			'typo3' => '4.7-0.0.0',
+			'typo3' => '4.7.0-6.2.99',
 		),
 		'conflicts' => array(
 		),

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-05-27T16:06:05Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-07-18T11:51:58Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -9,9 +9,37 @@
 			<source>Category</source>
 			<target>Kategorie</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.parent" approved="yes" xml:space="preserve">
+			<source>Parent Category</source>
+			<target>Eltern-Kategorie</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes" xml:space="preserve">
 			<source>Title</source>
 			<target>Titel</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact" approved="yes" xml:space="preserve">
+			<source>Contact Details</source>
+			<target>Ansprechpartner</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.description" approved="yes" xml:space="preserve">
+			<source>Description</source>
+			<target>Beschreibung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.email" approved="yes" xml:space="preserve">
+			<source>Email</source>
+			<target>Email</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.name" approved="yes" xml:space="preserve">
+			<source>Name</source>
+			<target>Name</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.photo" approved="yes" xml:space="preserve">
+			<source>Photo</source>
+			<target>Foto</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_contact.telephone" approved="yes" xml:space="preserve">
+			<source>Telephone</source>
+			<target>Telefon</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_discipline" approved="yes" xml:space="preserve">
 			<source>Discipline</source>
@@ -157,17 +185,25 @@
 			<source>Name</source>
 			<target>Bezeichnung</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_location.parent" approved="yes" xml:space="preserve">
+			<source>Parent Location</source>
+			<target>Übergeordneter Ort</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes" xml:space="preserve">
 			<source>Subscriber</source>
 			<target>Teilnehmer</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes" xml:space="preserve">
-			<source>Creation Date</source>
+			<source>Subscription Date</source>
 			<target>Anmeldezeitpunkt</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes" xml:space="preserve">
 			<source>Customerid</source>
 			<target>Benutzernummer</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.editcode" approved="yes" xml:space="preserve">
+			<source>Editcode</source>
+			<target>Bearbeitungscode</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes" xml:space="preserve">
 			<source>Email</source>
@@ -180,6 +216,10 @@
 		<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes" xml:space="preserve">
 			<source>Name</source>
 			<target>Name</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes" xml:space="preserve">
+			<source>Institution</source>
+			<target>Institution</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes" xml:space="preserve">
 			<source>Number</source>

@@ -421,7 +421,7 @@ $TCA['tx_slubevents_domain_model_event']['columns']['contact'] = array(
 		'allowed' => 'pages',
 		'type' => 'select',
 		'foreign_table' => 'tx_slubevents_domain_model_contact',
-		'foreign_table_where' => ' ORDER BY tx_slubevents_domain_model_contact.sorting',
+		'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_contact.sorting',
 		'minitems' => 1,
 		'maxitems' => 2, // this forces a working required select box! stupid but true...
 		'size' => 6, // it should be one but... no chance to get a required select box without it in TYPO3 4.6

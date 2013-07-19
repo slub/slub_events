@@ -40,22 +40,22 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	 * @return array The found Subscriber Objects
 	 */
 	public function findAllByFeuser($pid = 0) {
-		
+
 								$query = $this->createQuery();
-		
+
 								$constraints = array();
 								$constraints[] = $query->equals('customerid', $GLOBALS['TSFE']->fe_user->user['username']);
 								if ($pid) {
 									$query->getQuerySettings()->setRespectStoragePage(FALSE);
 									$constraints[] = $query->equals('pid', $pid);
 								}
-		
+
 								//~ $constraints[] = $query->greaterThan('start_date',  strtotime('today') );
-		
+
 								if (count($constraints)) {
 									$query->matching($query->logicalAnd($constraints));
 								}
-		
+
 								return $query->execute();
 	}
 
@@ -67,20 +67,20 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	 * @return array The found Subscriber Objects
 	 */
 	public function findAllByEditcode($editcode, $pid = 0) {
-		
+
 								$query = $this->createQuery();
-		
+
 								$constraints = array();
 								$constraints[] = $query->equals('editcode', $editcode);
 								if ($pid) {
 									$query->getQuerySettings()->setRespectStoragePage(FALSE);
 									$constraints[] = $query->equals('pid', $pid);
 								}
-		
+
 								if (count($constraints)) {
 									$query->matching($query->logicalAnd($constraints));
 								}
-		
+
 								return $query->execute();
 	}
 
@@ -91,25 +91,25 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	 * @return array The found Subscriber Objects
 	 */
 	public function countAllByEvent($event) {
-		
-								$query = $this->createQuery();
-		
-								$constraints = array();
-								$constraints[] = $query->equals('event', $event->getUid());
-		
-								if (count($constraints)) {
-									$query->matching($query->logicalAnd($constraints));
-								}
-		
-								// extbase doesn't know Mysql SUM() :-(
-								$allSubscribers = $query->execute();
-		
-								$count = 0;
-								foreach ($allSubscribers as $subscriber) {
-									$count += $subscriber->getNumber();
-								}
-		
-								return $count;
+
+		$query = $this->createQuery();
+
+		$constraints = array();
+		$constraints[] = $query->equals('event', $event->getUid());
+
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
+
+		// extbase doesn't know Mysql SUM() :-(
+		$allSubscribers = $query->execute();
+
+		$count = 0;
+		foreach ($allSubscribers as $subscriber) {
+			$count += $subscriber->getNumber();
+		}
+
+		return $count;
 	}
 
 	/**
@@ -119,21 +119,21 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	 * @return array The found Subscriber Objects
 	 */
 	public function findAllByEvents($events) {
-		
+
 						$query = $this->createQuery();
-		
+
 						$constraints = array();
 						$constraints[] = $query->in('event', $events);
-		
+
 						if (count($constraints)) {
 							$query->matching($query->logicalAnd($constraints));
 						}
-		
+
 						// order by start_date -> start_time...
 						$query->setOrderings(
 							array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
 						);
-		
+
 						return $query->execute();
 	}
 

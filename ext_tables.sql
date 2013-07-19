@@ -114,6 +114,7 @@ CREATE TABLE tx_slubevents_domain_model_subscriber (
 	name varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	telephone varchar(255) DEFAULT '' NOT NULL,
+	institution varchar(255) DEFAULT '' NOT NULL,
 	customerid varchar(255) DEFAULT '' NOT NULL,
 	number int(11) DEFAULT '0' NOT NULL,
 	message text NOT NULL,

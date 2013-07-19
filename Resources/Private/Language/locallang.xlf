@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-05-27T16:21:05Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-07-18T14:40:38Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -123,13 +123,16 @@
 			<source>customerid</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.email" xml:space="preserve">
-			<source>email</source>
+			<source>Email</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" xml:space="preserve">
+			<source>Institution</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.message" xml:space="preserve">
-			<source>message</source>
+			<source>Message</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.name" xml:space="preserve">
-			<source>name</source>
+			<source>Name</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.number" xml:space="preserve">
 			<source>Number</source>

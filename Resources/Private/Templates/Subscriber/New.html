@@ -66,11 +66,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:render partial="FormErrors" arguments="{obj: 'newSubscriber'}" />
 
-<ul>
-<f:for each="{feuserdata}" as="data" key="label">
-    <li>{label}: {data}</li>
-</f:for>
-</ul>
 <f:form action="create" name="newSubscriber" object="{newSubscriber}">
 
 	<f:if condition="{event.geniusBar}">
