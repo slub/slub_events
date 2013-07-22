@@ -49,9 +49,12 @@ class Tx_SlubEvents_ViewHelpers_Format_FreePlacesLeftViewHelper extends Tx_Fluid
  	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
 	 * @api
 	 */
-	public function render($event) {
+	public function render(Tx_SlubEvents_Domain_Model_Event $event = NULL) {
 
-		$free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
+		if ($event != NULL)
+			$free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
+		else
+			$free = 0;
 
 		return ($free > 0)? $free : 0;
 

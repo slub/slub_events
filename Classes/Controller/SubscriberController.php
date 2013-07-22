@@ -62,18 +62,29 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	}
 
 	/**
+	 * action EventNotfound
+	 *
+	 * @return void
+	 */
+	public function eventNotFoundAction() {
+
+	}
+
+	/**
 	 * action new
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
 	 * @param Tx_SlubEvents_Domain_Model_Event $event
 	 * @param Tx_SlubEvents_Domain_Model_Category $category
 	 * @ignorevalidation $newSubscriber
-	 * @ignorevalidation $event
 	 * @ignorevalidation $category
-	 * @dontvalidate $event
 	 * @return void
 	 */
 	public function newAction(Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber = NULL, Tx_SlubEvents_Domain_Model_Event $event = NULL, Tx_SlubEvents_Domain_Model_Category $category = NULL) {
+
+		// somebody is calling the action without giving an event --> useless
+		if ($event === NULL)
+			$this->redirect('eventNotFound');
 
 		// this is a little stupid with the rewritten property mapper from
 		// extbase 1.4, because the object is never NULL!
@@ -81,21 +92,21 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		// already POST values exists. extbase vodoo ;-)
 		if($newSubscriber === NULL) {
 
-		$newSubscriber = t3lib_div::makeInstance('Tx_SlubEvents_Domain_Model_Subscriber');
-		$newSubscriber->setNumber(1);
+			$newSubscriber = t3lib_div::makeInstance('Tx_SlubEvents_Domain_Model_Subscriber');
+			$newSubscriber->setNumber(1);
 
-		if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
+			if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
 
-				$newSubscriber->setCustomerid($GLOBALS['TSFE']->fe_user->user['username']);
-			$loggedIn = 'readonly'; // css class for form
-		} else
-			$loggedIn = ''; // css class for form
+					$newSubscriber->setCustomerid($GLOBALS['TSFE']->fe_user->user['username']);
+				$loggedIn = 'readonly'; // css class for form
+			} else
+				$loggedIn = ''; // css class for form
 
-		if (!empty($GLOBALS['TSFE']->fe_user->user['name']))
-			$newSubscriber->setName($GLOBALS['TSFE']->fe_user->user['name']);
+			if (!empty($GLOBALS['TSFE']->fe_user->user['name']))
+				$newSubscriber->setName($GLOBALS['TSFE']->fe_user->user['name']);
 
-		if (!empty($GLOBALS['TSFE']->fe_user->user['email']))
-			$newSubscriber->setEmail($GLOBALS['TSFE']->fe_user->user['email']);
+			if (!empty($GLOBALS['TSFE']->fe_user->user['email']))
+				$newSubscriber->setEmail($GLOBALS['TSFE']->fe_user->user['email']);
 
 		}
 
@@ -395,7 +406,11 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 * @ignorevalidation $editcode
 	 * @return void
 	 */
-	public function deleteAction(Tx_SlubEvents_Domain_Model_Event $event, $editcode) {
+	public function deleteAction(Tx_SlubEvents_Domain_Model_Event $event = NULL, $editcode) {
+
+		// somebody is calling the action without giving an event --> useless
+		if ($event === NULL)
+			$this->redirect('eventNotFound');
 
 		// delete for which subscriber?
 		$subscriber = $this->subscriberRepository->findAllByEditcode($editcode)->getFirst();
@@ -539,16 +554,6 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 						$subscribers = $this->subscriberRepository->findAllByEvents($events);
 
 						$this->view->assign('subscribers', $subscribers);
-	}
-
-	/**
-	 * injectSubscriberRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository
-	 * @return void
-	 */
-	public function injectSubscriberRepository(Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository) {
-		$this->subscriberRepository = $subscriberRepository;
 	}
 
 }

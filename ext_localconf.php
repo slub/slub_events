@@ -7,7 +7,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Eventlist',
 	array(
-		'Event' => 'list, show, showNotfound, new, update, create, delete, listMiniMonth',
+		'Event' => 'list, show, showNotFound, new, update, create, delete, listMiniMonth',
 
 	),
 	// non-cacheable actions
@@ -21,13 +21,11 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Eventsubscribe',
 	array(
-		'Subscriber' => 'new, create, delete',
-
+		'Subscriber' => 'new, create, delete, eventNotFound',
 	),
 	// non-cacheable actions
 	array(
 		'Subscriber' => 'new, create, delete',
-
 	)
 );
 

@@ -19,12 +19,12 @@
 
             <numIndex index="0">
              <numIndex index="0">Anmelden</numIndex>
-             <numIndex index="1">Subscriber->new;Subscriber->create;</numIndex>
+             <numIndex index="1">Subscriber->new;Subscriber->create;Subscriber->eventNotFound;</numIndex>
             </numIndex>
 
             <numIndex index="1">
              <numIndex index="0">Abmelden</numIndex>
-             <numIndex index="1">Subscriber->delete;</numIndex>
+             <numIndex index="1">Subscriber->delete;Subscriber->eventNotFound;</numIndex>
             </numIndex>
 
            </items>

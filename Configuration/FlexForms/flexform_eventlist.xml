@@ -20,12 +20,12 @@
 
             <numIndex index="0">
              <numIndex index="0">Listenansicht (list + single)</numIndex>
-             <numIndex index="1">Event->list;Event->show;Event->showNotfound</numIndex>
+             <numIndex index="1">Event->list;Event->show;Event->showNotFound</numIndex>
             </numIndex>
 
             <numIndex index="1">
              <numIndex index="0">Einzelansicht (single)</numIndex>
-             <numIndex index="1">Event->show;Event->showNotfound</numIndex>
+             <numIndex index="1">Event->show;Event->showNotFound</numIndex>
             </numIndex>
 
            </items>
@@ -36,7 +36,7 @@
 		<settings.categorySelection>
 			<TCEforms>
 				<label>Only Show Categories:</label>
-				<displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show;Event->showNotfound</displayCond>
+				<displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show;Event->showNotFound</displayCond>
 				<config>
 					<type>select</type>
 					<renderMode>tree</renderMode>

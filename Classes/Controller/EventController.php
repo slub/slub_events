@@ -65,11 +65,14 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function initializeShowAction() {
 
-		$eventId = $this->request->getArgument('event');
-		$event = $this->eventRepository->findByUid($eventId);
+		$eventId = $this->getParametersSafely('event');
+		$event = NULL;
 
-		if ($event == NULL)
-			$this->redirect('showNotfound'); // , $controllerName = NULL, $extensionName = NULL, array(), $pageUid = NULL, $delay = 0, 404);
+		if ($eventId != NULL)
+			$event = $this->eventRepository->findByUid($eventId);
+
+		if ($event === NULL)
+			$this->redirect('showNotFound');
 	}
 
 	/**
@@ -81,7 +84,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function showAction(Tx_SlubEvents_Domain_Model_Event $event = NULL) {
 
-		if ($event != NULL) {
+		if ($event !== NULL) {
 			// fill registers to be used in ts
 			$cObj = t3lib_div::makeInstance('tslib_cObj');
 			$cObj->LOAD_REGISTER(
@@ -98,7 +101,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 *
 	 * @return void
 	 */
-	public function showNotfoundAction() {
+	public function showNotFoundAction() {
 
 	}
 
@@ -378,16 +381,6 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			$jsonevent[] = $foundevent;
 		}
 		return json_encode($jsonevent);
-	}
-
-	/**
-	 * injectEventRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository
-	 * @return void
-	 */
-	public function injectEventRepository(Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository) {
-		$this->eventRepository = $eventRepository;
 	}
 
 }
