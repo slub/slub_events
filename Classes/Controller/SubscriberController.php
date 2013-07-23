@@ -71,6 +71,30 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	}
 
 	/**
+	 * action initializeNew
+	 *
+	 * This is necessary to precheck the given event id. If the event
+	 * is not found the object is NULL and the newAction is not called.
+	 * Otherwise the newAction will use the propertyMapper to convert
+	 * the event id to and object. If this object doesn't exist or is
+	 * hidden, an exception is thrown (TYPO3 4.7.12)
+	 *
+	 * @return void
+	 */
+	public function initializeNewAction() {
+
+		$eventId = $this->getParametersSafely('event');
+		$event = NULL;
+
+		if ($eventId != NULL)
+			$event = $this->eventRepository->findByUid($eventId);
+
+		if ($event === NULL)
+			$this->redirect('eventNotFound');
+	}
+
+
+	/**
 	 * action new
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
