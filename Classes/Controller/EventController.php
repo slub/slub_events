@@ -34,21 +34,11 @@
 class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_AbstractController {
 
 	/**
-	 * eventRepository
-	 *
-	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
-	 * @inject
-	 */
-	protected $eventRepository;
-
-	/**
 	 * action list
 	 *
 	 * @return void
 	 */
 	public function listAction() {
-
-//~ t3lib_utility_Debug::debug($this->settings['categorySelection'], 'listAction: ... ');
 
 		if (!empty($this->settings['categorySelection']))
 			$events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));

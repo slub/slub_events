@@ -34,13 +34,6 @@
 class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controller_AbstractController {
 
 	/**
-	 * categoryRepository
-	 *
-	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
-	 */
-	protected $categoryRepository;
-
-	/**
 	 * action list
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $category
@@ -60,16 +53,6 @@ class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controll
 		} else {
 			$this->view->assign('categories', $categories);
 		}
-	}
-
-	/**
-	 * injectCategoryRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository
-	 * @return void
-	 */
-	public function injectCategoryRepository(Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository) {
-		$this->categoryRepository = $categoryRepository;
 	}
 
 	/**

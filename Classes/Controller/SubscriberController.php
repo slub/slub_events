@@ -34,14 +34,6 @@
 class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Controller_AbstractController {
 
 	/**
-	 * subscriberRepository
-	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
-	 * @inject
-	 */
-	protected $subscriberRepository;
-
-	/**
 	 * action list
 	 *
 	 * @return void
