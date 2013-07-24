@@ -181,53 +181,53 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function beListAction() {
 
-			    // get data from BE session
-			    $sessionData = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
-			    // get search parameters from BE user configuration
-			    $ucData = $GLOBALS['BE_USER']->uc['moduleData']['slubevents'];
+		// get data from BE session
+		$sessionData = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
+		// get search parameters from BE user configuration
+		$ucData = $GLOBALS['BE_USER']->uc['moduleData']['slubevents'];
 
-			    // get search parameters from POST variables
-			    $searchParameter = $this->getParametersSafely('searchParameter');
-			    if (is_array($searchParameter)) {
-				    $ucData['searchParameter'] = $searchParameter;
-				    $sessionData['selectedStartDateStamp'] = $searchParameter['selectedStartDateStamp'];
-				    //~ $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
-				    $GLOBALS['BE_USER']->uc['moduleData']['slubevents'] = $ucData;
-				    $GLOBALS['BE_USER']->writeUC($GLOBALS['BE_USER']->uc);
-				    // save session data
-				    $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
-			    } else {
-				    // no POST vars --> take BE user configuration
-				    $searchParameter = $ucData['searchParameter'];
-			    }
+		// get search parameters from POST variables
+		$searchParameter = $this->getParametersSafely('searchParameter');
+		if (is_array($searchParameter)) {
+			$ucData['searchParameter'] = $searchParameter;
+			$sessionData['selectedStartDateStamp'] = $searchParameter['selectedStartDateStamp'];
+			//~ $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
+			$GLOBALS['BE_USER']->uc['moduleData']['slubevents'] = $ucData;
+			$GLOBALS['BE_USER']->writeUC($GLOBALS['BE_USER']->uc);
+			// save session data
+			$GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
+		} else {
+			// no POST vars --> take BE user configuration
+			$searchParameter = $ucData['searchParameter'];
+		}
 
-			    // set the startDateStamp
-			    // startDateStamp is saved in session data NOT user data
-			    if (empty($selectedStartDateStamp)) {
-				    if (!empty($sessionData['selectedStartDateStamp']))
-					    $selectedStartDateStamp = $sessionData['selectedStartDateStamp'];
-				    else
-					    $selectedStartDateStamp = date('d-m-Y');
-			    }
+		// set the startDateStamp
+		// startDateStamp is saved in session data NOT user data
+		if (empty($selectedStartDateStamp)) {
+			if (!empty($sessionData['selectedStartDateStamp']))
+				$selectedStartDateStamp = $sessionData['selectedStartDateStamp'];
+			else
+				$selectedStartDateStamp = date('d-m-Y');
+		}
 
-			    $categories = $this->categoryRepository->findAllTree();
+		$categories = $this->categoryRepository->findAllTree();
 
-			    if (is_array($searchParameter['selectedCategories'])) {
-				    $this->view->assign('selectedCategories', $searchParameter['selectedCategories']);
-			    }
-			    else {
-				    // if no category selection in user settings present --> look for the root categories
-				    if (! is_array($searchParameter['category']))
-					    foreach ($categories as $uid => $category)
-						    $searchParameter['category'][$uid] = $uid;
-				    $this->view->assign('categoriesSelected', $searchParameter['category']);
-			    }
-			    $this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
-			    if (is_array($searchParameter['category']))
-				    $events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp));
+		if (is_array($searchParameter['selectedCategories'])) {
+			$this->view->assign('selectedCategories', $searchParameter['selectedCategories']);
+		}
+		else {
+			// if no category selection in user settings present --> look for the root categories
+			if (! is_array($searchParameter['category']))
+				foreach ($categories as $uid => $category)
+					$searchParameter['category'][$uid] = $uid;
+			$this->view->assign('categoriesSelected', $searchParameter['category']);
+		}
+		$this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
+		if (is_array($searchParameter['category']))
+			$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp));
 
-			    $this->view->assign('categories', $categories);
-			    $this->view->assign('events', $events);
+		$this->view->assign('categories', $categories);
+		$this->view->assign('events', $events);
 	}
 
 	/**

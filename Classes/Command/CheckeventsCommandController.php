@@ -103,7 +103,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	 * @param string senderEmailAddress
 	 * @return void
 	*/
-    public function checkForSubscriptionEndCommand($storagePid, $senderEmailAddress='webmaster@example.com') {
+    public function checkForSubscriptionEndCommand($storagePid, $senderEmailAddress = '') {
 
 		$this->initializeAction();
 

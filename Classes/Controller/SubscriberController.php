@@ -194,7 +194,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 							// email to event owner
 							$this->sendTemplateEmail(
 								array($event->getContact()->getEmail() => $event->getContact()->getName()),
-								array('webmaster@slub-dresden.de' => 'SLUB Veranstaltungen - noreply'),
+								array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
 								'Veranstaltung ausgebucht: ' . $event->getTitle(),
 								'Maximumreached',
 								array(	'event' => $event,
@@ -498,7 +498,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		$this->sendTemplateEmail(
 			array($event->getContact()->getEmail() => $event->getContact()->getName()),
-			array('webmaster@slub-dresden.de' => 'SLUB Veranstaltungen - noreply'),
+			array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
 			'Termineinladung: ' . $event->getTitle(),
 			'Invitation',
 			array(	'event' => $event,
