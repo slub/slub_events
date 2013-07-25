@@ -411,6 +411,9 @@ $TCA['tx_slubevents_domain_model_event']['columns']['location'] = array(
 				'showHeader' => FALSE,
 			),
 		),
+		'size' => 10,
+		'autoSizeMax' => 30,
+		'minitems' => 1,
 		'maxitems' => 1,
 	),
 );

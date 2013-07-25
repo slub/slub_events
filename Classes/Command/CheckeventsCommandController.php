@@ -147,8 +147,11 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			$helper['now'] = time();
 			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 			$helper['description'] = $this->foldline($event->getDescription());
-			$helper['location'] = $event->getLocation()->getName();
-			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+			// location may be empty...
+			if (is_object($event->getLocation())) {
+				$helper['location'] = $event->getLocation()->getName();
+				$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+			}
 
 			// check if we have to cancel the event
 			if ($this->subscriberRepository->countAllByEvent($event) < $event->getMinSubscriber()) {

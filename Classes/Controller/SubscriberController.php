@@ -160,8 +160,11 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 						$helper['now'] = time();
 						// rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
 						$helper['description'] = $this->foldline($event->getDescription());
-						$helper['location'] = $event->getLocation()->getName();
-						$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+						// location may be empty...
+						if (is_object($event->getLocation())) {
+							$helper['location'] = $event->getLocation()->getName();
+							$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+						}
 						$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $newSubscriber->getName()));
 
 						// startDateTime may never be empty
@@ -437,8 +440,11 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['now'] = time();
 		$helper['isdelete'] = 1;
 		$helper['description'] = $this->foldline($event->getDescription());
-		$helper['location'] = $event->getLocation()->getName();
-		$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+		// location may be empty...
+		if (is_object($event->getLocation())) {
+			$helper['location'] = $event->getLocation()->getName();
+			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+		}
 		$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $subscriber->getName()));
 
 		$helper['start'] = $event->getStartDateTime()->getTimestamp();
@@ -492,8 +498,11 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		$helper['now'] = time();
 		$helper['description'] = $this->foldline($event->getDescription());
-		$helper['location'] = $event->getLocation()->getName();
-		$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+		// location may be empty...
+		if (is_object($event->getLocation())) {
+			$helper['location'] = $event->getLocation()->getName();
+			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+		}
 		$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
 		$this->sendTemplateEmail(
