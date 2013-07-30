@@ -212,6 +212,10 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		// reset session data
 		$this->setSessionData('editcode', '');
 
+		// we changed the event inside the repository and have to
+		// update the repo manually as of TYPO3 6.1
+		$this->eventRepository->update($event);
+
 		// clear cache on all cached list pages
 		$this->clearAllEventListCache();
 		$this->view->assign('event', $event);
@@ -409,7 +413,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function getSessionData($key) {
 
-					    return $GLOBALS["TSFE"]->fe_user->getKey("ses", $key);
+		return $GLOBALS["TSFE"]->fe_user->getKey("ses", $key);
 	}
 
 	/**
@@ -420,19 +424,28 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function clearAllEventListCache() {
 
-				$select = 'DISTINCT pid';
-				$table = 'tt_content';
-				$query = 'list_type = \'slubevents_eventlist\' AND hidden = 0 AND deleted = 0';
+		global $GLOBALS;
 
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$query);
+		$select = 'DISTINCT pages.uid';
+		$table = 'tt_content, pages';
+		$query = 'list_type IN(\'slubevents_eventlist\', \'slubevents_eventgeniusbar\') AND pages.uid = tt_content.pid';
+		$query .= ' AND tt_content.hidden = 0 AND pages.hidden = 0';
+		$query .= ' AND tt_content.deleted = 0 AND pages.deleted = 0';
 
-				while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-					$pluginPageIds[] = $row['pid'];
-				};
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$query);
 
-				$GLOBALS['TSFE']->clearPageCacheContent_pidList(implode(',', $pluginPageIds));
+		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
 
-				return;
+		// next two lines are necessary... don't know why.
+		$tcemain->stripslashes_values = 0;
+		$tcemain->start(array(), array());
+
+		while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+			$pluginPageIds[] = $row['uid'];
+		};
+		$GLOBALS['TSFE']->clearPageCacheContent_pidList(implode(',', $pluginPageIds));
+
+		return;
 	}
 
 	/**
@@ -467,8 +480,9 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $subscriber->getName()));
 
 		$helper['start'] = $event->getStartDateTime()->getTimestamp();
+
 		// endDate may be empty
-		if (is_object($event->getEndDateTime()) || ($event->getStartDateTime() != $event->getEndDateTime()))
+		if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
 			$helper['end'] = $event->getEndDateTime()->getTimestamp();
 
 		if ($event->isAllDay()) {
@@ -486,6 +500,10 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 					'settings' => $this->settings,
 			)
 		);
+
+		// we changed the event inside the repository and have to
+		// update the repo manually as of TYPO3 6.1
+		$this->eventRepository->update($event);
 
 		$this->clearAllEventListCache();
 		$this->view->assign('event', $event);

@@ -49,12 +49,15 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$query);
 
 		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
+
+		// next two lines are necessary... don't know why.
 		$tcemain->stripslashes_values = 0;
 		$tcemain->start(array(), array());
 
 		while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			$tcemain->clear_cacheCmd($row['uid']);
 		};
+
 		return;
 	}
 

@@ -239,34 +239,34 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function beCopyAction($event) {
 
-				$availableProperties = Tx_Extbase_Reflection_ObjectAccess::getGettablePropertyNames($event);
-				$newEvent =  $this->objectManager->create('Tx_SlubEvents_Domain_Model_Event');
+		$availableProperties = Tx_Extbase_Reflection_ObjectAccess::getGettablePropertyNames($event);
+		$newEvent =  $this->objectManager->create('Tx_SlubEvents_Domain_Model_Event');
 
-				foreach ($availableProperties as $propertyName) {
-					if (Tx_Extbase_Reflection_ObjectAccess::isPropertySettable($newEvent, $propertyName)
-						&& !in_array($propertyName, array('uid','pid','subscribers', 'cancelled', 'subEndDateTime','subEndDateInfoSent','categories'))) {
+		foreach ($availableProperties as $propertyName) {
+			if (Tx_Extbase_Reflection_ObjectAccess::isPropertySettable($newEvent, $propertyName)
+				&& !in_array($propertyName, array('uid','pid','subscribers', 'cancelled', 'subEndDateTime','subEndDateInfoSent','categories'))) {
 
-						$propertyValue = Tx_Extbase_Reflection_ObjectAccess::getProperty($event, $propertyName);
-						Tx_Extbase_Reflection_ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
-					}
-				}
+				$propertyValue = Tx_Extbase_Reflection_ObjectAccess::getProperty($event, $propertyName);
+				Tx_Extbase_Reflection_ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
+			}
+		}
 
-				foreach ($event->getCategories() as $cat) {
-					//~ $this->flashMessageContainer->add('Kategorie: '.$cat->getTitle().' wurde kopiert.');
-					$newEvent->addCategory($cat);
-				}
+		foreach ($event->getCategories() as $cat) {
+			//~ $this->flashMessageContainer->add('Kategorie: '.$cat->getTitle().' wurde kopiert.');
+			$newEvent->addCategory($cat);
+		}
 
-				if ($event->getGeniusBar())
-					$newEvent->setTitle('Wissensbar ' . $newEvent->getContact()->getName());
-				else
-					$newEvent->setTitle($newEvent->getTitle());
+		if ($event->getGeniusBar())
+			$newEvent->setTitle('Wissensbar ' . $newEvent->getContact()->getName());
+		else
+			$newEvent->setTitle($newEvent->getTitle());
 
-				$newEvent->setHidden(TRUE);
+		$newEvent->setHidden(TRUE);
 
-				$this->eventRepository->add($newEvent);
+		$this->eventRepository->add($newEvent);
 
-				$this->flashMessageContainer->add('Die Veranstaltung '.$newEvent->getTitle().' wurde kopiert.');
-				$this->redirect('beList');
+		$this->flashMessageContainer->add('Die Veranstaltung '.$newEvent->getTitle().' wurde kopiert.');
+		$this->redirect('beList');
 	}
 
 	/**
