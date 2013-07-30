@@ -2,7 +2,7 @@
 <b><se:format.date date="{event.startDateTime}" format="%a, %x" />
 	<f:if condition="{event.Allday} !=1 ">
 		<f:then>
-			<se:format.date date="{event.startDateTime}" format="%H:%M" /> Uhr
+			<se:format.date date="{event.startDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
 		</f:then>
 	</f:if>
 	<f:if condition="{event.endDateTime}">
@@ -12,21 +12,18 @@
 				- <se:format.date date="{event.endDateTime}" format="%a, %x" />
 				<f:if condition="{event.Allday} !=1 ">
 					<f:then>
-						<se:format.date date="{event.endDateTime}" format="%H:%M" /> Uhr
+						<se:format.date date="{event.endDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
 					</f:then>
 				</f:if>
 			</f:then>
 			<f:else>
 				<f:if condition="{event.endDateTime}">
 					<f:then>
-						- <se:format.date date="{event.endDateTime}" format="%H:%M" /> Uhr
+						- <se:format.date date="{event.endDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
 					</f:then>
 				</f:if>
 			</f:else>
 		</f:if>
 		</f:then>
-		<f:else>
-		Uhr
-		</f:else>
 	</f:if>
 </b>

@@ -49,11 +49,12 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$query);
 
 		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
+		$tcemain->stripslashes_values = 0;
+		$tcemain->start(array(), array());
 
 		while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			$tcemain->clear_cacheCmd($row['uid']);
 		};
-
 		return;
 	}
 
@@ -70,7 +71,6 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	function processDatamap_afterDatabaseOperations($status, $table, $idElement, &$fieldArray, &$pObj) {
 
 		// we are only interested in tx_slubevents_domain_model_event
-
 		if ($table == 'tx_slubevents_domain_model_event' &&
 				$pObj->checkValue_currentRecord['hidden'] == '0') {
 

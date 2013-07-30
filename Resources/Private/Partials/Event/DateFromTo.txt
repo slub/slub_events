@@ -1,7 +1,7 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
 <b><se:format.date date="{event.startDateTime}" format="%a, %x" /><f:if condition="{event.Allday} !=1 "> <f:then> <se:format.date
-date="{event.startDateTime}" format="%H:%M" /> Uhr </f:then> </f:if><f:if condition="{event.endDateTime}"> <f:then> <f:if condition="{0:
+date="{event.startDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" /> </f:then> </f:if><f:if condition="{event.endDateTime}"> <f:then> <f:if condition="{0:
 '<se:format.date date=\'{event.startDateTime}\' format=\'%a, %x\' />' } != {0: '<se:format.date date=\'{event.endDateTime}\' format=\'%a, %x\' />'}"> <f:then> - <se:format.date date="{event.endDateTime}" format="%a, %x" /> <f:if condition="{event.Allday} !=1 "> <f:then><se:format.date
-date="{event.endDateTime}" format="%H:%M" /> Uhr </f:then></f:if>
-</f:then> <f:else> <f:if condition="{event.endDateTime}"> <f:then> - <se:format.date date="{event.endDateTime}" format="%H:%M" /> Uhr
-</f:then> </f:if> </f:else> </f:if> </f:then> <f:else> Uhr </f:else></f:if></b>
+date="{event.endDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" /> </f:then></f:if>
+</f:then> <f:else> <f:if condition="{event.endDateTime}"> <f:then> - <se:format.date date="{event.endDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
+</f:then> </f:if> </f:else> </f:if> </f:then></f:if></b>
