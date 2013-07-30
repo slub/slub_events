@@ -145,78 +145,78 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function createAction(Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber, Tx_SlubEvents_Domain_Model_Event $event, Tx_SlubEvents_Domain_Model_Category $category = NULL) {
 
-						// add subscriber to event
-						$editcode = hash('sha256', rand().$newSubscriber->getEmail().time());
-						$newSubscriber->setEditcode($editcode);
-						$event->addSubscriber($newSubscriber);
+		// add subscriber to event
+		$editcode = hash('sha256', rand().$newSubscriber->getEmail().time());
+		$newSubscriber->setEditcode($editcode);
+		$event->addSubscriber($newSubscriber);
 
-						// Genius Bar Specials:
-						if ($event->getGeniusBar()) {
-							$event->setTitle($category->getTitle());
-							$event->setDescription($category->getDescription());
-						}
+		// Genius Bar Specials:
+		if ($event->getGeniusBar()) {
+			$event->setTitle($category->getTitle());
+			$event->setDescription($category->getDescription());
+		}
 
-						// send email(s)
-						$helper['now'] = time();
-						// rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
-						$helper['description'] = $this->foldline($event->getDescription());
-						// location may be empty...
-						if (is_object($event->getLocation())) {
-							$helper['location'] = $event->getLocation()->getName();
-							$helper['locationics'] = $this->foldline($event->getLocation()->getName());
-						}
-						$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $newSubscriber->getName()));
+		// send email(s)
+		$helper['now'] = time();
+		// rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
+		$helper['description'] = $this->foldline($event->getDescription());
+		// location may be empty...
+		if (is_object($event->getLocation())) {
+			$helper['location'] = $event->getLocation()->getName();
+			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+		}
+		$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $newSubscriber->getName()));
 
-						// startDateTime may never be empty
-						$helper['start'] = $event->getStartDateTime()->getTimestamp();
-						// endDateTime may be empty
-						if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
-							$helper['end'] = $event->getEndDateTime()->getTimestamp();
+		// startDateTime may never be empty
+		$helper['start'] = $event->getStartDateTime()->getTimestamp();
+		// endDateTime may be empty
+		if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
+			$helper['end'] = $event->getEndDateTime()->getTimestamp();
 
-						if ($event->isAllDay()) {
-							$helper['allDay'] = 1;
-						}
+		if ($event->isAllDay()) {
+			$helper['allDay'] = 1;
+		}
 
-						// email to customer
-						$this->sendTemplateEmail(
-							array($newSubscriber->getEmail() => $newSubscriber->getName()),
-							array($event->getContact()->getEmail() => $event->getContact()->getName()),
-							'Ihre Anmeldung: ' . $event->getTitle(),
-							'Subscribe',
-							array(	'event' => $event,
-									'subscriber' => $newSubscriber,
-									'helper' => $helper,
-									'settings' => $this->settings,
-							)
-						);
+		// email to customer
+		$this->sendTemplateEmail(
+			array($newSubscriber->getEmail() => $newSubscriber->getName()),
+			array($event->getContact()->getEmail() => $event->getContact()->getName()),
+			'Ihre Anmeldung: ' . $event->getTitle(),
+			'Subscribe',
+			array(	'event' => $event,
+					'subscriber' => $newSubscriber,
+					'helper' => $helper,
+					'settings' => $this->settings,
+			)
+		);
 
-						// only send, if maximum is reached...
-						if (($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()) {
-							$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
+		// only send, if maximum is reached...
+		if (($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()) {
+			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
-							// email to event owner
-							$this->sendTemplateEmail(
-								array($event->getContact()->getEmail() => $event->getContact()->getName()),
-								array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
-								'Veranstaltung ausgebucht: ' . $event->getTitle(),
-								'Maximumreached',
-								array(	'event' => $event,
-										'subscribers' => $event->getSubscribers(),
-										'helper' => $helper,
-										'settings' => $this->settings,
-										'attachSubscriberAsCsv' => TRUE,
-								)
-							);
-						}
+			// email to event owner
+			$this->sendTemplateEmail(
+				array($event->getContact()->getEmail() => $event->getContact()->getName()),
+				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+				'Veranstaltung ausgebucht: ' . $event->getTitle(),
+				'Maximumreached',
+				array(	'event' => $event,
+						'subscribers' => $event->getSubscribers(),
+						'helper' => $helper,
+						'settings' => $this->settings,
+						'attachSubscriberAsCsv' => TRUE,
+				)
+			);
+		}
 
-						// reset session data
-						$this->setSessionData('editcode', '');
+		// reset session data
+		$this->setSessionData('editcode', '');
 
-						// clear cache on all cached list pages
-						$this->clearAllEventListCache();
-						$this->view->assign('event', $event);
-						$this->view->assign('category', $category);
-						$this->view->assign('newSubscriber', $newSubscriber);
+		// clear cache on all cached list pages
+		$this->clearAllEventListCache();
+		$this->view->assign('event', $event);
+		$this->view->assign('category', $category);
+		$this->view->assign('newSubscriber', $newSubscriber);
 	}
 
 	/**
@@ -231,56 +231,75 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	protected function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array()) {
 
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
+			// TYPO3 4.7
 			$emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-			$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
-			$emailViewHTML->setFormat('html');
-			$emailViewHTML->assignMultiple($variables);
-
 			$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-			$ics->getRequest()->setControllerExtensionName($this->extensionName);
-			$ics->setFormat('ics');
-			$ics->assignMultiple($variables);
+			$csv = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+		} else {
+			// TYPO3 6.x
+			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+			$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
+			$ics = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+			$csv = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+		}
 
-			$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-			$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-			$partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+		$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
+		$emailViewHTML->setFormat('html');
+		$emailViewHTML->assignMultiple($variables);
 
-			$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
-			$emailViewHTML->setPartialRootPath($partialRootPath);
+		$ics->getRequest()->setControllerExtensionName($this->extensionName);
+		$ics->setFormat('ics');
+		$ics->assignMultiple($variables);
 
-			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
 
-			$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
-			t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
+		$emailViewHTML->setPartialRootPath($partialRootPath);
 
+		$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
+
+		$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
+		t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
+			// TYPO3 4.7
 			$message = t3lib_div::makeInstance('t3lib_mail_Message');
-			$message->setTo($recipient)
-					->setFrom($sender)
-					->setCharset('utf-8')
-					->setSubject($subject);
+		} else {
+			// TYPO3 6.x
+			/** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
+			$message = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+		}
 
-			// attach ICS-File
-			//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
-								//~ ->setFilename('invite.ics')
-								//~ ->setDisposition('inline')
-								//~ ->setContentType('text/calendar; charset="utf-8"; method=REQUEST'));
+		$message->setTo($recipient)
+				->setFrom($sender)
+				->setCharset('utf-8')
+				->setSubject($subject);
 
-			// attach CSV-File
-			if ($variables['attachSubscriberAsCsv'] == TRUE) {
-				$csv = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-				$csv->getRequest()->setControllerExtensionName($this->extensionName);
-				$csv->setFormat('csv');
-				$csv->assignMultiple($variables);
+		// attach ICS-File
+		//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
+							//~ ->setFilename('invite.ics')
+							//~ ->setDisposition('inline')
+							//~ ->setContentType('text/calendar; charset="utf-8"; method=REQUEST'));
 
-				$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
-				$csv->setPartialRootPath($partialRootPath);
+		// attach CSV-File
+		if ($variables['attachSubscriberAsCsv'] == TRUE) {
+			$csv->getRequest()->setControllerExtensionName($this->extensionName);
+			$csv->setFormat('csv');
+			$csv->assignMultiple($variables);
 
-				$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
-				t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
+			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
+			$csv->setPartialRootPath($partialRootPath);
 
-				$message->attach(Swift_Attachment::fromPath($eventCsvFile)
-							->setContentType('text/csv'));
-			}
+			$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
+			t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
+
+			$message->attach(Swift_Attachment::fromPath($eventCsvFile)
+						->setContentType('text/csv'));
+		}
 
 			// Plain text example
 			//~ $message->setBody($emailView->render(), 'text/plain');

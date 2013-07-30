@@ -196,26 +196,35 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllByCategoriesAndDate($categories, $startDateStamp) {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				// include hidden and deleted records
-				$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$constraints = array();
 
-				$constraints = array();
-					$constraints[] = $query->equals('deleted', 0 ); // get rid of deleted records
-					$constraints[] = $query->in('categories.uid', $categories );
-					$constraints[] = $query->greaterThan('start_date_time',  $startDateStamp );
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
+			// TYPO3 4.7
+			// include hidden and deleted records
+			$query->getQuerySettings()->setRespectEnableFields(FALSE);
+			// get rid of deleted records
+			$constraints[] = $query->equals('deleted', 0 );
+		} else {
+			// TYPO3 6.x
+			$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+			$query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+		}
 
-				if (count($constraints)) {
-					$query->matching($query->logicalAnd($constraints));
-				}
+			$constraints[] = $query->in('categories.uid', $categories );
+			$constraints[] = $query->greaterThan('start_date_time',  $startDateStamp );
 
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-				return $query->execute();
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
+
+		return $query->execute();
 	}
 
 	/**
@@ -229,27 +238,36 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllByCategoriesAndDateInterval($categories, $startDateStamp, $stopDateStamp) {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				// include hidden and deleted records
-				$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$constraints = array();
 
-				$constraints = array();
-					$constraints[] = $query->equals('deleted', 0 ); // get rid of deleted records
-					$constraints[] = $query->in('categories.uid', $categories );
-					$constraints[] = $query->greaterThanOrEqual('start_date_time',  $startDateStamp );
-					$constraints[] = $query->lessThanOrEqual('start_date_time',  $stopDateStamp );
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
+			// TYPO3 4.7
+			// include hidden and deleted records
+			$query->getQuerySettings()->setRespectEnableFields(FALSE);
+			// get rid of deleted records
+			$constraints[] = $query->equals('deleted', 0 );
+		} else {
+			// TYPO3 6.x
+			$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+			$query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+		}
 
-				if (count($constraints)) {
-					$query->matching($query->logicalAnd($constraints));
-				}
+		$constraints[] = $query->in('categories.uid', $categories );
+		$constraints[] = $query->greaterThanOrEqual('start_date_time',  $startDateStamp );
+		$constraints[] = $query->lessThanOrEqual('start_date_time',  $stopDateStamp );
 
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-				return $query->execute();
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
+
+		return $query->execute();
 	}
 
 	/**
@@ -260,29 +278,29 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllBySubscriber($subscribers) {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				$constraints = array();
-				foreach ($subscribers as $subscriber)
-					$constraints[] = $query->equals('subscribers.editcode', $subscriber->getEditcode());
-				//~ $constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
-				//~ print_r($constraints);
-				if (count($constraints)) {
-					$query->matching(
-						$query->logicalAND($query->greaterThan('start_date_time',  strtotime('today')),
-						$query->logicalOr($constraints)
-						)
-					);
+		$constraints = array();
+		foreach ($subscribers as $subscriber)
+			$constraints[] = $query->equals('subscribers.editcode', $subscriber->getEditcode());
+		//~ $constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		//~ print_r($constraints);
+		if (count($constraints)) {
+			$query->matching(
+				$query->logicalAND($query->greaterThan('start_date_time',  strtotime('today')),
+				$query->logicalOr($constraints)
+				)
+			);
 
-				} else
-					return;
-					//~ t3lib_utility_Debug::debug($constraints, 'findAllBySubscriber: query... ');
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		} else
+			return;
+			//~ t3lib_utility_Debug::debug($constraints, 'findAllBySubscriber: query... ');
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 
-				return $query->execute();
+		return $query->execute();
 	}
 
 	/**

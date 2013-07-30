@@ -41,22 +41,22 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	 */
 	public function findAllByFeuser($pid = 0) {
 
-								$query = $this->createQuery();
+		$query = $this->createQuery();
 
-								$constraints = array();
-								$constraints[] = $query->equals('customerid', $GLOBALS['TSFE']->fe_user->user['username']);
-								if ($pid) {
-									$query->getQuerySettings()->setRespectStoragePage(FALSE);
-									$constraints[] = $query->equals('pid', $pid);
-								}
+		$constraints = array();
+		$constraints[] = $query->equals('customerid', $GLOBALS['TSFE']->fe_user->user['username']);
+		if ($pid) {
+			$query->getQuerySettings()->setRespectStoragePage(FALSE);
+			$constraints[] = $query->equals('pid', $pid);
+		}
 
-								//~ $constraints[] = $query->greaterThan('start_date',  strtotime('today') );
+		//~ $constraints[] = $query->greaterThan('start_date',  strtotime('today') );
 
-								if (count($constraints)) {
-									$query->matching($query->logicalAnd($constraints));
-								}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-								return $query->execute();
+		return $query->execute();
 	}
 
 	/**
@@ -68,20 +68,20 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	 */
 	public function findAllByEditcode($editcode, $pid = 0) {
 
-								$query = $this->createQuery();
+		$query = $this->createQuery();
 
-								$constraints = array();
-								$constraints[] = $query->equals('editcode', $editcode);
-								if ($pid) {
-									$query->getQuerySettings()->setRespectStoragePage(FALSE);
-									$constraints[] = $query->equals('pid', $pid);
-								}
+		$constraints = array();
+		$constraints[] = $query->equals('editcode', $editcode);
+		if ($pid) {
+			$query->getQuerySettings()->setRespectStoragePage(FALSE);
+			$constraints[] = $query->equals('pid', $pid);
+		}
 
-								if (count($constraints)) {
-									$query->matching($query->logicalAnd($constraints));
-								}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-								return $query->execute();
+		return $query->execute();
 	}
 
 	/**
@@ -120,21 +120,21 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	 */
 	public function findAllByEvents($events) {
 
-						$query = $this->createQuery();
+		$query = $this->createQuery();
 
-						$constraints = array();
-						$constraints[] = $query->in('event', $events);
+		$constraints = array();
+		$constraints[] = $query->in('event', $events);
 
-						if (count($constraints)) {
-							$query->matching($query->logicalAnd($constraints));
-						}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-						// order by start_date -> start_time...
-						$query->setOrderings(
-							array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
-						);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+		);
 
-						return $query->execute();
+		return $query->execute();
 	}
 
 }
