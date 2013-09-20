@@ -62,6 +62,20 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	}
 
 	/**
+	 * Clear ajax cache files for fullcalendar
+	 *
+	 * @return
+	 */
+	function clearAjaxCacheFiles() {
+
+		global $GLOBALS;
+
+		system ('rm '.PATH_site.'typo3temp/events/calfile*');
+
+		return;
+	}
+
+	/**
 	 * TCEmain hook function
 	 *
 	 * @param       string          Status "new" or "update"
@@ -78,6 +92,7 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 				$pObj->checkValue_currentRecord['hidden'] == '0') {
 
 			$this->clearAllEventListCache();
+			$this->clearAjaxCacheFiles();
 
 
 		}

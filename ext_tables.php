@@ -52,9 +52,12 @@ if (TYPO3_MODE === 'BE') {
 		$_EXTKEY,
 		'web',	 // Make module a submodule of 'web'
 		'slubevents',	// Submodule key
-		'',						// Position
+		'',				// Position
 		array(
-			'Event' => 'beList, beCopy, show, new, create, edit, update, delete, listOwn','Category' => '','Subscriber' => 'beIcsInvitation, list, beList','Location' => '',
+			'Event' => 'beList, beCopy, show, new, create, edit, update, delete, listOwn',
+			'Category' => '',
+			'Subscriber' => 'beIcsInvitation, list, beList',
+			'Location' => '',
 		),
 		array(
 			'access' => 'user,group',

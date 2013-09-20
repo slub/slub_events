@@ -19,7 +19,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 				<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
 			</f:then>
 		</f:if>
-		<f:render partial="Event/Item" arguments="{event: event, settings:settings, label:label, eventIterator:eventIterator, view:'list'}"/>
+		<f:render partial="Event/Item" arguments="{event: event, settings:settings, label:label, eventIterator:eventIterator, view:'list'}" />
 	</f:for>
 	</ul>
 </f:section>

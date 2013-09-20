@@ -346,6 +346,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 
 			$foundevent['id'] = $event->getUid();
 			$foundevent['title'] = $event->getTitle();
+			$foundevent['teaser'] = $event->getTeaser();
 			$foundevent['start'] = $event->getStartDateTime()->getTimestamp();
 			if ($event->getEndDateTime() instanceof DateTime)
 				$foundevent['end'] = $event->getEndDateTime()->getTimestamp();
@@ -354,9 +355,9 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 				// Link to current page
 				'parameter' => $_GET['detailPid'],
 				// Set additional parameters
-				'additionalParams' => '&type=0&tx_slubevents_eventlist%5Bevent%5D='.$event->getUid().'&tx_slubevents_eventlist%5Baction%5D=show&tx_slubevents_eventlist%5Bcontroller%5D=Event',
+				'additionalParams' => '&type=0&tx_slubevents_eventlist%5Bevent%5D='.$event->getUid().'&tx_slubevents_eventlist%5Baction%5D=show',
 				// We must add cHash because we use parameters
-				'useCachHash' => true,
+				'useCacheHash' => 1,
 				// We want link only
 				'returnLast' => 'url',
 			);

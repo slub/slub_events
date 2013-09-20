@@ -1,0 +1,18 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<f:section name="categoryTree">
+	<ul class="category_tree">
+		<f:for each="{categories}" key="id" as="category">
+			<li>
+				<se:be.checkbox id="category-{category.item.uid}" name="searchParameter[category][{id}]" value="{category.item.uid}" selected="{categoriesSelected}" onclick="checkBoxes(this)" />
+				<label for="category-{category.item.uid}" title="{category.item.uid}">{category.item.title}</label>
+
+				<f:if condition="{category.children}">
+					<f:render section="categoryTree" arguments="{categories: category.children, categoriesSelected: categoriesSelected}" />
+				</f:if>
+			</li>
+		</f:for>
+	</ul>
+</f:section>
+
+<f:render section="categoryTree" arguments="{categories: categories, categoriesSelected : categoriesSelected}" />
+

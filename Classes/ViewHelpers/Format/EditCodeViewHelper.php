@@ -24,7 +24,7 @@
  ***************************************************************/
 
 /**
- * Calculate Free Places
+ * Adds the Editcode to the form and to the user session
  *
 
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later

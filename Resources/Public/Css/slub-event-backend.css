@@ -17,9 +17,16 @@ table.tx_slubevents td {
 	font-weight: normal;
 	padding: 4px;
 }
+table.tx_slubevents td.td-input {
+	width: 200px;
+}
 
 table.tx_slubevents td span.green {
 	color: green;
+}
+
+table.tx_slubevents td span.red {
+	color: red;
 }
 
 table.tx_slubevents td span.eventcontact {
@@ -51,6 +58,24 @@ table.tx_slubevents ul {
 	padding: 3px 0 3px 1.5em;
 }
 
+table.tx_slubevents .foldicon {
+	font-size: 150%;
+	margin-right: 10px;
+	width: 25px;
+	float: left;
+	text-align: center;
+}
+
+table.tx_slubevents td.foldtree > ul > li.open {
+	border-left: 1px dashed #ccc;
+}
+table.tx_slubevents td.foldtree > ul > li.open ul li {
+	border-left: 1px dashed #ccc;
+}
+table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
+	border-left: 1px dashed #a00;
+}
+
 /*
  *------
  * ...
@@ -64,6 +89,7 @@ table.tx_slubevents ul {
 	margin: 0px;
 
 }
+
 
 .slub-event-list li {
 	margin: 0.2em 0;

@@ -83,6 +83,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		if ($event === NULL)
 			$this->redirect('eventNotFound');
+
 	}
 
 
@@ -113,7 +114,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 			if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
 
-					$newSubscriber->setCustomerid($GLOBALS['TSFE']->fe_user->user['username']);
+				$newSubscriber->setCustomerid($GLOBALS['TSFE']->fe_user->user['username']);
 				$loggedIn = 'readonly'; // css class for form
 			} else
 				$loggedIn = ''; // css class for form
@@ -365,30 +366,30 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function html2rest($text) {
 
-					    $text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
-					    // header is getting **
-					    $text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', "**", $text);
-					    // bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
-					    $text = preg_replace('/<b>|<\/b>/', "*", $text);
-					    // get away links but preserve href with class slub-event-link
-					    $text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
-					    // Remove separator characters (like non-breaking spaces...)
-					    $text = preg_replace( '/\p{Z}/u', ' ', $text );
-					    $text = str_replace('<br />', "\n", $text);
-					    // get away paragraphs including class, title etc.
-					    $text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
-					    $text = str_replace('<li>', "- ", $text);
-					    $text = str_replace('</li>', "\n", $text);
-					    // remove multiple spaces
-					    $text = preg_replace('/[\ ]{2,}/', '', $text);
-					    // remove multiple tabs
-					    $text = preg_replace('/[\t]{1,}/', '', $text);
-					    // remove more than one empty line
-					    $text = preg_replace('/[\n]{3,}/', "\n\n", $text);
-					    // remove all remaining html tags
-					    $text = strip_tags($text);
+		$text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
+		// header is getting **
+		$text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', "**", $text);
+		// bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
+		$text = preg_replace('/<b>|<\/b>/', "*", $text);
+		// get away links but preserve href with class slub-event-link
+		$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
+		// Remove separator characters (like non-breaking spaces...)
+		$text = preg_replace( '/\p{Z}/u', ' ', $text );
+		$text = str_replace('<br />', "\n", $text);
+		// get away paragraphs including class, title etc.
+		$text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
+		$text = str_replace('<li>', "- ", $text);
+		$text = str_replace('</li>', "\n", $text);
+		// remove multiple spaces
+		$text = preg_replace('/[\ ]{2,}/', '', $text);
+		// remove multiple tabs
+		$text = preg_replace('/[\t]{1,}/', '', $text);
+		// remove more than one empty line
+		$text = preg_replace('/[\n]{3,}/', "\n\n", $text);
+		// remove all remaining html tags
+		$text = strip_tags($text);
 
-					    return $text;
+		return $text;
 	}
 
 	/**
