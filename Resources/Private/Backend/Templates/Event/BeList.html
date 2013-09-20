@@ -18,7 +18,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th><f:translate key="tx_slubevents_domain_model_event.title" /></th>
 		<th><f:translate key="tx_slubevents_domain_model_category" /></th>
 		<th><f:translate key="tx_slubevents_domain_model_event.start_date_time" /></th>
-		<th>frei / max</th>
+		<th><f:translate key='be.free' /> / max</th>
 		<th> </th>
 		<th> </th>
 		<th> </th>
@@ -83,6 +83,26 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		</td>
 	</tr>
 
+	<tr>
+		<th>
+			<label for="searchString">
+				<f:translate key="be.searchString" />
+			</label>
+		</th>
+		<th>
+		</th>
+		<th>
+		</th>
+	</tr>
+	<tr>
+		<td class="td-input">
+				<f:form.textfield class="" property="searchString" placeholder="<f:translate key='be.searchInTitle' />" value="{searchString}" />
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
 	<tr>
 		<td colspan="2" id="results">
 			<f:form.submit value="Suchen..." />

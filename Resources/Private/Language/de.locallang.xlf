@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-07-25T13:33:22Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-09-20T13:10:24Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -13,6 +13,10 @@
 			<source>Edit</source>
 			<target>Bearbeiten</target>
 		</trans-unit>
+		<trans-unit id="be.free" approved="yes" xml:space="preserve">
+			<source>free</source>
+			<target>frei</target>
+		</trans-unit>
 		<trans-unit id="be.hideEvent" approved="yes" xml:space="preserve">
 			<source>Hide Event</source>
 			<target>Verstecken</target>
@@ -24,6 +28,14 @@
 		<trans-unit id="be.newEvent" approved="yes" xml:space="preserve">
 			<source>New Event</source>
 			<target>Neue Veranstaltung anlegen</target>
+		</trans-unit>
+		<trans-unit id="be.searchInTitle" approved="yes" xml:space="preserve">
+			<source>Search in Title</source>
+			<target>Nach Titel suchen</target>
+		</trans-unit>
+		<trans-unit id="be.searchString" approved="yes" xml:space="preserve">
+			<source>Search String</source>
+			<target>Suchbegriff</target>
 		</trans-unit>
 		<trans-unit id="be.sendIcsInvitationTo" approved="yes" xml:space="preserve">
 			<source>Send ICS Invitation to:</source>
@@ -61,6 +73,10 @@
 			<source>Event Category</source>
 			<target>Kategorie</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes" xml:space="preserve">
+			<source>Title</source>
+			<target>Titel</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event" approved="yes" xml:space="preserve">
 			<source>Event</source>
 			<target>Veranstaltung</target>
@@ -94,7 +110,7 @@
 			<target>Uhr</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.title" approved="yes" xml:space="preserve">
-			<source>title</source>
+			<source>Title</source>
 			<target>Name der Veranstaltung</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.unsubscribe" approved="yes" xml:space="preserve">

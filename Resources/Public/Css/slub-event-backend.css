@@ -60,14 +60,22 @@ table.tx_slubevents ul {
 
 table.tx_slubevents .foldicon {
 	font-size: 150%;
-	margin-right: 10px;
-	width: 25px;
+	width: 20px;
 	float: left;
+	position: relative;
+	left: -2px;
 	text-align: center;
 }
+table.tx_slubevents .open input[type="checkbox"] {
 
-table.tx_slubevents td.foldtree > ul > li.open {
-	border-left: 1px dashed #ccc;
+}
+
+table.tx_slubevents td.foldtree>ul>li.open,
+table.tx_slubevents td.foldtree>ul>li.closed
+{
+	position: relative;
+	left: -20px;
+	border-left: none;
 }
 table.tx_slubevents td.foldtree > ul > li.open ul li {
 	border-left: 1px dashed #ccc;

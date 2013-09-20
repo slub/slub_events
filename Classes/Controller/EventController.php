@@ -186,12 +186,13 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		// get search parameters from BE user configuration
 		$ucData = $GLOBALS['BE_USER']->uc['moduleData']['slubevents'];
 
+		// -----------------------------------------
 		// get search parameters from POST variables
+		// -----------------------------------------
 		$searchParameter = $this->getParametersSafely('searchParameter');
 		if (is_array($searchParameter)) {
 			$ucData['searchParameter'] = $searchParameter;
 			$sessionData['selectedStartDateStamp'] = $searchParameter['selectedStartDateStamp'];
-			//~ $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
 			$GLOBALS['BE_USER']->uc['moduleData']['slubevents'] = $ucData;
 			$GLOBALS['BE_USER']->writeUC($GLOBALS['BE_USER']->uc);
 			// save session data
@@ -202,7 +203,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		}
 
 		// set the startDateStamp
-		// startDateStamp is saved in session data NOT user data
+		// startDateStamp is saved in session data NOT in user data
 		if (empty($selectedStartDateStamp)) {
 			if (!empty($sessionData['selectedStartDateStamp']))
 				$selectedStartDateStamp = $sessionData['selectedStartDateStamp'];
@@ -210,8 +211,10 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 				$selectedStartDateStamp = date('d-m-Y');
 		}
 
+		// get the categories
 		$categories = $this->categoryRepository->findAllTree();
 
+		// check which categories have been selected
 		if (is_array($searchParameter['selectedCategories'])) {
 			$this->view->assign('selectedCategories', $searchParameter['selectedCategories']);
 		}
@@ -223,9 +226,12 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			$this->view->assign('categoriesSelected', $searchParameter['category']);
 		}
 		$this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
-		if (is_array($searchParameter['category']))
-			$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp));
 
+		// get the events to show
+		if (is_array($searchParameter['category']))
+			$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp), $searchParameter['searchString']);
+
+		$this->view->assign('searchString', $searchParameter['searchString']);
 		$this->view->assign('categories', $categories);
 		$this->view->assign('events', $events);
 	}

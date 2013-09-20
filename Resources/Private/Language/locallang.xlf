@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-07-25T13:33:22Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-09-20T13:10:24Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -10,6 +10,9 @@
 		</trans-unit>
 		<trans-unit id="be.editEvent" xml:space="preserve">
 			<source>Edit</source>
+		</trans-unit>
+		<trans-unit id="be.free" xml:space="preserve">
+			<source>free</source>
 		</trans-unit>
 		<trans-unit id="be.hideEvent" xml:space="preserve">
 			<source>Hide Event</source>
@@ -25,6 +28,12 @@
 		</trans-unit>
 		<trans-unit id="be.scheduler.checkevents.description" xml:space="preserve">
 			<source>Long description of Task &quot;Check and Report&quot;</source>
+		</trans-unit>
+		<trans-unit id="be.searchInTitle" xml:space="preserve">
+			<source>Search in Title</source>
+		</trans-unit>
+		<trans-unit id="be.searchString" xml:space="preserve">
+			<source>Search String</source>
 		</trans-unit>
 		<trans-unit id="be.sendIcsInvitationTo" xml:space="preserve">
 			<source>Send ICS Invitation to:</source>
@@ -54,7 +63,7 @@
 			<source>Event Category</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.title" xml:space="preserve">
-			<source>title</source>
+			<source>Title</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event" xml:space="preserve">
 			<source>Event</source>
@@ -108,7 +117,7 @@
 			<source></source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.title" xml:space="preserve">
-			<source>title</source>
+			<source>Title</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.unsubscribe" xml:space="preserve">
 			<source>Unsubscribe</source>

@@ -151,7 +151,7 @@ TreeFolder.prepare = function(oElement, iDepth) {
 		});
 	} else if (iA>=0 && iDepth>2) {
 
-		var oAfold = document.createElement("div");
+		var oAfold = document.createElement("a");
 		oAfold.className = "foldicon";
 
 		oAfold.innerHTML = "<span>&nbsp;</span>";
