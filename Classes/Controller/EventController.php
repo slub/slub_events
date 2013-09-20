@@ -370,10 +370,30 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			$url = $cObj->typoLink('', $conf);
 			//~
 			$foundevent['url'] = $url;
+
 			if ($event->getAllDay())
 				$foundevent['allDay'] = true;
 			else
 				$foundevent['allDay'] = false;
+
+			// set special css class if subscription is NOT possible
+			$noSubscription = FALSE;
+			// limit reached already --> overbooked
+			if ($this->subscriberRepository->countAllByEvent($event) >= $event->getMaxSubscriber()) {
+				$noSubscription = TRUE;
+			}
+			// event is cancelled
+			if ($event->getCancelled()) {
+				$noSubscription = TRUE;
+			}
+			// deadline reached....
+			if (is_object($event->getSubEndDateTime())) {
+				if ($event->getSubEndDateTime()->getTimestamp() < time()) {
+					$noSubscription = TRUE;
+				}
+			}
+			if ($noSubscription)
+				$foundevent['className'] = 'no_subscription';
 
 			$jsonevent[] = $foundevent;
 		}
