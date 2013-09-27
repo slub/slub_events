@@ -41,24 +41,24 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllGbByCategory($category) {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				$constraints = array();
-				//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-				$constraints[] = $query->equals('categories.uid', $category );
-				$constraints[] = $query->equals('genius_bar', 1 );
-				$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints = array();
+		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
+		$constraints[] = $query->equals('categories.uid', $category );
+		$constraints[] = $query->equals('genius_bar', 1 );
+		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
 
-				if (count($constraints)) {
-					$query->matching($query->logicalAnd($constraints));
-				}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 
-				return $query->execute();
+		return $query->execute();
 	}
 
 	/**
@@ -96,31 +96,31 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findFreeByCategory($category) {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				$constraints = array();
-				//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-				$constraints[] = $query->equals('categories.uid', $category );
-				$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints = array();
+		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
+		$constraints[] = $query->equals('categories.uid', $category );
+		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
 
-				if (count($constraints)) {
-					$query->matching($query->logicalAnd($constraints));
-				}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 
-				$events = $query->execute();
+		$events = $query->execute();
 
-				foreach ($events as $event) {
-					$free = $event->getMaxSubscriber() - count($event->getSubscribers());
-					if ($free)
-						$returnevents[] = $event;
-				}
+		foreach ($events as $event) {
+			$free = $event->getMaxSubscriber() - count($event->getSubscribers());
+			if ($free)
+				$returnevents[] = $event;
+		}
 
-				return $returnevents;
+		return $returnevents;
 	}
 
 	/**

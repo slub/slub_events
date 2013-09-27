@@ -120,6 +120,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 		return $parentUid;
 
 	    }
+
 	/**
 	 * Finds all datasets of current branch and return in tree order
 	 *

@@ -417,6 +417,7 @@ $TCA['tx_slubevents_domain_model_event']['columns']['location'] = array(
 		'maxitems' => 1,
 	),
 );
+
 $TCA['tx_slubevents_domain_model_event']['columns']['contact'] = array(
 	'exclude' => 0,
 	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.contact',
@@ -458,6 +459,7 @@ $TCA['tx_slubevents_domain_model_event']['types'] = array (
 			'hidden;;1'
 		)
 );
+
 $TCA['tx_slubevents_domain_model_event']['palettes'] = array (
 		'paletteStart' => array(
 			'showitem' => 'start_date_time,all_day,cancelled',
