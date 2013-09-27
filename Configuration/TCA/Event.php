@@ -366,32 +366,32 @@ $TCA['tx_slubevents_domain_model_event']['columns']['subscribers'] = array(
 );
 
 $TCA['tx_slubevents_domain_model_event']['columns']['categories'] = array(
-			'exclude' => 0,
-			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.categories',
-			'config' => array(
-				'type' => 'select',
-				'foreign_table' => 'tx_slubevents_domain_model_category',
-				'foreign_table_where' => ' AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_category.sorting',
-				'MM' => 'tx_slubevents_event_category_mm',
-				'renderMode' => 'tree',
-				'subType' => 'db',
-				'treeConfig' => array(
-					'parentField' => 'parent',
-					'appearance' => array(
-						'expandAll' => TRUE,
-						'showHeader' => FALSE,
-						'maxLevels' => 10,
-						'width' => 400,
-					),
-
-				),
-				'size' => 10,
-				'autoSizeMax' => 30,
-				'minitems' => 1,
-				'maxitems' => 9999,
-				'multiple' => 0,
+	'exclude' => 0,
+	'l10n_mode' => 'mergeIfNotBlank',
+	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.categories',
+	'config' => array(
+		'type' => 'select',
+		'foreign_table' => 'tx_slubevents_domain_model_category',
+		'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_category.sorting',
+		'MM' => 'tx_slubevents_event_category_mm',
+		'renderMode' => 'tree',
+		'subType' => 'db',
+		'treeConfig' => array(
+			'parentField' => 'parent',
+			'appearance' => array(
+				'expandAll' => TRUE,
+				'showHeader' => FALSE,
+				'maxLevels' => 10,
+				'width' => 400,
 			),
+
+		),
+		'size' => 10,
+		'autoSizeMax' => 30,
+		'minitems' => 1,
+		'maxitems' => 9999,
+		'multiple' => 0,
+	),
 );
 
 $TCA['tx_slubevents_domain_model_event']['columns']['location'] = array(

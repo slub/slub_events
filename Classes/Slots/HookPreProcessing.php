@@ -118,7 +118,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 			}
 
 			if ($fieldArray['genius_bar'] == FALSE && count(explode(',', $fieldArray['categories'])) > 1) {
-					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Sie haben ' . count(explode(',', $fieldArray['categories'])). ' Kategorien ausgewählt. Mehrere Kategorien sind nur bei Wissensbar-Veranstaltungen erlaubt!', 'Fehler: ', t3lib_FlashMessage::ERROR, TRUE);
+					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Sie haben ' . count(explode(',', $fieldArray['categories'])). ' Kategorien ausgewählt. ', 'Bitte prüfen: ', t3lib_FlashMessage::INFO, TRUE);
 					t3lib_FlashMessageQueue::addMessage($message);
 			}
 		}
