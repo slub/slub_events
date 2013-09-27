@@ -12,7 +12,7 @@
 <label for="customerid">
 	<f:translate key="tx_slubevents_domain_model_subscriber.customerid" />
 </label>
-	<f:form.textfield type="number" readonly="{readonly}" property="customerid" /><br />
+	<f:form.textfield type="number" additionalAttributes="{min: '1', max: '999999'}" readonly="{readonly}" property="customerid" /><br />
 
 <label for="number">
 <f:format.printf arguments="{0: '<se:format.freePlacesLeft event=\'{event}\' />'}">
