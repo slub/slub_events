@@ -47,14 +47,12 @@ function addClassName(oNode, sClass, bAdd) {
 	oNode.className = aClass.join(" ");
 }
 
-//////////////////
-// isClassName //
+// isClassName
 function isClassName(oNode,sClass) {
 	return (" "+oNode.className+" ").indexOf(sClass)!=-1;
 }
 
-///////////////
-// addEvent //
+// addEvent
 function addEvent( obj, type, fn) {
 	if ( obj.attachEvent ) {
 		obj['e'+type+fn] = fn;
@@ -69,15 +67,14 @@ function removeEvent( obj, type, fn ) {
 	} else obj.removeEventListener( type, fn, false );
 }
 
-////////////////
-// construct //
+// construct
 var oSelectedPage;
 var TreeFolder = new function() {
 }
 
 // init
 TreeFolder.init = function() {
-    // Find td with classname 'foldtree' which contains the folable tree
+    // Find td with classname 'foldtree' which contains the foldable tree
     if (!document.getElementsByTagName) return;
     var aUls = document.getElementsByTagName("td");
     for (var i=0; i<aUls.length; i++) {
@@ -87,7 +84,7 @@ TreeFolder.init = function() {
 	}
 }
 
-// prepare //
+// prepare
 TreeFolder.prepare = function(oElement, iDepth) {
 	// we currently don't need the iDepth but... nobody knows.
 	if (iDepth==null) var iDepth = -1;
@@ -113,7 +110,7 @@ TreeFolder.prepare = function(oElement, iDepth) {
 					}
 				}
 				//~ alert(bFold + "checked?" + addon);
-				if (bFold) oChild.style.display = "none";
+				if (bFold && iDepth>0) oChild.style.display = "none";
 			break;
 			case "li":
 				iLi = i;
@@ -135,10 +132,7 @@ TreeFolder.prepare = function(oElement, iDepth) {
 			}
 		}
 		// name class of parent list element
-		//~ if (bFold)
-			//~ oElement.className = "open";
-		//~ else
-			oElement.className = (bFold ? "closed" : "open");
+		oElement.className = (bFold ? "closed" : "open");
 		// create extra fold anchor
 		var oAfold = document.createElement("a");
 		oAfold.className = "foldicon";
@@ -161,16 +155,16 @@ TreeFolder.prepare = function(oElement, iDepth) {
 
 }
 
-// activateALi //
+// activateALi
 TreeFolder.liAClicked = function(oAnchor) {
 	var oLi = oAnchor.parentNode;
 	var aSibling = oLi.childNodes;
 	var bDisplay = false;
 	for(var i=0;i<aSibling.length;i++) {
 		var oSibling = aSibling[i];
-		if (oSibling.nodeName.toLowerCase()=="ul") {
-			bDisplay = oSibling.style.display=="none";
-			oSibling.style.display = bDisplay?"block":"none";
+		if (oSibling.nodeName.toLowerCase() == "ul") {
+			bDisplay = oSibling.style.display == "none";
+			oSibling.style.display = bDisplay ? "block" : "none";
 		}
 		var oSpan = oAnchor.getElementsByTagName("span")[0];
 		oSpan.innerHTML = bDisplay ? "-" : "+";
