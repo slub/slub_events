@@ -7,12 +7,12 @@
 <label for="email">
 	<f:translate key="tx_slubevents_domain_model_subscriber.email" /> <span class="required">*</span>
 </label>
-	<f:form.textfield readonly="{readonly}" required="required" property="email" /><br />
+	<f:form.textfield type="email" readonly="{readonly}" required="required" property="email" /><br />
 
 <label for="customerid">
 	<f:translate key="tx_slubevents_domain_model_subscriber.customerid" />
 </label>
-	<f:form.textfield readonly="{readonly}" property="customerid" /><br />
+	<f:form.textfield type="number" readonly="{readonly}" property="customerid" /><br />
 
 <label for="number">
 <f:format.printf arguments="{0: '<se:format.freePlacesLeft event=\'{event}\' />'}">
@@ -20,7 +20,7 @@
 </f:format.printf> <span class="required">*</span>
 </label>
 
-<f:form.textfield property="number" required="required" />
+<f:form.textfield property="number" type="number" additionalAttributes="{min: '1', max: '<se:format.freePlacesLeft event=\'{event}\' />'}" required="required" />
 <f:form.hidden property="editcode" value="<se:format.editCode event='{event}' />"/>
 
 

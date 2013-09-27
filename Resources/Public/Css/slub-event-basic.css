@@ -85,8 +85,25 @@
 	font-weight: bold;
 }
 
-#leftcol .slub-event-register form input.error[type="text"] {
+#leftcol .slub-event-register form input.error[type="text"],
+#leftcol .slub-event-register form input.error[type="email"],
+#leftcol .slub-event-register form input.error[type="number"] {
 	border-bottom: 1px solid red;
+}
+#leftcol .slub-event-register input[type="text"],
+#leftcol .slub-event-register input[type="email"],
+#leftcol .slub-event-register input[type="number"],
+#leftcol .slub-event-register textarea {
+	padding: 3px;
+	display: block;
+	border: none;
+	border-bottom: 1px solid #333;
+	width: 60%;
+	margin: 2px 0;
+	font-size: 13px;
+	float: left;
+	text-align: left;
+	background: #fff;
 }
 
 .slub-event-register .event-short ul {
