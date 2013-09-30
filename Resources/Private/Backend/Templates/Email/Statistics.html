@@ -1,0 +1,86 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<p>Monats-Auswertung aller Veranstaltungen</p>
+
+<ul>
+<f:for each="{categories}" as="category">
+		<li>{category.title}: {category.uid}</li>
+</f:for>
+</ul>
+<f:section name="categoryTree">
+	<ul class="category_tree">
+		<f:for each="{categories}" key="id" as="category">
+			<li>
+				<se:be.checkbox id="category-{category.item.uid}" name="searchParameter[category][{id}]" value="{category.item.uid}" selected="{categoriesSelected}" onclick="checkBoxes(this)" />
+				<label for="category-{category.item.uid}" title="{category.item.uid}">{category.item.title}</label>
+
+				<f:if condition="{category.children}">
+					<f:render section="categoryTree" arguments="{categories: category.children, categoriesSelected: categoriesSelected}" />
+				</f:if>
+			</li>
+		</f:for>
+	</ul>
+</f:section>
+
+<f:render section="categoryTree" arguments="{categories: categories, categoriesSelected : categoriesSelected}" />
+
+<p>
+<f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang.xml:tx_slubevents_domain_model_event' />
+</p>
+
+<ul>
+<f:for each="{events}" as="event" key="label">
+<f:if condition="{event.geniusBar}">
+	<f:else>
+<li>{event.geniusBar}: {event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
+<f:for each="{event.categories}" as="category">
+	"{category.title}"
+</f:for>
+,
+"{event.location.name}",
+"<f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xml:tx_slubevents_domain_model_event.audience.I.{event.audience}' />",
+"{event.discipline.name}",
+"{event.title}",
+"<se:format.BookedPlaces event='{event}' />",
+"{subscriber.message}",
+"{subscriber.number}"</li>
+	</f:else>
+</f:if>
+</f:for>
+
+</ul>
+
+<p>
+<f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang.xml:tx_slubevents_domain_model_event.genius_bar' />
+</p>
+
+<ul>
+<f:for each="{events}" as="event" key="label">
+<f:if condition="{event.geniusBar}">
+	<f:then>
+	<f:if condition="<se:format.BookedPlaces event='{event}' /> > 0">
+		<li>{event.geniusBar}: genius: {event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
+		<f:for each="{event.categories}" as="category">
+			"{category.title}"
+		</f:for>
+		,
+		"{event.location.name}",
+		"<f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xml:tx_slubevents_domain_model_event.audience.I.{event.audience}' />",
+		"{event.discipline.name}",
+		"{event.title}",
+		"<se:format.BookedPlaces event='{event}' />",
+		"{subscriber.message}",
+		"{subscriber.number}"</li>
+</f:if>
+	</f:then>
+</f:if>
+</f:for>
+
+</ul>
+
+
+<p>Mit freundlichen Grüßen</p>
+
+<p>&nbsp;</p>
+
+<p>SLUB Dresden</p>
+

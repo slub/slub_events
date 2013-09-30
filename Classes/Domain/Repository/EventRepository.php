@@ -132,24 +132,24 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllByDisciplineAndCategory($discipline, $category) {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				$constraints = array();
-				//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-				$constraints[] = $query->equals('discipline.uid', $discipline );
-				$constraints[] = $query->equals('categories.uid', $category );
-				$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints = array();
+		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
+		$constraints[] = $query->equals('discipline.uid', $discipline );
+		$constraints[] = $query->equals('categories.uid', $category );
+		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
 
-				if (count($constraints)) {
-					$query->matching($query->logicalAnd($constraints));
-				}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 
-				return $query->execute();
+		return $query->execute();
 	}
 
 	/**
@@ -160,29 +160,29 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllDisciplinesByCategories($categories) {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				$constraints = array();
-				//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-				$constraints[] = $query->in('categories.uid', $categories );
-				$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints = array();
+		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
+		$constraints[] = $query->in('categories.uid', $categories );
+		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
 
-				if (count($constraints)) {
-					$query->matching($query->logicalAnd($constraints));
-				}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 
-				$events = $query->execute();
-				$disciplines = array();
-				foreach ($events as $event) {
-					$disciplines[]=$event->getDiscipline();
-				}
+		$events = $query->execute();
+		$disciplines = array();
+		foreach ($events as $event) {
+			$disciplines[]=$event->getDiscipline();
+		}
 
-				return array_unique($disciplines);
+		return array_unique($disciplines);
 	}
 
 	/**
@@ -233,10 +233,9 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	/**
 	 * Finds all datasets by MM relation categories
 	 *
-	 * INCLUDE hidden events for backend usage only!
-	 *
 	 * @param string categories separated by comma
 	 * @param int startdatestamp
+	 * @param int stopDateStamp
 	 * @return array The found Event Objects
 	 */
 	public function findAllByCategoriesAndDateInterval($categories, $startDateStamp, $stopDateStamp) {
@@ -244,18 +243,6 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$query = $this->createQuery();
 
 		$constraints = array();
-
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
-			// TYPO3 4.7
-			// include hidden and deleted records
-			$query->getQuerySettings()->setRespectEnableFields(FALSE);
-			// get rid of deleted records
-			$constraints[] = $query->equals('deleted', 0 );
-		} else {
-			// TYPO3 6.x
-			$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
-			$query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
-		}
 
 		$constraints[] = $query->in('categories.uid', $categories );
 		$constraints[] = $query->greaterThanOrEqual('start_date_time',  $startDateStamp );
@@ -313,36 +300,36 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllStartMonths() {
 
-						global $BE_USER;
+		global $BE_USER;
 
-						// we don't want to get an extbase object but an ordinary PHP array:
-						$query = $this->createQuery();
-						$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-						// order by start_date -> start_time...
-						$query->setOrderings(
-							array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-						);
-						$query->setLimit(1);
+		// we don't want to get an extbase object but an ordinary PHP array:
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
+		$query->setLimit(1);
 
-						$oldest = $query->execute();
+		$oldest = $query->execute();
 
-						$query = $this->createQuery();
-						$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-						// order by start_date -> start_time...
-						$query->setOrderings(
-							array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
-						);
-						$query->setLimit(1);
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+		);
+		$query->setLimit(1);
 
-						$newest = $query->execute();
+		$newest = $query->execute();
 
-						$startDate = strtotime('first day of this month 00:00:00', $oldest['0']['start_date_time']);
+		$startDate = strtotime('first day of this month 00:00:00', $oldest['0']['start_date_time']);
 
-						for ($date = $startDate; $date <= $newest['0']['start_date_time']; $date = strtotime('+1 month', $date)) {
-								$dateShow[$date] = strftime('%d %B %Y', $date);
-						}
+		for ($date = $startDate; $date <= $newest['0']['start_date_time']; $date = strtotime('+1 month', $date)) {
+				$dateShow[$date] = strftime('%d %B %Y', $date);
+		}
 
-						return $dateShow;
+		return $dateShow;
 	}
 
 	/**
@@ -353,25 +340,25 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 */
 	public function findAllSubscriptionEnded() {
 
-				$query = $this->createQuery();
+		$query = $this->createQuery();
 
-				$constraints = array();
-				//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-				$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
-				$constraints[] = $query->lessThan('sub_end_date_time',  time() );
-				$constraints[] = $query->greaterThan('sub_end_date_time',  0 );
-				$constraints[] = $query->equals('sub_end_date_info_sent',  '0' );
+		$constraints = array();
+		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
+		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints[] = $query->lessThan('sub_end_date_time',  time() );
+		$constraints[] = $query->greaterThan('sub_end_date_time',  0 );
+		$constraints[] = $query->equals('sub_end_date_info_sent',  '0' );
 
-				if (count($constraints)) {
-					$query->matching($query->logicalAnd($constraints));
-				}
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
-				// order by start_date -> start_time...
-				$query->setOrderings(
-					array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-				);
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 
-				return $query->execute();
+		return $query->execute();
 	}
 
 }

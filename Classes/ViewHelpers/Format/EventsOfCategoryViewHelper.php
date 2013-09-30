@@ -3,7 +3,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -102,7 +102,6 @@ class Tx_SlubEvents_ViewHelpers_Format_EventsOfCategoryViewHelper extends Tx_Flu
 		$free = 0;
 		if (count($categories) == 0) {
 			foreach ($events as $event) {
-				//~ $eventfree[$event->getUid()] = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
 				// is there any event with free places in this category?
 				$free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
 				if ($free > 0)
@@ -110,9 +109,8 @@ class Tx_SlubEvents_ViewHelpers_Format_EventsOfCategoryViewHelper extends Tx_Flu
 			}
 		} else
 			return 1;
-		//~ print_r($eventfree);
-		return $free;
 
+		return $free;
 	}
 }
 ?>

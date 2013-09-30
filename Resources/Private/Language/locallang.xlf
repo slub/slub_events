@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-09-20T13:10:24Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-09-30T10:44:22Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -74,14 +74,11 @@
 		<trans-unit id="tx_slubevents_domain_model_event.description" xml:space="preserve">
 			<source>description</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.end_date" xml:space="preserve">
-			<source>endDate</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.end_time" xml:space="preserve">
-			<source>endTime</source>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.freeplaces" xml:space="preserve">
 			<source>free places</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" xml:space="preserve">
+			<source>Knowledge Bar</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.individual_appointment" xml:space="preserve">
 			<source>Indivdual Appointment</source>
@@ -95,14 +92,8 @@
 		<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" xml:space="preserve">
 			<source>one free place</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.start_date" xml:space="preserve">
-			<source>startDate</source>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" xml:space="preserve">
 			<source>Start of Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.start_time" xml:space="preserve">
-			<source>startTime</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.subscribe" xml:space="preserve">
 			<source>Subscribe</source>

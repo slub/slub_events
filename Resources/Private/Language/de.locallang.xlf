@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-09-20T13:10:24Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-09-30T10:44:22Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -89,9 +89,21 @@
 			<source>free places</source>
 			<target>freie Plätze</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes" xml:space="preserve">
+			<source>Knowledge Bar</source>
+			<target>Wissensbar</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.individual_appointment" approved="yes" xml:space="preserve">
 			<source>Indivdual Appointment</source>
 			<target>Beratungstermin</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" approved="yes" xml:space="preserve">
+			<source>Maximum of Subscribers</source>
+			<target>Maximale Teilnehmerzahl</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes" xml:space="preserve">
+			<source>Minimum of Subscribers</source>
+			<target>Mindesteilnehmerzahl</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" approved="yes" xml:space="preserve">
 			<source>one free place</source>
@@ -104,6 +116,10 @@
 		<trans-unit id="tx_slubevents_domain_model_event.subscribe" approved="yes" xml:space="preserve">
 			<source>Subscribe</source>
 			<target>Anmeldung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes" xml:space="preserve">
+			<source>teaser</source>
+			<target>Kurzbeschreibung</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.time_oclock" approved="yes" xml:space="preserve">
 			<source></source>

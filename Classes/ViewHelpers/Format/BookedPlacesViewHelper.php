@@ -24,14 +24,14 @@
  ***************************************************************/
 
 /**
- * Calculate Free Places
+ * Return Booked Places
  *
 
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_FreePlacesLeftViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_SlubEvents_ViewHelpers_Format_BookedPlacesViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * subscriberRepository
@@ -42,7 +42,7 @@ class Tx_SlubEvents_ViewHelpers_Format_FreePlacesLeftViewHelper extends Tx_Fluid
 	protected $subscriberRepository;
 
 	/**
-	 * Calculate the free places for a given event.
+	 * Return the number of subscribers for a given event
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Event $event
 	 * @return int
@@ -52,11 +52,11 @@ class Tx_SlubEvents_ViewHelpers_Format_FreePlacesLeftViewHelper extends Tx_Fluid
 	public function render(Tx_SlubEvents_Domain_Model_Event $event = NULL) {
 
 		if ($event != NULL)
-			$free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
+			$booked = $this->subscriberRepository->countAllByEvent($event);
 		else
-			$free = 0;
+			$booked = 0;
 
-		return ($free > 0)? $free : 0;
+		return $booked;
 
 	}
 }

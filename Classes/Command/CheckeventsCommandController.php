@@ -40,6 +40,14 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	protected $eventRepository;
 
 	/**
+	 * categoryRepository
+	 *
+	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
+	 * @inject
+	 */
+	protected $categoryRepository;
+
+	/**
 	 * subscriberRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
@@ -105,6 +113,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	*/
     public function checkForSubscriptionEndCommand($storagePid, $senderEmailAddress = '') {
 
+		// do some init work...
 		$this->initializeAction();
 
 		// abort if no storagePid is found
@@ -168,6 +177,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 						array(	'event' => $event,
 								'subscribers' => '',
 								'helper' => $helper,
+								'attachIcs' => TRUE,
 						)
 					);
 				}
@@ -182,7 +192,8 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 					array(	'event' => $event,
 							'subscribers' => $event->getSubscribers(),
 							'helper' => $helper,
-							'attachSubscriberAsCsv' => TRUE,
+							'attachCsv' => TRUE,
+							'attachIcs' => TRUE,
 					)
 				);
 				if ($out >= 1) {
@@ -201,7 +212,8 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 					array(	'event' => $event,
 							'subscribers' => $event->getSubscribers(),
 							'helper' => $helper,
-							'attachSubscriberAsCsv' => TRUE,
+							'attachCsv' => TRUE,
+							'attachIcs' => TRUE,
 					)
 				);
 				if ($out == 1)
@@ -213,6 +225,77 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		//~ echo count($allevents);
 		//~ return;
     }
+
+	/**
+	 * checkForSubscriptionEndCommand
+	 *
+	 * @param int stroagePid
+	 * @param string senderEmailAddress
+	 * @param string receiverEmailAddress
+	 * @return void
+	*/
+    public function makeStatisticsReportsCommand($storagePid, $senderEmailAddress = '', $receiverEmailAddress = '') {
+
+		// do some init work...
+		$this->initializeAction();
+
+		// abort if no storagePid is found
+		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
+			echo "NO storagePid given. Please enter the storagePid in the scheduler task.";
+			exit(1);
+		}
+		// abort if no senderEmailAddress is found
+		if (empty($senderEmailAddress)) {
+			echo "NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.";
+			exit(1);
+		}
+		// abort if no senderEmailAddress is found
+		if (empty($receiverEmailAddress)) {
+			echo "NO receiverEmailAddress given. Please enter the receiverEmailAddress in the scheduler task.";
+			exit(1);
+		}
+
+		// set storagePid to point extbase to the right repositories
+		$configurationArray = array(
+			'persistence' => array(
+				'storagePid' => $storagePid
+			)
+		);
+		$this->configurationManager->setConfiguration($configurationArray);
+
+		// start the work...
+
+
+		// 1. get the categories
+		$categories = $this->categoryRepository->findAllTree();
+		foreach ($categories as $uid => $category)
+					$searchParameter['category'][$uid] = $uid;
+		$categories2 = $this->categoryRepository->findAllByUids($categories);
+
+		// 2. get events of last month
+		$startDateTime = strtotime('first day of last month 00:00:00');
+		$endDateTime = strtotime('last day of last month 23:59:59');
+
+		$allevents = $this->eventRepository->findAllByCategoriesAndDateInterval($searchParameter['category'], $startDateTime, $endDateTime);
+		//~ $allevents = $this->eventRepository->findAllByCategories($categories2);
+		//~ findFreeByCategory
+//~ 	$allevents = $this->eventRepository->findAllSubscriptionEnded();
+		$helper['nameto'] = $receiverEmailAddress;
+		// email to event owner
+		$out = $this->sendTemplateEmail(
+			array($receiverEmailAddress => ''),
+			array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
+			'Statistik Report Veranstaltungen: '. ': '. strftime('%x', $startDateTime) . ' - '. strftime('%x', $endDateTime),
+			'Statistics',
+			array(	'events' => $allevents,
+					'categories' => $categories,
+					'helper' => $helper,
+					'attachCsv' => TRUE,
+					'attachIcs' => FALSE,
+			)
+		);
+
+	}
 
 	/**
 	 * sendTemplateEmail
@@ -232,23 +315,14 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$emailViewHTML->assignMultiple($variables);
 
 
-		$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-		$ics->getRequest()->setControllerExtensionName($this->extensionName);
-		$ics->setFormat('ics');
-		$ics->assignMultiple($variables);
-
-
 		$templateRootPath =  PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
 		$partialRootPath =  PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
 
 		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
 		$emailViewHTML->setPartialRootPath($partialRootPath);
 
-		$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
 
-		$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. $templateName.'-'.$variables['event']->getUid().'.ics';
-		t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
 
 		$message = t3lib_div::makeInstance('t3lib_mail_Message');
@@ -261,9 +335,31 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
 							//~ ->setFilename('invite.ics')
 							//~ ->setContentType('application/ics'));
+		// Plain text example
+		$emailTextHTML = $emailViewHTML->render();
+		$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
 
+		// HTML Email
+		$message->addPart($emailTextHTML, 'text/html');
+
+		// attach ics-File
+		if ($variables['attachIcs'] == TRUE) {
+			$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+			$ics->getRequest()->setControllerExtensionName($this->extensionName);
+			$ics->setFormat('ics');
+			$ics->assignMultiple($variables);
+
+			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
+
+			$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. $templateName.'-'.$variables['event']->getUid().'.ics';
+			t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+
+			// add ics as part
+			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
+
+		}
 		// attach CSV-File
-		if ($variables['attachSubscriberAsCsv'] == TRUE) {
+		if ($variables['attachCsv'] == TRUE) {
 			$csv = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
 			$csv->getRequest()->setControllerExtensionName($this->extensionName);
 			$csv->setFormat('csv');
@@ -272,22 +368,13 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
 			$csv->setPartialRootPath($partialRootPath);
 
-			$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
+			$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'.csv';
 			t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
 
 			// attach CSV-File
 			$message->attach(Swift_Attachment::fromPath($eventCsvFile)
 						->setContentType('text/csv'));
 		}
-
-		// Plain text example
-		$emailTextHTML = $emailViewHTML->render();
-		$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
-
-		$message->addPart($ics->render(), 'text/calendar', 'utf-8');
-
-		// HTML Email
-		$message->addPart($emailTextHTML, 'text/html');
 
 		$message->send();
 

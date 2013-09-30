@@ -84,7 +84,7 @@
 			<source>End of Event</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" xml:space="preserve">
-			<source>Genius-Bar Event</source>
+			<source>Knowledge Bar</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.location" xml:space="preserve">
 			<source>Location</source>
