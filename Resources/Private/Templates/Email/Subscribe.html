@@ -1,4 +1,7 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
+<f:if condition="{settings.baseURL}">
+<f:format.raw><head><base href="{settings.baseURL}" target="_blank"></head></f:format.raw>
+</f:if>
 <p>Sehr geehrte(r) {subscriber.name},</p>
 
 <p>vielen Dank für Ihre Anmeldung zu folgender Veranstaltung:</p>
@@ -30,7 +33,7 @@
 
 
 <p><b>Beschreibung: </b></p>
-<f:format.html>{event.description}</f:format.html>
+<f:format.html parseFuncTSPath="lib.parseFunc_RTE">{event.description}</f:format.html>
 
 <f:if condition="{subscriber.customerid}">
 	<f:then>

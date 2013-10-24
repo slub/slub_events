@@ -36,6 +36,8 @@ plugin.tx_slubevents {
 				pagesAfter = 3
 			}
 		}
+		# set baseURL in Emails - needed for images in description field
+		#baseURL = http://www.example.com/
 	}
 }
 module.tx_slubevents {

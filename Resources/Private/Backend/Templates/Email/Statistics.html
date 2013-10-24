@@ -1,11 +1,6 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
 <p>Monats-Auswertung aller Veranstaltungen</p>
 
-<ul>
-<f:for each="{categories}" as="category">
-		<li>{category.title}: {category.uid}</li>
-</f:for>
-</ul>
 <f:section name="categoryTree">
 	<ul class="category_tree">
 		<f:for each="{categories}" key="id" as="category">

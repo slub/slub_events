@@ -118,12 +118,12 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 		// abort if no storagePid is found
 		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
-			echo "NO storagePid given. Please enter the storagePid in the scheduler task.";
+			echo "NO storagePid given. Please enter the storagePid in the scheduler task.\n";
 			exit(1);
 		}
 		// abort if no senderEmailAddress is found
 		if (empty($senderEmailAddress)) {
-			echo "NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.";
+			echo "NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.\n";
 			exit(1);
 		}
 
@@ -314,16 +314,11 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$emailViewHTML->setFormat('html');
 		$emailViewHTML->assignMultiple($variables);
 
-
-		$templateRootPath =  PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
-		$partialRootPath =  PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
+		$templateRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
+		$partialRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
 
 		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
 		$emailViewHTML->setPartialRootPath($partialRootPath);
-
-
-
-
 
 		$message = t3lib_div::makeInstance('t3lib_mail_Message');
 		$message->setTo($recipient)
