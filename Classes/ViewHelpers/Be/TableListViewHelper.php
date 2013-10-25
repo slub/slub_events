@@ -46,8 +46,6 @@
  * @author Bastian Waidelich <bastian@typo3.org>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
-require_once (PATH_typo3 . 'class.db_list.inc');
-require_once (PATH_typo3 . 'class.db_list_extra.inc');
 
 class Tx_SlubEvents_ViewHelpers_Be_TableListViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
 
