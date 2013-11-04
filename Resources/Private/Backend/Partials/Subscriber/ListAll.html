@@ -4,12 +4,7 @@
 			<f:if condition="{subscriber.customerid}"><f:then>{subscriber.customerid},</f:then></f:if>
 			<f:if condition="{subscriber.telephone}"><f:then>{subscriber.telephone},</f:then></f:if>
 			<f:if condition="{subscriber.institution}"><f:then>{subscriber.institution},</f:then></f:if>
-			<f:if condition="{subscriber.message}"><f:then>{subscriber.message},</f:then></f:if>
-			{subscriber.number}
-			<f:if condition="{subscriber.number} == 1">
-				<f:then>Person</f:then>
-				<f:else>Personen</f:else>
-			</f:if>
+			<f:if condition="{subscriber.message}"><f:then>{subscriber.message},</f:then></f:if> {subscriber.number} <f:if condition="{subscriber.number} == 1"><f:then>Person</f:then><f:else>Personen</f:else></f:if>
 		</li>
 </f:for>
 </ol>

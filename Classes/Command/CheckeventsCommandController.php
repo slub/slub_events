@@ -89,6 +89,13 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		// TYPO3 doesn't set locales for backend-users --> so do it manually like this...
 		// is needed with strftime
 		setlocale(LC_ALL, 'de_DE.utf8');
+		$GLOBALS['BE_USER']->uc['lang'] = 'de';
+
+		//~ global $BE_USER;
+
+		// TYPO3 doesn't set locales for backend-users --> so do it manually like this...
+		// is needed especially with strftime
+		//~ $BE_USER->uc['lang'] = 'de';
 	}
 
 	/**
@@ -265,12 +272,11 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 		// start the work...
 
-
 		// 1. get the categories
 		$categories = $this->categoryRepository->findAllTree();
 		foreach ($categories as $uid => $category)
 					$searchParameter['category'][$uid] = $uid;
-		$categories2 = $this->categoryRepository->findAllByUids($categories);
+		//~ $categories2 = $this->categoryRepository->findAllByUids($categories);
 
 		// 2. get events of last month
 		$startDateTime = strtotime('first day of last month 00:00:00');
