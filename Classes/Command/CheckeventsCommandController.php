@@ -234,7 +234,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
     }
 
 	/**
-	 * checkForSubscriptionEndCommand
+	 * makeStatisticsReportsCommand
 	 *
 	 * @param int stroagePid
 	 * @param string senderEmailAddress
@@ -273,7 +273,8 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		// start the work...
 
 		// 1. get the categories
-		$categories = $this->categoryRepository->findAllTree();
+		$categories = $this->categoryRepository->findAll();
+//~ t3lib_utility_Debug::debug($categories, 'categories');
 		foreach ($categories as $uid => $category)
 					$searchParameter['category'][$uid] = $uid;
 		//~ $categories2 = $this->categoryRepository->findAllByUids($categories);

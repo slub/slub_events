@@ -16,8 +16,6 @@
 	</ul>
 </f:section>
 
-<f:render section="categoryTree" arguments="{categories: categories, categoriesSelected : categoriesSelected}" />
-
 <p>
 <f:translate key='LLL:EXT:slub_events/Resources/Private/Language/de.locallang.xlf:tx_slubevents_domain_model_event' />
 </p>
@@ -26,7 +24,7 @@
 <f:for each="{events}" as="event" key="label">
 <f:if condition="{event.geniusBar}">
 	<f:else>
-<li>{event.geniusBar}: {event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
+<li>{event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
 <f:for each="{event.categories}" as="category">
 	"{category.title}"
 </f:for>
@@ -36,7 +34,6 @@
 "{event.discipline.name}",
 "{event.title}",
 "<se:format.BookedPlaces event='{event}' />",
-"{subscriber.message}",
 "{subscriber.number}"</li>
 	</f:else>
 </f:if>
@@ -53,7 +50,7 @@
 <f:if condition="{event.geniusBar}">
 	<f:then>
 	<f:if condition="<se:format.BookedPlaces event='{event}' /> > 0">
-		<li>{event.geniusBar}: genius: {event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
+		<li>{event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
 		<f:for each="{event.categories}" as="category">
 			"{category.title}"
 		</f:for>
@@ -63,7 +60,6 @@
 		"{event.discipline.name}",
 		"{event.title}",
 		"<se:format.BookedPlaces event='{event}' />",
-		"{subscriber.message}",
 		"{subscriber.number}"</li>
 </f:if>
 	</f:then>

@@ -144,6 +144,7 @@ $TCA['tx_slubevents_domain_model_subscriber'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
+				'default' => 1,
 				'eval' => 'int'
 			),
 		),

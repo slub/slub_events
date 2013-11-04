@@ -121,6 +121,14 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Sie haben ' . count(explode(',', $fieldArray['categories'])). ' Kategorien ausgewählt. ', 'Bitte prüfen: ', t3lib_FlashMessage::INFO, TRUE);
 					t3lib_FlashMessageQueue::addMessage($message);
 			}
+
+			// force genius bar events with min_ and max_subscriber == 1
+			if ($fieldArray['genius_bar'] == TRUE && ($fieldArray['min_subscriber'] != 1 || $fieldArray['max_subscriber'] != 1)) {
+					$fieldArray['min_subscriber'] = 1;
+					$fieldArray['max_subscriber'] = 1;
+					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Die Mindest- und Maximalteilnehmerzahl beträgt in der Wissensbar immer 1. Dies wurde automatisch korrigiert. ', 'Bitte prüfen: ', t3lib_FlashMessage::INFO, TRUE);
+					t3lib_FlashMessageQueue::addMessage($message);
+			}
 		}
 	}
 }
