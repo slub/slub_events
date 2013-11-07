@@ -6,19 +6,19 @@
   <sDEF>
    <ROOT>
      <TCEforms>
-      <sheetTitle>Funktion</sheetTitle>
+      <sheetTitle>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventgeniusbar_title</sheetTitle>
      </TCEforms>
      <type>array</type>
      <el>
       <switchableControllerActions>
        <TCEforms>
-         <label>Select function</label>
+         <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
          <config>
           <type>select</type>
           <items>
 
             <numIndex index="0">
-             <numIndex index="0">Wissensbar</numIndex>
+             <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.knowledgebar_view</numIndex>
              <numIndex index="1">Category->list;Category->gbList</numIndex>
             </numIndex>
 
@@ -29,7 +29,7 @@
 
 		<settings.categorySelection>
 			<TCEforms>
-				<label>Start Tree</label>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories_start</label>
 				<config>
 					<type>select</type>
 					<renderMode>tree</renderMode>
@@ -54,7 +54,7 @@
 		<settings.pidListing>
 			<TCEforms>
 				<exclude>1</exclude>
-				<label>Listing Page</label>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view</label>
 				<config>
 					<type>group</type>
 					<internal_type>db</internal_type>
@@ -70,7 +70,7 @@
 		<settings.pidDetails>
 			<TCEforms>
 				<exclude>1</exclude>
-				<label>Details Page</label>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_single_view</label>
 				<config>
 					<type>group</type>
 					<internal_type>db</internal_type>
@@ -86,7 +86,7 @@
 		<settings.pidSubscribeForm>
 			<TCEforms>
 				<exclude>1</exclude>
-				<label>Subscribe Form</label>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe</label>
 				<config>
 					<type>group</type>
 					<internal_type>db</internal_type>

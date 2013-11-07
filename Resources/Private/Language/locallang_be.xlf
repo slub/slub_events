@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-11-07T15:19:59Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="flexforms.eventgeniusbar_title" xml:space="preserve">
+			<source>Knowledge Bar View Settings</source>
+		</trans-unit>
+		<trans-unit id="flexforms.eventlist_title" xml:space="preserve">
+			<source>List and Single View Settings</source>
+		</trans-unit>
+		<trans-unit id="flexforms.eventsubscribe_title" xml:space="preserve">
+			<source>Registration View Settings</source>
+		</trans-unit>
+		<trans-unit id="flexforms.eventuserpanel_title" xml:space="preserve">
+			<source>Registration Userpanel Settings</source>
+		</trans-unit>
+		<trans-unit id="flexforms.knowledgebar_view" xml:space="preserve">
+			<source>Knowledge Bar View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.list_view" xml:space="preserve">
+			<source>List View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.page_list_view" xml:space="preserve">
+			<source>Page of List View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.page_single_view" xml:space="preserve">
+			<source>Page of Single View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.page_subscribe" xml:space="preserve">
+			<source>Page of Subscribe Form</source>
+		</trans-unit>
+		<trans-unit id="flexforms.page_unsubscribe" xml:space="preserve">
+			<source>Page of Unsubscribe Form</source>
+		</trans-unit>
+		<trans-unit id="flexforms.select_function" xml:space="preserve">
+			<source>Select Function</source>
+		</trans-unit>
+		<trans-unit id="flexforms.show_categories" xml:space="preserve">
+			<source>Show Selected Categories</source>
+		</trans-unit>
+		<trans-unit id="flexforms.show_categories_start" xml:space="preserve">
+			<source>Select Root Category</source>
+		</trans-unit>
+		<trans-unit id="flexforms.single_view" xml:space="preserve">
+			<source>Single View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.subscribe_view" xml:space="preserve">
+			<source>Subscribe View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.unsubscribe_view" xml:space="preserve">
+			<source>Unsubscribe View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.userpanel_view" xml:space="preserve">
+			<source>Userpanel View</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

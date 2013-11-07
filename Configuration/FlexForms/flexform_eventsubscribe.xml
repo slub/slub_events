@@ -6,24 +6,24 @@
   <sDEF>
    <ROOT>
      <TCEforms>
-      <sheetTitle>Funktion</sheetTitle>
+      <sheetTitle>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventsubscribe_title</sheetTitle>
      </TCEforms>
      <type>array</type>
      <el>
       <switchableControllerActions>
        <TCEforms>
-         <label>Select function</label>
+         <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
          <config>
           <type>select</type>
           <items>
 
             <numIndex index="0">
-             <numIndex index="0">Anmelden</numIndex>
+             <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.subscribe_view</numIndex>
              <numIndex index="1">Subscriber->new;Subscriber->create;Subscriber->eventNotFound;</numIndex>
             </numIndex>
 
             <numIndex index="1">
-             <numIndex index="0">Abmelden</numIndex>
+             <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.unsubscribe_view</numIndex>
              <numIndex index="1">Subscriber->delete;Subscriber->eventNotFound;</numIndex>
             </numIndex>
 
@@ -35,7 +35,7 @@
 		<settings.pidListOwn>
 			<TCEforms>
 				<exclude>1</exclude>
-				<label>List Own Events</label>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view</label>
 				<config>
 					<type>group</type>
 					<internal_type>db</internal_type>
@@ -51,7 +51,7 @@
 		<settings.pidSubscribeForm>
 			<TCEforms>
 				<exclude>1</exclude>
-				<label>Subscribe Form</label>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe</label>
 				<config>
 					<type>group</type>
 					<internal_type>db</internal_type>
@@ -67,7 +67,7 @@
 		<settings.pidUnSubscribeForm>
 			<TCEforms>
 				<exclude>1</exclude>
-				<label>Unsubscribe Form</label>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_unsubscribe</label>
 				<config>
 					<type>group</type>
 					<internal_type>db</internal_type>
