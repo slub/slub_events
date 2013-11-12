@@ -11,7 +11,7 @@ conf.py:
   latex_documents:
   - - Index
     - slub_events.tex
-    - slub_events
+    - SLUB Event Management
     - Alexander Bigga
     - manual
   latex_elements:
