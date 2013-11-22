@@ -17,15 +17,21 @@
          <config>
           <type>select</type>
           <items>
-            <numIndex index="0">
-             <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_view</numIndex>
-             <numIndex index="1">Event->list;Event->show;Event->showNotFound</numIndex>
-            </numIndex>
+			<numIndex index="0">
+				<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_view</numIndex>
+				<numIndex index="1">Event->list;Event->show;Event->showNotFound</numIndex>
+			</numIndex>
 
             <numIndex index="1">
              <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.single_view</numIndex>
              <numIndex index="1">Event->show;Event->showNotFound</numIndex>
             </numIndex>
+
+			<numIndex index="2">
+				<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_month_view</numIndex>
+				<numIndex index="1">Event->listMonth</numIndex>
+			</numIndex>
+
            </items>
          </config>
        </TCEforms>
@@ -34,7 +40,7 @@
 		<settings.categorySelection>
 			<TCEforms>
 				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories</label>
-				<displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show;Event->showNotFound</displayCond>
+				<displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
 				<config>
 					<type>select</type>
 					<renderMode>tree</renderMode>

@@ -350,7 +350,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
-			$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. $templateName.'-'.$variables['event']->getUid().'.ics';
+			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. $templateName.'-'.$variables['event']->getUid().'.ics';
 			t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
 			// add ics as part
@@ -367,7 +367,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
 			$csv->setPartialRootPath($partialRootPath);
 
-			$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'.csv';
+			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'.csv';
 			t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
 
 			// attach CSV-File

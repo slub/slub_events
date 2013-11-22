@@ -1,5 +1,0 @@
-$(function() {
-  $(":checkbox").change(function () {
-    $(this).parents().children(':checkbox').attr('checked', this.checked);
-  });
-});

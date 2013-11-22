@@ -66,11 +66,21 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	 *
 	 * @return
 	 */
-	function clearAjaxCacheFiles() {
+	function clearAjaxCacheFiles($startDate = NULL) {
 
 		global $GLOBALS;
 
-		system ('rm '.PATH_site.'typo3temp/events/calfile*');
+		$dir    = PATH_site.'typo3temp/tx_slubevents/';
+		if ($startDate === NULL)
+			system ('rm '.$dir.'calfile*');
+		else {
+			$files = scandir($dir);
+			foreach ($files as $file) {
+				$fileDetails = preg_split('/_/', $file);
+				if ($startDate > $fileDetails[2] && $startDate < $fileDetails[3])
+					system ('rm '.$dir.$file);
+			}
+		}
 
 		return;
 	}
@@ -92,7 +102,11 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 				$pObj->checkValue_currentRecord['hidden'] == '0') {
 
 			$this->clearAllEventListCache();
-			$this->clearAjaxCacheFiles();
+
+			// unfortunately I cannot access the category IDs only the amount of categories
+			// but at least I get the start_date_time so I will delete all cached files around this
+			// start_date_tim
+			$this->clearAjaxCacheFiles($pObj->checkValue_currentRecord['start_date_time']);
 
 
 		}

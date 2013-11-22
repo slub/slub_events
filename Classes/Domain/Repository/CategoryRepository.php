@@ -57,11 +57,50 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	/**
 	 * Finds all datasets and return in tree order
 	 *
-	 * @return array The found Event Objects
+	 * @return array The found Category Objects
 	 */
 	public function findAllTree() {
 
 		$query = $this->createQuery();
+
+		$categories = $query->execute();
+
+		$flatCategories = array();
+		foreach ($categories as $category) {
+			$flatCategories[$category->getUid()] = Array(
+				'item' =>  $category,
+				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL
+			);
+		}
+
+		$tree = array();
+		foreach ($flatCategories as $id => &$node) {
+			if ($node['parent'] === NULL) {
+				$tree[$id] = &$node;
+			} else {
+				$flatCategories[$node['parent']]['children'][$id] = &$node;
+			}
+		}
+
+		return $tree;
+	}
+
+	/**
+	 * Finds all datasets and return in tree order
+	 *
+	 * @param string categories separated by comma
+	 * @return array The found Category Objects
+	 */
+	public function findAllByUidsTree($categories) {
+
+		$query = $this->createQuery();
+
+		$constraints = array();
+		$constraints[] = $query->in('uid', $categories);
+
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
 
 		$categories = $query->execute();
 
@@ -126,7 +165,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $startCategory
 	 * @ignorevalidation $startCategory
-	 * @return array The found Event Objects as Tree
+	 * @return array The found Category Objects as Tree
 	 */
 	public function findCurrentBranch($startCategory = NULL) {
 
@@ -165,7 +204,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $startCategory
 	 * @ignorevalidation $startCategory
-	 * @return array The found Event Objects as Tree
+	 * @return array The found Category Objects as Tree
 	 */
 	public function findCurrentLevel($startCategory = NULL) {
 
@@ -216,7 +255,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $startCategory
 	 * @ignorevalidation $startCategory
-	 * @return array The found Event Objects
+	 * @return array The found Category Objects
 	 */
 	public function findCategoryRootline($startCategory = NULL) {
 

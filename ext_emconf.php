@@ -28,8 +28,9 @@ This extension is developped and used in production at the Saxony State and Univ
 	'createDirs' => '',
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
+	'createDirs' => 'typo3temp/tx_slubevents/',
 	'lockType' => '',
-	'version' => '1.0.26',
+	'version' => '1.0.27',
 	'constraints' => array(
 		'depends' => array(
 			'extbase' => '1.5',

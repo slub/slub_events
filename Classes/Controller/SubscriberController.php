@@ -267,7 +267,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
-		$eventIcsFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
+		$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
 		t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
 		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
@@ -299,7 +299,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
 			$csv->setPartialRootPath($partialRootPath);
 
-			$eventCsvFile = PATH_site.'typo3temp/events/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
+			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
 			t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
 
 			$message->attach(Swift_Attachment::fromPath($eventCsvFile)

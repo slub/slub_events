@@ -23,6 +23,9 @@
 		<trans-unit id="flexforms.list_view" xml:space="preserve">
 			<source>List View</source>
 		</trans-unit>
+		<trans-unit id="flexforms.list_month_view" xml:space="preserve">
+			<source>List Month View</source>
+		</trans-unit>
 		<trans-unit id="flexforms.page_list_view" xml:space="preserve">
 			<source>Page of List View</source>
 		</trans-unit>

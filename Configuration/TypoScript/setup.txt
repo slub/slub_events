@@ -73,3 +73,30 @@ module.tx_slubevents {
 		}
 	}
 }
+
+# ajax for fullcalendar
+ajaxEvents = PAGE
+ajaxEvents {
+	typeNum = 182098
+	10 = USER_INT
+	10 {
+		userFunc = tx_extbase_core_bootstrap->run
+		pluginName = Eventlist
+		extensionName = SlubEvents
+		controller = Event
+		switchableControllerActions {
+			Event {
+				1 = ajax
+			}
+		}
+		settings =< plugin.tx_slubevents.settings
+		persistence =< plugin.tx_slubevents.persistence
+	}
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/json
+		xhtml_cleaning = 0
+		admPanel = 0
+		debug = 0
+	}
+}

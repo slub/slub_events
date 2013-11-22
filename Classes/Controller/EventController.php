@@ -234,6 +234,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		$this->view->assign('searchString', $searchParameter['searchString']);
 		$this->view->assign('categories', $categories);
 		$this->view->assign('events', $events);
+
 	}
 
 	/**
@@ -258,7 +259,6 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		}
 
 		foreach ($event->getCategories() as $cat) {
-			//~ $this->flashMessageContainer->add('Kategorie: '.$cat->getTitle().' wurde kopiert.');
 			$newEvent->addCategory($cat);
 		}
 
@@ -276,53 +276,17 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	}
 
 	/**
-	 * action listMiniMonth
+	 * action listMonth
 	 *
 	 * @return void
 	 */
-	public function listMiniMonthAction() {
+	public function listMonthAction() {
 
-		if (!empty($this->settings['categorySelection']))
-			$events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
-		else
-			$events = $this->eventRepository->findAll();
+	    /* take the flexform settings and get categories as tree */
+		$categories = $this->categoryRepository->findAllByUidsTree(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
 
-		// prepare event array with timestamps for days:
-		foreach ($events as $event) {
-			$eventsPerDay[strtotime('today 00:00:00', $event->getStartDateTime()->getTimestamp())][] = $event->getUid();
-		}
-
-		$startDate = time();
-
-		$firstDayOfMonth = strtotime('first day of this month', $startDate);
-		if (date('w', $firstDayOfMonth) == 1) // last day is Monday
-			$firstDay = $firstDayOfMonth;
-		else
-			$firstDay = strtotime('last monday', $firstDayOfMonth);
-
-		$lastDayOfMonth = strtotime('last day of this month', $startDate);
-		if (date('w', $lastDayOfMonth) == 0) // last day is Sunday
-			$lastDay = $lastDayOfMonth;
-		else
-			$lastDay = strtotime('next sunday', $lastDayOfMonth);
-
-		for ($d = $firstDay; $d<=$lastDay; $d = strtotime('+1 day', $d)) {
-			unset($day);
-			$day['timestamp'] = $d;
-			if ($d < $firstDayOfMonth || $d > $lastDayOfMonth)
-				$day['active'] = 0;
-			else
-				$day['active'] = 1;
-
-			if ($eventsPerDay[$d])
-				$day['events'][] = $eventsPerDay[$d];
-
-			$weeks[date('W', $d)][] = $day;
-		}
-
-		$this->view->assign('firstDayOfMonth', $firstDayOfMonth);
-		$this->view->assign('events', $events);
-		$this->view->assign('weeks', $weeks);
+		$this->view->assign('categories', $categories);
+		$this->view->assign('categoriesIds', explode(',', $this->settings['categorySelection']));
 	}
 
 	/**
@@ -354,6 +318,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			$foundevent['title'] = $event->getTitle();
 			$foundevent['teaser'] = $event->getTeaser();
 			$foundevent['start'] = $event->getStartDateTime()->getTimestamp();
+			$foundevent['className'] = 'slubevents-category-' . $_GET['categories'];
 			if ($event->getEndDateTime() instanceof DateTime)
 				$foundevent['end'] = $event->getEndDateTime()->getTimestamp();
 
@@ -393,7 +358,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 				}
 			}
 			if ($noSubscription)
-				$foundevent['className'] = 'no_subscription';
+				$foundevent['className'] .= ' no_subscription';
 
 			$jsonevent[] = $foundevent;
 		}
