@@ -188,11 +188,13 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 					'subscriber' => $newSubscriber,
 					'helper' => $helper,
 					'settings' => $this->settings,
+					'attachIcsInvitation' => TRUE,
 			)
 		);
 
-		// only send, if maximum is reached...
-		if (($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()) {
+		// send to contact, if maximum is reached and TS setting is present:
+		if ($this->settings['emailToContact']['sendEmailOnMaximumReached'] &&
+			($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()) {
 			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
 			// email to event owner
@@ -206,6 +208,26 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 						'helper' => $helper,
 						'settings' => $this->settings,
 						'attachSubscriberAsCsv' => TRUE,
+						'attachIcsInvitation' => TRUE,
+				)
+			);
+		} // send to contact, on every booking if TS setting is present:
+		else if ($this->settings['emailToContact']['sendEmailOnEveryBooking']) {
+			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
+
+			// email to event owner
+			$this->sendTemplateEmail(
+				array($event->getContact()->getEmail() => $event->getContact()->getName()),
+				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+				'Veranstaltung gebucht: ' . $event->getTitle(),
+				'Newsubscriber',
+				array(	'event' => $event,
+						'newsubscriber' => $newSubscriber,
+						'subscribers' => $event->getSubscribers(),
+						'helper' => $helper,
+						'settings' => $this->settings,
+						'attachSubscriberAsCsv' => FALSE,
+						'attachIcsInvitation' => FALSE,
 				)
 			);
 		}
@@ -267,8 +289,6 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
-		$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
-		t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
 		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
 			// TYPO3 4.7
@@ -283,12 +303,6 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 				->setFrom($sender)
 				->setCharset('utf-8')
 				->setSubject($subject);
-
-		// attach ICS-File
-		//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
-							//~ ->setFilename('invite.ics')
-							//~ ->setDisposition('inline')
-							//~ ->setContentType('text/calendar; charset="utf-8"; method=REQUEST'));
 
 		// attach CSV-File
 		if ($variables['attachSubscriberAsCsv'] == TRUE) {
@@ -306,19 +320,29 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 						->setContentType('text/csv'));
 		}
 
-			// Plain text example
-			//~ $message->setBody($emailView->render(), 'text/plain');
-			$emailTextHTML = $emailViewHTML->render();
-			$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
+		// Plain text example
+		//~ $message->setBody($emailView->render(), 'text/plain');
+		$emailTextHTML = $emailViewHTML->render();
+		$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
+
+		if ($variables['attachIcsInvitation'] == TRUE) {
+			//~ $eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
+			//~ t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+			// attach ICS-File
+			//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
+								//~ ->setFilename('invite.ics')
+								//~ ->setDisposition('inline')
+								//~ ->setContentType('text/calendar; charset="utf-8"; method=REQUEST'));
 
 			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
+		}
 
-			// HTML Email
-			$message->addPart($emailTextHTML, 'text/html');
+		// HTML Email
+		$message->addPart($emailTextHTML, 'text/html');
 
-			$message->send();
+		$message->send();
 
-			return $message->isSent();
+		return $message->isSent();
 	}
 
 	/**

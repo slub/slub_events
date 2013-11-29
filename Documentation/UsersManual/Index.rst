@@ -37,7 +37,7 @@ If all this is done, you may use the backend module on the left, called
 slub_events template.
 
 **Important:** You have to set the StoragePid of the Eventdata-folder on
-some template (see :ref:`admin-manual`). Otherwise you get the
+some template (see :ref:`set-storage-folder`). Otherwise you get the
 following error message:
 
 .. code-block:: none

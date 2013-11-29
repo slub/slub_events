@@ -1,0 +1,42 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<p>Sehr geehrte(r) {event.contact.name},</p>
+
+<p>die folgende Veranstaltung wurde soeben von <b>{newsubscriber.name}</b> gebucht:</p>
+
+<p><b>{event.title}</b></p>
+
+<p>
+<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />" />
+</p>
+
+<f:if condition="{helper.location}">
+	<f:then>
+<p><b>Veranstaltungsort: </b><br/>{helper.location}</p>
+<f:format.html>{event.location.description}</f:format.html>
+	</f:then>
+</f:if>
+
+
+<p><b>Teilnehmerliste</b><br/>
+<ol>
+<f:for each="{subscribers}" as="subscriber">
+	<f:if condition="{subscriber.number} == 1">
+		<f:then><li>{subscriber.name}, {subscriber.email}, {subscriber.customerid}, {subscriber.number} Person
+			<f:if condition="{subscriber.message}">
+			<br /><f:translate key="tx_slubevents_domain_model_subscriber.message" />: {subscriber.message}
+			</f:if>
+			</li>
+		</f:then>
+		<f:else><li>{subscriber.name}, {subscriber.email}, {subscriber.customerid}, {subscriber.number} Personen</li></f:else>
+	</f:if>
+</f:for>
+</ol>
+
+<p>Bitte bedenken Sie, dass sich die Teilnehmerliste durch Ab- und Anmeldungen noch ändern kann.</p>
+
+<p>Mit freundlichen Grüßen</p>
+
+<p>&nbsp;</p>
+
+<p>SLUB Dresden</p>
+

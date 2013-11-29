@@ -40,7 +40,6 @@ $(document).ready(function() {
 	  day: 'Tag'
 	},
 	allDayText: 'ganztags',
-
     aspectRatio: 0.6,
     firstDay: 1,
     weekNumbers: true,

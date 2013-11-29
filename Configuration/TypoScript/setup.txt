@@ -21,6 +21,10 @@ plugin.tx_slubevents {
 	}
 	settings {
 		senderEmailAddress = webmaster@slub-dresden.de
+		emailToContact {
+			sendEmailOnMaximumReached = 1
+			sendEmailOnEveryBooking = 0
+		}
 		# --------------
 		#  List
 		# --------------
