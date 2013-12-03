@@ -589,12 +589,17 @@ table.fc-border-separate {
 .home #leftcol h2 {
 	display: block;
 }
+
 .no_subscription {
 	opacity: 0.6;
 }
 
 #content #calendar a {
 	text-decoration: none;
+}
+
+#slub-category-month-list ul ul {
+	margin-left: 1em;
 }
 
 .slubevents-category-1 {

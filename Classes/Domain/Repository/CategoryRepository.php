@@ -102,6 +102,9 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 			$query->matching($query->logicalAnd($constraints));
 		}
 
+		$query->setOrderings(
+			array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 		$categories = $query->execute();
 
 		$flatCategories = array();
