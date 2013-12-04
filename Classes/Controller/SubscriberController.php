@@ -523,6 +523,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 					'subscriber' => $subscriber,
 					'helper' => $helper,
 					'settings' => $this->settings,
+					'attachIcsInvitation' => TRUE,
 			)
 		);
 
@@ -577,6 +578,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 					'attachSubscriberAsCsv' => TRUE,
 					'helper' => $helper,
 					'settings' => $this->settings,
+					'attachIcsInvitation' => TRUE,
 			)
 		);
 
