@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-04-11T12:58:23Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-13T15:38:12Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -8,6 +8,10 @@
 		<trans-unit id="all_day.description" approved="yes" xml:space="preserve">
 			<source>This is an Allday-Event (Time is ignored)</source>
 			<target>Ganztägiges Ereignis wie z.B. Ausstellungen. Die Uhrzeitangaben werden ignoriert!</target>
+		</trans-unit>
+		<trans-unit id="audience.description" approved="yes" xml:space="preserve">
+			<source>Target Audience</source>
+			<target>Zielgruppe</target>
 		</trans-unit>
 		<trans-unit id="cancelled.description" approved="yes" xml:space="preserve">
 			<source>This will mark the event as cancelled. This flag is automatically set by cronjob. The cronjob sents a cancellation email to all subscribers.</source>
@@ -21,9 +25,25 @@
 			<source>Contact</source>
 			<target>Ansprechpartner (Pflichtfeld): Sie müssen einen Ansprechpartner aus der vorgegebenen Liste auswählen. Möchten Sie einen neuen Ansprechpartner anlegen, wenden Sie sich bitte an die Administratoren.&lt;br /&gt;&lt;br /&gt;Wichtig: An diese E-Mail-Adresse gehen alle Bestätigungs-Emails. Der Name erscheint darüberhinaus in den Bestätigungs-Emails an die Nutzer.</target>
 		</trans-unit>
+		<trans-unit id="description.description" approved="yes" xml:space="preserve">
+			<source>Description of Event</source>
+			<target>Beschreibung der Veranstaltung.</target>
+		</trans-unit>
 		<trans-unit id="end_date_time.description" approved="yes" xml:space="preserve">
 			<source>End of Event</source>
 			<target>Endzeitpunkt der Veranstaltung.&lt;br /&gt;&lt;br /&gt;Dies ist ein optionales Feld. Es kann also leer bleiben. Wenn die genaue Länge der Veranstaltung nicht bekannt ist, sollte jedoch trotzdem besser ein Ende gesetzt werden (z.B. 6 oder 90 Minuten), damit der Kalendereintrag einen gewissen Platz ausfüllen kann.&lt;br /&gt;&lt;br /&gt;Achtung: Das Ende muss natürlich NACH dem Startzeitpunkt sein! </target>
+		</trans-unit>
+		<trans-unit id="max_subscriber.description" approved="yes" xml:space="preserve">
+			<source>Maximum of Subscribers</source>
+			<target>Maximale Teilnehmerzahl</target>
+		</trans-unit>
+		<trans-unit id="min_subscriber.description" approved="yes" xml:space="preserve">
+			<source>Minimum of Subscribers</source>
+			<target>Mindestteilnehmerzahl</target>
+		</trans-unit>
+		<trans-unit id="start_date_time.description" approved="yes" xml:space="preserve">
+			<source>Start of Event</source>
+			<target>Beginn der Veranstaltung</target>
 		</trans-unit>
 		<trans-unit id="sub_end.description" approved="yes" xml:space="preserve">
 			<source>End of Subscription. Up to this date and time the subscription is possible. Leafe time empty or 0:00 to stop subscription _before_ the given day.</source>
@@ -34,8 +54,16 @@
 			<target>Diese Option wird automatisch gesetzt wenn die Benachrichtigungs-Email versendet wurde. &lt;br /&gt;&lt;br /&gt;Wenn Sie eine neue Benachrichtigung erhalten möchten, dann deaktivieren Sie die Option.&lt;br /&gt;&lt;br /&gt;Wenn Sie generell KEINE Benachrichtigung erhalten möchten, dann aktivieren Sie die Option.</target>
 		</trans-unit>
 		<trans-unit id="sub_end_date_time.description" approved="yes" xml:space="preserve">
-			<source>End of Subscription</source>
-			<target>Ende der Anmeldefrist. Nach dem angegebenen Zeitpunkt wird der Link zur Anmeldung entfernt und keine weitere Anmeldung wird mehr angenommen. Ein Cronjob informiert stündlich über Veranstaltungen deren Anmeldefrist abgelaufen ist.&lt;br /&gt;&lt;br /&gt;Wenn Sie keine Anmeldefrist setzen, erfolgt keine Benachrichtigung. Die Anmeldung wird erst geschlossen, wenn die maximale Teilnehmerzahl erreicht ist oder die Veranstaltung bereits begonnen hat.</target>
+			<source>Please the day and time the subscription period ends. If this value is empty, a selectbox is shown with values relative to the start time.</source>
+			<target>Ende der Anmeldefrist. Nach dem angegebenen Zeitpunkt wird der Link zur Anmeldung entfernt und keine weitere Anmeldung angenommen. Ein Cronjob informiert stündlich über Veranstaltungen deren Anmeldefrist abgelaufen ist.&lt;br /&gt;&lt;br /&gt;Wenn Sie keine Anmeldefrist setzen, erfolgt keine Benachrichtigung. Die Anmeldung wird erst geschlossen, wenn die maximale Teilnehmerzahl erreicht ist oder die Veranstaltung bereits begonnen hat.</target>
+		</trans-unit>
+		<trans-unit id="teaser.description" approved="yes" xml:space="preserve">
+			<source>Teaser text</source>
+			<target>Kurzbeschreibung der Veranstaltung. Diese wird z.B. in der Monatsübersicht angezeigt.</target>
+		</trans-unit>
+		<trans-unit id="title.description" approved="yes" xml:space="preserve">
+			<source>Title</source>
+			<target>Titel der Veranstaltung</target>
 		</trans-unit>
 		</body>
 	</file>

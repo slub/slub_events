@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-09-30T10:44:22Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-10T16:46:16Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -61,6 +61,9 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category" xml:space="preserve">
 			<source>Event Category</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey" xml:space="preserve">
+			<source>Online Survey</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.title" xml:space="preserve">
 			<source>Title</source>

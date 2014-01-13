@@ -19,6 +19,7 @@ CREATE TABLE tx_slubevents_domain_model_event (
 	sub_end_date_info_sent tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	genius_bar tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	onlinesurvey varchar(255) DEFAULT '' NOT NULL,
 	categories int(11) unsigned DEFAULT '0' NOT NULL,
 	subscribers int(11) unsigned DEFAULT '0' NOT NULL,
 	location int(11) unsigned DEFAULT '0',

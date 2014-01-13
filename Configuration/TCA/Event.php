@@ -8,11 +8,45 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, genius_bar, cancelled, categories, subscribers, location, discipline, contact',
 	),
-	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, genius_bar, cancelled, categories, subscribers, location, discipline, contact,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+	'types' => array (
+		// Single event
+		'0' => array('showitem' => '' .
+			'--div--;Was und Wann,'.
+			'genius_bar,title,'.
+			'--palette--;LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.start;paletteStart,'.
+			'--palette--;LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end;paletteEnd,'.
+			'location,'.
+			'teaser,'.
+			'description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css],'.
+			'--div--;Anmeldebedingungen,'.
+			'contact,'.
+			'min_subscriber,'.
+			'max_subscriber,'.
+			'--palette--;LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end;paletteEndSubscription,'.
+			'--div--;Kategorisierung,'.
+			'audience,'.
+			'categories,'.
+			'discipline,'.
+			'--div--;Angemeldete Teilnehmer,'.
+			'subscribers,'.
+			'--div--;Extras,'.
+			'hidden;;1,'.
+			'onlinesurvey'
+		)
 	),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
+	'palettes' => array (
+		'paletteStart' => array(
+			'showitem' => 'start_date_time,all_day,cancelled',
+			'canNotCollapse' => TRUE
+		),
+		'paletteEnd' => array(
+			'showitem' => 'end_date_time, end_date_time_select',
+			'canNotCollapse' => TRUE
+		),
+		'paletteEndSubscription' => array(
+			'showitem' => 'sub_end_date_time, sub_end_date_time_select, sub_end_date_info_sent',
+			'canNotCollapse' => TRUE
+		),
 	),
 	'columns' => array(
 		'sys_language_uid' => array(
@@ -94,6 +128,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			),
 		),
 		'title' => array(
+			'displayCond' => 'FIELD:genius_bar:<:1',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.title',
 			'config' => array(
@@ -122,6 +157,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			),
 		),
 		'end_date_time' => array(
+			'displayCond' => 'FIELD:end_date_time:>:0',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end_date_time',
 			'config' => array(
@@ -129,10 +165,36 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'size' => 10,
 				'eval' => 'datetime',
 				'checkbox' => 1,
-				'default' => time()
+				'default' => ''
+			),
+		),
+		'end_date_time_select' => array(
+			'displayCond' => 'FIELD:end_date_time:=:0',
+			'exclude' => 0,
+			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end_date_time',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array('-- Hours --', ''),
+					array('00:15', 15),
+					array('00:30', 30),
+					array('00:45', 45),
+					array('00:60', 60),
+					array('01:30', 90),
+					array('02:00', 120),
+					array('03:00', 180),
+					array('04:00', 240),
+					array('05:00', 300),
+					array('06:00', 360),
+				),
+				'size' => 1,
+				'maxitems' => 1,
+				'eval' => '',
+				'default' => '',
 			),
 		),
 		'sub_end_date_time' => array(
+			'displayCond' => 'FIELD:sub_end_date_time:>:0',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end_date_time',
 			'config' => array(
@@ -140,10 +202,32 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'size' => 10,
 				'eval' => 'datetime',
 				'checkbox' => 1,
-				'default' => time()
+				'default' => ''
+			),
+		),
+		'sub_end_date_time_select' => array(
+			'displayCond' => 'FIELD:sub_end_date_time:=:0',
+			'exclude' => 0,
+			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end_date_time',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array('-- Hours --', ''),
+					array('01:00', 60),
+					array('02:00', 120),
+					array('04:00', 240),
+					array('12:00', 720),
+					array('24:00', 1440),
+					array('48:00', 2880),
+				),
+				'size' => 1,
+				'maxitems' => 1,
+				'eval' => '',
+				'default' => 1440,
 			),
 		),
 		'teaser' => array(
+			'displayCond' => 'FIELD:genius_bar:<:1',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.teaser',
 			'config' => array(
@@ -165,6 +249,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
 		),
 		'description' => array(
+			'displayCond' => 'FIELD:genius_bar:<:1',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.description',
 			'config' => array(
@@ -242,41 +327,33 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 		),
 		'categories' => array(
 			'exclude' => 0,
+			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.categories',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_category',
+				'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_category.sorting',
 				'MM' => 'tx_slubevents_event_category_mm',
+				'renderMode' => 'tree',
+				'subType' => 'db',
+				'treeConfig' => array(
+					'parentField' => 'parent',
+					'appearance' => array(
+						'expandAll' => TRUE,
+						'showHeader' => FALSE,
+						'maxLevels' => 10,
+						'width' => 400,
+					),
+
+				),
 				'size' => 10,
 				'autoSizeMax' => 30,
+				'minitems' => 1,
 				'maxitems' => 9999,
 				'multiple' => 0,
-				'wizards' => array(
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
-					'add' => Array(
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => array(
-							'table' => 'tx_slubevents_domain_model_category',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							),
-						'script' => 'wizard_add.php',
-					),
-				),
 			),
 		),
-		'subscribers' => array(
+		'subscribers' =>  array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.subscribers',
 			'config' => array(
@@ -285,11 +362,12 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'foreign_field' => 'event',
 				'maxitems'      => 9999,
 				'appearance' => array(
-					'collapseAll' => 0,
-					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+					'collapseAll' => 1,
+					'expandSingle' => 1,
+					'levelLinksPosition' => 'bottom',
+					'showSynchronizationLink' => 0,
+					'showPossibleLocalizationRecords' => 0,
+					'showAllLocalizationLink' => 0
 				),
 			),
 		),
@@ -299,7 +377,20 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_location',
-				'minitems' => 0,
+				'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_location.sorting',
+
+				'renderMode' => 'tree',
+				'subType' => 'db',
+				'treeConfig' => array(
+					'parentField' => 'parent',
+					'appearance' => array(
+						'expandAll' => TRUE,
+						'showHeader' => FALSE,
+					),
+				),
+				'size' => 10,
+				'autoSizeMax' => 30,
+				'minitems' => 1,
 				'maxitems' => 1,
 			),
 		),
@@ -317,10 +408,24 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.contact',
 			'config' => array(
+				'allowed' => 'pages',
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_contact',
-				'minitems' => 0,
-				'maxitems' => 1,
+				'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_contact.sorting',
+				'minitems' => 1,
+				'maxitems' => 2, // this forces a working required select box! stupid but true...
+				'size' => 6, // it should be one but... no chance to get a required select box without it in TYPO3 4.6
+				'selectedListStyle' => 'width:400px;',
+				'itemListStyle' => 'width:400px;',
+			),
+		),
+		'onlinesurvey' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.onlinesurvey',
+			'config' => array(
+				'type' => 'input',
+				'size' => 50,
+				'eval' => 'trim'
 			),
 		),
 	),
@@ -338,140 +443,4 @@ $TCA['tx_slubevents_domain_model_event']['columns']['audience']['config']['items
 	array($ll . 'tx_slubevents_domain_model_event.audience.I.5', 5),
 );
 
-$TCA['tx_slubevents_domain_model_event']['columns']['end_date_time']['config']['default'] = '';
-$TCA['tx_slubevents_domain_model_event']['columns']['sub_end_date_time']['config']['default'] = '';
-
-# only required if NOT a genius_bar event (genius_bar == 0)
-$TCA['tx_slubevents_domain_model_event']['columns']['title']['displayCond'] = 'FIELD:genius_bar:<:1';
-$TCA['tx_slubevents_domain_model_event']['columns']['teaser']['displayCond'] = 'FIELD:genius_bar:<:1';
-$TCA['tx_slubevents_domain_model_event']['columns']['description']['displayCond'] = 'FIELD:genius_bar:<:1';
-
-$TCA['tx_slubevents_domain_model_event']['columns']['subscribers'] = array(
-	'exclude' => 0,
-	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.subscribers',
-	'config' => array(
-		'type' => 'inline',
-		'foreign_table' => 'tx_slubevents_domain_model_subscriber',
-		'foreign_field' => 'event',
-		'maxitems'      => 9999,
-		'appearance' => array(
-			'collapseAll' => 1,
-			'expandSingle' => 1,
-			'levelLinksPosition' => 'bottom',
-			'showSynchronizationLink' => 0,
-			'showPossibleLocalizationRecords' => 0,
-			'showAllLocalizationLink' => 0
-		),
-	),
-);
-
-$TCA['tx_slubevents_domain_model_event']['columns']['categories'] = array(
-	'exclude' => 0,
-	'l10n_mode' => 'mergeIfNotBlank',
-	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.categories',
-	'config' => array(
-		'type' => 'select',
-		'foreign_table' => 'tx_slubevents_domain_model_category',
-		'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_category.sorting',
-		'MM' => 'tx_slubevents_event_category_mm',
-		'renderMode' => 'tree',
-		'subType' => 'db',
-		'treeConfig' => array(
-			'parentField' => 'parent',
-			'appearance' => array(
-				'expandAll' => TRUE,
-				'showHeader' => FALSE,
-				'maxLevels' => 10,
-				'width' => 400,
-			),
-
-		),
-		'size' => 10,
-		'autoSizeMax' => 30,
-		'minitems' => 1,
-		'maxitems' => 9999,
-		'multiple' => 0,
-	),
-);
-
-$TCA['tx_slubevents_domain_model_event']['columns']['location'] = array(
-	'exclude' => 0,
-	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.location',
-	'config' => array(
-		'type' => 'select',
-		'foreign_table' => 'tx_slubevents_domain_model_location',
-		'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_location.sorting',
-
-		'renderMode' => 'tree',
-		'subType' => 'db',
-		'treeConfig' => array(
-			'parentField' => 'parent',
-			'appearance' => array(
-				'expandAll' => TRUE,
-				'showHeader' => FALSE,
-			),
-		),
-		'size' => 10,
-		'autoSizeMax' => 30,
-		'minitems' => 1,
-		'maxitems' => 1,
-	),
-);
-
-$TCA['tx_slubevents_domain_model_event']['columns']['contact'] = array(
-	'exclude' => 0,
-	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.contact',
-	'config' => array(
-		'allowed' => 'pages',
-		'type' => 'select',
-		'foreign_table' => 'tx_slubevents_domain_model_contact',
-		'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_contact.sorting',
-		'minitems' => 1,
-		'maxitems' => 2, // this forces a working required select box! stupid but true...
-		'size' => 6, // it should be one but... no chance to get a required select box without it in TYPO3 4.6
-		'selectedListStyle' => 'width:400px;',
-		'itemListStyle' => 'width:400px;',
-	),
-);
-
-$TCA['tx_slubevents_domain_model_event']['types'] = array (
-		// Single event
-		'0' => array('showitem' => '' .
-			'--div--;Was und Wann,'.
-			'genius_bar,title,'.
-			'--palette--;LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.start;paletteStart,'.
-			'--palette--;LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end;paletteEnd,'.
-			'location,'.
-			'teaser,'.
-			'description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css],'.
-			'--div--;Anmeldebedingungen,'.
-			'contact,'.
-			'min_subscriber,'.
-			'max_subscriber,'.
-			'--palette--;LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end;paletteEndSubscription,'.
-			'--div--;Kategorisierung,'.
-			'audience,'.
-			'categories,'.
-			'discipline,'.
-			'--div--;Angemeldete Teilnehmer,'.
-			'subscribers,'.
-			'--div--;Extras,'.
-			'hidden;;1'
-		)
-);
-
-$TCA['tx_slubevents_domain_model_event']['palettes'] = array (
-		'paletteStart' => array(
-			'showitem' => 'start_date_time,all_day,cancelled',
-			'canNotCollapse' => TRUE
-		),
-		'paletteEnd' => array(
-			'showitem' => 'end_date_time',
-			'canNotCollapse' => TRUE
-		),
-		'paletteEndSubscription' => array(
-			'showitem' => 'sub_end_date_time, sub_end_date_info_sent',
-			'canNotCollapse' => TRUE
-		),
-);
 ?>

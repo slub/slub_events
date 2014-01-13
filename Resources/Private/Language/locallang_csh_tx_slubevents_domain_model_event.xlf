@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-04-11T12:58:23Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-13T15:38:12Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -21,7 +21,7 @@
 			<source>Contact</source>
 		</trans-unit>
 		<trans-unit id="description.description" xml:space="preserve">
-			<source>description</source>
+			<source>Description of Event</source>
 		</trans-unit>
 		<trans-unit id="discipline.description" xml:space="preserve">
 			<source>Discipline Id</source>
@@ -48,16 +48,16 @@
 			<source>This option is checked automatically after the information mail was sent. To resent the mail on next cronjob run, remove the flag. If you do not want a notification, check this option.</source>
 		</trans-unit>
 		<trans-unit id="sub_end_date_time.description" xml:space="preserve">
-			<source>End of Subscription</source>
+			<source>Please the day and time the subscription period ends. If this value is empty, a selectbox is shown with values relative to the start time.</source>
 		</trans-unit>
 		<trans-unit id="subscribers.description" xml:space="preserve">
 			<source>Category Ids</source>
 		</trans-unit>
 		<trans-unit id="teaser.description" xml:space="preserve">
-			<source>teaser</source>
+			<source>Teaser text</source>
 		</trans-unit>
 		<trans-unit id="title.description" xml:space="preserve">
-			<source>title</source>
+			<source>Title</source>
 		</trans-unit>
 		</body>
 	</file>

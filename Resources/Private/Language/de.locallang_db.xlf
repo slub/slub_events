@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-07-18T11:51:58Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-10T16:55:34Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -106,7 +106,7 @@
 			<target>Uhrzeit Ende</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes" xml:space="preserve">
-			<source>Genius-Bar Event</source>
+			<source>Knowledge Bar</source>
 			<target>Wissensbar-Veranstaltung</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.location" approved="yes" xml:space="preserve">
@@ -120,6 +120,10 @@
 		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes" xml:space="preserve">
 			<source>Min Subscriber</source>
 			<target>Mindesteilnehmerzahl</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.onlinesurvey" approved="yes" xml:space="preserve">
+			<source>Online Survey</source>
+			<target>Online Umfrage</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start" approved="yes" xml:space="preserve">
 			<source></source>
@@ -209,6 +213,10 @@
 			<source>Email</source>
 			<target>Email-Adresse</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes" xml:space="preserve">
+			<source>Institution</source>
+			<target>Institution</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.message" approved="yes" xml:space="preserve">
 			<source>Message</source>
 			<target>Nachricht</target>
@@ -216,10 +224,6 @@
 		<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes" xml:space="preserve">
 			<source>Name</source>
 			<target>Name</target>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes" xml:space="preserve">
-			<source>Institution</source>
-			<target>Institution</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes" xml:space="preserve">
 			<source>Number</source>

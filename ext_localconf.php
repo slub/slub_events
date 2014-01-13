@@ -8,12 +8,12 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	'Eventlist',
 	array(
 		'Event' => 'list, show, showNotFound, new, update, create, delete, listMiniMonth',
-
+		
 	),
 	// non-cacheable actions
 	array(
 		'Event' => 'new, update, create, delete',
-
+		
 	)
 );
 
@@ -22,10 +22,12 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	'Eventsubscribe',
 	array(
 		'Subscriber' => 'new, create, delete, eventNotFound',
+		
 	),
 	// non-cacheable actions
 	array(
 		'Subscriber' => 'new, create, delete',
+		
 	)
 );
 
@@ -35,12 +37,12 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	array(
 		'Event' => 'listOwn, show',
 		'Subscriber' => 'list, show',
-
+		
 	),
 	// non-cacheable actions
 	array(
 		'Event' => 'listOwn',
-
+		
 	)
 );
 
@@ -49,10 +51,12 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	'Eventgeniusbar',
 	array(
 		'Category' => 'list, gbList',
-
+		
 	),
 	// non-cacheable actions
 	array(
+		'Category' => '',
+		
 	)
 );
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-07-18T11:51:58Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-10T16:55:34Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -66,7 +66,7 @@
 			<source>AbsolventInnen</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.cancelled" xml:space="preserve">
-			<source>is cancelled</source>
+			<source>Is cancelled</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.categories" xml:space="preserve">
 			<source>Categories</source>
@@ -94,6 +94,9 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" xml:space="preserve">
 			<source>Min Subscriber</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.onlinesurvey" xml:space="preserve">
+			<source>Online Survey</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" xml:space="preserve">
 			<source>Start of Event</source>
@@ -138,7 +141,7 @@
 			<source>Subscription Date</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" xml:space="preserve">
-			<source>Customerid</source>
+			<source>Customer ID</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.editcode" xml:space="preserve">
 			<source>Editcode</source>
@@ -146,11 +149,11 @@
 		<trans-unit id="tx_slubevents_domain_model_subscriber.email" xml:space="preserve">
 			<source>Email</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.message" xml:space="preserve">
-			<source>Message</source>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" xml:space="preserve">
 			<source>Institution</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.message" xml:space="preserve">
+			<source>Message</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.name" xml:space="preserve">
 			<source>Name</source>

@@ -92,7 +92,6 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 				$message_text .= $category_text . ' am '. gmstrftime('%a, %x %H:%M:%S', $fieldArray['start_date_time']) .'.';
 				$message = t3lib_div::makeInstance('t3lib_FlashMessage', $message_text, 'OK', t3lib_FlashMessage::OK, TRUE);
 			}
-
 			t3lib_FlashMessageQueue::addMessage($message);
 
 			if ($fieldArray['start_date_time'] > $fieldArray['end_date_time'] && $fieldArray['end_date_time'] > 0) {
@@ -100,12 +99,26 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 				t3lib_FlashMessageQueue::addMessage($message);
 			}
 
+			// use the select box value to calculate the end_date_time relative to start_date_time
+			if ($fieldArray['end_date_time_select'] > 0) {
+				$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Veranstaltung gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['end_date_time_select']), 'Bitte prüfen:', t3lib_FlashMessage::INFO, TRUE);
+				t3lib_FlashMessageQueue::addMessage($message);
+				$fieldArray['end_date_time'] = $fieldArray['start_date_time'] + $fieldArray['end_date_time_select'] * 60;
+				$fieldArray['end_date_time_select'] = '';
+			}
+
+			// touch the subscribtion end only if minimum subscribers are set
 			if ($fieldArray['min_subscriber'] > 0 || $fieldArray['max_subscriber'] > 0) {
 				if ($fieldArray['start_date_time'] < $fieldArray['sub_end_date_time'] ||
 					($fieldArray['min_subscriber'] > 0 && empty($fieldArray['sub_end_date_time'])) ) {
-					$fieldArray['sub_end_date_time'] = $fieldArray['start_date_time'] - 86400;
-					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Anmeldungsfrist wurde automatisch gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['sub_end_date_time']), 'Bitte prüfen:', t3lib_FlashMessage::INFO, TRUE);
-					t3lib_FlashMessageQueue::addMessage($message);
+
+					if ($fieldArray['sub_end_date_time_select'] > 0) {
+						$fieldArray['sub_end_date_time'] = $fieldArray['start_date_time'] - $fieldArray['sub_end_date_time_select'] * 60;
+						$fieldArray['sub_end_date_time_select'] = '';
+
+						$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Anmeldungsfrist wurde gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['sub_end_date_time']), 'Bitte prüfen:', t3lib_FlashMessage::INFO, TRUE);
+						t3lib_FlashMessageQueue::addMessage($message);
+					}
 				}
 
 				// warn if subscription deadline is more than 3 days before the event.
@@ -115,6 +128,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 				}
 			} else {
 					$fieldArray['sub_end_date_time'] = '';
+					$fieldArray['sub_end_date_time_select'] = '';
 			}
 
 			if ($fieldArray['genius_bar'] == FALSE && count(explode(',', $fieldArray['categories'])) > 1) {
