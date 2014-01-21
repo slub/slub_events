@@ -40,8 +40,16 @@ class Tx_SlubEvents_Slots_Tceforms {
 
 			if (empty($row['contact_name']))
 				$row['contact_name'] = $GLOBALS['BE_USER']->user['realName'];
+
 			if (empty($row['contact_email']))
 				$row['contact_email'] = $GLOBALS['BE_USER']->user['email'];
+
+			if (empty($row['end_date_time_select']) && empty($row['end_date_time']))
+					$row['end_date_time_select'] = 60;
+
+			if (empty($row['sub_end_date_time_select']) && empty($row['sub_end_date_time']))
+					$row['sub_end_date_time_select'] = 1440;
+
 		}
 	}
 }

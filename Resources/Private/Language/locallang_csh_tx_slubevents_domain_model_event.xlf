@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-13T15:38:12Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-15T16:51:46Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -29,17 +29,20 @@
 		<trans-unit id="end_date_time.description" xml:space="preserve">
 			<source>End of Event</source>
 		</trans-unit>
+		<trans-unit id="end_date_time_select.description" xml:space="preserve">
+			<source>You may select the duration of your event relative to start. This select box will be removed after saving the event.</source>
+		</trans-unit>
 		<trans-unit id="location.description" xml:space="preserve">
 			<source>Location Ids</source>
 		</trans-unit>
 		<trans-unit id="max_subscriber.description" xml:space="preserve">
-			<source>Maximum of Subscribers</source>
+			<source>Set maximum number of subscribers. If this value is reached, the subscription will be closed and the contact person will be informed.Remove this value to disable subscription.</source>
 		</trans-unit>
 		<trans-unit id="min_subscriber.description" xml:space="preserve">
-			<source>Minimum of Subscribers</source>
+			<source>Set minimum number of subscribers. If this value is not reached up to the given subscription end time, the event will be cancelled. All subscribers and the contact person will be informed. Remove this value to disable subscription.</source>
 		</trans-unit>
 		<trans-unit id="start_date_time.description" xml:space="preserve">
-			<source>Start of Event</source>
+			<source>Start of Event (Date and Time)</source>
 		</trans-unit>
 		<trans-unit id="sub_end.description" xml:space="preserve">
 			<source>End of Subscription. Up to this date and time the subscription is possible. Leafe time empty or 0:00 to stop subscription _before_ the given day.</source>
@@ -48,7 +51,10 @@
 			<source>This option is checked automatically after the information mail was sent. To resent the mail on next cronjob run, remove the flag. If you do not want a notification, check this option.</source>
 		</trans-unit>
 		<trans-unit id="sub_end_date_time.description" xml:space="preserve">
-			<source>Please the day and time the subscription period ends. If this value is empty, a selectbox is shown with values relative to the start time.</source>
+			<source>Please enter the day and time the subscription period ends. If this value is empty, a selectbox is shown with values relative to the start time.</source>
+		</trans-unit>
+		<trans-unit id="sub_end_date_time_select.description" xml:space="preserve">
+			<source>You may select a time the subscription period will end relative to the start of the event. This select box will be removed after saving the event.</source>
 		</trans-unit>
 		<trans-unit id="subscribers.description" xml:space="preserve">
 			<source>Category Ids</source>

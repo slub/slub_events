@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-10T16:55:34Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-15T17:00:12Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -81,7 +81,13 @@
 			<source>Discipline</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.end_date_time" xml:space="preserve">
-			<source>End of Event</source>
+			<source>End of Event (Date and Time)</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select" xml:space="preserve">
+			<source>End of Event (relative to Start of Event)</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select_value" xml:space="preserve">
+			<source>Time after Start of Event</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" xml:space="preserve">
 			<source>Knowledge Bar</source>
@@ -99,7 +105,7 @@
 			<source>Online Survey</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" xml:space="preserve">
-			<source>Start of Event</source>
+			<source>Start of Event (Date and Time)</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.sub_end" xml:space="preserve">
 			<source>End of Subscription</source>
@@ -108,7 +114,13 @@
 			<source>End of Subscription Information is already sent.</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time" xml:space="preserve">
-			<source>End of Subscription</source>
+			<source>End of Subscription (Date and Time)</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select" xml:space="preserve">
+			<source>End of Subscription (relative to Start of Event)</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select_value" xml:space="preserve">
+			<source>Time before Start of Event</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.subscribers" xml:space="preserve">
 			<source>Subscribers</source>

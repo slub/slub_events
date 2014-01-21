@@ -1,0 +1,19 @@
+<f:layout name="BeModule" />
+
+This template is found if the backend module doesn't find its configuration.
+
+The proper backend module template is located in /Resources/Private/Backend/...
+
+<f:section name="content">
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+<div class="slub-backend-error">
+<f:flashMessages />
+
+<h1><f:translate key="tx_slubevents.be.eventmanagement" /></h1>
+			<p>
+				<f:translate key="be.error.nofolderselected" htmlEscape="FALSE"/>
+			</p>
+
+</div>
+</f:section>

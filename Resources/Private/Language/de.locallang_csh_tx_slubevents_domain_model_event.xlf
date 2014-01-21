@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-13T15:38:12Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-15T16:51:46Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -33,16 +33,20 @@
 			<source>End of Event</source>
 			<target>Endzeitpunkt der Veranstaltung.&lt;br /&gt;&lt;br /&gt;Dies ist ein optionales Feld. Es kann also leer bleiben. Wenn die genaue Länge der Veranstaltung nicht bekannt ist, sollte jedoch trotzdem besser ein Ende gesetzt werden (z.B. 6 oder 90 Minuten), damit der Kalendereintrag einen gewissen Platz ausfüllen kann.&lt;br /&gt;&lt;br /&gt;Achtung: Das Ende muss natürlich NACH dem Startzeitpunkt sein! </target>
 		</trans-unit>
+		<trans-unit id="end_date_time_select.description" approved="yes" xml:space="preserve">
+			<source>You may select the duration of your event relative to start. This select box will be removed after saving the event.</source>
+			<target>Sie können das Ende der Veranstaltung relativ zum Beginn wählen. Nach dem Speichern der Veranstaltung wird diese Auswahlliste nicht mehr angezeigt.</target>
+		</trans-unit>
 		<trans-unit id="max_subscriber.description" approved="yes" xml:space="preserve">
-			<source>Maximum of Subscribers</source>
-			<target>Maximale Teilnehmerzahl</target>
+			<source>Set maximum number of subscribers. If this value is reached, the subscription will be closed and the contact person will be informed.Remove this value to disable subscription.</source>
+			<target>Maximale Teilnehmerzahl. &lt;br /&gt;&lt;br /&gt;Wenn dieser Wert erreicht wird, wird die Anmeldung geschlossen und der Ansprechpartner informiert.&lt;br /&gt;&lt;br /&gt;Entfernen Sie diesen Wert, wenn Sie keine Anmeldung wünschen.</target>
 		</trans-unit>
 		<trans-unit id="min_subscriber.description" approved="yes" xml:space="preserve">
-			<source>Minimum of Subscribers</source>
-			<target>Mindestteilnehmerzahl</target>
+			<source>Set minimum number of subscribers. If this value is not reached up to the given subscription end time, the event will be cancelled. All subscribers and the contact person will be informed. Remove this value to disable subscription.</source>
+			<target>Mindestteilnehmerzahl. Wenn dieser Wert nicht erreicht wird, wird die Veranstaltung abgesagt. Alle Teilnehmer sowie der Ansprechpartner werden darüber informiert. &lt;br /&gt;&lt;br /&gt;Entfernen Sie diesen Wert, wenn Sie keine Anmeldung wünschen.</target>
 		</trans-unit>
 		<trans-unit id="start_date_time.description" approved="yes" xml:space="preserve">
-			<source>Start of Event</source>
+			<source>Start of Event (Date and Time)</source>
 			<target>Beginn der Veranstaltung</target>
 		</trans-unit>
 		<trans-unit id="sub_end.description" approved="yes" xml:space="preserve">
@@ -54,8 +58,12 @@
 			<target>Diese Option wird automatisch gesetzt wenn die Benachrichtigungs-Email versendet wurde. &lt;br /&gt;&lt;br /&gt;Wenn Sie eine neue Benachrichtigung erhalten möchten, dann deaktivieren Sie die Option.&lt;br /&gt;&lt;br /&gt;Wenn Sie generell KEINE Benachrichtigung erhalten möchten, dann aktivieren Sie die Option.</target>
 		</trans-unit>
 		<trans-unit id="sub_end_date_time.description" approved="yes" xml:space="preserve">
-			<source>Please the day and time the subscription period ends. If this value is empty, a selectbox is shown with values relative to the start time.</source>
+			<source>Please enter the day and time the subscription period ends. If this value is empty, a selectbox is shown with values relative to the start time.</source>
 			<target>Ende der Anmeldefrist. Nach dem angegebenen Zeitpunkt wird der Link zur Anmeldung entfernt und keine weitere Anmeldung angenommen. Ein Cronjob informiert stündlich über Veranstaltungen deren Anmeldefrist abgelaufen ist.&lt;br /&gt;&lt;br /&gt;Wenn Sie keine Anmeldefrist setzen, erfolgt keine Benachrichtigung. Die Anmeldung wird erst geschlossen, wenn die maximale Teilnehmerzahl erreicht ist oder die Veranstaltung bereits begonnen hat.</target>
+		</trans-unit>
+		<trans-unit id="sub_end_date_time_select.description" approved="yes" xml:space="preserve">
+			<source>You may select a time the subscription period will end relative to the start of the event. This select box will be removed after saving the event.</source>
+			<target>Sie können das Ende der Anmeldung relativ zum Beginn wählen. Nach dem Speichern der Veranstaltung wird diese Auswahlliste nicht mehr angezeigt.</target>
 		</trans-unit>
 		<trans-unit id="teaser.description" approved="yes" xml:space="preserve">
 			<source>Teaser text</source>

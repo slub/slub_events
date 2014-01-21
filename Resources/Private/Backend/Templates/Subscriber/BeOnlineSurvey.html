@@ -1,0 +1,62 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+<f:flashMessages />
+
+<f:be.container
+	pageTitle="Veranstaltungsmanagement"
+	enableJumpToUrl="true"
+	enableClickMenu="true"
+	loadPrototype="true"
+	loadExtJs="true"
+	loadExtJsTheme="true"
+	extJsAdapter="ext-all"
+	enableExtJsDebug="false"
+	addCssFile="{f:uri.resource(path:'Css/slub-event-backend.css')}">
+
+
+<h1>Online Umfrage versenden.</h1>
+
+{namespace se=Tx_SlubEvents_ViewHelpers}
+
+
+<div class="tx_slubevents">
+<f:form action="beOnlineSurvey" controller="Subscriber" name="onlineSurvey" method="post">
+
+<p>Step {step}!</p>
+<p>Senden Sie im Namen von <b>{event.contact.name} ({event.contact.email})</b> folgende Einladung zu einer Online-Umfrage an alle Teilnehmer:</p>
+	<f:if condition="{event.geniusBar}">
+		<f:then>
+			<h3><f:translate key="tx_slubevents_domain_model_event.individual_appointment" /></h3>
+		</f:then>
+		<f:else>
+			<h3><f:translate key="tx_slubevents_domain_model_event" />: {event.title}</h3>
+		</f:else>
+	</f:if>
+
+	<p><f:render partial="Event/DateFromTo" arguments="{event : event}" /></p>
+	<p><div class="location" title="<se:format.stripTags htmlString='{event.location.description}' />"></p>
+
+	<p><f:format.html>{event.onlinesurvey}</f:format.html></p>
+
+	<p>
+		<f:form.textfield id="tceforms-datefield-1" class="formField tceforms-textfield tceforms-datefield" property="selectedStartDateStamp"  value="{selectedStartDateStamp}" />
+	</p>
+
+	<p>
+	<f:form.hidden name="step" value="1" />
+	<f:form.hidden name="event" value="{event}" />
+	<f:form.submit value="Sende Email" />
+	</p>
+
+	</div>
+</f:form>
+</div>
+
+<p>
+<f:link.action controller="Event" action="beList">Zurück zur Übersicht</f:link.action><br />
+</p>
+
+</f:be.container>
+
+</f:section>

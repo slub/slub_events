@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-10T16:55:34Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-15T17:00:12Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -62,7 +62,7 @@
 			<target>Zielgruppe</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.cancelled" approved="yes" xml:space="preserve">
-			<source>is cancelled</source>
+			<source>Is cancelled</source>
 			<target>abgesagt</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes" xml:space="preserve">
@@ -98,8 +98,16 @@
 			<target>Datum Ende</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.end_date_time" approved="yes" xml:space="preserve">
-			<source>End of Event</source>
+			<source>End of Event (Date and Time)</source>
 			<target>Ende der Veranstaltung (Datum + Uhrzeit)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select" approved="yes" xml:space="preserve">
+			<source>End of Event (relative to Start of Event)</source>
+			<target>Ende der Veranstaltung relativ zum Beginn (Dauer)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select_value" approved="yes" xml:space="preserve">
+			<source>Time after Start of Event</source>
+			<target>Dauer der Veranstaltung</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.end_time" approved="yes" xml:space="preserve">
 			<source></source>
@@ -134,7 +142,7 @@
 			<target>Datum Beginn</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes" xml:space="preserve">
-			<source>Start of Event</source>
+			<source>Start of Event (Date and Time)</source>
 			<target>Beginn</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_time" approved="yes" xml:space="preserve">
@@ -154,8 +162,16 @@
 			<target>Benachrichtigung über abgelaufene Anmeldefrist wurde bereits versendet.</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time" approved="yes" xml:space="preserve">
-			<source>End of Subscription</source>
+			<source>End of Subscription (Date and Time)</source>
 			<target>Anmeldefrist (Datum + Uhrzeit)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select" approved="yes" xml:space="preserve">
+			<source>End of Subscription (relative to Start of Event)</source>
+			<target>Ende des Anmeldezeitraums relativ zum Beginn der Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select_value" approved="yes" xml:space="preserve">
+			<source>Time before Start of Event</source>
+			<target>Zeit vor Beginn der Veranstaltung</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.sub_end_time" approved="yes" xml:space="preserve">
 			<source></source>
@@ -202,7 +218,7 @@
 			<target>Anmeldezeitpunkt</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes" xml:space="preserve">
-			<source>Customerid</source>
+			<source>Customer ID</source>
 			<target>Benutzernummer</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.editcode" approved="yes" xml:space="preserve">

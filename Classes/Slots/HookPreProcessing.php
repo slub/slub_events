@@ -49,8 +49,12 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 		}
 	}
 
+
 	/**
-	 * This method is called by a hook in the TYPO3 Core Engine (TCEmain) when a record is saved. We use it to disable saving of the current record if it has categories assigned that are not allowed for the BE user.
+	 * This method is called by a hook in the TYPO3 Core Engine (TCEmain)
+	 * when a record is saved.
+	 * We use it to disable saving of the current record if it has
+	 * categories assigned that are not allowed for the BE user.
 	 *
 	 * @param	array		$fieldArray: The field names and their values to be processed (passed by reference)
 	 * @param	string		$table: The table TCEmain is currently processing
@@ -100,12 +104,12 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 			}
 
 			// use the select box value to calculate the end_date_time relative to start_date_time
-			if ($fieldArray['end_date_time_select'] > 0) {
+			if (!empty($fieldArray['end_date_time_select'])) {
 				$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Veranstaltung gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['end_date_time_select']), 'Bitte prüfen:', t3lib_FlashMessage::INFO, TRUE);
 				t3lib_FlashMessageQueue::addMessage($message);
 				$fieldArray['end_date_time'] = $fieldArray['start_date_time'] + $fieldArray['end_date_time_select'] * 60;
-				$fieldArray['end_date_time_select'] = '';
 			}
+			//~ unset($fieldArray['end_date_time_select']);
 
 			// touch the subscribtion end only if minimum subscribers are set
 			if ($fieldArray['min_subscriber'] > 0 || $fieldArray['max_subscriber'] > 0) {
@@ -128,7 +132,6 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 				}
 			} else {
 					$fieldArray['sub_end_date_time'] = '';
-					$fieldArray['sub_end_date_time_select'] = '';
 			}
 
 			if ($fieldArray['genius_bar'] == FALSE && count(explode(',', $fieldArray['categories'])) > 1) {
@@ -143,6 +146,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 					$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Die Mindest- und Maximalteilnehmerzahl beträgt in der Wissensbar immer 1. Dies wurde automatisch korrigiert. ', 'Bitte prüfen: ', t3lib_FlashMessage::INFO, TRUE);
 					t3lib_FlashMessageQueue::addMessage($message);
 			}
+
 		}
 	}
 }

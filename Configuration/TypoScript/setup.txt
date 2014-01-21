@@ -44,6 +44,7 @@ plugin.tx_slubevents {
 		#baseURL = http://www.example.com/
 	}
 }
+module.tx_slubevents < plugin.tx_slubevents
 module.tx_slubevents {
 	view {
 		templateRootPath = {$module.tx_slubevents.view.templateRootPath}

@@ -98,7 +98,6 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 
 }
 
-
 .slub-event-list li {
 	margin: 0.2em 0;
 	vertical-align: middle;
@@ -163,4 +162,26 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 
 .slub-event-register .event-short ul li {
 	list-style: none;
+}
+
+/*
+ *
+ *
+ */
+
+.slub-backend-error {
+	border: 2px solid red;
+	background: white;
+	display: block;
+	width: 80%;
+	height: 400px;
+	padding: 20px;
+}
+
+.slub-backend-error h1 {
+	text-align: center;
+}
+.slub-backend-error p {
+	font-size: 200%;
+	text-align: left;
 }

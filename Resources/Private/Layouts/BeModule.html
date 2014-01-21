@@ -1,0 +1,44 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<se:be.container
+	pageTitle="Veranstaltungsmanagement"
+	enableJumpToUrl="true"
+	enableClickMenu="FALSE"
+	loadPrototype="FALSE"
+	loadExtJs="TRUE"
+	loadExtJsTheme="FALSE"
+	addCssFile="{f:uri.resource(path:'Css/slub-event-backend.css')}"
+	addJsFile="{f:uri.resource(path:'Js/slub-event-backend.js')}"
+	addJsDatepicker="true">
+	<div class="typo3-fullDoc">
+		<div id="typo3-docheader">
+			<div id="typo3-docheader-row1">
+				<div class="buttonsleft">
+
+				</div>
+				<div class="buttonsright">
+					<f:be.buttons.shortcut />
+				</div>
+			</div>
+			<div id="typo3-docheader-row2">
+				<div class="docheader-row2-left">
+					<f:be.buttons.csh />
+					<f:be.menus.actionMenu>
+						<f:be.menus.actionMenuItem label="<f:translate key='tx_slubevents.be.eventmanagement' />" controller="" action="beList" />
+					</f:be.menus.actionMenu>
+
+				</div>
+				<div class="docheader-row2-right">
+					<f:be.pagePath />
+					<f:be.pageInfo />
+				</div>
+			</div>
+
+		</div>
+		<div id="typo3-docbody">
+			<div id="typo3-inner-docbody">
+				<f:flashMessages renderMode="div" />
+				<f:render section="content" />
+			</div>
+		</div>
+	</div>
+</se:be.container>

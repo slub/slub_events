@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-10T16:46:16Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-21T10:45:17Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -12,6 +12,10 @@
 		<trans-unit id="be.editEvent" approved="yes" xml:space="preserve">
 			<source>Edit</source>
 			<target>Bearbeiten</target>
+		</trans-unit>
+		<trans-unit id="be.error.nofolderselected" approved="yes" xml:space="preserve">
+			<source>Cannot find the configuration! &lt;br /&gt;&lt;br /&gt;&lt;--  Please select a page or folder in the left tree to continue.</source>
+			<target>Keine Konfiguration gefunden!&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;--  Bitte wählen Sie eine Seite oder einen Ordner im linken Seitenbaum aus.</target>
 		</trans-unit>
 		<trans-unit id="be.free" approved="yes" xml:space="preserve">
 			<source>free</source>

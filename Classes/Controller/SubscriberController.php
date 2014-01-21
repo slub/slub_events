@@ -354,30 +354,30 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	private function foldline($content) {
 
-					    $text = trim(strip_tags( html_entity_decode($content), '<br>,<p>,<li>'));
-					    $text = preg_replace('/<p[\ \w\=\"]{0,}>/', '', $text);
-					    $text = preg_replace('/<li[\ \w\=\"]{0,}>/', '- ', $text);
-					    // make newline formated (yes, really write \n into the text!
-					    $text = str_replace('</p>', '\n', $text);
-					    $text = str_replace('</li>', '\n', $text);
-					    // remove tabs
-					    $text = str_replace("\t", ' ', $text);
-					    // remove multiple spaces
-					    $text = preg_replace('/[\ ]{2,}/', '', $text);
-					    $text = str_replace('<br />', '\n', $text);
-					    // remove more than one empty line
-					    $text = preg_replace('/[\n]{3,}/', '\n\n', $text);
-					    // remove windows linkebreak
-					    $text = preg_replace('/[\r]/', '', $text);
-					    // newlines are not allowed
-					    $text = str_replace("\n", '\n', $text);
-					    // semicolumns are not allowed
-					    $text = str_replace(';', '\;', $text);
+		$text = trim(strip_tags( html_entity_decode($content), '<br>,<p>,<li>'));
+		$text = preg_replace('/<p[\ \w\=\"]{0,}>/', '', $text);
+		$text = preg_replace('/<li[\ \w\=\"]{0,}>/', '- ', $text);
+		// make newline formated (yes, really write \n into the text!
+		$text = str_replace('</p>', '\n', $text);
+		$text = str_replace('</li>', '\n', $text);
+		// remove tabs
+		$text = str_replace("\t", ' ', $text);
+		// remove multiple spaces
+		$text = preg_replace('/[\ ]{2,}/', '', $text);
+		$text = str_replace('<br />', '\n', $text);
+		// remove more than one empty line
+		$text = preg_replace('/[\n]{3,}/', '\n\n', $text);
+		// remove windows linkebreak
+		$text = preg_replace('/[\r]/', '', $text);
+		// newlines are not allowed
+		$text = str_replace("\n", '\n', $text);
+		// semicolumns are not allowed
+		$text = str_replace(';', '\;', $text);
 
-					    $firstline = substr($text, 0, (75-12));
-					    $restofline = implode("\n ", str_split(trim(substr($text, (75-12), strlen($text))), 73) );
+		$firstline = substr($text, 0, (75-12));
+		$restofline = implode("\n ", str_split(trim(substr($text, (75-12), strlen($text))), 73) );
 
-					    return $firstline . "\n ". $restofline;
+		return $firstline . "\n ". $restofline;
 	}
 
 	/**
@@ -592,58 +592,112 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function beListAction() {
 
-						// get data from BE session
-						$sessionData = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
-						// get search parameters from BE user configuration
-						$ucData = $GLOBALS['BE_USER']->uc['moduleData']['slubevents'];
+		// get data from BE session
+		$sessionData = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
+		// get search parameters from BE user configuration
+		$ucData = $GLOBALS['BE_USER']->uc['moduleData']['slubevents'];
 
-						// get search parameters from POST variables
-						$searchParameter = $this->getParametersSafely('searchParameter');
-						if (is_array($searchParameter)) {
-							$ucData['searchParameter'] = $searchParameter;
-							$sessionData['selectedStartDateStamp'] = $searchParameter['selectedStartDateStamp'];
-							//~ $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
-							$GLOBALS['BE_USER']->uc['moduleData']['slubevents'] = $ucData;
-							$GLOBALS['BE_USER']->writeUC($GLOBALS['BE_USER']->uc);
-							// save session data
-							$GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
-						} else {
-							// no POST vars --> take BE user configuration
-							$searchParameter = $ucData['searchParameter'];
-						}
+		// get search parameters from POST variables
+		$searchParameter = $this->getParametersSafely('searchParameter');
+		if (is_array($searchParameter)) {
+			$ucData['searchParameter'] = $searchParameter;
+			$sessionData['selectedStartDateStamp'] = $searchParameter['selectedStartDateStamp'];
+			//~ $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
+			$GLOBALS['BE_USER']->uc['moduleData']['slubevents'] = $ucData;
+			$GLOBALS['BE_USER']->writeUC($GLOBALS['BE_USER']->uc);
+			// save session data
+			$GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
+		} else {
+			// no POST vars --> take BE user configuration
+			$searchParameter = $ucData['searchParameter'];
+		}
 
-						// set the startDateStamp
-						// startDateStamp is saved in session data NOT user data
-						if (empty($selectedStartDateStamp)) {
-							if (!empty($sessionData['selectedStartDateStamp']))
-								$selectedStartDateStamp = $sessionData['selectedStartDateStamp'];
-							else
-								$selectedStartDateStamp = date('d-m-Y');
-						}
+		// set the startDateStamp
+		// startDateStamp is saved in session data NOT user data
+		if (empty($selectedStartDateStamp)) {
+			if (!empty($sessionData['selectedStartDateStamp']))
+				$selectedStartDateStamp = $sessionData['selectedStartDateStamp'];
+			else
+				$selectedStartDateStamp = date('d-m-Y');
+		}
 
-						$categories = $this->categoryRepository->findAllTree();
+		$categories = $this->categoryRepository->findAllTree();
 
-						if (is_array($searchParameter['selectedCategories'])) {
-							$this->view->assign('selectedCategories', $searchParameter['selectedCategories']);
-						}
-						else {
-							// if no category selection in user settings present --> look for the root categories
-							if (! is_array($searchParameter['category']))
-								foreach ($categories as $uid => $category)
-									$searchParameter['category'][$uid] = $uid;
-							$this->view->assign('categoriesSelected', $searchParameter['category']);
-						}
-						$this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
-						if (is_array($searchParameter['category']))
-							$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp));
+		if (is_array($searchParameter['selectedCategories'])) {
+			$this->view->assign('selectedCategories', $searchParameter['selectedCategories']);
+		}
+		else {
+			// if no category selection in user settings present --> look for the root categories
+			if (! is_array($searchParameter['category']))
+				foreach ($categories as $uid => $category)
+					$searchParameter['category'][$uid] = $uid;
+			$this->view->assign('categoriesSelected', $searchParameter['category']);
+		}
+		$this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
+		if (is_array($searchParameter['category']))
+			$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp));
 
-						$this->view->assign('categories', $categories);
-						$this->view->assign('events', $events);
+		$this->view->assign('categories', $categories);
+		$this->view->assign('events', $events);
 
-						$subscribers = $this->subscriberRepository->findAllByEvents($events);
+		$subscribers = $this->subscriberRepository->findAllByEvents($events);
 
-						$this->view->assign('subscribers', $subscribers);
+		$this->view->assign('subscribers', $subscribers);
 	}
+
+	/**
+	 * action beOnlineSurveyAction
+	 *
+	 * --> see ics template in Resources/Private/Backend/Templates/Email/
+	 *
+	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param integer $step
+	 * @ignorevalidation $event
+	 * @return void
+	 */
+	public function beOnlineSurveyAction(Tx_SlubEvents_Domain_Model_Event $event, $step = 0) {
+
+		//~ // startDateTime may never be empty
+		//~ $helper['start'] = $event->getStartDateTime()->getTimestamp();
+		//~ // endDateTime may be empty
+		//~ if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
+			//~ $helper['end'] = $event->getEndDateTime()->getTimestamp();
+		//~ else
+			//~ $helper['end'] = $helper['start'];
+//~
+		//~ if ($event->isAllDay()) {
+			//~ $helper['allDay'] = 1;
+		//~ }
+
+		if ($step == 1) {
+			$helper['now'] = time();
+			$helper['description'] = $this->foldline($event->getDescription());
+			// location may be empty...
+			if (is_object($event->getLocation())) {
+				$helper['location'] = $event->getLocation()->getName();
+				$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+			}
+			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
+
+			$this->sendTemplateEmail(
+				array($event->getContact()->getEmail() => $event->getContact()->getName()),
+				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+				'Termineinladung: ' . $event->getTitle(),
+				'Invitation',
+				array(	'event' => $event,
+						'subscribers' => $event->getSubscribers(),
+						'attachSubscriberAsCsv' => TRUE,
+						'helper' => $helper,
+						'settings' => $this->settings,
+						'attachIcsInvitation' => TRUE,
+				)
+			);
+		}
+
+		$this->view->assign('event', $event);
+		$this->view->assign('step', $step);
+	}
+
 
 }
 

@@ -56,7 +56,7 @@ if (TYPO3_MODE === 'BE') {
 		array(
 			'Event' => 'beList, beCopy, show, new, create, edit, update, delete, listOwn',
 			'Category' => '',
-			'Subscriber' => 'beIcsInvitation, list, beList',
+			'Subscriber' => 'beIcsInvitation, list, beList, beOnlineSurvey',
 			'Location' => '',
 		),
 		array(

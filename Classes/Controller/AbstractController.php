@@ -105,7 +105,6 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 		}
 	}
 
-
 	/**
 	 * Safely gets Parameters from request
 	 * if they exist

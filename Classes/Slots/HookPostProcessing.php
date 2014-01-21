@@ -88,6 +88,32 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	/**
 	 * TCEmain hook function
 	 *
+	 * This hook is used to unset some TCA-helper fields which are not
+	 * part of the database table.
+	 *
+	 * We have to unset these helper fields here because with
+	 * status="NEW" it doesn't work in the preProcessFieldArray-hook
+	 *
+	 * @param       string          Status "new" or "update"
+	 * @param       string          Table name
+	 * @param       string          Record ID. If new record its a string pointing to index inside t3lib_tcemain::substNEWwithIDs
+	 * @param       array           Field array of updated fields in the operation
+	 * @param       object          Reference to tcemain calling object
+	 * @return      void
+	 *
+	 */
+	function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$pObj) {
+
+		if ($table == 'tx_slubevents_domain_model_event') {
+			unset($fieldArray['end_date_time_select']);
+			unset($fieldArray['sub_end_date_time_select']);
+		}
+
+	}
+
+	/**
+	 * TCEmain hook function
+	 *
 	 * @param       string          Status "new" or "update"
 	 * @param       string          Table name
 	 * @param       string          Record ID. If new record its a string pointing to index inside t3lib_tcemain::substNEWwithIDs

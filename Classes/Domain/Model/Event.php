@@ -170,6 +170,13 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	protected $contact;
 
 	/**
+	 * onlinesurvey
+	 *
+	 * @var string
+	 */
+	protected $onlinesurvey;
+
+	/**
 	 * Returns hidden
 	 *
 	 * @return boolean $hidden
@@ -601,6 +608,25 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function isCancelled() {
 		return $this->getCancelled();
+	}
+
+	/**
+	 * Returns the onlinesurvey
+	 *
+	 * @return string $onlinesurvey
+	 */
+	public function getOnlinesurvey() {
+		return $this->onlinesurvey;
+	}
+
+	/**
+	 * Sets the onlinesurvey
+	 *
+	 * @param string $onlinesurvey
+	 * @return void
+	 */
+	public function setOnlinesurvey($onlinesurvey) {
+		$this->onlinesurvey = $onlinesurvey;
 	}
 
 }

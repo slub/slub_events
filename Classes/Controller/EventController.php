@@ -289,6 +289,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		$this->view->assign('categoriesIds', explode(',', $this->settings['categorySelection']));
 	}
 
+
 	/**
 	 * action errorAction
 	 *
@@ -297,6 +298,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	public function errorAction() {
 
 	}
+
 
 	/**
 	 * action ajax

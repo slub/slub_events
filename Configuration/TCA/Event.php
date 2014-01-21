@@ -40,11 +40,11 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'canNotCollapse' => TRUE
 		),
 		'paletteEnd' => array(
-			'showitem' => 'end_date_time, end_date_time_select',
+			'showitem' => 'end_date_time_select, --linebreak--, end_date_time',
 			'canNotCollapse' => TRUE
 		),
 		'paletteEndSubscription' => array(
-			'showitem' => 'sub_end_date_time, sub_end_date_time_select, sub_end_date_info_sent',
+			'showitem' => 'sub_end_date_time_select, --linebreak--,  sub_end_date_time, sub_end_date_info_sent',
 			'canNotCollapse' => TRUE
 		),
 	),
@@ -157,7 +157,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			),
 		),
 		'end_date_time' => array(
-			'displayCond' => 'FIELD:end_date_time:>:0',
+			//~ 'displayCond' => 'FIELD:end_date_time:>:0',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end_date_time',
 			'config' => array(
@@ -165,21 +165,21 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'size' => 10,
 				'eval' => 'datetime',
 				'checkbox' => 1,
-				'default' => ''
+				'default' => 0
 			),
 		),
 		'end_date_time_select' => array(
 			'displayCond' => 'FIELD:end_date_time:=:0',
 			'exclude' => 0,
-			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end_date_time',
+			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end_date_time_select',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
-					array('-- Hours --', ''),
+					array('LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.end_date_time_select_value', 0),
 					array('00:15', 15),
 					array('00:30', 30),
 					array('00:45', 45),
-					array('00:60', 60),
+					array('01:00', 60),
 					array('01:30', 90),
 					array('02:00', 120),
 					array('03:00', 180),
@@ -190,11 +190,11 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'default' => '',
+				'default' => 0,
 			),
 		),
 		'sub_end_date_time' => array(
-			'displayCond' => 'FIELD:sub_end_date_time:>:0',
+			//~ 'displayCond' => 'FIELD:sub_end_date_time:>:0',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end_date_time',
 			'config' => array(
@@ -202,17 +202,17 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'size' => 10,
 				'eval' => 'datetime',
 				'checkbox' => 1,
-				'default' => ''
+				'default' => 0
 			),
 		),
 		'sub_end_date_time_select' => array(
 			'displayCond' => 'FIELD:sub_end_date_time:=:0',
 			'exclude' => 0,
-			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end_date_time',
+			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end_date_time_select',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
-					array('-- Hours --', ''),
+					array('LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.sub_end_date_time_select_value', 0),
 					array('01:00', 60),
 					array('02:00', 120),
 					array('04:00', 240),
@@ -223,7 +223,8 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'default' => 1440,
+				'default' => 0,
+				//~ 'default' => 1440,
 			),
 		),
 		'teaser' => array(

@@ -48,6 +48,16 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:if condition="{event.hidden} == 0"><f:then><f:be.buttons.icon icon="actions-edit-copy" uri="{f:uri.action(action:'beCopy' arguments:'{event:event}')}" title="<f:translate key='be.copyEvent' />" /></f:then></f:if></td>
 			<td><se:be.functionBar icon="hide" event="{event}" /></td>
 			<td><f:link.action action="beIcsInvitation" controller="Subscriber" title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}" arguments="{event : event}"><f:translate key='be.icsInvitation' /></f:link.action></td>
+			<td><f:if condition="{event.onlinesurvey}">
+					<f:then>
+						<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />"><f:then></f:then>
+						<f:else>
+							<f:link.action action="beOnlineSurvey" controller="Subscriber" title="<f:translate key='be.sendOnlineSurvey' /> {event.contact.name}, {event.contact.email}" arguments="{event : event}"> --xxx-- </f:link.action>
+						</f:else>
+						</f:if>
+					</f:then>
+				</f:if>
+			</td>
 		</tr>
 	</f:for>
 </table>
