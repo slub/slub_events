@@ -34,6 +34,30 @@
 class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controller_AbstractController {
 
 	/**
+	 * Initializes the current action
+	 *
+	 * idea from tx_news extension
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+
+		// Only do this in Frontend Context
+		if (!empty($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
+			// We only want to set the tag once in one request, so we have to cache that statically if it has been done
+			static $cacheTagsSet = FALSE;
+
+			/** @var $typoScriptFrontendController \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController  */
+			$typoScriptFrontendController = $GLOBALS['TSFE'];
+			if (!$cacheTagsSet) {
+				$typoScriptFrontendController->addCacheTags(array(0 => 'tx_slubevents_cat_' . $this->settings['storagePid']));
+				$cacheTagsSet = TRUE;
+			}
+			$this->typoScriptFrontendController = $typoScriptFrontendController;
+		}
+	}
+
+	/**
 	 * action list
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $category

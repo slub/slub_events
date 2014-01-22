@@ -22,19 +22,27 @@ plugins onto these pages:
 	|-- Unsubscribe	<-- plugin "SLUB: Events: Registration", Unsubscribe View
 	`-- Eventdata	<-- Sysfolder for Eventdata
 
-With the TYPO3 list module, you have to add some basic data to the
+With the TYPO3 list module, you have to add three basic data to the
 "Eventdate" folder:
 
-- Categories: e.g. "tutorials"
-- Contacts: The name and email address will be used to send the
-  confirmation emails on subscription. The picture and the description
-  is only used with the knowledge bar functionality.
-- Locations: Add location with title, descriptions and links. The title
-  will be shown in the ics-invitation.
+#. **Category**: The categories of your events like "Tutorial", "Lesson", "Workshop", etc.
+#. **Contact Details**: The name and email address will be used to send the
+   confirmation emails on subscription. The picture and the description
+   is only used with the knowledge bar functionality.
+#. **Location**: Add location with title, descriptions and links. The title
+   will be shown in the ics-invitation.
 
 If all this is done, you may use the backend module on the left, called
 "Events" and select the Eventdata-folder or any page below the
 slub_events template.
+
+
+.. figure:: ../Images/UserManual/slub-events-backend-module.jpg
+	:width: 500px
+	:alt: The Backend Module
+
+	The backend module appears on the right if the right page has been choosen.
+
 
 **Important:** You have to set the StoragePid of the Eventdata-folder on
 some template (see :ref:`set-storage-folder`). Otherwise you get the
@@ -42,9 +50,17 @@ following error message:
 
 .. code-block:: none
 
-	"Sorry, the requested view was not found.
+	Cannot find the configuration!
 
-	The technical reason is: No template was found. View could not be resolved for action "beList".
+	<-- Please select a page or folder in the left tree to continue.
+
+
+.. figure:: ../Images/UserManual/slub-events-error-cannot-find-configuration.jpg
+	:width: 500px
+	:alt: Error: cannot find the configuration
+
+	Error if no page or folder is selected with the slub_events template.
+
 
 
 Screenshots

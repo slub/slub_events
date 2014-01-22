@@ -63,3 +63,4 @@ slub_events
 	Introduction/Index
 	UsersManual/Index
 	AdministratorManual/Index
+	KnownProblems/Index

@@ -36,7 +36,20 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	 *
 	 * @return
 	 */
-	function clearAllEventListCache() {
+	function clearAllEventListCache($pid = 0, $isGeniusBar = 0) {
+
+		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
+
+		// next two lines are necessary... don't know why.
+		$tcemain->stripslashes_values = 0;
+		$tcemain->start(array(), array());
+
+		if ($isGeniusBar)
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_'.$pid);
+		else
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$pid);
+
+		return;
 
 		global $GLOBALS;
 
@@ -127,7 +140,7 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 		if ($table == 'tx_slubevents_domain_model_event' &&
 				$pObj->checkValue_currentRecord['hidden'] == '0') {
 
-			$this->clearAllEventListCache();
+			$this->clearAllEventListCache($pObj->checkValue_currentRecord['pid'], $pObj->checkValue_currentRecord['genius_bar']);
 
 			// unfortunately I cannot access the category IDs only the amount of categories
 			// but at least I get the start_date_time so I will delete all cached files around this

@@ -73,6 +73,10 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 
 		$this->contentObj = $this->configurationManager->getContentObject();
 		$this->settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+
+		// merge the storagePid into settings for the cache tags
+		$frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$this->settings['storagePid'] = $frameworkConfiguration['persistence']['storagePid'];
 	}
 
 	/**
@@ -91,19 +95,21 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	 *
 	 * @return
 	 */
-	protected function initializeAction() {
-
-		global $BE_USER;
-
-		// TYPO3 doesn't set locales for backend-users --> so do it manually like this...
-		// is needed especially with strftime
-		switch ($BE_USER->uc['lang']) {
-			case 'en': setlocale(LC_ALL, 'en_GB.utf8');
-				break;
-			case 'de': setlocale(LC_ALL, 'de_DE.utf8');
-				break;
-		}
-	}
+	//~ protected function initializeAction() {
+//~
+		//~ if (TYPO3_MODE === 'BE') {
+			//~ global $BE_USER;
+//~
+			//~ // TYPO3 doesn't set locales for backend-users --> so do it manually like this...
+			//~ // is needed especially with strftime
+			//~ switch ($BE_USER->uc['lang']) {
+				//~ case 'en': setlocale(LC_ALL, 'en_GB.utf8');
+					//~ break;
+				//~ case 'de': setlocale(LC_ALL, 'de_DE.utf8');
+					//~ break;
+			//~ }
+		//~ }
+	//~ }
 
 	/**
 	 * Safely gets Parameters from request

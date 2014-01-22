@@ -105,9 +105,9 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 
 			// use the select box value to calculate the end_date_time relative to start_date_time
 			if (!empty($fieldArray['end_date_time_select'])) {
-				$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Veranstaltung gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['end_date_time_select']), 'Bitte prüfen:', t3lib_FlashMessage::INFO, TRUE);
-				t3lib_FlashMessageQueue::addMessage($message);
 				$fieldArray['end_date_time'] = $fieldArray['start_date_time'] + $fieldArray['end_date_time_select'] * 60;
+				$message = t3lib_div::makeInstance('t3lib_FlashMessage', 'Ende der Veranstaltung gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['end_date_time']), 'Bitte prüfen:', t3lib_FlashMessage::INFO, TRUE);
+				t3lib_FlashMessageQueue::addMessage($message);
 			}
 			//~ unset($fieldArray['end_date_time_select']);
 
