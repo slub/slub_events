@@ -43,7 +43,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</f:if>
 
 	<p><f:render partial="Event/DateFromTo" arguments="{event : event}" /></p>
-	<p><div class="location" title="<se:format.stripTags htmlString='{event.location.description}' />"></p>
 
 	<p><f:format.html>{event.description}</f:format.html></p>
 
@@ -72,7 +71,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 </div>
 
 <p>
-<f:link.action controller="Event" action="beList">Zurück zur Übersicht</f:link.action><br />
+<f:translate key="be.error.nofolderselected" htmlEscape="FALSE"/>
 </p>
 
 </f:be.container>

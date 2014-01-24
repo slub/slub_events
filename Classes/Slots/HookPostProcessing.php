@@ -51,27 +51,6 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 
 		return;
 
-		global $GLOBALS;
-
-		$select = 'DISTINCT pages.uid';
-		$table = 'tt_content, pages';
-		$query = 'list_type IN(\'slubevents_eventlist\', \'slubevents_eventgeniusbar\') AND pages.uid = tt_content.pid';
-		$query .= ' AND tt_content.hidden = 0 AND pages.hidden = 0';
-		$query .= ' AND tt_content.deleted = 0 AND pages.deleted = 0';
-
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$query);
-
-		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
-
-		// next two lines are necessary... don't know why.
-		$tcemain->stripslashes_values = 0;
-		$tcemain->start(array(), array());
-
-		while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-			$tcemain->clear_cacheCmd($row['uid']);
-		};
-
-		return;
 	}
 
 	/**

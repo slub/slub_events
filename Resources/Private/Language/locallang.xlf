@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-21T10:45:17Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-24T13:58:14Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -41,11 +41,14 @@
 		<trans-unit id="be.sendIcsInvitationTo" xml:space="preserve">
 			<source>Send ICS Invitation to:</source>
 		</trans-unit>
+		<trans-unit id="be.sendOnlineSurvey" xml:space="preserve">
+			<source>Send Online Survey Request to Subscribers</source>
+		</trans-unit>
 		<trans-unit id="be.unhideEvent" xml:space="preserve">
 			<source>Unhide Event</source>
 		</trans-unit>
 		<trans-unit id="paginate_back" xml:space="preserve">
-			<source>back</source>
+			<source>Back</source>
 		</trans-unit>
 		<trans-unit id="paginate_next" xml:space="preserve">
 			<source>Next</source>

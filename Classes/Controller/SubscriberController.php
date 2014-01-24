@@ -240,7 +240,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$this->eventRepository->update($event);
 
 		// clear cache on all cached list pages
-		$this->clearAllEventListCache();
+		$this->clearAllEventListCache($event->getGeniusBar());
 		$this->view->assign('event', $event);
 		$this->view->assign('category', $category);
 		$this->view->assign('newSubscriber', $newSubscriber);
@@ -269,6 +269,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
 			$ics = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $csv */
 			$csv = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 		}
 
@@ -442,22 +443,13 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	}
 
 	/**
-	 * Clear cache of all pages with slubevents_eventlist plugin
-	 * This way the plugin may stay cached but on every delete or insert of subscribers, the cache gets cleared.
+	 * Clear cache of all pages with cached slubevents content.
+	 * This way the plugin may stay cached but on every delete or insert
+	 * of subscribers, the cache gets cleared.
 	 *
 	 * @return
 	 */
 	public function clearAllEventListCache() {
-
-		global $GLOBALS;
-
-		$select = 'DISTINCT pages.uid';
-		$table = 'tt_content, pages';
-		$query = 'list_type IN(\'slubevents_eventlist\', \'slubevents_eventgeniusbar\') AND pages.uid = tt_content.pid';
-		$query .= ' AND tt_content.hidden = 0 AND pages.hidden = 0';
-		$query .= ' AND tt_content.deleted = 0 AND pages.deleted = 0';
-
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$query);
 
 		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
 
@@ -465,12 +457,13 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$tcemain->stripslashes_values = 0;
 		$tcemain->start(array(), array());
 
-		while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-			$pluginPageIds[] = $row['uid'];
-		};
-		$GLOBALS['TSFE']->clearPageCacheContent_pidList(implode(',', $pluginPageIds));
+		if ($isGeniusBar)
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_'.$this->settings['storagePid']);
+		else
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$this->settings['storagePid']);
 
 		return;
+
 	}
 
 	/**
@@ -531,7 +524,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		// update the repo manually as of TYPO3 6.1
 		$this->eventRepository->update($event);
 
-		$this->clearAllEventListCache();
+		$this->clearAllEventListCache($event->getGeniusBar());
 		$this->view->assign('event', $event);
 		$this->view->assign('subscriber', $subscriber);
 	}
@@ -669,6 +662,34 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			//~ $helper['allDay'] = 1;
 		//~ }
 
+		if ($step == 0) {
+			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
+				// TYPO3 4.7
+				$emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+			} else {
+				// TYPO3 6.x
+				/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+				$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+			}
+
+			$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
+			$emailViewHTML->setFormat('html');
+			//~ $emailText->assignMultiple($variables);
+			$emailViewHTML->assign('event', $event);
+			$emailViewHTML->assign('subscriber', array('name' => '###Name wird automatisch ausgefüllt###'));
+
+			$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+			$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+			$partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+
+			$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . 'OnlineSurvey.html');
+			$emailViewHTML->setPartialRootPath($partialRootPath);
+
+			$emailTextHTML = $emailViewHTML->render();
+
+		}
+
+
 		if ($step == 1) {
 			$helper['now'] = time();
 			$helper['description'] = $this->foldline($event->getDescription());
@@ -677,25 +698,46 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 				$helper['location'] = $event->getLocation()->getName();
 				$helper['locationics'] = $this->foldline($event->getLocation()->getName());
 			}
-			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
-			$this->sendTemplateEmail(
-				array($event->getContact()->getEmail() => $event->getContact()->getName()),
-				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
-				'Termineinladung: ' . $event->getTitle(),
-				'Invitation',
-				array(	'event' => $event,
-						'subscribers' => $event->getSubscribers(),
-						'attachSubscriberAsCsv' => TRUE,
-						'helper' => $helper,
-						'settings' => $this->settings,
-						'attachIcsInvitation' => TRUE,
-				)
-			);
+
+			$allSubscribers = $event->getSubscribers();
+				foreach ($allSubscribers as $uid => $subscriber) {
+					//~ $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
+					$this->sendTemplateEmail(
+						array($subscriber->getEmail() => $subscriber->getName()),
+						array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+						'Online-Umfrage zu ' . $event->getTitle(),
+						'OnlineSurvey',
+						array(	'event' => $event,
+								'subscriber' => $subscriber,
+								'attachSubscriberAsCsv' => FALSE,
+								'helper' => $helper,
+								'settings' => $this->settings,
+								'attachIcsInvitation' => FALSE,
+						)
+					);
+				}
 		}
 
+		//~ if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
+			//~ // TYPO3 4.7
+			//~ $message = t3lib_div::makeInstance('t3lib_mail_Message');
+		//~ } else {
+			//~ // TYPO3 6.x
+			//~ /** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
+			//~ $message = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+		//~ }
+//~
+		//~ $message->setTo($recipient)
+				//~ ->setFrom($sender)
+				//~ ->setCharset('utf-8')
+				//~ ->setSubject($subject);
+
+
 		$this->view->assign('event', $event);
+		$this->view->assign('subscribers', $event->getSubscribers());
 		$this->view->assign('step', $step);
+		$this->view->assign('emailText', $emailTextHTML);
 	}
 
 

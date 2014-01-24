@@ -185,3 +185,12 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	font-size: 200%;
 	text-align: left;
 }
+
+.tx_slubevents .emailtext {
+
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 30px;
+	width: 500px;
+
+}

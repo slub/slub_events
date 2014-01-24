@@ -1,0 +1,21 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<p>Sehr geehrte(r) {subscriber.name},</p>
+
+<p>Sie hatten kürzlich an folgender Veranstaltung teilgenommen:</p>
+
+<p><b>{event.title}</b></p>
+<p>
+<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />" />
+</p>
+<p>Gerne würden wir erfahren, wie Ihnen die Veranstaltung gefallen hat. Wir haben dafür einen Online-Fragebogen vorbereitet und würden uns freuen, wenn Sie an dieser kurzen Umfrage teilnehmen würden:</p>
+
+<p>
+	<f:link.external class="slub-event-link" uri="{event.onlinesurvey}">Zum Fragebogen "{event.title}"</f:link.external>
+</p>
+
+<p>Vielen Dank für Ihre Teilnahme.</p>
+
+<p>Mit freundlichen Grüßen</p>
+<p>&nbsp;</p>
+<p>SLUB Dresden</p>
+

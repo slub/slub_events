@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-21T10:45:17Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-24T13:58:14Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -45,13 +45,17 @@
 			<source>Send ICS Invitation to:</source>
 			<target>Schicke Termineinladung an: </target>
 		</trans-unit>
+		<trans-unit id="be.sendOnlineSurvey" approved="yes" xml:space="preserve">
+			<source>Send Online Survey Request to Subscribers</source>
+			<target>Online-Umfrage an Teilnehmer senden.</target>
+		</trans-unit>
 		<trans-unit id="be.unhideEvent" approved="yes" xml:space="preserve">
 			<source>Unhide Event</source>
 			<target>Aktivieren</target>
 		</trans-unit>
 		<trans-unit id="paginate_back" approved="yes" xml:space="preserve">
-			<source>back</source>
-			<target>zurück</target>
+			<source>Back</source>
+			<target>Zurück</target>
 		</trans-unit>
 		<trans-unit id="paginate_next" approved="yes" xml:space="preserve">
 			<source>Next</source>

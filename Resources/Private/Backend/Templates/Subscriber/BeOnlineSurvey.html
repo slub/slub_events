@@ -19,42 +19,58 @@
 
 {namespace se=Tx_SlubEvents_ViewHelpers}
 
-
 <div class="tx_slubevents">
 <f:form action="beOnlineSurvey" controller="Subscriber" name="onlineSurvey" method="post">
 
-<p>Step {step}!</p>
-<p>Senden Sie im Namen von <b>{event.contact.name} ({event.contact.email})</b> folgende Einladung zu einer Online-Umfrage an alle Teilnehmer:</p>
-	<f:if condition="{event.geniusBar}">
+	<f:if condition="{step} == 0">
 		<f:then>
-			<h3><f:translate key="tx_slubevents_domain_model_event.individual_appointment" /></h3>
+			<p><b>Prüfen</b></p>
+			<p>Senden Sie im Namen von <b>{event.contact.name}
+			({event.contact.email})</b> folgende Einladung zu einer
+			Online-Umfrage an folgende Teilnehmer:</p>
+			<div class="emailtext">
+			<ul>
+			<f:for each="{subscribers}" as="subscriber">
+				<li>{subscriber.name} --> {subscriber.email}, {subscriber.number} <f:if condition="{subscriber.number} == 1"><f:then>Person</f:then><f:else>Personen</f:else></f:if></li>
+			</f:for>
+			</ul>
+			</div>
+
+			<p>
+				<div class="emailtext">
+					<f:format.html>
+						{emailText}
+					</f:format.html>
+				</div>
+			</p>
+			<p>
+			<f:form.hidden name="step" value="1" />
+			<f:form.hidden name="event" value="{event}" />
+			<f:form.submit value="Sende Email" />
+			</p>
 		</f:then>
-		<f:else>
-			<h3><f:translate key="tx_slubevents_domain_model_event" />: {event.title}</h3>
-		</f:else>
 	</f:if>
 
-	<p><f:render partial="Event/DateFromTo" arguments="{event : event}" /></p>
-	<p><div class="location" title="<se:format.stripTags htmlString='{event.location.description}' />"></p>
-
-	<p><f:format.html>{event.onlinesurvey}</f:format.html></p>
-
-	<p>
-		<f:form.textfield id="tceforms-datefield-1" class="formField tceforms-textfield tceforms-datefield" property="selectedStartDateStamp"  value="{selectedStartDateStamp}" />
-	</p>
-
-	<p>
-	<f:form.hidden name="step" value="1" />
-	<f:form.hidden name="event" value="{event}" />
-	<f:form.submit value="Sende Email" />
-	</p>
+	<f:if condition="{step} == 1">
+		<f:then>
+			<p><b>Versendet</b></p>
+			<p>Die Online-Umfrage wurde an folgende Email-Adressen versendet:</p>
+			<div class="emailtext">
+			<ul>
+			<f:for each="{subscribers}" as="subscriber">
+				<li>{subscriber.name} --> {subscriber.email}, {subscriber.number} <f:if condition="{subscriber.number} == 1"><f:then>Person</f:then><f:else>Personen</f:else></f:if></li>
+			</f:for>
+			</ul>
+			</div>
+		</f:then>
+	</f:if>
 
 	</div>
 </f:form>
 </div>
 
 <p>
-<f:link.action controller="Event" action="beList">Zurück zur Übersicht</f:link.action><br />
+<f:link.action controller="Event" action="beList"><f:translate key="paginate_back"/></f:link.action><br />
 </p>
 
 </f:be.container>

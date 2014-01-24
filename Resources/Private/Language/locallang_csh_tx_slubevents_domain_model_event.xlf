@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-15T16:51:46Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-24T15:18:48Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -40,6 +40,9 @@
 		</trans-unit>
 		<trans-unit id="min_subscriber.description" xml:space="preserve">
 			<source>Set minimum number of subscribers. If this value is not reached up to the given subscription end time, the event will be cancelled. All subscribers and the contact person will be informed. Remove this value to disable subscription.</source>
+		</trans-unit>
+		<trans-unit id="onlinesurvey.description" xml:space="preserve">
+			<source>Enter a full URI (http://...) to an online survey.</source>
 		</trans-unit>
 		<trans-unit id="start_date_time.description" xml:space="preserve">
 			<source>Start of Event (Date and Time)</source>

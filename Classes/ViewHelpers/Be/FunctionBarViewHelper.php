@@ -165,6 +165,10 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 				break;
 			case 'geniusbar': 	$content = $this->getGeniusBarIcon($event);
 				break;
+			case 'icsinvitation': 	$content = $this->getIcsInvitationIcon($event);
+				break;
+			case 'onlineSurvey': 	$content = $this->getOnlineSurveyIcon($event);
+				break;
 			case 'datepicker': 	$content = $this->getDatePickerIcon();
 				break;
 		}
