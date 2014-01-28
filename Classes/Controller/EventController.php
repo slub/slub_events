@@ -238,6 +238,8 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 
 		// get the categories
 		$categories = $this->categoryRepository->findAllTree();
+		// get all contacts
+		$contacts = $this->contactRepository->findAll();
 
 		// check which categories have been selected
 		if (is_array($searchParameter['selectedCategories'])) {
@@ -250,15 +252,28 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 					$searchParameter['category'][$uid] = $uid;
 			$this->view->assign('categoriesSelected', $searchParameter['category']);
 		}
+
+		// check which contacts have been selected
+		if (is_array($searchParameter['selectedContacts'])) {
+			$this->view->assign('selectedContacts', $searchParameter['selectedContacts']);
+		}
+		else {
+			// if no contacts selection in user settings present --> look for the root categories
+			if (! is_array($searchParameter['contacts']))
+				foreach ($contacts as $uid => $category)
+					$searchParameter['contacts'][$uid] = $uid;
+			$this->view->assign('contactsSelected', $searchParameter['contacts']);
+		}
 		$this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
 
 		// get the events to show
 		if (is_array($searchParameter['category']))
-			$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp), $searchParameter['searchString']);
+			$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp), $searchParameter['searchString'], $searchParameter['contacts']);
 
 		$this->view->assign('searchString', $searchParameter['searchString']);
 		$this->view->assign('categories', $categories);
 		$this->view->assign('events', $events);
+		$this->view->assign('contacts', $contacts);
 
 	}
 

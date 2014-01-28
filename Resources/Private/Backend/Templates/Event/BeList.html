@@ -78,12 +78,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:form action="beList" section="results" name="searchParameter" method="post">
 <table class="tx_slubevents" >
 	<tr>
-		<th><label for="selectedStartDateStamp">
+		<th><label for="tceforms-datefield-1">
 				<f:translate key="tx_slubevents_domain_model_event.start_date_time" />
 			</label>
 		</th>
 		<th><f:translate key="tx_slubevents_domain_model_category" /></th>
-		<th></th>
+		<th><label for="field-contact-search"><f:translate key="be.searchContacts" /></label></th>
 	</tr>
 	<tr>
 		<td class="td-input">
@@ -94,6 +94,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<f:render partial="Event/CategoryTree" arguments="{categories: categories, categoriesSelected : categoriesSelected}" />
 		</td>
 		<td>
+			<f:form.select id="field-contact-search" class="" property="contacts" options="{contacts}" optionValueField="uid" optionLabelField="name" multiple="1" size="10" value="{contactsSelected}" />
 		</td>
 	</tr>
 
@@ -108,6 +109,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th>
 		</th>
 	</tr>
+
 	<tr>
 		<td class="td-input">
 				<f:form.textfield class="" property="searchString" placeholder="<f:translate key='be.searchInTitle' />" value="{searchString}" />
@@ -117,6 +119,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<td>
 		</td>
 	</tr>
+
 	<tr>
 		<td colspan="2" id="results">
 			<f:form.submit value="Suchen..." />

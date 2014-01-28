@@ -58,6 +58,15 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	protected $subscriberRepository;
 
 	/**
+	 * contactRepository
+	 *
+	 * @var Tx_SlubEvents_Domain_Repository_ContactRepository
+	 * @inject
+	 */
+	protected $contactRepository;
+
+
+	/**
 	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
 	*/
 	protected $configurationManager;

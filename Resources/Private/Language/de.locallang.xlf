@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-24T13:58:14Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-28T09:52:25Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -32,6 +32,10 @@
 		<trans-unit id="be.newEvent" approved="yes" xml:space="preserve">
 			<source>New Event</source>
 			<target>Neue Veranstaltung anlegen</target>
+		</trans-unit>
+		<trans-unit id="be.searchContacts" approved="yes" xml:space="preserve">
+			<source>Selected Contacts</source>
+			<target>Ausgewählte Ansprechpartner</target>
 		</trans-unit>
 		<trans-unit id="be.searchInTitle" approved="yes" xml:space="preserve">
 			<source>Search in Title</source>

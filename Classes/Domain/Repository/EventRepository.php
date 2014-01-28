@@ -193,9 +193,10 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	 * @param string categories separated by comma
 	 * @param int startdatestamp
 	 * @param string searchString
+	 * @param array contacts separated by comma
 	 * @return array The found Event Objects
 	 */
-	public function findAllByCategoriesAndDate($categories, $startDateStamp, $searchString = '') {
+	public function findAllByCategoriesAndDate($categories, $startDateStamp, $searchString = '', $contacts = array()) {
 
 		$query = $this->createQuery();
 
@@ -214,6 +215,8 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		}
 
 			$constraints[] = $query->in('categories.uid', $categories );
+			if (!empty($contacts))
+				$constraints[] = $query->in('contact', $contacts );
 			$constraints[] = $query->greaterThan('start_date_time',  $startDateStamp );
 			if (!empty($searchString))
 				$constraints[] = $query->like('title',  '%'.$searchString.'%' );

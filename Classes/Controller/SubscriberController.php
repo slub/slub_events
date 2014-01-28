@@ -719,21 +719,6 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 				}
 		}
 
-		//~ if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
-			//~ // TYPO3 4.7
-			//~ $message = t3lib_div::makeInstance('t3lib_mail_Message');
-		//~ } else {
-			//~ // TYPO3 6.x
-			//~ /** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
-			//~ $message = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-		//~ }
-//~
-		//~ $message->setTo($recipient)
-				//~ ->setFrom($sender)
-				//~ ->setCharset('utf-8')
-				//~ ->setSubject($subject);
-
-
 		$this->view->assign('event', $event);
 		$this->view->assign('subscribers', $event->getSubscribers());
 		$this->view->assign('step', $step);

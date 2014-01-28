@@ -84,6 +84,9 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	border-left: 1px dashed #a00;
 }
 
+#field-contact-search {
+	width: 150px;
+}
 /*
  *------
  * ...
