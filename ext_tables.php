@@ -9,7 +9,7 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'SLUB: Events: Listing'
 );
 
-$pluginSignature = str_replace('_','',$_EXTKEY) . '_eventlist';
+$pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventlist';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_eventlist.xml');
 
@@ -19,7 +19,7 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'SLUB: Events: Registration'
 );
 
-$pluginSignature = str_replace('_','',$_EXTKEY) . '_eventsubscribe';
+$pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventsubscribe';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_eventsubscribe.xml');
 
@@ -29,7 +29,7 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'SLUB: Events: User Panel'
 );
 
-$pluginSignature = str_replace('_','',$_EXTKEY) . '_eventuserpanel';
+$pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventuserpanel';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_eventuserpanel.xml');
 
@@ -39,12 +39,11 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'SLUB: Events: Wissensbar'
 );
 
-$pluginSignature = str_replace('_','',$_EXTKEY) . '_eventgeniusbar';
+$pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventgeniusbar';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_eventgeniusbar.xml');
 
 if (TYPO3_MODE === 'BE') {
-
 	/**
 	 * Registers a Backend Module
 	 */
@@ -65,7 +64,6 @@ if (TYPO3_MODE === 'BE') {
 			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_slubevents.xlf',
 		)
 	);
-
 }
 
 
@@ -246,5 +244,4 @@ $TCA['tx_slubevents_domain_model_contact'] = array(
 	),
 );
 
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
 ?>
