@@ -34,6 +34,9 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	 * Clear cache of all pages with slubevents_eventlist plugin
 	 * This way the plugin may stay cached but on every delete or insert of subscribers, the cache gets cleared.
 	 *
+	 * @param       int			the PID of the storage folder
+	 * @param       boolean		set TRUE if this is a genius bar event
+	 *
 	 * @return
 	 */
 	function clearAllEventListCache($pid = 0, $isGeniusBar = 0) {
@@ -56,11 +59,11 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	/**
 	 * Clear ajax cache files for fullcalendar
 	 *
+	 * @param       timestamp		the startDate as unix timestamp
+	 *
 	 * @return
 	 */
 	function clearAjaxCacheFiles($startDate = NULL) {
-
-		global $GLOBALS;
 
 		$dir    = PATH_site.'typo3temp/tx_slubevents/';
 		if ($startDate === NULL)
@@ -125,9 +128,6 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 			// but at least I get the start_date_time so I will delete all cached files around this
 			// start_date_tim
 			$this->clearAjaxCacheFiles($pObj->checkValue_currentRecord['start_date_time']);
-
-
 		}
 	}
-
 }
