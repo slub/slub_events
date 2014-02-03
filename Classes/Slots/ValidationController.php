@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,7 +33,6 @@
  */
 
 class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller_ActionController {
-
 
 	/**
 	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
@@ -75,7 +74,7 @@ class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller
 		$this->formsRepository = t3lib_div::makeInstance('Tx_Powermail_Domain_Repository_FormsRepository');
 		$this->eventRepository = t3lib_div::makeInstance('Tx_SlubEvents_Domain_Repository_EventRepository');
 	}
-	
+
 	public function checkEvent($params, $obj) {
 
 		$this->initializeAction();
@@ -91,7 +90,6 @@ class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller
 
 		foreach ($form->getPages() as $page) { // every page in current form
 
-		
 			foreach ($page->getFields() as $field) { // every field in current page
 				switch ($field->getMarker()) {
 					case 'action':	$action = $params[$field->getUid()];
@@ -105,9 +103,9 @@ class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller
 								break;
 				}
 			}
-			
+
 		}
-		
+
 		//~ t3lib_utility_Debug::debug($editcode, 'checkEvent: editcode... ');
 		switch ($action) {
 				case 'delete':
@@ -117,7 +115,7 @@ class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller
 						t3lib_utility_Debug::debug($subscriber, 'checkEvent: NO subscriber found... ');
 						$obj->isValid = FALSE;
 						// we have to use the language labels of powermail :-(
-						// --> for validationerror_validation: 
+						// --> for validationerror_validation:
 						$obj->setError('validation', $idEventTitle);
 						break;
 					}
@@ -126,7 +124,7 @@ class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller
 					if (empty($event)) {
 						$obj->isValid = FALSE;
 						// we have to use the language labels of powermail :-(
-						// --> for validationerror_validation: 
+						// --> for validationerror_validation:
 						$obj->setError('validation', $idEventTitle);
 						break;
 					}
@@ -140,7 +138,7 @@ class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller
 						if (count($event->getSubscribers()) >= $event->getMaxSubscriber()) {
 							$obj->isValid = FALSE;
 							// we have to use the language labels of powermail :-(
-							// --> for validationerror_validation: 
+							// --> for validationerror_validation:
 							$obj->setError('validation', $idEventTitle);
 						}
 					}
@@ -159,7 +157,7 @@ class Tx_SlubEvents_Slots_ValidationController extends Tx_Extbase_MVC_Controller
 			if (count($event->getSubscribers()) >= $event->getMaxSubscriber()) {
 				$obj->isValid = FALSE;
 				// we have to use the language labels of powermail :-(
-				// --> for validationerror_validation: 
+				// --> for validationerror_validation:
 				$obj->setError('validation', $idEventTitle);
 			}
 		}

@@ -189,7 +189,6 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 			);
 		}
 
-
 		$tree = array();
 		foreach ($flatCategories as $id => &$node) {
 			if ($node['parent'] === NULL) {

@@ -28,7 +28,7 @@
 	// else make a new query...
 	$out = file_get_contents($url);
 
-	if (!empty($out) && $out != "null") {
+	if (!empty($out) && $out != 'null') {
 		$fp = fopen($calfile, 'w');
 		fwrite($fp, $out);
 		fclose($fp);
