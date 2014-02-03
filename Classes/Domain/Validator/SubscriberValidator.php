@@ -54,7 +54,7 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 	 *
 	 * @var bool
 	 */
-	private $isValid = true;
+	private $isValid = TRUE;
 
 	/**
 	 * Get session data
@@ -63,7 +63,7 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 	 */
 	public function getSessionData($key) {
 
-		return $GLOBALS["TSFE"]->fe_user->getKey("ses", $key);
+		return $GLOBALS['TSFE']->fe_user->getKey("ses", $key);
 
 	}
 
@@ -75,22 +75,20 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 	 */
 	public function isValid($newSubscriber) {
 
-//			t3lib_utility_Debug::debug($newSubscriber->getEditcode(), 'getEditcode:... ');
-//t3lib_utility_Debug::debug($newSubscriber, '$subscriber is empty:... ');
 		if (strlen($newSubscriber->getName())<3) {
 			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_name', 1000);
 			$this->result->forProperty('name')->addError($error);
 			// usually $this->addError is enough but this doesn't set the CSS errorClass in the form-viewhelper :-(
 //			$this->addError('val_name', 1000);
 
-			$this->isValid = false;
+			$this->isValid = FALSE;
 		}
 		if (!t3lib_div::validEmail($newSubscriber->getEmail())) {
 			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_email', 1100);
 			$this->result->forProperty('email')->addError($error);
 //			$this->addError('val_email', 1100);
 
-			$this->isValid = false;
+			$this->isValid = FALSE;
 		}
 		if (strlen($newSubscriber->getCustomerid()) > 0 &&
 			filter_var($newSubscriber->getCustomerid(), FILTER_VALIDATE_INT) === FALSE) {
@@ -98,7 +96,7 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 			$this->result->forProperty('customerid')->addError($error);
 //			$this->addError('val_customerid', 1110);
 
-			$this->isValid = false;
+			$this->isValid = FALSE;
 		}
 		if (strlen($newSubscriber->getNumber()) == 0 ||
 			filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === FALSE ||
@@ -108,7 +106,7 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 			$this->result->forProperty('number')->addError($error);
 //			$this->addError('val_number', 1120);
 
-			$this->isValid = false;
+			$this->isValid = FALSE;
 		} else {
 			$event = $newSubscriber->getEvent();
 			// limit reached already --> overbooked
@@ -117,14 +115,14 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 			    $this->result->forProperty('number')->addError($error);
 //			    $this->addError('val_number', 1130);
 
-			    $this->isValid = false;
+			    $this->isValid = FALSE;
 			}
 		}
 		if ($newSubscriber->getEditcode() != $this->getSessionData('editcode')) {
 			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_editcode', 1140);
 			$this->result->forProperty('editcode')->addError($error);
 //			$this->addError('val_editcode', 1140);
-			$this->isValid = false;
+			$this->isValid = FALSE;
 		}
 
 		return $this->isValid;
