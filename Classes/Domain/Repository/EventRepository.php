@@ -45,9 +45,9 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		$constraints = array();
 		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-		$constraints[] = $query->equals('categories.uid', $category );
-		$constraints[] = $query->equals('genius_bar', 1 );
-		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints[] = $query->equals('categories.uid', $category);
+		$constraints[] = $query->equals('genius_bar', 1);
+		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
@@ -73,8 +73,8 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		$constraints = array();
 		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-		$constraints[] = $query->in('categories.uid', $categories );
-		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints[] = $query->in('categories.uid', $categories);
+		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
@@ -136,9 +136,9 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		$constraints = array();
 		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-		$constraints[] = $query->equals('discipline.uid', $discipline );
-		$constraints[] = $query->equals('categories.uid', $category );
-		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints[] = $query->equals('discipline.uid', $discipline);
+		$constraints[] = $query->equals('categories.uid', $category);
+		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
@@ -164,8 +164,8 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		$constraints = array();
 		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-		$constraints[] = $query->in('categories.uid', $categories );
-		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
+		$constraints[] = $query->in('categories.uid', $categories);
+		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
@@ -216,10 +216,10 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 			$constraints[] = $query->in('categories.uid', $categories );
 			if (!empty($contacts))
-				$constraints[] = $query->in('contact', $contacts );
-			$constraints[] = $query->greaterThan('start_date_time',  $startDateStamp );
+				$constraints[] = $query->in('contact', $contacts);
+			$constraints[] = $query->greaterThan('start_date_time', $startDateStamp);
 			if (!empty($searchString))
-				$constraints[] = $query->like('title',  '%'.$searchString.'%' );
+				$constraints[] = $query->like('title', '%'.$searchString.'%');
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
@@ -247,9 +247,9 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		$constraints = array();
 
-		$constraints[] = $query->in('categories.uid', $categories );
-		$constraints[] = $query->greaterThanOrEqual('start_date_time',  $startDateStamp );
-		$constraints[] = $query->lessThanOrEqual('start_date_time',  $stopDateStamp );
+		$constraints[] = $query->in('categories.uid', $categories);
+		$constraints[] = $query->greaterThanOrEqual('start_date_time', $startDateStamp);
+		$constraints[] = $query->lessThanOrEqual('start_date_time', $stopDateStamp);
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
@@ -276,18 +276,16 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$constraints = array();
 		foreach ($subscribers as $subscriber)
 			$constraints[] = $query->equals('subscribers.editcode', $subscriber->getEditcode());
-		//~ $constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
-		//~ print_r($constraints);
+
 		if (count($constraints)) {
 			$query->matching(
 				$query->logicalAND($query->greaterThan('start_date_time',  strtotime('today')),
 				$query->logicalOr($constraints)
 				)
 			);
-
 		} else
 			return;
-			//~ t3lib_utility_Debug::debug($constraints, 'findAllBySubscriber: query... ');
+
 		// order by start_date -> start_time...
 		$query->setOrderings(
 			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
@@ -346,11 +344,10 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$query = $this->createQuery();
 
 		$constraints = array();
-		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
-		$constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
-		$constraints[] = $query->lessThan('sub_end_date_time',  time() );
-		$constraints[] = $query->greaterThan('sub_end_date_time',  0 );
-		$constraints[] = $query->equals('sub_end_date_info_sent',  '0' );
+		$constraints[] = $query->greaterThan('start_date_time', strtotime('today') );
+		$constraints[] = $query->lessThan('sub_end_date_time', time() );
+		$constraints[] = $query->greaterThan('sub_end_date_time', 0);
+		$constraints[] = $query->equals('sub_end_date_info_sent', '0');
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
