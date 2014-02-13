@@ -333,7 +333,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_category',
-				'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_category.sorting',
+				'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting',
 				'MM' => 'tx_slubevents_event_category_mm',
 				'renderMode' => 'tree',
 				'subType' => 'db',
@@ -378,7 +378,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_location',
-				'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_location.sorting',
+				'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID###  AND tx_slubevents_domain_model_location.hidden = 0 ORDER BY tx_slubevents_domain_model_location.sorting',
 
 				'renderMode' => 'tree',
 				'subType' => 'db',
@@ -412,7 +412,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'allowed' => 'pages',
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_contact',
-				'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_contact.sorting',
+				'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
 				'minitems' => 1,
 				'maxitems' => 2, // this forces a working required select box! stupid but true...
 				'size' => 6, // it should be one but... no chance to get a required select box without it in TYPO3 4.6
