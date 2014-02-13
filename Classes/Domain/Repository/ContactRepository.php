@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,6 +32,30 @@
  *
  */
 class Tx_SlubEvents_Domain_Repository_ContactRepository extends Tx_Extbase_Persistence_Repository {
+
+	/**
+	 * Finds all datasets and return in tree order
+	 *
+	 * @return array The found Contact Objects
+	 */
+	public function findAllSorted() {
+
+		$query = $this->createQuery();
+
+		$constraints = array();
+
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
+
+		$query->setOrderings(
+			array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
+		$contacts = $query->execute();
+
+		return $contacts;
+
+	}
 
 }
 ?>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-28T09:52:26Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-02-13T14:38:17Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -32,8 +32,11 @@
 		<trans-unit id="be.scheduler.checkevents.description" xml:space="preserve">
 			<source>Long description of Task &quot;Check and Report&quot;</source>
 		</trans-unit>
+		<trans-unit id="be.searchAllContacts" xml:space="preserve">
+			<source>Select all</source>
+		</trans-unit>
 		<trans-unit id="be.searchContacts" xml:space="preserve">
-			<source>Selected Contacts</source>
+			<source>Contacts</source>
 		</trans-unit>
 		<trans-unit id="be.searchInTitle" xml:space="preserve">
 			<source>Search in Title</source>

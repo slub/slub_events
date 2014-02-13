@@ -239,7 +239,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		// get the categories
 		$categories = $this->categoryRepository->findAllTree();
 		// get all contacts
-		$contacts = $this->contactRepository->findAll();
+		$contacts = $this->contactRepository->findAllSorted();
 
 		// check which categories have been selected
 		if (is_array($searchParameter['selectedCategories'])) {
@@ -260,11 +260,12 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		else {
 			// if no contacts selection in user settings present --> look for the root categories
 			if (! is_array($searchParameter['contacts']))
-				foreach ($contacts as $uid => $category)
-					$searchParameter['contacts'][$uid] = $uid;
+				foreach ($contacts as $uid => $contact)
+					$searchParameter['contacts'][$uid] = $contact->getUid();
 			$this->view->assign('contactsSelected', $searchParameter['contacts']);
 		}
 		$this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
+	//~ t3lib_utility_Debug::debug($searchParameter['contacts'], 'selectedStartDateStamp... ');
 
 		// get the events to show
 		if (is_array($searchParameter['category']))

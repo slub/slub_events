@@ -94,7 +94,11 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<f:render partial="Event/CategoryTree" arguments="{categories: categories, categoriesSelected : categoriesSelected}" />
 		</td>
 		<td>
-			<f:form.select id="field-contact-search" class="" property="contacts" options="{contacts}" optionValueField="uid" optionLabelField="name" multiple="1" size="10" value="{contactsSelected}" />
+			<label for="category-{category.item.uid}" title="{category.item.uid}">{category.item.title}</label>
+			<se:be.checkbox id="checkbox-all-contacts" name="checkbox-all-contacts" value="1" onclick="checkBoxContacts(this)" />
+			<label for="checkbox-all-contacts"><f:translate key="be.searchAllContacts" /></label>
+			<p>&nbsp;</p>
+			<f:form.select id="field-contact-search" class="" property="contacts" options="{contacts}" optionValueField="uid" optionLabelField="name" multiple="1" size="15" value="{contactsSelected}" />
 		</td>
 	</tr>
 

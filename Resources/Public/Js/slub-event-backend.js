@@ -21,6 +21,55 @@ function checkBoxes(objThis){
   }
 }
 
+function checkBoxContacts(objThis) {
+
+	// Checkbox selected? (true/false)
+	var blnChecked = objThis.checked;
+	var selectlist = document.getElementById('field-contact-search');
+
+	// un-/select all according to the checkbox state
+	for (var i=0; i < selectlist.length; i++) {
+		selectlist.options[i].selected = blnChecked;
+	}
+	if (blnChecked)
+		selectlist.disabled = true;
+	else
+		selectlist.disabled = false;
+
+}
+
+// add new event initCheckBoxContacts
+addEvent(window, "load", initCheckBoxContacts);
+function initCheckBoxContacts() {
+	CheckBoxContacts.init();
+}
+var CheckBoxContacts = new function() {
+}
+
+// init
+CheckBoxContacts.init = function() {
+
+    // Find td with classname 'foldtree' which contains the foldable tree
+    if (!document.getElementById) return;
+	var chkbox = document.getElementById("checkbox-all-contacts");
+	var selectlist = document.getElementById('field-contact-search');
+	var selected = 0;
+	for (var i=0; i < selectlist.length; i++) {
+		if (selectlist.options[i].selected == true)
+			selected++;
+	}
+	if (selected == selectlist.length) {
+		chkbox.checked = true;
+		selectlist.disabled = "disabled";
+	}
+	else {
+		chkbox.checked = false;
+		selectlist.disabled = false;
+	}
+
+}
+
+
 // --------------------
 // fold tree js part
 // --------------------
