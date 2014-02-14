@@ -95,7 +95,7 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	 */
 	public function getSessionData($key) {
 
-		return $GLOBALS["TSFE"]->fe_user->getKey("ses", $key);
+		return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
 
 	}
 

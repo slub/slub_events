@@ -42,7 +42,7 @@ class Tx_SlubEvents_ViewHelpers_Format_EditCodeViewHelper extends Tx_Fluid_Core_
 	 */
 	public function setSessionData($key, $data) {
 
-	    $GLOBALS["TSFE"]->fe_user->setKey("ses", $key, $data);
+	    $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
 
 	    return;
 	}
@@ -59,7 +59,6 @@ class Tx_SlubEvents_ViewHelpers_Format_EditCodeViewHelper extends Tx_Fluid_Core_
 
 		// set editcode-dummy for Spam/Form-double-sent protection
 		$editCodeDummy = hash('sha256', rand().$event->getTitle().time().'dummy');
-//		t3lib_utility_Debug::debug($setEditcode, '2setEditcode:!... ');
 		$this->setSessionData('editcode', $editCodeDummy);
 
 	    return $editCodeDummy;

@@ -63,7 +63,7 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 	 */
 	public function getSessionData($key) {
 
-		return $GLOBALS['TSFE']->fe_user->getKey("ses", $key);
+		return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
 
 	}
 

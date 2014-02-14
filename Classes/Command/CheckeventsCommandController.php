@@ -122,12 +122,12 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 		// abort if no storagePid is found
 		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
-			echo "NO storagePid given. Please enter the storagePid in the scheduler task.\n";
+			echo 'NO storagePid given. Please enter the storagePid in the scheduler task.';
 			exit(1);
 		}
 		// abort if no senderEmailAddress is found
 		if (empty($senderEmailAddress)) {
-			echo "NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.\n";
+			echo 'NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.';
 			exit(1);
 		}
 
@@ -245,17 +245,17 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 		// abort if no storagePid is found
 		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
-			echo "NO storagePid given. Please enter the storagePid in the scheduler task.";
+			echo 'NO storagePid given. Please enter the storagePid in the scheduler task.';
 			exit(1);
 		}
 		// abort if no senderEmailAddress is found
 		if (empty($senderEmailAddress)) {
-			echo "NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.";
+			echo 'NO senderEmailAddress given. Please enter the senderEmailAddress in the scheduler task.';
 			exit(1);
 		}
 		// abort if no senderEmailAddress is found
 		if (empty($receiverEmailAddress)) {
-			echo "NO receiverEmailAddress given. Please enter the receiverEmailAddress in the scheduler task.";
+			echo 'NO receiverEmailAddress given. Please enter the receiverEmailAddress in the scheduler task.';
 			exit(1);
 		} else {
 			$receiverEmailAddress = explode(', ', $receiverEmailAddress);
@@ -427,9 +427,9 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 
 		$text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
 		// header is getting **
-		$text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', "**", $text);
+		$text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', '**', $text);
 		// bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
-		$text = preg_replace('/<b>|<\/b>/', "*", $text);
+		$text = preg_replace('/<b>|<\/b>/', '*', $text);
 		// get away links but preserve href with class slub-event-link
 		$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
 		// Remove separator characters (like non-breaking spaces...)
@@ -437,7 +437,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 		$text = str_replace('<br />', "\n", $text);
 		// get away paragraphs including class, title etc.
 		$text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
-		$text = str_replace('<li>', "- ", $text);
+		$text = str_replace('<li>', '- ', $text);
 		$text = str_replace('</li>', "\n", $text);
 		// remove multiple spaces
 		$text = preg_replace('/[\ ]{2,}/', '', $text);

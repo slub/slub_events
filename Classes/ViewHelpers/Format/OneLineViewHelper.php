@@ -3,7 +3,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,7 +34,7 @@
 class Tx_SlubEvents_ViewHelpers_Format_OneLineViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
-	 * Render 
+	 * Render
 	 *
 	 * @param string $htmlString
 	 * @return string
@@ -43,15 +43,15 @@ class Tx_SlubEvents_ViewHelpers_Format_OneLineViewHelper extends Tx_Fluid_Core_V
 	 */
 	public function render($htmlString) {
 
-		$text = str_replace("\t", " ", $htmlString);
-		$text = str_replace('<br />', " ", $text);
+		$text = str_replace("\t", ' ', $htmlString);
+		$text = str_replace('<br />', ' ', $text);
 		// remove more than one empty line
 		$text = preg_replace('/[\n]{1,}/', ' ', $text);
 		// remove more than one space
 		$text = preg_replace('/[\ ]{2,}/', ' ', $text);
-		
-		return trim($text); 
-		
+
+		return trim($text);
+
 	}
 }
 ?>
