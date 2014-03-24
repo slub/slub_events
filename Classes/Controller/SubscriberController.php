@@ -483,6 +483,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		// delete for which subscriber?
 		$subscriber = $this->subscriberRepository->findAllByEditcode($editcode)->getFirst();
 
+		// multiple removal is possible... don't know, how to distinguish
 		$event->removeSubscriber($subscriber);
 
 		// some helper timestamps for ics-file
@@ -504,6 +505,35 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		if ($event->isAllDay()) {
 			$helper['allDay'] = 1;
+		}
+
+		// send to contact, if
+		//  1. new subscriber count is below minSubscriber
+		//     AND
+		//  2. before subscriber count was above minSubscriber -> event was guaranteed
+		//     AND
+		//  3. settings sendEmailOnFreeAgain
+		if ($this->settings['emailToContact']['sendEmailOnFreeAgain'] &&
+			($this->subscriberRepository->countAllByEvent($event) >= $event->getMinSubscriber()) &&
+			($this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber()) < $event->getMinSubscriber()
+			) {
+			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
+
+			// email to event owner
+			$this->sendTemplateEmail(
+				array($event->getContact()->getEmail() => $event->getContact()->getName()),
+				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+				'Veranstaltung wegen Abmeldung nicht mehr gesichert: ' . $event->getTitle(),
+				'Minimumreachedagain',
+				array(	'event' => $event,
+						'subscribers' => $event->getSubscribers(),
+						'subscriberCount' => $this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber(),
+						'helper' => $helper,
+						'settings' => $this->settings,
+						'attachSubscriberAsCsv' => FALSE,
+						'attachIcsInvitation' => TRUE,
+				)
+			);
 		}
 
 		$this->sendTemplateEmail(

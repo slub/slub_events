@@ -22,7 +22,10 @@ plugin.tx_slubevents {
 	settings {
 		senderEmailAddress = webmaster@slub-dresden.de
 		emailToContact {
+			# send email if the maxSubscriber limit is reached
 			sendEmailOnMaximumReached = 1
+			# send email if the the minSubscriber limit is reached due to cancellations
+			sendEmailOnFreeAgain = 1
 			sendEmailOnEveryBooking = 0
 		}
 		# --------------

@@ -82,6 +82,22 @@ Configure Email Handling
 .. container:: table-row
 
    Property
+         emailToContact.sendEmailOnFreeAgain
+
+   Data type
+         boolean
+
+   Description
+         In case of cancellation by a customer, an email is sent to the
+         contact person if the minimum number of subscribers is not
+         reached anymore. The event is not guaranteed anymore.
+
+   Default
+         1 = Send mails to contact person in case of cancellation by customer.
+
+.. container:: table-row
+
+   Property
          emailToContact.sendEmailOnEveryBooking
 
    Data type
