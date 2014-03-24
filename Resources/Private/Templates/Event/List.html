@@ -29,15 +29,19 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <div class="slub-event-list">
 
-<f:if condition="{settings.hidePagination}">
+<f:if condition="{events}">
 	<f:then>
-		<f:render section="eventListing" arguments="{events: events}" />
+		<f:if condition="{settings.hidePagination}">
+			<f:then>
+				<f:render section="eventListing" arguments="{events: events}" />
+			</f:then>
+			<f:else>
+				<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
+					<f:render section="eventListing" arguments="{events: paginatedEvents}" />
+				</f:widget.paginate>
+			</f:else>
+		</f:if>
 	</f:then>
-	<f:else>
-		<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-			<f:render section="eventListing" arguments="{events: paginatedEvents}" />
-		</f:widget.paginate>
-	</f:else>
 </f:if>
 
 </div>

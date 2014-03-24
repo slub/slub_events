@@ -40,8 +40,22 @@ For example:
    Default
          empty
 
-[tsref:plugin.tx_slubevents.persistence]
+.. container:: table-row
 
+   Property
+         hidePagination
+
+   Data type
+         boolean
+
+   Description
+         In list view (backend module and frontend plugin) a pagination
+         is shown by default. If you want to suppress this pagination for some reason set this option to TRUE
+
+   Default
+         0: show pagination
+
+[tsref:plugin.tx_slubevents.persistence]
 [tsref:module.tx_slubevents.persistence]
 
 

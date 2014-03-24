@@ -20,6 +20,8 @@ plugin.tx_slubevents {
 		skipDefaultArguments = 1
 	}
 	settings {
+		# hide the pagination
+		hidePagination = 0
 		senderEmailAddress = webmaster@slub-dresden.de
 		emailToContact {
 			# send email if the maxSubscriber limit is reached
@@ -64,6 +66,8 @@ module.tx_slubevents {
 	}
 	settings {
 		senderEmailAddress = webmaster@slub-dresden.de
+		# hide the pagination
+		hidePagination = 0
 		# --------------
 		#  List
 		# --------------
