@@ -413,7 +413,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Returns the contact
+	 * Returns the Event
 	 *
 	 * @return Tx_SlubEvents_Domain_Model_Event $event
 	 */
@@ -436,7 +436,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	 * @param Tx_SlubEvents_Domain_Model_Contact $contact
 	 * @return void
 	 */
-	public function setContact(Tx_SlubEvents_Domain_Model_contact $contact) {
+	public function setContact(Tx_SlubEvents_Domain_Model_Contact $contact) {
 		$this->contact = $contact;
 	}
 

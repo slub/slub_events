@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,18 +37,9 @@ class Tx_SlubEvents_Controller_LocationController extends Tx_Extbase_MVC_Control
 	 * locationRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_LocationRepository
+ 	 * @inject
 	 */
 	protected $locationRepository;
-
-	/**
-	 * injectLocationRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_LocationRepository $locationRepository
-	 * @return void
-	 */
-	public function injectLocationRepository(Tx_SlubEvents_Domain_Repository_LocationRepository $locationRepository) {
-		$this->locationRepository = $locationRepository;
-	}
 
 }
 ?>

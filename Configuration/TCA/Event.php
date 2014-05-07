@@ -379,7 +379,6 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_location',
 				'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID###  AND tx_slubevents_domain_model_location.hidden = 0 ORDER BY tx_slubevents_domain_model_location.sorting',
-
 				'renderMode' => 'tree',
 				'subType' => 'db',
 				'treeConfig' => array(
@@ -401,6 +400,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_discipline',
+				'foreign_table_where' => ' ORDER BY tx_slubevents_domain_model_discipline.name',
 				'minitems' => 0,
 				'maxitems' => 1,
 			),

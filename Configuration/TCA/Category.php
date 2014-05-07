@@ -38,7 +38,7 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_slubevents_domain_model_category',
-				'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid=###CURRENT_PID### AND tx_slubevents_domain_model_category.sys_language_uid IN (-1,0) ORDER BY tx_slubevents_domain_model_category.title',
+				'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid=###CURRENT_PID### AND tx_slubevents_domain_model_category.hidden = 0 AND tx_slubevents_domain_model_category.sys_language_uid IN (-1,0) ORDER BY tx_slubevents_domain_model_category.title',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -125,19 +125,27 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 		),
 		'parent' => array(
 			'exclude' => 0,
+			'displayCond' => 'FIELD:sys_language_uid:=:0',
+			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_category.parent',
 			'config' => array(
-				'type' => 'inline',
+				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_category',
-				'foreign_field' => 'category',
-				'maxitems'      => 9999,
-				'appearance' => array(
-					'collapseAll' => 0,
-					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+				'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID###  AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
+				'renderMode' => 'tree',
+				'subType' => 'db',
+				'treeConfig' => array(
+					'parentField' => 'parent',
+					'appearance' => array(
+						'expandAll' => TRUE,
+						'showHeader' => FALSE,
+						'maxLevels' => 10,
+						'width' => 400,
+					),
 				),
+				'size' => 10,
+				'autoSizeMax' => 30,
+				'maxitems'      => 2,
 			),
 		),
 		'category' => array(
@@ -148,31 +156,4 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 	),
 );
 
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
-
-$TCA['tx_slubevents_domain_model_category']['columns']['parent'] = array(
-	'exclude' => 0,
-	'displayCond' => 'FIELD:sys_language_uid:=:0',
-	'l10n_mode' => 'mergeIfNotBlank',
-	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_category.parent',
-	'config' => array(
-		'type' => 'select',
-		'foreign_table' => 'tx_slubevents_domain_model_category',
-		'foreign_table_where' => 'AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID###  AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_category.sorting ASC',
-		'renderMode' => 'tree',
-		'subType' => 'db',
-		'treeConfig' => array(
-			'parentField' => 'parent',
-			'appearance' => array(
-				'expandAll' => TRUE,
-				'showHeader' => FALSE,
-				'maxLevels' => 10,
-				'width' => 400,
-			),
-		),
-		'size' => 10,
-		'autoSizeMax' => 30,
-		'maxitems'      => 2,
-	),
-);
 ?>
