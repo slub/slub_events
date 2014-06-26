@@ -360,10 +360,14 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			$foundevent['id'] = $event->getUid();
 			$foundevent['title'] = $event->getTitle();
 			$foundevent['teaser'] = $event->getTeaser();
-			$foundevent['start'] = $event->getStartDateTime()->getTimestamp();
-			$foundevent['className'] = 'slubevents-category-' . $_GET['categories'];
+			$foundevent['start'] = $event->getStartDateTime()->format('Y-m-d H:i:s');
+			foreach ($event->getCategories() as $cat) {
+				$foundevent['className'] .= ' slubevents-category-' . $cat->getUid();
+			}
+
+			//~ $foundevent['className'] = 'slubevents-category-' . $event->getCategories(); // $_GET['categories'];
 			if ($event->getEndDateTime() instanceof DateTime)
-				$foundevent['end'] = $event->getEndDateTime()->getTimestamp();
+				$foundevent['end'] = $event->getEndDateTime()->format('Y-m-d H:i:s');
 
 			$conf = array(
 				// Link to current page
@@ -384,6 +388,15 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			else
 				$foundevent['allDay'] = false;
 
+			// how many free places are available?
+			$freePlaces = ($event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event));
+			if ($freePlaces <= 0)
+				$foundevent['freePlaces'] = 0;
+			else if ($freePlaces == 1)
+				$foundevent['freePlaces'] = Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event.oneFreePlace', 'slub_events');
+			else
+				$foundevent['freePlaces'] = ($event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event)) . ' ' . Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event.freeplaces', 'slub_events');
+
 			// set special css class if subscription is NOT possible
 			$noSubscription = FALSE;
 			// limit reached already --> overbooked
@@ -400,8 +413,9 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 					$noSubscription = TRUE;
 				}
 			}
-			if ($noSubscription)
+			if ($noSubscription) {
 				$foundevent['className'] .= ' no_subscription';
+			}
 
 			$jsonevent[] = $foundevent;
 		}

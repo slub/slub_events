@@ -49,12 +49,55 @@ class Tx_SlubEvents_ViewHelpers_Format_Fullcalendar_JsFooterViewHelper extends T
 		// get field configuration
 			$js1 = '<script>';
 
-			foreach($categories as $category) {
-				$js1 .= 'var eventcat' . $category .' = {';
-				$js1 .= 'url: \'typo3conf/ext/slub_events/Ajaxproxy/Ajaxproxy.php?link='.urlencode($link).'&categories='.$category.'&detailPid='.$settings['pidDetails'].'\', ';
-				$js1 .= "};\n";
-			}
+			$js1 .= "$(document).ready(function() {";
+			$js1 .= "$('#calendar').fullCalendar({";
+			if (! empty($settings['fullCalendarJS']))
+				$js1 .= $settings['fullCalendarJS'];
 
+			$js1 .= "events: {
+					url: '?eID=slubCal',
+					data: function() {
+						var eventurl = '';
+						$('.slubevents-category input:checked').each(function() {
+							var cal = $(this).attr('id').split(\"-\")[2];
+							eventurl = eventurl + ',' + cal;
+						});
+						return {
+							categories: eventurl,
+							link: '" . urlencode($link) . "',
+							detailPid: '" . $settings['pidDetails'] . "'
+						};
+					}
+			},";
+			// add event name to title attribute on mouseover
+			$js1 .= "eventMouseover: function(event, jsEvent, view) {
+					if (view.name !== 'agendaDay') {
+						$(jsEvent.target).attr('title', event.title);
+					}
+					},";
+
+			$js1 .= "eventRender: function(event, element, view) {
+						if (view.name === 'agendaDay' && event.freePlaces != '0') {
+							element.find('.fc-event-title')
+								.after('<div class=\"fc-event-freeplaces\">' + event.freePlaces + '</div>');
+						}
+					},";
+			// show/hide div #loading
+			$js1 .= "loading: function(bool) {
+						if (bool) {
+							$('#loading').show();
+						} else {
+							$('#loading').hide();
+						}
+					},";
+
+			// close fullCalendar()
+			$js1 .= '});';
+			// close $(document).ready()
+			$js1 .= '});';
+
+			// add the eventcatX variables at the end
+			$js1 .= $js_eventcat;
 			$js1 .= '</script>';
 
 			// dirty but working. Has to be called after the <form> and the jqueryvalidation validate()

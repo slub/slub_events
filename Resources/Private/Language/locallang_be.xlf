@@ -5,6 +5,9 @@
 			<generator>LFEditor</generator>
 		</header>
 		<body>
+		<trans-unit id="flexforms.fullcalendar_js" xml:space="preserve">
+			<source>Fullcalendar Javascript</source>
+		</trans-unit>
 		<trans-unit id="flexforms.eventgeniusbar_title" xml:space="preserve">
 			<source>Knowledge Bar View Settings</source>
 		</trans-unit>

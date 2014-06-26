@@ -30,8 +30,14 @@ Otherwise your changes will be overwritten the next time you save the extension 
 {namespace se=Tx_SlubEvents_ViewHelpers}
 {namespace t3jquery=Tx_T3jquery_ViewHelpers}
 <t3jquery:AddJQuery />
+<t3jquery:AddJQueryAndScript jsfile="typo3conf/ext/slub_events/Resources/Public/Js/Contrib/Moment/moment.min.js"/>
 <t3jquery:AddJQueryAndScript jsfile="typo3conf/ext/slub_events/Resources/Public/Js/Contrib/Fullcalendar/fullcalendar.min.js"/>
 <t3jquery:AddJQueryAndScript jsfile="typo3conf/ext/slub_events/Resources/Public/Js/slub-events-fullcalendar.js"/>
+<f:if condition="{settings.fullCalendarJS}">
+<f:else>
+	<t3jquery:AddJQueryAndScript jsfile="typo3conf/ext/slub_events/Resources/Public/Js/slub-events-fullcalendar-init.js"/>
+</f:else>
+</f:if>
 <se:format.fullcalendar.jsFooter categories="{categoriesIds}" settings="{settings}" link="<f:uri.page pageType='182098' absolute='1' />" />
 
 

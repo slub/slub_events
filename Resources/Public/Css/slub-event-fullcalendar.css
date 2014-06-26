@@ -1,5 +1,5 @@
 /*!
- * FullCalendar v1.6.4 Stylesheet
+ * FullCalendar v2.0.1 Stylesheet
  * Docs & License: http://arshaw.com/fullcalendar/
  * (c) 2013 Adam Shaw
  */
@@ -101,11 +101,14 @@ html .fc,
 ------------------------------------------------------------------------*/
 
 .fc-content {
+	position: relative;
+	z-index: 1; /* scopes all other z-index's to be inside this container */
 	clear: both;
 	zoom: 1; /* for IE7, gives accurate coordinates for [un]freezeContentHeight */
 	}
 
 .fc-view {
+	position: relative;
 	width: 100%;
 	overflow: hidden;
 	}
@@ -165,32 +168,38 @@ html .fc,
 	and we'll try to make them look good cross-browser.
 */
 
-.fc-text-arrow {
+.fc-button .fc-icon {
 	margin: 0 .1em;
 	font-size: 2em;
 	font-family: "Courier New", Courier, monospace;
 	vertical-align: baseline; /* for IE7 */
 	}
 
-.fc-button-prev .fc-text-arrow,
-.fc-button-next .fc-text-arrow { /* for &lsaquo; &rsaquo; */
+.fc-icon-left-single-arrow:after {
+	content: "\02039";
 	font-weight: bold;
+	}
+
+.fc-icon-right-single-arrow:after {
+	content: "\0203A";
+	font-weight: bold;
+	}
+
+.fc-icon-left-double-arrow:after {
+	content: "\000AB";
+	}
+
+.fc-icon-right-double-arrow:after {
+	content: "\000BB";
 	}
 
 /* icon (for jquery ui) */
 
-.fc-button .fc-icon-wrap {
-	position: relative;
-	float: left;
-	top: 50%;
-	}
-
 .fc-button .ui-icon {
 	position: relative;
+	top: 50%;
 	float: left;
-	margin-top: -50%;
-	*margin-top: 0;
-	*top: -50%;
+	margin-top: -8px; /* we know jqui icons are always 16px tall */
 	}
 
 /*
@@ -447,8 +456,11 @@ table.fc-border-separate {
 	padding: 0 4px;
 	vertical-align: middle;
 	text-align: right;
-	white-space: nowrap;
 	font-weight: normal;
+	}
+
+.fc-agenda-slots .fc-agenda-axis {
+	white-space: nowrap;
 	}
 
 .fc-agenda .fc-week-number {
@@ -585,6 +597,35 @@ table.fc-border-separate {
 .fc-agenda .ui-resizable-resizing { /* TODO: better selector */
 	_overflow: hidden;
 	}
+
+/* ---------------- SLUB customs -------------------------- */
+
+#calendar {
+	width: 160%;
+}
+
+.fc-event-freeplaces {
+	padding: 0 1px;
+	float: right;
+}
+.fc-event-title {
+	font-size: 120%;
+}
+a.fc-event:hover {
+	z-index: 100;
+	border: 1px solid #a00;
+}
+a.fc-event {
+	border: 2px solid #900;
+	background: rgb(242,245,246);
+	background: -moz-linear-gradient(left, rgba(242,245,246,1) 0%, rgba(227,234,237,1) 37%, rgba(200,215,220,1) 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(242,245,246,1)), color-stop(37%,rgba(227,234,237,1)), color-stop(100%,rgba(200,215,220,1)));
+	background: -webkit-linear-gradient(left, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
+	background: -o-linear-gradient(left, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
+	background: -ms-linear-gradient(left, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
+	background: linear-gradient(to right, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=1 );
+}
 
 .home #leftcol h2 {
 	display: block;

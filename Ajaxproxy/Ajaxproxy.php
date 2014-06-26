@@ -1,18 +1,16 @@
-<?PHP
+<?php
 
 	$year = date('Y');
 	$month = date('m');
 	$link = urldecode($_GET['link']);
 	$type = isset($_GET['type']) ? $_GET['type'] : 0;
-	$start = $_GET['start'];
-	$stop = $_GET['end'];
+	$start = strtotime($_GET['start']);
+	$stop = strtotime($_GET['end']);
 	$categories = $_GET['categories'];
 	$detailPid = $_GET['detailPid'];
 
-	$calfile = '../../../../typo3temp/tx_slubevents/calfile_'.$categories.'_'.$start.'_'.$stop;
-	//~ echo $calfile;
-	$url = $link.'&categories='. $categories . '&start=' . $start . '&stop=' . $stop .'&detailPid=' . $detailPid;
-	//~ echo $url;
+	$calfile = PATH_site . 'typo3temp/tx_slubevents/calfile_'.$categories.'_'.$start.'_'.$stop;
+
 	// if file exists and is not too old - take it
 	if (file_exists($calfile)) {
 		// if not older than one day:
@@ -24,6 +22,8 @@
 	}
 
 	// else make a new query...
+	$url = $link.'&categories='. $categories . '&start=' . $start . '&stop=' . $stop .'&detailPid=' . $detailPid;
+//~ echo $url;
 	$out = file_get_contents($url);
 
 	if (!empty($out)) {
@@ -36,5 +36,4 @@
 	}
 
 	return;
-
 ?>

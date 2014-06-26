@@ -65,7 +65,7 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	 */
 	function clearAjaxCacheFiles($startDate = NULL) {
 
-		$dir    = PATH_site.'typo3temp/tx_slubevents/';
+		$dir = PATH_site.'typo3temp/tx_slubevents/';
 		if ($startDate === NULL)
 			system ('rm '.$dir.'calfile*');
 		else {

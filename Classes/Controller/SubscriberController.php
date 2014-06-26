@@ -461,6 +461,10 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		else
 			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$this->settings['storagePid']);
 
+			$fp = fopen(PATH_site . 'typo3temp/clearcachehookx.txt', 'a');
+			fwrite($fp, strftime('%x %T') . ' cachetag:tx_slubevents_'.$this->settings['storagePid'] .  "\n");
+			fclose($fp);
+
 		return;
 
 	}

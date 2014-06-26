@@ -8,7 +8,7 @@
 		<f:if condition="<se:format.eventsOfCategory category='{category.item}' />">
 			<f:then>
 				<li class="teaser-geniusbar" id="category-{category.item.uid}">
-				<f:link.action action="gbList" controller="Category" title="<se:format.stripTags htmlString='{category.item.description}' />" arguments="{category : category.item}">{category.item.title}</f:link.action>
+				<f:link.action action="gbList" controller="Category" title="<se:format.stripTags htmlString='{category.item.description}' />" arguments="{category : category.item}" section="book-me-now">{category.item.title}</f:link.action>
 			</f:then>
 			<f:else>
 				<li class="teaser-geniusbar nooffer" id="category-{category.item.uid}">
