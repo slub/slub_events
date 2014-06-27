@@ -3,6 +3,8 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+$ll = 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:';
+
 $TCA['tx_slubevents_domain_model_event'] = array(
 	'ctrl' => $TCA['tx_slubevents_domain_model_event']['ctrl'],
 	'interface' => array(
@@ -224,7 +226,6 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'maxitems' => 1,
 				'eval' => '',
 				'default' => 0,
-				//~ 'default' => 1440,
 			),
 		),
 		'teaser' => array(
@@ -295,7 +296,12 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
-					array('-- Label --', 0),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.0', 0),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.1', 1),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.2', 2),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.3', 3),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.4', 4),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.5', 5),
 				),
 				'size' => 1,
 				'maxitems' => 1,
@@ -350,8 +356,8 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'minitems' => 1,
-				'maxitems' => 9999,
-				'multiple' => 0,
+				'maxitems' => 30,
+				'multiple' => FALSE,
 			),
 		),
 		'subscribers' =>  array(
@@ -378,20 +384,23 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_location',
-				'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID###  AND tx_slubevents_domain_model_location.hidden = 0 ORDER BY tx_slubevents_domain_model_location.sorting',
+				'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_location.deleted = 0 AND tx_slubevents_domain_model_location.hidden = 0 ORDER BY tx_slubevents_domain_model_location.sorting',
 				'renderMode' => 'tree',
 				'subType' => 'db',
 				'treeConfig' => array(
 					'parentField' => 'parent',
 					'appearance' => array(
-						'expandAll' => TRUE,
+						'expandAll' => FALSE,
 						'showHeader' => FALSE,
+						'allowRecursiveMode' => FALSE,
+						'width' => 500
 					),
 				),
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'minitems' => 1,
 				'maxitems' => 1,
+				'multiple' => FALSE,
 			),
 		),
 		'discipline' => array(
@@ -412,10 +421,12 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'allowed' => 'pages',
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_contact',
-				'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
+				'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.deleted = 0 AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
 				'minitems' => 1,
-				'maxitems' => 2, // this forces a working required select box! stupid but true...
-				'size' => 6, // it should be one but... no chance to get a required select box without it in TYPO3 4.6
+				'maxitems' => 2,	// this forces a working required select box!
+									// stupid but true... it should be "1"
+									// --> bug in TYPO3 4.7
+				'size' => 8,
 				'selectedListStyle' => 'width:400px;',
 				'itemListStyle' => 'width:400px;',
 			),
@@ -430,18 +441,6 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			),
 		),
 	),
-);
-
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
-$ll = 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:';
-
-$TCA['tx_slubevents_domain_model_event']['columns']['audience']['config']['items'] = array(
-	array($ll . 'tx_slubevents_domain_model_event.audience.I.0', 0),
-	array($ll . 'tx_slubevents_domain_model_event.audience.I.1', 1),
-	array($ll . 'tx_slubevents_domain_model_event.audience.I.2', 2),
-	array($ll . 'tx_slubevents_domain_model_event.audience.I.3', 3),
-	array($ll . 'tx_slubevents_domain_model_event.audience.I.4', 4),
-	array($ll . 'tx_slubevents_domain_model_event.audience.I.5', 5),
 );
 
 ?>

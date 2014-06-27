@@ -31,6 +31,7 @@
 class Tx_SlubEvents_Slots_Tceforms {
 
 	function getMainFields_preProcess($table, &$row, $tceform) {
+
 		if ($table == 'tx_slubevents_domain_model_event') {
 			global $TCA;
 			t3lib_div::loadTCA('tx_slubevents_domain_model_event');
@@ -51,5 +52,16 @@ class Tx_SlubEvents_Slots_Tceforms {
 					$row['sub_end_date_time_select'] = 1440;
 
 		}
+	}
+
+	function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj) {
+
+		if ($table == 'tx_slubevents_domain_model_event') {
+
+			// temporary bugfix until #48943 is in Core
+			if ($row['location'] == 0)
+				$row['location'] = '';
+		}
+
 	}
 }

@@ -306,21 +306,3 @@ CREATE TABLE tx_slubevents_event_category_mm (
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
-
-#
-# Table structure for table 'tx_slubevents_domain_model_category'
-#
-CREATE TABLE tx_slubevents_domain_model_category (
-
-	category  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_slubevents_domain_model_location'
-#
-CREATE TABLE tx_slubevents_domain_model_location (
-
-	location  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);

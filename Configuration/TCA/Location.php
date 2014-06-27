@@ -136,17 +136,21 @@ $TCA['tx_slubevents_domain_model_location'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_location.parent',
 			'config' => array(
-				'type' => 'inline',
+				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_location',
-				'foreign_field' => 'location',
-				'maxitems'      => 9999,
-				'appearance' => array(
-					'collapseAll' => 0,
-					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+				'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_location.sorting',
+
+				'renderMode' => 'tree',
+				'subType' => 'db',
+				'treeConfig' => array(
+					'parentField' => 'parent',
+					'appearance' => array(
+						'expandAll' => TRUE,
+						'showHeader' => FALSE,
+						'width' => 500,
+					),
 				),
+				'maxitems' => 2,
 			),
 		),
 		'location' => array(
@@ -157,26 +161,4 @@ $TCA['tx_slubevents_domain_model_location'] = array(
 	),
 );
 
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
-
-$TCA['tx_slubevents_domain_model_location']['columns']['parent'] = array(
-	'exclude' => 0,
-	'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_location.parent',
-	'config' => array(
-		'type' => 'select',
-		'foreign_table' => 'tx_slubevents_domain_model_location',
-		'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_location.sorting',
-		
-		'renderMode' => 'tree',
-		'subType' => 'db',
-		'treeConfig' => array(
-			'parentField' => 'parent',
-			'appearance' => array(
-				'expandAll' => TRUE,
-				'showHeader' => FALSE,
-			),
-		),
-		'maxitems' => 2,
-	),
-);
 ?>

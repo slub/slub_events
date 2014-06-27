@@ -66,7 +66,8 @@ $TYPO3_CONF_VARS['FE']['eID_include']['slubCal'] = 'EXT:slub_events/Ajaxproxy/Aj
 
 if (TYPO3_MODE === 'BE') {
 	// prefill BE user data in event form
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getMainFieldsClass'][] = 'EXT:' . $_EXTKEY . '/Classes/Slots/Tceforms.php:Tx_SlubEvents_Slots_Tceforms';
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getMainFieldsClass'][]  = 'EXT:' . $_EXTKEY . '/Classes/Slots/Tceforms.php:Tx_SlubEvents_Slots_Tceforms';
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'][] = 'EXT:' . $_EXTKEY . '/Classes/Slots/Tceforms.php:Tx_SlubEvents_Slots_Tceforms';
 
 	require_once (t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Slots/HookPreProcessing.php');
 	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'Tx_SlubEvents_Slots_HookPreProcessing';
