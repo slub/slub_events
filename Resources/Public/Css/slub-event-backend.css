@@ -10,6 +10,7 @@ table.tx_slubevents th {
 	font-size: 12pt;
 	font-weight: bold;
 	padding: 4px;
+	text-align: left;
 }
 
 table.tx_slubevents td {

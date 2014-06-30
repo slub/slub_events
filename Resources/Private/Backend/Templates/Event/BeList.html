@@ -87,8 +87,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</tr>
 	<tr>
 		<td class="td-input">
-			<f:form.textfield id="tceforms-datefield-1" class="formField tceforms-textfield tceforms-datefield" property="selectedStartDateStamp"  value="{selectedStartDateStamp}" />
-			<se:be.functionBar icon="datepicker" event="{event}" />
+			<span class="t3-tceforms-input-wrapper-date">
+				<f:form.textfield id="tceforms-datefield-1" class="formField tceforms-textfield tceforms-datefield" property="selectedStartDateStamp" size="12" value="{selectedStartDateStamp}" />
+				<se:be.functionBar icon="datepicker" event="{event}" />
+			</span>
 		</td>
 		<td class="foldtree">
 			<f:render partial="Event/CategoryTree" arguments="{categories: categories, categoriesSelected : categoriesSelected}" />
@@ -96,8 +98,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<td>
 			<label for="category-{category.item.uid}" title="{category.item.uid}">{category.item.title}</label>
 			<se:be.checkbox id="checkbox-all-contacts" name="checkbox-all-contacts" value="1" onclick="checkBoxContacts(this)" />
-			<label for="checkbox-all-contacts"><f:translate key="be.searchAllContacts" /></label>
-			<p>&nbsp;</p>
+			<label for="checkbox-all-contacts"><f:translate key="be.searchAllContacts" /></label><br />
 			<f:form.select id="field-contact-search" class="" property="contacts" options="{contacts}" optionValueField="uid" optionLabelField="name" multiple="1" size="15" value="{contactsSelected}" />
 		</td>
 	</tr>

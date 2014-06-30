@@ -103,17 +103,22 @@ class Tx_SlubEvents_ViewHelpers_Be_ContainerViewHelper extends Tx_Fluid_ViewHelp
 			$pageRenderer->addJsFile($addJsFile);
 		}
 		if ($addJsDatepicker) {
-			$pageRenderer->addJsFile('../t3lib/js/extjs/tceforms.js');
-			$pageRenderer->addJsFile('../t3lib/js/extjs/ux/Ext.ux.DateTimePicker.js');
-
+			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6002000') {
+				// TYPO3 4.7 to 6.1
+				$pageRenderer->addJsFile('../t3lib/js/extjs/tceforms.js');
+				$pageRenderer->addJsFile('../t3lib/js/extjs/ux/Ext.ux.DateTimePicker.js');
+			} else {
+				// TYPO3 6.2
+				$pageRenderer->addJsFile('../typo3/sysext/backend/Resources/Public/JavaScript/tceforms.js');
+				$pageRenderer->addJsFile('../typo3/js/extjs/ux/Ext.ux.DateTimePicker.js');
+			}
 			// Define settings for Date Picker
-                $typo3Settings = array(
-                        'datePickerUSmode' => $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ? 1 : 0,
-                        'dateFormat'       => array('j-n-Y', 'G:i j-n-Y'),
-                        'dateFormatUS'     => array('n-j-Y', 'G:i n-j-Y'),
-                );
-                $pageRenderer->addInlineSettingArray('', $typo3Settings);
-
+			$typo3Settings = array(
+					'datePickerUSmode' => $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ? 1 : 0,
+					'dateFormat'       => array('j-n-Y', 'G:i j-n-Y'),
+					'dateFormatUS'     => array('n-j-Y', 'G:i n-j-Y'),
+			);
+			$pageRenderer->addInlineSettingArray('', $typo3Settings);
 		}
 
 		$output = $this->renderChildren();

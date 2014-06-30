@@ -59,8 +59,8 @@ class Tx_SlubEvents_Slots_Tceforms {
 		if ($table == 'tx_slubevents_domain_model_event') {
 
 			// temporary bugfix until #48943 is in Core
-			if ($row['location'] == 0)
-				$row['location'] = '';
+			//~ if ($row['location'] == 0)
+				//~ $row['location'] = '';
 		}
 
 	}
