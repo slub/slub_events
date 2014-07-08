@@ -21,8 +21,19 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<f:then>
 			<h3>{event.title}</h3>
 			<f:render partial="Event/DateFromTo" arguments="{event : event}" />
-			
+
 			<f:format.html>{event.description}</f:format.html>
+
+			<f:if condition="{event.contact.photo}">
+				<f:then>
+						<div class="single-contact">
+							<div class="photo">
+								<f:image src='uploads/tx_slubevents/{event.contact.photo}' alt="Porträt von {event.contact.name}" title="<se:format.stripTags htmlString='{event.contact.name}' />" maxWidth="100" />
+							</div>
+							<div class="description"><span class="name">{event.contact.name}</span><f:format.html>{event.contact.description}</f:format.html></div>
+						</div>
+				</f:then>
+			</f:if>
 
 			<div class="location">
 			<f:translate key="tx_slubevents_domain_model_location" />:
@@ -43,7 +54,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</f:if>
 			<f:format.html>{event.location.description}</f:format.html>
 			</div>
-			
+
 			<div class="subscription">
 				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
 					<f:then>
@@ -56,7 +67,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 								<se:format.freePlacesLeft event="{event}" /> <f:translate key="tx_slubevents_domain_model_event.freeplaces" />
 							</f:else>
 						</f:if>
-						--> 
+						-->
 						<f:link.action action="new" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
 					</f:then>
 					<f:else>
@@ -72,13 +83,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 					</f:else>
 				</f:if>
 			</div>
-		
+
 			<div class="category"><f:translate key="tx_slubevents_domain_model_category" />:
 			<f:for each="{event.categories}" as="category">
 				{category.title} <br />
 			</f:for>
 			</div>
-			
+
 		</f:then>
 		<f:else>
 			<p>Leider konnten wir die gesuchte Veranstaltung nicht finden.</p>

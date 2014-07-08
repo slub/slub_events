@@ -55,13 +55,49 @@
 	background: #e1f4f7;
 }
 
-.slub-event-list div.contacts {
+.slub-event-gblist .contacts,
+.slub-event-show .contacts {
 	width: 100%;
+	border-top: 1px dotted #ccc;
+	position: relative;
+	margin: 20px 0;
 }
-.slub-event-list div.contacts div.single-contact {
+#leftcol .slub-event-gblist .contacts>p:first-child { color: #999; font-weight: 600; font-size: 11px; margin: 0 55px 0 0; float: right; }
+#leftcol .slub-event-gblist .contacts:before { content: " "; position: absolute; right: 0; top: -10px; width: 50px; height: 30px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAeCAMAAACL37eWAAAANlBMVEUAAACZmZn///+fn5/l5eWzs7PMzMzs7OysrKz5+fm5ubny8vLZ2dmmpqbGxsbf39/S0tK/v7/bgyiFAAAAAXRSTlMAQObYZgAAAXhJREFUeF6VlFmupEAMBAnXzs79LzvCSjVG01Lr5Q+UiQRvYvrIzHR9NH1VhBxfC/Q6ZPhitahRcKUmv/TGj1prc35GSou9FPC2AVAWswzMyzgTXDeVZ6CvMghPKIdhOxQvApJfXFyR78BVLw8XOOwWsNiBxP40MANN71o+fIJhG/RsY3azKZ2qVK1DfuXTcM5u3xn56nyB7PU21ZtlFiLDiaIbZLtCPzN05/fIL/hpXN6SFipcgGxmI8GqejWirSSgjh0JerMCqeZ1gzQefnQRs+6Km0lrS0jrs07LhcQGdO9n82DWI7q3yfEjEbWblL/EJ7PD7WfO+dw0eEmVF2XXx80vCdJh6hqbBVVgHf6tDpSbn7Xpmu8a+ZGg6XABp00LcJgEDIuab+YxpDFVKCHfmE7cFNPMphJSyPK++XiYJ2X4k9fnJ8B+8hLw4tsPPpGmnf4sxl4OP0hmY57DmrXa4t/o//+MFE5TQCL+LSI+IBEX8/ZPf9U/glEOTxpyFjgAAAAASUVORK5CYII=) no-repeat 0 0; }
+
+.slub-event-gblist .single-contact,
+.slub-event-show .single-contact {
+	margin: 10px 0;
+	clear: both;
+	border-top: 1px dotted #ccc;
+	padding: 10px 0;
+}
+.slub-event-gblist .single-contact .photo,
+.slub-event-show .single-contact .photo {
 	float: left;
-	width: 120px;
+	margin: 0 10px 10px 0;
 }
+.slub-event-gblist .single-contact .photo img,
+.slub-event-show .single-contact .photo img {
+	width: 100px;
+	height: auto;
+	border: 1px solid #999;
+}
+.slub-event-gblist .single-contact .description,
+.slub-event-show .single-contact .description {
+	font-size: 11px;
+}
+.slub-event-gblist .single-contact .description p,
+.slub-event-show .single-contact .description p {
+	margin: 0 !important;
+}
+.slub-event-gblist .single-contact .name,
+.slub-event-show .single-contact .name {
+	font-weight: bold;
+	color: #900;
+	display: block;
+}
+
 .slub-event-show div.subscription,
 .slub-event-list div.subscription {
 	float: right;
