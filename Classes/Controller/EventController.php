@@ -193,8 +193,6 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		$subscribers = $this->subscriberRepository->findAllByFeuser();
 		$events = $this->eventRepository->findAllBySubscriber($subscribers);
 
-		//~ t3lib_utility_Debug::debug(count($subscribers), 'listOwnAction: sizeof(subscribers)... ');
-
 		$this->view->assign('subscribers', $subscribers);
 		$this->view->assign('events', $events);
 	}

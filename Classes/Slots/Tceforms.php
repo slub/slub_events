@@ -58,9 +58,12 @@ class Tx_SlubEvents_Slots_Tceforms {
 
 		if ($table == 'tx_slubevents_domain_model_event') {
 
-			// temporary bugfix until #48943 is in Core
-			//~ if ($row['location'] == 0)
-				//~ $row['location'] = '';
+			// bugfix for TYPO3 < 6.1
+			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6001000') {
+				if ($row['location'] == 0)
+					$row['location'] = '';
+			}
+
 		}
 
 	}

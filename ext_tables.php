@@ -49,7 +49,7 @@ if (TYPO3_MODE === 'BE') {
 	 */
 	Tx_Extbase_Utility_Extension::registerModule(
 		$_EXTKEY,
-		'web',	 // Make module a submodule of 'web'
+		'web',	 		// Make module a submodule of 'web'
 		'slubevents',	// Submodule key
 		'',				// Position
 		array(
