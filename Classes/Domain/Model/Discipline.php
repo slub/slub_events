@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -42,6 +42,14 @@ class Tx_SlubEvents_Domain_Model_Discipline extends Tx_Extbase_DomainObject_Abst
 	protected $name;
 
 	/**
+	 * parent
+	 *
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline>
+	 * @lazy
+	 */
+	protected $parent;
+
+	/**
 	 * Returns the name
 	 *
 	 * @return string $name
@@ -58,6 +66,45 @@ class Tx_SlubEvents_Domain_Model_Discipline extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function setName($name) {
 		$this->name = $name;
+	}
+
+	/**
+	 * Adds a Discipline
+	 *
+	 * @param Tx_SlubEvents_Domain_Model_Discipline $parent
+	 * @return void
+	 */
+	public function addParent(Tx_SlubEvents_Domain_Model_Discipline $parent) {
+		$this->parent->attach($parent);
+	}
+
+	/**
+	 * Removes a Discipline
+	 *
+	 * @param Tx_SlubEvents_Domain_Model_Discipline $parentToRemove The Location to be removed
+	 * @return void
+	 */
+	public function removeParent(Tx_SlubEvents_Domain_Model_Discipline $parentToRemove) {
+		$this->parent->detach($parentToRemove);
+	}
+
+	/**
+	 * Returns the parent
+	 *
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $parent
+	 */
+	public function getParent() {
+		return $this->parent;
+	}
+
+	/**
+	 * Sets the parent
+	 *
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $parent
+	 * @return void
+	 */
+	public function setParent(Tx_Extbase_Persistence_ObjectStorage $parent) {
+		$this->parent = $parent;
 	}
 
 }

@@ -404,14 +404,30 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 			),
 		),
 		'discipline' => array(
+			'displayCond' => 'FIELD:genius_bar:<:1',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_event.discipline',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_slubevents_domain_model_discipline',
-				'foreign_table_where' => ' ORDER BY tx_slubevents_domain_model_discipline.name',
+				'foreign_table_where' => ' AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) AND tx_slubevents_domain_model_discipline.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_discipline.deleted = 0 AND tx_slubevents_domain_model_discipline.hidden = 0 ORDER BY tx_slubevents_domain_model_discipline.sorting',
+				'MM' => 'tx_slubevents_event_discipline_mm',
+				'renderMode' => 'tree',
+				'subType' => 'db',
+				'treeConfig' => array(
+					'parentField' => 'parent',
+					'appearance' => array(
+						'expandAll' => FALSE,
+						'showHeader' => FALSE,
+						'allowRecursiveMode' => FALSE,
+						'width' => 500
+					),
+				),
+				'size' => 10,
+				'autoSizeMax' => 30,
 				'minitems' => 0,
-				'maxitems' => 1,
+				'maxitems' => 10,
+				'multiple' => FALSE,
 			),
 		),
 		'contact' => array(

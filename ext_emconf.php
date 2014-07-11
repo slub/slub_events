@@ -29,11 +29,11 @@ This extension is developped and used in production at the Saxony State and Univ
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '1.3.1',
+	'version' => '1.4.0',
 	'constraints' => array(
 		'depends' => array(
-			'extbase' => '4.7',
-			'fluid' => '4.7',
+			'extbase' => '4.7-6.2',
+			'fluid' => '4.7-6.2',
 			'typo3' => '4.7.0-6.2.99',
 		),
 		'conflicts' => array(

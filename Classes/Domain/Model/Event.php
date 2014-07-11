@@ -156,9 +156,9 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	protected $location;
 
 	/**
-	 * Discipline ID
+	 * Discipline IDs
 	 *
-	 * @var Tx_SlubEvents_Domain_Model_Discipline
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline>
 	 */
 	protected $discipline;
 
@@ -375,22 +375,22 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Returns the discipline
+	 * Returns the categories
 	 *
-	 * @return Tx_SlubEvents_Domain_Model_Discipline $discipline
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $discipline
 	 */
 	public function getDiscipline() {
 		return $this->discipline;
 	}
 
 	/**
-	 * Sets the discipline
+	 * Adds a discipline
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Discipline $discipline
-	 * @return void
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $discipline
 	 */
-	public function setDiscipline(Tx_SlubEvents_Domain_Model_Discipline $discipline) {
-		$this->discipline = $discipline;
+	public function addDiscipline(Tx_SlubEvents_Domain_Model_Discipline $discipline) {
+		$this->discipline->attach($discipline);
 	}
 
 	/**
