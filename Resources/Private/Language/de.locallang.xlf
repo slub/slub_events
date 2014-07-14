@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-02-13T14:38:17Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-14T16:19:46Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -73,6 +73,18 @@
 			<source>Previous</source>
 			<target>Vorherige</target>
 		</trans-unit>
+		<trans-unit id="text.closing" approved="yes" xml:space="preserve">
+			<source>Best Regards</source>
+			<target>Mit freundlichen Grüßen</target>
+		</trans-unit>
+		<trans-unit id="text.salutation" approved="yes" xml:space="preserve">
+			<source>Dear</source>
+			<target>Sehr geehrte(r)</target>
+		</trans-unit>
+		<trans-unit id="text.signature" approved="yes" xml:space="preserve">
+			<source>SLUB Dresden</source>
+			<target>Ihre SLUB Dresden</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents.be.eventmanagement" approved="yes" xml:space="preserve">
 			<source>Event Management</source>
 			<target>SLUB Veranstaltungsmanagement</target>
@@ -100,6 +112,10 @@
 		<trans-unit id="tx_slubevents_domain_model_event" approved="yes" xml:space="preserve">
 			<source>Event</source>
 			<target>Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes" xml:space="preserve">
+			<source>Category Ids</source>
+			<target>Kategorien</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes" xml:space="preserve">
 			<source>description</source>
@@ -137,6 +153,10 @@
 			<source>Subscribe</source>
 			<target>Anmeldung</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.subscribers" approved="yes" xml:space="preserve">
+			<source>Category Ids</source>
+			<target>Kategorien</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes" xml:space="preserve">
 			<source>teaser</source>
 			<target>Kurzbeschreibung</target>
@@ -156,6 +176,10 @@
 		<trans-unit id="tx_slubevents_domain_model_location" approved="yes" xml:space="preserve">
 			<source>Location</source>
 			<target>Ort</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes" xml:space="preserve">
+			<source>Subscriber Details</source>
+			<target>Teilnehmer Details</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes" xml:space="preserve">
 			<source>Subscription Date</source>

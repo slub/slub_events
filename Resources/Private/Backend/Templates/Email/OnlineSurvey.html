@@ -1,21 +1,20 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
-<p>Sehr geehrte(r) {subscriber.name},</p>
+<p><f:translate key='text.salutation' /> {subscriber.name},</p>
 
 <p>Sie hatten kürzlich an folgender Veranstaltung teilgenommen:</p>
+<p><b>{event.title}</b> <br />
+<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />" /></p>
+<p>Um unsere Informations- und Kursangebote kontinuierlich zu verbessern und Ihre Erwartungen und Wünsche zu unseren Dienstleistungen zu erfahren, bitten wir Sie, sich <strong>ca. 5 Minuten</strong> Zeit für die Teilnahme an unserer <f:link.external class="slub-event-link" uri="{event.onlinesurvey}">Online-Befragung</f:link.external> zu nehmen.</p>
 
-<p><b>{event.title}</b></p>
+<p>Die Mitwirkung an dieser Befragung ist <strong>freiwillig</strong> und selbstverständlich <strong>anonym</strong>, d.h. es werden keine personenbezogenen Daten erhoben. Ein Rückschluss auf Einzelpersonen ist somit nicht möglich, die Daten werden entsprechend der Datenschutzbestimmungen behandelt und nur im Rahmen der Auswertung dieser Befragung verwendet.</p>
+
 <p>
-<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />" />
-</p>
-<p>Gerne würden wir erfahren, wie Ihnen die Veranstaltung gefallen hat. Wir haben dafür einen Online-Fragebogen vorbereitet und würden uns freuen, wenn Sie an dieser kurzen Umfrage teilnehmen würden:</p>
-
-<p>
-	<f:link.external class="slub-event-link" uri="{event.onlinesurvey}">Zum Fragebogen "{event.title}"</f:link.external>
+	Den Fragebogen finden Sie im Internet unter folgendem Link: <f:link.external class="slub-event-link" uri="{event.onlinesurvey}">{event.onlinesurvey}</f:link.external>
 </p>
 
-<p>Vielen Dank für Ihre Teilnahme.</p>
+<p>Wir bedanken uns schon jetzt für Ihre wertvolle Unterstützung.</p>
 
-<p>Mit freundlichen Grüßen</p>
+<p><f:translate key='text.closing' /></p>
 <p>&nbsp;</p>
-<p>SLUB Dresden</p>
+<p><f:translate key='text.signature' /></p>
 

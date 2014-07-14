@@ -1,5 +1,5 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
-<p>Sehr geehrte(r) {event.contact.name},</p>
+<p><f:translate key='text.salutation' /> {event.contact.name},</p>
 
 <p>leider müssen wir folgende Veranstaltung absagen, da die Mindestteilnehmerzahl nicht erreicht wurde:</p>
 
@@ -26,8 +26,7 @@
 
 <p>Anmeldungen sind nicht mehr möglich.</p>
 
-<p>Mit freundlichen Grüßen</p>
-
+<p><f:translate key='text.closing' /></p>
 <p>&nbsp;</p>
-
-<p>{event.contact.name} <br />SLUB Dresden</p>
+<p>{event.contact.name} <br />
+<f:translate key='text.signature' /></p>

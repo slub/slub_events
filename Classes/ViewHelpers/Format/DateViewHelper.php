@@ -108,7 +108,7 @@ class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_View
 			try {
 				//~ $date = 1;
 				$date = new DateTime($date);
-				
+
 				//~ return $date->format($format);
 			} catch (Exception $exception) {
 				throw new Tx_Fluid_Core_ViewHelper_Exception('"' . $date . '" could not be parsed by DateTime constructor.', 1241722579);
@@ -117,11 +117,20 @@ class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_View
 		if($TYPO3_CONF_VARS['SYS']['phpTimeZone']){
 			$date->setTimezone(new DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
 		}
-		//~ print_r($TYPO3_CONF_VARS['SYS']['phpTimeZone'] . '=' . $date->getTimezone()->getName());
-		//~ print_r($date);
+
+		// TYPO3 doesn't set backend locales
+		if (isset($GLOBALS['BE_USER'])) {
+			switch ($GLOBALS['BE_USER']->uc['lang']) {
+					case 'de': 	setlocale(LC_ALL, 'de_DE.utf8');
+							break;
+					case 'en':
+					default: 	setlocale(LC_ALL, 'en_GB.utf8');
+							break;
+			}
+		}
+
 		return strftime($format, $date->getTimestamp());
-		// the following is fluid default but it is not localized!
-		//~ return $date->format($format);
+
 	}
 }
 ?>
