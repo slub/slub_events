@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-15T17:00:12Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-07-11T16:35:30Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
 		<body>
 		<trans-unit id="tx_slubevents_domain_model_category" xml:space="preserve">
 			<source>Category</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.genius_bar" xml:space="preserve">
+			<source>Knowledge Bar Category</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.parent" xml:space="preserve">
 			<source>Parent Category</source>

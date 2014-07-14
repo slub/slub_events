@@ -124,7 +124,8 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 		),
 		'searchFields' => 'title,parent,',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Category.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_category.gif'
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_category.gif',
+		'requestUpdate' => 'genius_bar'
 	),
 );
 

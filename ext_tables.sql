@@ -70,6 +70,7 @@ CREATE TABLE tx_slubevents_domain_model_category (
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	parent int(11) unsigned DEFAULT '0' NOT NULL,
+	genius_bar tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
