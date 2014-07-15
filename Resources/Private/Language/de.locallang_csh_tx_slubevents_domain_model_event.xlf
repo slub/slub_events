@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-01-24T15:18:48Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-15T11:22:04Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -18,16 +18,20 @@
 			<target>Dies markiert die Veranstaltung als abgesagt.&lt;br /&gt;Diese Option wird automatisch vom Cronjob gesetzt, wenn bis Ende der Anmeldefrist nicht ausreichend Teilnehmer angemeldet sind. Alle bereits angemeldeten Teilnehmer erhalten eine Email mit der Terminabsage.</target>
 		</trans-unit>
 		<trans-unit id="categories.description" approved="yes" xml:space="preserve">
-			<source>Please select ONE category.</source>
+			<source>Select one ore more categories. At least one category is requried. This can be used to filter events in frontend plugins.</source>
 			<target>Bitte wählen Sie EINE Kategorie.&lt;br /&gt;&lt;br /&gt;Wenn bereits eine Kategorie gewählt ist, entfernen Sie zunächst das Häkchen. Erst dann können Sie eine neue Kategorie wählen.</target>
 		</trans-unit>
 		<trans-unit id="contact.description" approved="yes" xml:space="preserve">
-			<source>Contact</source>
+			<source>Select the contact person. The corresponding email address will be used to send the confirmation email. Only one person may be checked.</source>
 			<target>Ansprechpartner (Pflichtfeld): Sie müssen einen Ansprechpartner aus der vorgegebenen Liste auswählen. Möchten Sie einen neuen Ansprechpartner anlegen, wenden Sie sich bitte an die Administratoren.&lt;br /&gt;&lt;br /&gt;Wichtig: An diese E-Mail-Adresse gehen alle Bestätigungs-Emails. Der Name erscheint darüberhinaus in den Bestätigungs-Emails an die Nutzer.</target>
 		</trans-unit>
 		<trans-unit id="description.description" approved="yes" xml:space="preserve">
 			<source>Description of Event</source>
 			<target>Beschreibung der Veranstaltung.</target>
+		</trans-unit>
+		<trans-unit id="discipline.description" approved="yes" xml:space="preserve">
+			<source>Select one ore more discipline. This can be used to filter events in frontend plugins.</source>
+			<target>Auswahl einer oder mehrerer Fachdisziplinen. Dies kann als Filter in Frontend-Plugins verwendet werden.&lt;br /&gt;</target>
 		</trans-unit>
 		<trans-unit id="end_date_time.description" approved="yes" xml:space="preserve">
 			<source>End of Event</source>
@@ -36,6 +40,10 @@
 		<trans-unit id="end_date_time_select.description" approved="yes" xml:space="preserve">
 			<source>You may select the duration of your event relative to start. This select box will be removed after saving the event.</source>
 			<target>Sie können das Ende der Veranstaltung relativ zum Beginn wählen. Nach dem Speichern der Veranstaltung wird diese Auswahlliste nicht mehr angezeigt.</target>
+		</trans-unit>
+		<trans-unit id="location.description" approved="yes" xml:space="preserve">
+			<source>Select one location where the event takes place. This location is set in the ics-invitation.</source>
+			<target>Wählen Sie den Ort der Veranstaltung. Es kann nur ein Ort gewählt werden. Dieser Ort steht auch in der ICS-Termineinladung, die jedem Teilnehmer per Email gesendet wird.</target>
 		</trans-unit>
 		<trans-unit id="max_subscriber.description" approved="yes" xml:space="preserve">
 			<source>Set maximum number of subscribers. If this value is reached, the subscription will be closed and the contact person will be informed.Remove this value to disable subscription.</source>
@@ -68,6 +76,10 @@
 		<trans-unit id="sub_end_date_time_select.description" approved="yes" xml:space="preserve">
 			<source>You may select a time the subscription period will end relative to the start of the event. This select box will be removed after saving the event.</source>
 			<target>Sie können das Ende der Anmeldung relativ zum Beginn wählen. Nach dem Speichern der Veranstaltung wird diese Auswahlliste nicht mehr angezeigt.</target>
+		</trans-unit>
+		<trans-unit id="subscribers.description" approved="yes" xml:space="preserve">
+			<source>You may enter subscribers manually. Don't forget to save the event afterwards!</source>
+			<target>Sie können Teilnehmer auch manuell hinzufügen. Anschließend muss die Veranstaltung gespeichert werden, sonst werden die hinzugefügten Teilnehmer nicht übernommen!</target>
 		</trans-unit>
 		<trans-unit id="teaser.description" approved="yes" xml:space="preserve">
 			<source>Teaser text</source>

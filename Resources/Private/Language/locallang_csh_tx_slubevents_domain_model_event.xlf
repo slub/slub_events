@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-01-24T15:18:48Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-07-15T11:22:04Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -15,16 +15,16 @@
 			<source>This will mark the event as cancelled. This flag is automatically set by cronjob. The cronjob sents a cancellation email to all subscribers.</source>
 		</trans-unit>
 		<trans-unit id="categories.description" xml:space="preserve">
-			<source>Please select ONE category.</source>
+			<source>Select one ore more categories. At least one category is requried. This can be used to filter events in frontend plugins.</source>
 		</trans-unit>
 		<trans-unit id="contact.description" xml:space="preserve">
-			<source>Contact</source>
+			<source>Select the contact person. The corresponding email address will be used to send the confirmation email. Only one person may be checked.</source>
 		</trans-unit>
 		<trans-unit id="description.description" xml:space="preserve">
 			<source>Description of Event</source>
 		</trans-unit>
 		<trans-unit id="discipline.description" xml:space="preserve">
-			<source>Discipline Id</source>
+			<source>Select one ore more discipline. This can be used to filter events in frontend plugins.</source>
 		</trans-unit>
 		<trans-unit id="end_date_time.description" xml:space="preserve">
 			<source>End of Event</source>
@@ -33,7 +33,7 @@
 			<source>You may select the duration of your event relative to start. This select box will be removed after saving the event.</source>
 		</trans-unit>
 		<trans-unit id="location.description" xml:space="preserve">
-			<source>Location Ids</source>
+			<source>Select one location where the event takes place. This location is set in the ics-invitation.</source>
 		</trans-unit>
 		<trans-unit id="max_subscriber.description" xml:space="preserve">
 			<source>Set maximum number of subscribers. If this value is reached, the subscription will be closed and the contact person will be informed.Remove this value to disable subscription.</source>
@@ -60,7 +60,7 @@
 			<source>You may select a time the subscription period will end relative to the start of the event. This select box will be removed after saving the event.</source>
 		</trans-unit>
 		<trans-unit id="subscribers.description" xml:space="preserve">
-			<source>Category Ids</source>
+			<source>You may enter subscribers manually. Don't forget to save the event afterwards!</source>
 		</trans-unit>
 		<trans-unit id="teaser.description" xml:space="preserve">
 			<source>Teaser text</source>
