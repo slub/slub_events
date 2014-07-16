@@ -133,7 +133,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	 *
 	 * @return int uid
 	 */
-	    public function getParentUidLocalized($category) {
+	public function getParentUidLocalized($category) {
 
 		// is a localized entry?
 		if ($category->getL10nParent()) {
@@ -251,6 +251,56 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 
 		return $tree;
 	}
+
+	/**
+	 * Finds all datasets of current level and return in tree order
+	 *
+	 * @param integer $startCategory
+	 * @return array The found Category Ids
+	 */
+	public function findAllChildCategories($startCategory = 0) {
+
+		$childCategoriesIds = self::findChildCategories($startCategory);
+
+		foreach ($categories as $category) {
+			$childCategoriesIds = array_merge($this->findChildCategories($category), $childCategoriesIds);
+		}
+
+		return $childCategoriesIds;
+	}
+
+	/**
+	 * Finds all categories recursive from given startCategory
+	 *
+	 * @param integer $startCategory
+	 * @return array The found Category Ids
+	 */
+	private function findChildCategories($startCategory = 0) {
+
+		$query = $this->createQuery();
+
+		$constraints = array();
+
+		$constraints[] = $query->equals('parent', $startCategory);
+
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
+		$categories = $query->execute();
+
+		foreach ($categories as $category) {
+			$childCategoriesIds[] = $category->getUid();
+
+			$recursiveCategoriesIds = self::findChildCategories($category->getUid());
+			if (count($recursiveCategoriesIds) > 0) {
+				$childCategoriesIds = array_merge($recursiveCategoriesIds, $childCategoriesIds );
+			}
+		}
+
+
+		return $childCategoriesIds;
+	}
+
 
 	/**
 	 * Finds all datasets of current branch and return in tree order

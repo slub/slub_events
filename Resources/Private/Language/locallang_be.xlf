@@ -47,11 +47,29 @@
 		<trans-unit id="flexforms.show_categories" xml:space="preserve">
 			<source>Show Selected Categories</source>
 		</trans-unit>
+		<trans-unit id="flexforms.categories_recursive" xml:space="preserve">
+			<source>Include Child Categories</source>
+		</trans-unit>
+		<trans-unit id="flexforms.discipline_recursive" xml:space="preserve">
+			<source>Include Child Disciplines</source>
+		</trans-unit>
 		<trans-unit id="flexforms.show_categories_start" xml:space="preserve">
 			<source>Select Root Category</source>
 		</trans-unit>
 		<trans-unit id="flexforms.single_view" xml:space="preserve">
 			<source>Single View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.show_past_events" xml:space="preserve">
+			<source>Show Past Events</source>
+		</trans-unit>
+		<trans-unit id="flexforms.event_ordering" xml:space="preserve">
+			<source>Event Ordering</source>
+		</trans-unit>
+		<trans-unit id="flexforms.ordering_descending" xml:space="preserve">
+			<source>Descending</source>
+		</trans-unit>
+		<trans-unit id="flexforms.ordering_ascending" xml:space="preserve">
+			<source>Ascending</source>
 		</trans-unit>
 		<trans-unit id="flexforms.subscribe_view" xml:space="preserve">
 			<source>Subscribe View</source>

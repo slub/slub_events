@@ -21,17 +21,14 @@
 				<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_view</numIndex>
 				<numIndex index="1">Event->list;Event->show;Event->showNotFound</numIndex>
 			</numIndex>
-
-            <numIndex index="1">
-             <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.single_view</numIndex>
-             <numIndex index="1">Event->show;Event->showNotFound</numIndex>
-            </numIndex>
-
+			<numIndex index="1">
+				<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.single_view</numIndex>
+				<numIndex index="1">Event->show;Event->showNotFound</numIndex>
+			</numIndex>
 			<numIndex index="2">
 				<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_month_view</numIndex>
 				<numIndex index="1">Event->listMonth</numIndex>
 			</numIndex>
-
            </items>
          </config>
        </TCEforms>
@@ -47,13 +44,12 @@
 					<treeConfig>
 						<parentField>parent</parentField>
 						<appearance>
-							<expandAll>TRUE</expandAll>
+							<expandAll>FALSE</expandAll>
 							<showHeader>TRUE</showHeader>
 						</appearance>
 					</treeConfig>
-
 					<foreign_table>tx_slubevents_domain_model_category</foreign_table>
-					<foreign_table_where>AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_category.sorting ASC</foreign_table_where>
+					<foreign_table_where>AND tx_slubevents_domain_model_category.genius_bar = 0 AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC</foreign_table_where>
 					<size>5</size>
 					<autoSizeMax>30</autoSizeMax>
 					<minitems>0</minitems>
@@ -61,6 +57,83 @@
 				</config>
 			</TCEforms>
 		</settings.categorySelection>
+
+		<settings.categorySelectionRecursive>
+			<TCEforms>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.categories_recursive</label>
+				<displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
+				<config>
+					<type>check</type>
+					<default>0</default>
+				</config>
+			</TCEforms>
+		</settings.categorySelectionRecursive>
+
+		<settings.disciplineSelection>
+			<TCEforms>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_discipline</label>
+				<displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
+				<config>
+					<type>select</type>
+					<renderMode>tree</renderMode>
+					<treeConfig>
+						<parentField>parent</parentField>
+						<appearance>
+							<expandAll>FALSE</expandAll>
+							<showHeader>TRUE</showHeader>
+						</appearance>
+					</treeConfig>
+					<foreign_table>tx_slubevents_domain_model_discipline</foreign_table>
+					<foreign_table_where>AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_discipline.sorting ASC</foreign_table_where>
+					<size>5</size>
+					<autoSizeMax>30</autoSizeMax>
+					<minitems>0</minitems>
+					<maxitems>99</maxitems>
+				</config>
+			</TCEforms>
+		</settings.disciplineSelection>
+
+		<settings.disciplineSelectionRecursive>
+			<TCEforms>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.discipline_recursive</label>
+				<displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
+				<config>
+					<type>check</type>
+					<default>0</default>
+				</config>
+			</TCEforms>
+		</settings.disciplineSelectionRecursive>
+
+		<settings.showPastEvents>
+			<TCEforms>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_past_events</label>
+				<displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
+				<config>
+					<type>check</type>
+					<default>0</default>
+				</config>
+			</TCEforms>
+		</settings.showPastEvents>
+
+		<settings.eventOrdering>
+			<TCEforms>
+				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.event_ordering</label>
+				<displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show;Event->showNotFound</displayCond>
+				<config>
+					<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.ordering_ascending</numIndex>
+								<numIndex index="1">ASC</numIndex>
+							</numIndex>
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.ordering_descending</numIndex>
+								<numIndex index="1">DESC</numIndex>
+							</numIndex>
+						</items>
+				</config>
+			</TCEforms>
+		</settings.eventOrdering>
 
 		<settings.pidListing>
 			<TCEforms>

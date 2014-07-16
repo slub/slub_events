@@ -65,10 +65,42 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function listAction() {
 
-		if (!empty($this->settings['categorySelection']))
-			$events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
-		else
-			$events = $this->eventRepository->findAll();
+		if (!empty($this->settings['categorySelection'])) {
+			$categoriesIds = t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE);
+
+			if ($this->settings['categorySelectionRecursive']) {
+				// add somehow the other categories...
+				foreach ($categoriesIds as $category) {
+					$foundRecusiveCategories = $this->categoryRepository->findAllChildCategories($category);
+					if (count($foundRecusiveCategories) > 0)
+						$categoriesIds = array_merge($foundRecusiveCategories, $categoriesIds);
+				}
+			}
+			$this->settings['categoryList'] = $categoriesIds;
+		}
+t3lib_utility_Debug::debug($categoriesIds, 'categoriesIds... ');
+		if (!empty($this->settings['disciplineSelection'])) {
+			$disciplineIds = t3lib_div::intExplode(',', $this->settings['disciplineSelection'], TRUE);
+
+			if ($this->settings['disciplineSelectionRecursive']) {
+				// add somehow the other categories...
+				foreach ($disciplineIds as $discipline) {
+					$foundRecusiveDisciplines = $this->disciplineRepository->findAllChildDisciplines($discipline);
+					if (count($foundRecusiveDisciplines) > 0)
+						$disciplineIds = array_merge($foundRecusiveDisciplines, $disciplineIds);
+				}
+			}
+			$this->settings['disciplineList'] = $disciplineIds;
+		}
+t3lib_utility_Debug::debug($disciplineIds, 'disciplineIds... ');
+
+		$events = $this->eventRepository->findAllBySettings($this->settings);
+
+
+		//~ if (!empty($this->settings['categorySelection']))
+			//~ $events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
+		//~ else
+			//~ $events = $this->eventRepository->findAll();
 
 		$this->view->assign('events', $events);
 	}

@@ -118,17 +118,6 @@ class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_View
 			$date->setTimezone(new DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
 		}
 
-		// TYPO3 doesn't set backend locales
-		if (isset($GLOBALS['BE_USER'])) {
-			switch ($GLOBALS['BE_USER']->uc['lang']) {
-					case 'de': 	setlocale(LC_ALL, 'de_DE.utf8');
-							break;
-					case 'en':
-					default: 	setlocale(LC_ALL, 'en_GB.utf8');
-							break;
-			}
-		}
-
 		return strftime($format, $date->getTimestamp());
 
 	}

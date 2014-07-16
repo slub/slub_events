@@ -40,11 +40,7 @@ class ext_update {
 	 * @return string
 	 */
 	public function main() {
-$fp = fopen('/home/ab/public_html/fileadmin/eventbla.txt', "a");
-fwrite($fp, 'BEGIN: ' . print_r($this->messageArray, 1));
 		$this->processUpdates();
-fwrite($fp, 'END: ' .  print_r($this->messageArray, 1));
-fclose($fp);
 		return $this->generateOutput();
 	}
 
@@ -61,11 +57,6 @@ fclose($fp);
 
 		$countGeniusBarEvent = $GLOBALS['TYPO3_DB']->exec_SELECTcountRows('*', 'tx_slubevents_domain_model_event', 'genius_bar=1');
 		$countGeniusBarCategory = $GLOBALS['TYPO3_DB']->exec_SELECTcountRows('*', 'tx_slubevents_domain_model_category', 'genius_bar=1');
-
-		$fp = fopen('/home/ab/public_html/fileadmin/eventbla.txt', "a");
-		$out = strftime('%H:%M:%S') . ' START ... ' . $countMmTable . '/' . $countGeniusBarEvent . '/' . $countGeniusBarCategory . "\n";
-		fwrite($fp, $out);
-		fclose($fp);
 
 		if ($countMmTable > 0 && ($countGeniusBarEvent > 0 &&  $countGeniusBarCategory > 0))
 			return FALSE;
@@ -103,16 +94,16 @@ fclose($fp);
 		if ($countMmTable === 0) {
 
 			$eventCount = 0;
-			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid,discipline', 'tx_slubevents_domain_model_event', 'deleted=0');
 
 			// Insert mm relation, sorting and sorting_foreign is 0 because it will be only one item
 			$fields = array('uid_local', 'uid_foreign');
 
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid,discipline', 'tx_slubevents_domain_model_event', 'deleted=0');
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 				$eventCount++;
 
 				// Insert mm relation, sorting is 0 because it will be only one item
-				$inserts[] = array($row['uid'], $contentElement);
+				$inserts[] = array($row['uid'], $row['discipline']);
 
 				// Update event record
 				$update = array('discipline' => 1);
