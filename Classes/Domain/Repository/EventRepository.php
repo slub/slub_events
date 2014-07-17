@@ -99,31 +99,37 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$query = $this->createQuery();
 		$constraints = array();
 
+		// we don't want genius_bar events here
+		$constraints[] = $query->equals('genius_bar', 0);
+
+		// are categories selected?
 		if (!empty($settings['categoryList'])) {
 			$constraints[] = $query->in('categories.uid', $settings['categoryList']);
 		}
 
+		// are disciplines selected?
 		if (!empty($settings['disciplineList'])) {
 			$constraints[] = $query->in('discipline.uid', $settings['disciplineList']);
 		}
 
-		if ($settings['showPastEvents'] === 0) {
+		// default is to show only future events
+		if ($settings['showPastEvents'] !== TRUE) {
 			$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 		}
 
+		// AND all constraints together
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
 		}
 
-		// order by start_date -> start_time...
-		if ($settings['eventOrdering'] === 'ASC') {
-			$query->setOrderings(
-				array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-			);
-		}
-		else {
+		// order by start_date ascending or descending
+		if ($settings['eventOrdering'] === 'DESC') {
 			$query->setOrderings(
 				array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+			);
+		} else {
+			$query->setOrderings(
+				array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
 			);
 		}
 

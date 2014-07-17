@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-07-14T16:19:46Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-07-17T08:25:37Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -62,8 +62,14 @@
 		<trans-unit id="paginate_previous" xml:space="preserve">
 			<source>Previous</source>
 		</trans-unit>
+		<trans-unit id="text.back_to_overview" xml:space="preserve">
+			<source>Back to Overview</source>
+		</trans-unit>
 		<trans-unit id="text.closing" xml:space="preserve">
 			<source>Best Regards</source>
+		</trans-unit>
+		<trans-unit id="text.error.could_find_event" xml:space="preserve">
+			<source>Sorry, we couldn't find the requested event.</source>
 		</trans-unit>
 		<trans-unit id="text.salutation" xml:space="preserve">
 			<source>Dear</source>

@@ -16,8 +16,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
 {namespace se=Tx_SlubEvents_ViewHelpers}
 
 <div class="slub-event-show">
-	<p>Leider konnten wir die gesuchte Veranstaltung nicht finden.</p>
+	<div class="error">
+		<p><f:translate key="text.error.could_find_event" /></p>
+	</div>
 </div>
 
-<f:link.action action="list" pageUid="{settings.pidListing}">Zurück zur Übersicht</f:link.action><br />
+<f:link.action action="list" pageUid="{settings.pidListing}"><f:translate key="text.back_to_overview" /></f:link.action><br />
 </f:section>

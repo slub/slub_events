@@ -226,7 +226,9 @@
 	float: right;
 }
 
-#content a { text-decoration: none }
+#content a {
+	text-decoration: none;
+}
 
 .slub-category-list a.linkback,
 .slub-event-list a.linkback,
@@ -362,7 +364,35 @@
 */
 }
 
+.slub-event-show .subscription,
+.slub-event-show .category {
+	margin: 10px 0;
+}
 
+.slub-event-list a.subscribe,
+.slub-event-show a.subscribe {
+	position: relative;
+	padding: 2px 4px;
+	margin: 20px 0;
+	font-size: 120%;
+	text-decoration: none !important;
+	-webkit-border-radius: 15px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius: 15px;
+	-moz-border-radius-topleft:
+	5px; border-radius: 15px;
+	border-top-left-radius: 5px;
+	background: #e0edef;
+	border: 1px solid #29a;
+	color: #29a;
+	text-shadow: 1px 1px 0 #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+.slub-event-list a.subscribe:visited,
+.slub-event-show a.subscribe:visited {
+	color: #29a !important;
+}
 
 .slub-event-minimonth {
 	background: transparent;

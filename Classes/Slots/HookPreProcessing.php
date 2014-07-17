@@ -73,7 +73,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 
 			$this->initialize();
 
-			if ($fieldArray['genius_bar'] == FALSE)
+			if ($fieldArray['genius_bar'] === FALSE)
 				$message = t3lib_div::makeInstance('t3lib_FlashMessage',
 					'Veranstaltung gespeichert: <b>"'.$fieldArray['title'] . '"</b> am '. gmstrftime('%a, %x %H:%M:%S', $fieldArray['start_date_time']) .'.',
 					'OK',

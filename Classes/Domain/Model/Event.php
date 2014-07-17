@@ -275,6 +275,8 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 		 */
 		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
 
+		$this->discipline = new Tx_Extbase_Persistence_ObjectStorage();
+
 		$this->subscribers = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 

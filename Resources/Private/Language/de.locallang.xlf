@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-14T16:19:46Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-17T08:25:37Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -73,9 +73,17 @@
 			<source>Previous</source>
 			<target>Vorherige</target>
 		</trans-unit>
+		<trans-unit id="text.back_to_overview" approved="yes" xml:space="preserve">
+			<source>Back to Overview</source>
+			<target>Zurück zur Übersicht</target>
+		</trans-unit>
 		<trans-unit id="text.closing" approved="yes" xml:space="preserve">
 			<source>Best Regards</source>
 			<target>Mit freundlichen Grüßen</target>
+		</trans-unit>
+		<trans-unit id="text.error.could_find_event" approved="yes" xml:space="preserve">
+			<source>Sorry, we couldn't find the requested event.</source>
+			<target>Leider konnten wir die gesuchte Veranstaltung nicht finden.</target>
 		</trans-unit>
 		<trans-unit id="text.salutation" approved="yes" xml:space="preserve">
 			<source>Dear</source>

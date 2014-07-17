@@ -24,6 +24,14 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 			<f:format.html>{event.description}</f:format.html>
 
+			<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
+				<f:then>
+					<div class="subscription">
+						<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
+					</div>
+				</f:then>
+			</f:if>
+
 			<f:if condition="{event.contact.photo}">
 				<f:then>
 						<div class="single-contact">
@@ -64,11 +72,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 								<f:translate key="tx_slubevents_domain_model_event.oneFreePlace" />
 							</f:then>
 							<f:else>
-								<se:format.freePlacesLeft event="{event}" /> <f:translate key="tx_slubevents_domain_model_event.freeplaces" />
+								<f:translate key="tx_slubevents_domain_model_event.freeplaces" />: <se:format.freePlacesLeft event="{event}" />
 							</f:else>
 						</f:if>
-						-->
-						<f:link.action action="new" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
 					</f:then>
 					<f:else>
 						<f:if condition="{event.maxSubscriber} > 0">
@@ -85,17 +91,19 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</div>
 
 			<div class="category"><f:translate key="tx_slubevents_domain_model_category" />:
-			<f:for each="{event.categories}" as="category">
-				{category.title} <br />
+			<f:for each="{event.categories}" as="category" iteration="categoryIterator">
+				{category.title}<f:if condition="{categoryIterator.isLast}"><f:else>,</f:else></f:if>
 			</f:for>
 			</div>
 
 		</f:then>
 		<f:else>
-			<p>Leider konnten wir die gesuchte Veranstaltung nicht finden.</p>
+			<div class="error">
+				<p><f:translate key="text.error.could_find_event" /></p>
+			</div>
 		</f:else>
 	</f:if>
 </div>
 
-<f:link.action action="list" pageUid="{settings.pidListing}">Zurück zur Übersicht</f:link.action><br />
+<f:link.action action="list" pageUid="{settings.pidListing}"><f:translate key="text.back_to_overview" /></f:link.action>
 </f:section>

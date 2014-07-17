@@ -78,7 +78,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			}
 			$this->settings['categoryList'] = $categoriesIds;
 		}
-t3lib_utility_Debug::debug($categoriesIds, 'categoriesIds... ');
+//~ t3lib_utility_Debug::debug($categoriesIds, 'categoriesIds... ');
 		if (!empty($this->settings['disciplineSelection'])) {
 			$disciplineIds = t3lib_div::intExplode(',', $this->settings['disciplineSelection'], TRUE);
 
@@ -92,15 +92,9 @@ t3lib_utility_Debug::debug($categoriesIds, 'categoriesIds... ');
 			}
 			$this->settings['disciplineList'] = $disciplineIds;
 		}
-t3lib_utility_Debug::debug($disciplineIds, 'disciplineIds... ');
+//~ t3lib_utility_Debug::debug($disciplineIds, 'disciplineIds... ');
 
 		$events = $this->eventRepository->findAllBySettings($this->settings);
-
-
-		//~ if (!empty($this->settings['categorySelection']))
-			//~ $events = $this->eventRepository->findAllByCategories(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
-		//~ else
-			//~ $events = $this->eventRepository->findAll();
 
 		$this->view->assign('events', $events);
 	}
@@ -322,7 +316,7 @@ t3lib_utility_Debug::debug($disciplineIds, 'disciplineIds... ');
 
 		foreach ($availableProperties as $propertyName) {
 			if (Tx_Extbase_Reflection_ObjectAccess::isPropertySettable($newEvent, $propertyName)
-				&& !in_array($propertyName, array('uid','pid','subscribers', 'cancelled', 'subEndDateTime','subEndDateInfoSent','categories'))) {
+				&& !in_array($propertyName, array('uid','pid','subscribers', 'cancelled', 'subEndDateTime','subEndDateInfoSent','categories', 'discipline'))) {
 
 				$propertyValue = Tx_Extbase_Reflection_ObjectAccess::getProperty($event, $propertyName);
 				Tx_Extbase_Reflection_ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
@@ -331,6 +325,10 @@ t3lib_utility_Debug::debug($disciplineIds, 'disciplineIds... ');
 
 		foreach ($event->getCategories() as $cat) {
 			$newEvent->addCategory($cat);
+		}
+
+		foreach ($event->getDiscipline() as $discipline) {
+			$newEvent->addDiscipline($discipline);
 		}
 
 		if ($event->getGeniusBar())
