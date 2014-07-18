@@ -601,16 +601,23 @@ table.fc-border-separate {
 /* ---------------- SLUB customs -------------------------- */
 
 #calendar {
-	width: 160%;
+	width: 100%;
 }
 
 .fc-event-freeplaces {
 	padding: 0 1px;
 	float: right;
 }
-.fc-event-title {
-	font-size: 120%;
+.fc-event-inner {
+	line-height: 120%;
 }
+.fc-event-time {
+	white-space: nowrap;
+}
+.fc-event-title {
+	font-size: 10px;
+}
+
 a.fc-event:hover {
 	z-index: 100;
 	border: 1px solid #a00;

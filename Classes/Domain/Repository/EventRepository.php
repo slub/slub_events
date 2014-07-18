@@ -103,12 +103,12 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$constraints[] = $query->equals('genius_bar', 0);
 
 		// are categories selected?
-		if (!empty($settings['categoryList'])) {
+		if (count($settings['categoryList']) > 0) {
 			$constraints[] = $query->in('categories.uid', $settings['categoryList']);
 		}
 
 		// are disciplines selected?
-		if (!empty($settings['disciplineList'])) {
+		if (count($settings['disciplineList']) > 0) {
 			$constraints[] = $query->in('discipline.uid', $settings['disciplineList']);
 		}
 
@@ -120,6 +120,12 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		// default is to show only future events
 		if ($settings['showPastEvents'] !== TRUE) {
 			$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+		}
+
+		// default is to show only future events
+		if (!empty($settings['startTimestamp']) && !empty($settings['stopTimestamp'])) {
+			$constraints[] = $query->greaterThanOrEqual('start_date_time', $settings['startTimestamp']);
+			$constraints[] = $query->lessThanOrEqual('start_date_time', $settings['stopTimestamp']);
 		}
 
 		// AND all constraints together

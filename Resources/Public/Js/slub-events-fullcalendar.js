@@ -22,20 +22,13 @@ function checkBoxes(objThis){
 
 $(document).ready(function() {
 
-    $('.slubevents-category input').change(function() {
-	  var cal = $(this).attr('id').split("-")[2];
-	  var eventurl = 'eventcat' + cal;
-      if($(this).is(":checked")) {
-        $('#calendar')
-        .fullCalendar('addEventSource', window[eventurl]);
-        $('#calendar').fullCalendar('refetchEvents');
-      } else {
-        $('#calendar')
-        .fullCalendar('removeEventSource', window[eventurl]);
-        $('#calendar').fullCalendar('refetchEvents');
-      };
-    });
+	$('.slubevents-category input').change(function() {
+		$('#calendar').fullCalendar('refetchEvents');
+	});
 
+	 $('.slubevents-discipline input').change(function() {
+		$('#calendar').fullCalendar('refetchEvents');
+	});
 });
 
 

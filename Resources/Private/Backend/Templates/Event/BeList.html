@@ -145,6 +145,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</f:else>
 		</f:if>
 	</f:then>
+	<f:else>
+		<f:render section="eventListing" arguments="{events: events}" />
+	</f:else>
 </f:if>
 
 </div>

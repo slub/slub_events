@@ -416,30 +416,6 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		return $text;
 	}
 
-	/**
-	 * Set session data
-	 *
-	 * @param $key
-	 * @param $data
-	 * @return
-	 */
-	public function setSessionData($key, $data) {
-
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
-
-		return;
-	}
-
-	/**
-	 * Get session data
-	 *
-	 * @param $key
-	 * @return
-	 */
-	public function getSessionData($key) {
-
-		return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
-	}
 
 	/**
 	 * Clear cache of all pages with cached slubevents content.

@@ -34,6 +34,48 @@
 class Tx_SlubEvents_Domain_Repository_DisciplineRepository extends Tx_Extbase_Persistence_Repository {
 
 	/**
+	 * Finds all datasets and return in tree order
+	 *
+	 * @param string categories separated by comma
+	 * @return array The found Category Objects
+	 */
+	public function findAllByUidsTree($disciplines) {
+
+		$query = $this->createQuery();
+
+		$constraints = array();
+		$constraints[] = $query->in('uid', $disciplines);
+
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
+
+		$query->setOrderings(
+			array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
+		$disciplines = $query->execute();
+
+		$flatCategories = array();
+		foreach ($disciplines as $category) {
+			$flatCategories[$category->getUid()] = Array(
+				'item' =>  $category,
+				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL
+			);
+		}
+
+		$tree = array();
+		foreach ($flatCategories as $id => &$node) {
+			if ($node['parent'] === NULL) {
+				$tree[$id] = &$node;
+			} else {
+				$flatCategories[$node['parent']]['children'][$id] = &$node;
+			}
+		}
+
+		return $tree;
+	}
+
+	/**
 	 * Finds all datasets of current level and return in tree order
 	 *
 	 * @param integer $startCategory

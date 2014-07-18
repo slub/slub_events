@@ -7,9 +7,10 @@
 	$start = strtotime($_GET['start']);
 	$stop = strtotime($_GET['end']);
 	$categories = $_GET['categories'];
+	$disciplines = $_GET['disciplines'];
 	$detailPid = $_GET['detailPid'];
 
-	$calfile = PATH_site . 'typo3temp/tx_slubevents/calfile_'.$categories.'_'.$start.'_'.$stop;
+	$calfile = PATH_site . 'typo3temp/tx_slubevents/calfile_'.md5($disciplines.$categories).'_'.$start.'_'.$stop;
 
 	// if file exists and is not too old - take it
 	if (file_exists($calfile)) {
@@ -22,7 +23,7 @@
 	}
 
 	// else make a new query...
-	$url = $link.'&categories='. $categories . '&start=' . $start . '&stop=' . $stop .'&detailPid=' . $detailPid;
+	$url = $link . '&categories=' . $categories . '&disciplines=' . $disciplines . '&start=' . $start . '&stop=' . $stop .'&detailPid=' . $detailPid;
 //~ echo $url;
 	$out = file_get_contents($url);
 

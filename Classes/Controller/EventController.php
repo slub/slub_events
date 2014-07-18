@@ -78,7 +78,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			}
 			$this->settings['categoryList'] = $categoriesIds;
 		}
-//~ t3lib_utility_Debug::debug($categoriesIds, 'categoriesIds... ');
+
 		if (!empty($this->settings['disciplineSelection'])) {
 			$disciplineIds = t3lib_div::intExplode(',', $this->settings['disciplineSelection'], TRUE);
 
@@ -92,7 +92,6 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 			}
 			$this->settings['disciplineList'] = $disciplineIds;
 		}
-//~ t3lib_utility_Debug::debug($disciplineIds, 'disciplineIds... ');
 
 		$events = $this->eventRepository->findAllBySettings($this->settings);
 
@@ -351,11 +350,40 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function listMonthAction() {
 
-	    /* take the flexform settings and get categories as tree */
-		$categories = $this->categoryRepository->findAllByUidsTree(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE));
+		if (!empty($this->settings['categorySelection'])) {
+			$categoriesIds = t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE);
+
+			if ($this->settings['categorySelectionRecursive']) {
+				// add somehow the other categories...
+				foreach ($categoriesIds as $category) {
+					$foundRecusiveCategories = $this->categoryRepository->findAllChildCategories($category);
+					if (count($foundRecusiveCategories) > 0)
+						$categoriesIds = array_merge($foundRecusiveCategories, $categoriesIds);
+				}
+			}
+			$this->settings['categoryList'] = $categoriesIds;
+			$categories = $this->categoryRepository->findAllByUidsTree($this->settings['categoryList']);
+		}
+
+		if (!empty($this->settings['disciplineSelection'])) {
+			$disciplineIds = t3lib_div::intExplode(',', $this->settings['disciplineSelection'], TRUE);
+
+			if ($this->settings['disciplineSelectionRecursive']) {
+				// add somehow the other categories...
+				foreach ($disciplineIds as $discipline) {
+					$foundRecusiveDisciplines = $this->disciplineRepository->findAllChildDisciplines($discipline);
+					if (count($foundRecusiveDisciplines) > 0)
+						$disciplineIds = array_merge($foundRecusiveDisciplines, $disciplineIds);
+				}
+			}
+			$this->settings['disciplineList'] = $disciplineIds;
+			$disciplines = $this->disciplineRepository->findAllByUidsTree($this->settings['disciplineList']);
+		}
 
 		$this->view->assign('categories', $categories);
+		$this->view->assign('disciplines', $disciplines);
 		$this->view->assign('categoriesIds', explode(',', $this->settings['categorySelection']));
+		$this->view->assign('disciplinesIds', explode(',', $this->settings['disciplineSelection']));
 	}
 
 
@@ -378,7 +406,14 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function ajaxAction() {
 
-		$events = $this->eventRepository->findAllByCategoriesAndDateInterval(t3lib_div::intExplode(',', $_GET['categories'], TRUE), $_GET['start'], $_GET['stop']);
+		//~ $events = $this->eventRepository->findAllByCategoriesAndDateInterval(t3lib_div::intExplode(',', $_GET['categories'], TRUE), $_GET['start'], $_GET['stop']);
+
+		$events = $this->eventRepository->findAllBySettings(array('categoryList' => t3lib_div::intExplode(',', $_GET['categories'], TRUE),
+			'disciplineList' => t3lib_div::intExplode(',', $_GET['disciplines'], TRUE),
+			'startTimestamp' => $_GET['start'],
+			'stopTimestamp' => $_GET['stop'],
+			'showPastEvents' => TRUE)
+		);
 
 		$cObj = $this->configurationManager->getContentObject();
 		foreach ($events as $event) {

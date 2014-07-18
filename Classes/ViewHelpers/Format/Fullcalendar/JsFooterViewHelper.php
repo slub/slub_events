@@ -58,12 +58,18 @@ class Tx_SlubEvents_ViewHelpers_Format_Fullcalendar_JsFooterViewHelper extends T
 					url: '?eID=slubCal',
 					data: function() {
 						var eventurl = '';
+						var disurl = '';
 						$('.slubevents-category input:checked').each(function() {
 							var cal = $(this).attr('id').split(\"-\")[2];
 							eventurl = eventurl + ',' + cal;
 						});
+						$('.slubevents-discipline input:checked').each(function() {
+							var cal = $(this).attr('id').split(\"-\")[2];
+							disurl = disurl + ',' + cal;
+						});
 						return {
 							categories: eventurl,
+							disciplines: disurl,
 							link: '" . urlencode($link) . "',
 							detailPid: '" . $settings['pidDetails'] . "'
 						};
@@ -71,9 +77,7 @@ class Tx_SlubEvents_ViewHelpers_Format_Fullcalendar_JsFooterViewHelper extends T
 			},";
 			// add event name to title attribute on mouseover
 			$js1 .= "eventMouseover: function(event, jsEvent, view) {
-					if (view.name !== 'agendaDay') {
-						$(jsEvent.target).attr('title', event.title);
-					}
+							$(jsEvent.target).attr('title', moment(event.start).format('LT') + ' - ' + moment(event.end).format('LT') + ' ' + event.title);
 					},";
 
 			$js1 .= "eventRender: function(event, element, view) {

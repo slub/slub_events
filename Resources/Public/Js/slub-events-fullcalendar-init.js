@@ -16,21 +16,6 @@ $('#calendar').fullCalendar({
 		maxTime: '22:00:00',
 		defaultEventMinutes: 60,
 
-		// add event name to title attribute on mouseover
-		eventMouseover: function(event, jsEvent, view) {
-		  if (view.name !== 'agendaDay') {
-				  $(jsEvent.target).attr('title', event.title);
-		  }
-		},
-
-		loading: function(bool) {
-			if (bool) {
-				$('#loading').show();
-			} else {
-				$('#loading').hide();
-			}
-		},
-
 	});
 
 });

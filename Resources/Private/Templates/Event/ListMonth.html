@@ -14,17 +14,29 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:section name="categoryTree">
 	<ul>
 		<f:for each="{categories}" key="id" as="category">
-			    <f:render partial="Category/ItemCheckbox" arguments="{category: category, settings:settings, label:label, view:'list'}"/>
+			<f:render partial="Category/ItemCheckbox" arguments="{category: category, settings:settings, label:label, view:'list'}"/>
 
-			    <f:if condition="{category.children}">
-				    <f:render section="categoryTree" arguments="{categories: category.children, categoriesSelected: categoriesSelected}" />
-			    </f:if>
-			    </li>
+			<f:if condition="{category.children}">
+				<f:render section="categoryTree" arguments="{categories: category.children, categoriesSelected: categoriesSelected}" />
+			</f:if>
+			</li>
 		</f:for>
-
-
 	</ul>
 </f:section>
+
+<f:section name="disciplineTree">
+	<ul>
+		<f:for each="{disciplines}" key="id" as="discipline">
+			<f:render partial="Discipline/ItemCheckbox" arguments="{discipline: discipline, settings:settings, label:label, view:'list'}"/>
+
+			<f:if condition="{discipline.children}">
+				<f:render section="disciplineTree" arguments="{disciplines: discipline.children, disciplinesSelected: disciplinesSelected}" />
+			</f:if>
+			</li>
+		</f:for>
+	</ul>
+</f:section>
+
 
 <f:section name="main">
 {namespace se=Tx_SlubEvents_ViewHelpers}
@@ -42,8 +54,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 
 <div id="slub-category-month-list">
+
 	<f:if condition="{categories}">
 		<f:render section="categoryTree" arguments="{categories: categories}" />
+	</f:if>
+	<p>&nbsp;</p>
+	<f:if condition="{disciplines}">
+		<f:render section="disciplineTree" arguments="{disciplines: disciplines}" />
 	</f:if>
 
 </div>

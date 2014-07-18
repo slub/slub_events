@@ -15,6 +15,9 @@
 
 }
 
+#slub-category-month-list ul {
+	list-style: none;
+}
 .slub-event-list ul li {
 	margin: 0.2em 0;
 	padding: 0.3em 0.5em;
