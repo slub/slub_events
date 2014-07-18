@@ -94,7 +94,7 @@ class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_View
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 * @api
 	 */
-	public function render($date, $format='%X') {
+	public function render($date, $format = '%X') {
 
 		global $TYPO3_CONF_VARS;
 
@@ -104,6 +104,7 @@ class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_View
 				return '';
 			}
 		}
+
 		if (!$date instanceof DateTime) {
 			try {
 				//~ $date = 1;
@@ -114,6 +115,7 @@ class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_View
 				throw new Tx_Fluid_Core_ViewHelper_Exception('"' . $date . '" could not be parsed by DateTime constructor.', 1241722579);
 			}
 		}
+
 		if($TYPO3_CONF_VARS['SYS']['phpTimeZone']){
 			$date->setTimezone(new DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
 		}

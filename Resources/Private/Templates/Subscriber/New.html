@@ -82,7 +82,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<f:form.hidden name="event" value="{event}" />
 
 	<div class="submit">
-		<f:form.submit class="button submit" value="<f:translate key='tx_slubevents_domain_model_subscriber.submit_registration' />" />
+		<div class="subscription">
+			<f:form.submit class="button submit" value="<f:translate key='tx_slubevents_domain_model_subscriber.submit_registration' />" />
+		</div>
 		<f:link.external class="button linkback" uri="javascript:history.back();"><f:translate key="paginate_back" /></f:link.external>
 	</div>
 

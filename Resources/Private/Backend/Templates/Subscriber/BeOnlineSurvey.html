@@ -25,15 +25,22 @@
 	<f:if condition="{step} == 0">
 		<f:then>
 			<p><b>Prüfen</b></p>
-			<p>Senden Sie im Namen von <b>{event.contact.name}
-			({event.contact.email})</b> folgende Einladung zu einer
-			Online-Umfrage an folgende Teilnehmer:</p>
+			<f:if condition="{onlineSurveyLastSent}">
+				<f:then>
+				<div class="error">
+					<p>Achtung, der Fragebogen wurde bereits am <se:format.date date='@{onlineSurveyLastSent}' format="%c"/> versendet!</p>
+				</div>
+				</f:then>
+			</f:if>
 			<div class="emailtext">
-			<ul>
-			<f:for each="{subscribers}" as="subscriber">
-				<li>{subscriber.name} --> {subscriber.email}, {subscriber.number} <f:if condition="{subscriber.number} == 1"><f:then>Person</f:then><f:else>Personen</f:else></f:if></li>
-			</f:for>
-			</ul>
+				<p>Senden Sie im Namen von
+				<b>{event.contact.name}	({event.contact.email})</b>
+				folgende Einladung zu einer Online-Umfrage an alle Teilnehmer:</p>
+				<ul>
+				<f:for each="{subscribers}" as="subscriber">
+					<li>{subscriber.name} --> {subscriber.email}, {subscriber.number} <f:if condition="{subscriber.number} == 1"><f:then>Person</f:then><f:else>Personen</f:else></f:if></li>
+				</f:for>
+				</ul>
 			</div>
 
 			<p>

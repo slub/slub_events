@@ -112,6 +112,11 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 			$constraints[] = $query->in('discipline.uid', $settings['disciplineList']);
 		}
 
+		// are contacts selected?
+		if (!empty($settings['contactsSelection'])) {
+			$constraints[] = $query->in('contact.uid', t3lib_div::intExplode(',', $settings['contactsSelection'], TRUE));
+		}
+
 		// default is to show only future events
 		if ($settings['showPastEvents'] !== TRUE) {
 			$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
@@ -136,40 +141,6 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		return $query->execute();
 	}
 
-	/**
-	 * Finds all datasets by MM relation categories
-	 *
-	 * @param string $categories separated by comma
-	 * @return array The found Event Objects
-	 */
-	//~ public function findFreeByCategory($categories) {
-//~
-		//~ $query = $this->createQuery();
-//~
-		//~ $constraints = array();
-//~
-		//~ $constraints[] = $query->equals('categories.uid', $categories);
-		//~ $constraints[] = $query->greaterThan('start_date_time',  strtotime('today') );
-//~
-		//~ if (count($constraints)) {
-			//~ $query->matching($query->logicalAnd($constraints));
-		//~ }
-//~
-		//~ // order by start_date -> start_time...
-		//~ $query->setOrderings(
-			//~ array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-		//~ );
-//~
-		//~ $events = $query->execute();
-//~
-		//~ foreach ($events as $event) {
-			//~ $free = $event->getMaxSubscriber() - count($event->getSubscribers());
-			//~ if ($free)
-				//~ $returnevents[] = $event;
-		//~ }
-//~
-		//~ return $returnevents;
-	//~ }
 
 	/**
 	 * Finds all datasets by disciplines
@@ -200,38 +171,6 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		return $query->execute();
 	}
 
-	/**
-	 * Finds all datasets by disciplines
-	 *
-	 * @param string $categories categories separated by comma
-	 * @return array The found Event Objects
-	 */
-	//~ public function findAllDisciplinesByCategories($categories) {
-//~
-		//~ $query = $this->createQuery();
-//~
-		//~ $constraints = array();
-
-		//~ $constraints[] = $query->in('categories.uid', $categories);
-		//~ $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
-//~
-		//~ if (count($constraints)) {
-			//~ $query->matching($query->logicalAnd($constraints));
-		//~ }
-//~
-		//~ // order by start_date -> start_time...
-		//~ $query->setOrderings(
-			//~ array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-		//~ );
-//~
-		//~ $events = $query->execute();
-		//~ $disciplines = array();
-		//~ foreach ($events as $event) {
-			//~ $disciplines[]=$event->getDiscipline();
-		//~ }
-//~
-		//~ return array_unique($disciplines);
-	//~ }
 
 	/**
 	 * Finds all datasets by MM relation categories

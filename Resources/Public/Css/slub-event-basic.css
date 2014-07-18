@@ -98,6 +98,7 @@
 	display: block;
 }
 
+.slub-event-register div.subscription,
 .slub-event-show div.subscription,
 .slub-event-list div.subscription {
 	float: right;
@@ -110,6 +111,7 @@
 	clear: both;
 }
 
+.slub-event-show ul.slub-event-error,
 .slub-event-register ul.slub-event-error {
 	padding: 1em 1em 1em 2em;
 	border: 1px solid red;
@@ -117,6 +119,7 @@
 	font-weight: bold;
 }
 
+.slub-event-show form label.error,
 .slub-event-register form label.error {
 	color: red;
 	font-weight: bold;
@@ -213,40 +216,15 @@
 	display:inline-block;
 }
 
-.slub-category-list form  input[type="submit"],
-.slub-event-register form  input[type="submit"]
- {
-	float: right;
-	width: 150px;
-}
 
 .slub-category-list div.submit,
 .slub-event-register div.submit  {
-	width: 60%;
-	float: right;
+	width: 100%;
+	float: left;
 }
 
 #content a {
 	text-decoration: none;
-}
-
-.slub-category-list a.linkback,
-.slub-event-list a.linkback,
-.slub-event-register a.linkback
-  {
-	text-decoration: none;
-	width: 100px;
-	margin: 20px;
-	border-radius: 15px;
-	border-top-left-radius: 5px;
-	border: 1px solid #999;
-	float: left;
-	text-align: center;
-	background: #eee;
-	color: #999;
-	text-shadow: 1px 1px 0 #fff;
-	font-weight: bold;
-	cursor: pointer;
 }
 
 .slub-category-list li#category-5 {
@@ -369,10 +347,12 @@
 	margin: 10px 0;
 }
 
+.slub-category-list form input[type="submit"],
+.slub-event-register form input[type="submit"],
 .slub-event-list a.subscribe,
 .slub-event-show a.subscribe {
 	position: relative;
-	padding: 2px 4px;
+	padding: 5px 10px !important;
 	margin: 20px 0;
 	font-size: 120%;
 	text-decoration: none !important;
@@ -393,6 +373,40 @@
 .slub-event-show a.subscribe:visited {
 	color: #29a !important;
 }
+
+.slub-category-list .submit a.linkback,
+.slub-event-list .submit a.linkback,
+.slub-event-show .submit a.linkback,
+.slub-event-register .submit a.linkback {
+	text-decoration: none !important;
+	margin: 20px 20px 20px 0;
+	padding: 5px 10px;
+	border-radius: 15px;
+	border-top-left-radius: 5px;
+	border: 1px solid #fff;
+	border-color: #fff rgba(0,0,0,0.2) rgba(0,0,0,0.2) #fff;
+	float: left;
+	text-align: center;
+	background: #e1f4f7 !important;
+	color: #078 !important;
+	text-shadow: 1px 1px 0 #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.slub-category-list form input[type="submit"]:hover,
+.slub-event-register form input[type="submit"]:hover,
+.slub-category-list .submit a.linkback:hover,
+.slub-event-list .submit a.linkback:hover,
+.slub-event-list a.subscribe:hover,
+.slub-event-show .submit a.linkback:hover,
+.slub-event-show a.subscribe:hover,
+.slub-event-register .submit a.linkback:hover,
+.slub-event-register a.subscribe:hover {
+	color: #c00 !important;
+	background: #c3dde1 !important;
+}
+
 
 .slub-event-minimonth {
 	background: transparent;

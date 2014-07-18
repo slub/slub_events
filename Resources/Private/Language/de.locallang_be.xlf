@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2013-11-07T15:19:59Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-18T07:52:44Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
 		<body>
+		<trans-unit id="flexforms.categories_recursive" approved="yes" xml:space="preserve">
+			<source>Include Child Categories</source>
+			<target>Untergeordnete Kategorien einschließen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.discipline_recursive" approved="yes" xml:space="preserve">
+			<source>Include Child Disciplines</source>
+			<target>Untergeordnete Fachdiszipline einschließen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.event_ordering" approved="yes" xml:space="preserve">
+			<source>Event Ordering</source>
+			<target>Sortierung der Liste</target>
+		</trans-unit>
 		<trans-unit id="flexforms.eventgeniusbar_title" approved="yes" xml:space="preserve">
 			<source>Knowledge Bar View Settings</source>
 			<target>Einstellungen Wissensbar</target>
@@ -29,6 +41,14 @@
 			<source>List View</source>
 			<target>Listenansicht</target>
 		</trans-unit>
+		<trans-unit id="flexforms.ordering_ascending" approved="yes" xml:space="preserve">
+			<source>Ascending</source>
+			<target>Aufsteigend</target>
+		</trans-unit>
+		<trans-unit id="flexforms.ordering_descending" approved="yes" xml:space="preserve">
+			<source>Descending</source>
+			<target>Absteigend</target>
+		</trans-unit>
 		<trans-unit id="flexforms.page_list_view" approved="yes" xml:space="preserve">
 			<source>Page of List View</source>
 			<target>Seite mit Listenansicht</target>
@@ -51,11 +71,23 @@
 		</trans-unit>
 		<trans-unit id="flexforms.show_categories" approved="yes" xml:space="preserve">
 			<source>Show Selected Categories</source>
-			<target>Zeige ausgewählte Kategorien</target>
+			<target>Nur gewählte Kategorien anzeigen</target>
 		</trans-unit>
 		<trans-unit id="flexforms.show_categories_start" approved="yes" xml:space="preserve">
 			<source>Select Root Category</source>
 			<target>Wurzel-Kategorie wählen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.show_contacts" approved="yes" xml:space="preserve">
+			<source>Show Only Selected Contacts</source>
+			<target>Nur gewählte Kontakte anzeigen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.show_discipline" approved="yes" xml:space="preserve">
+			<source>Show Only Selected Disciplines</source>
+			<target>Nur gewählte Fachdisziplinen anzeigen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.show_past_events" approved="yes" xml:space="preserve">
+			<source>Show Past Events</source>
+			<target>Zeige vergangene Veranstaltungen</target>
 		</trans-unit>
 		<trans-unit id="flexforms.single_view" approved="yes" xml:space="preserve">
 			<source>Single View</source>

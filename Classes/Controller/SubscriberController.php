@@ -526,7 +526,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			// email to event owner
 			$this->sendTemplateEmail(
 				array($event->getContact()->getEmail() => $event->getContact()->getName()),
-				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
 				'Veranstaltung wegen Abmeldung nicht mehr gesichert: ' . $event->getTitle(),
 				'Minimumreachedagain',
 				array(	'event' => $event,
@@ -596,7 +596,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		$this->sendTemplateEmail(
 			array($event->getContact()->getEmail() => $event->getContact()->getName()),
-			array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+			array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
 			'Termineinladung: ' . $event->getTitle(),
 			'Invitation',
 			array(	'event' => $event,
@@ -683,17 +683,11 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 */
 	public function beOnlineSurveyAction(Tx_SlubEvents_Domain_Model_Event $event, $step = 0) {
 
-		//~ // startDateTime may never be empty
-		//~ $helper['start'] = $event->getStartDateTime()->getTimestamp();
-		//~ // endDateTime may be empty
-		//~ if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
-			//~ $helper['end'] = $event->getEndDateTime()->getTimestamp();
-		//~ else
-			//~ $helper['end'] = $helper['start'];
-//~
-		//~ if ($event->isAllDay()) {
-			//~ $helper['allDay'] = 1;
-		//~ }
+		// get the onlineSurveyLink and potential timestamp of last sent
+		$onlineSurveyLink = t3lib_div::trimExplode('|', $event->getOnlinesurvey(), TRUE);
+
+		// set the link to the current object to get access inside the email
+		$event->setOnlinesurvey($onlineSurveyLink[0]);
 
 		if ($step == 0) {
 			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
@@ -708,6 +702,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
 			$emailViewHTML->setFormat('html');
 			//~ $emailText->assignMultiple($variables);
+			$emailViewHTML->assign('onlineSurveyLink', $onlineSurveyLink[0]);
 			$emailViewHTML->assign('event', $event);
 			$emailViewHTML->assign('subscriber', array('name' => '###Name wird automatisch ausgefüllt###'));
 
@@ -732,32 +727,40 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 				$helper['locationics'] = $this->foldline($event->getLocation()->getName());
 			}
 
-
 			$allSubscribers = $event->getSubscribers();
-				foreach ($allSubscribers as $uid => $subscriber) {
-					//~ $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
-					$this->sendTemplateEmail(
-						array($subscriber->getEmail() => $subscriber->getName()),
-						array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
-						'Online-Umfrage zu ' . $event->getTitle(),
-						'OnlineSurvey',
-						array(	'event' => $event,
-								'subscriber' => $subscriber,
-								'attachSubscriberAsCsv' => FALSE,
-								'helper' => $helper,
-								'settings' => $this->settings,
-								'attachIcsInvitation' => FALSE,
-						)
-					);
-				}
+			foreach ($allSubscribers as $uid => $subscriber) {
+				//~ $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
+				$this->sendTemplateEmail(
+					array($subscriber->getEmail() => $subscriber->getName()),
+					array($event->getContact()->getEmail() => $event->getContact()->getName()),
+					'Online-Umfrage zu ' . $event->getTitle(),
+					'OnlineSurvey',
+					array(	'event' => $event,
+							'subscriber' => $subscriber,
+							'attachSubscriberAsCsv' => FALSE,
+							'helper' => $helper,
+							'settings' => $this->settings,
+							'attachIcsInvitation' => FALSE,
+					)
+				);
+			}
+
+			// change the onlineSurvey link to see, that we sent it already
+			$event->setOnlinesurvey($onlineSurveyLink[0] . '|' .time());
+			// we changed the event inside the repository and have to
+			// update the repo manually as of TYPO3 6.1
+			$this->eventRepository->update($event);
+
 		}
 
 		$this->view->assign('event', $event);
+		if (isset($onlineSurveyLink[1]))
+			$this->view->assign('onlineSurveyLastSent', $onlineSurveyLink[1]);
 		$this->view->assign('subscribers', $event->getSubscribers());
 		$this->view->assign('step', $step);
 		$this->view->assign('emailText', $emailTextHTML);
-	}
 
+	}
 
 }
 

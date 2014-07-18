@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-11-07T15:19:59Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-07-18T07:52:44Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
 		<body>
-		<trans-unit id="flexforms.fullcalendar_js" xml:space="preserve">
-			<source>Fullcalendar Javascript</source>
+		<trans-unit id="flexforms.categories_recursive" xml:space="preserve">
+			<source>Include Child Categories</source>
+		</trans-unit>
+		<trans-unit id="flexforms.discipline_recursive" xml:space="preserve">
+			<source>Include Child Disciplines</source>
+		</trans-unit>
+		<trans-unit id="flexforms.event_ordering" xml:space="preserve">
+			<source>Event Ordering</source>
 		</trans-unit>
 		<trans-unit id="flexforms.eventgeniusbar_title" xml:space="preserve">
 			<source>Knowledge Bar View Settings</source>
@@ -20,14 +26,23 @@
 		<trans-unit id="flexforms.eventuserpanel_title" xml:space="preserve">
 			<source>Registration Userpanel Settings</source>
 		</trans-unit>
+		<trans-unit id="flexforms.fullcalendar_js" xml:space="preserve">
+			<source>Fullcalendar Javascript</source>
+		</trans-unit>
 		<trans-unit id="flexforms.knowledgebar_view" xml:space="preserve">
 			<source>Knowledge Bar View</source>
+		</trans-unit>
+		<trans-unit id="flexforms.list_month_view" xml:space="preserve">
+			<source>List Month View</source>
 		</trans-unit>
 		<trans-unit id="flexforms.list_view" xml:space="preserve">
 			<source>List View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.list_month_view" xml:space="preserve">
-			<source>List Month View</source>
+		<trans-unit id="flexforms.ordering_ascending" xml:space="preserve">
+			<source>Ascending</source>
+		</trans-unit>
+		<trans-unit id="flexforms.ordering_descending" xml:space="preserve">
+			<source>Descending</source>
 		</trans-unit>
 		<trans-unit id="flexforms.page_list_view" xml:space="preserve">
 			<source>Page of List View</source>
@@ -47,29 +62,20 @@
 		<trans-unit id="flexforms.show_categories" xml:space="preserve">
 			<source>Show Selected Categories</source>
 		</trans-unit>
-		<trans-unit id="flexforms.categories_recursive" xml:space="preserve">
-			<source>Include Child Categories</source>
-		</trans-unit>
-		<trans-unit id="flexforms.discipline_recursive" xml:space="preserve">
-			<source>Include Child Disciplines</source>
-		</trans-unit>
 		<trans-unit id="flexforms.show_categories_start" xml:space="preserve">
 			<source>Select Root Category</source>
 		</trans-unit>
-		<trans-unit id="flexforms.single_view" xml:space="preserve">
-			<source>Single View</source>
+		<trans-unit id="flexforms.show_contacts" xml:space="preserve">
+			<source>Show Only Selected Contacts</source>
+		</trans-unit>
+		<trans-unit id="flexforms.show_discipline" xml:space="preserve">
+			<source>Show Only Selected Disciplines</source>
 		</trans-unit>
 		<trans-unit id="flexforms.show_past_events" xml:space="preserve">
 			<source>Show Past Events</source>
 		</trans-unit>
-		<trans-unit id="flexforms.event_ordering" xml:space="preserve">
-			<source>Event Ordering</source>
-		</trans-unit>
-		<trans-unit id="flexforms.ordering_descending" xml:space="preserve">
-			<source>Descending</source>
-		</trans-unit>
-		<trans-unit id="flexforms.ordering_ascending" xml:space="preserve">
-			<source>Ascending</source>
+		<trans-unit id="flexforms.single_view" xml:space="preserve">
+			<source>Single View</source>
 		</trans-unit>
 		<trans-unit id="flexforms.subscribe_view" xml:space="preserve">
 			<source>Subscribe View</source>

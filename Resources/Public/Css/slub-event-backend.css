@@ -44,9 +44,9 @@ table.tx_slubevents tr.Even{
 }
 
 div.tx_slubevents p, div.tx_slubevents div {
-	font-size: 11pt;
+	font-size: 110%;
 	font-weight: normal;
-	padding: 4px;
+	line-height: 120%;
 }
 
 div.tx_slubevents h3 {
@@ -191,9 +191,20 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 }
 
 .tx_slubevents .emailtext {
-
 	background: #fff;
 	border: 1px solid #ccc;
+	padding: 30px;
+	width: 500px;
+}
+.tx_slubevents .emailtext ul {
+	list-style-type: disc;
+	padding: 20px 0 0 20px;
+}
+.tx_slubevents .error {
+	background: white;
+	border: 5px solid red;
+	color: red;
+	font-weight: bold;
 	padding: 30px;
 	width: 500px;
 
