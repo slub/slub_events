@@ -6,7 +6,7 @@ if (!defined('TYPO3_MODE')) {
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventlist',
-	'SLUB: Events: Listing'
+	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventlist',
 );
 
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventlist';
@@ -16,7 +16,7 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventsubscribe',
-	'SLUB: Events: Registration'
+	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventsubscribe',
 );
 
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventsubscribe';
@@ -26,7 +26,7 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventuserpanel',
-	'SLUB: Events: User Panel'
+	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventuserpanel',
 );
 
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventuserpanel';
@@ -36,7 +36,7 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Eventgeniusbar',
-	'SLUB: Events: Wissensbar'
+	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventgeniusbar',
 );
 
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventgeniusbar';

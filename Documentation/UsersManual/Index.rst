@@ -11,6 +11,12 @@
 Users manual
 ============
 
+
+.. _users-manualpage-setup:
+
+Page Setup
+----------
+
 Please imagine the following page structure and put the mentioned
 plugins onto these pages:
 
@@ -21,6 +27,9 @@ plugins onto these pages:
 	|-- Subscribe	<-- plugin "SLUB: Events: Registration", Subscribe View
 	|-- Unsubscribe	<-- plugin "SLUB: Events: Registration", Unsubscribe View
 	`-- Eventdata	<-- Sysfolder for Eventdata
+
+Backend Module
+--------------
 
 With the TYPO3 list module, you have to add three basic datatypes to the
 "Eventdate" folder:
@@ -68,6 +77,29 @@ following error message:
 
 	Error if no page or folder is selected with the slub_events template.
 
+
+
+Frontend Plugins
+----------------
+
+See :ref:`users-manualpage-setup`.
+
+SLUB: Events: Listing
+_____________________
+
+
+SLUB: Events: Registration
+_____________________
+
+
+SLUB: Events: User Panel
+_____________________
+
+
+SLUB: Events: Genius Bar
+_____________________
+
+text2
 
 
 Screenshots

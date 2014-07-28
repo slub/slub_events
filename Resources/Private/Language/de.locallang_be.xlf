@@ -105,6 +105,22 @@
 			<source>Userpanel View</source>
 			<target>Meine Veranstaltungen</target>
 		</trans-unit>
+		<trans-unit id="plugin.Eventgeniusbar" approved="yes" xml:space="preserve">
+			<source>SLUB: Events: Genius Bar</source>
+			<target>SLUB: Veranstaltungen: Wissensbar</target>
+		</trans-unit>
+		<trans-unit id="plugin.Eventlist" approved="yes" xml:space="preserve">
+			<source>SLUB: Events: Listing</source>
+			<target>SLUB: Veranstaltungen: Listenansicht</target>
+		</trans-unit>
+		<trans-unit id="plugin.Eventsubscribe" approved="yes" xml:space="preserve">
+			<source>SLUB: Events: Registration</source>
+			<target>SLUB: Veranstaltungen: Registrierung</target>
+		</trans-unit>
+		<trans-unit id="plugin.Eventuserpanel" approved="yes" xml:space="preserve">
+			<source>SLUB: Events: User Panel</source>
+			<target>SLUB: Veranstaltungen: Meine Veranstaltung</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

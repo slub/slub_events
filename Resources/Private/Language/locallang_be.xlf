@@ -86,6 +86,18 @@
 		<trans-unit id="flexforms.userpanel_view" xml:space="preserve">
 			<source>Userpanel View</source>
 		</trans-unit>
+		<trans-unit id="plugin.Eventgeniusbar" xml:space="preserve">
+			<source>SLUB: Events: Genius Bar</source>
+		</trans-unit>
+		<trans-unit id="plugin.Eventlist" xml:space="preserve">
+			<source>SLUB: Events: Listing</source>
+		</trans-unit>
+		<trans-unit id="plugin.Eventsubscribe" xml:space="preserve">
+			<source>SLUB: Events: Registration</source>
+		</trans-unit>
+		<trans-unit id="plugin.Eventuserpanel" xml:space="preserve">
+			<source>SLUB: Events: User Panel</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
