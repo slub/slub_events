@@ -11,6 +11,8 @@ Known Problems
 ================
 
 
+Configuration
+-------------
 
 - In the list view, month names are written as fulltext as separators.
   If you encounter problems with the selected language or with the encoding,
@@ -29,4 +31,24 @@ Known Problems
 
 	config.locale_all = de_DE.UTF-8
 
-- Please use the `issue tracker on the Forge project website <http://forge.typo3.org/projects/extension-slub_events>`_, if you encounter problems.
+- Not everything is localized yet. Especially some fluid templates have
+  pure German texts. But these templates you have to customize anyway.
+  Nevertheless, we continue our work to translate the contents
+  step-by-step.
+
+
+Limitations
+-----------
+
+- There is no way to add extra fields to the registration form.
+  The fields are connected to the data model which makes it easy to use
+  the built-in validation by Extbase.
+
+  To add new fields, you have to
+  change the database scheme, the data model, the subscriber controler,
+  etc. If you have a better approach: please fill in a `feature request
+  on the Forge project website
+  <http://forge.typo3.org/projects/extension-slub_events>`_ and explain
+  your solution.
+
+  Thank you!

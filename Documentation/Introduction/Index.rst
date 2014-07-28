@@ -20,10 +20,10 @@ There are two use cases supported:
 #. Event listing and detail view with optional subscription
 
 #. Category listing with subscription for single consultation
-   ("Wissensbar")
+   ("Genius Bar", "Wissensbar")
 
 On subscription, the customer receives an email including an
-ics-calendar compontent. MS Outlook and Thunderbird/Lightning recognize
+ics-calendar invitation. MS Outlook and Thunderbird/Lightning recognize
 this component as calendar event.
 
 The templates are not yet all localized but are easily changeable by

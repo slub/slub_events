@@ -22,26 +22,33 @@ plugins onto these pages:
 	|-- Unsubscribe	<-- plugin "SLUB: Events: Registration", Unsubscribe View
 	`-- Eventdata	<-- Sysfolder for Eventdata
 
-With the TYPO3 list module, you have to add three basic data to the
+With the TYPO3 list module, you have to add three basic datatypes to the
 "Eventdate" folder:
 
-#. **Category**: The categories of your events like "Tutorial", "Lesson", "Workshop", etc.
-#. **Contact Details**: The name and email address will be used to send the
-   confirmation emails on subscription. The picture and the description
-   is only used with the knowledge bar functionality.
-#. **Location**: Add location with title, descriptions and links. The title
-   will be shown in the ics-invitation.
+#. **Category**: The categories of your events like "Tutorial",
+   "Lesson", "Workshop", etc. You can create a category tree.
+#. **Contact Details**: The name and email address will be used to send
+   the confirmation emails on subscription. The picture and the
+   description is shown in the detail view and in the category list view
+   of the knowledge bar.
+#. **Location**: Add location with title, descriptions and links. The
+   title will be shown in the ics-invitation.
 
-If all this is done, you may use the backend module on the left, called
-"Events" and select the Eventdata-folder or any page below the
-slub_events template.
+Optional you can add:
 
+#. **Disciplines**: Disciplines can be used as another filter tree for
+   the list view.
+
+If all this is done, you can start using the backend module on the left
+column, called "Events" and select the Eventdata-folder or any page
+below the slub_events template in the middle column.
 
 .. figure:: ../Images/UserManual/slub-events-backend-module.jpg
 	:width: 500px
 	:alt: The Backend Module
 
-	The backend module appears on the right if the right page has been choosen.
+	The backend module appears on the right column if a page in the
+	pagetreeg has been selected.
 
 
 **Important:** You have to set the StoragePid of the Eventdata-folder on

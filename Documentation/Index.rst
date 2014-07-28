@@ -33,7 +33,7 @@ slub_events
 		events, registration
 
 	:Copyright:
-		2013
+		2013-2014
 
 	:Author:
 		Alexander Bigga (SLUB Dresden)
@@ -64,3 +64,4 @@ slub_events
 	UsersManual/Index
 	AdministratorManual/Index
 	KnownProblems/Index
+	Support/Index
