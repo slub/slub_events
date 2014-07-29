@@ -82,22 +82,36 @@ following error message:
 Frontend Plugins
 ----------------
 
-See :ref:`users-manualpage-setup`.
+As mentioned in :ref:`users-manualpage-setup` there are several frontend
+plugins to list, show and register to events.
+
 
 SLUB: Events: Listing
 _____________________
 
+This plugin has three functions:
+
+- *List View*: list all upcoming events in a chronological
+  order. By default only future events (including "today") are shown. You
+  can show event only from selected categories, disciplines or contacts.
+  You can change the chronological ordering and you can show past events.
+
+- *Single View*: show details of a single event.
+
+- *List Month View*: this is an experimental view with fullcalendar. We
+  are playing around with it.
+
 
 SLUB: Events: Registration
-_____________________
+__________________________
 
 
 SLUB: Events: User Panel
-_____________________
+________________________
 
 
 SLUB: Events: Genius Bar
-_____________________
+________________________
 
 text2
 

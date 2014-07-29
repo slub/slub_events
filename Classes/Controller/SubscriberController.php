@@ -69,7 +69,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 * is not found the object is NULL and the newAction is not called.
 	 * Otherwise the newAction will use the propertyMapper to convert
 	 * the event id to and object. If this object doesn't exist or is
-	 * hidden, an exception is thrown (TYPO3 4.7.12)
+	 * hidden, an exception is thrown (TYPO3 4.7.x)
 	 *
 	 * @return void
 	 */
@@ -88,12 +88,37 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 
 	/**
+	 * action initializeDelete
+	 *
+	 * This is necessary to precheck the given event id. If the event
+	 * is not found the object is NULL and the newAction is not called.
+	 * Otherwise the newAction will use the propertyMapper to convert
+	 * the event id to and object. If this object doesn't exist or is
+	 * hidden, an exception is thrown (TYPO3 4.7.x)
+	 *
+	 * @return void
+	 */
+	public function initializeDeleteAction() {
+
+		$eventId = $this->getParametersSafely('event');
+		$event = NULL;
+
+		if ($eventId != NULL)
+			$event = $this->eventRepository->findByUid($eventId);
+
+		if ($event === NULL)
+			$this->redirect('eventNotFound');
+
+	}
+
+	/**
 	 * action new
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
 	 * @param Tx_SlubEvents_Domain_Model_Event $event
 	 * @param Tx_SlubEvents_Domain_Model_Category $category
 	 * @ignorevalidation $newSubscriber
+	 * @ignorevalidation $event
 	 * @ignorevalidation $category
 	 * @return void
 	 */
