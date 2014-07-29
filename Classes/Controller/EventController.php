@@ -210,11 +210,8 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function listOwnAction() {
 
-		// two ways:
-		// 1. either an editcode is given --> look for this - and only this event
-		// 2. a) an editcode is given AND the user is logged in
-		// 2. b) the user is logged in
-
+		// + the user is logged in
+		// + the username == customerid
 		$subscribers = $this->subscriberRepository->findAllByFeuser();
 		$events = $this->eventRepository->findAllBySubscriber($subscribers);
 

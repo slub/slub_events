@@ -105,15 +105,32 @@ This plugin has three functions:
 SLUB: Events: Registration
 __________________________
 
+This plugin has two functions:
+
+- *Subscribe View*: This shows the registration form.
+- *Unsubscribe View*: This is the target plugin to unsubscribe users.
+  Unfortunately you have to place it on a separate page.
+
 
 SLUB: Events: User Panel
 ________________________
 
+This basic plugin shows all events of a customer. This is currently
+working only for our usecase:
 
-SLUB: Events: Genius Bar
-________________________
+- the user is logged in
+- the "customer ID" is equal to the fe_user username
 
-text2
+SLUB: Events: Knowledge Bar
+___________________________
+
+The knowledge bar is a different type of event with only one subscriber.
+Technically an event may have multiple categories. This plugin lists
+the event ordered by categories. The event itself only provides the
+time, subscription and contact details. The descriptions are taken from
+the category.
+
+To better understand the concept, have a look at the `SLUB Knowledge Bar <http://www.slub-dresden.de/en/service/knowledge-bar/>`_.
 
 
 Screenshots

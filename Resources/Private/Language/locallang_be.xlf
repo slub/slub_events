@@ -87,7 +87,7 @@
 			<source>Userpanel View</source>
 		</trans-unit>
 		<trans-unit id="plugin.Eventgeniusbar" xml:space="preserve">
-			<source>SLUB: Events: Genius Bar</source>
+			<source>SLUB: Events: Knowledge Bar</source>
 		</trans-unit>
 		<trans-unit id="plugin.Eventlist" xml:space="preserve">
 			<source>SLUB: Events: Listing</source>

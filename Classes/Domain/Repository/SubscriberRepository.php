@@ -50,8 +50,6 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 			$constraints[] = $query->equals('pid', $pid);
 		}
 
-		//~ $constraints[] = $query->greaterThan('start_date',  strtotime('today') );
-
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
 		}

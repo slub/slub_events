@@ -20,7 +20,7 @@ There are two use cases supported:
 #. Event listing and detail view with optional subscription
 
 #. Category listing with subscription for single consultation
-   ("Genius Bar", "Wissensbar")
+   ("Knowledge Bar", "Wissensbar")
 
 On subscription, the customer receives an email including an
 ics-calendar invitation. MS Outlook and Thunderbird/Lightning recognize
