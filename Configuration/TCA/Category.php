@@ -104,6 +104,8 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 		),
 		'genius_bar' => array(
 			'exclude' => 0,
+			'l10n_mode' => 'exclude',
+			//~ 'displayCond' => 'FIELD:sys_language_uid:=:0',
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_category.genius_bar',
 			'config' => array(
 				'type' => 'check',
@@ -133,8 +135,9 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 		),
 		'parent' => array(
 			'exclude' => 0,
-			'displayCond' => 'FIELD:sys_language_uid:=:0',
-			'l10n_mode' => 'mergeIfNotBlank',
+			//~ 'displayCond' => 'FIELD:sys_language_uid:=:0',
+			'l10n_mode' => 'exclude',
+			//~ 'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_db.xlf:tx_slubevents_domain_model_category.parent',
 			'config' => array(
 				'type' => 'select',

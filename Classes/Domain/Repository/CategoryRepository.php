@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2012-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -43,6 +43,10 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	public function findAllByUids($categories) {
 
 		$query = $this->createQuery();
+
+		// we have to ignore sys_language here
+		// --> https://forge.typo3.org/issues/37696
+		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
 
 		$constraints = array();
 		$constraints[] = $query->in('uid', $categories);
@@ -128,42 +132,6 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	}
 
 	/**
-	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
-	 *
-	 * @return int uid
-	 */
-	public function getParentUidLocalized($category) {
-
-		// is a localized entry?
-		if ($category->getL10nParent()) {
-
-			// create own query because of buggy localization handling in extbase 4.7 with relations
-			$query = $this->createQuery();
-
-			$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-
-			$buildquery = 'SELECT parent ';
-			$buildquery .= 'FROM tx_slubevents_domain_model_category ';
-			$buildquery .= 'WHERE uid = \''. $category->getL10nParent() .'\' ';
-			$buildquery .= 'AND deleted = \'0\' ';
-			$buildquery .= 'AND hidden = \'0\' ';
-
-			$query->statement($buildquery);
-
-			$parentCategory = $query->execute();
-
-			$parentUid = $parentCategory[0]['parent'];
-
-		} else {
-		    $parentUid = ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL;
-		}
-
-		return $parentUid;
-
-	    }
-
-	/**
 	 * Finds all datasets of current branch and return in tree order
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $startCategory
@@ -172,20 +140,21 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	 */
 	public function findCurrentBranch($startCategory = NULL) {
 
-		$query = $this->createQuery();
+		$childCategorieIds = $this->findAllChildCategories($startCategory->getUid());
 
-		// order by start_date -> start_time...
-		$query->setOrderings(
-			array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
-		);
+		// ups, no childs found...
+		if ($childCategorieIds === NULL) {
+			return array();
+		}
 
-		$categories = $query->execute();
+		$categories = $this->findAllByUids($childCategorieIds);
 
 		$flatCategories = array();
+
 		foreach ($categories as $category) {
 			$flatCategories[$category->getUid()] = Array(
 				'item' =>  $category,
-				'parent' => $this->getParentUidLocalized($category),
+				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL,
 			);
 		}
 
@@ -198,58 +167,9 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 			}
 		}
 
+//~ t3lib_utility_Debug::debug($tree, 'tree... ');
+
 		return $tree[$startCategory->getUid()]['children'];
-	}
-
-	/**
-	 * Finds all datasets of current level and return in tree order
-	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $startCategory
-	 * @ignorevalidation $startCategory
-	 * @return array The found Category Objects as Tree
-	 */
-	public function findCurrentLevel($startCategory = NULL) {
-
-		$query = $this->createQuery();
-
-		$constraints = array();
-
-		if ($startCategory !== NULL)
-			$constraints[] = $query->equals('parent', $startCategory->getUid());
-		else
-			$constraints[] = $query->equals('parent', 0);
-
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
-		$categories = $query->execute();
-
-		$flatCategories = array();
-		foreach ($categories as $category) {
-			$flatCategories[$category->getUid()] = Array(
-				'item' =>  $category,
-				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL
-			);
-		}
-
-		$tree = array();
-
-		// if only one categorie exists the foreach-solution below
-		// doesn't work as expected --> take the one and give it back as tree-array()
-		if (count($flatCategories) == 1) {
-			$tree[0] = array_shift($flatCategories);
-			return $tree;
-		}
-
-		foreach ($flatCategories as $id => &$node) {
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-				$tree[$node['parent']]['children'][$id] = &$node;
-			}
-		}
-
-		return $tree;
 	}
 
 	/**
@@ -260,11 +180,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	 */
 	public function findAllChildCategories($startCategory = 0) {
 
-		$childCategoriesIds = self::findChildCategories($startCategory);
-
-		foreach ($categories as $category) {
-			$childCategoriesIds = array_merge($this->findChildCategories($category), $childCategoriesIds);
-		}
+		$childCategoriesIds = $this->findChildCategories($startCategory);
 
 		return $childCategoriesIds;
 	}
@@ -279,9 +195,18 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 
 		$query = $this->createQuery();
 
+		// we have to ignore sys_language here
+		// --> https://forge.typo3.org/issues/37696
+		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
+		//~ $query->getQuerySettings()->setLanguageOverlayMode(TRUE);
+
 		$constraints = array();
 
 		$constraints[] = $query->equals('parent', $startCategory);
+
+		$query->setOrderings(
+			array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+		);
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
@@ -290,13 +215,11 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 
 		foreach ($categories as $category) {
 			$childCategoriesIds[] = $category->getUid();
-
 			$recursiveCategoriesIds = self::findChildCategories($category->getUid());
 			if (count($recursiveCategoriesIds) > 0) {
 				$childCategoriesIds = array_merge($recursiveCategoriesIds, $childCategoriesIds );
 			}
 		}
-
 
 		return $childCategoriesIds;
 	}
@@ -316,7 +239,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 		$constraints = array();
 
 		if ($startCategory !== NULL)
-			$constraints[] = $query->equals('parent', $startCategory->getUid());
+			$constraints[] = $query->equals('parents', $startCategory->getUid());
 		else
 			$constraints[] = $query->equals('parent', 0);
 

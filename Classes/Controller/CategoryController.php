@@ -66,10 +66,14 @@ class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controll
 	 */
 	public function listAction(Tx_SlubEvents_Domain_Model_Category $category = NULL) {
 
-	    // take the flexform settings by default
+//~ t3lib_utility_Debug::debug($this->settings, 'settings... ');
+		// take the root category of the flexform
 		$category = $this->categoryRepository->findAllByUids(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE))->getFirst();
 
+//~ t3lib_utility_Debug::debug($category, 'category... ');
 		$categories = $this->categoryRepository->findCurrentBranch($category);
+		//~ $categories = $this->categoryRepository->findCurrentLevel($category);
+//~ t3lib_utility_Debug::debug($categories, 'listAction... ');
 
 		if (count($categories) == 0) {
 			// there are no further child categories --> show events

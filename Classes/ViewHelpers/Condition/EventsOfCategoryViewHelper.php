@@ -31,12 +31,13 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_EventsOfCategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_SlubEvents_ViewHelpers_Condition_EventsOfCategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * eventRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
+	 * @inject
 	 */
 	protected $eventRepository;
 
@@ -44,6 +45,7 @@ class Tx_SlubEvents_ViewHelpers_Format_EventsOfCategoryViewHelper extends Tx_Flu
 	 * categoryRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
+	 * @inject
 	 */
 	protected $categoryRepository;
 
@@ -51,66 +53,50 @@ class Tx_SlubEvents_ViewHelpers_Format_EventsOfCategoryViewHelper extends Tx_Flu
 	 * subscriberRepository
 	 *
 	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @inject
 	 */
 	protected $subscriberRepository;
-
-	/**
-	 * injectEventRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository
-	 * @return void
-	 */
-	public function injectEventRepository(Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository) {
-		$this->eventRepository = $eventRepository;
-	}
-
-	/**
-	 * injectSubscriberRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository
-	 * @return void
-	 */
-	public function injectSubscriberRepository(Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository) {
-		$this->subscriberRepository = $subscriberRepository;
-	}
-
-	/**
-	 * injectCategoryRepository
-	 *
-	 * @param Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository
-	 * @return void
-	 */
-	public function injectCategoryRepository(Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository) {
-		$this->categoryRepository = $categoryRepository;
-	}
 
 	/**
 	 * check if any events of categories below are present and free for booking
 	 *
 	 * @param Tx_SlubEvents_Domain_Model_Category $category
-	 * @return int
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+	 * @return boolean
 	 * @api
 	 */
 	public function render(Tx_SlubEvents_Domain_Model_Category $category) {
 
-		//~ print_r($category->getTitle());
 		$events = $this->eventRepository->findAllGbByCategory($category);
 
-		$categories = $this->categoryRepository->findCurrentLevel($category);
+		$categories = $this->categoryRepository->findCurrentBranch($category);
 
-		$free = 0;
-		if (count($categories) == 0) {
+		$showLink = FALSE;
+
+		if (count($categories) == 0 || count($events) == 0) {
 			foreach ($events as $event) {
-				// is there any event with free places in this category?
-				$free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
-				if ($free > 0)
+				$showLink = TRUE;
+				if ($this->subscriberRepository->countAllByEvent($event) >= $event->getMaxSubscriber()) {
+					$showLink = FALSE;
+				}
+				// event is cancelled
+				if ($event->getCancelled()) {
+					$showLink = FALSE;
+				}
+				// deadline reached....
+				if (is_object($event->getSubEndDateTime())) {
+					if ($event->getSubEndDateTime()->getTimestamp() < time()) {
+						$showLink = FALSE;
+					}
+				}
+				// if any event exists and is valid, break here and return TRUE
+				if ($showLink)
 					break;
 			}
-		} else
-			return 1;
+		}
+		//~ else
+			//~ return TRUE;
 
-		return $free;
+		return $showLink;
 	}
 }
 ?>

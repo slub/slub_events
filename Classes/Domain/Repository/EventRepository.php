@@ -44,7 +44,6 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$query = $this->createQuery();
 
 		$constraints = array();
-		//~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
 		$constraints[] = $query->equals('categories.uid', $category);
 		$constraints[] = $query->equals('genius_bar', 1);
 		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));

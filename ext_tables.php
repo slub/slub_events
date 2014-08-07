@@ -125,7 +125,7 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 		'searchFields' => 'title,parent,',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Category.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_category.gif',
-		'requestUpdate' => 'genius_bar'
+		'requestUpdate' => 'genius_bar,sys_language_uid'
 	),
 );
 
@@ -183,7 +183,8 @@ $TCA['tx_slubevents_domain_model_location'] = array(
 		),
 		'searchFields' => 'name,description,link,parent,',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Location.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_location.gif'
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_location.gif',
+		'requestUpdate' => 'sys_language_uid'
 	),
 );
 
@@ -212,7 +213,8 @@ $TCA['tx_slubevents_domain_model_discipline'] = array(
 		),
 		'searchFields' => 'name,parent,',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Discipline.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_discipline.gif'
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_discipline.gif',
+		'requestUpdate' => 'sys_language_uid'
 	),
 );
 
@@ -241,7 +243,8 @@ $TCA['tx_slubevents_domain_model_contact'] = array(
 		),
 		'searchFields' => 'name,',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Contact.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_contact.gif'
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_slubevents_domain_model_contact.gif',
+		'requestUpdate' => 'sys_language_uid'
 	),
 );
 

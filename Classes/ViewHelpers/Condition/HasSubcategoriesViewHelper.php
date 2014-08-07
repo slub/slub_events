@@ -3,7 +3,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -61,9 +61,9 @@ class Tx_SlubEvents_ViewHelpers_Condition_HasSubcategoriesViewHelper extends Tx_
 	 */
 	public function render(Tx_SlubEvents_Domain_Model_Category $category) {
 
-		$categories = $this->categoryRepository->findCurrentLevel($category);
+		$categories = $this->categoryRepository->findCurrentBranch($category);
 
-		if (count($categories) == 0) 
+		if (count($categories) == 0)
 			return FALSE;
 		else
 			return TRUE;

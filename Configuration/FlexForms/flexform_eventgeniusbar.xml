@@ -42,7 +42,7 @@
 					</treeConfig>
 
 					<foreign_table>tx_slubevents_domain_model_category</foreign_table>
-					<foreign_table_where>AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_category.sorting DESC</foreign_table_where>
+					<foreign_table_where>AND tx_slubevents_domain_model_category.genius_bar = 1 AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_category.sorting DESC</foreign_table_where>
 					<size>5</size>
 					<autoSizeMax>30</autoSizeMax>
 					<minitems>1</minitems>
