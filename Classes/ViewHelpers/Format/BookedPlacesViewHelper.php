@@ -51,10 +51,11 @@ class Tx_SlubEvents_ViewHelpers_Format_BookedPlacesViewHelper extends Tx_Fluid_C
 	 */
 	public function render(Tx_SlubEvents_Domain_Model_Event $event = NULL) {
 
-		if ($event != NULL)
+		if ($event != NULL) {
 			$booked = $this->subscriberRepository->countAllByEvent($event);
-		else
+		} else {
 			$booked = 0;
+		}
 
 		return $booked;
 

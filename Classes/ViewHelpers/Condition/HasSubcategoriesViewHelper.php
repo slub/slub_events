@@ -63,10 +63,11 @@ class Tx_SlubEvents_ViewHelpers_Condition_HasSubcategoriesViewHelper extends Tx_
 
 		$categories = $this->categoryRepository->findCurrentBranch($category);
 
-		if (count($categories) == 0)
+		if (count($categories) == 0) {
 			return FALSE;
-		else
+		} else {
 			return TRUE;
+		}
 
 	}
 }

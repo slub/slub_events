@@ -107,10 +107,7 @@ class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_View
 
 		if (!$date instanceof DateTime) {
 			try {
-				//~ $date = 1;
 				$date = new DateTime($date);
-
-				//~ return $date->format($format);
 			} catch (Exception $exception) {
 				throw new Tx_Fluid_Core_ViewHelper_Exception('"' . $date . '" could not be parsed by DateTime constructor.', 1241722579);
 			}

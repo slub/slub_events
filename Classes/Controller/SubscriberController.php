@@ -185,7 +185,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		// send email(s)
 		$helper['now'] = time();
 		// rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
-		$helper['description'] = $this->foldline($event->getDescription());
+		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
 			$helper['location'] = $event->getLocation()->getName();
@@ -494,7 +494,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		// some helper timestamps for ics-file
 		$helper['now'] = time();
 		$helper['isdelete'] = 1;
-		$helper['description'] = $this->foldline($event->getDescription());
+		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
 			$helper['location'] = $event->getLocation()->getName();
@@ -587,7 +587,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		}
 
 		$helper['now'] = time();
-		$helper['description'] = $this->foldline($event->getDescription());
+		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
 			$helper['location'] = $event->getLocation()->getName();
@@ -721,7 +721,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		if ($step == 1) {
 			$helper['now'] = time();
-			$helper['description'] = $this->foldline($event->getDescription());
+			$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 			// location may be empty...
 			if (is_object($event->getLocation())) {
 				$helper['location'] = $event->getLocation()->getName();

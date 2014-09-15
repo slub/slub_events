@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -69,8 +69,6 @@ class Tx_SlubEvents_ViewHelpers_Condition_IsWeekendViewHelper extends Tx_Fluid_C
 	 * @api
 	 */
 	public function render($day) {
-	
-		$showLink = TRUE;
 
 		$dayOfWeek = date('w', $day);
 

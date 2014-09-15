@@ -113,8 +113,9 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 	 */
 	protected function getGeniusBarIcon(Tx_SlubEvents_Domain_Model_Event $event){
 
-		if ($event->getGeniusBar())
+		if ($event->getGeniusBar()) {
 			return '<span title="Wissensbar-Termin" class="geniusbar">W&nbsp;</span>';
+		}
 	}
 
 	/**
@@ -125,15 +126,15 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 	 */
 	protected function getDatePickerIcon() {
 
-			return t3lib_iconWorks::getSpriteIcon(
-                                'actions-edit-pick-date',
-                                array(
-                                        'style' => 'cursor:pointer;',
-                                        'id' => 'picker-tceforms-datefield-1'
-                                )
-                        );
+		return t3lib_iconWorks::getSpriteIcon(
+			'actions-edit-pick-date',
+			array(
+					'style' => 'cursor:pointer;',
+					'id' => 'picker-tceforms-datefield-1'
+			)
+		);
 
-			return '<img' . t3lib_iconWorks::skinImg($this->backPath, 'gfx/datepicker.gif', '', 0) . ' style="cursor:pointer; vertical-align:middle;" alt=""' . ' id="picker-tceforms-datetimefield-1" />';
+		return '<img' . t3lib_iconWorks::skinImg($this->backPath, 'gfx/datepicker.gif', '', 0) . ' style="cursor:pointer; vertical-align:middle;" alt=""' . ' id="picker-tceforms-datetimefield-1" />';
 	}
 
 
