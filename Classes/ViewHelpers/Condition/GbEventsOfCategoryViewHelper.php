@@ -31,7 +31,7 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Condition_EventsOfCategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_SlubEvents_ViewHelpers_Condition_GbEventsOfCategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * eventRepository
@@ -93,8 +93,6 @@ class Tx_SlubEvents_ViewHelpers_Condition_EventsOfCategoryViewHelper extends Tx_
 					break;
 			}
 		}
-		//~ else
-			//~ return TRUE;
 
 		return $showLink;
 	}

@@ -101,7 +101,6 @@ class Tx_SlubEvents_ViewHelpers_Format_Fullcalendar_JsFooterViewHelper extends T
 			$js1 .= '});';
 
 			// add the eventcatX variables at the end
-			$js1 .= $js_eventcat;
 			$js1 .= '</script>';
 
 			// dirty but working. Has to be called after the <form> and the jqueryvalidation validate()
