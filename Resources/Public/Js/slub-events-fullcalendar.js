@@ -29,6 +29,7 @@ $(document).ready(function() {
 	 $('.slubevents-discipline input').change(function() {
 		$('#calendar').fullCalendar('refetchEvents');
 	});
+
 });
 
 

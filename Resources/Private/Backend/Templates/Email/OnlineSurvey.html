@@ -1,7 +1,7 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
 <p><f:translate key='text.salutation' /> {subscriber.name},</p>
 
-<p>Sie hatten kürzlich an folgender Veranstaltung teilgenommen:</p>
+<p>Sie haben kürzlich an folgender Veranstaltung teilgenommen:</p>
 
 <p><b>{event.title}</b> <br />
 <se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />" /></p>
