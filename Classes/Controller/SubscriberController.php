@@ -660,9 +660,14 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 					$searchParameter['category'][$uid] = $uid;
 			$this->view->assign('categoriesSelected', $searchParameter['category']);
 		}
+
 		$this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
-		if (is_array($searchParameter['category']))
+
+		if (is_array($searchParameter['category'])) {
+
 			$events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'], strtotime($selectedStartDateStamp));
+
+		}
 
 		$this->view->assign('categories', $categories);
 		$this->view->assign('events', $events);
@@ -755,8 +760,13 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		}
 
 		$this->view->assign('event', $event);
-		if (isset($onlineSurveyLink[1]))
+
+		if (isset($onlineSurveyLink[1])) {
+
 			$this->view->assign('onlineSurveyLastSent', $onlineSurveyLink[1]);
+
+		}
+
 		$this->view->assign('subscribers', $event->getSubscribers());
 		$this->view->assign('step', $step);
 		$this->view->assign('emailText', $emailTextHTML);

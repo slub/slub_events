@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -54,8 +54,8 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 		$params .= '&edit[' . $table . '][' . $row['uid'] . ']=edit';
 		$title = Tx_Extbase_Utility_Localization::translate('be.editEvent', 'slub_events', $arguments=NULL) . ' ' . $row['uid'] . ': ' . $row['title'] ;
 		$icon = '<a href="#" onclick="' . htmlspecialchars(t3lib_BEfunc::editOnClick($params, $this->backPath, -1)) . '" title="' . $title . '">' .
-							t3lib_iconWorks::getSpriteIcon('actions-document-open') .
-						'</a>';
+					t3lib_iconWorks::getSpriteIcon('actions-document-open') .
+				'</a>';
 
 		return $icon;
 	}
@@ -94,7 +94,7 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 				$icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(\'' . $doc->issueCommand($params, -1) . '\');') . '" title="' . $title . '">' .
 									t3lib_iconWorks::getSpriteIcon('actions-edit-unhide') .
 							'</a>';
-				// Hide
+		// Hide
 		} else {
 				$title = Tx_Extbase_Utility_Localization::translate('be.hideEvent', 'slub_events', $arguments=NULL);
 				$params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=1';
@@ -113,9 +113,12 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 	 */
 	protected function getGeniusBarIcon(Tx_SlubEvents_Domain_Model_Event $event){
 
-		if ($event->getGeniusBar()) {
-			return '<span title="Wissensbar-Termin" class="geniusbar">W&nbsp;</span>';
+		if ($event !== NULL) {
+			if ($event->getGeniusBar()) {
+				return '<span title="Wissensbar-Termin" class="geniusbar">W&nbsp;</span>';
+			}
 		}
+
 	}
 
 	/**
@@ -130,11 +133,11 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 			'actions-edit-pick-date',
 			array(
 					'style' => 'cursor:pointer;',
-					'id' => 'picker-tceforms-datefield-1'
+					'id' => 'picker-tceforms-datefield-1',
+					'class' => 't3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date'
 			)
 		);
 
-		return '<img' . t3lib_iconWorks::skinImg($this->backPath, 'gfx/datepicker.gif', '', 0) . ' style="cursor:pointer; vertical-align:middle;" alt=""' . ' id="picker-tceforms-datetimefield-1" />';
 	}
 
 
@@ -165,10 +168,6 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 			case 'hide': 	$content = $this->getHideIcon('tx_slubevents_domain_model_event', $row);
 				break;
 			case 'geniusbar': 	$content = $this->getGeniusBarIcon($event);
-				break;
-			case 'icsinvitation': 	$content = $this->getIcsInvitationIcon($event);
-				break;
-			case 'onlineSurvey': 	$content = $this->getOnlineSurveyIcon($event);
 				break;
 			case 'datepicker': 	$content = $this->getDatePickerIcon();
 				break;

@@ -137,7 +137,7 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Returns the event
 	 *
-	 * @return string $event
+	 * @return Tx_SlubEvents_Domain_Model_Event $event
 	 */
 	public function getEvent() {
 		return $this->event;

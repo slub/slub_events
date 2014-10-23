@@ -405,7 +405,8 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 
 		//~ $events = $this->eventRepository->findAllByCategoriesAndDateInterval(t3lib_div::intExplode(',', $_GET['categories'], TRUE), $_GET['start'], $_GET['stop']);
 
-		$events = $this->eventRepository->findAllBySettings(array('categoryList' => t3lib_div::intExplode(',', $_GET['categories'], TRUE),
+		$events = $this->eventRepository->findAllBySettings(array(
+			'categoryList' => t3lib_div::intExplode(',', $_GET['categories'], TRUE),
 			'disciplineList' => t3lib_div::intExplode(',', $_GET['disciplines'], TRUE),
 			'startTimestamp' => $_GET['start'],
 			'stopTimestamp' => $_GET['stop'],
