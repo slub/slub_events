@@ -1,36 +1,18 @@
 <f:layout name="Default" />
 
-This Template is responsible for displaying a single view for a domain object
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
 
 {namespace se=Tx_SlubEvents_ViewHelpers}
-
 
 <div class="slub-event-show">
 	<f:if condition="{event}">
 		<f:then>
 			<h3>{event.title}</h3>
-			<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+			<f:render partial="Event/DateFromTo" arguments="{event : event}" />,
+				<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/>,
+				{event.contact.name}
 
 			<f:format.html>{event.description}</f:format.html>
-
-			<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
-				<f:then>
-					<div class="subscription">
-						<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
-					</div>
-				</f:then>
-			</f:if>
 
 			<f:if condition="{event.contact.photo}">
 				<f:then>
@@ -44,23 +26,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</f:if>
 
 			<div class="location">
-			<f:translate key="tx_slubevents_domain_model_location" />:
-			<f:if condition="{event.location.link}">
-				<f:then>
-					<f:if condition="<se:link.islocal link='{event.location.link}' />">
-						<f:then>
-							<f:link.page pageUid="{event.location.link}">{event.location.name}</f:link.page>
-						</f:then>
-						<f:else>
-							<f:link.external uri="{event.location.link}">{event.location.name}</f:link.external>
-						</f:else>
-					</f:if>
-				</f:then>
-				<f:else>
-					{event.location.name}
-				</f:else>
-			</f:if>
-			<f:format.html>{event.location.description}</f:format.html>
+				<f:translate key="tx_slubevents_domain_model_location" />:
+				<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'true', onlyParent: 'false'}"/>
+				<f:format.html>{event.location.description}</f:format.html>
 			</div>
 
 			<div class="subscription">
@@ -84,7 +52,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 								<f:else>Es ist keine Anmeldung mehr möglich.</f:else>
 							</f:if>
 						</f:then>
-						<f:else>Keine Anmeldung erforderlich.</f:else>
+						<f:else><!-- keine Anmeldung notwendig --></f:else>
 						</f:if>
 					</f:else>
 				</f:if>
@@ -96,16 +64,21 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</f:for>
 			</div>
 
+			<div class="submit">
+				<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}"><f:translate key="paginate_back" /></f:link.action>
+				<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
+			</div>
+
 		</f:then>
 		<f:else>
 			<div class="error">
 				<p><f:translate key="text.error.could_find_event" /></p>
 			</div>
+			<div class="submit">
+				<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}"><f:translate key="paginate_back" /></f:link.action>
+			</div>
 		</f:else>
 	</f:if>
-<div class="submit">
-	<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}"><f:translate key="paginate_back" /></f:link.action>
-</div>
 
 </div>
 </f:section>

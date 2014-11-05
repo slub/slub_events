@@ -1,0 +1,51 @@
+{namespace se=Tx_SlubEvents_ViewHelpers}
+<f:section name="locationLink">
+	<f:if condition="{doLink}">
+		<f:then>
+		<f:if condition="{location.link}">
+			<f:then>
+				<f:if condition="<se:link.islocal link='{location.link}' />">
+					<f:then>
+						<f:link.page pageUid="{location.link}" title="<se:format.stripTags htmlString='{location.description}' />">{location.name}</f:link.page>
+					</f:then>
+					<f:else>
+						<f:if condition="<se:link.is3dModel link='{location.link}' />">
+							<f:then>
+								<f:link.external class="threed" uri="{location.link}" title="<se:format.stripTags htmlString='{location.description}' />">{location.name}</f:link.external>
+							</f:then>
+							<f:else>
+								<f:link.external class="external" uri="{location.link}" title="<se:format.stripTags htmlString='{location.description}' />">{location.name}</f:link.external>
+							</f:else>
+						</f:if>
+					</f:else>
+				</f:if>
+			</f:then>
+			<f:else>
+				{location.name}
+			</f:else>
+		</f:if>
+		</f:then>
+		<f:else>
+			{location.name}
+		</f:else>
+	</f:if>
+</f:section>
+
+<f:if condition="{location.parent}">
+	<f:then>
+		<f:for each="{location.parent}" as="parentLocation" iteration="i">
+			<f:if condition='{i.isFirst}'>
+				<f:render section="locationLink" arguments="{location: parentLocation, doLink: doLink}" />
+			</f:if>
+		</f:for>
+
+		<f:if condition="{onlyParent}">
+			<f:else>
+				, <f:render section="locationLink" arguments="{location: location, doLink: doLink}" />
+			</f:else>
+		</f:if>
+	</f:then>
+	<f:else>
+		<f:render section="locationLink" arguments="{location: location, doLink: doLink}" />
+	</f:else>
+</f:if>

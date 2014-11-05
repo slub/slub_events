@@ -27,32 +27,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		</f:else>
 	</f:if>
 	<f:render partial="Event/DateFromTo" arguments="{event : event}" />
-	<div class="location" title="<se:format.stripTags htmlString='{event.location.description}' />">
-	<f:translate key="tx_slubevents_domain_model_location" />:
-	<f:if condition="{event.location.link}">
-		<f:then>
-			<f:if condition="<se:link.islocal link='{event.location.link}' />">
-				<f:then>
-					<f:link.page pageUid="{event.location.link}">{event.location.name}</f:link.page>
-				</f:then>
-				<f:else>
-					<f:if condition="<se:link.is3dModel link='{event.location.link}' />">
-					<f:then>
-						<f:link.external class="threed" uri="{event.location.link}">{event.location.name}</f:link.external>
-					</f:then>
-					<f:else>
-						<f:link.external uri="{event.location.link}">{event.location.name}</f:link.external>
-					</f:else>
-					</f:if>
-				</f:else>
-			</f:if>
-		</f:then>
-		<f:else>
-			{event.location.name}
-		</f:else>
-	</f:if>
 
+	<div class="location">
+		<f:translate key="tx_slubevents_domain_model_location" />:
+		<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'true', onlyParent: 'false'}"/>
 	</div>
+
 </div>
 
 <f:if condition="{loggedIn}">

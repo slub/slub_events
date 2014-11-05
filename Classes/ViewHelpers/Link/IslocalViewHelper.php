@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -55,7 +55,7 @@ class Tx_SlubEvents_ViewHelpers_Link_IslocalViewHelper extends Tx_Fluid_Core_Vie
 			return FALSE;
 		}
 
-		return t3lib_utility_Math::canBeInterpretedAsInteger($link) ? TRUE : FALSE; 
+		return t3lib_utility_Math::canBeInterpretedAsInteger($link) ? TRUE : FALSE;
 
 	}
 }

@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -59,7 +59,6 @@ class Tx_SlubEvents_Domain_Model_Location extends Tx_Extbase_DomainObject_Abstra
 	 * parent
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Location>
-	 * @lazy
 	 */
 	protected $parent;
 

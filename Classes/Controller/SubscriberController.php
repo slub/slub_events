@@ -188,8 +188,12 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
-			$helper['location'] = $event->getLocation()->getName();
-			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
+			if (is_object($event->getLocation()->getParent())){
+				$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
+				$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+			}
+			$helper['location'] .= $event->getLocation()->getName();
+			$helper['locationics'] .= $this->foldline($event->getLocation()->getName());
 		}
 		$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $newSubscriber->getName()));
 
@@ -497,6 +501,10 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
+			if (is_object($event->getLocation()->getParent())){
+				$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
+				$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+			}
 			$helper['location'] = $event->getLocation()->getName();
 			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
 		}
@@ -590,6 +598,10 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
+			if (is_object($event->getLocation()->getParent())){
+				$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
+				$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+			}
 			$helper['location'] = $event->getLocation()->getName();
 			$helper['locationics'] = $this->foldline($event->getLocation()->getName());
 		}
@@ -729,6 +741,10 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 			// location may be empty...
 			if (is_object($event->getLocation())) {
+				if (is_object($event->getLocation()->getParent())){
+					$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
+					$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+				}
 				$helper['location'] = $event->getLocation()->getName();
 				$helper['locationics'] = $this->foldline($event->getLocation()->getName());
 			}

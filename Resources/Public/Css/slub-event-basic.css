@@ -221,6 +221,7 @@
 
 
 .slub-category-list div.submit,
+.slub-event-show div.submit,
 .slub-event-register div.submit  {
 	width: 100%;
 	float: left;
@@ -355,8 +356,9 @@
 .slub-event-list a.subscribe,
 .slub-event-show a.subscribe {
 	position: relative;
+	float: right;
 	padding: 5px 10px !important;
-	margin: 20px 0;
+	margin: 20px 0 0 20px;
 	font-size: 120%;
 	text-decoration: none !important;
 	-webkit-border-radius: 15px;
@@ -372,6 +374,12 @@
 	font-weight: bold;
 	cursor: pointer;
 }
+
+.slub-event-list a.subscribe {
+	margin: 0 0 0 20px;
+}
+
+
 .slub-event-list a.subscribe:visited,
 .slub-event-show a.subscribe:visited {
 	color: #29a !important;
