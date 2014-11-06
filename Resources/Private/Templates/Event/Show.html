@@ -8,8 +8,8 @@
 	<f:if condition="{event}">
 		<f:then>
 			<h3>{event.title}</h3>
-			<f:render partial="Event/DateFromTo" arguments="{event : event}" />,
-				<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/>,
+			<strong><se:format.trim><f:render partial="Event/DateFromTo" arguments="{event : event}" /></se:format.trim></strong>,
+				<se:format.trim><f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/></se:format.trim>,
 				{event.contact.name}
 
 			<f:format.html>{event.description}</f:format.html>
@@ -66,7 +66,11 @@
 
 			<div class="submit">
 				<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}"><f:translate key="paginate_back" /></f:link.action>
-				<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
+				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
+					<f:then>
+						<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"  arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
+					</f:then>
+				</f:if>
 			</div>
 
 		</f:then>

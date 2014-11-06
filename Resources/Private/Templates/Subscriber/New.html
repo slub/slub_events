@@ -26,7 +26,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<h4><f:translate key="tx_slubevents_domain_model_event" />: {event.title}</h4>
 		</f:else>
 	</f:if>
-	<f:render partial="Event/DateFromTo" arguments="{event : event}" />
+	<strong><se:format.trim><f:render partial="Event/DateFromTo" arguments="{event : event}" /></se:format.trim></strong>
 
 	<div class="location">
 		<f:translate key="tx_slubevents_domain_model_location" />:

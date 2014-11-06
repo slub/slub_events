@@ -29,7 +29,7 @@ This extension is developped and used in production at the Saxony State and Univ
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '1.4.3',
+	'version' => '1.4.4',
 	'constraints' => array(
 		'depends' => array(
 			'extbase' => '4.7.0-6.2.99',

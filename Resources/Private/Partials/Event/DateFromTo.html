@@ -1,5 +1,5 @@
 {namespace se=Tx_SlubEvents_ViewHelpers}
-<b><se:format.date date="{event.startDateTime}" format="%a, %x" />
+<se:format.date date="{event.startDateTime}" format="%a, %x" />
 	<f:if condition="{event.Allday} !=1 ">
 		<f:then>
 			<se:format.date date="{event.startDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
@@ -26,4 +26,3 @@
 		</f:if>
 		</f:then>
 	</f:if>
-</b>

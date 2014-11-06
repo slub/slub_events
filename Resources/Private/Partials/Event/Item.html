@@ -12,9 +12,9 @@
 		</f:if>
         </h4>
 
-	<f:render partial="Event/DateFromTo" arguments="{event : event}"></f:render>,
-				<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/>,
-				{event.contact.name}
+		<strong><se:format.trim><f:render partial="Event/DateFromTo" arguments="{event : event}" /></se:format.trim></strong>,
+			<se:format.trim><f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/></se:format.trim>,
+			{event.contact.name}
 
 	<div class="clear"></div>
 	<div class="teaser">
