@@ -188,7 +188,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
-			if (is_object($event->getLocation()->getParent())){
+			if (is_object($event->getLocation()->getParent()->current())){
 				$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
 				$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
 			}
@@ -501,7 +501,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
-			if (is_object($event->getLocation()->getParent())){
+			if (is_object($event->getLocation()->getParent()->current())){
 				$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
 				$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
 			}
@@ -598,7 +598,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 		// location may be empty...
 		if (is_object($event->getLocation())) {
-			if (is_object($event->getLocation()->getParent())){
+			if (is_object($event->getLocation()->getParent()->current())){
 				$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
 				$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
 			}
@@ -741,7 +741,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			$helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
 			// location may be empty...
 			if (is_object($event->getLocation())) {
-				if (is_object($event->getLocation()->getParent())){
+				if (is_object($event->getLocation()->getParent()->current())){
 					$helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
 					$helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
 				}
