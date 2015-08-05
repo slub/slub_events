@@ -70,6 +70,7 @@
 .slub-event-gblist ul li { padding: 6px; }
 .slub-event-gblist ul li.Even { background: #e1f4f7; }
 .slub-event-gblist ul li .subscription { float: right; }
+.slub-event-gblist .submit { clear: both; }
 
 #leftcol ul.f3-widget-paginator { position: relative; display: inline-block; float: right; background: #eee; padding: 3px; border: 1px dotted #ccc; margin: -5px 5px 0 0; }
 #leftcol ul.f3-widget-paginator:nth-of-type(1) { margin-top: 23px; }
