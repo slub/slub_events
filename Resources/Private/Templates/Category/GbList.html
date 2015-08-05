@@ -6,15 +6,15 @@
 	<f:for each="{events}" as="event" key="label" iteration="eventIterator">
 		<f:if condition="{event.geniusBar}">
 			<f:then>
+                <f:if condition="<se:format.newMonthTitle events='{events}' index='{label}' />">
+                    <f:then>
+                        <li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
+                    </f:then>
+                </f:if>
 				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
 					<f:then>
 						<f:if condition="<se:format.freePlacesLeft event='{event}' /> >= 1">
 							<f:then>
-								<f:if condition="<se:format.newMonthTitle events='{events}' index='{label}' />">
-									<f:then>
-										<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
-									</f:then>
-								</f:if>
 								<f:render partial="Event/GbItem" arguments="{event: event, category: category, eventIterator:eventIterator}"/>
 							</f:then>
 						</f:if>
@@ -36,23 +36,6 @@
 		<h4>{category.title}</h4>
 		<div class="category-description"><f:format.html>{category.description}</f:format.html></div>
 
-		<div class="contacts">
-		<p><f:translate key="tx_slubevents.gb.we_consult_you" /></p>
-		<f:groupedFor each="{events}" as="cevent" groupBy="contact" groupKey="contact">
-			<div class="single-contact">
-				<f:if condition="{contact.photo}">
-					<f:then>
-						<div class="photo">
-							<f:image src='uploads/tx_slubevents/{contact.photo}' alt="Porträt von {contact.name}" title="<se:format.stripTags htmlString='{contact.name}' />" maxWidth="100" />
-						</div>
-						<div class="description"><span class="name">{contact.name}</span><f:format.html>{contact.description}</f:format.html></div>
-					</f:then>
-				</f:if>
-			</div>
-		</f:groupedFor>
-		<div class="clear"></div>
-		</div>
-
 		<f:if condition="{settings.hidePagination}">
 			<f:then>
 				<f:render section="eventListing" arguments="{events: events, category: category}" />
@@ -63,6 +46,24 @@
 				</f:widget.paginate>
 			</f:else>
 		</f:if>
+
+		<div class="contacts">
+			<p><f:translate key="tx_slubevents.gb.we_consult_you" /></p>
+			<f:groupedFor each="{events}" as="cevent" groupBy="contact" groupKey="contact">
+				<div class="single-contact">
+					<f:if condition="{contact.photo}">
+						<f:then>
+							<div class="photo">
+								<f:image src='uploads/tx_slubevents/{contact.photo}' alt="Porträt von {contact.name}" title="<se:format.stripTags htmlString='{contact.name}' />" maxWidth="100" />
+							</div>
+							<div class="description"><span class="name">{contact.name}</span><f:format.html>{contact.description}</f:format.html></div>
+						</f:then>
+					</f:if>
+				</div>
+			</f:groupedFor>
+			<div class="clear"></div>
+		</div>
+
 	</f:then>
 	<f:else>
 		<ul>
