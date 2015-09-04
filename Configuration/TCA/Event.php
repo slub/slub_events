@@ -391,7 +391,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 					'parentField' => 'parent',
 					'appearance' => array(
 						'expandAll' => FALSE,
-						'showHeader' => FALSE,
+						'showHeader' => TRUE,
 						'allowRecursiveMode' => FALSE,
 						'width' => 500
 					),

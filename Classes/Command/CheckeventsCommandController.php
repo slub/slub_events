@@ -203,6 +203,7 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 				if ($out >= 1) {
 					$event->setSubEndDateInfoSent(TRUE);
 					$event->setCancelled(TRUE);
+					$this->eventRepository->update($event);
 				}
 			} else {
 				// event takes place but subscription is not possible anymore...
@@ -220,8 +221,10 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 							'attachIcs' => TRUE,
 					)
 				);
-				if ($out == 1)
+				if ($out == 1) {
 					$event->setSubEndDateInfoSent(TRUE);
+					$this->eventRepository->update($event);
+				}
 			}
 		}
 
