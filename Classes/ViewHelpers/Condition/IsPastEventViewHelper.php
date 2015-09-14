@@ -59,7 +59,7 @@ class Tx_SlubEvents_ViewHelpers_Condition_IsPastEventViewHelper extends Tx_Fluid
         // deadline reached...
         if (is_object($event->getSubEndDateTime())) {
 
-            if ($event->getSubEndDateTime()->getTimestamp() < time()) {
+            if ($event->getEndDateTime()->getTimestamp() < time()) {
 
                 $isPast = TRUE;
 
