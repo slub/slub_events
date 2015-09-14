@@ -209,3 +209,9 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	width: 500px;
 
 }
+
+
+img.inactive {
+	filter: gray;
+	-webkit-filter: grayscale(100%);
+}

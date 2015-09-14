@@ -1,275 +1,283 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-17T08:25:37Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-09-14T09:32:32Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
 		<body>
-		<trans-unit id="be.copyEvent" approved="yes" xml:space="preserve">
+		<trans-unit id="be.copyEvent" approved="yes">
 			<source>Copy Event</source>
 			<target>Kopieren</target>
 		</trans-unit>
-		<trans-unit id="be.editEvent" approved="yes" xml:space="preserve">
+		<trans-unit id="be.editEvent" approved="yes">
 			<source>Edit</source>
 			<target>Bearbeiten</target>
 		</trans-unit>
 		<trans-unit id="be.error.nofolderselected" approved="yes" xml:space="preserve">
 			<source>Cannot find the configuration! &lt;br /&gt;&lt;br /&gt;&lt;--  Please select a page or folder in the left tree to continue.</source>
-			<target>Keine Konfiguration gefunden!&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;--  Bitte wählen Sie eine Seite oder einen Ordner im linken Seitenbaum aus.</target>
+			<target>Keine Konfiguration gefunden! &lt;br /&gt;&lt;br /&gt; &lt;--- Bitte wählen Sie eine Seite oder einen Ordner im linken Seitenbaum aus.</target>
 		</trans-unit>
-		<trans-unit id="be.free" approved="yes" xml:space="preserve">
+		<trans-unit id="be.free" approved="yes">
 			<source>free</source>
 			<target>frei</target>
 		</trans-unit>
-		<trans-unit id="be.hideEvent" approved="yes" xml:space="preserve">
+		<trans-unit id="be.hideEvent" approved="yes">
 			<source>Hide Event</source>
 			<target>Verstecken</target>
 		</trans-unit>
-		<trans-unit id="be.icsInvitation" approved="yes" xml:space="preserve">
+		<trans-unit id="be.icsInvitation" approved="yes">
 			<source>ICS Invitation</source>
 			<target>Termineinladung</target>
 		</trans-unit>
-		<trans-unit id="be.newEvent" approved="yes" xml:space="preserve">
+		<trans-unit id="be.newEvent" approved="yes">
 			<source>New Event</source>
 			<target>Neue Veranstaltung anlegen</target>
 		</trans-unit>
-		<trans-unit id="be.searchAllContacts" approved="yes" xml:space="preserve">
+		<trans-unit id="be.searchAllContacts" approved="yes">
 			<source>Select all</source>
 			<target>alle auswählen</target>
 		</trans-unit>
-		<trans-unit id="be.searchContacts" approved="yes" xml:space="preserve">
+		<trans-unit id="be.searchContacts" approved="yes">
 			<source>Contacts</source>
 			<target>Ansprechpartner</target>
 		</trans-unit>
-		<trans-unit id="be.searchInTitle" approved="yes" xml:space="preserve">
+		<trans-unit id="be.searchInTitle" approved="yes">
 			<source>Search in Title</source>
 			<target>Nach Titel suchen</target>
 		</trans-unit>
-		<trans-unit id="be.searchString" approved="yes" xml:space="preserve">
+		<trans-unit id="be.searchString" approved="yes">
 			<source>Search String</source>
 			<target>Suchbegriff</target>
 		</trans-unit>
-		<trans-unit id="be.sendIcsInvitationTo" approved="yes" xml:space="preserve">
+		<trans-unit id="be.sendIcsInvitationTo" approved="yes">
 			<source>Send ICS Invitation to:</source>
 			<target>Schicke Termineinladung an: </target>
 		</trans-unit>
-		<trans-unit id="be.sendOnlineSurvey" approved="yes" xml:space="preserve">
+		<trans-unit id="be.sendOnlineSurvey" approved="yes">
 			<source>Send Online Survey Request to Subscribers</source>
 			<target>Online-Umfrage an Teilnehmer senden.</target>
 		</trans-unit>
-		<trans-unit id="be.unhideEvent" approved="yes" xml:space="preserve">
+		<trans-unit id="be.sendOnlineSurveyNoSubscribers" approved="yes">
+			<source>Sending of Online Survey not possible as no subscribers are present.</source>
+			<target>Das Versenden der Online-Umfrage ist nicht möglich, da es keine Teilnehmer gibt.</target>
+		</trans-unit>
+		<trans-unit id="be.sendOnlineSurveyNotYetPossible" approved="yes">
+			<source>Sending of Online Survey not yet possible.</source>
+			<target>Das Versenden der Online-Umfrage ist noch nicht möglich.</target>
+		</trans-unit>
+		<trans-unit id="be.unhideEvent" approved="yes">
 			<source>Unhide Event</source>
 			<target>Aktivieren</target>
 		</trans-unit>
-		<trans-unit id="paginate_back" approved="yes" xml:space="preserve">
+		<trans-unit id="paginate_back" approved="yes">
 			<source>Back</source>
 			<target>Zurück</target>
 		</trans-unit>
-		<trans-unit id="paginate_next" approved="yes" xml:space="preserve">
+		<trans-unit id="paginate_next" approved="yes">
 			<source>Next</source>
 			<target>Nächste </target>
 		</trans-unit>
-		<trans-unit id="paginate_previous" approved="yes" xml:space="preserve">
+		<trans-unit id="paginate_previous" approved="yes">
 			<source>Previous</source>
 			<target>Vorherige</target>
 		</trans-unit>
-		<trans-unit id="text.back_to_overview" approved="yes" xml:space="preserve">
+		<trans-unit id="text.back_to_overview" approved="yes">
 			<source>Back to Overview</source>
 			<target>Zurück zur Übersicht</target>
 		</trans-unit>
-		<trans-unit id="text.closing" approved="yes" xml:space="preserve">
+		<trans-unit id="text.closing" approved="yes">
 			<source>Best Regards</source>
 			<target>Mit freundlichen Grüßen</target>
 		</trans-unit>
-		<trans-unit id="text.error.could_find_event" approved="yes" xml:space="preserve">
+		<trans-unit id="text.error.could_find_event" approved="yes">
 			<source>Sorry, we couldn't find the requested event.</source>
 			<target>Leider konnten wir die gesuchte Veranstaltung nicht finden.</target>
 		</trans-unit>
-		<trans-unit id="text.salutation" approved="yes" xml:space="preserve">
+		<trans-unit id="text.salutation" approved="yes">
 			<source>Dear</source>
 			<target>Sehr geehrte(r)</target>
 		</trans-unit>
-		<trans-unit id="text.signature" approved="yes" xml:space="preserve">
+		<trans-unit id="text.signature" approved="yes">
 			<source>SLUB Dresden</source>
 			<target>Ihre SLUB Dresden</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents.be.eventmanagement" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents.be.eventmanagement" approved="yes">
 			<source>Event Management</source>
 			<target>SLUB Veranstaltungsmanagement</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents.be.subscriberlist" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents.be.subscriberlist" approved="yes">
 			<source>List of Subscribers</source>
 			<target>Anmeldungen</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents.gb.we_consult_you" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents.gb.we_consult_you" approved="yes">
 			<source>We Consult You</source>
 			<target>Wir beraten Sie</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
 			<source>Event Category</source>
 			<target>Kategorie</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey" approved="yes">
 			<source>Online Survey</source>
 			<target>Online Umfrage</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes">
 			<source>Title</source>
 			<target>Titel</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event" approved="yes">
 			<source>Event</source>
 			<target>Veranstaltung</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes">
 			<source>Category Ids</source>
 			<target>Kategorien</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes">
 			<source>description</source>
 			<target>Beschreibung</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.freeplaces" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.freeplaces" approved="yes">
 			<source>free places</source>
 			<target>freie Plätze</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes">
 			<source>Knowledge Bar</source>
 			<target>Wissensbar</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.individual_appointment" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.individual_appointment" approved="yes">
 			<source>Indivdual Appointment</source>
 			<target>Beratungstermin</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" approved="yes">
 			<source>Maximum of Subscribers</source>
 			<target>Maximale Teilnehmerzahl</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes">
 			<source>Minimum of Subscribers</source>
 			<target>Mindesteilnehmerzahl</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" approved="yes">
 			<source>one free place</source>
 			<target>ein freier Platz</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes">
 			<source>Start of Event</source>
 			<target>Beginn</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.subscribe" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.subscribe" approved="yes">
 			<source>Subscribe</source>
 			<target>Anmeldung</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.subscribers" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.subscribers" approved="yes">
 			<source>Category Ids</source>
 			<target>Kategorien</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes">
 			<source>teaser</source>
 			<target>Kurzbeschreibung</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.time_oclock" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.time_oclock" approved="yes">
 			<source></source>
 			<target>Uhr</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.title" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.title" approved="yes">
 			<source>Title</source>
 			<target>Name der Veranstaltung</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.unsubscribe" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_event.unsubscribe" approved="yes">
 			<source>Unsubscribe</source>
 			<target>Abmelden</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_location" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_location" approved="yes">
 			<source>Location</source>
 			<target>Ort</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes">
 			<source>Subscriber Details</source>
 			<target>Teilnehmer Details</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes">
 			<source>Subscription Date</source>
 			<target>Anmeldezeitpunkt</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes">
 			<source>customerid</source>
 			<target>Benutzernummer</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes">
 			<source>Email</source>
 			<target>E-Mail</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes">
 			<source>Institution</source>
 			<target>Institution</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.message" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.message" approved="yes">
 			<source>Message</source>
 			<target>Nachricht</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes">
 			<source>Name</source>
 			<target>Name</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes">
 			<source>Number</source>
 			<target>Anzahl der Personen</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.number_max" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.number_max" approved="yes">
 			<source>Number of Persons (max. %1$s)</source>
 			<target>Anzahl der Personen (max. %1$s)</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.submit_registration" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.submit_registration" approved="yes">
 			<source>Submit Registration</source>
 			<target>Verbindliche Anmeldung</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" approved="yes" xml:space="preserve">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" approved="yes">
 			<source>telephone</source>
 			<target>Telefon</target>
 		</trans-unit>
-		<trans-unit id="val_event_overbooked" approved="yes" xml:space="preserve">
+		<trans-unit id="val_event_overbooked" approved="yes">
 			<source></source>
 			<target>Die Veranstaltung ist bereits ausgebucht.</target>
 		</trans-unit>
-		<trans-unit id="val_event_reacheddeadline" approved="yes" xml:space="preserve">
+		<trans-unit id="val_event_reacheddeadline" approved="yes">
 			<source></source>
 			<target>Die Anmeldefrist ist bereits überschritten.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_customerid" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_customerid" approved="yes">
 			<source>The given customer id is not valid.</source>
 			<target>Bitte geben Sie eine gültige SLUB-Benutzernummer ein.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_editcode" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_editcode" approved="yes">
 			<source>Please start the registration from the beginning.</source>
 			<target>Es ist ein Fehler bei der Anmeldung aufgetreten. Bitte starten Sie die Anmeldung erneut.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_email" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_email" approved="yes">
 			<source>Please enter a valid email-address.</source>
 			<target>Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_event_cancelled" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_event_cancelled" approved="yes">
 			<source>Sorry, the event has been cancelled.</source>
 			<target>Die Veranstaltung wurde abgesagt.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_event_overbooked" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_event_overbooked" approved="yes">
 			<source>Sorry, the event is already complete.</source>
 			<target>Die Veranstaltung ist bereits ausgebucht.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_event_reacheddeadline" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_event_reacheddeadline" approved="yes">
 			<source>Sorry, the deadline for subscription is already reached.</source>
 			<target>Die Anmeldefrist ist bereits abgelaufen.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_name" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_name" approved="yes">
 			<source>Please enter your name.</source>
 			<target>Bitte geben Sie Ihren Namen ein.</target>
 		</trans-unit>
-		<trans-unit id="validationerror_val_number" approved="yes" xml:space="preserve">
+		<trans-unit id="validationerror_val_number" approved="yes">
 			<source>The given amount of subscribers is not valid.</source>
 			<target>Die eingegebene Anzahl der Personen ist nicht gültig.</target>
 		</trans-unit>
-		<trans-unit id="view_my_events" approved="yes" xml:space="preserve">
+		<trans-unit id="view_my_events" approved="yes">
 			<source>My Events</source>
 			<target>Meine Veranstaltungen</target>
 		</trans-unit>

@@ -106,7 +106,7 @@
 			<target>Meine Veranstaltungen</target>
 		</trans-unit>
 		<trans-unit id="plugin.Eventgeniusbar" approved="yes" xml:space="preserve">
-			<source>SLUB: Events: Genius Bar</source>
+			<source>SLUB: Events: Knowledge Bar</source>
 			<target>SLUB: Veranstaltungen: Wissensbar</target>
 		</trans-unit>
 		<trans-unit id="plugin.Eventlist" approved="yes" xml:space="preserve">

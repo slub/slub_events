@@ -708,14 +708,8 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		$event->setOnlinesurvey($onlineSurveyLink[0]);
 
 		if ($step == 0) {
-			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
-				// TYPO3 4.7
-				$emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-			} else {
-				// TYPO3 6.x
-				/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
-				$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-			}
+			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+			$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 
 			$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
 			$emailViewHTML->setFormat('html');

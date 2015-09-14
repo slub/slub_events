@@ -50,14 +50,20 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:if condition="{event.hidden} == 0"><f:then><f:link.action action="beIcsInvitation" controller="Subscriber" title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}" arguments="{event : event}"><img src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/calendar-import.png'></f:link.action></f:then></f:if></td>
 			<td><f:if condition="{event.onlinesurvey}">
 					<f:then>
-						<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />"><f:then></f:then>
-						<f:else>
-							<f:if condition="<f:count subject='{event.subscribers}' />">
-								<f:then>
-									<f:link.action action="beOnlineSurvey" controller="Subscriber" title="<f:translate key='be.sendOnlineSurvey' />" arguments="{event : event}"><img src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'></f:link.action>
-								</f:then>
-							</f:if>
-						</f:else>
+						<f:if condition="<se:condition.IsPastEvent event='{event}' />">
+							<f:then>
+								<f:if condition="<f:count subject='{event.subscribers}' />">
+									<f:then>
+										<f:link.action action="beOnlineSurvey" controller="Subscriber" title="<f:translate key='be.sendOnlineSurvey' />" arguments="{event : event}"><img src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'></f:link.action>
+									</f:then>
+									<f:else>
+										<img class="inactive" title="<f:translate key='be.sendOnlineSurveyNoSubscribers' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'>
+									</f:else>
+								</f:if>
+							</f:then>
+							<f:else>
+								<img class="inactive" title="<f:translate key='be.sendOnlineSurveyNotYetPossible' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'>
+							</f:else>
 						</f:if>
 					</f:then>
 				</f:if>
