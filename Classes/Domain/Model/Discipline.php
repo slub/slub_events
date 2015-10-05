@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Model_Discipline extends Tx_Extbase_DomainObject_AbstractValueObject {
+class Discipline extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Name of the specialists discipline
@@ -44,7 +45,7 @@ class Tx_SlubEvents_Domain_Model_Discipline extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * parent
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Discipline>
 	 * @lazy
 	 */
 	protected $parent;
@@ -71,27 +72,27 @@ class Tx_SlubEvents_Domain_Model_Discipline extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Adds a Discipline
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Discipline $parent
+	 * @param \Slub\SlubEvents\Domain\Model\Discipline $parent
 	 * @return void
 	 */
-	public function addParent(Tx_SlubEvents_Domain_Model_Discipline $parent) {
+	public function addParent(\Slub\SlubEvents\Domain\Model\Discipline $parent) {
 		$this->parent->attach($parent);
 	}
 
 	/**
 	 * Removes a Discipline
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Discipline $parentToRemove The Location to be removed
+	 * @param \Slub\SlubEvents\Domain\Model\Discipline $parentToRemove The Location to be removed
 	 * @return void
 	 */
-	public function removeParent(Tx_SlubEvents_Domain_Model_Discipline $parentToRemove) {
+	public function removeParent(\Slub\SlubEvents\Domain\Model\Discipline $parentToRemove) {
 		$this->parent->detach($parentToRemove);
 	}
 
 	/**
 	 * Returns the parent
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $parent
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Discipline> $parent
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -100,10 +101,10 @@ class Tx_SlubEvents_Domain_Model_Discipline extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Sets the parent
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $parent
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Discipline> $parent
 	 * @return void
 	 */
-	public function setParent(Tx_Extbase_Persistence_ObjectStorage $parent) {
+	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorag $parent) {
 		$this->parent = $parent;
 	}
 

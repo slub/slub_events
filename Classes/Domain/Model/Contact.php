@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Model_Contact extends Tx_Extbase_DomainObject_AbstractEntity {
+class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Name of Contact

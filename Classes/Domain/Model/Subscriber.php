@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_AbstractEntity {
+class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * name
@@ -102,7 +103,7 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * event
 	 *
-	 * @var Tx_SlubEvents_Domain_Model_Event
+	 * @var \Slub\SlubEvents\Domain\Model\Event
 	 */
 	protected $event;
 
@@ -137,7 +138,7 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Returns the event
 	 *
-	 * @return Tx_SlubEvents_Domain_Model_Event $event
+	 * @return \Slub\SlubEvents\Domain\Model\Event $event
 	 */
 	public function getEvent() {
 		return $this->event;
@@ -289,10 +290,10 @@ class Tx_SlubEvents_Domain_Model_Subscriber extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Sets the event
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @return void
 	 */
-	public function setEvent(Tx_SlubEvents_Domain_Model_Event $event) {
+	public function setEvent(\Slub\SlubEvents\Domain\Model\Event $event) {
 		$this->event = $event;
 	}
 

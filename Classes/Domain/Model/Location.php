@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Model_Location extends Tx_Extbase_DomainObject_AbstractEntity {
+class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Name of the Location
@@ -58,7 +59,7 @@ class Tx_SlubEvents_Domain_Model_Location extends Tx_Extbase_DomainObject_Abstra
 	/**
 	 * parent
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Location>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Location>
 	 */
 	protected $parent;
 
@@ -130,7 +131,7 @@ class Tx_SlubEvents_Domain_Model_Location extends Tx_Extbase_DomainObject_Abstra
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorag properties.
 	 *
 	 * @return void
 	 */
@@ -140,33 +141,33 @@ class Tx_SlubEvents_Domain_Model_Location extends Tx_Extbase_DomainObject_Abstra
 		 * It will be rewritten on each save in the extension builder
 		 * You may modify the constructor of this class instead
 		 */
-		$this->parent = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorag();
 	}
 
 	/**
 	 * Adds a Location
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Location $parent
+	 * @param \Slub\SlubEvents\Domain\Model\Location $parent
 	 * @return void
 	 */
-	public function addParent(Tx_SlubEvents_Domain_Model_Location $parent) {
+	public function addParent(\Slub\SlubEvents\Domain\Model\Location $parent) {
 		$this->parent->attach($parent);
 	}
 
 	/**
 	 * Removes a Location
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Location $parentToRemove The Location to be removed
+	 * @param \Slub\SlubEvents\Domain\Model\Location $parentToRemove The Location to be removed
 	 * @return void
 	 */
-	public function removeParent(Tx_SlubEvents_Domain_Model_Location $parentToRemove) {
+	public function removeParent(\Slub\SlubEvents\Domain\Model\Location $parentToRemove) {
 		$this->parent->detach($parentToRemove);
 	}
 
 	/**
 	 * Returns the parent
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Location> $parent
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Location> $parent
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -175,10 +176,10 @@ class Tx_SlubEvents_Domain_Model_Location extends Tx_Extbase_DomainObject_Abstra
 	/**
 	 * Sets the parent
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Location> $parent
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Location> $parent
 	 * @return void
 	 */
-	public function setParent(Tx_Extbase_Persistence_ObjectStorage $parent) {
+	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorag $parent) {
 		$this->parent = $parent;
 	}
 
