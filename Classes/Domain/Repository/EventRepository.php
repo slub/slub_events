@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -31,12 +32,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persistence_Repository {
+class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Finds all datasets by MM relation categories
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @return array The found Event Objects
 	 */
 	public function findAllGbByCategory($category) {
@@ -54,7 +55,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		return $query->execute();
@@ -81,7 +82,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		return $query->execute();
@@ -135,11 +136,11 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		// order by start_date ascending or descending
 		if ($settings['eventOrdering'] === 'DESC') {
 			$query->setOrderings(
-				array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+				array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
 			);
 		} else {
 			$query->setOrderings(
-				array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+				array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 			);
 		}
 
@@ -170,7 +171,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		return $query->execute();
@@ -219,7 +220,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		return $query->execute();
@@ -249,7 +250,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		return $query->execute();
@@ -258,7 +259,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 	/**
 	 * Finds all datasets by MM relation categories
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Subscriber> $subscribers
+	 * @param Tx_Extbase_Persistence_ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
 	 * @return array The found Event Objects
 	 */
 	public function findAllBySubscriber($subscribers) {
@@ -280,7 +281,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		return $query->execute();
@@ -300,7 +301,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 		$query->setLimit(1);
 
@@ -310,7 +311,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
 		);
 		$query->setLimit(1);
 
@@ -347,7 +348,7 @@ class Tx_SlubEvents_Domain_Repository_EventRepository extends Tx_Extbase_Persist
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('start_date_time' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		return $query->execute();

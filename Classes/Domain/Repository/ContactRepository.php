@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Repository_ContactRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_SlubEvents_Domain_Repository_ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Finds all datasets and return in tree order
@@ -49,7 +50,7 @@ class Tx_SlubEvents_Domain_Repository_ContactRepository extends Tx_Extbase_Persi
 		}
 
 		$query->setOrderings(
-			array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 		$contacts = $query->execute();
 

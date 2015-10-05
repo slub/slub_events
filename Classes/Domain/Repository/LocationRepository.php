@@ -1,10 +1,11 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Repository_LocationRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_SlubEvents_Domain_Repository_LocationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 }
 ?>

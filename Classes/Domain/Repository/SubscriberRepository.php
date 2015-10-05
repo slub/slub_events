@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Finds subscriber by fe_user data
@@ -85,7 +86,7 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	/**
 	 * Count all Subscribers by number for a given event
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event event
+	 * @param \Slub\SlubEvents\Domain\Model\Event event
 	 * @return array The found Subscriber Objects
 	 */
 	public function countAllByEvent($event) {
@@ -113,7 +114,7 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 	/**
 	 * Finds subscriber by fe_user data
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Event> $events
+	 * @param Tx_Extbase_Persistence_ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
 	 * @return array The found Subscriber Objects
 	 */
 	public function findAllByEvents($events) {
@@ -129,7 +130,7 @@ class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends Tx_Extbase_Pe
 
 		// order by start_date -> start_time...
 		$query->setOrderings(
-			array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+			array('crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
 		);
 
 		return $query->execute();

@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_SlubEvents_Domain_Repository_CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 
 	/**
@@ -107,7 +108,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 		}
 
 		$query->setOrderings(
-			array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 		$categories = $query->execute();
 
@@ -134,7 +135,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	/**
 	 * Finds all datasets of current branch and return in tree order
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $startCategory
+	 * @param \Slub\SlubEvents\Domain\Model\Category $startCategory
 	 * @ignorevalidation $startCategory
 	 * @return array The found Category Objects as Tree
 	 */
@@ -205,7 +206,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 		$constraints[] = $query->equals('parent', $startCategory);
 
 		$query->setOrderings(
-			array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING)
+			array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
 		);
 
 		if (count($constraints)) {
@@ -228,7 +229,7 @@ class Tx_SlubEvents_Domain_Repository_CategoryRepository extends Tx_Extbase_Pers
 	/**
 	 * Finds all datasets of current branch and return in tree order
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $startCategory
+	 * @param \Slub\SlubEvents\Domain\Model\Category $startCategory
 	 * @ignorevalidation $startCategory
 	 * @return array The found Category Objects
 	 */
