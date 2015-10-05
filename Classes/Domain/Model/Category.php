@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEntity {
+class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Name of the Category
@@ -51,7 +52,7 @@ class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_Abstra
 	/**
 	 * Parent Category
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category>
 	 */
 	protected $parent;
 
@@ -109,7 +110,7 @@ class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_Abstra
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
 	 *
 	 * @return void
 	 */
@@ -119,33 +120,33 @@ class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_Abstra
 		 * It will be rewritten on each save in the extension builder
 		 * You may modify the constructor of this class instead
 		 */
-		$this->parent = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
 	 * Adds a Category
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $parent
+	 * @param \Slub\SlubEvents\Domain\Model\Category $parent
 	 * @return void
 	 */
-	public function addParent(Tx_SlubEvents_Domain_Model_Category $parent) {
+	public function addParent(\Slub\SlubEvents\Domain\Model\Category $parent) {
 		$this->parent->attach($parent);
 	}
 
 	/**
 	 * Removes a Category
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $parentToRemove The Category to be removed
+	 * @param \Slub\SlubEvents\Domain\Model\Category $parentToRemove The Category to be removed
 	 * @return void
 	 */
-	public function removeParent(Tx_SlubEvents_Domain_Model_Category $parentToRemove) {
+	public function removeParent(\Slub\SlubEvents\Domain\Model\Category $parentToRemove) {
 		$this->parent->detach($parentToRemove);
 	}
 
 	/**
 	 * Returns the parent
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category> $parent
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $parent
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -154,10 +155,10 @@ class Tx_SlubEvents_Domain_Model_Category extends Tx_Extbase_DomainObject_Abstra
 	/**
 	 * Sets the parent
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category> $parent
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $parent
 	 * @return void
 	 */
-	public function setParent(Tx_Extbase_Persistence_ObjectStorage $parent) {
+	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent) {
 		$this->parent = $parent;
 	}
 
