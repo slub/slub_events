@@ -3,8 +3,8 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-Tx_Extbase_Utility_Extension::registerPlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventlist',
 	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventlist'
 );
@@ -13,8 +13,8 @@ $pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventlist';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_eventlist.xml');
 
-Tx_Extbase_Utility_Extension::registerPlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventsubscribe',
 	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventsubscribe'
 );
@@ -23,8 +23,8 @@ $pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventsubscribe';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_eventsubscribe.xml');
 
-Tx_Extbase_Utility_Extension::registerPlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventuserpanel',
 	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventuserpanel'
 );
@@ -33,8 +33,8 @@ $pluginSignature = str_replace('_', '', $_EXTKEY) . '_eventuserpanel';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_eventuserpanel.xml');
 
-Tx_Extbase_Utility_Extension::registerPlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventgeniusbar',
 	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_be.xlf:plugin.Eventgeniusbar'
 );
@@ -48,7 +48,7 @@ if (TYPO3_MODE === 'BE') {
 	 * Registers a Backend Module
 	 */
 	Tx_Extbase_Utility_Extension::registerModule(
-		$_EXTKEY,
+		'Slub.' . $_EXTKEY,
 		'web',	 		// Make module a submodule of 'web'
 		'slubevents',	// Submodule key
 		'',				// Position

@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,10 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_AbstractController {
+
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+class EventController extends AbstractController {
 
 
 	/**
@@ -66,7 +70,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	public function listAction() {
 
 		if (!empty($this->settings['categorySelection'])) {
-			$categoriesIds = t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE);
+			$categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], TRUE);
 
 			if ($this->settings['categorySelectionRecursive']) {
 				// add somehow the other categories...
@@ -80,7 +84,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		}
 
 		if (!empty($this->settings['disciplineSelection'])) {
-			$disciplineIds = t3lib_div::intExplode(',', $this->settings['disciplineSelection'], TRUE);
+			$disciplineIds = GeneralUtility::intExplode(',', $this->settings['disciplineSelection'], TRUE);
 
 			if ($this->settings['disciplineSelectionRecursive']) {
 				// add somehow the other categories...
@@ -126,7 +130,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 
 		if ($event !== NULL) {
 			// fill registers to be used in ts
-			$cObj = t3lib_div::makeInstance('tslib_cObj');
+			$cObj = GeneralUtility::makeInstance('tslib_cObj');
 			$cObj->LOAD_REGISTER(
 				array(
 					'eventPageTitle' => Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event', 'slub_events') . ': "' . $event->getTitle() . '" - ' . strftime('%a, %x %H:%M', $event->getStartDateTime()->getTimeStamp()),
@@ -348,7 +352,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	public function listMonthAction() {
 
 		if (!empty($this->settings['categorySelection'])) {
-			$categoriesIds = t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE);
+			$categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], TRUE);
 
 			if ($this->settings['categorySelectionRecursive']) {
 				// add somehow the other categories...
@@ -363,7 +367,7 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 		}
 
 		if (!empty($this->settings['disciplineSelection'])) {
-			$disciplineIds = t3lib_div::intExplode(',', $this->settings['disciplineSelection'], TRUE);
+			$disciplineIds = GeneralUtility::intExplode(',', $this->settings['disciplineSelection'], TRUE);
 
 			if ($this->settings['disciplineSelectionRecursive']) {
 				// add somehow the other categories...
@@ -403,11 +407,9 @@ class Tx_SlubEvents_Controller_EventController extends Tx_SlubEvents_Controller_
 	 */
 	public function ajaxAction() {
 
-		//~ $events = $this->eventRepository->findAllByCategoriesAndDateInterval(t3lib_div::intExplode(',', $_GET['categories'], TRUE), $_GET['start'], $_GET['stop']);
-
 		$events = $this->eventRepository->findAllBySettings(array(
-			'categoryList' => t3lib_div::intExplode(',', $_GET['categories'], TRUE),
-			'disciplineList' => t3lib_div::intExplode(',', $_GET['disciplines'], TRUE),
+			'categoryList' => GeneralUtility::intExplode(',', $_GET['categories'], TRUE),
+			'disciplineList' => GeneralUtility::intExplode(',', $_GET['disciplines'], TRUE),
 			'startTimestamp' => $_GET['start'],
 			'stopTimestamp' => $_GET['stop'],
 			'showPastEvents' => TRUE)

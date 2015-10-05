@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,12 +32,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Controller_ActionController {
+class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * eventRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
 	 * @inject
 	 */
 	protected $eventRepository;
@@ -44,7 +45,7 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	/**
 	 * categoryRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
 	 * @inject
 	 */
 	protected $categoryRepository;
@@ -52,7 +53,7 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 * @inject
 	 */
 	protected $subscriberRepository;
@@ -60,7 +61,7 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	/**
 	 * contactRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_ContactRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\ContactRepository
 	 * @inject
 	 */
 	protected $contactRepository;
@@ -69,30 +70,30 @@ class Tx_SlubEvents_Controller_AbstractController extends Tx_Extbase_MVC_Control
 	/**
 	 * disciplineRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_DisciplineRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\DisciplineRepository
 	 * @inject
 	 */
 	protected $disciplineRepository;
 
 	/**
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	*/
 	protected $configurationManager;
 
 	/**
 	 * injectConfigurationManager
 	 *
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return void
 	*/
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 
 		$this->contentObj = $this->configurationManager->getContentObject();
-		$this->settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+		$this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
 
 		// merge the storagePid into settings for the cache tags
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 		$this->settings['storagePid'] = $frameworkConfiguration['persistence']['storagePid'];
 	}
 

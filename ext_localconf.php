@@ -3,8 +3,8 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventlist',
 	array(
 		'Event' => 'list, show, showNotFound, new, update, create, delete',
@@ -17,8 +17,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventsubscribe',
 	array(
 		'Subscriber' => 'new, create, delete, eventNotFound',
@@ -31,8 +31,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventuserpanel',
 	array(
 		'Event' => 'listOwn, show',
@@ -46,8 +46,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Slub.' . $_EXTKEY,
 	'Eventgeniusbar',
 	array(
 		'Category' => 'list, gbList',
