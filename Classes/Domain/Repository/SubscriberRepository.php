@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Repository_SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Finds subscriber by fe_user data

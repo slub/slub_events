@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controller_AbstractController {
+class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * Initializes the current action
@@ -60,11 +61,11 @@ class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controll
 	/**
 	 * action list
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @ignorevalidation
 	 * @return void
 	 */
-	public function listAction(Tx_SlubEvents_Domain_Model_Category $category = NULL) {
+	public function listAction(\Slub\SlubEvents\Domain\Model\Category $category = NULL) {
 
 //~ t3lib_utility_Debug::debug($this->settings, 'settings... ');
 		// take the root category of the flexform
@@ -88,11 +89,11 @@ class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controll
 	 *
 	 * List of genius bar events with category description, contact photo and calendar link
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @ignorevalidation
 	 * @return void
 	 */
-	public function gbListAction(Tx_SlubEvents_Domain_Model_Category $category = NULL) {
+	public function gbListAction(\Slub\SlubEvents\Domain\Model\Category $category = NULL) {
 
 		if ($category != NULL) {
 			$events = $this->eventRepository->findAllGbByCategory($category);
@@ -106,10 +107,10 @@ class Tx_SlubEvents_Controller_CategoryController extends Tx_SlubEvents_Controll
 	/**
 	 * action show
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @return void
 	 */
-	public function showAction(Tx_SlubEvents_Domain_Model_Category $category) {
+	public function showAction(\Slub\SlubEvents\Domain\Model\Category $category) {
 		$this->view->assign('category', $category);
 	}
 
