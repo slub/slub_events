@@ -34,6 +34,7 @@
  */
 
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
+	use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class EventController extends AbstractController {
 
@@ -122,18 +123,18 @@ class EventController extends AbstractController {
 	/**
 	 * action show
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @ignorevalidation $event
 	 * @return void
 	 */
-	public function showAction(Tx_SlubEvents_Domain_Model_Event $event = NULL) {
+	public function showAction(\Slub\SlubEvents\Domain\Model\Event $event = NULL) {
 
 		if ($event !== NULL) {
 			// fill registers to be used in ts
 			$cObj = GeneralUtility::makeInstance('tslib_cObj');
 			$cObj->LOAD_REGISTER(
 				array(
-					'eventPageTitle' => Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event', 'slub_events') . ': "' . $event->getTitle() . '" - ' . strftime('%a, %x %H:%M', $event->getStartDateTime()->getTimeStamp()),
+					'eventPageTitle' => LocalizationUtility::translate('tx_slubevents_domain_model_event', 'slub_events') . ': "' . $event->getTitle() . '" - ' . strftime('%a, %x %H:%M', $event->getStartDateTime()->getTimeStamp()),
 				), 'LOAD_REGISTER');
 		}
 
@@ -152,21 +153,21 @@ class EventController extends AbstractController {
 	/**
 	 * action new
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $newEvent
+	 * @param \Slub\SlubEvents\Domain\Model\Event $newEvent
 	 * @ignorevalidation $newEvent
 	 * @return void
 	 */
-	public function newAction(Tx_SlubEvents_Domain_Model_Event $newEvent = NULL) {
+	public function newAction(\Slub\SlubEvents\Domain\Model\Event $newEvent = NULL) {
 			$this->view->assign('newEvent', $newEvent);
 	}
 
 	/**
 	 * action create
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $newEvent
+	 * @param \Slub\SlubEvents\Domain\Model\Event $newEvent
 	 * @return void
 	 */
-	public function createAction(Tx_SlubEvents_Domain_Model_Event $newEvent) {
+	public function createAction(\Slub\SlubEvents\Domain\Model\Event $newEvent) {
 		$this->eventRepository->add($newEvent);
 		$this->flashMessageContainer->add('Your new Event was created.');
 		$this->redirect('list');
@@ -175,21 +176,21 @@ class EventController extends AbstractController {
 	/**
 	 * action edit
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @ignorevalidation $event
 	 * @return void
 	 */
-	public function editAction(Tx_SlubEvents_Domain_Model_Event $event) {
+	public function editAction(\Slub\SlubEvents\Domain\Model\Event $event) {
 		$this->view->assign('event', $event);
 	}
 
 	/**
 	 * action update
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @return void
 	 */
-	public function updateAction(Tx_SlubEvents_Domain_Model_Event $event) {
+	public function updateAction(\Slub\SlubEvents\Domain\Model\Event $event) {
 		$this->eventRepository->update($event);
 		$this->flashMessageContainer->add('Your Event was updated.');
 		$this->redirect('list');
@@ -198,10 +199,10 @@ class EventController extends AbstractController {
 	/**
 	 * action delete
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @return void
 	 */
-	public function deleteAction(Tx_SlubEvents_Domain_Model_Event $event) {
+	public function deleteAction(\Slub\SlubEvents\Domain\Model\Event $event) {
 		$this->eventRepository->remove($event);
 		$this->flashMessageContainer->add('Your Event was removed.');
 		$this->redirect('list');
@@ -305,14 +306,14 @@ class EventController extends AbstractController {
 	/**
 	 * action beCopy
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @ignorevalidation $event
 	 * @return void
 	 */
 	public function beCopyAction($event) {
 
 		$availableProperties = Tx_Extbase_Reflection_ObjectAccess::getGettablePropertyNames($event);
-		$newEvent =  $this->objectManager->create('Tx_SlubEvents_Domain_Model_Event');
+		$newEvent =  $this->objectManager->create('\Slub\SlubEvents\Domain\Model\Event');
 
 		foreach ($availableProperties as $propertyName) {
 			if (Tx_Extbase_Reflection_ObjectAccess::isPropertySettable($newEvent, $propertyName)

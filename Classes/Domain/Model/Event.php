@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractEntity {
+class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * title
@@ -136,14 +137,14 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Category Id
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category>
 	 */
 	protected $categories;
 
 	/**
 	 * Subscriber Ids
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Subscriber>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber>
 	 * @lazy
 	 */
 	protected $subscribers;
@@ -151,21 +152,21 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Location Ids
 	 *
-	 * @var Tx_SlubEvents_Domain_Model_Location
+	 * @var \Slub\SlubEvents\Domain\Model\Location
 	 */
 	protected $location;
 
 	/**
 	 * Discipline IDs
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline>
 	 */
 	protected $discipline;
 
 	/**
 	 * Contact ID
 	 *
-	 * @var Tx_SlubEvents_Domain_Model_Contact
+	 * @var \Slub\SlubEvents\Domain\Model\Contact
 	 */
 	protected $contact;
 
@@ -273,11 +274,11 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 		 * It will be rewritten on each save in the extension builder
 		 * You may modify the constructor of this class instead
 		 */
-		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 
-		$this->discipline = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->discipline = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 
-		$this->subscribers = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->subscribers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -321,27 +322,27 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Adds a Subscriber
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Subscriber $subscriber
+	 * @param \Slub\SlubEvents\Domain\Model\Subscriber $subscriber
 	 * @return void
 	 */
-	public function addSubscriber(Tx_SlubEvents_Domain_Model_Subscriber $subscriber) {
+	public function addSubscriber(\Slub\SlubEvents\Domain\Model\Subscriber $subscriber) {
 		$this->subscribers->attach($subscriber);
 	}
 
 	/**
 	 * Removes a Subscriber
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Subscriber $subscriberToRemove The Subscriber to be removed
+	 * @param \Slub\SlubEvents\Domain\Model\Subscriber $subscriberToRemove The Subscriber to be removed
 	 * @return void
 	 */
-	public function removeSubscriber(Tx_SlubEvents_Domain_Model_Subscriber $subscriberToRemove) {
+	public function removeSubscriber(\Slub\SlubEvents\Domain\Model\Subscriber $subscriberToRemove) {
 		$this->subscribers->detach($subscriberToRemove);
 	}
 
 	/**
 	 * Returns the subscribers
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Subscriber> $subscribers
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
 	 */
 	public function getSubscribers() {
 		return $this->subscribers;
@@ -350,10 +351,10 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the subscribers
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Subscriber> $subscribers
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
 	 * @return void
 	 */
-	public function setSubscribers(Tx_Extbase_Persistence_ObjectStorage $subscribers) {
+	public function setSubscribers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $subscribers) {
 		$this->subscribers = $subscribers;
 	}
 
@@ -379,7 +380,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $discipline
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
 	 */
 	public function getDiscipline() {
 		return $this->discipline;
@@ -388,17 +389,17 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Adds a discipline
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Discipline $discipline
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Discipline> $discipline
+	 * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
 	 */
-	public function addDiscipline(Tx_SlubEvents_Domain_Model_Discipline $discipline) {
+	public function addDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $discipline) {
 		$this->discipline->attach($discipline);
 	}
 
 	/**
 	 * Returns the location
 	 *
-	 * @return Tx_SlubEvents_Domain_Model_Location $location
+	 * @return \Slub\SlubEvents\Domain\Model\Location $location
 	 */
 	public function getLocation() {
 		return $this->location;
@@ -407,17 +408,17 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the location
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Location $location
+	 * @param \Slub\SlubEvents\Domain\Model\Location $location
 	 * @return void
 	 */
-	public function setLocation(Tx_SlubEvents_Domain_Model_Location $location) {
+	public function setLocation(\Slub\SlubEvents\Domain\Model\Location $location) {
 		$this->location = $location;
 	}
 
 	/**
 	 * Returns the Event
 	 *
-	 * @return Tx_SlubEvents_Domain_Model_Event $event
+	 * @return \Slub\SlubEvents\Domain\Model\Event $event
 	 */
 	public function getEvent() {
 		return $this->event;
@@ -426,7 +427,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the contact
 	 *
-	 * @return Tx_SlubEvents_Domain_Model_Contact $contact
+	 * @return \Slub\SlubEvents\Domain\Model\Contact $contact
 	 */
 	public function getContact() {
 		return $this->contact;
@@ -435,10 +436,10 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the contact
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Contact $contact
+	 * @param \Slub\SlubEvents\Domain\Model\Contact $contact
 	 * @return void
 	 */
-	public function setContact(Tx_SlubEvents_Domain_Model_Contact $contact) {
+	public function setContact(\Slub\SlubEvents\Domain\Model\Contact $contact) {
 		$this->contact = $contact;
 	}
 
@@ -568,7 +569,7 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category> $categories
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $categories
 	 */
 	public function getCategories() {
 		return $this->categories;
@@ -577,10 +578,10 @@ class Tx_SlubEvents_Domain_Model_Event extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Adds a categories
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Category> categories
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> categories
 	 */
-	public function addCategory(Tx_SlubEvents_Domain_Model_Category $category) {
+	public function addCategory(\Slub\SlubEvents\Domain\Model\Category $category) {
 		$this->categories->attach($category);
 	}
 
