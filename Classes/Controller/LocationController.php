@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Controller_LocationController extends Tx_Extbase_MVC_Controller_ActionController {
+class LocationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * locationRepository

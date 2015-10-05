@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,10 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Controller_AbstractController {
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
+	use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
+class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * action list
@@ -46,10 +50,10 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	/**
 	 * action show
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Subscriber $subscriber
+	 * @param \Slub\SlubEvents\Domain\Model\Subscriber $subscriber
 	 * @return void
 	 */
-	public function showAction(Tx_SlubEvents_Domain_Model_Subscriber $subscriber) {
+	public function showAction(\Slub\SlubEvents\Domain\Model\Subscriber $subscriber) {
 		$this->view->assign('subscriber', $subscriber);
 	}
 
@@ -114,15 +118,15 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	/**
 	 * action new
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @ignorevalidation $newSubscriber
 	 * @ignorevalidation $event
 	 * @ignorevalidation $category
 	 * @return void
 	 */
-	public function newAction(Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber = NULL, Tx_SlubEvents_Domain_Model_Event $event = NULL, Tx_SlubEvents_Domain_Model_Category $category = NULL) {
+	public function newAction(\Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber = NULL, \Slub\SlubEvents\Domain\Model\Event $event = NULL, \Slub\SlubEvents\Domain\Model\Category $category = NULL) {
 
 		// somebody is calling the action without giving an event --> useless
 		if ($event === NULL)
@@ -134,7 +138,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 		// already POST values exists. extbase vodoo ;-)
 		if($newSubscriber === NULL) {
 
-			$newSubscriber = t3lib_div::makeInstance('Tx_SlubEvents_Domain_Model_Subscriber');
+			$newSubscriber = GeneralUtility::makeInstance('\Slub\SlubEvents\Domain\Model\Subscriber');
 			$newSubscriber->setNumber(1);
 
 			if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
@@ -162,14 +166,14 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 * action create
 	 * // gets validated automatically if name is like this: ...Tx_SlubEvents_Domain_Validator_SubscriberValidator
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @validate $event Tx_SlubEvents_Domain_Validator_EventSubscriptionAllowedValidator
 	 * @ignorevalidation $category
 	 * @return void
 	 */
-	public function createAction(Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber, Tx_SlubEvents_Domain_Model_Event $event, Tx_SlubEvents_Domain_Model_Category $category = NULL) {
+	public function createAction(\Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber, \Slub\SlubEvents\Domain\Model\Event $event, \Slub\SlubEvents\Domain\Model\Category $category = NULL) {
 
 		// add subscriber to event
 		$editcode = hash('sha256', rand().$newSubscriber->getEmail().time());
@@ -229,7 +233,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			// email to event owner
 			$this->sendTemplateEmail(
 				array($event->getContact()->getEmail() => $event->getContact()->getName()),
-				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+				array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
 				'Veranstaltung ausgebucht: ' . $event->getTitle(),
 				'Maximumreached',
 				array(	'event' => $event,
@@ -247,7 +251,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			// email to event owner
 			$this->sendTemplateEmail(
 				array($event->getContact()->getEmail() => $event->getContact()->getName()),
-				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
+				array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
 				'Veranstaltung gebucht: ' . $event->getTitle(),
 				'Newsubscriber',
 				array(	'event' => $event,
@@ -477,13 +481,13 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	/**
 	 * action delete
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @param string $subscriber
 	 * @ignorevalidation $event
 	 * @ignorevalidation $editcode
 	 * @return void
 	 */
-	public function deleteAction(Tx_SlubEvents_Domain_Model_Event $event = NULL, $editcode) {
+	public function deleteAction(\Slub\SlubEvents\Domain\Model\Event $event = NULL, $editcode) {
 
 		// somebody is calling the action without giving an event --> useless
 		if ($event === NULL)
@@ -535,7 +539,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 			// email to event owner
 			$this->sendTemplateEmail(
 				array($event->getContact()->getEmail() => $event->getContact()->getName()),
-				array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
+				array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
 				'Veranstaltung wegen Abmeldung nicht mehr gesichert: ' . $event->getTitle(),
 				'Minimumreachedagain',
 				array(	'event' => $event,
@@ -576,11 +580,11 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 *
 	 * --> see ics template in Resources/Private/Backend/Templates/Email/
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @ignorevalidation $event
 	 * @return void
 	 */
-	public function beIcsInvitationAction(Tx_SlubEvents_Domain_Model_Event $event) {
+	public function beIcsInvitationAction(\Slub\SlubEvents\Domain\Model\Event $event) {
 
 		// startDateTime may never be empty
 		$helper['start'] = $event->getStartDateTime()->getTimestamp();
@@ -609,7 +613,7 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 
 		$this->sendTemplateEmail(
 			array($event->getContact()->getEmail() => $event->getContact()->getName()),
-			array($this->settings['senderEmailAddress'] => Tx_Extbase_Utility_Localization::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
+			array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
 			'Termineinladung: ' . $event->getTitle(),
 			'Invitation',
 			array(	'event' => $event,
@@ -694,12 +698,12 @@ class Tx_SlubEvents_Controller_SubscriberController extends Tx_SlubEvents_Contro
 	 *
 	 * --> see ics template in Resources/Private/Backend/Templates/Email/
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @param integer $step
 	 * @ignorevalidation $event
 	 * @return void
 	 */
-	public function beOnlineSurveyAction(Tx_SlubEvents_Domain_Model_Event $event, $step = 0) {
+	public function beOnlineSurveyAction(\Slub\SlubEvents\Domain\Model\Event $event, $step = 0) {
 
 		// get the onlineSurveyLink and potential timestamp of last sent
 		$onlineSurveyLink = t3lib_div::trimExplode('|', $event->getOnlinesurvey(), TRUE);

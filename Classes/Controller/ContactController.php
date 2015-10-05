@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Controller_ContactController extends Tx_SlubEvents_Controller_AbstractController {
+class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * action list
@@ -46,10 +47,10 @@ class Tx_SlubEvents_Controller_ContactController extends Tx_SlubEvents_Controlle
 	/**
 	 * action show
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Contact $contact
+	 * @param \Slub\SlubEvents\Domain\Model\Contact $contact
 	 * @return void
 	 */
-	public function showAction(Tx_SlubEvents_Domain_Model_Contact $contact) {
+	public function showAction(\Slub\SlubEvents\Domain\Model\Contact $contact) {
 		$this->view->assign('contact', $contact);
 	}
 
