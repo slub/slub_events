@@ -1,9 +1,10 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,29 +32,29 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_NewMonthTitleViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class NewMonthTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * eventRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
 	 */
 	protected $eventRepository;
 
 	/**
 	 * injectEventRepository
 	 *
-	 * @param Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository
+	 * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
 	 * @return void
 	 */
-	public function injectEventRepository(Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository) {
+	public function injectEventRepository(\Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository) {
 		$this->eventRepository = $eventRepository;
 	}
 
 	/**
 	 * Render the supplied DateTime object as a formatted date.
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SlubEvents_Domain_Model_Event> $events
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
 	 * @param int index
 	 * @return int
  	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
@@ -72,17 +73,17 @@ class Tx_SlubEvents_ViewHelpers_Format_NewMonthTitleViewHelper extends Tx_Fluid_
 
 			$event = $events[$index];
 			$date = $event->getStartDateTime();
-			
+
 			$preevent = $events[$index - 1];
 			$predate = $preevent->getStartDateTime();
 
 			if ($date->format('m') != $predate->format('m'))
 				return $date;
-		
+
 		}
 
 		return;
-		
+
 	}
 }
 ?>
