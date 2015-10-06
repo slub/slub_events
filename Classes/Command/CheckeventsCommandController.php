@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Command;
 /***************************************************************
 *  Copyright notice
 *
@@ -30,19 +31,19 @@
  *
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_Controller_CommandController {
+class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController {
 
 	/**
 	 * eventRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
 	 */
 	protected $eventRepository;
 
 	/**
 	 * categoryRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
 	 * @inject
 	 */
 	protected $categoryRepository;
@@ -50,32 +51,32 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 */
 	protected $subscriberRepository;
 
 	/**
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	*/
 	protected $configurationManager;
 
 	/**
 	 * injectEventRepository
 	 *
-	 * @param Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository
+	 * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
 	 * @return void
 	 */
-	public function injectEventRepository(Tx_SlubEvents_Domain_Repository_EventRepository $eventRepository) {
+	public function injectEventRepository(\Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository) {
 		$this->eventRepository = $eventRepository;
 	}
 
 	/**
 	 * injectSubscriberRepository
 	 *
-	 * @param Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository
+	 * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
 	 * @return void
 	 */
-	public function injectSubscriberRepository(Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository) {
+	public function injectSubscriberRepository(\Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository) {
 		$this->subscriberRepository = $subscriberRepository;
 	}
 
@@ -98,14 +99,14 @@ class Tx_SlubEvents_Command_CheckeventsCommandController extends Tx_Extbase_MVC_
 	/**
 	 * injectConfigurationManager
 	 *
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return void
 	*/
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 
 		$this->contentObj = $this->configurationManager->getContentObject();
-		$this->settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+		$this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
 	}
 
 	/**

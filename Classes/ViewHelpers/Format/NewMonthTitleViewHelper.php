@@ -64,21 +64,32 @@ class NewMonthTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 
 		// the first is shown anyway...
 		if ($index == 0) {
+
 			$event = $events[$index];
+
 			$date = $event->getStartDateTime();
-			if ($date instanceof DateTime) {
+
+			if ($date instanceof \DateTime) {
+
 				return $date;
+				
 			}
+
 		} else {
 
 			$event = $events[$index];
+
 			$date = $event->getStartDateTime();
 
 			$preevent = $events[$index - 1];
+
 			$predate = $preevent->getStartDateTime();
 
-			if ($date->format('m') != $predate->format('m'))
+			if ($date->format('m') != $predate->format('m')) {
+
 				return $date;
+
+			}
 
 		}
 
