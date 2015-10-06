@@ -28,6 +28,7 @@
  *
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tx_SlubEvents_Slots_HookPreProcessing {
 
 	/**
@@ -74,7 +75,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 			$this->initialize();
 
 			if ($fieldArray['genius_bar'] === FALSE)
-				$message = t3lib_div::makeInstance('t3lib_FlashMessage',
+				$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
 					'Veranstaltung gespeichert: <b>"'.$fieldArray['title'] . '"</b> am '. gmstrftime('%a, %x %H:%M:%S', $fieldArray['start_date_time']) .'.',
 					'OK',
 					t3lib_FlashMessage::OK,
@@ -96,7 +97,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 					$category_text = '<b>"'.substr($category_text, 0, strlen($category_text)-2).'"</b>';
 				}
 				$message_text .= $category_text . ' am '. gmstrftime('%a, %x %H:%M:%S', $fieldArray['start_date_time']) .'.';
-				$message = t3lib_div::makeInstance('t3lib_FlashMessage',
+				$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
 								$message_text,
 								'OK',
 								t3lib_FlashMessage::OK,

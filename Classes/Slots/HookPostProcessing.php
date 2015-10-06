@@ -28,6 +28,7 @@
  *
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tx_SlubEvents_Slots_HookPostProcessing {
 
 	/**
@@ -41,7 +42,7 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	 */
 	function clearAllEventListCache($pid = 0, $isGeniusBar = 0) {
 
-		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
+		$tcemain = GeneralUtility::makeInstance('t3lib_TCEmain');
 
 		// next two lines are necessary... don't know why.
 		$tcemain->stripslashes_values = 0;
