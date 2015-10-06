@@ -77,18 +77,20 @@ class SubscriberController extends AbstractController {
 	 *
 	 * @return void
 	 */
-	public function initializeNewAction() {
-
-		$eventId = $this->getParametersSafely('event');
-		$event = NULL;
-
-		if ($eventId != NULL)
-			$event = $this->eventRepository->findByUid($eventId);
-
-		if ($event === NULL)
-			$this->redirect('eventNotFound');
-
-	}
+//	public function initializeNewAction() {
+//
+//		$eventId = $this->getParametersSafely('event');
+//		$event = NULL;
+//
+//		if ($eventId != NULL) {
+//			$event = $this->eventRepository->findByUid($eventId);
+//		}
+//
+//		if ($event === NULL) {
+//			$this->redirect('eventNotFound');
+//		}
+//
+//	}
 
 
 	/**
@@ -102,18 +104,20 @@ class SubscriberController extends AbstractController {
 	 *
 	 * @return void
 	 */
-	public function initializeDeleteAction() {
-
-		$eventId = $this->getParametersSafely('event');
-		$event = NULL;
-
-		if ($eventId != NULL)
-			$event = $this->eventRepository->findByUid($eventId);
-
-		if ($event === NULL)
-			$this->redirect('eventNotFound');
-
-	}
+//	public function initializeDeleteAction() {
+//
+//		$eventId = $this->getParametersSafely('event');
+//		$event = NULL;
+//
+//		if ($eventId != NULL) {
+//			$event = $this->eventRepository->findByUid($eventId);
+//		}
+//
+//		if ($event === NULL) {
+//			$this->redirect('eventNotFound');
+//		}
+//
+//	}
 
 	/**
 	 * action new

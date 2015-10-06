@@ -108,17 +108,17 @@ class EventController extends AbstractController {
 	 *
 	 * @return void
 	 */
-	public function initializeShowAction() {
-
-		$eventId = $this->getParametersSafely('event');
-		$event = NULL;
-
-		if ($eventId != NULL)
-			$event = $this->eventRepository->findByUid($eventId);
-
-		if ($event === NULL)
-			$this->redirect('showNotFound');
-	}
+//	public function initializeShowAction() {
+//
+//		$eventId = $this->getParametersSafely('event');
+//		$event = NULL;
+//
+//		if ($eventId != NULL)
+//			$event = $this->eventRepository->findByUid($eventId);
+//
+//		if ($event === NULL)
+//			$this->redirect('showNotFound');
+//	}
 
 	/**
 	 * action show
