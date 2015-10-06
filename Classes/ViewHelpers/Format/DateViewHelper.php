@@ -1,6 +1,5 @@
 <?php
 	namespace Slub\SlubEvents\ViewHelpers\Format;
-
 /*                                                                        *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -106,16 +105,16 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 			}
 		}
 
-		if (!$date instanceof DateTime) {
+		if (!$date instanceof \DateTime) {
 			try {
-				$date = new DateTime($date);
+				$date = new \DateTime($date);
 			} catch (Exception $exception) {
 				throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('"' . $date . '" could not be parsed by DateTime constructor.', 1241722579);
 			}
 		}
 
 		if($TYPO3_CONF_VARS['SYS']['phpTimeZone']){
-			$date->setTimezone(new DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
+			$date->setTimezone(new \DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
 		}
 
 		return strftime($format, $date->getTimestamp());

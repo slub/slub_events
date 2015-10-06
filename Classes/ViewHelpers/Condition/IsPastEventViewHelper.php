@@ -1,6 +1,5 @@
 <?php
-
-
+    namespace Slub\SlubEvents\ViewHelpers\Condition;
 /***************************************************************
  *  Copyright notice
  *
@@ -42,12 +41,12 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Condition_IsPastEventViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class IsPastEventViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
     /**
      * Render the supplied DateTime object as a formatted date.
      *
-     * @param Tx_SlubEvents_Domain_Model_Event $event
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
      * @return boolean
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api

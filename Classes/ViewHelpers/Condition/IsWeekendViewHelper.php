@@ -1,5 +1,5 @@
 <?php
-
+	namespace Slub\SlubEvents\ViewHelpers\Condition;
 /***************************************************************
  *  Copyright notice
  *
@@ -41,22 +41,22 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Condition_IsWeekendViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class IsWeekendViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 */
 	protected $subscriberRepository;
 
 	/**
 	 * injectSubscriberRepository
 	 *
-	 * @param Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository
+	 * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
 	 * @return void
 	 */
-	public function injectSubscriberRepository(Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository) {
+	public function injectSubscriberRepository(\Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository) {
 		$this->subscriberRepository = $subscriberRepository;
 	}
 

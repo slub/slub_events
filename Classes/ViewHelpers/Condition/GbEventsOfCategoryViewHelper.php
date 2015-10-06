@@ -1,5 +1,6 @@
 <?php
-/***************************************************************
+	namespace Slub\SlubEvents\ViewHelpers\Condition;
+	/***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
@@ -31,12 +32,12 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Condition_GbEventsOfCategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class GbEventsOfCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * eventRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
 	 * @inject
 	 */
 	protected $eventRepository;
@@ -44,7 +45,7 @@ class Tx_SlubEvents_ViewHelpers_Condition_GbEventsOfCategoryViewHelper extends T
 	/**
 	 * categoryRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
 	 * @inject
 	 */
 	protected $categoryRepository;
@@ -52,7 +53,7 @@ class Tx_SlubEvents_ViewHelpers_Condition_GbEventsOfCategoryViewHelper extends T
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 * @inject
 	 */
 	protected $subscriberRepository;
@@ -60,11 +61,11 @@ class Tx_SlubEvents_ViewHelpers_Condition_GbEventsOfCategoryViewHelper extends T
 	/**
 	 * check if any events of categories below are present and free for booking
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @return boolean
 	 * @api
 	 */
-	public function render(Tx_SlubEvents_Domain_Model_Category $category) {
+	public function render(\Slub\SlubEvents\Domain\Model\Category $category) {
 
 		$events = $this->eventRepository->findAllGbByCategory($category);
 

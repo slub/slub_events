@@ -1,10 +1,10 @@
 <?php
-
+	namespace Slub\SlubEvents\ViewHelpers\Condition;
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -41,35 +41,35 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Condition_IsSubscriptionAllowedViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class IsSubscriptionAllowedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 */
 	protected $subscriberRepository;
 
 	/**
 	 * injectSubscriberRepository
 	 *
-	 * @param Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository
+	 * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
 	 * @return void
 	 */
-	public function injectSubscriberRepository(Tx_SlubEvents_Domain_Repository_SubscriberRepository $subscriberRepository) {
+	public function injectSubscriberRepository(\Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository) {
 		$this->subscriberRepository = $subscriberRepository;
 	}
 
 	/**
 	 * Render the supplied DateTime object as a formatted date.
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @return boolean
 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
 	 * @api
 	 */
 	public function render($event) {
-	
+
 		$showLink = TRUE;
 
 		// limit reached already --> overbooked

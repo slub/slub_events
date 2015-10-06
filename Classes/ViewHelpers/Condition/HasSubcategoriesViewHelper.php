@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Condition;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,35 +32,35 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Condition_HasSubcategoriesViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 
 	/**
 	 * categoryRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_CategoryRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
 
 	/**
 	 * injectCategoryRepository
 	 *
-	 * @param Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository
+	 * @param \Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository
 	 * @return void
 	 */
-	public function injectCategoryRepository(Tx_SlubEvents_Domain_Repository_CategoryRepository $categoryRepository) {
+	public function injectCategoryRepository(\Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository) {
 		$this->categoryRepository = $categoryRepository;
 	}
 
 	/**
 	 * check if any events of categories below are present and free for booking
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @return int
  	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
 	 * @api
 	 */
-	public function render(Tx_SlubEvents_Domain_Model_Category $category) {
+	public function render(\Slub\SlubEvents\Domain\Model\Category $category) {
 
 		$categories = $this->categoryRepository->findCurrentBranch($category);
 
