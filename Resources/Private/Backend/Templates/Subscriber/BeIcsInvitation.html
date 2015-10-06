@@ -48,7 +48,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 	<div class="category"><f:translate key="tx_slubevents_domain_model_category" />:
 	    <f:for each="{event.categories}" as="category">
-				<span class="categorytitle" title="<se:format.stripTags htmlString='{category.description}' />">{category.title}</span><br />
+				<span class="categorytitle" title="{category.description -> f:format.stripTags}">{category.title}</span><br />
 			</f:for>
 	</div>
 	<div class="location"><f:translate key="tx_slubevents_domain_model_location" />:

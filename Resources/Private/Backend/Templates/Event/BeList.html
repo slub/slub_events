@@ -27,11 +27,11 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<tr class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
 			<td><se:be.functionBar icon="edit" event="{event}" /></td>
 			<td><se:be.functionBar icon="geniusbar" event="{event}" />
-				<span class="eventtitle" title="<se:format.stripTags htmlString='{event.description}' />">{event.title}</span><br />
+				<span class="eventtitle" title="{event.description -> f:format.stripTags()}">{event.title}</span><br />
 				<span class="eventcontact">{event.contact.name}: <f:link.email email="{event.contact.email}" /></span>
 			</td>
 			<td><f:for each="{event.categories}" as="category">
-				<span class="categorytitle" title="<se:format.stripTags htmlString='{category.description}' />">{category.title}</span><br />
+				<span class="categorytitle" title="{event.description -> f:format.stripTags()}">{category.title}</span><br />
 			</f:for>
 			</td>
 			<td><se:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M" /></td>

@@ -45,7 +45,7 @@ class Discipline extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * parent
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Discipline>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline>
 	 * @lazy
 	 */
 	protected $parent;
@@ -92,7 +92,7 @@ class Discipline extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the parent
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Discipline> $parent
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $parent
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -101,10 +101,10 @@ class Discipline extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the parent
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Discipline> $parent
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $parent
 	 * @return void
 	 */
-	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorag $parent) {
+	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent) {
 		$this->parent = $parent;
 	}
 

@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Fluid".                      *
@@ -77,7 +78,7 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_DateViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * @var boolean

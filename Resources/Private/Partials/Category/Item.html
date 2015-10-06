@@ -2,17 +2,17 @@
 <f:if condition="<se:condition.HasSubcategories category='{category.item}' />">
 	<f:then>
 		<li class="teaser-geniusbar" id="category-{category.item.uid}">
-		<span class="" title="<se:format.stripTags htmlString='{category.item.description}' />">{category.item.title}</span>
+		<span class="" title="{category.item.description -> f:format.stripTags()}">{category.item.title}</span>
 	</f:then>
 	<f:else>
 		<f:if condition="<se:condition.gbEventsOfCategory category='{category.item}' />">
 			<f:then>
 				<li class="teaser-geniusbar" id="category-{category.item.uid}">
-				<f:link.action action="gbList" controller="Category" title="<se:format.stripTags htmlString='{category.item.description}' />" arguments="{category : category.item}" section="book-me-now">{category.item.title}</f:link.action>
+				<f:link.action action="gbList" controller="Category" title="{category.item.description -> f:format.stripTags()}" arguments="{category : category.item}" section="book-me-now">{category.item.title}</f:link.action>
 			</f:then>
 			<f:else>
 				<li class="teaser-geniusbar nooffer" id="category-{category.item.uid}">
-				<span class="nooffer" title="<se:format.stripTags htmlString='{category.item.description}' />">{category.item.title}</span>
+				<span class="nooffer" title="{category.item.description -> f:format.stripTags()}">{category.item.title}</span>
 			</f:else>
 		</f:if>
 	</f:else>

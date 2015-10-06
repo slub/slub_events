@@ -59,7 +59,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * parent
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Location>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Location>
 	 */
 	protected $parent;
 
@@ -131,7 +131,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorag properties.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
 	 *
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		 * It will be rewritten on each save in the extension builder
 		 * You may modify the constructor of this class instead
 		 */
-		$this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorag();
+		$this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the parent
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Location> $parent
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Location> $parent
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -176,10 +176,10 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the parent
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorag<\Slub\SlubEvents\Domain\Model\Location> $parent
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Location> $parent
 	 * @return void
 	 */
-	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorag $parent) {
+	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent) {
 		$this->parent = $parent;
 	}
 

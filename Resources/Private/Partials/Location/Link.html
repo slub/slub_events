@@ -6,15 +6,15 @@
 			<f:then>
 				<f:if condition="<se:link.islocal link='{location.link}' />">
 					<f:then>
-						<f:link.page pageUid="{location.link}" title="<se:format.stripTags htmlString='{location.description}' />">{location.name}</f:link.page>
+						<f:link.page pageUid="{location.link}" title="{location.description -> f:format.stripTags()}">{location.name}</f:link.page>
 					</f:then>
 					<f:else>
 						<f:if condition="<se:link.is3dModel link='{location.link}' />">
 							<f:then>
-								<f:link.external class="threed" uri="{location.link}" title="<se:format.stripTags htmlString='{location.description}' />">{location.name}</f:link.external>
+								<f:link.external class="threed" uri="{location.link}" title="{location.description -> f:format.stripTags()}">{location.name}</f:link.external>
 							</f:then>
 							<f:else>
-								<f:link.external class="external" uri="{location.link}" title="<se:format.stripTags htmlString='{location.description}' />">{location.name}</f:link.external>
+								<f:link.external class="external" uri="{location.link}" title="{location.description -> f:format.stripTags()}">{location.name}</f:link.external>
 							</f:else>
 						</f:if>
 					</f:else>
