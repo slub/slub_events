@@ -195,24 +195,15 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		$constraints = array();
 
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
-			// TYPO3 4.7
-			// include hidden and deleted records
-			$query->getQuerySettings()->setRespectEnableFields(FALSE);
-			// get rid of deleted records
-			$constraints[] = $query->equals('deleted', 0 );
-		} else {
-			// TYPO3 6.x
-			$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
-			$query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
-		}
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+		$query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
 
-			$constraints[] = $query->in('categories.uid', $categories );
-			if (!empty($contacts))
-				$constraints[] = $query->in('contact', $contacts);
-			$constraints[] = $query->greaterThan('start_date_time', $startDateStamp);
-			if (!empty($searchString))
-				$constraints[] = $query->like('title', '%'.$searchString.'%');
+		$constraints[] = $query->in('categories.uid', $categories );
+		if (!empty($contacts))
+			$constraints[] = $query->in('contact', $contacts);
+		$constraints[] = $query->greaterThan('start_date_time', $startDateStamp);
+		if (!empty($searchString))
+			$constraints[] = $query->like('title', '%'.$searchString.'%');
 
 		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));

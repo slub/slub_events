@@ -31,6 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
 class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
@@ -84,7 +85,7 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
 
 			$this->isValid = FALSE;
 		}
-		if (!t3lib_div::validEmail($newSubscriber->getEmail())) {
+		if (!GeneralUtility::validEmail($newSubscriber->getEmail())) {
 			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_email', 1100);
 			$this->result->forProperty('email')->addError($error);
 //			$this->addError('val_email', 1100);

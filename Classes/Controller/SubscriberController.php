@@ -173,7 +173,7 @@ class SubscriberController extends AbstractController {
 	 * @param \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber
 	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @param \Slub\SlubEvents\Domain\Model\Category $category
-	 * @validate $event Tx_SlubEvents_Domain_Validator_EventSubscriptionAllowedValidator
+	 * @validate $event \Slub\SlubEvents\Domain\Validator\EventSubscriptionAllowedValidator
 	 * @ignorevalidation $category
 	 * @return void
 	 */
@@ -295,20 +295,13 @@ class SubscriberController extends AbstractController {
 	 */
 	protected function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array()) {
 
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
-			// TYPO3 4.7
-			$emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-			$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-			$csv = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-		} else {
-			// TYPO3 6.x
-			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
-			$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
-			$ics = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $csv */
-			$csv = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-		}
+		// TYPO3 6.x
+		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+		$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
+		$ics = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $csv */
+		$csv = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 
 		$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
 		$emailViewHTML->setFormat('html');
@@ -318,23 +311,18 @@ class SubscriberController extends AbstractController {
 		$ics->setFormat('ics');
 		$ics->assignMultiple($variables);
 
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-		$partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$partialRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
 
 		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
 		$emailViewHTML->setPartialRootPath($partialRootPath);
 
 		$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6000000') {
-			// TYPO3 4.7
-			$message = t3lib_div::makeInstance('t3lib_mail_Message');
-		} else {
-			// TYPO3 6.x
-			/** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
-			$message = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-		}
+		// TYPO3 6.x
+		/** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
+		$message = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 
 		$message->setTo($recipient)
 				->setFrom($sender)
@@ -351,7 +339,7 @@ class SubscriberController extends AbstractController {
 			$csv->setPartialRootPath($partialRootPath);
 
 			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
-			t3lib_div::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
+			GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
 
 			$message->attach(Swift_Attachment::fromPath($eventCsvFile)
 						->setContentType('text/csv'));
@@ -364,7 +352,7 @@ class SubscriberController extends AbstractController {
 
 		if ($variables['attachIcsInvitation'] == TRUE) {
 			//~ $eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
-			//~ t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+			//~ GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 			// attach ICS-File
 			//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
 								//~ ->setFilename('invite.ics')
@@ -463,7 +451,7 @@ class SubscriberController extends AbstractController {
 	 */
 	public function clearAllEventListCache() {
 
-		$tcemain = t3lib_div::makeInstance('t3lib_TCEmain');
+		$tcemain = GeneralUtility::makeInstance('t3lib_TCEmain');
 
 		// next two lines are necessary... don't know why.
 		$tcemain->stripslashes_values = 0;
@@ -474,9 +462,9 @@ class SubscriberController extends AbstractController {
 		else
 			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$this->settings['storagePid']);
 
-			$fp = fopen(PATH_site . 'typo3temp/clearcachehookx.txt', 'a');
-			fwrite($fp, strftime('%x %T') . ' cachetag:tx_slubevents_'.$this->settings['storagePid'] .  "\n");
-			fclose($fp);
+//			$fp = fopen(PATH_site . 'typo3temp/clearcachehookx.txt', 'a');
+//			fwrite($fp, strftime('%x %T') . ' cachetag:tx_slubevents_'.$this->settings['storagePid'] .  "\n");
+//			fclose($fp);
 
 		return;
 
@@ -710,7 +698,7 @@ class SubscriberController extends AbstractController {
 	public function beOnlineSurveyAction(\Slub\SlubEvents\Domain\Model\Event $event, $step = 0) {
 
 		// get the onlineSurveyLink and potential timestamp of last sent
-		$onlineSurveyLink = t3lib_div::trimExplode('|', $event->getOnlinesurvey(), TRUE);
+		$onlineSurveyLink = GeneralUtility::trimExplode('|', $event->getOnlinesurvey(), TRUE);
 
 		// set the link to the current object to get access inside the email
 		$event->setOnlinesurvey($onlineSurveyLink[0]);
@@ -727,8 +715,8 @@ class SubscriberController extends AbstractController {
 			$emailViewHTML->assign('subscriber', array('name' => '###Name wird automatisch ausgefüllt###'));
 
 			$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-			$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-			$partialRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+			$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+			$partialRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
 
 			$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . 'OnlineSurvey.html');
 			$emailViewHTML->setPartialRootPath($partialRootPath);
@@ -736,7 +724,6 @@ class SubscriberController extends AbstractController {
 			$emailTextHTML = $emailViewHTML->render();
 
 		}
-
 
 		if ($step == 1) {
 			$helper['now'] = time();

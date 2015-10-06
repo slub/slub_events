@@ -77,7 +77,7 @@
  *
  * --> 2015-10-06: maybe possible with native fluid viewHelper now, form validation has to be checked to verify
  */
-class CheckboxViewHelper extends  \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormViewHelper {
+class CheckboxViewHelper extends  \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper {
 
 	/**
 	 * @var string

@@ -26,11 +26,12 @@
 /**
  * Command Controller for CLI
  *
- * note: scheduler task is working from extbase 4.7
  *
  *
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
+	use TYPO3\CMS\Core\Utility\MathUtility;
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
 class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController {
 
 	/**
@@ -122,7 +123,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 		$this->initializeAction();
 
 		// abort if no storagePid is found
-		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
+		if (! MathUtility::canBeInterpretedAsInteger($storagePid)) {
 			echo 'NO storagePid given. Please enter the storagePid in the scheduler task.';
 			exit(1);
 		}
@@ -248,7 +249,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 		$this->initializeAction();
 
 		// abort if no storagePid is found
-		if (! t3lib_utility_Math::canBeInterpretedAsInteger($storagePid)) {
+		if (! MathUtility::canBeInterpretedAsInteger($storagePid)) {
 			echo 'NO storagePid given. Please enter the storagePid in the scheduler task.';
 			exit(1);
 		}
@@ -328,7 +329,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
 		$emailViewHTML->setPartialRootPath($partialRootPath);
 
-		$message = t3lib_div::makeInstance('t3lib_mail_Message');
+		$message = GeneralUtility::makeInstance('t3lib_mail_Message');
 		$message->setTo($recipient)
 				->setFrom($sender)
 				->setCharset('utf-8')
@@ -347,6 +348,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 
 		// attach ics-File
 		if ($variables['attachIcs'] == TRUE) {
+
 			$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
 			$ics->getRequest()->setControllerExtensionName($this->extensionName);
 			$ics->setFormat('ics');
@@ -355,7 +357,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
 			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. $templateName.'-'.$variables['event']->getUid().'.ics';
-			t3lib_div::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+			GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
 			// add ics as part
 			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
@@ -372,7 +374,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 			$csv->setPartialRootPath($partialRootPath);
 
 			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'.csv';
-			t3lib_div::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
+			GeneralUtility::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
 
 			// attach CSV-File
 			$message->attach(Swift_Attachment::fromPath($eventCsvFile)
