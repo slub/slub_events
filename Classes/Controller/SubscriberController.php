@@ -341,7 +341,7 @@ class SubscriberController extends AbstractController {
 			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
 			GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
 
-			$message->attach(Swift_Attachment::fromPath($eventCsvFile)
+			$message->attach(\Swift_Attachment::fromPath($eventCsvFile)
 						->setContentType('text/csv'));
 		}
 
@@ -354,7 +354,7 @@ class SubscriberController extends AbstractController {
 			//~ $eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
 			//~ GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 			// attach ICS-File
-			//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
+			//~ $message->attach(\Swift_Attachment::fromPath($eventIcsFile)
 								//~ ->setFilename('invite.ics')
 								//~ ->setDisposition('inline')
 								//~ ->setContentType('text/calendar; charset="utf-8"; method=REQUEST'));

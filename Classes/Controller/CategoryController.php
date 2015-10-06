@@ -32,6 +32,8 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class CategoryController extends AbstractController {
 
 	/**
@@ -69,7 +71,7 @@ class CategoryController extends AbstractController {
 
 //~ t3lib_utility_Debug::debug($this->settings, 'settings... ');
 		// take the root category of the flexform
-		$category = $this->categoryRepository->findAllByUids(t3lib_div::intExplode(',', $this->settings['categorySelection'], TRUE))->getFirst();
+		$category = $this->categoryRepository->findAllByUids(GeneralUtility::intExplode(',', $this->settings['categorySelection'], TRUE))->getFirst();
 
 //~ t3lib_utility_Debug::debug($category, 'category... ');
 		$categories = $this->categoryRepository->findCurrentBranch($category);
