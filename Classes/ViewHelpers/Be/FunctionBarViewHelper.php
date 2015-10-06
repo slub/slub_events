@@ -1,5 +1,5 @@
 <?php
-
+	namespace Slub\SlubEvents\ViewHelpers\Be;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,18 +24,22 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
+	use TYPO3\CMS\Backend\Utility\BackendUtility;
+	use TYPO3\CMS\Backend\Utility\IconUtility;
+	use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
+class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper {
 
 	/**
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	 */
 	protected $configurationManager;
 
 	/**
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return void
 	 */
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 	}
 
@@ -52,9 +56,9 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 		//~ $params = '%26selectedStartDateStamp='.$row['selectedStartDateStamp'];
 		//~ $params .= '%26selectedCategories='.$row['selectedCategories'];
 		$params .= '&edit[' . $table . '][' . $row['uid'] . ']=edit';
-		$title = Tx_Extbase_Utility_Localization::translate('be.editEvent', 'slub_events', $arguments=NULL) . ' ' . $row['uid'] . ': ' . $row['title'] ;
-		$icon = '<a href="#" onclick="' . htmlspecialchars(t3lib_BEfunc::editOnClick($params, $this->backPath, -1)) . '" title="' . $title . '">' .
-					t3lib_iconWorks::getSpriteIcon('actions-document-open') .
+		$title = LocalizationUtility::translate('be.editEvent', 'slub_events', $arguments=NULL) . ' ' . $row['uid'] . ': ' . $row['title'] ;
+		$icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath, -1)) . '" title="' . $title . '">' .
+			IconUtility::getSpriteIcon('actions-document-open') .
 				'</a>';
 
 		return $icon;
@@ -70,9 +74,9 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 	protected function getNewIcon($table, array $row){
 
 		$params .= '&edit[' . $table . '][' . $row['storagePid'] . ']=new';
-		$title = Tx_Extbase_Utility_Localization::translate('be.newEvent', 'slub_events', $arguments=NULL);
-		$icon = '<a href="#" onclick="' . htmlspecialchars(t3lib_BEfunc::editOnClick($params, $this->backPath, -1)) . '" title="' . $title . '">' .
-							t3lib_iconWorks::getSpriteIcon('actions-document-new') .
+		$title = LocalizationUtility::translate('be.newEvent', 'slub_events', $arguments=NULL);
+		$icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath, -1)) . '" title="' . $title . '">' .
+			IconUtility::getSpriteIcon('actions-document-new') .
 						'</a>';
 
 		return $icon;
@@ -89,17 +93,17 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 
 		$doc = $this->getDocInstance();
 		if ($row['hidden'])   {
-				$title = Tx_Extbase_Utility_Localization::translate('be.unhideEvent', 'slub_events', $arguments=NULL);
+				$title = LocalizationUtility::translate('be.unhideEvent', 'slub_events', $arguments=NULL);
 				$params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=0';
 				$icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(\'' . $doc->issueCommand($params, -1) . '\');') . '" title="' . $title . '">' .
-									t3lib_iconWorks::getSpriteIcon('actions-edit-unhide') .
+					IconUtility::getSpriteIcon('actions-edit-unhide') .
 							'</a>';
 		// Hide
 		} else {
-				$title = Tx_Extbase_Utility_Localization::translate('be.hideEvent', 'slub_events', $arguments=NULL);
+				$title = LocalizationUtility::translate('be.hideEvent', 'slub_events', $arguments=NULL);
 				$params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=1';
 				$icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(\'' . $doc->issueCommand($params, -1) . '\');') . '" title="' . $title . '">'.
-									t3lib_iconWorks::getSpriteIcon('actions-edit-hide') .
+					IconUtility::getSpriteIcon('actions-edit-hide') .
 							'</a>';
 		}
 		return $icon;
@@ -108,10 +112,10 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 	/**
 	 * Returns the Genius Bar Icon
 	 *
-	 * @param event Tx_SlubEvents_Domain_Model_Event
+	 * @param event \Slub\SlubEvents\Domain\Model\Event
 	 * @return string html output
 	 */
-	protected function getGeniusBarIcon(Tx_SlubEvents_Domain_Model_Event $event){
+	protected function getGeniusBarIcon(\Slub\SlubEvents\Domain\Model\Event $event){
 
 		if ($event !== NULL) {
 			if ($event->getGeniusBar()) {
@@ -124,12 +128,12 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 	/**
 	 * Returns the Datepicker img
 	 *
-	 * @param event Tx_SlubEvents_Domain_Model_Event
+	 * @param event \Slub\SlubEvents\Domain\Model\Event
 	 * @return string html output
 	 */
 	protected function getDatePickerIcon() {
 
-		return t3lib_iconWorks::getSpriteIcon(
+		return IconUtility::getSpriteIcon(
 			'actions-edit-pick-date',
 			array(
 					'style' => 'cursor:pointer;',
@@ -146,10 +150,10 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 	 * Note: This feature is experimental!
 	 *
 	 * @param icon string
-	 * @param event Tx_SlubEvents_Domain_Model_Event
+	 * @param event \Slub\SlubEvents\Domain\Model\Event
 	 * @return string the rendered record list
 	 */
-	public function render($icon = 'edit', Tx_SlubEvents_Domain_Model_Event $event = NULL) {
+	public function render($icon = 'edit', \Slub\SlubEvents\Domain\Model\Event $event = NULL) {
 
 		if ($event !== NULL) {
 			$row['uid'] = $event->getUid();
@@ -157,7 +161,7 @@ class Tx_SlubEvents_ViewHelpers_Be_FunctionBarViewHelper extends Tx_Fluid_ViewHe
 			$row['hidden'] = $event->getHidden();
 		}
 
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 		$row['storagePid'] = $frameworkConfiguration['persistence']['storagePid'];
 
 		switch ($icon) {

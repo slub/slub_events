@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Be;
 /*                                                                        *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -44,7 +45,7 @@
  * @author Bastian Waidelich <bastian@typo3.org>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
-class Tx_SlubEvents_ViewHelpers_Be_ContainerViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
+class ContainerViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper {
 
 	/**
 	 * Render start page with template.php and pageTitle

@@ -1,9 +1,10 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Be;
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -73,9 +74,10 @@
  * </output>
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- * @api
+ *
+ * --> 2015-10-06: maybe possible with native fluid viewHelper now, form validation has to be checked to verify
  */
-class Tx_SlubEvents_ViewHelpers_Be_CheckboxViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class CheckboxViewHelper extends  \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormViewHelper {
 
 	/**
 	 * @var string
@@ -113,7 +115,7 @@ class Tx_SlubEvents_ViewHelpers_Be_CheckboxViewHelper extends Tx_Fluid_ViewHelpe
 		$nameAttribute = $this->getName();
 		$valueAttribute = $this->getValue();
 		$checked = in_array($valueAttribute, $selected);
-		
+
 		$this->registerFieldNameForFormTokenGeneration($nameAttribute);
 		$this->tag->addAttribute('name', $nameAttribute);
 		$this->tag->addAttribute('value', $valueAttribute);
