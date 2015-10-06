@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,12 +32,12 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_EventsOfCategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class EventsOfCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * eventRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_EventRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
 	 * @inject
 	 */
 	protected $eventRepository;
@@ -44,11 +45,11 @@ class Tx_SlubEvents_ViewHelpers_Format_EventsOfCategoryViewHelper extends Tx_Flu
 	/**
 	 * check if any events of categories below are present and free for booking
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Category $category
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @return boolean
 	 * @api
 	 */
-	public function render(Tx_SlubEvents_Domain_Model_Category $category) {
+	public function render(\Slub\SlubEvents\Domain\Model\Category $category) {
 
 		$events = $this->eventRepository->findAllBySettings(array('categoryList' => array( 0 => $category )));
 

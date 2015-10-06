@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_CsvEscapeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class CsvEscapeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 
 	/**

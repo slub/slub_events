@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_TrimViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class TrimViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * trim whitespaces before and after

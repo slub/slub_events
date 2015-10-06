@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format\Fullcalendar;
 /***************************************************************
  *  Copyright notice
  *
@@ -33,7 +34,7 @@
  * @api
  * @scope prototype
  */
-class Tx_SlubEvents_ViewHelpers_Format_Fullcalendar_JsFooterViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Looks for already checked form from last request

@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,12 +32,12 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_BookedPlacesViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class BookedPlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 * @inject
 	 */
 	protected $subscriberRepository;
@@ -44,12 +45,12 @@ class Tx_SlubEvents_ViewHelpers_Format_BookedPlacesViewHelper extends Tx_Fluid_C
 	/**
 	 * Return the number of subscribers for a given event
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @return int
  	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
 	 * @api
 	 */
-	public function render(Tx_SlubEvents_Domain_Model_Event $event = NULL) {
+	public function render(\Slub\SlubEvents\Domain\Model\Event $event = NULL) {
 
 		if ($event != NULL) {
 			$booked = $this->subscriberRepository->countAllByEvent($event);

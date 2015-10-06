@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Format_EditCodeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class EditCodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Set session data
@@ -50,7 +51,7 @@ class Tx_SlubEvents_ViewHelpers_Format_EditCodeViewHelper extends Tx_Fluid_Core_
 	/**
 	 * Render the supplied DateTime object as a formatted date.
 	 *
-	 * @param Tx_SlubEvents_Domain_Model_Event $event
+	 * @param \Slub\SlubEvents\Domain\Model\Event $event
 	 * @return int
  	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
 	 * @api
