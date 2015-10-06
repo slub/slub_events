@@ -72,7 +72,7 @@ class NewMonthTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 			if ($date instanceof \DateTime) {
 
 				return $date;
-				
+
 			}
 
 		} else {

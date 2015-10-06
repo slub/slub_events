@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Validator;
 /***************************************************************
  *  Copyright notice
  *
@@ -30,12 +31,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 * @inject
 	 */
 	protected $subscriberRepository;
@@ -43,7 +44,7 @@ class Tx_SlubEvents_Domain_Validator_SubscriberValidator extends Tx_Extbase_Vali
 	/**
 	 * Object Manager
 	 *
-	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
 	 * @inject
 	 */
 	protected $objectManager;

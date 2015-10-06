@@ -1,4 +1,5 @@
 <?php
+	namespace Slub\SlubEvents\Domain\Validator;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,12 +32,12 @@
  *
  */
 
-class Tx_SlubEvents_Domain_Validator_EventSubscriptionAllowedValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
 	 * subscriberRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_SubscriberRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
 	 * @inject
 	 */
 	protected $subscriberRepository;
