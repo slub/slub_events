@@ -37,7 +37,7 @@ class LocationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * locationRepository
 	 *
-	 * @var Tx_SlubEvents_Domain_Repository_LocationRepository
+	 * @var \Slub\SlubEvents\Domain\Repository\LocationRepository
  	 * @inject
 	 */
 	protected $locationRepository;

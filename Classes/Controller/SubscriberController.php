@@ -35,7 +35,7 @@
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
 	use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class SubscriberController extends AbstractController {
 
 	/**
 	 * action list

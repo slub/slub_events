@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class CategoryController extends AbstractController {
 
 	/**
 	 * Initializes the current action
