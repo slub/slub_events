@@ -1,5 +1,5 @@
 <?php
-
+	namespace Slub\SlubEvents\ViewHelpers\Link;
 /***************************************************************
  *  Copyright notice
  *
@@ -41,7 +41,7 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Link_IslocalViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class IslocalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * @param string $link the given link as integer uid or string
@@ -55,7 +55,7 @@ class Tx_SlubEvents_ViewHelpers_Link_IslocalViewHelper extends Tx_Fluid_Core_Vie
 			return FALSE;
 		}
 
-		return t3lib_utility_Math::canBeInterpretedAsInteger($link) ? TRUE : FALSE;
+		return \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($link) ? TRUE : FALSE;
 
 	}
 }

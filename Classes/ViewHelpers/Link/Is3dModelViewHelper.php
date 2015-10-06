@@ -1,10 +1,10 @@
 <?php
-
+	namespace Slub\SlubEvents\ViewHelpers\Link;
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -41,7 +41,7 @@
  * @api
  */
 
-class Tx_SlubEvents_ViewHelpers_Link_Is3dModelViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Is3dModelViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * check if string "3d.slub-dresden.de" is part of the l ink
