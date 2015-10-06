@@ -29,7 +29,8 @@
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
-	use TYPO3\CMS\Install\Service\SessionService;
+	use TYPO3\CMS\Core\Messaging\FlashMessage;
+	use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
 class Tx_SlubEvents_Slots_HookPreProcessing {
 
 	/**
@@ -47,6 +48,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 			case 'de': setlocale(LC_ALL, 'de_DE.utf8');
 				break;
 		}
+
 	}
 
 
@@ -75,12 +77,19 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 
 			$this->initialize();
 
-			if ($fieldArray['genius_bar'] === FALSE)
-				$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
+			/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
+			$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+
+			if ($fieldArray['genius_bar'] === FALSE) {
+				$message = GeneralUtility::makeInstance(
+					'TYPO3\CMS\Core\Messaging\FlashMessage',
 					'Veranstaltung gespeichert: <b>"'.$fieldArray['title'] . '"</b> am '. gmstrftime('%a, %x %H:%M:%S', $fieldArray['start_date_time']) .'.',
 					'OK',
-					t3lib_FlashMessage::OK,
+					FlashMessage::OK,
 					TRUE);
+			}
 			else {
 				$message_text = 'Wissensbar-Veranstaltung gespeichert: ';
 				// most time the category field is something like
@@ -98,35 +107,37 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 					$category_text = '<b>"'.substr($category_text, 0, strlen($category_text)-2).'"</b>';
 				}
 				$message_text .= $category_text . ' am '. gmstrftime('%a, %x %H:%M:%S', $fieldArray['start_date_time']) .'.';
-				$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
-								$message_text,
-								'OK',
-								t3lib_FlashMessage::OK,
-								TRUE);
+				$message = GeneralUtility::makeInstance(
+					'TYPO3\CMS\Core\Messaging\FlashMessage',
+					$message_text,
+					'OK',
+					FlashMessage::OK,
+					TRUE);
 			}
-			SessionService::addMessage($message);
+			$defaultFlashMessageQueue->enqueue($message);
 
 			if ($fieldArray['start_date_time'] > $fieldArray['end_date_time'] && $fieldArray['end_date_time'] > 0) {
-				$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
+				$message = GeneralUtility::makeInstance(
+					'TYPO3\CMS\Core\Messaging\FlashMessage',
 						'Ende (' . gmstrftime('%a, %x %H:%M:%S',
 						$fieldArray['end_date_time']) .') liegt vor dem Start (' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['start_date_time']) .')',
 						'Fehler: Ende der Veranstaltung',
-						t3lib_FlashMessage::ERROR,
+						FlashMessage::ERROR,
 						TRUE);
-				SessionService::addMessage($message);
+				$defaultFlashMessageQueue->enqueue($message);
 			}
 
 			// use the select box value to calculate the end_date_time relative to start_date_time
 			if (!empty($fieldArray['end_date_time_select'])) {
 				$fieldArray['end_date_time'] = $fieldArray['start_date_time'] + $fieldArray['end_date_time_select'] * 60;
-				$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
+				$message = GeneralUtility::makeInstance(
+					'TYPO3\CMS\Core\Messaging\FlashMessage',
 					'Ende der Veranstaltung gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['end_date_time']),
 					'Bitte prüfen:',
-					t3lib_FlashMessage::INFO,
+					FlashMessage::INFO,
 					TRUE);
-				SessionService::addMessage($message);
+				$defaultFlashMessageQueue->enqueue($message);
 			}
-			//~ unset($fieldArray['end_date_time_select']);
 
 			// touch the subscribtion end only if minimum subscribers are set
 			if ($fieldArray['min_subscriber'] > 0 || $fieldArray['max_subscriber'] > 0) {
@@ -137,47 +148,51 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 						$fieldArray['sub_end_date_time'] = $fieldArray['start_date_time'] - $fieldArray['sub_end_date_time_select'] * 60;
 						$fieldArray['sub_end_date_time_select'] = '';
 
-						$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
+						$message = GeneralUtility::makeInstance(
+							'TYPO3\CMS\Core\Messaging\FlashMessage',
 							'Ende der Anmeldungsfrist wurde gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['sub_end_date_time']),
 							'Bitte prüfen:',
-							t3lib_FlashMessage::INFO,
+							FlashMessage::INFO,
 							TRUE);
-						SessionService::addMessage($message);
+						$defaultFlashMessageQueue->enqueue($message);
 					}
 				}
 
 				// warn if subscription deadline is more than 3 days before the event.
 				if ($fieldArray['sub_end_date_time'] > 0 && ($fieldArray['start_date_time']  > $fieldArray['sub_end_date_time'] + (3*86400))) {
-					$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
+					$message = GeneralUtility::makeInstance(
+						'TYPO3\CMS\Core\Messaging\FlashMessage',
 						'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['sub_end_date_time']) . ' ==> <b>' . (int)(($fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']) / 86400). ' Tage</b> vorher!',
 						'Bitte prüfen:',
-						t3lib_FlashMessage::WARNING,
+						FlashMessage::WARNING,
 						TRUE);
-					SessionService::addMessage($message);
+					$defaultFlashMessageQueue->enqueue($message);
 				}
 			} else {
 					$fieldArray['sub_end_date_time'] = '';
 			}
 
 			if ($fieldArray['genius_bar'] == FALSE && count(explode(',', $fieldArray['categories'])) > 1) {
-					$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
+					$message = GeneralUtility::makeInstance(
+						'TYPO3\CMS\Core\Messaging\FlashMessage',
 						'Sie haben ' . count(explode(',', $fieldArray['categories'])). ' Kategorien ausgewählt. ',
 						'Bitte prüfen: ',
-						t3lib_FlashMessage::INFO,
+						FlashMessage::INFO,
 						TRUE);
-					SessionService::addMessage($message);
+				$defaultFlashMessageQueue->enqueue($message);
 			}
 
 			// force genius bar events with min_ and max_subscriber == 1
 			if ($fieldArray['genius_bar'] == TRUE && ($fieldArray['min_subscriber'] != 1 || $fieldArray['max_subscriber'] != 1)) {
 					$fieldArray['min_subscriber'] = 1;
 					$fieldArray['max_subscriber'] = 1;
-					$message = GeneralUtility::makeInstance('t3lib_FlashMessage',
+					$message = GeneralUtility::makeInstance(
+						'TYPO3\CMS\Core\Messaging\FlashMessage',
 						'Die Mindest- und Maximalteilnehmerzahl beträgt in der Wissensbar immer 1. Dies wurde automatisch korrigiert. ',
 						'Bitte prüfen: ',
-						t3lib_FlashMessage::INFO,
+						FlashMessage::INFO,
 						TRUE);
-					SessionService::addMessage($message);
+				$defaultFlashMessageQueue->enqueue($message);
 			}
 		}
 	}
