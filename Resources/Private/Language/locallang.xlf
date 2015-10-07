@@ -212,6 +212,28 @@
 		<trans-unit id="view_my_events">
 			<source>My Events</source>
 		</trans-unit>
+		<trans-unit id="tasks.statistics.name">
+			<source>Statistics Report</source>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.description">
+			<source>Send monthly report to given email addresses.</source>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.storagePid">
+			<source>StoragePid</source>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.invalidStoragePid">
+			<source>Invalid Storage Pid Given!</source>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.invalidEmail">
+			<source>Invalid Email Address Given!</source>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.senderEmailAddress">
+			<source>Sender Email Address</source>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.receiverEmailAddress">
+			<source>Receiver Email Address(es)</source>
+		</trans-unit>
+
 		</body>
 	</file>
 </xliff>
