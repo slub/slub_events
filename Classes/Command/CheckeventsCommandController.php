@@ -30,29 +30,25 @@
  *
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
+	use Slub\SlubEvents\Helper\EmailHelper;
 	use TYPO3\CMS\Core\Utility\MathUtility;
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController {
 
 	/**
 	 * eventRepository
 	 *
 	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-	 */
-	protected $eventRepository;
-
-	/**
-	 * categoryRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
 	 * @inject
 	 */
-	protected $categoryRepository;
+	protected $eventRepository;
 
 	/**
 	 * subscriberRepository
 	 *
 	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+	 * @inject
 	 */
 	protected $subscriberRepository;
 
@@ -60,26 +56,6 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	*/
 	protected $configurationManager;
-
-	/**
-	 * injectEventRepository
-	 *
-	 * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
-	 * @return void
-	 */
-	public function injectEventRepository(\Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository) {
-		$this->eventRepository = $eventRepository;
-	}
-
-	/**
-	 * injectSubscriberRepository
-	 *
-	 * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
-	 * @return void
-	 */
-	public function injectSubscriberRepository(\Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository) {
-		$this->subscriberRepository = $subscriberRepository;
-	}
 
 	/**
 	 * initializeAction
@@ -151,7 +127,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 			// startDateTime may never be empty
 			$helper['start'] = $event->getStartDateTime()->getTimestamp();
 			// endDateTime may be empty
-			if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
+			if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
 				$helper['end'] = $event->getEndDateTime()->getTimestamp();
 			else
 				$helper['end'] = $helper['start'];
@@ -175,7 +151,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 				// email to all subscribers
 				foreach($event->getSubscribers() as $subscriber) {
 					$cronLog .= 'Absage an Teilnehmer: ' . $event->getTitle() . ': '. strftime('%x %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $subscriber->getEmail() ."\n";
-					$out = $this->sendTemplateEmail(
+					$out = EmailHelper::sendTemplateEmail(
 						array($subscriber->getEmail() => $subscriber->getName()),
 						array($event->getContact()->getEmail() => $event->getContact()->getName()),
 						'Absage der Veranstaltung: ' . $event->getTitle(),
@@ -190,7 +166,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 
 				$cronLog .= 'Absage an Veranstalter: ' . $event->getTitle() . ': '. strftime('%x %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
 				// email to event owner
-				$out = $this->sendTemplateEmail(
+				$out = EmailHelper::sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
 					array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
 					'Absage der Veranstaltung: ' . $event->getTitle(),
@@ -211,7 +187,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 				// event takes place but subscription is not possible anymore...
 				// email to event owner
 				$cronLog .= 'Anmeldefrist abgelaufen an Veranstalter: ' . $event->getTitle() . ': '. strftime('%x %H:%M', $event->getStartDateTime()->getTimestamp()) . ' --> '. $event->getContact()->getEmail() ."\n";
-				$out = $this->sendTemplateEmail(
+				$out = EmailHelper::sendTemplateEmail(
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
 					array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
 					'Veranstaltung Anmeldefrist abgelaufen: ' . $event->getTitle(),
@@ -235,85 +211,6 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 		return;
     }
 
-	/**
-	 * sendTemplateEmail
-	 *
-	 * @param array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
-	 * @param array $sender sender of the email in the format array('sender@domain.tld' => 'Sender Name')
-	 * @param string $subject subject of the email
-	 * @param string $templateName template name (UpperCamelCase)
-	 * @param array $variables variables to be passed to the Fluid view
-	 * @return boolean TRUE on success, otherwise false
-	 */
-	protected function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array()) {
-
-		$emailViewHTML = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-		$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
-		$emailViewHTML->setFormat('html');
-		$emailViewHTML->assignMultiple($variables);
-
-		$templateRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
-		$partialRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
-
-		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
-		$emailViewHTML->setPartialRootPath($partialRootPath);
-
-		$message = GeneralUtility::makeInstance('t3lib_mail_Message');
-		$message->setTo($recipient)
-				->setFrom($sender)
-				->setCharset('utf-8')
-				->setSubject($subject);
-
-		// attach ICS-File
-		//~ $message->attach(Swift_Attachment::fromPath($eventIcsFile)
-							//~ ->setFilename('invite.ics')
-							//~ ->setContentType('application/ics'));
-		// Plain text example
-		$emailTextHTML = $emailViewHTML->render();
-		$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
-
-		// HTML Email
-		$message->addPart($emailTextHTML, 'text/html');
-
-		// attach ics-File
-		if ($variables['attachIcs'] == TRUE) {
-
-			$ics = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-			$ics->getRequest()->setControllerExtensionName($this->extensionName);
-			$ics->setFormat('ics');
-			$ics->assignMultiple($variables);
-
-			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
-
-			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. $templateName.'-'.$variables['event']->getUid().'.ics';
-			GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
-
-			// add ics as part
-			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
-
-		}
-		// attach CSV-File
-		if ($variables['attachCsv'] == TRUE) {
-			$csv = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-			$csv->getRequest()->setControllerExtensionName($this->extensionName);
-			$csv->setFormat('csv');
-			$csv->assignMultiple($variables);
-
-			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
-			$csv->setPartialRootPath($partialRootPath);
-
-			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'.csv';
-			GeneralUtility::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
-
-			// attach CSV-File
-			$message->attach(Swift_Attachment::fromPath($eventCsvFile)
-						->setContentType('text/csv'));
-		}
-
-		$message->send();
-
-		return $message->isSent();
-	}
 
 	/**
 	 * Function foldline folds the line after 73 signs
@@ -350,40 +247,5 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 		return $firstline . "\n ". $restofline;
 	}
 
-	/**
-	 * html2rest
-	 *
-	 * this converts the HTML email to something Rest-Style like text form
-	 *
-	 * @param $htmlString
-	 * @return
-	 */
-	public function html2rest($text) {
-
-		$text = strip_tags( html_entity_decode($text, ENT_COMPAT, 'UTF-8'), '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
-		// header is getting **
-		$text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', '**', $text);
-		// bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
-		$text = preg_replace('/<b>|<\/b>/', '*', $text);
-		// get away links but preserve href with class slub-event-link
-		$text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/', "$6\n$3", $text);
-		// Remove separator characters (like non-breaking spaces...)
-		$text = preg_replace( '/\p{Z}/u', ' ', $text );
-		$text = str_replace('<br />', "\n", $text);
-		// get away paragraphs including class, title etc.
-		$text = preg_replace('/<p[\s\w\=\"]*>(?s)(.*?)<\/p>/u', "$1\n", $text);
-		$text = str_replace('<li>', '- ', $text);
-		$text = str_replace('</li>', "\n", $text);
-		// remove multiple spaces
-		$text = preg_replace('/[\ ]{2,}/', '', $text);
-		// remove multiple tabs
-		$text = preg_replace('/[\t]{1,}/', '', $text);
-		// remove more than one empty line
-		$text = preg_replace('/[\n]{3,}/', "\n\n", $text);
-		// remove all remaining html tags
-		$text = strip_tags($text);
-
-		return $text;
-	}
 
 }

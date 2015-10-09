@@ -202,9 +202,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 			echo 'NO receiverEmailAddress given. Please enter the receiverEmailAddress in the scheduler task.';
 			$successfullyExecuted = FALSE;
 		}
-//		else {
-//			$this->receiverEmailAddress = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(', ', $this->receiverEmailAddress);
-//		}
 
 		// set storagePid to point extbase to the right repositories
 		$configurationArray = array(
@@ -213,8 +210,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 			)
 		);
 		$this->configurationManager->setConfiguration($configurationArray);
-
-
 
 		// start the work...
 
