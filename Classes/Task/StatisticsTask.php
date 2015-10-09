@@ -72,14 +72,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	protected $eventRepository;
 
 	/**
-	 * categoryRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
-	 * @inject
-	 */
-	protected $categoryRepository;
-
-	/**
 	 * injectConfigurationManager
 	 *
 	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
@@ -167,7 +159,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 		$objectManager = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
 
 		$this->eventRepository= $objectManager->get('\Slub\SlubEvents\Domain\Repository\EventRepository');
-		$this->categoryRepository= $objectManager->get('\Slub\SlubEvents\Domain\Repository\CategoryRepository');
 		$this->configurationManager = $objectManager->get('\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface');
 
 	}
@@ -213,18 +204,12 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 
 		// start the work...
 
-		// 1. get the categories
-		$categories = $this->categoryRepository->findAll();
-
-		foreach ($categories as $uid => $category) {
-			$searchParameter['category'][$uid] = $uid;
-		}
-
 		// 2. get events of last month
 		$startDateTime = strtotime('first day of last month 00:00:00');
 		$endDateTime = strtotime('last day of last month 23:59:59');
 
-		$allevents = $this->eventRepository->findAllByCategoriesAndDateInterval($searchParameter['category'], $startDateTime, $endDateTime);
+		$allevents = $this->eventRepository->findAllByDateInterval($startDateTime, $endDateTime);
+
 		// used to name the csv file...
 		$helper['nameto'] = strftime('%Y%m', $startDateTime);
 
@@ -235,7 +220,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 			'Statistik Report Veranstaltungen: ' . ': ' . strftime('%x', $startDateTime) . ' - ' . strftime('%x', $endDateTime),
 			'Statistics',
 			array('events' => $allevents,
-				'categories' => $categories,
 				'helper' => $helper,
 				'attachCsv' => TRUE,
 				'attachIcs' => FALSE,

@@ -220,18 +220,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Finds all datasets by MM relation categories
 	 *
-	 * @param string categories separated by comma
 	 * @param int startdatestamp
 	 * @param int stopDateStamp
 	 * @return array The found Event Objects
 	 */
-	public function findAllByCategoriesAndDateInterval($categories, $startDateStamp, $stopDateStamp) {
+	public function findAllByDateInterval($startDateStamp, $stopDateStamp) {
 
 		$query = $this->createQuery();
 
 		$constraints = array();
 
-		$constraints[] = $query->in('categories.uid', $categories);
 		$constraints[] = $query->greaterThanOrEqual('start_date_time', $startDateStamp);
 		$constraints[] = $query->lessThanOrEqual('start_date_time', $stopDateStamp);
 

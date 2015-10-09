@@ -425,7 +425,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				),
 				'size' => 10,
 				'autoSizeMax' => 30,
-				'minitems' => 0,
+				'minitems' => 1,
 				'maxitems' => 10,
 				'multiple' => FALSE,
 			),

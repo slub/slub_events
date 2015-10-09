@@ -1,57 +1,13 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
-<p>Monats-Auswertung aller Veranstaltungen</p>
+<h1>Monats-Auswertung aller Veranstaltungen</h1>
 
 <p>
-<f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tx_slubevents_domain_model_event' />
+	Die Auswertung von insgesamt <strong>{events -> f:count()}</strong>
+	<f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tx_slubevents_domain_model_event' />
+	des Monats <strong><se:format.date date="{events.0.startDateTime}" format="%B %Y" /></strong> finden Sie in der angehängten CSV-Datei.
 </p>
-
-<ul>
-<f:for each="{events}" as="event" key="label">
-<f:if condition="{event.geniusBar}">
-	<f:else>
-<li>{event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
-<f:for each="{event.categories}" as="category">
-	"{category.title}"
-</f:for>
-,
-"{event.location.name}",
-"{event.discipline.name}",
-"{event.title}",
-"<se:format.BookedPlaces event='{event}' />",
-"{subscriber.number}"</li>
-	</f:else>
-</f:if>
-</f:for>
-
-</ul>
-
-<p>
-<f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tx_slubevents_domain_model_event.genius_bar' />
-</p>
-
-<ul>
-<f:for each="{events}" as="event" key="label">
-<f:if condition="{event.geniusBar}">
-	<f:then>
-	<f:if condition="<se:format.BookedPlaces event='{event}' /> > 0">
-		<li>{event.uid}: "<se:format.date date='{event.startDateTime}' format='%x' />",
-		<f:for each="{event.categories}" as="category">
-			"{category.title}"
-		</f:for>
-		,
-		"{event.location.name}",
-		"{event.discipline.name}",
-		"{event.title}",
-		"<se:format.BookedPlaces event='{event}' />",
-		"{subscriber.number}"</li>
-</f:if>
-	</f:then>
-</f:if>
-</f:for>
-
-</ul>
 
 <p><f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:text.closing' /></p>
-<p>&nbsp;</p>
+
 <p><f:translate key='LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:text.signature' /></p>
 
