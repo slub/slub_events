@@ -233,7 +233,12 @@
 		<trans-unit id="tasks.statistics.receiverEmailAddress">
 			<source>Receiver Email Address(es)</source>
 		</trans-unit>
-
+		<trans-unit id="tasks.statistics.date">
+			<source>Date</source>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.duration">
+			<source>Duration (min)</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -1,101 +1,102 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-07-18T07:52:44Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-10-09T13:44:44Z">
 		<header>
 			<generator>LFEditor</generator>
+			<authorName>Alexander Bigga</authorName>
 		</header>
 		<body>
-		<trans-unit id="flexforms.categories_recursive" xml:space="preserve">
+		<trans-unit id="flexforms.categories_recursive">
 			<source>Include Child Categories</source>
 		</trans-unit>
-		<trans-unit id="flexforms.discipline_recursive" xml:space="preserve">
+		<trans-unit id="flexforms.discipline_recursive">
 			<source>Include Child Disciplines</source>
 		</trans-unit>
-		<trans-unit id="flexforms.event_ordering" xml:space="preserve">
+		<trans-unit id="flexforms.event_ordering">
 			<source>Event Ordering</source>
 		</trans-unit>
-		<trans-unit id="flexforms.eventgeniusbar_title" xml:space="preserve">
+		<trans-unit id="flexforms.eventgeniusbar_title">
 			<source>Knowledge Bar View Settings</source>
 		</trans-unit>
-		<trans-unit id="flexforms.eventlist_title" xml:space="preserve">
+		<trans-unit id="flexforms.eventlist_title">
 			<source>List and Single View Settings</source>
 		</trans-unit>
-		<trans-unit id="flexforms.eventsubscribe_title" xml:space="preserve">
+		<trans-unit id="flexforms.eventsubscribe_title">
 			<source>Registration View Settings</source>
 		</trans-unit>
-		<trans-unit id="flexforms.eventuserpanel_title" xml:space="preserve">
+		<trans-unit id="flexforms.eventuserpanel_title">
 			<source>Registration Userpanel Settings</source>
 		</trans-unit>
-		<trans-unit id="flexforms.fullcalendar_js" xml:space="preserve">
+		<trans-unit id="flexforms.fullcalendar_js">
 			<source>Fullcalendar Javascript</source>
 		</trans-unit>
-		<trans-unit id="flexforms.knowledgebar_view" xml:space="preserve">
+		<trans-unit id="flexforms.knowledgebar_view">
 			<source>Knowledge Bar View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.list_month_view" xml:space="preserve">
+		<trans-unit id="flexforms.list_month_view">
 			<source>List Month View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.list_view" xml:space="preserve">
+		<trans-unit id="flexforms.list_view">
 			<source>List View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.ordering_ascending" xml:space="preserve">
+		<trans-unit id="flexforms.ordering_ascending">
 			<source>Ascending</source>
 		</trans-unit>
-		<trans-unit id="flexforms.ordering_descending" xml:space="preserve">
+		<trans-unit id="flexforms.ordering_descending">
 			<source>Descending</source>
 		</trans-unit>
-		<trans-unit id="flexforms.page_list_view" xml:space="preserve">
+		<trans-unit id="flexforms.page_list_view">
 			<source>Page of List View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.page_single_view" xml:space="preserve">
+		<trans-unit id="flexforms.page_single_view">
 			<source>Page of Single View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.page_subscribe" xml:space="preserve">
+		<trans-unit id="flexforms.page_subscribe">
 			<source>Page of Subscribe Form</source>
 		</trans-unit>
-		<trans-unit id="flexforms.page_unsubscribe" xml:space="preserve">
+		<trans-unit id="flexforms.page_unsubscribe">
 			<source>Page of Unsubscribe Form</source>
 		</trans-unit>
-		<trans-unit id="flexforms.select_function" xml:space="preserve">
+		<trans-unit id="flexforms.select_function">
 			<source>Select Function</source>
 		</trans-unit>
-		<trans-unit id="flexforms.show_categories" xml:space="preserve">
+		<trans-unit id="flexforms.show_categories">
 			<source>Show Selected Categories</source>
 		</trans-unit>
-		<trans-unit id="flexforms.show_categories_start" xml:space="preserve">
+		<trans-unit id="flexforms.show_categories_start">
 			<source>Select Root Category</source>
 		</trans-unit>
-		<trans-unit id="flexforms.show_contacts" xml:space="preserve">
+		<trans-unit id="flexforms.show_contacts">
 			<source>Show Only Selected Contacts</source>
 		</trans-unit>
-		<trans-unit id="flexforms.show_discipline" xml:space="preserve">
+		<trans-unit id="flexforms.show_discipline">
 			<source>Show Only Selected Disciplines</source>
 		</trans-unit>
-		<trans-unit id="flexforms.show_past_events" xml:space="preserve">
+		<trans-unit id="flexforms.show_past_events">
 			<source>Show Past Events</source>
 		</trans-unit>
-		<trans-unit id="flexforms.single_view" xml:space="preserve">
+		<trans-unit id="flexforms.single_view">
 			<source>Single View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.subscribe_view" xml:space="preserve">
+		<trans-unit id="flexforms.subscribe_view">
 			<source>Subscribe View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.unsubscribe_view" xml:space="preserve">
+		<trans-unit id="flexforms.unsubscribe_view">
 			<source>Unsubscribe View</source>
 		</trans-unit>
-		<trans-unit id="flexforms.userpanel_view" xml:space="preserve">
+		<trans-unit id="flexforms.userpanel_view">
 			<source>Userpanel View</source>
 		</trans-unit>
-		<trans-unit id="plugin.Eventgeniusbar" xml:space="preserve">
+		<trans-unit id="plugin.Eventgeniusbar">
 			<source>SLUB: Events: Knowledge Bar</source>
 		</trans-unit>
-		<trans-unit id="plugin.Eventlist" xml:space="preserve">
+		<trans-unit id="plugin.Eventlist">
 			<source>SLUB: Events: Listing</source>
 		</trans-unit>
-		<trans-unit id="plugin.Eventsubscribe" xml:space="preserve">
+		<trans-unit id="plugin.Eventsubscribe">
 			<source>SLUB: Events: Registration</source>
 		</trans-unit>
-		<trans-unit id="plugin.Eventuserpanel" xml:space="preserve">
+		<trans-unit id="plugin.Eventuserpanel">
 			<source>SLUB: Events: User Panel</source>
 		</trans-unit>
 		</body>

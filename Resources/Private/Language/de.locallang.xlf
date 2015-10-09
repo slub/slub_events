@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-09-14T09:32:32Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-10-09T14:52:16Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -80,6 +80,26 @@
 		<trans-unit id="paginate_previous" approved="yes">
 			<source>Previous</source>
 			<target>Vorherige</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.date" approved="yes">
+			<source>Date</source>
+			<target>Datum</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.description" approved="yes">
+			<source>Send monthly report to given email addresses.</source>
+			<target>Monatsberichte an angegebene Adressen schicken.</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.duration" approved="yes">
+			<source>Duration (min)</source>
+			<target>Dauer (Minuten)</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.invalidEmail" approved="yes">
+			<source>Invalid Email Address Given!</source>
+			<target>Falsche Email Adresse angegeben!</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.name" approved="yes">
+			<source>Statistics Report</source>
+			<target>Monatsstatistik</target>
 		</trans-unit>
 		<trans-unit id="text.back_to_overview" approved="yes">
 			<source>Back to Overview</source>
