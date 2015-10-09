@@ -158,10 +158,11 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 
 		// TYPO3 doesn't set locales for backend-users --> so do it manually like this...
 		// is needed with strftime
-		setlocale(LC_ALL, 'de_DE.utf8');
+		setlocale(LC_ALL, 'de_DE.UTF-8');
 
 		// simulate BE_USER setting to force fluid using the proper translation
-		$GLOBALS['BE_USER']->uc['lang'] = 'de';
+//		$GLOBALS['BE_USER']->uc['lang'] = 'de';
+		$GLOBALS['LANG']->init('de');
 
 		$objectManager = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
 
@@ -248,4 +249,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 
 		return $successfullyExecuted;
 	}
+
+
 }

@@ -58,7 +58,7 @@ class EmailHelper {
 		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
 		$emailViewHTML->setPartialRootPath($partialRootPath);
 
-		$message = GeneralUtility::makeInstance('t3lib_mail_Message');
+		$message = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Mail\MailMessage');
 		$message->setTo($recipient)
 			->setFrom($sender)
 			->setCharset('utf-8')
