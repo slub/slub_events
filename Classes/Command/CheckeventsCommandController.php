@@ -69,7 +69,8 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 		setlocale(LC_ALL, 'de_DE.utf8');
 
 		// simulate BE_USER setting to force fluid using the proper translation
-		$GLOBALS['BE_USER']->uc['lang'] = 'de';
+//		$GLOBALS['BE_USER']->uc['lang'] = 'de';
+		$GLOBALS['LANG']->init('de');
 
 	}
 
