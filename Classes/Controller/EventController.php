@@ -312,15 +312,19 @@ class EventController extends AbstractController {
 	 */
 	public function beCopyAction($event) {
 
-		$availableProperties = Tx_Extbase_Reflection_ObjectAccess::getGettablePropertyNames($event);
+		$availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($event);
 		$newEvent =  $this->objectManager->create('\Slub\SlubEvents\Domain\Model\Event');
 
 		foreach ($availableProperties as $propertyName) {
-			if (Tx_Extbase_Reflection_ObjectAccess::isPropertySettable($newEvent, $propertyName)
+			if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
 				&& !in_array($propertyName, array('uid','pid','subscribers', 'cancelled', 'subEndDateTime','subEndDateInfoSent','categories', 'discipline'))) {
 
-				$propertyValue = Tx_Extbase_Reflection_ObjectAccess::getProperty($event, $propertyName);
-				Tx_Extbase_Reflection_ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
+				$propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($event, $propertyName);
+				// special handling for onlinesurvey field to remove trailing timestamp with sent date
+				if ($propertyName == 'onlinesurvey') {
+					$propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
+				}
+				\TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
 			}
 		}
 
