@@ -33,6 +33,7 @@
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EmailHelper {
+
 	/**
 	 * sendTemplateEmail
 	 *
@@ -41,33 +42,39 @@ class EmailHelper {
 	 * @param string $subject subject of the email
 	 * @param string $templateName template name (UpperCamelCase)
 	 * @param array $variables variables to be passed to the Fluid view
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return boolean TRUE on success, otherwise false
 	 */
-	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array()) {
+	public static function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array(), $configurationManager = NULL) {
 
-		$objectManager = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+		$objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-		$emailViewHTML = $objectManager->create('\TYPO3\CMS\Fluid\View\StandaloneView');
+		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+		$emailViewHTML = $objectManager->create('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 		$emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
 		$emailViewHTML->setFormat('html');
 		$emailViewHTML->assignMultiple($variables);
 
-		$templateRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
-		$partialRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
+		if ($configurationManager) {
+			$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+			$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+			$partialRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+		} else {
+			$templateRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
+			$partialRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
+		}
 
 		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
 		$emailViewHTML->setPartialRootPath($partialRootPath);
 
-		$message = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Mail\MailMessage');
+		/** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
+		$message = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 		$message->setTo($recipient)
 			->setFrom($sender)
 			->setCharset('utf-8')
 			->setSubject($subject);
 
-		// attach ICS-File
-		//~ $message->attach(\Swift_Attachment::fromPath($eventIcsFile)
-		//~ ->setFilename('invite.ics')
-		//~ ->setContentType('application/ics'));
 		// Plain text example
 		$emailTextHTML = $emailViewHTML->render();
 		$message->setBody(EmailHelper::html2rest($emailTextHTML), 'text/plain');
@@ -78,23 +85,30 @@ class EmailHelper {
 		// attach ics-File
 		if ($variables['attachIcs'] == TRUE) {
 
-			$ics = $objectManager->create('\TYPO3\CMS\Fluid\View\StandaloneView');
+			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
+			$ics = $objectManager->create('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 			$emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
 			$ics->setFormat('ics');
 			$ics->assignMultiple($variables);
 
 			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
-			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. $templateName.'-'.$variables['event']->getUid().'.ics';
+			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-invitation-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
 			GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
 			// add ics as part
 			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
 
+			// attach additionally ics as file
+			$message->attach(\Swift_Attachment::fromPath($eventIcsFile)
+				->setContentType('text/calendar'));
+
 		}
 		// attach CSV-File
 		if ($variables['attachCsv'] == TRUE) {
-			$csv = $objectManager->create('\TYPO3\CMS\Fluid\View\StandaloneView');
+
+			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $csv */
+			$csv = $objectManager->create('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 			$emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
 			$csv->setFormat('csv');
 			$csv->assignMultiple($variables);
@@ -102,12 +116,13 @@ class EmailHelper {
 			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
 			$csv->setPartialRootPath($partialRootPath);
 
-			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'.csv';
+			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-subscribers-'. strtolower($templateName).'.csv';
 			GeneralUtility::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
 
 			// attach CSV-File
 			$message->attach(\Swift_Attachment::fromPath($eventCsvFile)
 				->setContentType('text/csv'));
+
 		}
 
 		$message->send();

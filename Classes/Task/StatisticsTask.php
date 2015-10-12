@@ -57,7 +57,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	 */
 	protected $senderEmailAddress;
 
-
 	/**
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	 */

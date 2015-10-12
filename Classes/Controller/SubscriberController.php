@@ -34,6 +34,7 @@
  */
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
 	use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+	use Slub\SlubEvents\Helper\EmailHelper;
 
 class SubscriberController extends AbstractController {
 
@@ -216,7 +217,7 @@ class SubscriberController extends AbstractController {
 		}
 
 		// email to customer
-		$this->sendTemplateEmail(
+		EmailHelper::sendTemplateEmail(
 			array($newSubscriber->getEmail() => $newSubscriber->getName()),
 			array($event->getContact()->getEmail() => $event->getContact()->getName()),
 			'Ihre Anmeldung: ' . $event->getTitle(),
@@ -225,8 +226,10 @@ class SubscriberController extends AbstractController {
 					'subscriber' => $newSubscriber,
 					'helper' => $helper,
 					'settings' => $this->settings,
-					'attachIcsInvitation' => TRUE,
-			)
+					'attachCsv' => FALSE,
+					'attachIcs' => TRUE,
+			),
+			$this->configurationManager
 		);
 
 		// send to contact, if maximum is reached and TS setting is present:
@@ -235,7 +238,7 @@ class SubscriberController extends AbstractController {
 			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
 			// email to event owner
-			$this->sendTemplateEmail(
+			EmailHelper::sendTemplateEmail(
 				array($event->getContact()->getEmail() => $event->getContact()->getName()),
 				array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
 				'Veranstaltung ausgebucht: ' . $event->getTitle(),
@@ -244,16 +247,17 @@ class SubscriberController extends AbstractController {
 						'subscribers' => $event->getSubscribers(),
 						'helper' => $helper,
 						'settings' => $this->settings,
-						'attachSubscriberAsCsv' => TRUE,
-						'attachIcsInvitation' => TRUE,
-				)
+						'attachCsv' => TRUE,
+						'attachIcs' => TRUE,
+				),
+				$this->configurationManager
 			);
 		} // send to contact, on every booking if TS setting is present:
 		else if ($this->settings['emailToContact']['sendEmailOnEveryBooking']) {
 			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
 			// email to event owner
-			$this->sendTemplateEmail(
+			EmailHelper::sendTemplateEmail(
 				array($event->getContact()->getEmail() => $event->getContact()->getName()),
 				array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events') . ' - noreply'),
 				'Veranstaltung gebucht: ' . $event->getTitle(),
@@ -263,9 +267,10 @@ class SubscriberController extends AbstractController {
 						'subscribers' => $event->getSubscribers(),
 						'helper' => $helper,
 						'settings' => $this->settings,
-						'attachSubscriberAsCsv' => FALSE,
-						'attachIcsInvitation' => FALSE,
-				)
+						'attachCsv' => FALSE,
+						'attachIcs' => FALSE,
+				),
+				$this->configurationManager
 			);
 		}
 
@@ -283,92 +288,6 @@ class SubscriberController extends AbstractController {
 		$this->view->assign('newSubscriber', $newSubscriber);
 	}
 
-	/**
-	 * sendTemplateEmail
-	 *
-	 * @param array $recipient recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
-	 * @param array $sender sender of the email in the format array('sender@domain.tld' => 'Sender Name')
-	 * @param string $subject subject of the email
-	 * @param string $templateName template name (UpperCamelCase)
-	 * @param array $variables variables to be passed to the Fluid view
-	 * @return boolean TRUE on success, otherwise false
-	 */
-	protected function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array()) {
-
-		// TYPO3 6.x
-		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
-		$emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
-		$ics = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $csv */
-		$csv = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-
-		$emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
-		$emailViewHTML->setFormat('html');
-		$emailViewHTML->assignMultiple($variables);
-
-		$ics->getRequest()->setControllerExtensionName($this->extensionName);
-		$ics->setFormat('ics');
-		$ics->assignMultiple($variables);
-
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-		$partialRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
-
-		$emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
-		$emailViewHTML->setPartialRootPath($partialRootPath);
-
-		$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
-
-		// TYPO3 6.x
-		/** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
-		$message = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-
-		$message->setTo($recipient)
-				->setFrom($sender)
-				->setCharset('utf-8')
-				->setSubject($subject);
-
-		// attach CSV-File
-		if ($variables['attachSubscriberAsCsv'] == TRUE) {
-			$csv->getRequest()->setControllerExtensionName($this->extensionName);
-			$csv->setFormat('csv');
-			$csv->assignMultiple($variables);
-
-			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
-			$csv->setPartialRootPath($partialRootPath);
-
-			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.csv';
-			GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
-
-			$message->attach(\Swift_Attachment::fromPath($eventCsvFile)
-						->setContentType('text/csv'));
-		}
-
-		// Plain text example
-		//~ $message->setBody($emailView->render(), 'text/plain');
-		$emailTextHTML = $emailViewHTML->render();
-		$message->setBody($this->html2rest($emailTextHTML), 'text/plain');
-
-		if ($variables['attachIcsInvitation'] == TRUE) {
-			//~ $eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
-			//~ GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
-			// attach ICS-File
-			//~ $message->attach(\Swift_Attachment::fromPath($eventIcsFile)
-								//~ ->setFilename('invite.ics')
-								//~ ->setDisposition('inline')
-								//~ ->setContentType('text/calendar; charset="utf-8"; method=REQUEST'));
-
-			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
-		}
-
-		// HTML Email
-		$message->addPart($emailTextHTML, 'text/html');
-
-		$message->send();
-
-		return $message->isSent();
-	}
 
 	/**
 	 * Function foldline folds the line after 73 signs
@@ -529,7 +448,7 @@ class SubscriberController extends AbstractController {
 			$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
 			// email to event owner
-			$this->sendTemplateEmail(
+			EmailHelper::sendTemplateEmail(
 				array($event->getContact()->getEmail() => $event->getContact()->getName()),
 				array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
 				'Veranstaltung wegen Abmeldung nicht mehr gesichert: ' . $event->getTitle(),
@@ -539,13 +458,14 @@ class SubscriberController extends AbstractController {
 						'subscriberCount' => $this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber(),
 						'helper' => $helper,
 						'settings' => $this->settings,
-						'attachSubscriberAsCsv' => FALSE,
-						'attachIcsInvitation' => TRUE,
-				)
+						'attachCsv' => FALSE,
+						'attachIcs' => TRUE,
+				),
+				$this->configurationManager
 			);
 		}
 
-		$this->sendTemplateEmail(
+		EmailHelper::sendTemplateEmail(
 			array($subscriber->getEmail() => $subscriber->getName()),
 			array($event->getContact()->getEmail() => $event->getContact()->getName()),
 			'Ihre Abmeldung: ' . $event->getTitle(),
@@ -554,8 +474,10 @@ class SubscriberController extends AbstractController {
 					'subscriber' => $subscriber,
 					'helper' => $helper,
 					'settings' => $this->settings,
-					'attachIcsInvitation' => TRUE,
-			)
+					'attachCsv' => FALSE,
+					'attachIcs' => TRUE,
+			),
+			$this->configurationManager
 		);
 
 		// we changed the event inside the repository and have to
@@ -603,18 +525,19 @@ class SubscriberController extends AbstractController {
 		}
 		$helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
 
-		$this->sendTemplateEmail(
+		EmailHelper::sendTemplateEmail(
 			array($event->getContact()->getEmail() => $event->getContact()->getName()),
 			array($this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement', 'slub_events')),
 			'Termineinladung: ' . $event->getTitle(),
 			'Invitation',
 			array(	'event' => $event,
 					'subscribers' => $event->getSubscribers(),
-					'attachSubscriberAsCsv' => TRUE,
 					'helper' => $helper,
 					'settings' => $this->settings,
-					'attachIcsInvitation' => TRUE,
-			)
+					'attachCsv' => TRUE,
+					'attachIcs' => TRUE,
+			),
+			$this->configurationManager
 		);
 
 		$this->view->assign('event', $event);
@@ -714,7 +637,7 @@ class SubscriberController extends AbstractController {
 			$emailViewHTML->assign('event', $event);
 			$emailViewHTML->assign('subscriber', array('name' => '###Name wird automatisch ausgefüllt###'));
 
-			$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+			$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 			$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
 			$partialRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
 
@@ -740,19 +663,19 @@ class SubscriberController extends AbstractController {
 
 			$allSubscribers = $event->getSubscribers();
 			foreach ($allSubscribers as $uid => $subscriber) {
-				//~ $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
-				$this->sendTemplateEmail(
+				EmailHelper::sendTemplateEmail(
 					array($subscriber->getEmail() => $subscriber->getName()),
 					array($event->getContact()->getEmail() => $event->getContact()->getName()),
 					'Online-Umfrage zu ' . $event->getTitle(),
 					'OnlineSurvey',
 					array(	'event' => $event,
 							'subscriber' => $subscriber,
-							'attachSubscriberAsCsv' => FALSE,
 							'helper' => $helper,
 							'settings' => $this->settings,
-							'attachIcsInvitation' => FALSE,
-					)
+							'attachCsv' => FALSE,
+							'attachIcs' => FALSE,
+					),
+					$this->configurationManager
 				);
 			}
 
