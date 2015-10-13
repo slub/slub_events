@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-10-09T14:52:16Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-10-13T15:56:48Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -108,6 +108,10 @@
 		<trans-unit id="text.closing" approved="yes">
 			<source>Best Regards</source>
 			<target>Mit freundlichen Grüßen</target>
+		</trans-unit>
+		<trans-unit id="text.error.could_find_subscriber" approved="yes">
+			<source>Couldn't find your subscription. Maybe you have already unsubscribed?</source>
+			<target>Ihre Anmeldung wurde nicht gefunden. Haben Sie sich vielleicht bereits abgemeldet?</target>
 		</trans-unit>
 		<trans-unit id="text.error.could_find_event" approved="yes">
 			<source>Sorry, we couldn't find the requested event.</source>

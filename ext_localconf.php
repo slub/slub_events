@@ -21,7 +21,7 @@ if (!defined('TYPO3_MODE')) {
 	'Slub.' . $_EXTKEY,
 	'Eventsubscribe',
 	array(
-		'Subscriber' => 'new, create, delete, eventNotFound',
+		'Subscriber' => 'new, create, delete, eventNotFound, subscriberNotFound',
 
 	),
 	// non-cacheable actions

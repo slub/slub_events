@@ -32,7 +32,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 								<f:then>
 								<li>
 									<div class="subscription">
-										<f:link.action action="delete" controller="Subscriber" pageUid="{settings.pidUnsubscribeForm}" pluginName="Eventsubscribe" arguments="{event : event, editcode : subscriber.editcode}"><f:translate key="tx_slubevents_domain_model_event.unsubscribe" /></f:link.action>
+										<f:link.action action="delete" controller="Subscriber" pageUid="{settings.pidUnsubscribeForm}" pluginName="Eventsubscribe" noCacheHash="1" arguments="{event : event, editcode : subscriber.editcode}"><f:translate key="tx_slubevents_domain_model_event.unsubscribe" /></f:link.action>
 									</div>
 								</li>
 								</f:then>

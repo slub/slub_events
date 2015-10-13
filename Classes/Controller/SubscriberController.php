@@ -68,6 +68,15 @@ class SubscriberController extends AbstractController {
 	}
 
 	/**
+	 * action SubscriberNotfound
+	 *
+	 * @return void
+	 */
+	public function subscriberNotFoundAction() {
+
+	}
+
+	/**
 	 * action initializeNew
 	 *
 	 * This is necessary to precheck the given event id. If the event
@@ -393,22 +402,33 @@ class SubscriberController extends AbstractController {
 	 * action delete
 	 *
 	 * @param \Slub\SlubEvents\Domain\Model\Event $event
-	 * @param string $subscriber
+	 * @param string $editcode
 	 * @ignorevalidation $event
-	 * @ignorevalidation $editcode
 	 * @return void
 	 */
 	public function deleteAction(\Slub\SlubEvents\Domain\Model\Event $event = NULL, $editcode) {
 
 		// somebody is calling the action without giving an event --> useless
-		if ($event === NULL)
+		if ($event === NULL || empty($editcode)) {
 			$this->redirect('eventNotFound');
+		}
 
 		// delete for which subscriber?
 		$subscriber = $this->subscriberRepository->findAllByEditcode($editcode)->getFirst();
 
-		// multiple removal is possible... don't know, how to distinguish
-		$event->removeSubscriber($subscriber);
+		if (! is_object($subscriber)) {
+			$this->redirect('subscriberNotFound');
+		}
+		// get all subscribers of event
+		$allsubscribers = $event->getSubscribers();
+
+		// check if subscriber has really subscribed to this event
+		if ($allsubscribers->offsetExists($subscriber)) {
+			$event->removeSubscriber($subscriber);
+		} else {
+			// ohh, someone tries to unsubscribe but has not subscribed or is already unsubscribed.
+			$this->redirect('subscriberNotFound');
+		}
 
 		// some helper timestamps for ics-file
 		$helper['now'] = time();

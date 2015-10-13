@@ -113,7 +113,7 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Finds subscriber by fe_user data
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
 	 * @return array The found Subscriber Objects
 	 */
 	public function findAllByEvents($events) {
