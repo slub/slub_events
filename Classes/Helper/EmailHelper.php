@@ -96,12 +96,12 @@ class EmailHelper {
 			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-invitation-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
 			GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
-			// add ics as part
-			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
-
 			// attach additionally ics as file
 			$message->attach(\Swift_Attachment::fromPath($eventIcsFile)
 				->setContentType('text/calendar'));
+
+			// add ics as part
+			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
 
 		}
 		// attach CSV-File
