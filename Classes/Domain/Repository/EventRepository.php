@@ -258,8 +258,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		$constraints = array();
 		foreach ($subscribers as $subscriber) {
-			if (!empty($subscriber->getEditcode())) {
-				$constraints[] = $query->equals('subscribers.editcode', $subscriber->getEditcode());
+			$editCode = $subscriber->getEditcode();
+			if (!empty($editCode)) {
+				$constraints[] = $query->equals('subscribers.editcode', $editCode);
 			}
 		}
 
