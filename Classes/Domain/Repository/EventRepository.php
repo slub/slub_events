@@ -249,7 +249,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Finds all datasets by MM relation categories
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
 	 * @return array The found Event Objects
 	 */
 	public function findAllBySubscriber($subscribers) {
@@ -257,8 +257,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query = $this->createQuery();
 
 		$constraints = array();
-		foreach ($subscribers as $subscriber)
-			$constraints[] = $query->equals('subscribers.editcode', $subscriber->getEditcode());
+		foreach ($subscribers as $subscriber) {
+			if (!empty($subscriber->getEditcode())) {
+				$constraints[] = $query->equals('subscribers.editcode', $subscriber->getEditcode());
+			}
+		}
 
 		if (count($constraints)) {
 			$query->matching(

@@ -218,6 +218,7 @@ class EventController extends AbstractController {
 		// + the user is logged in
 		// + the username == customerid
 		$subscribers = $this->subscriberRepository->findAllByFeuser();
+debug(count($subscribers));
 		$events = $this->eventRepository->findAllBySubscriber($subscribers);
 
 		$this->view->assign('subscribers', $subscribers);
