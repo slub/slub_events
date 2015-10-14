@@ -77,7 +77,8 @@ class EmailHelper {
 
 		// Plain text example
 		$emailTextHTML = $emailViewHTML->render();
-		$message->setBody(EmailHelper::html2rest($emailTextHTML), 'text/plain');
+
+		$message->setBody(EmailHelper::html2rest($emailTextHTML));
 
 		// HTML Email
 		$message->addPart($emailTextHTML, 'text/html');

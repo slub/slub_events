@@ -217,9 +217,11 @@ class SubscriberController extends AbstractController {
 
 		// startDateTime may never be empty
 		$helper['start'] = $event->getStartDateTime()->getTimestamp();
-		// endDateTime may be empty
-		if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
+
+		// endDate may be empty
+		if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime())) {
 			$helper['end'] = $event->getEndDateTime()->getTimestamp();
+		}
 
 		if ($event->isAllDay()) {
 			$helper['allDay'] = 1;
@@ -448,8 +450,9 @@ class SubscriberController extends AbstractController {
 		$helper['start'] = $event->getStartDateTime()->getTimestamp();
 
 		// endDate may be empty
-		if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
+		if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime())) {
 			$helper['end'] = $event->getEndDateTime()->getTimestamp();
+		}
 
 		if ($event->isAllDay()) {
 			$helper['allDay'] = 1;
@@ -523,7 +526,7 @@ class SubscriberController extends AbstractController {
 		// startDateTime may never be empty
 		$helper['start'] = $event->getStartDateTime()->getTimestamp();
 		// endDateTime may be empty
-		if (($event->getEndDateTime() instanceof DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
+		if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime()))
 			$helper['end'] = $event->getEndDateTime()->getTimestamp();
 		else
 			$helper['end'] = $helper['start'];
