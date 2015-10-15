@@ -1,3 +1,48 @@
+.tx-slub-events form {
+  background: #d8e9ec;
+  padding: 10px;
+  margin: 12px 0;
+  border: 1px solid #9bb;
+  border-width: 0 1px 1px 0;
+}
+
+.tx-slub-events form label {
+  display: block;
+  float: left;
+  width: 30%;
+  color: #666;
+  font-size: 11px;
+  clear: both;
+  margin: 5px 10px 0px 0px;
+}
+.tx-slub-events form span.required {
+  font-weight: bold;
+  color: #9bb;
+}
+
+#leftcol .tx-slub-events form p {
+  position: relative;
+  border: 1px solid #fff;
+  border-width: 1px 0;
+  padding: 3px 0;
+  margin: 13px 18px 13px 0;
+  color: #666;
+  font-size: 0.918em;
+}
+
+#leftcol .tx-slub-events form p:after {
+  position: absolute;
+  bottom: -7px;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border: 7px transparent solid;
+  border-color: #fff transparent transparent transparent;
+  border-bottom-width: 0;
+  content: "";
+  
+}
+
 .slub-event-show div.location {
 	background: #e1f4f7 url(../Images/extraboxbg.png) no-repeat left center;
 	padding: 7px 10px 7px 35px;
@@ -104,7 +149,9 @@
 .slub-event-register div.subscription,
 .slub-event-show div.subscription,
 .slub-event-list div.subscription {
-	float: right;
+  margin: 20px -10px 0 -10px;
+  padding-bottom: 20px;
+  border-bottom: 1px dotted #ccc;
 }
 .slub-event-list div.teaser {
 	float: left;
@@ -137,16 +184,41 @@
 #leftcol .slub-event-register input[type="email"],
 #leftcol .slub-event-register input[type="number"],
 #leftcol .slub-event-register textarea {
-	padding: 3px;
-	display: block;
-	border: none;
-	border-bottom: 1px solid #333;
-	width: 60%;
-	margin: 2px 0;
-	font-size: 13px;
-	float: left;
-	text-align: left;
-	background: #fff;
+	padding: 6px;
+  border: 1px solid #9bb;
+  border-color: #9bb transparent transparent #9bb;
+  display: block;
+  width: 100%;
+  margin: 2px 0;
+  font-size: 13px;
+  float: left;
+  text-align: left;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  #leftcol .slub-event-register input[type="text"],
+  #leftcol .slub-event-register input[type="email"],
+  #leftcol .slub-event-register input[type="number"],
+  #leftcol .slub-event-register textarea {
+    width: 60%;
+    max-width: 60%;
+    box-sizing: content-box;
+  }
+}
+
+#leftcol .slub-event-register input[type="text"]:focus,
+#leftcol .slub-event-register input[type="email"]:focus,
+#leftcol .slub-event-register input[type="number"]:focus,
+#leftcol .slub-event-register textarea:focus {
+  float: left;
+  color: #278;
+  border-color: #278 #49c #49c #278;
+  -webkit-box-shadow: 0 0 6px rgba(34,119,135,0.6);
+  -moz-box-shadow: 0 0 6px rgba(34,119,135,0.6);
+  -o-box-shadow: 0 0 6px rgba(34,119,135,0.6);
+  box-shadow: 0 0 6px rgba(34,119,135,0.6);
 }
 
 .slub-event-register .event-short ul {
@@ -351,28 +423,27 @@
 	margin: 10px 0;
 }
 
-.slub-category-list form input[type="submit"],
-.slub-event-register form input[type="submit"],
-.slub-event-list a.subscribe,
-.slub-event-show a.subscribe {
-	position: relative;
-	float: right;
-	padding: 5px 10px !important;
-	margin: 20px 0 0 20px;
-	font-size: 120%;
-	text-decoration: none !important;
-	-webkit-border-radius: 15px;
-	-webkit-border-top-left-radius: 5px;
-	-moz-border-radius: 15px;
-	-moz-border-radius-topleft:
-	5px; border-radius: 15px;
-	border-top-left-radius: 5px;
-	background: #e0edef;
-	border: 1px solid #29a;
-	color: #29a;
-	text-shadow: 1px 1px 0 #fff;
-	font-weight: bold;
-	cursor: pointer;
+#leftcol form input.submit, #formhandler_contact_form #beMrXbtn, #formhandler_contact_form .picUpload input[type="submit"],
+#leftcol form .slub-category-list form input[type="submit"],
+#leftcol form .slub-event-register form input[type="submit"],
+#leftcol form .slub-event-list a.subscribe,
+#leftcol form .slub-event-show a.subscribe {
+    border: 0 none;
+    border-bottom: 2px solid #900;
+    background: #c00;
+    padding: 10px;
+    margin: 12px 0 0 0;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    text-shadow: none;
+    text-align: center;
 }
 
 .slub-event-list a.subscribe {
@@ -389,33 +460,26 @@
 .slub-event-list .submit a.linkback,
 .slub-event-show .submit a.linkback,
 .slub-event-register .submit a.linkback {
-	text-decoration: none !important;
-	margin: 20px 20px 20px 0;
-	padding: 5px 10px;
-	border-radius: 15px;
-	border-top-left-radius: 5px;
-	border: 1px solid #fff;
-	border-color: #fff rgba(0,0,0,0.2) rgba(0,0,0,0.2) #fff;
-	float: left;
-	text-align: center;
-	background: #e1f4f7 !important;
-	color: #078 !important;
-	text-shadow: 1px 1px 0 #fff;
-	font-weight: bold;
-	cursor: pointer;
+  margin: 10px 0 0 -15px;
+  padding: 5px;
+  display: block;
+  float: left;
 }
 
-.slub-category-list form input[type="submit"]:hover,
-.slub-event-register form input[type="submit"]:hover,
-.slub-category-list .submit a.linkback:hover,
-.slub-event-list .submit a.linkback:hover,
-.slub-event-list a.subscribe:hover,
-.slub-event-show .submit a.linkback:hover,
-.slub-event-show a.subscribe:hover,
-.slub-event-register .submit a.linkback:hover,
-.slub-event-register a.subscribe:hover {
-	color: #c00 !important;
-	background: #c3dde1 !important;
+.slub-category-list .submit a.linkback:before,
+.slub-event-list .submit a.linkback:before,
+.slub-event-show .submit a.linkback:before,
+.slub-event-register .submit a.linkback:before {
+  content: "\2190\00a0";
+}
+
+#leftcol .slub-category-list form input[type="submit"]:hover,
+#leftcol .slub-event-register form input[type="submit"]:hover,
+#leftcol .slub-event-list a.subscribe:hover,
+#leftcol .slub-event-show a.subscribe:hover,
+#leftcol .slub-event-register a.subscribe:hover {
+    background: #f00;
+    border-bottom-color: #c00;
 }
 
 
