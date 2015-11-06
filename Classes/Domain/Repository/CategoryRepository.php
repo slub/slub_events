@@ -143,7 +143,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		$childCategorieIds = $this->findAllChildCategories($startCategory->getUid());
 
-		// ups, no childs found...
+		// ups, no children found...
 		if ($childCategorieIds === NULL) {
 			return array();
 		}
@@ -161,10 +161,17 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		$tree = array();
 		foreach ($flatCategories as $id => &$node) {
+
+
 			if ($node['parent'] === NULL) {
 				$tree[$id] = &$node;
 			} else {
+
 				$flatCategories[$node['parent']]['children'][$id] = &$node;
+				// if tree is empty, we have to add this node here too
+				if (empty($tree)) {
+					$tree[$node['parent']]['children'][$id] = &$node;
+				}
 			}
 		}
 

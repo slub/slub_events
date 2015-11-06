@@ -90,8 +90,9 @@ class GbEventsOfCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 					}
 				}
 				// if any event exists and is valid, break here and return TRUE
-				if ($showLink)
+				if ($showLink) {
 					break;
+				}
 			}
 		}
 
