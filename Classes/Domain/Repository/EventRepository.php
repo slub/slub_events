@@ -32,6 +32,8 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+	use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
@@ -114,7 +116,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		// are contacts selected?
 		if (!empty($settings['contactsSelection'])) {
-			$constraints[] = $query->in('contact.uid', t3lib_div::intExplode(',', $settings['contactsSelection'], TRUE));
+			$constraints[] = $query->in('contact.uid', GeneralUtility::intExplode(',', $settings['contactsSelection'], TRUE));
 		}
 
 		// default is to show only future events
