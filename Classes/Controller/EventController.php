@@ -322,7 +322,7 @@ class EventController extends AbstractController {
 
 				$propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($event, $propertyName);
 				// special handling for onlinesurvey field to remove trailing timestamp with sent date
-				if ($propertyName == 'onlinesurvey') {
+				if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
 					$propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
 				}
 				\TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
