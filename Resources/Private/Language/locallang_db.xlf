@@ -60,13 +60,7 @@
 			<source>Studierende</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.audience.I.3" xml:space="preserve">
-			<source>SeniorInnen</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.4" xml:space="preserve">
-			<source>Promovierende/Mitarbeiter TU</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.5" xml:space="preserve">
-			<source>AbsolventInnen</source>
+			<source>WissenschaftlerInnen</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.cancelled" xml:space="preserve">
 			<source>Is cancelled</source>
