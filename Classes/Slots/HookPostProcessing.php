@@ -29,7 +29,7 @@
  * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
-class Tx_SlubEvents_Slots_HookPostProcessing {
+class HookPostProcessing {
 
 	/**
 	 * Clear cache of all pages with slubevents_eventlist plugin
@@ -105,6 +105,7 @@ class Tx_SlubEvents_Slots_HookPostProcessing {
 	function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$pObj) {
 
 		if ($table == 'tx_slubevents_domain_model_event') {
+			// should be already unset in HookPreProcessing
 			unset($fieldArray['end_date_time_select']);
 			unset($fieldArray['sub_end_date_time_select']);
 		}

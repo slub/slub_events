@@ -31,7 +31,7 @@
 	use TYPO3\CMS\Core\Utility\GeneralUtility;
 	use TYPO3\CMS\Core\Messaging\FlashMessage;
 	use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
-class Tx_SlubEvents_Slots_HookPreProcessing {
+class HookPreProcessing {
 
 	/**
 	 * initializeAction
@@ -130,6 +130,7 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 			// use the select box value to calculate the end_date_time relative to start_date_time
 			if (!empty($fieldArray['end_date_time_select'])) {
 				$fieldArray['end_date_time'] = $fieldArray['start_date_time'] + $fieldArray['end_date_time_select'] * 60;
+				unset($fieldArray['end_date_time_select']);
 				$message = GeneralUtility::makeInstance(
 					'TYPO3\CMS\Core\Messaging\FlashMessage',
 					'Ende der Veranstaltung gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['end_date_time']),
@@ -144,9 +145,9 @@ class Tx_SlubEvents_Slots_HookPreProcessing {
 				if ($fieldArray['start_date_time'] < $fieldArray['sub_end_date_time'] ||
 					($fieldArray['min_subscriber'] > 0 && empty($fieldArray['sub_end_date_time'])) ) {
 
-					if ($fieldArray['sub_end_date_time_select'] > 0) {
+					if (!empty($fieldArray['sub_end_date_time_select'])) {
 						$fieldArray['sub_end_date_time'] = $fieldArray['start_date_time'] - $fieldArray['sub_end_date_time_select'] * 60;
-						$fieldArray['sub_end_date_time_select'] = '';
+						unset($fieldArray['sub_end_date_time_select']);
 
 						$message = GeneralUtility::makeInstance(
 							'TYPO3\CMS\Core\Messaging\FlashMessage',
