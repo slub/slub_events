@@ -94,7 +94,8 @@ class EmailHelper {
 
 			$ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
 
-			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-invitation-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
+			// the total basename length must not be more than 60 characters --> see writeFileToTypo3tempDir()
+			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. substr(preg_replace('/[^\w]/', '', $variables['helper']['nameto']), 0, 20).'-inv-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
 			GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
 
 			// attach additionally ics as file
@@ -117,7 +118,7 @@ class EmailHelper {
 			$csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
 			$csv->setPartialRootPath($partialRootPath);
 
-			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. preg_replace('/[^\w]/', '', $variables['helper']['nameto']).'-subscribers-'. strtolower($templateName).'.csv';
+			$eventCsvFile = PATH_site.'typo3temp/tx_slubevents/'. substr(preg_replace('/[^\w]/', '', $variables['helper']['nameto']), 0, 20).'-sub-'. strtolower($templateName).'.csv';
 			GeneralUtility::writeFileToTypo3tempDir($eventCsvFile,  $csv->render());
 
 			// attach CSV-File
