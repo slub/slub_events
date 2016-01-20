@@ -298,8 +298,10 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 				'items' => array(
 					array($ll . 'tx_slubevents_domain_model_event.audience.I.0', 0),
 					array($ll . 'tx_slubevents_domain_model_event.audience.I.1', 1),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.4', 4),
 					array($ll . 'tx_slubevents_domain_model_event.audience.I.2', 2),
 					array($ll . 'tx_slubevents_domain_model_event.audience.I.3', 3),
+					array($ll . 'tx_slubevents_domain_model_event.audience.I.5', 5),
 				),
 				'size' => 1,
 				'maxitems' => 1,
