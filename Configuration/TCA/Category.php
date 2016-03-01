@@ -131,7 +131,7 @@ $TCA['tx_slubevents_domain_model_category'] = array(
 					)
 				)
 			),
-			'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
+			'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]',
 		),
 		'parent' => array(
 			'exclude' => 0,

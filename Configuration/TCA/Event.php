@@ -248,7 +248,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 					)
 				)
 			),
-			'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
+			'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]',
 		),
 		'description' => array(
 			'displayCond' => 'FIELD:genius_bar:<:1',
@@ -270,7 +270,7 @@ $TCA['tx_slubevents_domain_model_event'] = array(
 					)
 				)
 			),
-			'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]',
+			'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]',
 		),
 		'min_subscriber' => array(
 			'exclude' => 0,
