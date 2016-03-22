@@ -42,16 +42,21 @@ class HookPostProcessing {
 	 */
 	function clearAllEventListCache($pid = 0, $isGeniusBar = 0) {
 
-		$tcemain = GeneralUtility::makeInstance('t3lib_TCEmain');
+		$tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
 
 		// next two lines are necessary... don't know why.
 		$tcemain->stripslashes_values = 0;
 		$tcemain->start(array(), array());
 
-		if ($isGeniusBar)
-			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_'.$pid);
-		else
-			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$pid);
+		if ($isGeniusBar) {
+
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_'.$this->settings['storagePid']);
+
+		} else {
+
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$this->settings['storagePid']);
+
+		}
 
 		return;
 

@@ -376,25 +376,28 @@ class SubscriberController extends AbstractController {
 	 * Clear cache of all pages with cached slubevents content.
 	 * This way the plugin may stay cached but on every delete or insert
 	 * of subscribers, the cache gets cleared.
+
+	 * @param integer $isGeniusBar
 	 *
 	 * @return
 	 */
-	public function clearAllEventListCache() {
+	public function clearAllEventListCache($isGeniusBar = 0) {
 
-		$tcemain = GeneralUtility::makeInstance('t3lib_TCEmain');
+		$tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
 
 		// next two lines are necessary... don't know why.
 		$tcemain->stripslashes_values = 0;
 		$tcemain->start(array(), array());
 
-		if ($isGeniusBar)
+		if ($isGeniusBar) {
+
 			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_'.$this->settings['storagePid']);
-		else
+
+		} else {
+
 			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$this->settings['storagePid']);
 
-//			$fp = fopen(PATH_site . 'typo3temp/clearcachehookx.txt', 'a');
-//			fwrite($fp, strftime('%x %T') . ' cachetag:tx_slubevents_'.$this->settings['storagePid'] .  "\n");
-//			fclose($fp);
+		}
 
 		return;
 
