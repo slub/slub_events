@@ -50,11 +50,11 @@ class HookPostProcessing {
 
 		if ($isGeniusBar) {
 
-			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_'.$this->settings['storagePid']);
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $pid);
 
 		} else {
 
-			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_'.$this->settings['storagePid']);
+			$tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $pid);
 
 		}
 
