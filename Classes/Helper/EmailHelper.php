@@ -96,14 +96,14 @@ class EmailHelper {
 
 			// the total basename length must not be more than 60 characters --> see writeFileToTypo3tempDir()
 			$eventIcsFile = PATH_site.'typo3temp/tx_slubevents/'. substr(preg_replace('/[^\w]/', '', $variables['helper']['nameto']), 0, 20).'-inv-'. strtolower($templateName).'-'.$variables['event']->getUid().'.ics';
-			GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  $ics->render());
+			GeneralUtility::writeFileToTypo3tempDir($eventIcsFile,  implode("\n", array_filter(explode("\n", $ics->render()))));
 
 			// attach additionally ics as file
 			$message->attach(\Swift_Attachment::fromPath($eventIcsFile)
 				->setContentType('text/calendar'));
 
 			// add ics as part
-			$message->addPart($ics->render(), 'text/calendar', 'utf-8');
+			$message->addPart(implode("\n", array_filter(explode("\n", $ics->render()))), 'text/calendar', 'utf-8');
 
 		}
 		// attach CSV-File

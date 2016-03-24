@@ -332,7 +332,13 @@ class SubscriberController extends AbstractController {
 		$firstline = substr($text, 0, (75-12));
 		$restofline = implode("\n ", str_split(trim(substr($text, (75-12), strlen($text))), 73) );
 
-		return $firstline . "\n ". $restofline;
+		if (strlen($restofline) > 0) {
+			$foldedline = $firstline . "\n ". $restofline;
+		} else {
+			$foldedline = $firstline;
+		}
+
+		return $foldedline;
 	}
 
 	/**
