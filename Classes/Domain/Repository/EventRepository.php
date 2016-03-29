@@ -94,15 +94,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Finds all datasets using the flexform settings
 	 *
 	 * @param array $settings
+	 * @param integer $geniusBar
 	 * @return array The found Event Objects
 	 */
-	public function findAllBySettings($settings) {
+	public function findAllBySettings($settings, $geniusBar = 0) {
 
 		$query = $this->createQuery();
 		$constraints = array();
 
-		// we don't want genius_bar events here
-		$constraints[] = $query->equals('genius_bar', 0);
+		// we don't want genius_bar events as default
+		$constraints[] = $query->equals('genius_bar', $geniusBar);
 
 		// are categories selected?
 		if (count($settings['categoryList']) > 0) {

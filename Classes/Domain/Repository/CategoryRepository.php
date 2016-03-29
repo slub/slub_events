@@ -175,8 +175,6 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			}
 		}
 
-//~ t3lib_utility_Debug::debug($tree, 'tree... ');
-
 		return $tree[$startCategory->getUid()]['children'];
 	}
 
