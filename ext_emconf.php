@@ -30,7 +30,7 @@ This extension was refactored to work with TYPO3 7.6 LTS by UDG United Digital G
     'modify_tables'    => '',
     'clearCacheOnLoad' => 0,
     'lockType'         => '',
-    'version'          => '2.2.0-dev',
+    'version'          => '2.2.0',
     'constraints'      => [
         'depends'   => [
             'extbase' => '6.2.0-7.6.99',
