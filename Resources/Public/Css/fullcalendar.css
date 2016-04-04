@@ -4,7 +4,6 @@
  * (c) 2015 Adam Shaw
  */
 
-
 .fc {
 	direction: ltr;
 	text-align: left;
@@ -17,7 +16,6 @@
 body .fc { /* extra precedence to overcome jqui */
 	font-size: 1em;
 }
-
 
 /* Colors
 --------------------------------------------------------------------------------------------------*/
@@ -66,7 +64,6 @@ body .fc { /* extra precedence to overcome jqui */
 	background: #d7d7d7;
 }
 
-
 /* Icons (inline elements with styled text that mock arrow icons)
 --------------------------------------------------------------------------------------------------*/
 
@@ -87,7 +84,7 @@ body .fc { /* extra precedence to overcome jqui */
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	}
+}
 
 /*
 Acceptable font-family overrides for individual icons:
@@ -156,7 +153,6 @@ NOTE: use percentage font sizes or else old IE chokes
 	top: 6%;
 }
 
-
 /* Buttons (styled <button> tags, normalized to work cross-browser)
 --------------------------------------------------------------------------------------------------*/
 
@@ -178,8 +174,11 @@ NOTE: use percentage font sizes or else old IE chokes
 }
 
 /* Firefox has an annoying inner border */
-.fc button::-moz-focus-inner { margin: 0; padding: 0; }
-	
+.fc button::-moz-focus-inner {
+	margin: 0;
+	padding: 0;
+}
+
 .fc-state-default { /* non-theme */
 	border: 1px solid;
 }
@@ -202,7 +201,7 @@ NOTE: use percentage font sizes or else old IE chokes
 	margin: 0 .2em;
 	vertical-align: middle;
 }
-	
+
 /*
   button states
   borrowed from twitter bootstrap (http://twitter.github.com/bootstrap/)
@@ -236,9 +235,9 @@ NOTE: use percentage font sizes or else old IE chokes
 	text-decoration: none;
 	background-position: 0 -15px;
 	-webkit-transition: background-position 0.1s linear;
-	   -moz-transition: background-position 0.1s linear;
-	     -o-transition: background-position 0.1s linear;
-	        transition: background-position 0.1s linear;
+	-moz-transition: background-position 0.1s linear;
+	-o-transition: background-position 0.1s linear;
+	transition: background-position 0.1s linear;
 }
 
 .fc-state-down,
@@ -255,7 +254,6 @@ NOTE: use percentage font sizes or else old IE chokes
 	filter: alpha(opacity=65);
 	box-shadow: none;
 }
-
 
 /* Buttons Groups
 --------------------------------------------------------------------------------------------------*/
@@ -278,13 +276,12 @@ previous button's border...
 	margin-left: 0;
 }
 
-
 /* Popover
 --------------------------------------------------------------------------------------------------*/
 
 .fc-popover {
 	position: absolute;
-	box-shadow: 0 2px 6px rgba(0,0,0,.15);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
 }
 
 .fc-popover .fc-header { /* TODO: be more consistent with fc-head/fc-body */
@@ -327,7 +324,6 @@ previous button's border...
 	border-top: 0; /* where they meet, let the header have the border */
 }
 
-
 /* Misc Reusable Components
 --------------------------------------------------------------------------------------------------*/
 
@@ -366,7 +362,6 @@ hr.fc-divider {
 	height: 100%; /* strech bg to bottom edge */
 }
 
-
 /* Tables
 --------------------------------------------------------------------------------------------------*/
 
@@ -394,7 +389,6 @@ hr.fc-divider {
 	border-style: double; /* overcome neighboring borders */
 }
 
-
 /* Fake Table Rows
 --------------------------------------------------------------------------------------------------*/
 
@@ -406,18 +400,17 @@ hr.fc-divider {
 
 .fc-row table {
 	/* don't put left/right border on anything within a fake row.
-	   the outer tbody will worry about this */
+       the outer tbody will worry about this */
 	border-left: 0 hidden transparent;
 	border-right: 0 hidden transparent;
 
 	/* no bottom borders on rows */
-	border-bottom: 0 hidden transparent; 
+	border-bottom: 0 hidden transparent;
 }
 
 .fc-row:first-child table {
 	border-top: 0 hidden transparent; /* no top border on first row */
 }
-
 
 /* Day Row (used within the header and the DayGrid)
 --------------------------------------------------------------------------------------------------*/
@@ -487,7 +480,6 @@ temporary rendered events).
 	border-top: 0;
 }
 
-
 /* Scrolling Container
 --------------------------------------------------------------------------------------------------*/
 
@@ -501,7 +493,6 @@ temporary rendered events).
 	width: 100%; /* hack to force re-sizing this inner element when scrollbars appear/disappear */
 	overflow: hidden; /* don't let negative margins or absolute positioning create further scroll */
 }
-
 
 /* Global Event Styles
 --------------------------------------------------------------------------------------------------*/
@@ -551,7 +542,6 @@ temporary rendered events).
 	position: absolute;
 	z-index: 3;
 }
-
 
 /* Horizontal Events
 --------------------------------------------------------------------------------------------------*/
@@ -608,7 +598,6 @@ temporary rendered events).
 	cursor: e-resize;
 }
 
-
 /* DayGrid events
 ----------------------------------------------------------------------------------------------------
 We use the full "fc-day-grid-event" class instead of using descendants because the event won't
@@ -619,7 +608,6 @@ be a descendant of the grid when it is being dragged.
 	margin: 1px 2px 0; /* spacing between events and edges */
 	padding: 0 1px;
 }
-
 
 .fc-day-grid-event .fc-content { /* force events to be one-line tall */
 	white-space: nowrap;
@@ -635,7 +623,6 @@ be a descendant of the grid when it is being dragged.
 	right: -3px;
 	width: 7px;
 }
-
 
 /* Event Limiting
 --------------------------------------------------------------------------------------------------*/
@@ -702,7 +689,7 @@ a.fc-more:hover {
 .fc .fc-toolbar > * > :first-child { /* extra precedence to override button border margins */
 	margin-left: 0;
 }
-	
+
 /* title text */
 
 .fc-toolbar h2 {
@@ -719,7 +706,7 @@ a.fc-more:hover {
 .fc-toolbar .ui-state-hover {
 	z-index: 2;
 }
-	
+
 .fc-toolbar .fc-state-down {
 	z-index: 3;
 }
@@ -733,7 +720,6 @@ a.fc-more:hover {
 	z-index: 5;
 }
 
-
 /* View Structure
 --------------------------------------------------------------------------------------------------*/
 
@@ -743,8 +729,8 @@ a.fc-more:hover {
 .fc-view-container *:before,
 .fc-view-container *:after {
 	-webkit-box-sizing: content-box;
-	   -moz-box-sizing: content-box;
-	        box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
 }
 
 .fc-view, /* scope positioning and z-index's for everything within the view */
@@ -817,8 +803,8 @@ a.fc-more:hover {
 	opacity: 0.3;
 	filter: alpha(opacity=30); /* for IE */
 	/* opacity with small font can sometimes look too faded
-	   might want to set the 'color' property instead
-	   making day-numbers bold also fixes the problem */
+       might want to set the 'color' property instead
+       making day-numbers bold also fixes the problem */
 }
 
 /* AgendaView all-day area
@@ -837,7 +823,6 @@ a.fc-more:hover {
 	padding-top: 1px; /* add a pixel to make sure there are 2px padding above events */
 	padding-bottom: 1em; /* give space underneath events for clicking/selecting days */
 }
-
 
 /* TimeGrid axis running down the side (for both the all-day area and the slot area)
 --------------------------------------------------------------------------------------------------*/
@@ -859,7 +844,6 @@ a.fc-more:hover {
 .ui-widget td.fc-axis {
 	font-weight: normal; /* overcome jqui theme making it bold */
 }
-
 
 /* TimeGrid Structure
 --------------------------------------------------------------------------------------------------*/
@@ -912,7 +896,6 @@ a.fc-more:hover {
 	z-index: 6;
 }
 
-
 /* TimeGrid Slats (lines that run horizontally)
 --------------------------------------------------------------------------------------------------*/
 
@@ -929,7 +912,6 @@ a.fc-more:hover {
 	background: none; /* see through to fc-bg */
 }
 
-
 /* TimeGrid Highlighting Slots
 --------------------------------------------------------------------------------------------------*/
 
@@ -943,7 +925,6 @@ a.fc-more:hover {
 	right: 0;
 	/* top and bottom will be in by JS */
 }
-
 
 /* TimeGrid Event Containment
 --------------------------------------------------------------------------------------------------*/
@@ -973,7 +954,6 @@ a.fc-more:hover {
 	right: 0;
 }
 
-
 /* Generic Vertical Event
 --------------------------------------------------------------------------------------------------*/
 
@@ -996,7 +976,6 @@ a.fc-more:hover {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 }
-
 
 /* TimeGrid Event Styling
 ----------------------------------------------------------------------------------------------------

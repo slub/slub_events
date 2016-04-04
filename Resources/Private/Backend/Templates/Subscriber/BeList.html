@@ -1,83 +1,108 @@
-<f:layout name="Default" />
+<f:layout name="Default"/>
 
 This Template is responsible for creating a table of domain objects.
 
 If you modify this template, do not forget to change the overwrite settings
 in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
+Resources:
+Private:
+Templates:
+List.html: keep
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="subscriberListing">
-<table class="tx_slubevents">
-	<tr>
-		<th><f:translate key="tx_slubevents_domain_model_subscriber.name" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_subscriber.crdate" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_event.title" /></th>
-		<th><f:translate key="tx_slubevents_domain_model_subscriber.number" /></th>
-	</tr>
-	<f:for each="{subscribers}" as="subscriber"  iteration="subscriberIterator">
-		<tr class="{f:if(condition: subscriberIterator.isEven, then: 'Even')} {f:if(condition: subscriberIterator.isOdd, then: 'Odd')} {f:if(condition: subscriberIterator.isFirst, then: 'First')} {f:if(condition: subscriberIterator.isLast, then: 'Last')}">
-			<td><span class="subscriber"><f:link.email email="{subscriber.email}">{subscriber.name}</f:link.email></span></td>
-			<td><se:format.date date="{subscriber.crdate}" format="%d.%m.%Y %H:%M" /></td>
-			<td><se:be.functionBar icon="geniusbar" event="{subscriber.event}" /><span class="eventtitle" title="<se:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">{subscriber.event.title}</span></td>
-			<td>{subscriber.number}</td>
+	<table class="tx_slubevents">
+		<tr>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_subscriber.name"/>
+			</th>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_subscriber.crdate"/>
+			</th>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_event.title"/>
+			</th>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_subscriber.number"/>
+			</th>
 		</tr>
-	</f:for>
-</table>
+		<f:for each="{subscribers}" as="subscriber" iteration="subscriberIterator">
+			<tr class="{f:if(condition: subscriberIterator.isEven, then: 'Even')} {f:if(condition: subscriberIterator.isOdd, then: 'Odd')} {f:if(condition: subscriberIterator.isFirst, then: 'First')} {f:if(condition: subscriberIterator.isLast, then: 'Last')}">
+				<td><span class="subscriber"><f:link.email email="{subscriber.email}">{subscriber.name}
+				</f:link.email></span></td>
+				<td>
+					<se:format.date date="{subscriber.crdate}" format="%d.%m.%Y %H:%M"/>
+				</td>
+				<td>
+					<se:be.functionBar icon="geniusbar" event="{subscriber.event}"/>
+                    <span class="eventtitle"
+						  title="<se:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">{subscriber.event.title}</span>
+				</td>
+				<td>{subscriber.number}</td>
+			</tr>
+		</f:for>
+	</table>
 </f:section>
 
 <f:section name="content">
 	{namespace se=Slub\SlubEvents\ViewHelpers}
 
-<div class="slub-event-list">
+	<div class="slub-event-list">
 
-<h1><f:translate key="tx_slubevents.be.subscriberlist" /></h1>
+		<h1>
+			<f:translate key="tx_slubevents.be.subscriberlist"/>
+		</h1>
 
-<f:flashMessages />
+		<f:flashMessages/>
 
-<f:form action="beList" section="results" name="searchParameter" method="post">
-<table  class="tx_slubevents" >
-	<tr>
-		<th><label for="selectedStartDateStamp">
-				<f:translate key="tx_slubevents_domain_model_event.start_date_time" />
-			</label>
-		</th>
-		<th><f:translate key="tx_slubevents_domain_model_category" /></th>
-		<th></th>
-	</tr>
-	<tr>
-		<td class="td-input">
-			<f:form.textfield id="tceforms-datefield-1" class="formField tceforms-textfield tceforms-datefield" property="selectedStartDateStamp"  value="{selectedStartDateStamp}" />
-			<se:be.functionBar icon="datepicker" event="{event}" />
-		</td>
-		<td class="foldtree">
-			<f:render partial="Event/CategoryTree" arguments="{categories: categories, categoriesSelected : categoriesSelected}" />
-		</td>
-		<td>
-		</td>
-	</tr>
+		<f:form action="beList" section="results" name="searchParameter" method="post">
+			<table class="tx_slubevents">
+				<tr>
+					<th><label for="selectedStartDateStamp">
+						<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
+					</label>
+					</th>
+					<th>
+						<f:translate key="tx_slubevents_domain_model_category"/>
+					</th>
+					<th></th>
+				</tr>
+				<tr>
+					<td class="td-input">
+						<f:form.textfield id="tceforms-datefield-1"
+										  property="selectedStartDateStamp"
+										  value="{selectedStartDateStamp}"/>
+						<!-- TODO: implement datepicker -->
+						<!-- se:be.functionBar icon="datepicker" event="{event}"/ -->
+					</td>
+					<td class="foldtree">
+						<f:render partial="Event/CategoryTree"
+								  section="categoryTree"
+								  arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
+					</td>
+					<td>
+					</td>
+				</tr>
 
-	<tr>
-		<td colspan="2" id="results">
-			<f:form.submit value="Suchen..." />
-		</td>
-	</tr>
-</f:form>
+				<tr>
+					<td colspan="2" id="results">
+						<f:form.submit value="Suchen..."/>
+					</td>
+				</tr>
+		</f:form>
 
-<f:if condition="{settings.hidePagination}">
-	<f:then>
-		<f:render section="subscriberListing" arguments="{subscribers: subscribers}" />
-	</f:then>
-	<f:else>
-		<f:widget.paginate objects="{subscribers}" as="paginatedSubscribers" configuration="{settings.list.paginate}">
-			<f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}" />
-		</f:widget.paginate>
-	</f:else>
-</f:if>
+		<f:if condition="{settings.hidePagination}">
+			<f:then>
+				<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
+			</f:then>
+			<f:else>
+				<f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
+								   configuration="{settings.list.paginate}">
+					<f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
+				</f:widget.paginate>
+			</f:else>
+		</f:if>
 
-</div>
+	</div>
 </f:section>

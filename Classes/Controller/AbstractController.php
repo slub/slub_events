@@ -1,5 +1,8 @@
 <?php
-	namespace Slub\SlubEvents\Controller;
+namespace Slub\SlubEvents\Controller;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController as ExtbaseActionController;
 
 /***************************************************************
  *  Copyright notice
@@ -32,129 +35,126 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class AbstractController extends ExtbaseActionController
+{
+    /**
+     * eventRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\EventRepository
+     * @inject
+     */
+    protected $eventRepository;
 
-	/**
-	 * eventRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-	 * @inject
-	 */
-	protected $eventRepository;
+    /**
+     * categoryRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository;
 
-	/**
-	 * categoryRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
-	 * @inject
-	 */
-	protected $categoryRepository;
+    /**
+     * subscriberRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     * @inject
+     */
+    protected $subscriberRepository;
 
-	/**
-	 * subscriberRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-	 * @inject
-	 */
-	protected $subscriberRepository;
+    /**
+     * contactRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\ContactRepository
+     * @inject
+     */
+    protected $contactRepository;
 
-	/**
-	 * contactRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\ContactRepository
-	 * @inject
-	 */
-	protected $contactRepository;
+    /**
+     * disciplineRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\DisciplineRepository
+     * @inject
+     */
+    protected $disciplineRepository;
 
+    /**
+     * Set session data
+     *
+     * @param string $key
+     * @param string $data
+     */
+    public function setSessionData($key, $data)
+    {
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
 
-	/**
-	 * disciplineRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\DisciplineRepository
-	 * @inject
-	 */
-	protected $disciplineRepository;
+        return;
+    }
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-	*/
-	protected $configurationManager;
+    /**
+     * Get session data
+     *
+     * @param string $key
+     *
+     * @return
+     */
+    public function getSessionData($key)
+    {
+        return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
+    }
 
-	/**
-	 * injectConfigurationManager
-	 *
-	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-	 * @return void
-	*/
-	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
-		$this->configurationManager = $configurationManager;
+    /**
+     * initializeAction
+     *
+     */
+    protected function initializeAction()
+    {
+        if (TYPO3_MODE === 'BE') {
+            global $BE_USER;
+            // TYPO3 doesn't set locales for backend-users --> so do it manually like this...
+            // is needed especially with strftime
+            switch ($BE_USER->uc['lang']) {
+                case 'en':
+                    setlocale(LC_ALL, 'en_GB.utf8');
+                    break;
+                case 'de':
+                    setlocale(LC_ALL, 'de_DE.utf8');
+                    break;
+            }
+        }
+    }
 
-		$this->contentObj = $this->configurationManager->getContentObject();
-		$this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+    /**
+     * Safely gets Parameters from request
+     * if they exist
+     *
+     * @param string $parameterName
+     *
+     * @return null|string
+     */
+    protected function getParametersSafely($parameterName)
+    {
+        if ($this->request->hasArgument($parameterName)) {
+            return $this->filterSafelyParameters($this->request->getArgument($parameterName));
+        }
+        return null;
+    }
 
-		// merge the storagePid into settings for the cache tags
-		$frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$this->settings['storagePid'] = $frameworkConfiguration['persistence']['storagePid'];
-	}
-
-	/**
-	 * Set session data
-	 *
-	 * @param $key
-	 * @param $data
-	 * @return
-	 */
-	public function setSessionData($key, $data) {
-
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
-
-		return;
-	}
-
-	/**
-	 * Get session data
-	 *
-	 * @param $key
-	 * @return
-	 */
-	public function getSessionData($key) {
-
-		return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
-	}
-
-	 /**
-	 * initializeAction
-	 *
-	 * @return
-	 */
-	protected function initializeAction() {
-
-	if (TYPO3_MODE === 'BE') {
-			global $BE_USER;
-			// TYPO3 doesn't set locales for backend-users --> so do it manually like this...
-			// is needed especially with strftime
-			switch ($BE_USER->uc['lang']) {
-				case 'en': setlocale(LC_ALL, 'en_GB.utf8');
-					break;
-				case 'de': setlocale(LC_ALL, 'de_DE.utf8');
-					break;
-			}
-		}
-
-	}
-	/**
-	 * Safely gets Parameters from request
-	 * if they exist
-	 *
-	 * @param string $parameterName
-	 * @return *
-	 */
-	protected function getParametersSafely($parameterName) {
-		if($this->request->hasArgument( $parameterName )){
-			return $this->request->getArgument( $parameterName );
-		}
-		return NULL;
-	}
-
+    /**
+     * remove XSS stuff recursively
+     *
+     * @param mixed $param
+     *
+     * @return string
+     */
+    protected function filterSafelyParameters($param)
+    {
+        if (is_array($param)) {
+            foreach ($param as $key => $item) {
+                $param[$key] = $this->filterSafelyParameters($item);
+            }
+            return $param;
+        } else {
+            return GeneralUtility::removeXSS($param);
+        }
+    }
 }
-?>

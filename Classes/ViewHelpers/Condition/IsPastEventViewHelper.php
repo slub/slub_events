@@ -1,5 +1,7 @@
 <?php
-    namespace Slub\SlubEvents\ViewHelpers\Condition;
+
+namespace Slub\SlubEvents\ViewHelpers\Condition;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -40,34 +42,29 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-
-class IsPastEventViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class IsPastEventViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
     /**
      * Render the supplied DateTime object as a formatted date.
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return boolean
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
-    public function render($event) {
-
-        $isPast = FALSE;
+    public function render($event)
+    {
+        $isPast = false;
 
         // deadline reached...
         if (is_object($event->getSubEndDateTime())) {
-
             if ($event->getEndDateTime()->getTimestamp() < time()) {
-
-                $isPast = TRUE;
-
+                $isPast = true;
             }
-
         }
 
         return $isPast;
-
     }
 }
-?>

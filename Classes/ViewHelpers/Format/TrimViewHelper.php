@@ -1,5 +1,7 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+
+namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,32 +29,29 @@
 /**
  * trim output
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class TrimViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
+    /**
+     * trim whitespaces before and after
+     *
+     * @param string $htmlString
+     *
+     * @return string
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($htmlString = null)
+    {
+        if ($htmlString === null) {
+            $htmlString = $this->renderChildren();
+            if ($htmlString === null) {
+                return '';
+            }
+        }
 
-class TrimViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
-
-	/**
-	 * trim whitespaces before and after
-	 *
-	 * @param string $htmlString
-	 * @return string
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($htmlString = NULL) {
-
-		if ($htmlString === NULL) {
-			$htmlString = $this->renderChildren();
-			if ($htmlString === NULL) {
-				return '';
-			}
-		}
-
-		return trim($htmlString);
-
-	}
+        return trim($htmlString);
+    }
 }
-?>

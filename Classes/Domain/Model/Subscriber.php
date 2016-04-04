@@ -1,5 +1,6 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Model;
+
+namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -32,271 +33,280 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
+    /**
+     * name
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $name;
 
-	/**
-	 * name
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $name;
+    /**
+     * email
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $email;
 
-	/**
-	 * email
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $email;
+    /**
+     * telephone
+     *
+     * @var string
+     */
+    protected $telephone;
 
-	/**
-	 * telephone
-	 *
-	 * @var string
-	 */
-	protected $telephone;
+    /**
+     * institution
+     *
+     * @var string
+     */
+    protected $institution;
 
-	/**
-	 * institution
-	 *
-	 * @var string
-	 */
-	protected $institution;
+    /**
+     * customerid
+     *
+     * @var string
+     */
+    protected $customerid;
 
-	/**
-	 * customerid
-	 *
-	 * @var string
-	 */
-	protected $customerid;
+    /**
+     * Number of Subscribers
+     *
+     * @var integer
+     */
+    protected $number = 2;
 
-	/**
-	 * Number of Subscribers
-	 *
-	 * @var integer
-	 */
-	protected $number = 2;
+    /**
+     * Message by the Customer
+     *
+     * @var string
+     */
+    protected $message;
 
-	/**
-	 * Message by the Customer
-	 *
-	 * @var string
-	 */
-	protected $message;
+    /**
+     * Edit Code
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $editcode;
 
-	/**
-	 * Edit Code
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $editcode;
+    /**
+     * Creation Date
+     *
+     * @var \DateTime
+     */
+    protected $crdate;
 
-	/**
-	 * Creation Date
-	 *
-	 * @var DateTime
-	 */
-	protected $crdate;
+    /**
+     * event
+     *
+     * @var \Slub\SlubEvents\Domain\Model\Event
+     */
+    protected $event;
 
-	/**
-	 * event
-	 *
-	 * @var \Slub\SlubEvents\Domain\Model\Event
-	 */
-	protected $event;
+    /**
+     * Returns the name
+     *
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	/**
-	 * Returns the name
-	 *
-	 * @return string $name
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    /**
+     * Sets the name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
-	/**
-	 * Sets the name
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
+    /**
+     * Returns the email
+     *
+     * @return string $email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
 
-	/**
-	 * Returns the email
-	 *
-	 * @return string $email
-	 */
-	public function getEmail() {
-		return $this->email;
-	}
+    /**
+     * Returns the event
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Event $event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
 
-	/**
-	 * Returns the event
-	 *
-	 * @return \Slub\SlubEvents\Domain\Model\Event $event
-	 */
-	public function getEvent() {
-		return $this->event;
-	}
+    /**
+     * Sets the email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 
-	/**
-	 * Sets the email
-	 *
-	 * @param string $email
-	 * @return void
-	 */
-	public function setEmail($email) {
-		$this->email = $email;
-	}
+    /**
+     * Returns the telephone
+     *
+     * @return string $telephone
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
 
-	/**
-	 * Returns the telephone
-	 *
-	 * @return string $telephone
-	 */
-	public function getTelephone() {
-		return $this->telephone;
-	}
+    /**
+     * Sets the telephone
+     *
+     * @param string $telephone
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    }
 
-	/**
-	 * Sets the telephone
-	 *
-	 * @param string $telephone
-	 * @return void
-	 */
-	public function setTelephone($telephone) {
-		$this->telephone = $telephone;
-	}
+    /**
+     * Returns the institution
+     *
+     * @return string $institution
+     */
+    public function getInstitution()
+    {
+        return $this->institution;
+    }
 
-	/**
-	 * Returns the institution
-	 *
-	 * @return string $institution
-	 */
-	public function getInstitution() {
-		return $this->institution;
-	}
+    /**
+     * Sets the institution
+     *
+     * @param string $institution
+     */
+    public function setInstitution($institution)
+    {
+        $this->institution = $institution;
+    }
 
-	/**
-	 * Sets the institution
-	 *
-	 * @param string $institution
-	 * @return void
-	 */
-	public function setInstitution($institution) {
-		$this->institution = $institution;
-	}
+    /**
+     * Returns the customerid
+     *
+     * @return string $customerid
+     */
+    public function getCustomerid()
+    {
+        return $this->customerid;
+    }
 
-	/**
-	 * Returns the customerid
-	 *
-	 * @return string $customerid
-	 */
-	public function getCustomerid() {
-		return $this->customerid;
-	}
+    /**
+     * Sets the customerid
+     *
+     * @param string $customerid
+     */
+    public function setCustomerid($customerid)
+    {
+        $this->customerid = $customerid;
+    }
 
-	/**
-	 * Sets the customerid
-	 *
-	 * @param string $customerid
-	 * @return void
-	 */
-	public function setCustomerid($customerid) {
-		$this->customerid = $customerid;
-	}
+    /**
+     * Returns the number
+     *
+     * @return integer number
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
 
-	/**
-	 * Returns the number
-	 *
-	 * @return integer number
-	 */
-	public function getNumber() {
-		return $this->number;
-	}
+    /**
+     * Sets the number
+     *
+     * @param integer $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
 
-	/**
-	 * Sets the number
-	 *
-	 * @param integer $number
-	 * @return integer number
-	 */
-	public function setNumber($number) {
-		$this->number = $number;
-	}
+    /**
+     * Returns the editcode
+     *
+     * @return string $editcode
+     */
+    public function getEditcode()
+    {
+        return $this->editcode;
+    }
 
-	/**
-	 * Returns the editcode
-	 *
-	 * @return string $editcode
-	 */
-	public function getEditcode() {
-		return $this->editcode;
-	}
+    /**
+     * Sets the editcode
+     *
+     * @param string $editcode
+     */
+    public function setEditcode($editcode)
+    {
+        $this->editcode = $editcode;
+    }
 
-	/**
-	 * Sets the editcode
-	 *
-	 * @param string $editcode
-	 * @return void
-	 */
-	public function setEditcode($editcode) {
-		$this->editcode = $editcode;
-	}
+    /**
+     * Returns the message
+     *
+     * @return string $message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
-	/**
-	 * Returns the message
-	 *
-	 * @return string $message
-	 */
-	public function getMessage() {
-		return $this->message;
-	}
+    /**
+     * Sets the message
+     *
+     * @param string $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+    }
 
-	/**
-	 * Sets the message
-	 *
-	 * @param string $message
-	 * @return void
-	 */
-	public function setMessage($message) {
-		$this->message = $message;
-	}
+    /**
+     * Returns the crdate
+     *
+     * @return \DateTime $crdate
+     */
+    public function getCrdate()
+    {
+        return $this->crdate;
+    }
 
-	/**
-	 * Returns the crdate
-	 *
-	 * @return DateTime $crdate
-	 */
-	public function getCrdate() {
-		return $this->crdate;
-	}
+    /**
+     * Sets the crdate
+     *
+     * @param \DateTime $crdate
+     */
+    public function setCrdate($crdate)
+    {
+        $this->crdate = $crdate;
+    }
 
-	/**
-	 * Sets the crdate
-	 *
-	 * @param DateTime $crdate
-	 * @return void
-	 */
-	public function setCrdate($crdate) {
-		$this->crdate = $crdate;
-	}
-
-	/**
-	 * Sets the event
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Event $event
-	 * @return void
-	 */
-	public function setEvent(\Slub\SlubEvents\Domain\Model\Event $event) {
-		$this->event = $event;
-	}
-
+    /**
+     * Sets the event
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
+     * @return void
+     */
+    public function setEvent(\Slub\SlubEvents\Domain\Model\Event $event)
+    {
+        $this->event = $event;
+    }
 }
-
-?>

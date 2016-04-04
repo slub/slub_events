@@ -1,5 +1,7 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Condition;
+
+namespace Slub\SlubEvents\ViewHelpers\Condition;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -40,40 +42,41 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class IsWeekendViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
+    /**
+     * subscriberRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     */
+    protected $subscriberRepository;
 
-class IsWeekendViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * injectSubscriberRepository
+     *
+     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+     *
+     * @return void
+     */
+    public function injectSubscriberRepository(
+        \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+    ) {
+        $this->subscriberRepository = $subscriberRepository;
+    }
 
-	/**
-	 * subscriberRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-	 */
-	protected $subscriberRepository;
+    /**
+     * Checks if Saturday or Sunday
+     *
+     * @param int $day
+     *
+     * @return boolean
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($day)
+    {
+        $dayOfWeek = date('w', $day);
 
-	/**
-	 * injectSubscriberRepository
-	 *
-	 * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
-	 * @return void
-	 */
-	public function injectSubscriberRepository(\Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository) {
-		$this->subscriberRepository = $subscriberRepository;
-	}
-
-	/**
-	 * Checks if Saturday or Sunday
-	 *
-	 * @param int day
-	 * @return boolean
-	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($day) {
-
-		$dayOfWeek = date('w', $day);
-
-		return ($dayOfWeek == 6 || $dayOfWeek == 0) ? TRUE : FALSE;
-
-	}
+        return ($dayOfWeek == 6 || $dayOfWeek == 0) ? true : false;
+    }
 }
-?>
