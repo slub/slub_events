@@ -69,13 +69,40 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @param \Slub\SlubEvents\Domain\Model\Contact $contact
 	 * @return array The found Event Objects
 	 */
-	public function findAllGbByContact($contact) {
+	public function findWibaByContact($contact) {
 
 		$query = $this->createQuery();
 
 		$constraints = array();
 		$constraints[] = $query->equals('contact', $contact);
 		$constraints[] = $query->equals('genius_bar', 1);
+		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+
+		if (count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
+
+		// order by start_date -> start_time...
+		$query->setOrderings(
+			array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+		);
+
+		return $query->execute();
+	}
+
+	/**
+	 * Finds all datasets by MM relation contact
+	 *
+	 * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+	 * @return array The found Event Objects
+	 */
+	public function findEventByContact($contact) {
+
+		$query = $this->createQuery();
+
+		$constraints = array();
+		$constraints[] = $query->equals('contact', $contact);
+		$constraints[] = $query->equals('genius_bar', 0);
 		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
 		if (count($constraints)) {

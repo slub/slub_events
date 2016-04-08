@@ -94,14 +94,16 @@ class CategoryController extends AbstractController {
 	 */
 	public function contactListAction(\Slub\SlubEvents\Domain\Model\Category $category = NULL) {
 
-// Array ( [hidePagination] => 0 [senderEmailAddress] => webmaster@slub-dresden.de [emailToContact] => Array ( [sendEmailOnMaximumReached] => 1 [sendEmailOnFreeAgain] => 1 [sendEmailOnEveryBooking] => 0 ) [list] => Array ( [paginate] => Array ( [itemsPerPage] => 10 [insertAbove] => TRUE [insertBelow] => TRUE [lessPages] => TRUE [forcedNumberOfLinks] => 5 [pagesBefore] => 3 [pagesAfter] => 3 ) ) [categorySelection] => 7 [pidListing] => 26 [pidDetails] => 28 [pidSubscribeForm] => 29 [categorySelectionRecursive] => 0 [disciplineSelection] => [disciplineSelectionRecursive] => 0 [showPastEvents] => 0 [contactsSelection] => [pidUnsubscribeForm] => [pidListOwn] => [pidUnSubscribeForm] => [testval] => ewqrwqr [contactSelection] => 1 [fullCalendarJS] => [storagePid] => 25 )
-
-
 		if(!($this->settings['contactSelection'] > 0)) {
 			$this->view->assign('contactSelectionWarning', 1);
 		} else {
-			$this->view->assign('ansprech', $this->settings['contactSelection']);
-			$events = $this->eventRepository->findAllGbByContact($this->settings['contactSelection']);
+			$this->view->assign('contacts', $this->contactRepository->findById($this->settings['contactSelection']));
+			if($this->settings['showWiba']) {
+				$wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection']);
+			}
+			if($this->settings['showEvent']) {
+				$events = $this->eventRepository->findEventByContact($this->settings['contactSelection']);
+			}
 		}
 
 
@@ -109,9 +111,10 @@ class CategoryController extends AbstractController {
 		#	$events = $this->eventRepository->findAllGbByCategory($category);
 		#}
 
+		$this->view->assign('wibas', $wibas);
 		$this->view->assign('events', $events);
-		#$this->view->assign('category', $category);
-		#$this->view->assign('parentcategory', $category->getParent()->current());
+		$this->view->assign('showWiba', $this->settings['showWiba']);
+		$this->view->assign('showEvent', $this->settings['showEvent']);
 	}
 
 	/**

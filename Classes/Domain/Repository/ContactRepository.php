@@ -58,5 +58,18 @@ class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	}
 
+	/**
+	 * Find contact by uid
+	 *
+	 * @return array The found Contact Objects
+	 */
+	public function findById($uid) {
+		$query = $this->createQuery();
+		$constraints = array();
+		$query->matching($query->equals('uid', $uid));
+		$contact = $query->execute();
+		return $contact;
+	}
+
 }
 ?>

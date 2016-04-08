@@ -65,7 +65,7 @@
 				<config>
 					<type>select</type>
 					<foreign_table>tx_slubevents_domain_model_contact</foreign_table>
-					<foreign_table_where>ORDER BY tx_slubevents_domain_model_contact.sorting DESC</foreign_table_where>
+					<foreign_table_where>ORDER BY tx_slubevents_domain_model_contact.name, tx_slubevents_domain_model_contact.sorting</foreign_table_where>
 					<size>5</size>
 					<autoSizeMax>30</autoSizeMax>
 					<minitems>1</minitems>
@@ -74,17 +74,27 @@
 			</TCEforms>
 		</settings.contactSelection>
 
-		<settings.testval>
+		<settings.showWiba>
 			<TCEforms>
 				<exclude>1</exclude>
-				<label>Textval</label>
+				<label>Wissensbar anzeigen</label>
 				<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
 				<config>
-					<type>input</type>
-					<size>32</size>
+					<type>check</type>
 				</config>
 			</TCEforms>
-		</settings.testval>
+		</settings.showWiba>
+
+		<settings.showEvent>
+			<TCEforms>
+				<exclude>1</exclude>
+				<label>Veranstaltungen anzeigen</label>
+				<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
+				<config>
+					<type>check</type>
+				</config>
+			</TCEforms>
+		</settings.showEvent>
 
 		<settings.pidListing>
 			<TCEforms>

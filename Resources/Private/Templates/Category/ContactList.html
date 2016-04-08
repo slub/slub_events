@@ -6,19 +6,12 @@
 	<f:for each="{events}" as="event" key="label" iteration="eventIterator">
 		<f:if condition="{event.geniusBar}">
 			<f:then>
-                <f:comment>
                 <f:if condition="<se:format.newMonthTitle events='{events}' index='{label}' />">
                     <f:then>
                         <li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
                     </f:then>
                 </f:if>
-                </f:comment>
-                <li class="heading"><h4>{event.title} -
-					<f:for each="{event.categories}" as="cat" iteration="ite">
-						{cat.title}<f:if condition="{ite.isLast}"><f:then></f:then><f:else>, </f:else></f:if>
-					</f:for>
-					</h4>
-                </li>
+
 				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
 					<f:then>
 						<f:if condition="<se:format.freePlacesLeft event='{event}' /> >= 1">
@@ -34,6 +27,28 @@
 	</ul>
 </f:section>
 
+<f:section name="wibaListing">
+	<ul>
+		<f:for each="{wibas}" as="wiba" key="label" iteration="wibaIterator">
+	       <f:if condition="<se:format.newMonthTitle events='{wibas}' index='{label}' />">
+	            <f:then>
+	                <li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{wibas}' index='{label}' />" format="%B %Y" /></h4></li>
+	            </f:then>
+	        </f:if>
+
+			<f:if condition="<se:condition.IsSubscriptionAllowed event='{wiba}' />">
+				<f:then>
+					<f:if condition="<se:format.freePlacesLeft event='{wiba}' /> >= 1">
+						<f:then>
+							<f:render partial="Event/GbItem" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+						</f:then>
+					</f:if>
+				</f:then>
+			</f:if>
+		</f:for>
+	</ul>
+</f:section>
+
 <f:section name="main">
 
 <div class="slub-event-gblist" id="book-me-now">
@@ -46,7 +61,7 @@
 
 		<div class="contacts">
 			<p><f:translate key="tx_slubevents.gb.i_consult_you" /></p>
-			<f:groupedFor each="{events}" as="cevent" groupBy="contact" groupKey="contact">
+			<f:for each="{contacts}" as="contact">
 				<div class="single-contact">
 					<f:if condition="{contact.photo}">
 						<f:then>
@@ -57,77 +72,75 @@
 						</f:then>
 					</f:if>
 				</div>
-			</f:groupedFor>
+			</f:for>
 			<div class="clear"></div>
 		</div>
 
 		<br style="clear:both">
 
-		<f:if condition="{settings.hidePagination}">
+		<f:if condition="{showWiba}">
 			<f:then>
-				<f:render section="eventListing" arguments="{events: events, category: category}" />
+				<f:if condition="{wibas}">
+					<f:then>
+						<f:if condition="{settings.hidePagination}">
+							<f:then>
+								<f:render section="wibaListing" arguments="{wibas: wibas, category: category}" />
+							</f:then>
+							<f:else>
+								<f:widget.paginate objects="{wibas}" as="paginatedWibas" configuration="{settings.list.paginate}">
+									<f:render section="wibaListing" arguments="{wibas: paginatedWibas, category: category}" />
+								</f:widget.paginate>
+							</f:else>
+						</f:if>
+					</f:then>
+					<f:else>
+						<ul>
+							<li><f:translate key="tx_slubwibas.gb.no_date" /></li>
+						</ul>
+					</f:else>
+				</f:if>
+
+				<br style="clear:both">
+
 			</f:then>
-			<f:else>
-				<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-					<f:render section="eventListing" arguments="{events: paginatedEvents, category: category}" />
-				</f:widget.paginate>
-			</f:else>
 		</f:if>
 
-		</f:else>
-	</f:if>
 
-<f:comment>
+		<f:if condition="{showEvent}">
+			<f:then>
 
-	<f:if condition="{events}">
-		<f:then>
-
-			<h4>{category.title}</h4>
-			<div class="category-description"><f:format.html>{category.description}</f:format.html></div>
-
-			<f:if condition="{settings.hidePagination}">
-				<f:then>
-					<f:render section="eventListing" arguments="{events: events, category: category}" />
-				</f:then>
-				<f:else>
-					<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-						<f:render section="eventListing" arguments="{events: paginatedEvents, category: category}" />
-					</f:widget.paginate>
-				</f:else>
-			</f:if>
-
-			<div class="contacts">
-				<p><f:translate key="tx_slubevents.gb.we_consult_you" /></p>
-				<f:groupedFor each="{events}" as="cevent" groupBy="contact" groupKey="contact">
-					<div class="single-contact">
-						<f:if condition="{contact.photo}">
+				<f:if condition="{events}">
+					<f:then>
+						<f:if condition="{settings.hidePagination}">
 							<f:then>
-								<div class="photo">
-									<f:image src='uploads/tx_slubevents/{contact.photo}' alt="Porträt von {contact.name}" title="{contact.name -> f:format.stripTags()}" maxWidth="100" />
-								</div>
-								<div class="description"><span class="name">{contact.name}</span><f:format.html>{contact.description}</f:format.html></div>
+								<f:render section="eventListing" arguments="{events: events, category: category}" />
 							</f:then>
+							<f:else>
+								<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
+									<f:render section="eventListing" arguments="{events: paginatedEvents, category: category}" />
+								</f:widget.paginate>
+							</f:else>
 						</f:if>
-					</div>
-				</f:groupedFor>
-				<div class="clear"></div>
-			</div>
+					</f:then>
+					<f:else>
+						<ul>
+							<li><f:translate key="tx_slubevents.gb.no_event" /></li>
+						</ul>
+					</f:else>
+				</f:if>
 
-		</f:then>
-		<f:else>
-			<ul>
-			<li>
-				Zur Zeit haben wir zu diesem Thema leider keine Angebote.
-			</li>
-			</ul>
+			</f:then>
+		</f:if>
+
+
 		</f:else>
 	</f:if>
 
-</f:comment>
-
-	<div class="submit">
-		<f:link.action action="list" class="button linkback" controller="Category" arguments="{category : parentcategory}"><f:translate key="paginate_back" /></f:link.action>
-	</div>
+	<f:comment>
+		<div class="submit">
+			<f:link.action action="list" class="button linkback" controller="Category" arguments="{category : parentcategory}"><f:translate key="paginate_back" /></f:link.action>
+		</div>
+	</f:comment>
 
 </div>
 
