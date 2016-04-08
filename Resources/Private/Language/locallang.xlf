@@ -122,6 +122,9 @@
 		<trans-unit id="tx_slubevents.gb.we_consult_you">
 			<source>We Consult You</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.i_consult_you">
+			<source>I Consult You</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category">
 			<source>Event Category</source>
 		</trans-unit>

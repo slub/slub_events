@@ -13,13 +13,19 @@
       <switchableControllerActions>
        <TCEforms>
          <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
+         <onChange>reload</onChange>
          <config>
           <type>select</type>
           <items>
 
             <numIndex index="0">
              <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.knowledgebar_view</numIndex>
-             <numIndex index="1">Category->list;Category->gbList</numIndex>
+             <numIndex index="1">Category->list;Category->gbList;Category->contactList</numIndex>
+            </numIndex>
+
+            <numIndex index="1">
+             <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.contact_view</numIndex>
+             <numIndex index="1">Category->contactList;Category->list;Category->gbList</numIndex>
             </numIndex>
 
            </items>
@@ -30,6 +36,7 @@
 		<settings.categorySelection>
 			<TCEforms>
 				<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories_start</label>
+				<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->list;Category->gbList;Category->contactList]]></displayCond>
 				<config>
 					<type>select</type>
 					<renderMode>tree</renderMode>
@@ -50,6 +57,34 @@
 				</config>
 			</TCEforms>
 		</settings.categorySelection>
+
+		<settings.contactSelection>
+			<TCEforms>
+				<label>Ansprechpartner</label>
+				<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
+				<config>
+					<type>select</type>
+					<foreign_table>tx_slubevents_domain_model_contact</foreign_table>
+					<foreign_table_where>ORDER BY tx_slubevents_domain_model_contact.sorting DESC</foreign_table_where>
+					<size>5</size>
+					<autoSizeMax>30</autoSizeMax>
+					<minitems>1</minitems>
+					<maxitems>1</maxitems>
+				</config>
+			</TCEforms>
+		</settings.contactSelection>
+
+		<settings.testval>
+			<TCEforms>
+				<exclude>1</exclude>
+				<label>Textval</label>
+				<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
+				<config>
+					<type>input</type>
+					<size>32</size>
+				</config>
+			</TCEforms>
+		</settings.testval>
 
 		<settings.pidListing>
 			<TCEforms>

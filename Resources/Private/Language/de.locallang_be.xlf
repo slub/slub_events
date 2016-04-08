@@ -42,6 +42,10 @@
 			<source>Knowledge Bar View</source>
 			<target>Wissensbar</target>
 		</trans-unit>
+		<trans-unit id="flexforms.contact_view" approved="yes">
+			<source>Contact View</source>
+			<target>Personenansicht</target>
+		</trans-unit>
 		<trans-unit id="flexforms.list_month_view" approved="yes">
 			<source>List Month View</source>
 			<target>Monatsliste</target>

@@ -137,6 +137,10 @@
 			<source>We Consult You</source>
 			<target>Wir beraten Sie</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.i_consult_you" approved="yes">
+			<source>I Consult You</source>
+			<target>Ich berate Sie</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
 			<source>Event Category</source>
 			<target>Kategorie</target>
