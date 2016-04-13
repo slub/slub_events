@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,39 +27,40 @@
 /**
  * Calculate Free Places
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class FreePlacesLeftViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class FreePlacesLeftViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * subscriberRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     * @inject
+     */
+    protected $subscriberRepository;
 
-	/**
-	 * subscriberRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-	 * @inject
-	 */
-	protected $subscriberRepository;
+    /**
+     * Calculate the free places for a given event.
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @return int
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render(\Slub\SlubEvents\Domain\Model\Event $event = null)
+    {
 
-	/**
-	 * Calculate the free places for a given event.
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Event $event
-	 * @return int
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render(\Slub\SlubEvents\Domain\Model\Event $event = NULL) {
+        if ($event != null) {
+            $free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
+        } else {
+            $free = 0;
+        }
 
-		if ($event != NULL) {
-			$free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
-		} else {
-			$free = 0;
-		}
+        return ($free > 0) ? $free : 0;
 
-		return ($free > 0)? $free : 0;
-
-	}
+    }
 }
+
 ?>

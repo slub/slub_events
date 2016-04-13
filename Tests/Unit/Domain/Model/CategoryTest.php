@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,111 +36,125 @@
  *
  * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_SlubEvents_Domain_Model_Category
-	 */
-	protected $fixture;
+class Tx_SlubEvents_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+{
+    /**
+     * @var Tx_SlubEvents_Domain_Model_Category
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_SlubEvents_Domain_Model_Category();
-	}
+    public function setUp()
+    {
+        $this->fixture = new Tx_SlubEvents_Domain_Model_Category();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTitleReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getTitleReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleForStringSetsTitle() { 
-		$this->fixture->setTitle('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setTitleForStringSetsTitle()
+    {
+        $this->fixture->setTitle('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTitle()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setDescriptionForStringSetsDescription() { 
-		$this->fixture->setDescription('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsInitialValueForString()
+    {
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getDescription()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getParentReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Category() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->fixture->getParent()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setDescriptionForStringSetsDescription()
+    {
+        $this->fixture->setDescription('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setParentForObjectStorageContainingTx_SlubEvents_Domain_Model_CategorySetsParent() { 
-		$parent = new Tx_SlubEvents_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneParent->attach($parent);
-		$this->fixture->setParent($objectStorageHoldingExactlyOneParent);
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getDescription()
+        );
+    }
 
-		$this->assertSame(
-			$objectStorageHoldingExactlyOneParent,
-			$this->fixture->getParent()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function addParentToObjectStorageHoldingParent() {
-		$parent = new Tx_SlubEvents_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneParent->attach($parent);
-		$this->fixture->addParent($parent);
+    /**
+     * @test
+     */
+    public function getParentReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Category()
+    {
+        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->fixture->getParent()
+        );
+    }
 
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOneParent,
-			$this->fixture->getParent()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setParentForObjectStorageContainingTx_SlubEvents_Domain_Model_CategorySetsParent()
+    {
+        $parent = new Tx_SlubEvents_Domain_Model_Category();
+        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneParent->attach($parent);
+        $this->fixture->setParent($objectStorageHoldingExactlyOneParent);
 
-	/**
-	 * @test
-	 */
-	public function removeParentFromObjectStorageHoldingParent() {
-		$parent = new Tx_SlubEvents_Domain_Model_Category();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$localObjectStorage->attach($parent);
-		$localObjectStorage->detach($parent);
-		$this->fixture->addParent($parent);
-		$this->fixture->removeParent($parent);
+        $this->assertSame(
+            $objectStorageHoldingExactlyOneParent,
+            $this->fixture->getParent()
+        );
+    }
 
-		$this->assertEquals(
-			$localObjectStorage,
-			$this->fixture->getParent()
-		);
-	}
-	
+    /**
+     * @test
+     */
+    public function addParentToObjectStorageHoldingParent()
+    {
+        $parent = new Tx_SlubEvents_Domain_Model_Category();
+        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneParent->attach($parent);
+        $this->fixture->addParent($parent);
+
+        $this->assertEquals(
+            $objectStorageHoldingExactlyOneParent,
+            $this->fixture->getParent()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeParentFromObjectStorageHoldingParent()
+    {
+        $parent = new Tx_SlubEvents_Domain_Model_Category();
+        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $localObjectStorage->attach($parent);
+        $localObjectStorage->detach($parent);
+        $this->fixture->addParent($parent);
+        $this->fixture->removeParent($parent);
+
+        $this->assertEquals(
+            $localObjectStorage,
+            $this->fixture->getParent()
+        );
+    }
+
 }
+
 ?>

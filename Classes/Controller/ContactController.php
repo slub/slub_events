@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Controller;
+namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -32,27 +32,31 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class ContactController extends AbstractController {
+class ContactController extends AbstractController
+{
 
-	/**
-	 * action list
-	 *
-	 * @return void
-	 */
-	public function listAction() {
-		$contacts = $this->contactRepository->findAll();
-		$this->view->assign('contacts', $contacts);
-	}
+    /**
+     * action list
+     *
+     * @return void
+     */
+    public function listAction()
+    {
+        $contacts = $this->contactRepository->findAll();
+        $this->view->assign('contacts', $contacts);
+    }
 
-	/**
-	 * action show
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Contact $contact
-	 * @return void
-	 */
-	public function showAction(\Slub\SlubEvents\Domain\Model\Contact $contact) {
-		$this->view->assign('contact', $contact);
-	}
+    /**
+     * action show
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+     * @return void
+     */
+    public function showAction(\Slub\SlubEvents\Domain\Model\Contact $contact)
+    {
+        $this->view->assign('contact', $contact);
+    }
 
 }
+
 ?>

@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Link;
+namespace Slub\SlubEvents\ViewHelpers\Link;
 /***************************************************************
  *  Copyright notice
  *
@@ -40,23 +40,25 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class IslocalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class IslocalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * @param string $link the given link as integer uid or string
+     * @return boolean
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($link)
+    {
 
-	/**
-	 * @param string $link the given link as integer uid or string
-	 * @return boolean
-	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($link) {
+        if ($link === null) {
+            return false;
+        }
 
-		if ($link === NULL) {
-			return FALSE;
-		}
+        return \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($link) ? true : false;
 
-		return \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($link) ? TRUE : FALSE;
-
-	}
+    }
 }
+
 ?>

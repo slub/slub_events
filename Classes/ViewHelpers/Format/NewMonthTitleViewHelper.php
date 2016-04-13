@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,74 +27,76 @@
 /**
  * Calculate Free Places
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class NewMonthTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class NewMonthTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * eventRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\EventRepository
+     */
+    protected $eventRepository;
 
-	/**
-	 * eventRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-	 */
-	protected $eventRepository;
+    /**
+     * injectEventRepository
+     *
+     * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
+     * @return void
+     */
+    public function injectEventRepository(\Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
 
-	/**
-	 * injectEventRepository
-	 *
-	 * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
-	 * @return void
-	 */
-	public function injectEventRepository(\Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository) {
-		$this->eventRepository = $eventRepository;
-	}
+    /**
+     * Render the supplied DateTime object as a formatted date.
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
+     * @param int index
+     * @return int
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($events, $index)
+    {
 
-	/**
-	 * Render the supplied DateTime object as a formatted date.
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
-	 * @param int index
-	 * @return int
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($events, $index) {
+        // the first is shown anyway...
+        if ($index == 0) {
 
-		// the first is shown anyway...
-		if ($index == 0) {
+            $event = $events[$index];
 
-			$event = $events[$index];
+            $date = $event->getStartDateTime();
 
-			$date = $event->getStartDateTime();
+            if ($date instanceof \DateTime) {
 
-			if ($date instanceof \DateTime) {
+                return $date;
 
-				return $date;
+            }
 
-			}
+        } else {
 
-		} else {
+            $event = $events[$index];
 
-			$event = $events[$index];
+            $date = $event->getStartDateTime();
 
-			$date = $event->getStartDateTime();
+            $preevent = $events[$index - 1];
 
-			$preevent = $events[$index - 1];
+            $predate = $preevent->getStartDateTime();
 
-			$predate = $preevent->getStartDateTime();
+            if ($date->format('m') != $predate->format('m')) {
 
-			if ($date->format('m') != $predate->format('m')) {
+                return $date;
 
-				return $date;
+            }
 
-			}
+        }
 
-		}
+        return;
 
-		return;
-
-	}
+    }
 }
+
 ?>

@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Model;
+namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -32,144 +32,156 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * Name of the Category
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title;
+    /**
+     * Name of the Category
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $title;
 
-	/**
-	 * Description of the Category
-	 *
-	 * @var string
-	 */
-	protected $description;
+    /**
+     * Description of the Category
+     *
+     * @var string
+     */
+    protected $description;
 
-	/**
-	 * Parent Category
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category>
-	 */
-	protected $parent;
+    /**
+     * Parent Category
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category>
+     */
+    protected $parent;
 
-	/**
-	 * @var integer
-	 */
-	protected $l10nParent;
+    /**
+     * @var integer
+     */
+    protected $l10nParent;
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Sets the title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * Returns the description
-	 *
-	 * @return string $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * Sets the description
-	 *
-	 * @param string $description
-	 * @return void
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-		//Do not remove the next line: It would break the functionality
-		$this->initStorageObjects();
-	}
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //Do not remove the next line: It would break the functionality
+        $this->initStorageObjects();
+    }
 
-	/**
-	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
-	 *
-	 * @return void
-	 */
-	protected function initStorageObjects() {
-		/**
-		 * Do not modify this method!
-		 * It will be rewritten on each save in the extension builder
-		 * You may modify the constructor of this class instead
-		 */
-		$this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-	}
+    /**
+     * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
+     *
+     * @return void
+     */
+    protected function initStorageObjects()
+    {
+        /**
+         * Do not modify this method!
+         * It will be rewritten on each save in the extension builder
+         * You may modify the constructor of this class instead
+         */
+        $this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
 
-	/**
-	 * Adds a Category
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $parent
-	 * @return void
-	 */
-	public function addParent(\Slub\SlubEvents\Domain\Model\Category $parent) {
-		$this->parent->attach($parent);
-	}
+    /**
+     * Adds a Category
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $parent
+     * @return void
+     */
+    public function addParent(\Slub\SlubEvents\Domain\Model\Category $parent)
+    {
+        $this->parent->attach($parent);
+    }
 
-	/**
-	 * Removes a Category
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $parentToRemove The Category to be removed
-	 * @return void
-	 */
-	public function removeParent(\Slub\SlubEvents\Domain\Model\Category $parentToRemove) {
-		$this->parent->detach($parentToRemove);
-	}
+    /**
+     * Removes a Category
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $parentToRemove The Category to be removed
+     * @return void
+     */
+    public function removeParent(\Slub\SlubEvents\Domain\Model\Category $parentToRemove)
+    {
+        $this->parent->detach($parentToRemove);
+    }
 
-	/**
-	 * Returns the parent
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $parent
-	 */
-	public function getParent() {
-		return $this->parent;
-	}
+    /**
+     * Returns the parent
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $parent
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
 
-	/**
-	 * Sets the parent
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $parent
-	 * @return void
-	 */
-	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent) {
-		$this->parent = $parent;
-	}
+    /**
+     * Sets the parent
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $parent
+     * @return void
+     */
+    public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent)
+    {
+        $this->parent = $parent;
+    }
 
-	/**
-	 * Get l10n parent
-	 *
-	 * @return int
-	 */
-	public function getL10nParent() {
-		return $this->l10nParent;
-	}
+    /**
+     * Get l10n parent
+     *
+     * @return int
+     */
+    public function getL10nParent()
+    {
+        return $this->l10nParent;
+    }
 
 }
 

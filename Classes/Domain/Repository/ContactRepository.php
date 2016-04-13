@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Repository;
+namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -32,31 +32,34 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * Finds all datasets and return in tree order
-	 *
-	 * @return array The found Contact Objects
-	 */
-	public function findAllSorted() {
+    /**
+     * Finds all datasets and return in tree order
+     *
+     * @return array The found Contact Objects
+     */
+    public function findAllSorted()
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
+        $constraints = array();
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		$query->setOrderings(
-			array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
-		);
-		$contacts = $query->execute();
+        $query->setOrderings(
+            array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+        );
+        $contacts = $query->execute();
 
-		return $contacts;
+        return $contacts;
 
-	}
+    }
 
 }
+
 ?>

@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Repository;
+namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -32,97 +32,102 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * Finds all datasets and return in tree order
-	 *
-	 * @param string categories separated by comma
-	 * @return array The found Category Objects
-	 */
-	public function findAllByUidsTree($disciplines) {
+    /**
+     * Finds all datasets and return in tree order
+     *
+     * @param string categories separated by comma
+     * @return array The found Category Objects
+     */
+    public function findAllByUidsTree($disciplines)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
-		$constraints[] = $query->in('uid', $disciplines);
+        $constraints = array();
+        $constraints[] = $query->in('uid', $disciplines);
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		$query->setOrderings(
-			array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
-		);
-		$disciplines = $query->execute();
+        $query->setOrderings(
+            array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+        );
+        $disciplines = $query->execute();
 
-		$flatCategories = array();
-		foreach ($disciplines as $category) {
-			$flatCategories[$category->getUid()] = Array(
-				'item' =>  $category,
-				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL
-			);
-		}
+        $flatCategories = array();
+        foreach ($disciplines as $category) {
+            $flatCategories[$category->getUid()] = Array(
+                'item' => $category,
+                'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : null
+            );
+        }
 
-		$tree = array();
-		foreach ($flatCategories as $id => &$node) {
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-				$flatCategories[$node['parent']]['children'][$id] = &$node;
-			}
-		}
+        $tree = array();
+        foreach ($flatCategories as $id => &$node) {
+            if ($node['parent'] === null) {
+                $tree[$id] = &$node;
+            } else {
+                $flatCategories[$node['parent']]['children'][$id] = &$node;
+            }
+        }
 
-		return $tree;
-	}
+        return $tree;
+    }
 
-	/**
-	 * Finds all datasets of current level and return in tree order
-	 *
-	 * @param integer $startCategory
-	 * @return array The found Category Ids
-	 */
-	public function findAllChildDisciplines($startCategory = 0) {
+    /**
+     * Finds all datasets of current level and return in tree order
+     *
+     * @param integer $startCategory
+     * @return array The found Category Ids
+     */
+    public function findAllChildDisciplines($startCategory = 0)
+    {
 
-		$childCategoriesIds = self::findChildDisciplines($startCategory);
+        $childCategoriesIds = self::findChildDisciplines($startCategory);
 
-		foreach ($categories as $category) {
-			$childCategoriesIds = array_merge($this->findChildDisciplines($category), $childCategoriesIds);
-		}
+        foreach ($categories as $category) {
+            $childCategoriesIds = array_merge($this->findChildDisciplines($category), $childCategoriesIds);
+        }
 
-		return $childCategoriesIds;
-	}
+        return $childCategoriesIds;
+    }
 
-	/**
-	 * Finds all categories recursive from given startCategory
-	 *
-	 * @param integer $startCategory
-	 * @return array The found Category Ids
-	 */
-	private function findChildDisciplines($startCategory = 0) {
+    /**
+     * Finds all categories recursive from given startCategory
+     *
+     * @param integer $startCategory
+     * @return array The found Category Ids
+     */
+    private function findChildDisciplines($startCategory = 0)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
+        $constraints = array();
 
-		$constraints[] = $query->equals('parent', $startCategory);
+        $constraints[] = $query->equals('parent', $startCategory);
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
-		$categories = $query->execute();
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+        $categories = $query->execute();
 
-		foreach ($categories as $category) {
-			$childCategoriesIds[] = $category->getUid();
+        foreach ($categories as $category) {
+            $childCategoriesIds[] = $category->getUid();
 
-			$recursiveCategoriesIds = self::findChildDisciplines($category->getUid());
-			if (count($recursiveCategoriesIds) > 0) {
-				$childCategoriesIds = array_merge($recursiveCategoriesIds, $childCategoriesIds );
-			}
-		}
+            $recursiveCategoriesIds = self::findChildDisciplines($category->getUid());
+            if (count($recursiveCategoriesIds) > 0) {
+                $childCategoriesIds = array_merge($recursiveCategoriesIds, $childCategoriesIds);
+            }
+        }
 
-		return $childCategoriesIds;
-	}
+        return $childCategoriesIds;
+    }
 
 }
+
 ?>

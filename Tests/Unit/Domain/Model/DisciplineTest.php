@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,36 +36,43 @@
  *
  * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_DisciplineTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_SlubEvents_Domain_Model_Discipline
-	 */
-	protected $fixture;
+class Tx_SlubEvents_Domain_Model_DisciplineTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+{
+    /**
+     * @var Tx_SlubEvents_Domain_Model_Discipline
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_SlubEvents_Domain_Model_Discipline();
-	}
+    public function setUp()
+    {
+        $this->fixture = new Tx_SlubEvents_Domain_Model_Discipline();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getNameReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getNameReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setNameForStringSetsName() { 
-		$this->fixture->setName('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setNameForStringSetsName()
+    {
+        $this->fixture->setName('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getName()
-		);
-	}
-	
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getName()
+        );
+    }
+
 }
+
 ?>

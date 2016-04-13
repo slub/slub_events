@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,43 +27,45 @@
 /**
  * Adds the Editcode to the form and to the user session
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class EditCodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class EditCodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * Set session data
+     *
+     * @param $key
+     * @param $data
+     * @return
+     */
+    public function setSessionData($key, $data)
+    {
 
-	/**
-	 * Set session data
-	 *
-	 * @param $key
-	 * @param $data
-	 * @return
-	 */
-	public function setSessionData($key, $data) {
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
 
-	    $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
+        return;
+    }
 
-	    return;
-	}
+    /**
+     * Render the supplied DateTime object as a formatted date.
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @return int
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($event)
+    {
 
-	/**
-	 * Render the supplied DateTime object as a formatted date.
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Event $event
-	 * @return int
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($event) {
+        // set editcode-dummy for Spam/Form-double-sent protection
+        $editCodeDummy = hash('sha256', rand() . $event->getTitle() . time() . 'dummy');
+        $this->setSessionData('editcode', $editCodeDummy);
 
-		// set editcode-dummy for Spam/Form-double-sent protection
-		$editCodeDummy = hash('sha256', rand().$event->getTitle().time().'dummy');
-		$this->setSessionData('editcode', $editCodeDummy);
+        return $editCodeDummy;
 
-	    return $editCodeDummy;
-
-	}
+    }
 }
+
 ?>

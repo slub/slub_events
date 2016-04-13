@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,400 +36,459 @@
  *
  * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_SlubEvents_Domain_Model_Event
-	 */
-	protected $fixture;
+class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+{
+    /**
+     * @var Tx_SlubEvents_Domain_Model_Event
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_SlubEvents_Domain_Model_Event();
-	}
+    public function setUp()
+    {
+        $this->fixture = new Tx_SlubEvents_Domain_Model_Event();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTitleReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getTitleReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleForStringSetsTitle() { 
-		$this->fixture->setTitle('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setTitleForStringSetsTitle()
+    {
+        $this->fixture->setTitle('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTitle()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getStartDateTimeReturnsInitialValueForDateTime() { }
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setStartDateTimeForDateTimeSetsStartDateTime() { }
-	
-	/**
-	 * @test
-	 */
-	public function getAllDayReturnsInitialValueForBoolean() { 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getAllDay()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getStartDateTimeReturnsInitialValueForDateTime()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setAllDayForBooleanSetsAllDay() { 
-		$this->fixture->setAllDay(TRUE);
+    /**
+     * @test
+     */
+    public function setStartDateTimeForDateTimeSetsStartDateTime()
+    {
+    }
 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getAllDay()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getEndDateTimeReturnsInitialValueForDateTime() { }
+    /**
+     * @test
+     */
+    public function getAllDayReturnsInitialValueForBoolean()
+    {
+        $this->assertSame(
+            true,
+            $this->fixture->getAllDay()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setEndDateTimeForDateTimeSetsEndDateTime() { }
-	
-	/**
-	 * @test
-	 */
-	public function getSubEndDateTimeReturnsInitialValueForDateTime() { }
+    /**
+     * @test
+     */
+    public function setAllDayForBooleanSetsAllDay()
+    {
+        $this->fixture->setAllDay(true);
 
-	/**
-	 * @test
-	 */
-	public function setSubEndDateTimeForDateTimeSetsSubEndDateTime() { }
-	
-	/**
-	 * @test
-	 */
-	public function getTeaserReturnsInitialValueForString() { }
+        $this->assertSame(
+            true,
+            $this->fixture->getAllDay()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTeaserForStringSetsTeaser() { 
-		$this->fixture->setTeaser('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getEndDateTimeReturnsInitialValueForDateTime()
+    {
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTeaser()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function setEndDateTimeForDateTimeSetsEndDateTime()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setDescriptionForStringSetsDescription() { 
-		$this->fixture->setDescription('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getSubEndDateTimeReturnsInitialValueForDateTime()
+    {
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getDescription()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getMinSubscriberReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
-			$this->fixture->getMinSubscriber()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setSubEndDateTimeForDateTimeSetsSubEndDateTime()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setMinSubscriberForIntegerSetsMinSubscriber() { 
-		$this->fixture->setMinSubscriber(12);
+    /**
+     * @test
+     */
+    public function getTeaserReturnsInitialValueForString()
+    {
+    }
 
-		$this->assertSame(
-			12,
-			$this->fixture->getMinSubscriber()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getMaxSubscriberReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
-			$this->fixture->getMaxSubscriber()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setTeaserForStringSetsTeaser()
+    {
+        $this->fixture->setTeaser('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setMaxSubscriberForIntegerSetsMaxSubscriber() { 
-		$this->fixture->setMaxSubscriber(12);
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getTeaser()
+        );
+    }
 
-		$this->assertSame(
-			12,
-			$this->fixture->getMaxSubscriber()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getAudienceReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
-			$this->fixture->getAudience()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setAudienceForIntegerSetsAudience() { 
-		$this->fixture->setAudience(12);
+    /**
+     * @test
+     */
+    public function setDescriptionForStringSetsDescription()
+    {
+        $this->fixture->setDescription('Conceived at T3CON10');
 
-		$this->assertSame(
-			12,
-			$this->fixture->getAudience()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getSubEndDateInfoSentReturnsInitialValueForBoolean() { 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getSubEndDateInfoSent()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getDescription()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setSubEndDateInfoSentForBooleanSetsSubEndDateInfoSent() { 
-		$this->fixture->setSubEndDateInfoSent(TRUE);
+    /**
+     * @test
+     */
+    public function getMinSubscriberReturnsInitialValueForInteger()
+    {
+        $this->assertSame(
+            0,
+            $this->fixture->getMinSubscriber()
+        );
+    }
 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getSubEndDateInfoSent()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getGeniusBarReturnsInitialValueForBoolean() { 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getGeniusBar()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setMinSubscriberForIntegerSetsMinSubscriber()
+    {
+        $this->fixture->setMinSubscriber(12);
 
-	/**
-	 * @test
-	 */
-	public function setGeniusBarForBooleanSetsGeniusBar() { 
-		$this->fixture->setGeniusBar(TRUE);
+        $this->assertSame(
+            12,
+            $this->fixture->getMinSubscriber()
+        );
+    }
 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getGeniusBar()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getCancelledReturnsInitialValueForBoolean() { 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getCancelled()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getMaxSubscriberReturnsInitialValueForInteger()
+    {
+        $this->assertSame(
+            0,
+            $this->fixture->getMaxSubscriber()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setCancelledForBooleanSetsCancelled() { 
-		$this->fixture->setCancelled(TRUE);
+    /**
+     * @test
+     */
+    public function setMaxSubscriberForIntegerSetsMaxSubscriber()
+    {
+        $this->fixture->setMaxSubscriber(12);
 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getCancelled()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getCategoriesReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Category() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->fixture->getCategories()
-		);
-	}
+        $this->assertSame(
+            12,
+            $this->fixture->getMaxSubscriber()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setCategoriesForObjectStorageContainingTx_SlubEvents_Domain_Model_CategorySetsCategories() { 
-		$category = new Tx_SlubEvents_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneCategories = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneCategories->attach($category);
-		$this->fixture->setCategories($objectStorageHoldingExactlyOneCategories);
+    /**
+     * @test
+     */
+    public function getAudienceReturnsInitialValueForInteger()
+    {
+        $this->assertSame(
+            0,
+            $this->fixture->getAudience()
+        );
+    }
 
-		$this->assertSame(
-			$objectStorageHoldingExactlyOneCategories,
-			$this->fixture->getCategories()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function addCategoryToObjectStorageHoldingCategories() {
-		$category = new Tx_SlubEvents_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneCategory = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($category);
-		$this->fixture->addCategory($category);
+    /**
+     * @test
+     */
+    public function setAudienceForIntegerSetsAudience()
+    {
+        $this->fixture->setAudience(12);
 
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategories()
-		);
-	}
+        $this->assertSame(
+            12,
+            $this->fixture->getAudience()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function removeCategoryFromObjectStorageHoldingCategories() {
-		$category = new Tx_SlubEvents_Domain_Model_Category();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$localObjectStorage->attach($category);
-		$localObjectStorage->detach($category);
-		$this->fixture->addCategory($category);
-		$this->fixture->removeCategory($category);
+    /**
+     * @test
+     */
+    public function getSubEndDateInfoSentReturnsInitialValueForBoolean()
+    {
+        $this->assertSame(
+            true,
+            $this->fixture->getSubEndDateInfoSent()
+        );
+    }
 
-		$this->assertEquals(
-			$localObjectStorage,
-			$this->fixture->getCategories()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getSubscribersReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Subscriber() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->fixture->getSubscribers()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setSubEndDateInfoSentForBooleanSetsSubEndDateInfoSent()
+    {
+        $this->fixture->setSubEndDateInfoSent(true);
 
-	/**
-	 * @test
-	 */
-	public function setSubscribersForObjectStorageContainingTx_SlubEvents_Domain_Model_SubscriberSetsSubscribers() { 
-		$subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
-		$objectStorageHoldingExactlyOneSubscribers = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneSubscribers->attach($subscriber);
-		$this->fixture->setSubscribers($objectStorageHoldingExactlyOneSubscribers);
+        $this->assertSame(
+            true,
+            $this->fixture->getSubEndDateInfoSent()
+        );
+    }
 
-		$this->assertSame(
-			$objectStorageHoldingExactlyOneSubscribers,
-			$this->fixture->getSubscribers()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function addSubscriberToObjectStorageHoldingSubscribers() {
-		$subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
-		$objectStorageHoldingExactlyOneSubscriber = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneSubscriber->attach($subscriber);
-		$this->fixture->addSubscriber($subscriber);
+    /**
+     * @test
+     */
+    public function getGeniusBarReturnsInitialValueForBoolean()
+    {
+        $this->assertSame(
+            true,
+            $this->fixture->getGeniusBar()
+        );
+    }
 
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOneSubscriber,
-			$this->fixture->getSubscribers()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setGeniusBarForBooleanSetsGeniusBar()
+    {
+        $this->fixture->setGeniusBar(true);
 
-	/**
-	 * @test
-	 */
-	public function removeSubscriberFromObjectStorageHoldingSubscribers() {
-		$subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$localObjectStorage->attach($subscriber);
-		$localObjectStorage->detach($subscriber);
-		$this->fixture->addSubscriber($subscriber);
-		$this->fixture->removeSubscriber($subscriber);
+        $this->assertSame(
+            true,
+            $this->fixture->getGeniusBar()
+        );
+    }
 
-		$this->assertEquals(
-			$localObjectStorage,
-			$this->fixture->getSubscribers()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getLocationReturnsInitialValueForTx_SlubEvents_Domain_Model_Location() { }
+    /**
+     * @test
+     */
+    public function getCancelledReturnsInitialValueForBoolean()
+    {
+        $this->assertSame(
+            true,
+            $this->fixture->getCancelled()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setLocationForTx_SlubEvents_Domain_Model_LocationSetsLocation() { }
-	
-	/**
-	 * @test
-	 */
-	public function getDisciplineReturnsInitialValueForTx_SlubEvents_Domain_Model_Discipline() { }
+    /**
+     * @test
+     */
+    public function setCancelledForBooleanSetsCancelled()
+    {
+        $this->fixture->setCancelled(true);
 
-	/**
-	 * @test
-	 */
-	public function setDisciplineForTx_SlubEvents_Domain_Model_DisciplineSetsDiscipline() { }
-	
-	/**
-	 * @test
-	 */
-	public function getContactReturnsInitialValueForTx_SlubEvents_Domain_Model_Contact() { }
+        $this->assertSame(
+            true,
+            $this->fixture->getCancelled()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setContactForTx_SlubEvents_Domain_Model_ContactSetsContact() { }
-	
+    /**
+     * @test
+     */
+    public function getCategoriesReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Category()
+    {
+        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->fixture->getCategories()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setCategoriesForObjectStorageContainingTx_SlubEvents_Domain_Model_CategorySetsCategories()
+    {
+        $category = new Tx_SlubEvents_Domain_Model_Category();
+        $objectStorageHoldingExactlyOneCategories = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneCategories->attach($category);
+        $this->fixture->setCategories($objectStorageHoldingExactlyOneCategories);
+
+        $this->assertSame(
+            $objectStorageHoldingExactlyOneCategories,
+            $this->fixture->getCategories()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addCategoryToObjectStorageHoldingCategories()
+    {
+        $category = new Tx_SlubEvents_Domain_Model_Category();
+        $objectStorageHoldingExactlyOneCategory = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneCategory->attach($category);
+        $this->fixture->addCategory($category);
+
+        $this->assertEquals(
+            $objectStorageHoldingExactlyOneCategory,
+            $this->fixture->getCategories()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeCategoryFromObjectStorageHoldingCategories()
+    {
+        $category = new Tx_SlubEvents_Domain_Model_Category();
+        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $localObjectStorage->attach($category);
+        $localObjectStorage->detach($category);
+        $this->fixture->addCategory($category);
+        $this->fixture->removeCategory($category);
+
+        $this->assertEquals(
+            $localObjectStorage,
+            $this->fixture->getCategories()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getSubscribersReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Subscriber()
+    {
+        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->fixture->getSubscribers()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setSubscribersForObjectStorageContainingTx_SlubEvents_Domain_Model_SubscriberSetsSubscribers()
+    {
+        $subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
+        $objectStorageHoldingExactlyOneSubscribers = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneSubscribers->attach($subscriber);
+        $this->fixture->setSubscribers($objectStorageHoldingExactlyOneSubscribers);
+
+        $this->assertSame(
+            $objectStorageHoldingExactlyOneSubscribers,
+            $this->fixture->getSubscribers()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addSubscriberToObjectStorageHoldingSubscribers()
+    {
+        $subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
+        $objectStorageHoldingExactlyOneSubscriber = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneSubscriber->attach($subscriber);
+        $this->fixture->addSubscriber($subscriber);
+
+        $this->assertEquals(
+            $objectStorageHoldingExactlyOneSubscriber,
+            $this->fixture->getSubscribers()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeSubscriberFromObjectStorageHoldingSubscribers()
+    {
+        $subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
+        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $localObjectStorage->attach($subscriber);
+        $localObjectStorage->detach($subscriber);
+        $this->fixture->addSubscriber($subscriber);
+        $this->fixture->removeSubscriber($subscriber);
+
+        $this->assertEquals(
+            $localObjectStorage,
+            $this->fixture->getSubscribers()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getLocationReturnsInitialValueForTx_SlubEvents_Domain_Model_Location()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function setLocationForTx_SlubEvents_Domain_Model_LocationSetsLocation()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function getDisciplineReturnsInitialValueForTx_SlubEvents_Domain_Model_Discipline()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function setDisciplineForTx_SlubEvents_Domain_Model_DisciplineSetsDiscipline()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function getContactReturnsInitialValueForTx_SlubEvents_Domain_Model_Contact()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function setContactForTx_SlubEvents_Domain_Model_ContactSetsContact()
+    {
+    }
+
 }
+
 ?>

@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,39 +27,40 @@
 /**
  * Return Booked Places
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class BookedPlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class BookedPlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * subscriberRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     * @inject
+     */
+    protected $subscriberRepository;
 
-	/**
-	 * subscriberRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-	 * @inject
-	 */
-	protected $subscriberRepository;
+    /**
+     * Return the number of subscribers for a given event
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @return int
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render(\Slub\SlubEvents\Domain\Model\Event $event = null)
+    {
 
-	/**
-	 * Return the number of subscribers for a given event
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Event $event
-	 * @return int
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render(\Slub\SlubEvents\Domain\Model\Event $event = NULL) {
+        if ($event != null) {
+            $booked = $this->subscriberRepository->countAllByEvent($event);
+        } else {
+            $booked = 0;
+        }
 
-		if ($event != NULL) {
-			$booked = $this->subscriberRepository->countAllByEvent($event);
-		} else {
-			$booked = 0;
-		}
+        return $booked;
 
-		return $booked;
-
-	}
+    }
 }
+
 ?>

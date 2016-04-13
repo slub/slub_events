@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Be;
+namespace Slub\SlubEvents\ViewHelpers\Be;
 /***************************************************************
  *  Copyright notice
  *
@@ -77,57 +77,62 @@
  *
  * --> 2015-10-06: maybe possible with native fluid viewHelper now, form validation has to be checked to verify
  */
-class CheckboxViewHelper extends  \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper {
+class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper
+{
 
-	/**
-	 * @var string
-	 */
-	protected $tagName = 'input';
+    /**
+     * @var string
+     */
+    protected $tagName = 'input';
 
-	/**
-	 * Initialize the arguments.
-	 *
-	 * @return void
-	 * @author Bastian Waidelich <bastian@typo3.org>
-	 * @api
-	 */
-	public function initializeArguments() {
-		parent::initializeArguments();
-		$this->registerTagAttribute('disabled', 'string', 'Specifies that the input element should be disabled when the page loads');
-		$this->registerArgument('errorClass', 'string', 'CSS class to set if there are errors for this view helper', FALSE, 'f3-form-error');
-		$this->overrideArgument('value', 'string', 'Value of input tag. Required for checkboxes', TRUE);
-		$this->registerUniversalTagAttributes();
-	}
+    /**
+     * Initialize the arguments.
+     *
+     * @return void
+     * @author Bastian Waidelich <bastian@typo3.org>
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerTagAttribute('disabled', 'string',
+            'Specifies that the input element should be disabled when the page loads');
+        $this->registerArgument('errorClass', 'string', 'CSS class to set if there are errors for this view helper',
+            false, 'f3-form-error');
+        $this->overrideArgument('value', 'string', 'Value of input tag. Required for checkboxes', true);
+        $this->registerUniversalTagAttributes();
+    }
 
-	/**
-	 * Renders the checkbox.
-	 *
-	 * @param array $checked list id of checked values
-	 * @param array $selected list id of checked values
-	 *
-	 * @return string
-	 * @author Bastian Waidelich <bastian@typo3.org>
-	 * @api
-	 */
-	public function render($checked = NULL, $selected = array()) {
-		$this->tag->addAttribute('type', 'checkbox');
+    /**
+     * Renders the checkbox.
+     *
+     * @param array $checked list id of checked values
+     * @param array $selected list id of checked values
+     *
+     * @return string
+     * @author Bastian Waidelich <bastian@typo3.org>
+     * @api
+     */
+    public function render($checked = null, $selected = array())
+    {
+        $this->tag->addAttribute('type', 'checkbox');
 
-		$nameAttribute = $this->getName();
-		$valueAttribute = $this->getValue();
-		$checked = in_array($valueAttribute, $selected);
+        $nameAttribute = $this->getName();
+        $valueAttribute = $this->getValue();
+        $checked = in_array($valueAttribute, $selected);
 
-		$this->registerFieldNameForFormTokenGeneration($nameAttribute);
-		$this->tag->addAttribute('name', $nameAttribute);
-		$this->tag->addAttribute('value', $valueAttribute);
-		if ($checked) {
-			$this->tag->addAttribute('checked', 'checked');
-		}
+        $this->registerFieldNameForFormTokenGeneration($nameAttribute);
+        $this->tag->addAttribute('name', $nameAttribute);
+        $this->tag->addAttribute('value', $valueAttribute);
+        if ($checked) {
+            $this->tag->addAttribute('checked', 'checked');
+        }
 
-		$this->setErrorClassAttribute();
+        $this->setErrorClassAttribute();
 
-		$hiddenField = $this->renderHiddenFieldForEmptyValue();
-		return $hiddenField . $this->tag->render();
-	}
+        $hiddenField = $this->renderHiddenFieldForEmptyValue();
+        return $hiddenField . $this->tag->render();
+    }
 }
 
 ?>

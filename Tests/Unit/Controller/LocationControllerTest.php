@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,26 +36,31 @@
  *
  * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_Slub_events_Controller_LocationControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_SlubEvents_Domain_Model_Location
-	 */
-	protected $fixture;
+class Tx_Slub_events_Controller_LocationControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+{
+    /**
+     * @var Tx_SlubEvents_Domain_Model_Location
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_SlubEvents_Domain_Model_Location();
-	}
+    public function setUp()
+    {
+        $this->fixture = new Tx_SlubEvents_Domain_Model_Location();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
-	}
+    /**
+     * @test
+     */
+    public function dummyMethod()
+    {
+        $this->markTestIncomplete();
+    }
 
 }
+
 ?>

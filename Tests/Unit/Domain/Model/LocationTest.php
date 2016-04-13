@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,128 +36,145 @@
  *
  * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_SlubEvents_Domain_Model_Location
-	 */
-	protected $fixture;
+class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+{
+    /**
+     * @var Tx_SlubEvents_Domain_Model_Location
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_SlubEvents_Domain_Model_Location();
-	}
+    public function setUp()
+    {
+        $this->fixture = new Tx_SlubEvents_Domain_Model_Location();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getNameReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getNameReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setNameForStringSetsName() { 
-		$this->fixture->setName('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setNameForStringSetsName()
+    {
+        $this->fixture->setName('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getName()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getName()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setDescriptionForStringSetsDescription() { 
-		$this->fixture->setDescription('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsInitialValueForString()
+    {
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getDescription()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getLinkReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function setDescriptionForStringSetsDescription()
+    {
+        $this->fixture->setDescription('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setLinkForStringSetsLink() { 
-		$this->fixture->setLink('Conceived at T3CON10');
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getDescription()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getLink()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getParentReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Location() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->fixture->getParent()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getLinkReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setParentForObjectStorageContainingTx_SlubEvents_Domain_Model_LocationSetsParent() { 
-		$parent = new Tx_SlubEvents_Domain_Model_Location();
-		$objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneParent->attach($parent);
-		$this->fixture->setParent($objectStorageHoldingExactlyOneParent);
+    /**
+     * @test
+     */
+    public function setLinkForStringSetsLink()
+    {
+        $this->fixture->setLink('Conceived at T3CON10');
 
-		$this->assertSame(
-			$objectStorageHoldingExactlyOneParent,
-			$this->fixture->getParent()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function addParentToObjectStorageHoldingParent() {
-		$parent = new Tx_SlubEvents_Domain_Model_Location();
-		$objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneParent->attach($parent);
-		$this->fixture->addParent($parent);
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getLink()
+        );
+    }
 
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOneParent,
-			$this->fixture->getParent()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getParentReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Location()
+    {
+        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->fixture->getParent()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function removeParentFromObjectStorageHoldingParent() {
-		$parent = new Tx_SlubEvents_Domain_Model_Location();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$localObjectStorage->attach($parent);
-		$localObjectStorage->detach($parent);
-		$this->fixture->addParent($parent);
-		$this->fixture->removeParent($parent);
+    /**
+     * @test
+     */
+    public function setParentForObjectStorageContainingTx_SlubEvents_Domain_Model_LocationSetsParent()
+    {
+        $parent = new Tx_SlubEvents_Domain_Model_Location();
+        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneParent->attach($parent);
+        $this->fixture->setParent($objectStorageHoldingExactlyOneParent);
 
-		$this->assertEquals(
-			$localObjectStorage,
-			$this->fixture->getParent()
-		);
-	}
-	
+        $this->assertSame(
+            $objectStorageHoldingExactlyOneParent,
+            $this->fixture->getParent()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addParentToObjectStorageHoldingParent()
+    {
+        $parent = new Tx_SlubEvents_Domain_Model_Location();
+        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $objectStorageHoldingExactlyOneParent->attach($parent);
+        $this->fixture->addParent($parent);
+
+        $this->assertEquals(
+            $objectStorageHoldingExactlyOneParent,
+            $this->fixture->getParent()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeParentFromObjectStorageHoldingParent()
+    {
+        $parent = new Tx_SlubEvents_Domain_Model_Location();
+        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $localObjectStorage->attach($parent);
+        $localObjectStorage->detach($parent);
+        $this->fixture->addParent($parent);
+        $this->fixture->removeParent($parent);
+
+        $this->assertEquals(
+            $localObjectStorage,
+            $this->fixture->getParent()
+        );
+    }
+
 }
+
 ?>

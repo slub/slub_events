@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+namespace Slub\SlubEvents\ViewHelpers\Format;
 /*                                                                        *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -76,49 +76,52 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * @var boolean
+     */
+    protected $escapingInterceptorEnabled = false;
 
-	/**
-	 * @var boolean
-	 */
-	protected $escapingInterceptorEnabled = FALSE;
+    /**
+     * Render the supplied DateTime object as a formatted date.
+     *
+     * @param mixed $date either a DateTime object or a string that is accepted by DateTime constructor
+     * @param string $format Format String which is taken to format the Date/Time
+     * @return string Formatted date
+     * @author Christopher Hlubek <hlubek@networkteam.com>
+     * @author Bastian Waidelich <bastian@typo3.org>
+     * @api
+     */
+    public function render($date, $format = '%X')
+    {
 
-	/**
-	 * Render the supplied DateTime object as a formatted date.
-	 *
-	 * @param mixed $date either a DateTime object or a string that is accepted by DateTime constructor
-	 * @param string $format Format String which is taken to format the Date/Time
-	 * @return string Formatted date
-	 * @author Christopher Hlubek <hlubek@networkteam.com>
-	 * @author Bastian Waidelich <bastian@typo3.org>
-	 * @api
-	 */
-	public function render($date, $format = '%X') {
+        global $TYPO3_CONF_VARS;
 
-		global $TYPO3_CONF_VARS;
+        if ($date === null) {
+            $date = $this->renderChildren();
+            if ($date === null) {
+                return '';
+            }
+        }
 
-		if ($date === NULL) {
-			$date = $this->renderChildren();
-			if ($date === NULL) {
-				return '';
-			}
-		}
+        if (!$date instanceof \DateTime) {
+            try {
+                $date = new \DateTime($date);
+            } catch (Exception $exception) {
+                throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('"' . $date . '" could not be parsed by DateTime constructor.',
+                    1241722579);
+            }
+        }
 
-		if (!$date instanceof \DateTime) {
-			try {
-				$date = new \DateTime($date);
-			} catch (Exception $exception) {
-				throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('"' . $date . '" could not be parsed by DateTime constructor.', 1241722579);
-			}
-		}
+        if ($TYPO3_CONF_VARS['SYS']['phpTimeZone']) {
+            $date->setTimezone(new \DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
+        }
 
-		if($TYPO3_CONF_VARS['SYS']['phpTimeZone']){
-			$date->setTimezone(new \DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
-		}
+        return strftime($format, $date->getTimestamp());
 
-		return strftime($format, $date->getTimestamp());
-
-	}
+    }
 }
+
 ?>

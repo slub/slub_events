@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Repository;
+namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -32,254 +32,263 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
 
-	/**
-	 * Finds all datasets by MM relation categories
-	 *
-	 * @param string categories separated by comma
-	 * @return array The found Category Objects
-	 */
-	public function findAllByUids($categories) {
+    /**
+     * Finds all datasets by MM relation categories
+     *
+     * @param string categories separated by comma
+     * @return array The found Category Objects
+     */
+    public function findAllByUids($categories)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		// we have to ignore sys_language here
-		// --> https://forge.typo3.org/issues/37696
-		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
+        // we have to ignore sys_language here
+        // --> https://forge.typo3.org/issues/37696
+        $query->getQuerySettings()->setRespectSysLanguage(false);
 
-		$constraints = array();
-		$constraints[] = $query->in('uid', $categories);
+        $constraints = array();
+        $constraints[] = $query->in('uid', $categories);
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
-	/**
-	 * Finds all datasets and return in tree order
-	 *
-	 * @return array The found Category Objects
-	 */
-	public function findAllTree() {
+    /**
+     * Finds all datasets and return in tree order
+     *
+     * @return array The found Category Objects
+     */
+    public function findAllTree()
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$categories = $query->execute();
+        $categories = $query->execute();
 
-		$flatCategories = array();
-		foreach ($categories as $category) {
-			$flatCategories[$category->getUid()] = Array(
-				'item' =>  $category,
-				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL
-			);
-		}
+        $flatCategories = array();
+        foreach ($categories as $category) {
+            $flatCategories[$category->getUid()] = Array(
+                'item' => $category,
+                'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : null
+            );
+        }
 
-		$tree = array();
-		foreach ($flatCategories as $id => &$node) {
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-				$flatCategories[$node['parent']]['children'][$id] = &$node;
-			}
-		}
+        $tree = array();
+        foreach ($flatCategories as $id => &$node) {
+            if ($node['parent'] === null) {
+                $tree[$id] = &$node;
+            } else {
+                $flatCategories[$node['parent']]['children'][$id] = &$node;
+            }
+        }
 
-		return $tree;
-	}
+        return $tree;
+    }
 
-	/**
-	 * Finds all datasets and return in tree order
-	 *
-	 * @param string categories separated by comma
-	 * @return array The found Category Objects
-	 */
-	public function findAllByUidsTree($categories) {
+    /**
+     * Finds all datasets and return in tree order
+     *
+     * @param string categories separated by comma
+     * @return array The found Category Objects
+     */
+    public function findAllByUidsTree($categories)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
-		$constraints[] = $query->in('uid', $categories);
+        $constraints = array();
+        $constraints[] = $query->in('uid', $categories);
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		$query->setOrderings(
-			array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
-		);
-		$categories = $query->execute();
+        $query->setOrderings(
+            array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+        );
+        $categories = $query->execute();
 
-		$flatCategories = array();
-		foreach ($categories as $category) {
-			$flatCategories[$category->getUid()] = Array(
-				'item' =>  $category,
-				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL
-			);
-		}
+        $flatCategories = array();
+        foreach ($categories as $category) {
+            $flatCategories[$category->getUid()] = Array(
+                'item' => $category,
+                'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : null
+            );
+        }
 
-		$tree = array();
-		foreach ($flatCategories as $id => &$node) {
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-				$flatCategories[$node['parent']]['children'][$id] = &$node;
-			}
-		}
+        $tree = array();
+        foreach ($flatCategories as $id => &$node) {
+            if ($node['parent'] === null) {
+                $tree[$id] = &$node;
+            } else {
+                $flatCategories[$node['parent']]['children'][$id] = &$node;
+            }
+        }
 
-		return $tree;
-	}
+        return $tree;
+    }
 
-	/**
-	 * Finds all datasets of current branch and return in tree order
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $startCategory
-	 * @ignorevalidation $startCategory
-	 * @return array The found Category Objects as Tree
-	 */
-	public function findCurrentBranch($startCategory = NULL) {
+    /**
+     * Finds all datasets of current branch and return in tree order
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $startCategory
+     * @ignorevalidation $startCategory
+     * @return array The found Category Objects as Tree
+     */
+    public function findCurrentBranch($startCategory = null)
+    {
 
-		$childCategorieIds = $this->findAllChildCategories($startCategory->getUid());
+        $childCategorieIds = $this->findAllChildCategories($startCategory->getUid());
 
-		// ups, no children found...
-		if ($childCategorieIds === NULL) {
-			return array();
-		}
+        // ups, no children found...
+        if ($childCategorieIds === null) {
+            return array();
+        }
 
-		$categories = $this->findAllByUids($childCategorieIds);
+        $categories = $this->findAllByUids($childCategorieIds);
 
-		$flatCategories = array();
+        $flatCategories = array();
 
-		foreach ($categories as $category) {
-			$flatCategories[$category->getUid()] = Array(
-				'item' =>  $category,
-				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL,
-			);
-		}
+        foreach ($categories as $category) {
+            $flatCategories[$category->getUid()] = Array(
+                'item' => $category,
+                'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : null,
+            );
+        }
 
-		$tree = array();
-		foreach ($flatCategories as $id => &$node) {
-
-
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-
-				$flatCategories[$node['parent']]['children'][$id] = &$node;
-				// if tree is empty, we have to add this node here too
-				if (empty($tree)) {
-					$tree[$node['parent']]['children'][$id] = &$node;
-				}
-			}
-		}
-
-		return $tree[$startCategory->getUid()]['children'];
-	}
-
-	/**
-	 * Finds all datasets of current level and return in tree order
-	 *
-	 * @param integer $startCategory
-	 * @return array The found Category Ids
-	 */
-	public function findAllChildCategories($startCategory = 0) {
-
-		$childCategoriesIds = $this->findChildCategories($startCategory);
-
-		return $childCategoriesIds;
-	}
-
-	/**
-	 * Finds all categories recursive from given startCategory
-	 *
-	 * @param integer $startCategory
-	 * @return array The found Category Ids
-	 */
-	private function findChildCategories($startCategory = 0) {
-
-		$query = $this->createQuery();
-
-		// we have to ignore sys_language here
-		// --> https://forge.typo3.org/issues/37696
-		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
-		//~ $query->getQuerySettings()->setLanguageOverlayMode(TRUE);
-
-		$constraints = array();
-
-		$constraints[] = $query->equals('parent', $startCategory);
-
-		$query->setOrderings(
-			array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
-		);
-
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
-		$categories = $query->execute();
-
-		foreach ($categories as $category) {
-			$childCategoriesIds[] = $category->getUid();
-			$recursiveCategoriesIds = self::findChildCategories($category->getUid());
-			if (count($recursiveCategoriesIds) > 0) {
-				$childCategoriesIds = array_merge($recursiveCategoriesIds, $childCategoriesIds );
-			}
-		}
-
-		return $childCategoriesIds;
-	}
+        $tree = array();
+        foreach ($flatCategories as $id => &$node) {
 
 
-	/**
-	 * Finds all datasets of current branch and return in tree order
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $startCategory
-	 * @ignorevalidation $startCategory
-	 * @return array The found Category Objects
-	 */
-	public function findCategoryRootline($startCategory = NULL) {
+            if ($node['parent'] === null) {
+                $tree[$id] = &$node;
+            } else {
 
-		$query = $this->createQuery();
+                $flatCategories[$node['parent']]['children'][$id] = &$node;
+                // if tree is empty, we have to add this node here too
+                if (empty($tree)) {
+                    $tree[$node['parent']]['children'][$id] = &$node;
+                }
+            }
+        }
 
-		$constraints = array();
+        return $tree[$startCategory->getUid()]['children'];
+    }
 
-		if ($startCategory !== NULL)
-			$constraints[] = $query->equals('parents', $startCategory->getUid());
-		else
-			$constraints[] = $query->equals('parent', 0);
+    /**
+     * Finds all datasets of current level and return in tree order
+     *
+     * @param integer $startCategory
+     * @return array The found Category Ids
+     */
+    public function findAllChildCategories($startCategory = 0)
+    {
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
-		$categories = $query->execute();
+        $childCategoriesIds = $this->findChildCategories($startCategory);
 
-		$flatCategories = array();
-		foreach ($categories as $category) {
-			$flatCategories[$category->getUid()] = Array(
-				'item' =>  $category,
-				'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : NULL
-			);
-		}
+        return $childCategoriesIds;
+    }
 
-		$tree = array();
+    /**
+     * Finds all categories recursive from given startCategory
+     *
+     * @param integer $startCategory
+     * @return array The found Category Ids
+     */
+    private function findChildCategories($startCategory = 0)
+    {
 
-		// if only one categorie exists the foreach-solution below
-		// doesn't work as expected --> take the one and give it back as tree-array()
-		if (count($flatCategories) == 1) {
-			$tree[0] = array_shift($flatCategories);
-			return $tree;
-		}
+        $query = $this->createQuery();
 
-		foreach ($flatCategories as $id => &$node) {
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-				$flatCategories[$node['parent']]['children'][$id] = &$node;
-			}
-		}
-		return $tree;
-	}
+        // we have to ignore sys_language here
+        // --> https://forge.typo3.org/issues/37696
+        $query->getQuerySettings()->setRespectSysLanguage(false);
+        //~ $query->getQuerySettings()->setLanguageOverlayMode(TRUE);
+
+        $constraints = array();
+
+        $constraints[] = $query->equals('parent', $startCategory);
+
+        $query->setOrderings(
+            array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+        );
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+        $categories = $query->execute();
+
+        foreach ($categories as $category) {
+            $childCategoriesIds[] = $category->getUid();
+            $recursiveCategoriesIds = self::findChildCategories($category->getUid());
+            if (count($recursiveCategoriesIds) > 0) {
+                $childCategoriesIds = array_merge($recursiveCategoriesIds, $childCategoriesIds);
+            }
+        }
+
+        return $childCategoriesIds;
+    }
+
+
+    /**
+     * Finds all datasets of current branch and return in tree order
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $startCategory
+     * @ignorevalidation $startCategory
+     * @return array The found Category Objects
+     */
+    public function findCategoryRootline($startCategory = null)
+    {
+
+        $query = $this->createQuery();
+
+        $constraints = array();
+
+        if ($startCategory !== null) {
+            $constraints[] = $query->equals('parents', $startCategory->getUid());
+        } else {
+            $constraints[] = $query->equals('parent', 0);
+        }
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+        $categories = $query->execute();
+
+        $flatCategories = array();
+        foreach ($categories as $category) {
+            $flatCategories[$category->getUid()] = Array(
+                'item' => $category,
+                'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : null
+            );
+        }
+
+        $tree = array();
+
+        // if only one categorie exists the foreach-solution below
+        // doesn't work as expected --> take the one and give it back as tree-array()
+        if (count($flatCategories) == 1) {
+            $tree[0] = array_shift($flatCategories);
+            return $tree;
+        }
+
+        foreach ($flatCategories as $id => &$node) {
+            if ($node['parent'] === null) {
+                $tree[$id] = &$node;
+            } else {
+                $flatCategories[$node['parent']]['children'][$id] = &$node;
+            }
+        }
+        return $tree;
+    }
 
 }
 

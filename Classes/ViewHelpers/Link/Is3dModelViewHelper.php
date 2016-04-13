@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Link;
+namespace Slub\SlubEvents\ViewHelpers\Link;
 /***************************************************************
  *  Copyright notice
  *
@@ -40,25 +40,27 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class Is3dModelViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class Is3dModelViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * check if string "3d.slub-dresden.de" is part of the l ink
+     *
+     * @param string $link the given link as integer uid or string
+     * @return boolean
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($link)
+    {
 
-	/**
-	 * check if string "3d.slub-dresden.de" is part of the l ink
-	 *
-	 * @param string $link the given link as integer uid or string
-	 * @return boolean
-	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($link) {
+        if ($link === null) {
+            return false;
+        }
 
-		if ($link === NULL) {
-			return FALSE;
-		}
+        return strpos($link, '3d.slub-dresden.de') ? true : false;
 
-		return strpos($link, '3d.slub-dresden.de') ? TRUE : FALSE;
-
-	}
+    }
 }
+
 ?>

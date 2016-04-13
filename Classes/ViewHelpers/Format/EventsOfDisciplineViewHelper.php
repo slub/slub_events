@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,34 +27,35 @@
 /**
  * Counts future events of given discipline
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class EventsOfDisciplineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class EventsOfDisciplineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * eventRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\EventRepository
+     * @inject
+     */
+    protected $eventRepository;
 
-	/**
-	 * eventRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-	 * @inject
-	 */
-	protected $eventRepository;
+    /**
+     * check if any events of categories below are present and free for booking
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
+     * @return boolean
+     * @api
+     */
+    public function render(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
+    {
 
-	/**
-	 * check if any events of categories below are present and free for booking
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
-	 * @return boolean
-	 * @api
-	 */
-	public function render(\Slub\SlubEvents\Domain\Model\Discipline $discipline) {
+        $events = $this->eventRepository->findAllBySettings(array('disciplineList' => array(0 => $discipline)));
 
-		$events = $this->eventRepository->findAllBySettings(array('disciplineList' => array( 0 => $discipline )));
+        return count($events);
 
-		return count($events);
-
-	}
+    }
 }
+
 ?>

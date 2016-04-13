@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Repository;
+namespace Slub\SlubEvents\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,109 +31,114 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * Finds subscriber by fe_user data
-	 *
-	 * @param int pid
-	 * @return array The found Subscriber Objects
-	 */
-	public function findAllByFeuser($pid = 0) {
+    /**
+     * Finds subscriber by fe_user data
+     *
+     * @param int pid
+     * @return array The found Subscriber Objects
+     */
+    public function findAllByFeuser($pid = 0)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
-		$constraints[] = $query->equals('customerid', $GLOBALS['TSFE']->fe_user->user['username']);
-		if ($pid) {
-			$query->getQuerySettings()->setRespectStoragePage(FALSE);
-			$constraints[] = $query->equals('pid', $pid);
-		}
+        $constraints = array();
+        $constraints[] = $query->equals('customerid', $GLOBALS['TSFE']->fe_user->user['username']);
+        if ($pid) {
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $constraints[] = $query->equals('pid', $pid);
+        }
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
-	/**
-	 * Finds subscriber by fe_user data
-	 *
-	 * @param string editcode
-	 * @param int pid
-	 * @return array The found Subscriber Objects
-	 */
-	public function findAllByEditcode($editcode, $pid = 0) {
+    /**
+     * Finds subscriber by fe_user data
+     *
+     * @param string editcode
+     * @param int pid
+     * @return array The found Subscriber Objects
+     */
+    public function findAllByEditcode($editcode, $pid = 0)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
-		$constraints[] = $query->equals('editcode', $editcode);
-		if ($pid) {
-			$query->getQuerySettings()->setRespectStoragePage(FALSE);
-			$constraints[] = $query->equals('pid', $pid);
-		}
+        $constraints = array();
+        $constraints[] = $query->equals('editcode', $editcode);
+        if ($pid) {
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $constraints[] = $query->equals('pid', $pid);
+        }
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
-	/**
-	 * Count all Subscribers by number for a given event
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Event event
-	 * @return array The found Subscriber Objects
-	 */
-	public function countAllByEvent($event) {
+    /**
+     * Count all Subscribers by number for a given event
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event event
+     * @return array The found Subscriber Objects
+     */
+    public function countAllByEvent($event)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
-		$constraints[] = $query->equals('event', $event->getUid());
+        $constraints = array();
+        $constraints[] = $query->equals('event', $event->getUid());
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		// extbase doesn't know Mysql SUM() :-(
-		$allSubscribers = $query->execute();
+        // extbase doesn't know Mysql SUM() :-(
+        $allSubscribers = $query->execute();
 
-		$count = 0;
-		foreach ($allSubscribers as $subscriber) {
-			$count += $subscriber->getNumber();
-		}
+        $count = 0;
+        foreach ($allSubscribers as $subscriber) {
+            $count += $subscriber->getNumber();
+        }
 
-		return $count;
-	}
+        return $count;
+    }
 
-	/**
-	 * Finds subscriber by fe_user data
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
-	 * @return array The found Subscriber Objects
-	 */
-	public function findAllByEvents($events) {
+    /**
+     * Finds subscriber by fe_user data
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
+     * @return array The found Subscriber Objects
+     */
+    public function findAllByEvents($events)
+    {
 
-		$query = $this->createQuery();
+        $query = $this->createQuery();
 
-		$constraints = array();
-		$constraints[] = $query->in('event', $events);
+        $constraints = array();
+        $constraints[] = $query->in('event', $events);
 
-		if (count($constraints)) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		// order by start_date -> start_time...
-		$query->setOrderings(
-			array('crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
-		);
+        // order by start_date -> start_time...
+        $query->setOrderings(
+            array('crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+        );
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
 }
 

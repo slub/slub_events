@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Condition;
+namespace Slub\SlubEvents\ViewHelpers\Condition;
 /***************************************************************
  *  Copyright notice
  *
@@ -40,58 +40,62 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class IsSubscriptionAllowedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class IsSubscriptionAllowedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * subscriberRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     */
+    protected $subscriberRepository;
 
-	/**
-	 * subscriberRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-	 */
-	protected $subscriberRepository;
+    /**
+     * injectSubscriberRepository
+     *
+     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+     * @return void
+     */
+    public function injectSubscriberRepository(
+        \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+    ) {
+        $this->subscriberRepository = $subscriberRepository;
+    }
 
-	/**
-	 * injectSubscriberRepository
-	 *
-	 * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
-	 * @return void
-	 */
-	public function injectSubscriberRepository(\Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository) {
-		$this->subscriberRepository = $subscriberRepository;
-	}
+    /**
+     * Render the supplied DateTime object as a formatted date.
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @return boolean
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($event)
+    {
 
-	/**
-	 * Render the supplied DateTime object as a formatted date.
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Event $event
-	 * @return boolean
-	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($event) {
+        $showLink = true;
 
-		$showLink = TRUE;
+        // limit reached already --> overbooked
+        if ($this->subscriberRepository->countAllByEvent($event) >= $event->getMaxSubscriber()) {
+            $showLink = false;
+        }
 
-		// limit reached already --> overbooked
-		if ($this->subscriberRepository->countAllByEvent($event) >= $event->getMaxSubscriber()) {
-			$showLink = FALSE;
-		}
+        // event is cancelled
+        if ($event->getCancelled()) {
+            $showLink = false;
+        }
 
-		// event is cancelled
-		if ($event->getCancelled()) {
-			$showLink = FALSE;
-		}
+        // deadline reached....
+        if (is_object($event->getSubEndDateTime())) {
+            if ($event->getSubEndDateTime()->getTimestamp() < time()) {
+                $showLink = false;
+            }
+        }
 
-		// deadline reached....
-		if (is_object($event->getSubEndDateTime())) {
-			if ($event->getSubEndDateTime()->getTimestamp() < time()) {
-				$showLink = FALSE;
-			}
-		}
-
-	return $showLink;
+        return $showLink;
 
 
-	}
+    }
 }
+
 ?>

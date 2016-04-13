@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,32 +27,33 @@
 /**
  * returns one single line
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class OneLineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-class OneLineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * Render
+     *
+     * @param string $htmlString
+     * @return string
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render($htmlString)
+    {
 
-	/**
-	 * Render
-	 *
-	 * @param string $htmlString
-	 * @return string
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render($htmlString) {
+        $text = str_replace("\t", ' ', $htmlString);
+        $text = str_replace('<br />', ' ', $text);
+        // remove more than one empty line
+        $text = preg_replace('/[\n]{1,}/', ' ', $text);
+        // remove more than one space
+        $text = preg_replace('/[\ ]{2,}/', ' ', $text);
 
-		$text = str_replace("\t", ' ', $htmlString);
-		$text = str_replace('<br />', ' ', $text);
-		// remove more than one empty line
-		$text = preg_replace('/[\n]{1,}/', ' ', $text);
-		// remove more than one space
-		$text = preg_replace('/[\ ]{2,}/', ' ', $text);
+        return trim($text);
 
-		return trim($text);
-
-	}
+    }
 }
+
 ?>

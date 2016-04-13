@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Controller;
+namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -32,15 +32,17 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class LocationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class LocationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * locationRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\LocationRepository
- 	 * @inject
-	 */
-	protected $locationRepository;
+    /**
+     * locationRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\LocationRepository
+     * @inject
+     */
+    protected $locationRepository;
 
 }
+
 ?>

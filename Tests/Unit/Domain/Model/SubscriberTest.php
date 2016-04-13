@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,163 +36,195 @@
  *
  * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_SlubEvents_Domain_Model_Subscriber
-	 */
-	protected $fixture;
+class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+{
+    /**
+     * @var Tx_SlubEvents_Domain_Model_Subscriber
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_SlubEvents_Domain_Model_Subscriber();
-	}
+    public function setUp()
+    {
+        $this->fixture = new Tx_SlubEvents_Domain_Model_Subscriber();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getNameReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getNameReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setNameForStringSetsName() { 
-		$this->fixture->setName('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setNameForStringSetsName()
+    {
+        $this->fixture->setName('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getName()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getEmailReturnsInitialValueForString() { }
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getName()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setEmailForStringSetsEmail() { 
-		$this->fixture->setEmail('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getEmailReturnsInitialValueForString()
+    {
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getEmail()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getTelephoneReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function setEmailForStringSetsEmail()
+    {
+        $this->fixture->setEmail('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setTelephoneForStringSetsTelephone() { 
-		$this->fixture->setTelephone('Conceived at T3CON10');
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getEmail()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTelephone()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getCustomeridReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getTelephoneReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setCustomeridForStringSetsCustomerid() { 
-		$this->fixture->setCustomerid('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setTelephoneForStringSetsTelephone()
+    {
+        $this->fixture->setTelephone('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getCustomerid()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getNumberReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
-			$this->fixture->getNumber()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getTelephone()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setNumberForIntegerSetsNumber() { 
-		$this->fixture->setNumber(12);
+    /**
+     * @test
+     */
+    public function getCustomeridReturnsInitialValueForString()
+    {
+    }
 
-		$this->assertSame(
-			12,
-			$this->fixture->getNumber()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getMessageReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function setCustomeridForStringSetsCustomerid()
+    {
+        $this->fixture->setCustomerid('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setMessageForStringSetsMessage() { 
-		$this->fixture->setMessage('Conceived at T3CON10');
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getCustomerid()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getMessage()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getEditcodeReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getNumberReturnsInitialValueForInteger()
+    {
+        $this->assertSame(
+            0,
+            $this->fixture->getNumber()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setEditcodeForStringSetsEditcode() { 
-		$this->fixture->setEditcode('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setNumberForIntegerSetsNumber()
+    {
+        $this->fixture->setNumber(12);
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getEditcode()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getCrdateReturnsInitialValueForDateTime() { }
+        $this->assertSame(
+            12,
+            $this->fixture->getNumber()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setCrdateForDateTimeSetsCrdate() { }
-	
-	/**
-	 * @test
-	 */
-	public function getEventReturnsInitialValueForTx_SlubEvents_Domain_Model_Event() { }
+    /**
+     * @test
+     */
+    public function getMessageReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setEventForTx_SlubEvents_Domain_Model_EventSetsEvent() { }
-	
+    /**
+     * @test
+     */
+    public function setMessageForStringSetsMessage()
+    {
+        $this->fixture->setMessage('Conceived at T3CON10');
+
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getMessage()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getEditcodeReturnsInitialValueForString()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function setEditcodeForStringSetsEditcode()
+    {
+        $this->fixture->setEditcode('Conceived at T3CON10');
+
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getEditcode()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getCrdateReturnsInitialValueForDateTime()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function setCrdateForDateTimeSetsCrdate()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function getEventReturnsInitialValueForTx_SlubEvents_Domain_Model_Event()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function setEventForTx_SlubEvents_Domain_Model_EventSetsEvent()
+    {
+    }
+
 }
+
 ?>

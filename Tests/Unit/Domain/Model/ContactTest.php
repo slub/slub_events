@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,104 +36,123 @@
  *
  * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_SlubEvents_Domain_Model_Contact
-	 */
-	protected $fixture;
+class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+{
+    /**
+     * @var Tx_SlubEvents_Domain_Model_Contact
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_SlubEvents_Domain_Model_Contact();
-	}
+    public function setUp()
+    {
+        $this->fixture = new Tx_SlubEvents_Domain_Model_Contact();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getNameReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getNameReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setNameForStringSetsName() { 
-		$this->fixture->setName('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setNameForStringSetsName()
+    {
+        $this->fixture->setName('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getName()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getEmailReturnsInitialValueForString() { }
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getName()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setEmailForStringSetsEmail() { 
-		$this->fixture->setEmail('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getEmailReturnsInitialValueForString()
+    {
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getEmail()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getTelephoneReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function setEmailForStringSetsEmail()
+    {
+        $this->fixture->setEmail('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setTelephoneForStringSetsTelephone() { 
-		$this->fixture->setTelephone('Conceived at T3CON10');
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getEmail()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTelephone()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+    /**
+     * @test
+     */
+    public function getTelephoneReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setDescriptionForStringSetsDescription() { 
-		$this->fixture->setDescription('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setTelephoneForStringSetsTelephone()
+    {
+        $this->fixture->setTelephone('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getDescription()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getPhotoReturnsInitialValueForString() { }
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getTelephone()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setPhotoForStringSetsPhoto() { 
-		$this->fixture->setPhoto('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsInitialValueForString()
+    {
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getPhoto()
-		);
-	}
-	
+    /**
+     * @test
+     */
+    public function setDescriptionForStringSetsDescription()
+    {
+        $this->fixture->setDescription('Conceived at T3CON10');
+
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getDescription()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getPhotoReturnsInitialValueForString()
+    {
+    }
+
+    /**
+     * @test
+     */
+    public function setPhotoForStringSetsPhoto()
+    {
+        $this->fixture->setPhoto('Conceived at T3CON10');
+
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getPhoto()
+        );
+    }
+
 }
+
 ?>
