@@ -1,7 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Command;
 
-/***************************************************************
+    /***************************************************************
      *  Copyright notice
      *
      *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>
@@ -34,6 +34,7 @@ namespace Slub\SlubEvents\Command;
 use Slub\SlubEvents\Helper\EmailHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController
 {
@@ -55,6 +56,11 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
     protected $subscriberRepository;
 
     /**
+     * @var ConfigurationManagerInterface
+     */
+    protected $configurationManager;
+
+    /**
      * initializeAction
      *
      * @return
@@ -69,6 +75,23 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
         // simulate BE_USER setting to force fluid using the proper translation
         $GLOBALS['BE_USER']->uc['lang'] = 'de';
         $GLOBALS['LANG']->init('de');
+    }
+
+    /**
+     * injectConfigurationManager
+     *
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @return void
+     */
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
+    {
+
+        $this->configurationManager = $configurationManager;
+
+        $this->contentObj = $this->configurationManager->getContentObject();
+
+        $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+
     }
 
     /**
@@ -146,10 +169,10 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                         'Absage der Veranstaltung: ' . $event->getTitle(),
                         'CancellEvent',
                         [
-                            'event'       => $event,
+                            'event' => $event,
                             'subscribers' => '',
-                            'helper'      => $helper,
-                            'attachIcs'   => true,
+                            'helper' => $helper,
+                            'attachIcs' => true,
                         ]
                     );
                 }
@@ -163,11 +186,11 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                     'Absage der Veranstaltung: ' . $event->getTitle(),
                     'CancellEvent',
                     [
-                        'event'       => $event,
+                        'event' => $event,
                         'subscribers' => $event->getSubscribers(),
-                        'helper'      => $helper,
-                        'attachCsv'   => true,
-                        'attachIcs'   => true,
+                        'helper' => $helper,
+                        'attachCsv' => true,
+                        'attachIcs' => true,
                     ]
                 );
                 if ($out >= 1) {
@@ -186,11 +209,11 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                     'Veranstaltung Anmeldefrist abgelaufen: ' . $event->getTitle(),
                     'DeadlineReached',
                     [
-                        'event'       => $event,
+                        'event' => $event,
                         'subscribers' => $event->getSubscribers(),
-                        'helper'      => $helper,
-                        'attachCsv'   => true,
-                        'attachIcs'   => true,
+                        'helper' => $helper,
+                        'attachCsv' => true,
+                        'attachIcs' => true,
                     ]
                 );
                 if ($out == 1) {
