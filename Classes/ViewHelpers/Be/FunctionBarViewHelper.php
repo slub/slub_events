@@ -173,7 +173,6 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
     /**
      * Returns the Datepicker img
      *
-     * @param event \Slub\SlubEvents\Domain\Model\Event
      * @return string html output
      */
     protected function getDatePickerIcon()
