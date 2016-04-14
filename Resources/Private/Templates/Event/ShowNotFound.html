@@ -1,17 +1,12 @@
-<f:layout name="Default"/>
+<f:layout name="Default" />
 
 <f:section name="main">
 
-	<div class="slub-event-show">
-		<div class="error">
-			<p>
-				<f:translate key="text.error.could_find_event"/>
-			</p>
-		</div>
+<div class="slub-event-show">
+	<div class="error">
+		<p><f:translate key="text.error.could_find_event" /></p>
 	</div>
+</div>
 
-	<f:link.action action="list" pageUid="{settings.pidListing}">
-		<f:translate key="text.back_to_overview"/>
-	</f:link.action>
-	<br/>
+<f:link.action action="list" pageUid="{settings.pidListing}"><f:translate key="text.back_to_overview" /></f:link.action><br />
 </f:section>

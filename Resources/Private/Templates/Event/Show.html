@@ -1,121 +1,88 @@
-<f:layout name="Default"/>
+<f:layout name="Default" />
 
 <f:section name="main">
 
 	{namespace se=Slub\SlubEvents\ViewHelpers}
 
-	<div class="slub-event-show">
-		<f:if condition="{event}">
-			<f:then>
-				<h3>{event.title}</h3>
-				<strong>
-					<se:format.trim>
-						<f:render partial="Event/DateFromTo" arguments="{event : event}"/>
-					</se:format.trim>
-				</strong>,
-				<se:format.trim>
-					<f:render partial="Location/Link"
-							  arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/>
-				</se:format.trim>
-				,
+<div class="slub-event-show">
+	<f:if condition="{event}">
+		<f:then>
+			<h3>{event.title}</h3>
+			<strong><se:format.trim><f:render partial="Event/DateFromTo" arguments="{event : event}" /></se:format.trim></strong>,
+				<se:format.trim><f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/></se:format.trim>,
 				{event.contact.name}
 
-				<f:format.html>{event.description}</f:format.html>
+			<f:format.html>{event.description}</f:format.html>
 
-				<f:if condition="{event.contact.photo}">
-					<f:then>
+			<f:if condition="{event.contact.photo}">
+				<f:then>
 						<div class="single-contact">
 							<div class="photo">
-								<f:image src='uploads/tx_slubevents/{event.contact.photo}'
-										 alt="Porträt von {event.contact.name}"
-										 title="{event.contact.name -> f:format.stripTags()}" maxWidth="100"/>
+								<f:image src='uploads/tx_slubevents/{event.contact.photo}' alt="Porträt von {event.contact.name}" title="{event.contact.name -> f:format.stripTags()}" maxWidth="100" />
 							</div>
-							<div class="description"><span class="name">{event.contact.name}</span>
-								<f:format.html>{event.contact.description}</f:format.html>
-							</div>
+							<div class="description"><span class="name">{event.contact.name}</span><f:format.html>{event.contact.description}</f:format.html></div>
 						</div>
+				</f:then>
+			</f:if>
+
+			<div class="location">
+				<f:translate key="tx_slubevents_domain_model_location" />:
+				<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'true', onlyParent: 'false'}"/>
+				<f:format.html>{event.location.description}</f:format.html>
+			</div>
+
+			<div class="subscription">
+				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
+					<f:then>
+						Mindestteilnehmerzahl: {event.minsubscriber} <br />
+						<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 1">
+							<f:then>
+								<f:translate key="tx_slubevents_domain_model_event.oneFreePlace" />
+							</f:then>
+							<f:else>
+								<f:translate key="tx_slubevents_domain_model_event.freeplaces" />: <se:format.freePlacesLeft event="{event}" />
+							</f:else>
+						</f:if>
+					</f:then>
+					<f:else>
+						<f:if condition="{event.maxSubscriber} > 0">
+						<f:then>
+							<f:if condition="{event.maxSubscriber} <= <f:count subject='{event.subscribers}' />">
+								<f:then>Die maximale Teilnehmerzahl von {event.maxSubscriber} ist erreicht.</f:then>
+								<f:else>Es ist keine Anmeldung mehr möglich.</f:else>
+							</f:if>
+						</f:then>
+						<f:else><!-- keine Anmeldung notwendig --></f:else>
+						</f:if>
+					</f:else>
+				</f:if>
+			</div>
+
+			<div class="category"><f:translate key="tx_slubevents_domain_model_category" />:
+			<f:for each="{event.categories}" as="category" iteration="categoryIterator">
+				{category.title}<f:if condition="{categoryIterator.isLast}"><f:else>,</f:else></f:if>
+			</f:for>
+			</div>
+
+			<div class="submit">
+				<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}"><f:translate key="paginate_back" /></f:link.action>
+				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
+					<f:then>
+						<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}" noCacheHash="1" arguments="{event : event}"><f:translate key="tx_slubevents_domain_model_event.subscribe" /></f:link.action>
 					</f:then>
 				</f:if>
+			</div>
 
-				<div class="location">
-					<f:translate key="tx_slubevents_domain_model_location"/>
-					:
-					<f:render partial="Location/Link"
-							  arguments="{location: event.location, doLink: 'true', onlyParent: 'false'}"/>
-					<f:format.html>{event.location.description}</f:format.html>
-				</div>
+		</f:then>
+		<f:else>
+			<div class="error">
+				<p><f:translate key="text.error.could_find_event" /></p>
+			</div>
+			<div class="submit">
+				<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}"><f:translate key="paginate_back" /></f:link.action>
+			</div>
+		</f:else>
+	</f:if>
 
-				<div class="subscription">
-					<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
-						<f:then>
-							Mindestteilnehmerzahl: {event.minsubscriber} <br/>
-							<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 1">
-								<f:then>
-									<f:translate key="tx_slubevents_domain_model_event.oneFreePlace"/>
-								</f:then>
-								<f:else>
-									<f:translate key="tx_slubevents_domain_model_event.freeplaces"/>
-									:
-									<se:format.freePlacesLeft event="{event}"/>
-								</f:else>
-							</f:if>
-						</f:then>
-						<f:else>
-							<f:if condition="{event.maxSubscriber} > 0">
-								<f:then>
-									<f:if
-										condition="{event.maxSubscriber} <= <f:count subject='{event.subscribers}' />">
-										<f:then>Die maximale Teilnehmerzahl von {event.maxSubscriber} ist erreicht.
-										</f:then>
-										<f:else>Es ist keine Anmeldung mehr möglich.</f:else>
-									</f:if>
-								</f:then>
-								<f:else><!-- keine Anmeldung notwendig --></f:else>
-							</f:if>
-						</f:else>
-					</f:if>
-				</div>
-
-				<div class="category">
-					<f:translate key="tx_slubevents_domain_model_category"/>
-					:
-					<f:for each="{event.categories}" as="category" iteration="categoryIterator">
-						{category.title}
-						<f:if condition="{categoryIterator.isLast}">
-							<f:else>,</f:else>
-						</f:if>
-					</f:for>
-				</div>
-
-				<div class="submit">
-					<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}">
-						<f:translate key="paginate_back"/>
-					</f:link.action>
-					<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
-						<f:then>
-							<f:link.action action="new" class="button subscribe" controller="Subscriber"
-										   pageUid="{settings.pidSubscribeForm}" noCacheHash="1"
-										   arguments="{event : event}">
-								<f:translate key="tx_slubevents_domain_model_event.subscribe"/>
-							</f:link.action>
-						</f:then>
-					</f:if>
-				</div>
-
-			</f:then>
-			<f:else>
-				<div class="error">
-					<p>
-						<f:translate key="text.error.could_find_event"/>
-					</p>
-				</div>
-				<div class="submit">
-					<f:link.action action="list" class="button linkback" pageUid="{settings.pidListing}">
-						<f:translate key="paginate_back"/>
-					</f:link.action>
-				</div>
-			</f:else>
-		</f:if>
-
-	</div>
+</div>
 </f:section>

@@ -1,16 +1,14 @@
-<f:layout name="Default"/>
+<f:layout name="Default" />
 
 <f:section name="categoryTree">
 	<ul>
 		<f:for each="{categories}" key="id" as="category">
-			<f:render partial="Category/Item"
-					  arguments="{category: category, settings:settings, label:label, view:'list'}"/>
+			    <f:render partial="Category/Item" arguments="{category: category, settings:settings, label:label, view:'list'}"/>
 
-			<f:if condition="{category.children}">
-				<f:render section="categoryTree"
-						  arguments="{categories: category.children, categoriesSelected: categoriesSelected}"/>
-			</f:if>
-			</li>
+			    <f:if condition="{category.children}">
+				    <f:render section="categoryTree" arguments="{categories: category.children, categoriesSelected: categoriesSelected}" />
+			    </f:if>
+			    </li>
 		</f:for>
 	</ul>
 </f:section>
@@ -18,11 +16,11 @@
 <f:section name="main">
 	{namespace se=Slub\SlubEvents\ViewHelpers}
 
-	<div class="slub-category-list">
+<div class="slub-category-list">
 
-		<f:if condition="{categories}">
-			<f:render section="categoryTree" arguments="{categories: categories}"/>
-		</f:if>
+	<f:if condition="{categories}">
+		<f:render section="categoryTree" arguments="{categories: categories}" />
+	</f:if>
 
-	</div>
+</div>
 </f:section>
