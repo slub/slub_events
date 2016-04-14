@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,18 +34,17 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  */
 class OneLineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * Render
      *
      * @param string $htmlString
+     *
      * @return string
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render($htmlString)
     {
-
         $text = str_replace("\t", ' ', $htmlString);
         $text = str_replace('<br />', ' ', $text);
         // remove more than one empty line
@@ -52,8 +53,5 @@ class OneLineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
         $text = preg_replace('/[\ ]{2,}/', ' ', $text);
 
         return trim($text);
-
     }
 }
-
-?>

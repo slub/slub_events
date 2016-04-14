@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Condition;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -42,7 +44,6 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  */
 class IsWeekendViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * subscriberRepository
      *
@@ -54,6 +55,7 @@ class IsWeekendViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
      * injectSubscriberRepository
      *
      * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+     *
      * @return void
      */
     public function injectSubscriberRepository(
@@ -65,19 +67,16 @@ class IsWeekendViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
     /**
      * Checks if Saturday or Sunday
      *
-     * @param int day
+     * @param int $day
+     *
      * @return boolean
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render($day)
     {
-
         $dayOfWeek = date('w', $day);
 
         return ($dayOfWeek == 6 || $dayOfWeek == 0) ? true : false;
-
     }
 }
-
-?>

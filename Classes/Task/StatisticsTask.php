@@ -32,8 +32,8 @@ namespace Slub\SlubEvents\Task;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use Slub\SlubEvents\Helper\EmailHelper;
-use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
 
 class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
@@ -76,6 +76,7 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * injectConfigurationManager
      *
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     *
      * @return void
      */
     public function injectConfigurationManager(
@@ -83,14 +84,16 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     ) {
         $this->configurationManager = $configurationManager;
 
-        $this->contentObj = $this->configurationManager->getContentObject();
-        $this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+        $this->settings = $this->configurationManager->getConfiguration(
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+        );
     }
 
     /**
      * Set the value of the storage pid
      *
      * @param integer $page UID of the start page for this task.
+     *
      * @return void
      */
     public function setStoragePid($storagePid)
@@ -112,6 +115,7 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * Set the value of the private property receiverEmailAddress
      *
      * @param string $receiverEmailAddress The receiver email address
+     *
      * @return void
      */
     public function setReceiverEmailAddress($receiverEmailAddress)
@@ -133,6 +137,7 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * Set the value of the private property senderEmailAddress
      *
      * @param string $senderEmailAddress The sender email address
+     *
      * @return void
      */
     public function setSenderEmailAddress($senderEmailAddress)
@@ -153,7 +158,7 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     /**
      * initializeAction
      *
-     * @return
+     * @return void
      */
     protected function initializeAction()
     {
@@ -163,14 +168,18 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         setlocale(LC_ALL, 'de_DE.UTF-8');
 
         // simulate BE_USER setting to force fluid using the proper translation
-//		$GLOBALS['BE_USER']->uc['lang'] = 'de';
+//      $GLOBALS['BE_USER']->uc['lang'] = 'de';
         $GLOBALS['LANG']->init('de');
 
         $objectManager = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
 
-        $this->eventRepository = $objectManager->get('\Slub\SlubEvents\Domain\Repository\EventRepository');
-        $this->configurationManager = $objectManager->get('\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface');
+        $this->eventRepository = $objectManager->get(
+            '\Slub\SlubEvents\Domain\Repository\EventRepository'
+        );
 
+        $this->configurationManager = $objectManager->get(
+            '\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface'
+        );
     }
 
     /**
@@ -181,7 +190,6 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     public function execute()
     {
-
         $successfullyExecuted = true;
 
         // do some init work...
@@ -206,11 +214,11 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         }
 
         // set storagePid to point extbase to the right repositories
-        $configurationArray = array(
-            'persistence' => array(
-                'storagePid' => $this->storagePid
-            )
-        );
+        $configurationArray = [
+            'persistence' => [
+                'storagePid' => $this->storagePid,
+            ],
+        ];
         $this->configurationManager->setConfiguration($configurationArray);
 
         // start the work...
@@ -225,22 +233,20 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         $helper['nameto'] = strftime('%Y%m', $startDateTime);
 
         // email to all receivers...
+        $msg = 'Statistik Report Veranstaltungen: %s - %s';
         $successfullyExecuted = EmailHelper::sendTemplateEmail(
             $this->receiverEmailAddress,
-            array($this->senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
-            'Statistik Report Veranstaltungen: ' . ': ' . strftime('%x', $startDateTime) . ' - ' . strftime('%x',
-                $endDateTime),
+            [$this->senderEmailAddress => 'SLUB Veranstaltungen - noreply'],
+            sprintf($msg, strftime('%x', $startDateTime), strftime('%x', $endDateTime)),
             'Statistics',
-            array(
-                'events' => $allevents,
-                'helper' => $helper,
+            [
+                'events'    => $allevents,
+                'helper'    => $helper,
                 'attachCsv' => true,
                 'attachIcs' => false,
-            )
+            ]
         );
 
         return $successfullyExecuted;
     }
-
-
 }

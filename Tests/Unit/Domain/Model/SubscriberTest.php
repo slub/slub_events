@@ -27,14 +27,14 @@
 /**
  * Test case for class Tx_SlubEvents_Domain_Model_Subscriber.
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @version    $Id$
+ * @copyright  Copyright belongs to the respective authors
+ * @license    http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
- * @package TYPO3
+ * @package    TYPO3
  * @subpackage SLUB: Event Registration
  *
- * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 {
@@ -224,7 +224,4 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
     public function setEventForTx_SlubEvents_Domain_Model_EventSetsEvent()
     {
     }
-
 }
-
-?>

@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,7 +34,6 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  */
 class BookedPlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * subscriberRepository
      *
@@ -45,13 +46,13 @@ class BookedPlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
      * Return the number of subscribers for a given event
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return int
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render(\Slub\SlubEvents\Domain\Model\Event $event = null)
     {
-
         if ($event != null) {
             $booked = $this->subscriberRepository->countAllByEvent($event);
         } else {
@@ -59,8 +60,5 @@ class BookedPlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
         }
 
         return $booked;
-
     }
 }
-
-?>

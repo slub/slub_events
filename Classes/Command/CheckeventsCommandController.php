@@ -1,7 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Command;
 
-    /***************************************************************
+/***************************************************************
      *  Copyright notice
      *
      *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>
@@ -32,8 +32,8 @@ namespace Slub\SlubEvents\Command;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use Slub\SlubEvents\Helper\EmailHelper;
-use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
 
 class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController
 {
@@ -55,11 +55,6 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
     protected $subscriberRepository;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     */
-    protected $configurationManager;
-
-    /**
      * initializeAction
      *
      * @return
@@ -74,29 +69,14 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
         // simulate BE_USER setting to force fluid using the proper translation
         $GLOBALS['BE_USER']->uc['lang'] = 'de';
         $GLOBALS['LANG']->init('de');
-
-    }
-
-    /**
-     * injectConfigurationManager
-     *
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-     * @return void
-     */
-    public function injectConfigurationManager(
-        \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-    ) {
-        $this->configurationManager = $configurationManager;
-
-        $this->contentObj = $this->configurationManager->getContentObject();
-        $this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
     }
 
     /**
      * checkForSubscriptionEndCommand
      *
-     * @param int stroagePid
+     * @param int    stroagePid
      * @param string senderEmailAddress
+     *
      * @return void
      */
     public function checkForSubscriptionEndCommand($storagePid, $senderEmailAddress = '')
@@ -117,11 +97,11 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
         }
 
         // set storagePid to point extbase to the right repositories
-        $configurationArray = array(
-            'persistence' => array(
-                'storagePid' => $storagePid
-            )
-        );
+        $configurationArray = [
+            'persistence' => [
+                'storagePid' => $storagePid,
+            ],
+        ];
         $this->configurationManager->setConfiguration($configurationArray);
 
         // start the work...
@@ -144,8 +124,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                 $helper['allDay'] = 1;
             }
             $helper['now'] = time();
-            $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'),
-                $event->getContact()->getName()));
+            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
             $helper['description'] = $this->foldline($event->getDescription());
             // location may be empty...
             if (is_object($event->getLocation())) {
@@ -162,16 +141,16 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                     $cronLog .= 'Absage an Teilnehmer: ' . $event->getTitle() . ': ' . strftime('%x %H:%M',
                             $event->getStartDateTime()->getTimestamp()) . ' --> ' . $subscriber->getEmail() . "\n";
                     $out = EmailHelper::sendTemplateEmail(
-                        array($subscriber->getEmail() => $subscriber->getName()),
-                        array($event->getContact()->getEmail() => $event->getContact()->getName()),
+                        [$subscriber->getEmail() => $subscriber->getName()],
+                        [$event->getContact()->getEmail() => $event->getContact()->getName()],
                         'Absage der Veranstaltung: ' . $event->getTitle(),
                         'CancellEvent',
-                        array(
-                            'event' => $event,
+                        [
+                            'event'       => $event,
                             'subscribers' => '',
-                            'helper' => $helper,
-                            'attachIcs' => true,
-                        )
+                            'helper'      => $helper,
+                            'attachIcs'   => true,
+                        ]
                     );
                 }
 
@@ -179,17 +158,17 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                         $event->getStartDateTime()->getTimestamp()) . ' --> ' . $event->getContact()->getEmail() . "\n";
                 // email to event owner
                 $out = EmailHelper::sendTemplateEmail(
-                    array($event->getContact()->getEmail() => $event->getContact()->getName()),
-                    array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
+                    [$event->getContact()->getEmail() => $event->getContact()->getName()],
+                    [$senderEmailAddress => 'SLUB Veranstaltungen - noreply'],
                     'Absage der Veranstaltung: ' . $event->getTitle(),
                     'CancellEvent',
-                    array(
-                        'event' => $event,
+                    [
+                        'event'       => $event,
                         'subscribers' => $event->getSubscribers(),
-                        'helper' => $helper,
-                        'attachCsv' => true,
-                        'attachIcs' => true,
-                    )
+                        'helper'      => $helper,
+                        'attachCsv'   => true,
+                        'attachIcs'   => true,
+                    ]
                 );
                 if ($out >= 1) {
                     $event->setSubEndDateInfoSent(true);
@@ -202,17 +181,17 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                 $cronLog .= 'Anmeldefrist abgelaufen an Veranstalter: ' . $event->getTitle() . ': ' . strftime('%x %H:%M',
                         $event->getStartDateTime()->getTimestamp()) . ' --> ' . $event->getContact()->getEmail() . "\n";
                 $out = EmailHelper::sendTemplateEmail(
-                    array($event->getContact()->getEmail() => $event->getContact()->getName()),
-                    array($senderEmailAddress => 'SLUB Veranstaltungen - noreply'),
+                    [$event->getContact()->getEmail() => $event->getContact()->getName()],
+                    [$senderEmailAddress => 'SLUB Veranstaltungen - noreply'],
                     'Veranstaltung Anmeldefrist abgelaufen: ' . $event->getTitle(),
                     'DeadlineReached',
-                    array(
-                        'event' => $event,
+                    [
+                        'event'       => $event,
                         'subscribers' => $event->getSubscribers(),
-                        'helper' => $helper,
-                        'attachCsv' => true,
-                        'attachIcs' => true,
-                    )
+                        'helper'      => $helper,
+                        'attachCsv'   => true,
+                        'attachIcs'   => true,
+                    ]
                 );
                 if ($out == 1) {
                     $event->setSubEndDateInfoSent(true);
@@ -232,11 +211,11 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
      * rfc2445.txt: lines SHOULD NOT be longer than 75 octets
      *
      * @param string $content : Anystring
+     *
      * @return string        $content: Manipulated string
      */
     private function foldline($content)
     {
-
         $text = trim(strip_tags(html_entity_decode($content), '<br>,<p>,<li>'));
         $text = preg_replace('/<p[\ \w\=\"]{0,}>/', '', $text);
         $text = preg_replace('/<li[\ \w\=\"]{0,}>/', '- ', $text);
@@ -262,6 +241,4 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
 
         return $firstline . "\n " . $restofline;
     }
-
-
 }

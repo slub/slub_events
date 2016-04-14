@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Be;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -95,10 +97,18 @@ class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormF
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerTagAttribute('disabled', 'string',
-            'Specifies that the input element should be disabled when the page loads');
-        $this->registerArgument('errorClass', 'string', 'CSS class to set if there are errors for this view helper',
-            false, 'f3-form-error');
+        $this->registerTagAttribute(
+            'disabled',
+            'string',
+            'Specifies that the input element should be disabled when the page loads'
+        );
+        $this->registerArgument(
+            'errorClass',
+            'string',
+            'CSS class to set if there are errors for this view helper',
+            false,
+            'f3-form-error'
+        );
         $this->overrideArgument('value', 'string', 'Value of input tag. Required for checkboxes', true);
         $this->registerUniversalTagAttributes();
     }
@@ -106,14 +116,14 @@ class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormF
     /**
      * Renders the checkbox.
      *
-     * @param array $checked list id of checked values
+     * @param array $checked  list id of checked values
      * @param array $selected list id of checked values
      *
      * @return string
      * @author Bastian Waidelich <bastian@typo3.org>
      * @api
      */
-    public function render($checked = null, $selected = array())
+    public function render($checked = null, $selected = [])
     {
         $this->tag->addAttribute('type', 'checkbox');
 
@@ -134,5 +144,3 @@ class CheckboxViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormF
         return $hiddenField . $this->tag->render();
     }
 }
-
-?>

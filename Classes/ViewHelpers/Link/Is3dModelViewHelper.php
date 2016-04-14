@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Link;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -42,25 +44,21 @@ namespace Slub\SlubEvents\ViewHelpers\Link;
  */
 class Is3dModelViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * check if string "3d.slub-dresden.de" is part of the l ink
      *
      * @param string $link the given link as integer uid or string
+     *
      * @return boolean
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render($link)
     {
-
         if ($link === null) {
             return false;
         }
 
         return strpos($link, '3d.slub-dresden.de') ? true : false;
-
     }
 }
-
-?>

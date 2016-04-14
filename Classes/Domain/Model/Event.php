@@ -1,29 +1,30 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
- *  Copyright notice
- *
- *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+     *  Copyright notice
+     *
+     *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***************************************************************/
 
 /**
  *
@@ -52,7 +53,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * startDateTime
      *
-     * @var DateTime
+     * @var \DateTime
      * @validate NotEmpty
      */
     protected $startDateTime;
@@ -67,14 +68,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * End Date of Event
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $endDateTime;
 
     /**
      * End Date of Subscription
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $subEndDateTime;
 
@@ -192,7 +193,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets hidden
      *
      * @param boolean $hidden
-     * @return void
      */
     public function setHidden($hidden)
     {
@@ -213,7 +213,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the title
      *
      * @param string $title
-     * @return void
      */
     public function setTitle($title)
     {
@@ -234,7 +233,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the teaser
      *
      * @param string $teaser
-     * @return void
      */
     public function setTeaser($teaser)
     {
@@ -255,7 +253,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description
-     * @return void
      */
     public function setDescription($description)
     {
@@ -263,9 +260,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * __construct
-     *
-     * @return void
+     * Event constructor.
      */
     public function __construct()
     {
@@ -306,6 +301,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the minSubscriber
      *
      * @param integer $minSubscriber
+     *
      * @return void
      */
     public function setMinSubscriber($minSubscriber)
@@ -327,6 +323,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the maxSubscriber
      *
      * @param integer $maxSubscriber
+     *
      * @return void
      */
     public function setMaxSubscriber($maxSubscriber)
@@ -338,6 +335,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Subscriber
      *
      * @param \Slub\SlubEvents\Domain\Model\Subscriber $subscriber
+     *
      * @return void
      */
     public function addSubscriber(\Slub\SlubEvents\Domain\Model\Subscriber $subscriber)
@@ -349,6 +347,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Subscriber
      *
      * @param \Slub\SlubEvents\Domain\Model\Subscriber $subscriberToRemove The Subscriber to be removed
+     *
      * @return void
      */
     public function removeSubscriber(\Slub\SlubEvents\Domain\Model\Subscriber $subscriberToRemove)
@@ -370,6 +369,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the subscribers
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
+     *
      * @return void
      */
     public function setSubscribers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $subscribers)
@@ -391,6 +391,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the audience
      *
      * @param integer $audience
+     *
      * @return void
      */
     public function setAudience($audience)
@@ -412,6 +413,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a discipline
      *
      * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
+     *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
      */
     public function addDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
@@ -433,6 +435,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the location
      *
      * @param \Slub\SlubEvents\Domain\Model\Location $location
+     *
      * @return void
      */
     public function setLocation(\Slub\SlubEvents\Domain\Model\Location $location)
@@ -464,6 +467,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the contact
      *
      * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+     *
      * @return void
      */
     public function setContact(\Slub\SlubEvents\Domain\Model\Contact $contact)
@@ -485,6 +489,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the allDay
      *
      * @param boolean $allDay
+     *
      * @return boolean allDay
      */
     public function setAllDay($allDay)
@@ -505,7 +510,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the startDateTime
      *
-     * @return DateTime startDateTime
+     * @return \DateTime startDateTime
      */
     public function getStartDateTime()
     {
@@ -515,8 +520,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the startDateTime
      *
-     * @param DateTime $startDateTime
-     * @return DateTime startDateTime
+     * @param \DateTime $startDateTime
      */
     public function setStartDateTime($startDateTime)
     {
@@ -526,7 +530,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the endDateTime
      *
-     * @return DateTime endDateTime
+     * @return \DateTime endDateTime
      */
     public function getEndDateTime()
     {
@@ -536,8 +540,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the endDateTime
      *
-     * @param DateTime $endDateTime
-     * @return DateTime endDateTime
+     * @param \DateTime $endDateTime
      */
     public function setEndDateTime($endDateTime)
     {
@@ -557,8 +560,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the subEndDateTime
      *
-     * @param DateTime $subEndDateTime
-     * @return DateTime subEndDateTime
+     * @param \DateTime $subEndDateTime
      */
     public function setSubEndDateTime($subEndDateTime)
     {
@@ -568,7 +570,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the subEndDateInfoSent
      *
-     * @return DateTime subEndDateTime
+     * @return \DateTime subEndDateTime
      */
     public function getSubEndDateInfoSent()
     {
@@ -578,8 +580,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the subEndDateInfoSent
      *
-     * @param DateTime $subEndDateTime
-     * @return DateTime subEndDateTime
+     * @param \DateTime $subEndDateInfoSent
      */
     public function setSubEndDateInfoSent($subEndDateInfoSent)
     {
@@ -600,6 +601,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets geniusBar
      *
      * @param boolean $geniusBar
+     *
      * @return void
      */
     public function setGeniusBar($geniusBar)
@@ -621,6 +623,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a categories
      *
      * @param \Slub\SlubEvents\Domain\Model\Category $category
+     *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> categories
      */
     public function addCategory(\Slub\SlubEvents\Domain\Model\Category $category)
@@ -642,6 +645,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the cancelled
      *
      * @param boolean $cancelled
+     *
      * @return void
      */
     public function setCancelled($cancelled)
@@ -673,13 +677,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the onlinesurvey
      *
      * @param string $onlinesurvey
+     *
      * @return void
      */
     public function setOnlinesurvey($onlinesurvey)
     {
         $this->onlinesurvey = $onlinesurvey;
     }
-
 }
-
-?>

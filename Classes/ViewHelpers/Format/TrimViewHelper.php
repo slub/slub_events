@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,18 +34,17 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  */
 class TrimViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * trim whitespaces before and after
      *
      * @param string $htmlString
+     *
      * @return string
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render($htmlString = null)
     {
-
         if ($htmlString === null) {
             $htmlString = $this->renderChildren();
             if ($htmlString === null) {
@@ -52,8 +53,5 @@ class TrimViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         }
 
         return trim($htmlString);
-
     }
 }
-
-?>

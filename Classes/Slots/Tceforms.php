@@ -31,9 +31,8 @@
 class Tx_SlubEvents_Slots_Tceforms
 {
 
-    function getMainFields_preProcess($table, &$row, $tceform)
+    public function getMainFields_preProcess($table, &$row, $tceform)
     {
-
         if ($table == 'tx_slubevents_domain_model_event') {
             global $TCA;
             t3lib_div::loadTCA('tx_slubevents_domain_model_event');
@@ -57,13 +56,11 @@ class Tx_SlubEvents_Slots_Tceforms
             if (empty($row['sub_end_date_time_select']) && empty($row['sub_end_date_time'])) {
                 $row['sub_end_date_time_select'] = 1440;
             }
-
         }
     }
 
-    function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj)
+    public function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj)
     {
-
         if ($table == 'tx_slubevents_domain_model_event') {
 
             // bugfix for TYPO3 < 6.1
@@ -71,8 +68,6 @@ class Tx_SlubEvents_Slots_Tceforms
 //				if ($row['location'] == 0)
 //					$row['location'] = '';
 //			}
-
         }
-
     }
 }

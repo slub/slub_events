@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -45,17 +47,13 @@ class EventsOfCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
      * check if any events of categories below are present and free for booking
      *
      * @param \Slub\SlubEvents\Domain\Model\Category $category
+     *
      * @return boolean
      * @api
      */
     public function render(\Slub\SlubEvents\Domain\Model\Category $category)
     {
-
-        $events = $this->eventRepository->findAllBySettings(array('categoryList' => array(0 => $category)));
-
+        $events = $this->eventRepository->findAllBySettings(['categoryList' => [0 => $category]]);
         return count($events);
-
     }
 }
-
-?>

@@ -1,5 +1,6 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 <li class="slubevents-category" id="category-{category.item.uid}">
-<f:form.checkbox id="slubevents-category-{category.item.uid}" name="category[{category.item.uid}]" title="{category.item.description -> f:format.stripTags()}"  checked="1" value="1" />
-<label for="slubevents-category-{category.item.uid}">{category.item.title}</label>
-<div class="altCheckElement"></div>
+	<f:form.checkbox id="slubevents-category-{category.item.uid}" name="category[{category.item.uid}]"
+					 title="{category.item.description -> f:format.stripTags()}" checked="1" value="1"/>
+	<label for="slubevents-category-{category.item.uid}">{category.item.title}</label>
+	<div class="altCheckElement"></div>

@@ -37,44 +37,38 @@ class HookPostProcessing
      * Clear cache of all pages with slubevents_eventlist plugin
      * This way the plugin may stay cached but on every delete or insert of subscribers, the cache gets cleared.
      *
-     * @param       int            the PID of the storage folder
-     * @param       boolean        set TRUE if this is a genius bar event
+     * @param       int     $pid         the PID of the storage folder
+     * @param       boolean $isGeniusBar set TRUE if this is a genius bar event
      *
-     * @return
+     * @return void
      */
-    function clearAllEventListCache($pid = 0, $isGeniusBar = 0)
+    public function clearAllEventListCache($pid = 0, $isGeniusBar = false)
     {
-
-        $tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+        /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $tcemain */
+        $tcemain = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
 
         // next two lines are necessary... don't know why.
         $tcemain->stripslashes_values = 0;
-        $tcemain->start(array(), array());
+        $tcemain->start([], []);
 
         if ($isGeniusBar) {
-
             $tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $pid);
-
         } else {
-
             $tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $pid);
-
         }
 
         return;
-
     }
 
     /**
      * Clear ajax cache files for fullcalendar
      *
-     * @param       timestamp        the startDate as unix timestamp
+     * @param timestamp $startDate the startDate as unix timestamp
      *
-     * @return
+     * @return void
      */
-    function clearAjaxCacheFiles($startDate = null)
+    public function clearAjaxCacheFiles($startDate = null)
     {
-
         $dir = PATH_site . 'typo3temp/tx_slubevents/';
         if (!file_exists($dir)) {
             mkdir($dir);
@@ -103,45 +97,47 @@ class HookPostProcessing
      * We have to unset these helper fields here because with
      * status="NEW" it doesn't work in the preProcessFieldArray-hook
      *
-     * @param       string          Status "new" or "update"
-     * @param       string          Table name
-     * @param       string          Record ID. If new record its a string pointing to index inside t3lib_tcemain::substNEWwithIDs
-     * @param       array           Field array of updated fields in the operation
-     * @param       object          Reference to tcemain calling object
+     * @param       string $status     Status "new" or "update"
+     * @param       string $table      Table name
+     * @param       string $id         Record ID. If new record its a string pointing to index inside
+     *                                 \TYPO3\CMS\Core\DataHandling\DataHandler::substNEWwithIDs
+     * @param       array  $fieldArray Field array of updated fields in the operation
+     * @param       object $pObj       Reference to tcemain calling object
+     *
      * @return      void
      *
      */
-    function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$pObj)
+    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$pObj)
     {
-
         if ($table == 'tx_slubevents_domain_model_event') {
             // should be already unset in HookPreProcessing
             unset($fieldArray['end_date_time_select']);
             unset($fieldArray['sub_end_date_time_select']);
         }
-
     }
 
     /**
      * TCEmain hook function
      *
-     * @param       string          Status "new" or "update"
-     * @param       string          Table name
-     * @param       string          Record ID. If new record its a string pointing to index inside t3lib_tcemain::substNEWwithIDs
-     * @param       array           Field array of updated fields in the operation
-     * @param       object          Reference to tcemain calling object
+     * @param       string $status     "new" or "update"
+     * @param       string $table      name
+     * @param       string $idElement  record ID. If new record its a string pointing to index inside
+     *                                 end_date_time_select::substNEWwithIDs
+     * @param       array  $fieldArray of updated fields in the operation
+     * @param       object $pObj       Reference to tcemain calling object
+     *
      * @return      void
      */
-    function processDatamap_afterDatabaseOperations($status, $table, $idElement, &$fieldArray, &$pObj)
+    public function processDatamap_afterDatabaseOperations($status, $table, $idElement, &$fieldArray, &$pObj)
     {
-
         // we are only interested in tx_slubevents_domain_model_event
         if ($table == 'tx_slubevents_domain_model_event' &&
             $pObj->checkValue_currentRecord['hidden'] == '0'
         ) {
-
-            $this->clearAllEventListCache($pObj->checkValue_currentRecord['pid'],
-                $pObj->checkValue_currentRecord['genius_bar']);
+            $this->clearAllEventListCache(
+                $pObj->checkValue_currentRecord['pid'],
+                $pObj->checkValue_currentRecord['genius_bar']
+            );
 
             // unfortunately I cannot access the category IDs only the amount of categories
             // but at least I get the start_date_time so I will delete all cached files around this

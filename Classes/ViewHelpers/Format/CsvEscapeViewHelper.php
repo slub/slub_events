@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,8 +34,6 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  */
 class CsvEscapeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
-
     /**
      * Return the number of subscribers for a given event
      *
@@ -44,12 +44,8 @@ class CsvEscapeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
     public function render()
     {
         $value = $this->renderChildren();
-
         $tidystring = str_replace('"', '""', $value);
 
         return $tidystring;
-
     }
 }
-
-?>

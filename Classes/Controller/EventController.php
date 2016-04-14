@@ -1,29 +1,29 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2012-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+    /***************************************************************
+     *  Copyright notice
+     *
+     *  (c) 2012-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***************************************************************/
 
 /**
  *
@@ -34,11 +34,11 @@ namespace Slub\SlubEvents\Controller;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class EventController extends AbstractController
 {
-
 
     /**
      * Initializes the current action
@@ -58,7 +58,9 @@ class EventController extends AbstractController
             /** @var $typoScriptFrontendController \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController */
             $typoScriptFrontendController = $GLOBALS['TSFE'];
             if (!$cacheTagsSet) {
-                $typoScriptFrontendController->addCacheTags(array(1 => 'tx_slubevents_' . $this->settings['storagePid']));
+                $typoScriptFrontendController->addCacheTags(
+                    [1 => 'tx_slubevents_' . $this->settings['persistence']['storagePid']]
+                );
                 $cacheTagsSet = true;
             }
             $this->typoScriptFrontendController = $typoScriptFrontendController;
@@ -72,7 +74,6 @@ class EventController extends AbstractController
      */
     public function listAction()
     {
-
         if (!empty($this->settings['categorySelection'])) {
             $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);
 
@@ -130,20 +131,28 @@ class EventController extends AbstractController
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
      * @ignorevalidation $event
+     *
      * @return void
      */
     public function showAction(\Slub\SlubEvents\Domain\Model\Event $event = null)
     {
-
         if ($event !== null) {
             // fill registers to be used in ts
-            $cObj = GeneralUtility::makeInstance('tslib_cObj');
+            $cObj = GeneralUtility::makeInstance('TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
             $cObj->LOAD_REGISTER(
-                array(
-                    'eventPageTitle' => LocalizationUtility::translate('tx_slubevents_domain_model_event',
-                            'slub_events') . ': "' . $event->getTitle() . '" - ' . strftime('%a, %x %H:%M',
-                            $event->getStartDateTime()->getTimeStamp()),
-                ), 'LOAD_REGISTER');
+                [
+                    'eventPageTitle' =>
+                        LocalizationUtility::translate(
+                            'tx_slubevents_domain_model_event',
+                            'slub_events'
+                        )
+                        . ': "' . $event->getTitle() . '" - ' . strftime(
+                            '%a, %x %H:%M',
+                            $event->getStartDateTime()->getTimeStamp()
+                        ),
+                ],
+                'LOAD_REGISTER'
+            );
         }
 
         $this->view->assign('event', $event);
@@ -156,7 +165,6 @@ class EventController extends AbstractController
      */
     public function showNotFoundAction()
     {
-
     }
 
     /**
@@ -164,6 +172,7 @@ class EventController extends AbstractController
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $newEvent
      * @ignorevalidation $newEvent
+     *
      * @return void
      */
     public function newAction(\Slub\SlubEvents\Domain\Model\Event $newEvent = null)
@@ -175,12 +184,13 @@ class EventController extends AbstractController
      * action create
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $newEvent
+     *
      * @return void
      */
     public function createAction(\Slub\SlubEvents\Domain\Model\Event $newEvent)
     {
         $this->eventRepository->add($newEvent);
-        $this->flashMessageContainer->add('Your new Event was created.');
+        $this->addFlashMessage('Your new Event was created.');
         $this->redirect('list');
     }
 
@@ -189,6 +199,7 @@ class EventController extends AbstractController
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
      * @ignorevalidation $event
+     *
      * @return void
      */
     public function editAction(\Slub\SlubEvents\Domain\Model\Event $event)
@@ -200,12 +211,13 @@ class EventController extends AbstractController
      * action update
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return void
      */
     public function updateAction(\Slub\SlubEvents\Domain\Model\Event $event)
     {
         $this->eventRepository->update($event);
-        $this->flashMessageContainer->add('Your Event was updated.');
+        $this->addFlashMessage('Your Event was updated.');
         $this->redirect('list');
     }
 
@@ -213,12 +225,13 @@ class EventController extends AbstractController
      * action delete
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return void
      */
     public function deleteAction(\Slub\SlubEvents\Domain\Model\Event $event)
     {
         $this->eventRepository->remove($event);
-        $this->flashMessageContainer->add('Your Event was removed.');
+        $this->addFlashMessage('Your Event was removed.');
         $this->redirect('list');
     }
 
@@ -242,105 +255,94 @@ class EventController extends AbstractController
 
     /**
      * action beList
-     *
-     * @return void
      */
     public function beListAction()
     {
-
         // get data from BE session
-        $sessionData = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
-        // get search parameters from BE user configuration
-        $ucData = $GLOBALS['BE_USER']->uc['moduleData']['slubevents'];
-
-        // -----------------------------------------
-        // get search parameters from POST variables
-        // -----------------------------------------
-        $searchParameter = $this->getParametersSafely('searchParameter');
-        if (is_array($searchParameter)) {
-            $ucData['searchParameter'] = $searchParameter;
-            $sessionData['selectedStartDateStamp'] = $searchParameter['selectedStartDateStamp'];
-            $GLOBALS['BE_USER']->uc['moduleData']['slubevents'] = $ucData;
-            $GLOBALS['BE_USER']->writeUC($GLOBALS['BE_USER']->uc);
-            // save session data
-            $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
-        } else {
-            // no POST vars --> take BE user configuration
-            $searchParameter = $ucData['searchParameter'];
-        }
+        /** @noinspection PhpUndefinedMethodInspection */
+        $searchParameter = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
 
         // set the startDateStamp
-        // startDateStamp is saved in session data NOT in user data
-        if (empty($selectedStartDateStamp)) {
-            if (!empty($sessionData['selectedStartDateStamp'])) {
-                $selectedStartDateStamp = $sessionData['selectedStartDateStamp'];
-            } else {
-                $selectedStartDateStamp = date('d-m-Y');
-            }
+        if (empty($searchParameter['selectedStartDateStamp'])) {
+            $searchParameter['selectedStartDateStamp'] = date('d-m-Y');
         }
+
+        // if search was triggered
+        $submittedSearchParams = $this->getParametersSafely('searchParameter');
+        if (is_array($submittedSearchParams)) {
+            // clean category array to prevent errors
+            $searchParameter['category'] = $this->cleanArray($submittedSearchParams['category']);
+
+            // merge search parameter
+            $searchParameter = array_merge($searchParameter, $submittedSearchParams);
+
+            // save session data
+            /** @noinspection PhpUndefinedMethodInspection */
+            $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $searchParameter);
+        }
+
+        // Categories
+        // ------------------------------------------------------------------------------------
 
         // get the categories
         $categories = $this->categoryRepository->findAllTree();
+
+        // check which categories have been selected
+        if (!is_array($submittedSearchParams['category'])) {
+            $allCategories = $this->categoryRepository->findAll()->toArray();
+            foreach ($allCategories as $category) {
+                $searchParameter['category'][$category->getUid()] = $category->getUid();
+            }
+        }
+        $this->view->assign('categoriesSelected', $searchParameter['category']);
+
+        // Contacts
+        // ------------------------------------------------------------------------------------
+        // check which contacts have been selected
         // get all contacts
         $contacts = $this->contactRepository->findAllSorted();
 
-        // check which categories have been selected
-        if (is_array($searchParameter['selectedCategories'])) {
-            $this->view->assign('selectedCategories', $searchParameter['selectedCategories']);
-        } else {
-            // if no category selection in user settings present --> look for the root categories
-            if (!is_array($searchParameter['category'])) {
-                foreach ($categories as $uid => $category) {
-                    $searchParameter['category'][$uid] = $uid;
-                }
+        // if no contacts selection in user settings present --> look for the root categories
+        if (!is_array($searchParameter['contacts'])) {
+            foreach ($contacts as $uid => $contact) {
+                $searchParameter['contacts'][$uid] = $contact->getUid();
             }
-            $this->view->assign('categoriesSelected', $searchParameter['category']);
         }
+        $this->view->assign('contactsSelected', $searchParameter['contacts']);
 
-        // check which contacts have been selected
-        if (is_array($searchParameter['selectedContacts'])) {
-            $this->view->assign('selectedContacts', $searchParameter['selectedContacts']);
-        } else {
-            // if no contacts selection in user settings present --> look for the root categories
-            if (!is_array($searchParameter['contacts'])) {
-                foreach ($contacts as $uid => $contact) {
-                    $searchParameter['contacts'][$uid] = $contact->getUid();
-                }
-            }
-            $this->view->assign('contactsSelected', $searchParameter['contacts']);
-        }
-        $this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
-        //~ t3lib_utility_Debug::debug($searchParameter['contacts'], 'selectedStartDateStamp... ');
-
+        // Events
+        // ------------------------------------------------------------------------------------
         // get the events to show
-        if (is_array($searchParameter['category'])) {
-            $events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'],
-                strtotime($selectedStartDateStamp), $searchParameter['searchString'], $searchParameter['contacts']);
-        }
+        $events = $this->eventRepository->findAllByCategoriesAndDate(
+            $searchParameter['category'],
+            strtotime($searchParameter['selectedStartDateStamp']),
+            $searchParameter['searchString'],
+            $searchParameter['contacts']
+        );
 
+        $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
         $this->view->assign('searchString', $searchParameter['searchString']);
         $this->view->assign('categories', $categories);
         $this->view->assign('events', $events);
         $this->view->assign('contacts', $contacts);
-
     }
 
     /**
      * action beCopy
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
-     * @ignorevalidation $event
+     *
      * @return void
      */
-    public function beCopyAction($event)
+    public function beCopyAction(\Slub\SlubEvents\Domain\Model\Event $event)
     {
-
         $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($event);
-        $newEvent = $this->objectManager->create('\Slub\SlubEvents\Domain\Model\Event');
+        /** @var \Slub\SlubEvents\Domain\Model\Event $newEvent */
+        $newEvent = $this->objectManager->get('Slub\SlubEvents\Domain\Model\Event');
 
         foreach ($availableProperties as $propertyName) {
             if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
-                && !in_array($propertyName, array(
+                && !in_array($propertyName, [
                     'uid',
                     'pid',
                     'subscribers',
@@ -348,10 +350,9 @@ class EventController extends AbstractController
                     'subEndDateTime',
                     'subEndDateInfoSent',
                     'categories',
-                    'discipline'
-                ))
+                    'discipline',
+                ])
             ) {
-
                 $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($event, $propertyName);
                 // special handling for onlinesurvey field to remove trailing timestamp with sent date
                 if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
@@ -378,8 +379,7 @@ class EventController extends AbstractController
         $newEvent->setHidden(true);
 
         $this->eventRepository->add($newEvent);
-
-        $this->flashMessageContainer->add('Die Veranstaltung ' . $newEvent->getTitle() . ' wurde kopiert.');
+        $this->addFlashMessage('Die Veranstaltung ' . $newEvent->getTitle() . ' wurde kopiert.');
         $this->redirect('beList');
     }
 
@@ -390,7 +390,6 @@ class EventController extends AbstractController
      */
     public function listMonthAction()
     {
-
         if (!empty($this->settings['categorySelection'])) {
             $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);
 
@@ -437,7 +436,6 @@ class EventController extends AbstractController
      */
     public function errorAction()
     {
-
     }
 
 
@@ -446,24 +444,24 @@ class EventController extends AbstractController
      *
      * EXPERIMENTAL!!
      *
-     * @return void
+     * @return string
      */
     public function ajaxAction()
     {
+        $jsonevent = [];
 
-        $events = $this->eventRepository->findAllBySettings(array(
-                'categoryList' => GeneralUtility::intExplode(',', $_GET['categories'], true),
-                'disciplineList' => GeneralUtility::intExplode(',', $_GET['disciplines'], true),
-                'startTimestamp' => $_GET['start'],
-                'stopTimestamp' => $_GET['stop'],
-                'showPastEvents' => true
-            )
-        );
+        $events = $this->eventRepository->findAllBySettings([
+            'categoryList'   => GeneralUtility::intExplode(',', $_GET['categories'], true),
+            'disciplineList' => GeneralUtility::intExplode(',', $_GET['disciplines'], true),
+            'startTimestamp' => $_GET['start'],
+            'stopTimestamp'  => $_GET['stop'],
+            'showPastEvents' => true,
+        ]);
 
         $cObj = $this->configurationManager->getContentObject();
+        /** @var \Slub\SlubEvents\Domain\Model\Event $event */
         foreach ($events as $event) {
-
-            $foundevent = array();
+            $foundevent = [];
 
             $foundevent['id'] = $event->getUid();
             $foundevent['title'] = $event->getTitle();
@@ -473,23 +471,21 @@ class EventController extends AbstractController
                 $foundevent['className'] .= ' slubevents-category-' . $cat->getUid();
             }
 
-            //~ $foundevent['className'] = 'slubevents-category-' . $event->getCategories(); // $_GET['categories'];
-            if ($event->getEndDateTime() instanceof DateTime) {
+            if ($event->getEndDateTime() instanceof \DateTime) {
                 $foundevent['end'] = $event->getEndDateTime()->format('Y-m-d H:i:s');
             }
 
-            $conf = array(
+            $conf = [
                 // Link to current page
-                'parameter' => $_GET['detailPid'],
+                'parameter'        => $_GET['detailPid'],
                 // Set additional parameters
                 'additionalParams' => '&type=0&tx_slubevents_eventlist%5Bevent%5D=' . $event->getUid() . '&tx_slubevents_eventlist%5Baction%5D=show',
                 // We must add cHash because we use parameters
-                'useCacheHash' => 1,
+                'useCacheHash'     => 1,
                 // We want link only
-                'returnLast' => 'url',
-            );
+                'returnLast'       => 'url',
+            ];
             $url = $cObj->typoLink('', $conf);
-            //~
             $foundevent['url'] = $url;
 
             if ($event->getAllDay()) {
@@ -504,11 +500,19 @@ class EventController extends AbstractController
                 $foundevent['freePlaces'] = 0;
             } else {
                 if ($freePlaces == 1) {
-                    $foundevent['freePlaces'] = Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event.oneFreePlace',
-                        'slub_events');
+                    $foundevent['freePlaces'] = LocalizationUtility::translate(
+                        'tx_slubevents_domain_model_event.oneFreePlace',
+                        'slub_events'
+                    );
                 } else {
-                    $foundevent['freePlaces'] = ($event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event)) . ' ' . Tx_Extbase_Utility_Localization::translate('tx_slubevents_domain_model_event.freeplaces',
-                            'slub_events');
+                    $foundevent['freePlaces'] =
+                        ($event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event));
+
+                    $foundevent['freePlaces'] .= ' ' .
+                        LocalizationUtility::translate(
+                            'tx_slubevents_domain_model_event.freeplaces',
+                            'slub_events'
+                        );
                 }
             }
 
@@ -531,12 +535,21 @@ class EventController extends AbstractController
             if ($noSubscription) {
                 $foundevent['className'] .= ' no_subscription';
             }
-
             $jsonevent[] = $foundevent;
         }
+
         return json_encode($jsonevent);
     }
 
+    /**
+     * remove empty entries in array
+     *
+     * @param array $array
+     *
+     * @return array
+     */
+    protected function cleanArray(array $array)
+    {
+        return array_filter(array_map('trim', $array));
+    }
 }
-
-?>

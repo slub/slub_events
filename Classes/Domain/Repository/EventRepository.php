@@ -1,29 +1,30 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Repository;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+    /***************************************************************
+     *  Copyright notice
+     *
+     *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***************************************************************/
 
 /**
  *
@@ -32,23 +33,25 @@ namespace Slub\SlubEvents\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+use Slub\SlubEvents\Domain\Model\Category;
+use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Finds all datasets by MM relation categories
      *
-     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @param Category $category
+     *
      * @return array The found Event Objects
      */
-    public function findAllGbByCategory($category)
+    public function findAllGbByCategory(Category $category)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->equals('categories.uid', $category);
         $constraints[] = $query->equals('genius_bar', 1);
         $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
@@ -59,36 +62,34 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
     }
 
     /**
-     * Finds all datasets by MM relation categories
+     * @param array $categories separated by comma
+     * @param bool  $fromNow    separated by comma
      *
-     * @param string $categories separated by comma
-     * @return array The found Event Objects
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface The found Event Objects
      */
-    public function findAllByCategories($categories)
+    public function findAllByCategories($categories, $fromNow = true)
     {
-
         $query = $this->createQuery();
-
-        $constraints = array();
-
-        $constraints[] = $query->in('categories.uid', $categories);
-        $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
-
-        if (count($constraints)) {
-            $query->matching($query->logicalAnd($constraints));
-        }
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
+
+        $constraints = [];
+        $constraints[] = $query->in('categories.uid', $categories);
+        if ($fromNow === true) {
+            $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+        }
+
+        $query->matching($query->logicalAnd($constraints));
 
         return $query->execute();
     }
@@ -96,17 +97,17 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Finds all datasets using the flexform settings
      *
-     * @param array $settings
+     * @param array   $settings
      * @param integer $geniusBar
+     *
      * @return array The found Event Objects
      */
     public function findAllBySettings($settings, $geniusBar = 0)
     {
-
         $query = $this->createQuery();
-        $constraints = array();
+        $constraints = [];
 
-        // we don't want genius_bar events as default
+        // we don't want genius_bar events here
         $constraints[] = $query->equals('genius_bar', $geniusBar);
 
         // are categories selected?
@@ -121,12 +122,14 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // are contacts selected?
         if (!empty($settings['contactsSelection'])) {
-            $constraints[] = $query->in('contact.uid',
-                GeneralUtility::intExplode(',', $settings['contactsSelection'], true));
+            $constraints[] = $query->in(
+                'contact.uid',
+                GeneralUtility::intExplode(',', $settings['contactsSelection'], true)
+            );
         }
 
         // default is to show only future events
-        if ($settings['showPastEvents'] !== true) {
+        if ($settings['showPastEvents'] != true) {
             $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
         }
 
@@ -144,32 +147,30 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         // order by start_date ascending or descending
         if ($settings['eventOrdering'] === 'DESC') {
             $query->setOrderings(
-                array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+                ['start_date_time' => QueryInterface::ORDER_DESCENDING]
             );
         } else {
             $query->setOrderings(
-                array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+                ['start_date_time' => QueryInterface::ORDER_ASCENDING]
             );
         }
 
         return $query->execute();
     }
 
-
     /**
      * Finds all datasets by disciplines
      *
      * @param int $discipline
      * @param int $category
+     *
      * @return array The found Event Objects
      */
     public function findAllByDisciplineAndCategory($discipline, $category)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
-        //~ $constraints[] = $query->in('tx_slubevents_domain_model_category.uid', $categories);
+        $constraints = [];
         $constraints[] = $query->equals('discipline.uid', $discipline);
         $constraints[] = $query->equals('categories.uid', $category);
         $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
@@ -180,40 +181,45 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
     }
-
 
     /**
      * Finds all datasets by MM relation categories
      *
      * INCLUDE hidden events for backend usage only!
      *
-     * @param string categories separated by comma
-     * @param int startdatestamp
-     * @param string searchString
-     * @param array contacts separated by comma
+     * @param string $categories separated by comma
+     * @param int    $startDateStamp
+     * @param string $searchString
+     * @param array  $contacts   separated by comma
+     *
      * @return array The found Event Objects
      */
-    public function findAllByCategoriesAndDate($categories, $startDateStamp, $searchString = '', $contacts = array())
+    public function findAllByCategoriesAndDate($categories, $startDateStamp, $searchString = '', $contacts = [])
     {
-
         $query = $this->createQuery();
-
-        $constraints = array();
-
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
 
-        $constraints[] = $query->in('categories.uid', $categories);
+        $constraints = [];
+
+        if (!empty($categories)) {
+            $constraints[] = $query->in('categories.uid', $categories);
+        }
+
         if (!empty($contacts)) {
             $constraints[] = $query->in('contact', $contacts);
         }
+
         $constraints[] = $query->greaterThan('start_date_time', $startDateStamp);
+
         if (!empty($searchString)) {
+            // escape strings
+            $searchString = $this->getDbConnection()->quoteStr($searchString, $this->getTableName());
             $constraints[] = $query->like('title', '%' . $searchString . '%');
         }
 
@@ -223,7 +229,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
@@ -232,16 +238,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Finds all datasets by MM relation categories
      *
-     * @param int startdatestamp
-     * @param int stopDateStamp
+     * @param int $startDateStamp
+     * @param int $stopDateStamp
+     *
      * @return array The found Event Objects
      */
     public function findAllByDateInterval($startDateStamp, $stopDateStamp)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
 
         $constraints[] = $query->greaterThanOrEqual('start_date_time', $startDateStamp);
         $constraints[] = $query->lessThanOrEqual('start_date_time', $stopDateStamp);
@@ -252,7 +258,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
@@ -263,14 +269,14 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds all datasets by MM relation categories
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
+     *
      * @return array The found Event Objects
      */
     public function findAllBySubscriber($subscribers)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         foreach ($subscribers as $subscriber) {
             $editCode = $subscriber->getEditcode();
             if (!empty($editCode)) {
@@ -280,7 +286,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         if (count($constraints)) {
             $query->matching(
-                $query->logicalAND($query->greaterThan('start_date_time', strtotime('today')),
+                $query->logicalAND(
+                    $query->greaterThan('start_date_time', strtotime('today')),
                     $query->logicalOr($constraints)
                 )
             );
@@ -290,7 +297,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
@@ -303,7 +310,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findAllStartMonths()
     {
-
+        // TODO: why is $BE_USER defined here?
         global $BE_USER;
 
         // we don't want to get an extbase object but an ordinary PHP array:
@@ -311,7 +318,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->getQuerySettings()->setReturnRawQueryResult(true);
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
         $query->setLimit(1);
 
@@ -321,7 +328,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->getQuerySettings()->setReturnRawQueryResult(true);
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+            ['start_date_time' => QueryInterface::ORDER_DESCENDING]
         );
         $query->setLimit(1);
 
@@ -340,14 +347,14 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds all events in future where subscription time ended (deadline)
      *
      * @param string categories separated by comma
+     *
      * @return array The found Event Objects
      */
     public function findAllSubscriptionEnded()
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
         $constraints[] = $query->lessThan('sub_end_date_time', time());
         $constraints[] = $query->greaterThan('sub_end_date_time', 0);
@@ -359,12 +366,35 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
     }
 
-}
+    /**
+     * Returns the name of the Event-Table
+     * @return string
+     */
+    protected static function getTableName()
+    {
+        /**
+         * @var \TYPO3\CMS\Extbase\Object\ObjectManager                  $objectManager
+         * @var \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper $dataMapper
+         */
+        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $dataMapper = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper');
 
-?>
+        return $dataMapper
+            ->getDataMap('Slub\\SlubEvents\\Domain\\Model\\Event')
+            ->getTableName();
+    }
+
+    /**
+     * @return DatabaseConnection
+     */
+    protected static function getDbConnection()
+    {
+        return $GLOBALS['TYPO3_DB'];
+    }
+}

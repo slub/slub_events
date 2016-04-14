@@ -6,6 +6,7 @@ table.tx_slubevents, div.tx_slubevents {
 	margin: 2px;
 	border-spacing: 0;
 }
+
 table.tx_slubevents th {
 	font-size: 12pt;
 	font-weight: bold;
@@ -18,6 +19,7 @@ table.tx_slubevents td {
 	font-weight: normal;
 	padding: 4px;
 }
+
 table.tx_slubevents td.td-input {
 	width: 200px;
 }
@@ -39,7 +41,7 @@ table.tx_slubevents td span.geniusbar {
 	cursor: pointer;
 }
 
-table.tx_slubevents tr.Even{
+table.tx_slubevents tr.Even {
 	background-color: #dedede;
 }
 
@@ -67,20 +69,22 @@ table.tx_slubevents .foldicon {
 	left: -2px;
 	text-align: center;
 }
+
 table.tx_slubevents .open input[type="checkbox"] {
 
 }
 
-table.tx_slubevents td.foldtree>ul>li.open,
-table.tx_slubevents td.foldtree>ul>li.closed
-{
+table.tx_slubevents td.foldtree > ul > li.open,
+table.tx_slubevents td.foldtree > ul > li.closed {
 	position: relative;
 	left: -20px;
 	border-left: none;
 }
+
 table.tx_slubevents td.foldtree > ul > li.open ul li {
 	border-left: 1px dashed #ccc;
 }
+
 table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	border-left: 1px dashed #a00;
 }
@@ -88,6 +92,7 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 #field-contact-search {
 	width: 150px;
 }
+
 /*
  *------
  * ...
@@ -97,6 +102,7 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 .slub-event-list {
 	background: transparent;
 }
+
 #leftcol .slub-event-list ul {
 	margin: 0px;
 
@@ -120,6 +126,7 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	display: inline-block;
 	margin: 2px;
 }
+
 .slub-event-list ul.f3-widget-paginator li {
 	float: left;
 	font-size: 140%;
@@ -128,14 +135,18 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	margin: 0;
 	padding: 0.5em;
 }
+
 .slub-event-list ul.f3-widget-paginator li:hover {
 	background-color: #dedede;
 }
+
 .slub-event-list ul.f3-widget-paginator li.current {
 	background-color: #dedede;
 }
+
 .slub-event-list li.Odd {
 }
+
 .slub-event-list li.Even {
 	background: #e1f4f7;
 }
@@ -185,6 +196,7 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 .slub-backend-error h1 {
 	text-align: center;
 }
+
 .slub-backend-error p {
 	font-size: 200%;
 	text-align: left;
@@ -196,10 +208,12 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	padding: 30px;
 	width: 500px;
 }
+
 .tx_slubevents .emailtext ul {
 	list-style-type: disc;
 	padding: 20px 0 0 20px;
 }
+
 .tx_slubevents .error {
 	background: white;
 	border: 5px solid red;
@@ -209,7 +223,6 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	width: 500px;
 
 }
-
 
 img.inactive {
 	filter: gray;

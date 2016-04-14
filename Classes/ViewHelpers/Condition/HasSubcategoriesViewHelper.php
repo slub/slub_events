@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Condition;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,8 +34,6 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  */
 class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
-
     /**
      * categoryRepository
      *
@@ -45,6 +45,7 @@ class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
      * injectCategoryRepository
      *
      * @param \Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository
+     *
      * @return void
      */
     public function injectCategoryRepository(\Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository)
@@ -56,13 +57,13 @@ class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
      * check if any events of categories below are present and free for booking
      *
      * @param \Slub\SlubEvents\Domain\Model\Category $category
+     *
      * @return int
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render(\Slub\SlubEvents\Domain\Model\Category $category)
     {
-
         $categories = $this->categoryRepository->findCurrentBranch($category);
 
         if (count($categories) == 0) {
@@ -70,8 +71,5 @@ class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
         } else {
             return true;
         }
-
     }
 }
-
-?>

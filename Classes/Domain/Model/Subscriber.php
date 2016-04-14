@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
@@ -34,7 +35,6 @@ namespace Slub\SlubEvents\Domain\Model;
  */
 class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * name
      *
@@ -97,7 +97,7 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Creation Date
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $crdate;
 
@@ -122,7 +122,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the name
      *
      * @param string $name
-     * @return void
      */
     public function setName($name)
     {
@@ -153,7 +152,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the email
      *
      * @param string $email
-     * @return void
      */
     public function setEmail($email)
     {
@@ -174,7 +172,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the telephone
      *
      * @param string $telephone
-     * @return void
      */
     public function setTelephone($telephone)
     {
@@ -195,7 +192,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the institution
      *
      * @param string $institution
-     * @return void
      */
     public function setInstitution($institution)
     {
@@ -216,7 +212,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the customerid
      *
      * @param string $customerid
-     * @return void
      */
     public function setCustomerid($customerid)
     {
@@ -237,7 +232,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the number
      *
      * @param integer $number
-     * @return integer number
      */
     public function setNumber($number)
     {
@@ -258,7 +252,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the editcode
      *
      * @param string $editcode
-     * @return void
      */
     public function setEditcode($editcode)
     {
@@ -279,7 +272,6 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the message
      *
      * @param string $message
-     * @return void
      */
     public function setMessage($message)
     {
@@ -289,7 +281,7 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the crdate
      *
-     * @return DateTime $crdate
+     * @return \DateTime $crdate
      */
     public function getCrdate()
     {
@@ -299,8 +291,7 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the crdate
      *
-     * @param DateTime $crdate
-     * @return void
+     * @param \DateTime $crdate
      */
     public function setCrdate($crdate)
     {
@@ -311,13 +302,11 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the event
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return void
      */
     public function setEvent(\Slub\SlubEvents\Domain\Model\Event $event)
     {
         $this->event = $event;
     }
-
 }
-
-?>

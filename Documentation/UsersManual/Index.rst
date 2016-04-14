@@ -56,8 +56,8 @@ below the slub_events template in the middle column.
 	:width: 500px
 	:alt: The Backend Module
 
-	The backend module appears on the right column if a page in the
-	pagetreeg has been selected.
+        	The backend module appears on the right column if a page in the
+        	pagetreeg has been selected.
 
 
 **Important:** You have to set the StoragePid of the Eventdata-folder on
@@ -75,7 +75,7 @@ following error message:
 	:width: 500px
 	:alt: Error: cannot find the configuration
 
-	Error if no page or folder is selected with the slub_events template.
+        	Error if no page or folder is selected with the slub_events template.
 
 
 
@@ -145,7 +145,7 @@ dresden.de/>`_
 	:width: 500px
 	:alt: Listing View
 
-	Listing of Events
+        	Listing of Events
 
 
 
@@ -153,7 +153,7 @@ dresden.de/>`_
 	:width: 500px
 	:alt: Subscription View
 
-	Subscription Form
+        	Subscription Form
 
 
 
@@ -161,7 +161,7 @@ dresden.de/>`_
 	:width: 500px
 	:alt: Knowledge Bar View
 
-	Knowledge Bar View
+        	Knowledge Bar View
 
 
 
@@ -169,6 +169,6 @@ dresden.de/>`_
 	:width: 500px
 	:alt: Knowledge View
 
-	Knowledge View
+        	Knowledge View
 
 

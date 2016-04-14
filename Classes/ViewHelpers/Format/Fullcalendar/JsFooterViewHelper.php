@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format\Fullcalendar;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,19 +37,18 @@ namespace Slub\SlubEvents\ViewHelpers\Format\Fullcalendar;
  */
 class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * Looks for already checked form from last request
      *
-     * @param array $categories
-     * @param array $settings
+     * @param array  $categories
+     * @param array  $settings
      * @param string $link
+     *
      * @return string
      * @api
      */
     public function render($categories = null, $settings = null, $link = null)
     {
-
         // get field configuration
         $js1 = '<script>';
 
@@ -58,45 +59,45 @@ class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         }
 
         $js1 .= "events: {
-					url: '?eID=slubCal',
-					data: function() {
-						var eventurl = '';
-						var disurl = '';
-						$('.slubevents-category input:checked').each(function() {
-							var cal = $(this).attr('id').split(\"-\")[2];
-							eventurl = eventurl + ',' + cal;
-						});
-						$('.slubevents-discipline input:checked').each(function() {
-							var cal = $(this).attr('id').split(\"-\")[2];
-							disurl = disurl + ',' + cal;
-						});
-						return {
-							categories: eventurl,
-							disciplines: disurl,
-							link: '" . urlencode($link) . "',
-							detailPid: '" . $settings['pidDetails'] . "'
-						};
-					}
-			},";
+                    url: '?eID=slubCal',
+                    data: function() {
+                        var eventurl = '';
+                        var disurl = '';
+                        $('.slubevents-category input:checked').each(function() {
+                            var cal = $(this).attr('id').split(\"-\")[2];
+                            eventurl = eventurl + ',' + cal;
+                        });
+                        $('.slubevents-discipline input:checked').each(function() {
+                            var cal = $(this).attr('id').split(\"-\")[2];
+                            disurl = disurl + ',' + cal;
+                        });
+                        return {
+                            categories: eventurl,
+                            disciplines: disurl,
+                            link: '" . urlencode($link) . "',
+                            detailPid: '" . $settings['pidDetails'] . "'
+                        };
+                    }
+            },";
         // add event name to title attribute on mouseover
         $js1 .= "eventMouseover: function(event, jsEvent, view) {
-							$(jsEvent.target).attr('title', moment(event.start).format('LT') + ' - ' + moment(event.end).format('LT') + ' ' + event.title);
-					},";
+                            $(jsEvent.target).attr('title', moment(event.start).format('LT') + ' - ' + moment(event.end).format('LT') + ' ' + event.title);
+                    },";
 
         $js1 .= "eventRender: function(event, element, view) {
-						if (view.name === 'agendaDay' && event.freePlaces != '0') {
-							element.find('.fc-event-title')
-								.after('<div class=\"fc-event-freeplaces\">' + event.freePlaces + '</div>');
-						}
-					},";
+                        if (view.name === 'agendaDay' && event.freePlaces != '0') {
+                            element.find('.fc-event-title')
+                                .after('<div class=\"fc-event-freeplaces\">' + event.freePlaces + '</div>');
+                        }
+                    },";
         // show/hide div #loading
         $js1 .= "loading: function(bool) {
-						if (bool) {
-							$('#loading').show();
-						} else {
-							$('#loading').hide();
-						}
-					},";
+                        if (bool) {
+                            $('#loading').show();
+                        } else {
+                            $('#loading').hide();
+                        }
+                    },";
 
         // close fullCalendar()
         $js1 .= '});';
@@ -110,10 +111,5 @@ class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         // getPagerender() doesn't work in 4.7.x....
         // see: http://forge.typo3.org/issues/22273
         $GLOBALS['TSFE']->additionalFooterData['tx_slub_forms'] .= $js1;
-
     }
-
-
 }
-
-?>

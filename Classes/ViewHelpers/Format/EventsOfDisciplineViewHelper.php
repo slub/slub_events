@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -45,17 +47,13 @@ class EventsOfDisciplineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
      * check if any events of categories below are present and free for booking
      *
      * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
+     *
      * @return boolean
      * @api
      */
     public function render(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
     {
-
-        $events = $this->eventRepository->findAllBySettings(array('disciplineList' => array(0 => $discipline)));
-
+        $events = $this->eventRepository->findAllBySettings(['disciplineList' => [0 => $discipline]]);
         return count($events);
-
     }
 }
-
-?>
