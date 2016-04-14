@@ -200,6 +200,8 @@ class EmailHelper
         $text = preg_replace('/[\t]{1,}/', '', $text);
         // remove more than one empty line
         $text = preg_replace('/[\n]{3,}/', "\n\n", $text);
+        // yes, really do CRLF to let quoted printable work as expected!
+        $text = preg_replace('/[\n]/', "\r\n", $text);
         // remove all remaining html tags
         $text = strip_tags($text);
 
