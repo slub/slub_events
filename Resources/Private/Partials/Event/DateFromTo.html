@@ -1,33 +1,24 @@
-<f:format.date date="{event.startDateTime}" format="%a, %x"/>
+<f:format.date date="{event.startDateTime}" format="%a, %x" />
 <f:if condition="{event.Allday} !=1 ">
 	<f:then>
-		&nbsp;
-		<f:format.date date="{event.startDateTime}" format="%H:%M"/>
-		&nbsp;
-		<f:translate key="tx_slubevents_domain_model_event.time_oclock"/>
+		<f:format.date date="{event.startDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
 	</f:then>
 </f:if>
 <f:if condition="{event.endDateTime}">
 	<f:then>
-		<f:if
-			condition="{0: '<f:format.date date=\'{event.startDateTime}\' format=\'%a, %x\' />' } != {0: '<f:format.date date=\'{event.endDateTime}\' format=\'%a, %x\' />'}">
+		<f:if condition="{0: '<f:format.date date=\'{event.startDateTime}\' format=\'%a, %x\' />' } != {0: '<f:format.date date=\'{event.endDateTime}\' format=\'%a, %x\' />'}">
 			<f:then>
-				&nbsp;-&nbsp;
-				<f:format.date date="{event.endDateTime}" format="%a, %x"/>
+				- <f:format.date date="{event.endDateTime}" format="%a, %x" />
 				<f:if condition="{event.Allday} !=1 ">
 					<f:then>
-						&nbsp;
-						<f:format.date date="{event.endDateTime}" format="%H:%M"/>
-						<f:translate key="tx_slubevents_domain_model_event.time_oclock"/>
+						<f:format.date date="{event.endDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
 					</f:then>
 				</f:if>
 			</f:then>
 			<f:else>
 				<f:if condition="{event.endDateTime}">
 					<f:then>
-						&nbsp;-&nbsp;
-						<f:format.date date="{event.endDateTime}" format="%H:%M"/>
-						<f:translate key="tx_slubevents_domain_model_event.time_oclock"/>
+						- <f:format.date date="{event.endDateTime}" format="%H:%M" /> <f:translate key="tx_slubevents_domain_model_event.time_oclock" />
 					</f:then>
 				</f:if>
 			</f:else>
