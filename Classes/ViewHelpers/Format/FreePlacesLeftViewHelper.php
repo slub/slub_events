@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -45,13 +47,13 @@ class FreePlacesLeftViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
      * Calculate the free places for a given event.
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return int
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render(\Slub\SlubEvents\Domain\Model\Event $event = null)
     {
-
         if ($event != null) {
             $free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
         } else {
@@ -59,8 +61,5 @@ class FreePlacesLeftViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
         }
 
         return ($free > 0) ? $free : 0;
-
     }
 }
-
-?>

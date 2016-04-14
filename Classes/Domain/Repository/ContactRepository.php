@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
@@ -34,7 +35,6 @@ namespace Slub\SlubEvents\Domain\Repository;
  */
 class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Finds all datasets and return in tree order
      *
@@ -42,24 +42,19 @@ class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findAllSorted()
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
 
         if (count($constraints)) {
             $query->matching($query->logicalAnd($constraints));
         }
 
         $query->setOrderings(
-            array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
         );
         $contacts = $query->execute();
 
         return $contacts;
-
     }
-
 }
-
-?>

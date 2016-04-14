@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Link;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -45,20 +47,17 @@ class IslocalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 
     /**
      * @param string $link the given link as integer uid or string
+     *
      * @return boolean
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render($link)
     {
-
         if ($link === null) {
             return false;
         }
 
         return \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($link) ? true : false;
-
     }
 }
-
-?>

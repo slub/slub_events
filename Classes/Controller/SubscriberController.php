@@ -1,29 +1,30 @@
 <?php
+
 namespace Slub\SlubEvents\Controller;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+    /***************************************************************
+     *  Copyright notice
+     *
+     *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***************************************************************/
 
 /**
  *
@@ -32,9 +33,13 @@ namespace Slub\SlubEvents\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+use Slub\SlubEvents\Domain\Model\Category;
+use Slub\SlubEvents\Domain\Model\Event;
+use Slub\SlubEvents\Domain\Model\Subscriber;
+use Slub\SlubEvents\Helper\EmailHelper;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use Slub\SlubEvents\Helper\EmailHelper;
 
 class SubscriberController extends AbstractController
 {
@@ -53,10 +58,11 @@ class SubscriberController extends AbstractController
     /**
      * action show
      *
-     * @param \Slub\SlubEvents\Domain\Model\Subscriber $subscriber
+     * @param Subscriber $subscriber
+     *
      * @return void
      */
-    public function showAction(\Slub\SlubEvents\Domain\Model\Subscriber $subscriber)
+    public function showAction(Subscriber $subscriber)
     {
         $this->view->assign('subscriber', $subscriber);
     }
@@ -68,7 +74,6 @@ class SubscriberController extends AbstractController
      */
     public function eventNotFoundAction()
     {
-
     }
 
     /**
@@ -78,7 +83,6 @@ class SubscriberController extends AbstractController
      */
     public function subscriberNotFoundAction()
     {
-
     }
 
     /**
@@ -137,18 +141,19 @@ class SubscriberController extends AbstractController
     /**
      * action new
      *
-     * @param \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
-     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @param Subscriber $newSubscriber
+     * @param Event      $event
+     * @param Category   $category
      * @ignorevalidation $newSubscriber
      * @ignorevalidation $event
      * @ignorevalidation $category
+     *
      * @return void
      */
     public function newAction(
-        \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber = null,
-        \Slub\SlubEvents\Domain\Model\Event $event = null,
-        \Slub\SlubEvents\Domain\Model\Category $category = null
+        Subscriber $newSubscriber = null,
+        Event $event = null,
+        Category $category = null
     ) {
 
         // somebody is calling the action without giving an event --> useless
@@ -162,11 +167,11 @@ class SubscriberController extends AbstractController
         // already POST values exists. extbase vodoo ;-)
         if ($newSubscriber === null) {
 
-            $newSubscriber = GeneralUtility::makeInstance('\Slub\SlubEvents\Domain\Model\Subscriber');
+            /** @var \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber */
+            $newSubscriber = GeneralUtility::makeInstance(\Slub\SlubEvents\Domain\Model\Subscriber::class);
             $newSubscriber->setNumber(1);
 
             if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
-
                 $newSubscriber->setCustomerid($GLOBALS['TSFE']->fe_user->user['username']);
                 $loggedIn = 'readonly'; // css class for form
             } else {
@@ -180,7 +185,6 @@ class SubscriberController extends AbstractController
             if (!empty($GLOBALS['TSFE']->fe_user->user['email'])) {
                 $newSubscriber->setEmail($GLOBALS['TSFE']->fe_user->user['email']);
             }
-
         }
 
         $this->view->assign('event', $event);
@@ -193,17 +197,18 @@ class SubscriberController extends AbstractController
      * action create
      * // gets validated automatically if name is like this: ...Tx_SlubEvents_Domain_Validator_SubscriberValidator
      *
-     * @param \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
-     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @param Subscriber $newSubscriber
+     * @param Event      $event
+     * @param Category   $category
      * @validate $event \Slub\SlubEvents\Domain\Validator\EventSubscriptionAllowedValidator
      * @ignorevalidation $category
+     *
      * @return void
      */
     public function createAction(
-        \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber,
-        \Slub\SlubEvents\Domain\Model\Event $event,
-        \Slub\SlubEvents\Domain\Model\Category $category = null
+        Subscriber $newSubscriber,
+        Event $event,
+        Category $category = null
     ) {
 
         // add subscriber to event
@@ -225,18 +230,20 @@ class SubscriberController extends AbstractController
         if (is_object($event->getLocation())) {
             if (is_object($event->getLocation()->getParent()->current())) {
                 $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+                $helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
             }
             $helper['location'] .= $event->getLocation()->getName();
             $helper['locationics'] .= $this->foldline($event->getLocation()->getName());
         }
-        $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $newSubscriber->getName()));
+        $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
 
         // startDateTime may never be empty
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
 
         // endDate may be empty
-        if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime())) {
+        if (($event->getEndDateTime() instanceof \DateTime)
+            && ($event->getStartDateTime() != $event->getEndDateTime())
+        ) {
             $helper['end'] = $event->getEndDateTime()->getTimestamp();
         }
 
@@ -246,18 +253,18 @@ class SubscriberController extends AbstractController
 
         // email to customer
         EmailHelper::sendTemplateEmail(
-            array($newSubscriber->getEmail() => $newSubscriber->getName()),
-            array($event->getContact()->getEmail() => $event->getContact()->getName()),
+            [$newSubscriber->getEmail() => $newSubscriber->getName()],
+            [$event->getContact()->getEmail() => $event->getContact()->getName()],
             'Ihre Anmeldung: ' . $event->getTitle(),
             'Subscribe',
-            array(
-                'event' => $event,
+            [
+                'event'      => $event,
                 'subscriber' => $newSubscriber,
-                'helper' => $helper,
-                'settings' => $this->settings,
-                'attachCsv' => false,
-                'attachIcs' => true,
-            ),
+                'helper'     => $helper,
+                'settings'   => $this->settings,
+                'attachCsv'  => false,
+                'attachIcs'  => true,
+            ],
             $this->configurationManager
         );
 
@@ -265,52 +272,58 @@ class SubscriberController extends AbstractController
         if ($this->settings['emailToContact']['sendEmailOnMaximumReached'] &&
             ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()
         ) {
-            $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'),
-                $event->getContact()->getName()));
+            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
             // email to event owner
             EmailHelper::sendTemplateEmail(
-                array($event->getContact()->getEmail() => $event->getContact()->getName()),
-                array(
-                    $this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement',
-                            'slub_events') . ' - noreply'
-                ),
+                [$event->getContact()->getEmail() => $event->getContact()->getName()],
+                [
+                    $this->settings['senderEmailAddress'] =>
+                        LocalizationUtility::translate(
+                            'tx_slubevents.be.eventmanagement',
+                            'slub_events'
+                        )
+                        . ' - noreply',
+                ],
                 'Veranstaltung ausgebucht: ' . $event->getTitle(),
                 'Maximumreached',
-                array(
-                    'event' => $event,
+                [
+                    'event'       => $event,
                     'subscribers' => $event->getSubscribers(),
-                    'helper' => $helper,
-                    'settings' => $this->settings,
-                    'attachCsv' => true,
-                    'attachIcs' => true,
-                ),
+                    'helper'      => $helper,
+                    'settings'    => $this->settings,
+                    'attachCsv'   => true,
+                    'attachIcs'   => true,
+                ],
                 $this->configurationManager
             );
         } // send to contact, on every booking if TS setting is present:
         else {
             if ($this->settings['emailToContact']['sendEmailOnEveryBooking']) {
-                $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'),
-                    $event->getContact()->getName()));
+                $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
                 // email to event owner
                 EmailHelper::sendTemplateEmail(
-                    array($event->getContact()->getEmail() => $event->getContact()->getName()),
-                    array(
-                        $this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement',
-                                'slub_events') . ' - noreply'
-                    ),
+                    [$event->getContact()->getEmail() => $event->getContact()->getName()],
+                    [
+                        $this->settings['senderEmailAddress'] =>
+                            LocalizationUtility::translate(
+                                'tx_slubevents.be.eventmanagement',
+                                'slub_events'
+                            )
+                            . ' - noreply',
+                    ],
                     'Veranstaltung gebucht: ' . $event->getTitle(),
                     'Newsubscriber',
-                    array(
-                        'event' => $event,
+                    [
+                        'event'         => $event,
                         'newsubscriber' => $newSubscriber,
-                        'subscribers' => $event->getSubscribers(),
-                        'helper' => $helper,
-                        'settings' => $this->settings,
-                        'attachCsv' => false,
-                        'attachIcs' => false,
-                    ),
+                        'subscribers'   => $event->getSubscribers(),
+                        'helper'        => $helper,
+                        'settings'      => $this->settings,
+                        'attachCsv'     => false,
+                        'attachIcs'     => false,
+                    ],
                     $this->configurationManager
                 );
             }
@@ -336,11 +349,11 @@ class SubscriberController extends AbstractController
      * rfc2445.txt: lines SHOULD NOT be longer than 75 octets
      *
      * @param string $content : Anystring
+     *
      * @return string        $content: Manipulated string
      */
-    private function foldline($content)
+    protected function foldline($content)
     {
-
         $text = trim(strip_tags(html_entity_decode($content), '<br>,<p>,<li>'));
         $text = preg_replace('/<p[\ \w\=\"]{0,}>/', '', $text);
         $text = preg_replace('/<li[\ \w\=\"]{0,}>/', '- ', $text);
@@ -378,21 +391,33 @@ class SubscriberController extends AbstractController
      *
      * this converts the HTML email to something Rest-Style like text form
      *
-     * @param $htmlString
-     * @return
+     * @param $text
+     *
+     * @return mixed|string
+     * @internal param $htmlString
+     *
      */
     public function html2rest($text)
     {
+        $text = strip_tags(
+            html_entity_decode(
+                $text,
+                ENT_COMPAT,
+                'UTF-8'
+            ),
+            '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>'
+        );
 
-        $text = strip_tags(html_entity_decode($text, ENT_COMPAT, 'UTF-8'),
-            '<br>,<p>,<b>,<h1>,<h2>,<h3>,<h4>,<h5>,<a>,<li>');
         // header is getting **
         $text = preg_replace('/<h[1-5]>|<\/h[1-5]>/', '**', $text);
         // bold is getting * ([[\w\ \d:\/~\.\?\=&%\"]+])
         $text = preg_replace('/<b>|<\/b>/', '*', $text);
         // get away links but preserve href with class slub-event-link
-        $text = preg_replace('/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/',
-            "$6\n$3", $text);
+        $text = preg_replace(
+            '/(<a[\ \w\=\"]{0,})(class=\"slub-event-link\" href\=\")([\w\d:\-\/~\.\?\=&%]+)([\"])([\"]{0,1}>)([\ \w\d\p{P}]+)(<\/a>)/',
+            "$6\n$3",
+            $text
+        );
         // Remove separator characters (like non-breaking spaces...)
         $text = preg_replace('/\p{Z}/u', ' ', $text);
         $text = str_replace('<br />', "\n", $text);
@@ -417,46 +442,39 @@ class SubscriberController extends AbstractController
      * Clear cache of all pages with cached slubevents content.
      * This way the plugin may stay cached but on every delete or insert
      * of subscribers, the cache gets cleared.
-     * @param integer $isGeniusBar
      *
-     * @return
+     * @param bool $isGeniusBar
      */
-    public function clearAllEventListCache($isGeniusBar = 0)
+    public function clearAllEventListCache($isGeniusBar = false)
     {
-
-        $tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+        /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $tcemain */
+        $tcemain = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
 
         // next two lines are necessary... don't know why.
         $tcemain->stripslashes_values = 0;
-        $tcemain->start(array(), array());
+        $tcemain->start([], []);
 
         if ($isGeniusBar) {
-
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $this->settings['storagePid']);
-
+            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $this->settings['persistence']['storagePid']);
         } else {
-
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $this->settings['storagePid']);
-
+            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $this->settings['persistence']['storagePid']);
         }
-
         return;
-
     }
 
     /**
      * action delete
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event  $event
      * @param string $editcode
      * @ignorevalidation $event
+     *
      * @return void
      */
-    public function deleteAction(\Slub\SlubEvents\Domain\Model\Event $event = null, $editcode)
+    public function deleteAction(Event $event = null, $editcode = null)
     {
-
         // somebody is calling the action without giving an event --> useless
-        if ($event === null || empty($editcode)) {
+        if ($event === null || $editcode === null) {
             $this->redirect('eventNotFound');
         }
 
@@ -485,17 +503,20 @@ class SubscriberController extends AbstractController
         if (is_object($event->getLocation())) {
             if (is_object($event->getLocation()->getParent()->current())) {
                 $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+                $helper['locationics'] =
+                    $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
             }
             $helper['location'] = $event->getLocation()->getName();
             $helper['locationics'] = $this->foldline($event->getLocation()->getName());
         }
-        $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $subscriber->getName()));
+        $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
 
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
 
         // endDate may be empty
-        if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime())) {
+        if (($event->getEndDateTime() instanceof \DateTime)
+            && ($event->getStartDateTime() != $event->getEndDateTime())
+        ) {
             $helper['end'] = $event->getEndDateTime()->getTimestamp();
         }
 
@@ -513,44 +534,45 @@ class SubscriberController extends AbstractController
             ($this->subscriberRepository->countAllByEvent($event) >= $event->getMinSubscriber()) &&
             ($this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber()) < $event->getMinSubscriber()
         ) {
-            $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'),
-                $event->getContact()->getName()));
+            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
             // email to event owner
             EmailHelper::sendTemplateEmail(
-                array($event->getContact()->getEmail() => $event->getContact()->getName()),
-                array(
-                    $this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement',
-                        'slub_events')
-                ),
+                [$event->getContact()->getEmail() => $event->getContact()->getName()],
+                [
+                    $this->settings['senderEmailAddress'] => LocalizationUtility::translate(
+                        'tx_slubevents.be.eventmanagement',
+                        'slub_events'
+                    ),
+                ],
                 'Veranstaltung wegen Abmeldung nicht mehr gesichert: ' . $event->getTitle(),
                 'Minimumreachedagain',
-                array(
-                    'event' => $event,
-                    'subscribers' => $event->getSubscribers(),
+                [
+                    'event'           => $event,
+                    'subscribers'     => $event->getSubscribers(),
                     'subscriberCount' => $this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber(),
-                    'helper' => $helper,
-                    'settings' => $this->settings,
-                    'attachCsv' => false,
-                    'attachIcs' => true,
-                ),
+                    'helper'          => $helper,
+                    'settings'        => $this->settings,
+                    'attachCsv'       => false,
+                    'attachIcs'       => true,
+                ],
                 $this->configurationManager
             );
         }
 
         EmailHelper::sendTemplateEmail(
-            array($subscriber->getEmail() => $subscriber->getName()),
-            array($event->getContact()->getEmail() => $event->getContact()->getName()),
+            [$subscriber->getEmail() => $subscriber->getName()],
+            [$event->getContact()->getEmail() => $event->getContact()->getName()],
             'Ihre Abmeldung: ' . $event->getTitle(),
             'Unsubscribe',
-            array(
-                'event' => $event,
+            [
+                'event'      => $event,
                 'subscriber' => $subscriber,
-                'helper' => $helper,
-                'settings' => $this->settings,
-                'attachCsv' => false,
-                'attachIcs' => true,
-            ),
+                'helper'     => $helper,
+                'settings'   => $this->settings,
+                'attachCsv'  => false,
+                'attachIcs'  => true,
+            ],
             $this->configurationManager
         );
 
@@ -568,17 +590,19 @@ class SubscriberController extends AbstractController
      *
      * --> see ics template in Resources/Private/Backend/Templates/Email/
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event $event
      * @ignorevalidation $event
+     *
      * @return void
      */
-    public function beIcsInvitationAction(\Slub\SlubEvents\Domain\Model\Event $event)
+    public function beIcsInvitationAction(Event $event)
     {
-
         // startDateTime may never be empty
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
         // endDateTime may be empty
-        if (($event->getEndDateTime() instanceof \DateTime) && ($event->getStartDateTime() != $event->getEndDateTime())) {
+        if (($event->getEndDateTime() instanceof \DateTime)
+            && ($event->getStartDateTime() != $event->getEndDateTime())
+        ) {
             $helper['end'] = $event->getEndDateTime()->getTimestamp();
         } else {
             $helper['end'] = $helper['start'];
@@ -594,29 +618,32 @@ class SubscriberController extends AbstractController
         if (is_object($event->getLocation())) {
             if (is_object($event->getLocation()->getParent()->current())) {
                 $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+                $helper['locationics'] =
+                    $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
             }
             $helper['location'] = $event->getLocation()->getName();
             $helper['locationics'] = $this->foldline($event->getLocation()->getName());
         }
-        $helper['nameto'] = strtolower(str_replace(array(',', ' '), array('', '-'), $event->getContact()->getName()));
+        $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
         EmailHelper::sendTemplateEmail(
-            array($event->getContact()->getEmail() => $event->getContact()->getName()),
-            array(
-                $this->settings['senderEmailAddress'] => LocalizationUtility::translate('tx_slubevents.be.eventmanagement',
-                    'slub_events')
-            ),
+            [$event->getContact()->getEmail() => $event->getContact()->getName()],
+            [
+                $this->settings['senderEmailAddress'] => LocalizationUtility::translate(
+                    'tx_slubevents.be.eventmanagement',
+                    'slub_events'
+                ),
+            ],
             'Termineinladung: ' . $event->getTitle(),
             'Invitation',
-            array(
-                'event' => $event,
+            [
+                'event'       => $event,
                 'subscribers' => $event->getSubscribers(),
-                'helper' => $helper,
-                'settings' => $this->settings,
-                'attachCsv' => true,
-                'attachIcs' => true,
-            ),
+                'helper'      => $helper,
+                'settings'    => $this->settings,
+                'attachCsv'   => true,
+                'attachIcs'   => true,
+            ],
             $this->configurationManager
         );
 
@@ -630,66 +657,66 @@ class SubscriberController extends AbstractController
      */
     public function beListAction()
     {
-
         // get data from BE session
-        $sessionData = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
-        // get search parameters from BE user configuration
-        $ucData = $GLOBALS['BE_USER']->uc['moduleData']['slubevents'];
-
-        // get search parameters from POST variables
-        $searchParameter = $this->getParametersSafely('searchParameter');
-        if (is_array($searchParameter)) {
-            $ucData['searchParameter'] = $searchParameter;
-            $sessionData['selectedStartDateStamp'] = $searchParameter['selectedStartDateStamp'];
-            //~ $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
-            $GLOBALS['BE_USER']->uc['moduleData']['slubevents'] = $ucData;
-            $GLOBALS['BE_USER']->writeUC($GLOBALS['BE_USER']->uc);
-            // save session data
-            $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $sessionData);
-        } else {
-            // no POST vars --> take BE user configuration
-            $searchParameter = $ucData['searchParameter'];
-        }
+        /** @noinspection PhpUndefinedMethodInspection */
+        $searchParameter = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
 
         // set the startDateStamp
-        // startDateStamp is saved in session data NOT user data
-        if (empty($selectedStartDateStamp)) {
-            if (!empty($sessionData['selectedStartDateStamp'])) {
-                $selectedStartDateStamp = $sessionData['selectedStartDateStamp'];
-            } else {
-                $selectedStartDateStamp = date('d-m-Y');
-            }
+        if (empty($searchParameter['selectedStartDateStamp'])) {
+            $searchParameter['selectedStartDateStamp'] = date('d-m-Y');
         }
 
+        // if search was triggered
+        $submittedSearchParams = $this->getParametersSafely('searchParameter');
+        if (is_array($submittedSearchParams)) {
+            // clean category array to prevent errors
+            $searchParameter['category'] = $this->cleanArray($submittedSearchParams['category']);
+
+            // merge search parameter
+            $searchParameter = array_merge($searchParameter, $submittedSearchParams);
+
+            // save session data
+            /** @noinspection PhpUndefinedMethodInspection */
+            $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $searchParameter);
+        }
+
+        // Categories
+        // ------------------------------------------------------------------------------------
+
+        // get the categories
         $categories = $this->categoryRepository->findAllTree();
 
-        if (is_array($searchParameter['selectedCategories'])) {
-            $this->view->assign('selectedCategories', $searchParameter['selectedCategories']);
-        } else {
-            // if no category selection in user settings present --> look for the root categories
-            if (!is_array($searchParameter['category'])) {
-                foreach ($categories as $uid => $category) {
-                    $searchParameter['category'][$uid] = $uid;
-                }
+        // check which categories have been selected
+        if (!is_array($submittedSearchParams['category'])) {
+            $allCategories = $this->categoryRepository->findAll()->toArray();
+            foreach ($allCategories as $category) {
+                $searchParameter['category'][$category->getUid()] = $category->getUid();
             }
-            $this->view->assign('categoriesSelected', $searchParameter['category']);
         }
+        $this->view->assign('categoriesSelected', $searchParameter['category']);
 
-        $this->view->assign('selectedStartDateStamp', $selectedStartDateStamp);
+        // Events
+        // ------------------------------------------------------------------------------------
+        // get the events to show
+        $events = $this->eventRepository->findAllByCategoriesAndDate(
+            $searchParameter['category'],
+            strtotime($searchParameter['selectedStartDateStamp'])
+        );
 
-        if (is_array($searchParameter['category'])) {
 
-            $events = $this->eventRepository->findAllByCategoriesAndDate($searchParameter['category'],
-                strtotime($selectedStartDateStamp));
-
+        // Subscribers
+        // ------------------------------------------------------------------------------------
+        if (sizeof($events->toArray()) > 0) {
+            $subscribers = $this->subscriberRepository->findAllByEvents($events);
+            $this->view->assign('subscribers', $subscribers);
+        } else {
+            $this->addFlashMessage('No events found.', 'Error', FlashMessage::ERROR);
         }
 
         $this->view->assign('categories', $categories);
         $this->view->assign('events', $events);
+        $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
 
-        $subscribers = $this->subscriberRepository->findAllByEvents($events);
-
-        $this->view->assign('subscribers', $subscribers);
     }
 
     /**
@@ -697,14 +724,14 @@ class SubscriberController extends AbstractController
      *
      * --> see ics template in Resources/Private/Backend/Templates/Email/
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event   $event
      * @param integer $step
      * @ignorevalidation $event
+     *
      * @return void
      */
-    public function beOnlineSurveyAction(\Slub\SlubEvents\Domain\Model\Event $event, $step = 0)
+    public function beOnlineSurveyAction(Event $event, $step = 0)
     {
-
         // get the onlineSurveyLink and potential timestamp of last sent
         $onlineSurveyLink = GeneralUtility::trimExplode('|', $event->getOnlinesurvey(), true);
 
@@ -717,20 +744,24 @@ class SubscriberController extends AbstractController
 
             $emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
             $emailViewHTML->setFormat('html');
-            //~ $emailText->assignMultiple($variables);
             $emailViewHTML->assign('onlineSurveyLink', $onlineSurveyLink[0]);
             $emailViewHTML->assign('event', $event);
-            $emailViewHTML->assign('subscriber', array('name' => '###Name wird automatisch ausgefüllt###'));
+            $emailViewHTML->assign('subscriber', ['name' => '###Name wird automatisch ausgefüllt###']);
 
-            $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-            $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-            $partialRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+            $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+                \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+            );
+            $templateRootPath = GeneralUtility::getFileAbsFileName(
+                $extbaseFrameworkConfiguration['view']['templateRootPath']
+            );
+            $partialRootPath = GeneralUtility::getFileAbsFileName(
+                $extbaseFrameworkConfiguration['view']['partialRootPath']
+            );
 
             $emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . 'OnlineSurvey.html');
-            $emailViewHTML->setPartialRootPath($partialRootPath);
+            $emailViewHTML->setPartialRootPaths([$partialRootPath]);
 
             $emailTextHTML = $emailViewHTML->render();
-
         }
 
         if ($step == 1) {
@@ -740,7 +771,8 @@ class SubscriberController extends AbstractController
             if (is_object($event->getLocation())) {
                 if (is_object($event->getLocation()->getParent()->current())) {
                     $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                    $helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';;
+                    $helper['locationics'] =
+                        $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
                 }
                 $helper['location'] = $event->getLocation()->getName();
                 $helper['locationics'] = $this->foldline($event->getLocation()->getName());
@@ -749,18 +781,18 @@ class SubscriberController extends AbstractController
             $allSubscribers = $event->getSubscribers();
             foreach ($allSubscribers as $uid => $subscriber) {
                 EmailHelper::sendTemplateEmail(
-                    array($subscriber->getEmail() => $subscriber->getName()),
-                    array($event->getContact()->getEmail() => $event->getContact()->getName()),
+                    [$subscriber->getEmail() => $subscriber->getName()],
+                    [$event->getContact()->getEmail() => $event->getContact()->getName()],
                     'Online-Umfrage zu ' . $event->getTitle(),
                     'OnlineSurvey',
-                    array(
-                        'event' => $event,
+                    [
+                        'event'      => $event,
                         'subscriber' => $subscriber,
-                        'helper' => $helper,
-                        'settings' => $this->settings,
-                        'attachCsv' => false,
-                        'attachIcs' => false,
-                    ),
+                        'helper'     => $helper,
+                        'settings'   => $this->settings,
+                        'attachCsv'  => false,
+                        'attachIcs'  => false,
+                    ],
                     $this->configurationManager
                 );
             }
@@ -770,23 +802,28 @@ class SubscriberController extends AbstractController
             // we changed the event inside the repository and have to
             // update the repo manually as of TYPO3 6.1
             $this->eventRepository->update($event);
-
         }
 
         $this->view->assign('event', $event);
 
         if (isset($onlineSurveyLink[1])) {
-
             $this->view->assign('onlineSurveyLastSent', $onlineSurveyLink[1]);
-
         }
 
         $this->view->assign('subscribers', $event->getSubscribers());
         $this->view->assign('step', $step);
         $this->view->assign('emailText', $emailTextHTML);
-
     }
 
+    /**
+     * remove empty entries in array
+     *
+     * @param array $array
+     *
+     * @return array
+     */
+    protected function cleanArray(array $array)
+    {
+        return array_filter(array_map('trim', $array));
+    }
 }
-
-?>

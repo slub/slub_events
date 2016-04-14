@@ -8,6 +8,9 @@
 		<trans-unit id="tx_slubevents_domain_model_category">
 			<source>Category</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.description">
+			<source>Description</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.genius_bar">
 			<source>Knowledge Bar Category</source>
 		</trans-unit>
@@ -37,6 +40,9 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_discipline">
 			<source>Discipline</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_discipline.parent">
+			<source>Parent discipline</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_discipline.name">
 			<source>Name</source>

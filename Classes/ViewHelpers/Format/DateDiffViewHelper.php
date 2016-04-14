@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -83,19 +85,17 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  */
 class DateDiffViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * Render the supplied DateTime object as a formatted date.
      *
      * @param DateTime object with end
      * @param DateTime object with start
+     *
      * @return string with diff
      */
     public function render($dateEnd, $dateStart)
     {
-
         $diff = null;
-
         if ($dateEnd instanceof \DateTime
             && $dateStart instanceof \DateTime
         ) {
@@ -103,8 +103,5 @@ class DateDiffViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         }
 
         return ($interval / 60);
-
     }
 }
-
-?>

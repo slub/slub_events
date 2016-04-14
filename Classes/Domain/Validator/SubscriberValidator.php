@@ -1,5 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Domain\Validator;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -67,20 +68,18 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
      */
     public function getSessionData($key)
     {
-
         return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
-
     }
 
     /**
      * Validation of given Params
      *
      * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
+     *
      * @return bool
      */
     public function isValid($newSubscriber)
     {
-
         if (strlen($newSubscriber->getName()) < 3) {
             $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_name', 1000);
             $this->result->forProperty('name')->addError($error);
@@ -109,7 +108,6 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
             filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === false ||
             $newSubscriber->getNumber() < 1
         ) {
-
             $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_number', 1120);
             $this->result->forProperty('number')->addError($error);
 //			$this->addError('val_number', 1120);
@@ -136,5 +134,3 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
         return $this->isValid;
     }
 }
-
-?>

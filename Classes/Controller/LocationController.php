@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
@@ -34,7 +35,6 @@ namespace Slub\SlubEvents\Controller;
  */
 class LocationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
      * locationRepository
      *
@@ -42,7 +42,4 @@ class LocationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @inject
      */
     protected $locationRepository;
-
 }
-
-?>

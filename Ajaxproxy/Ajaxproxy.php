@@ -24,7 +24,6 @@ if (file_exists($calfile)) {
 
 // else make a new query...
 $url = $link . '&categories=' . $categories . '&disciplines=' . $disciplines . '&start=' . $start . '&stop=' . $stop . '&detailPid=' . $detailPid;
-//~ echo $url;
 $out = file_get_contents($url);
 
 if (!empty($out)) {
@@ -37,4 +36,3 @@ if (!empty($out)) {
 }
 
 return;
-?>

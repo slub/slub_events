@@ -1,24 +1,27 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 
 <label for="name">
-	<f:translate key="tx_slubevents_domain_model_subscriber.name" /> <span class="required">*</span>
+	<f:translate key="tx_slubevents_domain_model_subscriber.name"/>
+	<span class="required">*</span>
 </label>
-	<f:form.textfield readonly="{readonly}" required="required" property="name" /><br />
+<f:form.textfield readonly="{readonly}" required="required" property="name"/><br/>
 <label for="email">
-	<f:translate key="tx_slubevents_domain_model_subscriber.email" /> <span class="required">*</span>
+	<f:translate key="tx_slubevents_domain_model_subscriber.email"/>
+	<span class="required">*</span>
 </label>
-	<f:form.textfield type="email" readonly="{readonly}" required="required" property="email" /><br />
+<f:form.textfield type="email" readonly="{readonly}" required="required" property="email"/><br/>
 
 <label for="customerid">
-	<f:translate key="tx_slubevents_domain_model_subscriber.customerid" />
+	<f:translate key="tx_slubevents_domain_model_subscriber.customerid"/>
 </label>
-	<f:form.textfield type="number" additionalAttributes="{min: '1', max: '9999999'}" readonly="{readonly}" property="customerid" /><br />
+<f:form.textfield type="number" additionalAttributes="{min: '1', max: '9999999'}" readonly="{readonly}"
+				  property="customerid"/><br/>
 
 <p>Haben Sie schon jetzt konkrete Fragen? Stellen Sie sie uns, damit wir uns auf das Gespräch vorbereiten können.</p>
 <label for="message">
-	<f:translate key="tx_slubevents_domain_model_subscriber.message" />
+	<f:translate key="tx_slubevents_domain_model_subscriber.message"/>
 </label>
-	<f:form.textarea class="{readonly}" property="message" cols="60" rows="8" /><br />
+<f:form.textarea class="{readonly}" property="message" cols="60" rows="8"/><br/>
 
 <f:form.hidden property="number" value="1"/>
 <f:form.hidden property="editcode" value="<se:format.editCode event='{event}' />"/>

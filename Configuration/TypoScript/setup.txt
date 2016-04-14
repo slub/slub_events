@@ -1,114 +1,125 @@
-
 ## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
 
 page.includeCSS.slubevents = EXT:slub_events/Resources/Public/Css/slub-event-basic.css
 page.includeCSS.slubeventsgb = EXT:slub_events/Resources/Public/Css/slub-event-gb.css
 
 plugin.tx_slubevents {
-	view {
-		templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
-		partialRootPath = {$plugin.tx_slubevents.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_slubevents.view.layoutRootPath}
-		widget.Tx_Fluid_ViewHelpers_Widget_PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
-	}
-	persistence {
-		storagePid = {$plugin.tx_slubevents.persistence.storagePid}
-	}
-	features {
-		# uncomment the following line to enable the new Property Mapper.
-		rewrittenPropertyMapper = 1
-		skipDefaultArguments = 1
-	}
-	settings {
-		# hide the pagination
-		hidePagination = 0
-		senderEmailAddress = webmaster@slub-dresden.de
-		emailToContact {
-			# send email if the maxSubscriber limit is reached
-			sendEmailOnMaximumReached = 1
-			# send email if the the minSubscriber limit is reached due to cancellations
-			sendEmailOnFreeAgain = 1
-			sendEmailOnEveryBooking = 0
-		}
-		# --------------
-		#  List
-		# --------------
-		list {
-			# Paginate configuration.
-			paginate {
-				itemsPerPage = 10
-				insertAbove = TRUE
-				insertBelow = TRUE
-				lessPages = TRUE
-				forcedNumberOfLinks = 5
-				pagesBefore = 3
-				pagesAfter = 3
-			}
-		}
-		# set baseURL in Emails - needed for images in description field
-		#baseURL = http://www.example.com/
-	}
+
+    view {
+        templateRootPaths.10 = {$plugin.tx_slubevents.view.templateRootPath}
+        partialRootPaths.10 = {$plugin.tx_slubevents.view.partialRootPath}
+        layoutRootPaths.10 = {$plugin.tx_slubevents.view.layoutRootPath}
+        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
+    }
+
+    features {
+        # uncomment the following line to enable the new Property Mapper.
+        rewrittenPropertyMapper = 1
+        skipDefaultArguments = 1
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_slubevents.persistence.storagePid}
+    }
+
+    settings {
+        # hide the pagination
+        hidePagination = 0
+        senderEmailAddress = webmaster@slub-dresden.de
+        emailToContact {
+            # send email if the maxSubscriber limit is reached
+            sendEmailOnMaximumReached = 1
+            # send email if the the minSubscriber limit is reached due to cancellations
+            sendEmailOnFreeAgain = 1
+            sendEmailOnEveryBooking = 0
+        }
+
+        # --------------
+        #  List
+        # --------------
+        list {
+            # Paginate configuration.
+            paginate {
+                itemsPerPage = 10
+                insertAbove = TRUE
+                insertBelow = TRUE
+                lessPages = TRUE
+                forcedNumberOfLinks = 5
+                pagesBefore = 3
+                pagesAfter = 3
+            }
+        }
+
+        persistence {
+            storagePid < persistence.storagePid
+        }
+
+        # set baseURL in Emails - needed for images in description field
+        #baseURL = http://www.example.com/
+    }
 }
+
 module.tx_slubevents < plugin.tx_slubevents
 module.tx_slubevents {
-	view {
-		templateRootPath = {$module.tx_slubevents.view.templateRootPath}
-		partialRootPath = {$module.tx_slubevents.view.partialRootPath}
-		layoutRootPath = {$module.tx_slubevents.view.layoutRootPath}
-		widget.Tx_Fluid_ViewHelpers_Widget_PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
-	}
-	persistence {
-		storagePid = {$module.tx_slubevents.persistence.storagePid}
-	}
-	features {
-		# uncomment the following line to enable the new Property Mapper.
-		rewrittenPropertyMapper = 1
-	}
-	settings {
-		senderEmailAddress = webmaster@slub-dresden.de
-		# hide the pagination
-		hidePagination = 0
-		# --------------
-		#  List
-		# --------------
-		list {
-			# Paginate configuration.
-			paginate {
-				itemsPerPage = 25
-				insertAbove = FALSE
-				insertBelow = TRUE
-				lessPages = TRUE
-				forcedNumberOfLinks = 5
-				pagesBefore = 3
-				pagesAfter = 3
-			}
-		}
-	}
+    view {
+        templateRootPaths.10 = {$module.tx_slubevents.view.templateRootPath}
+        partialRootPaths.10 = {$module.tx_slubevents.view.partialRootPath}
+        layoutRootPaths.10 = {$module.tx_slubevents.view.layoutRootPath}
+        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
+    }
+
+    features {
+        # uncomment the following line to enable the new Property Mapper.
+        rewrittenPropertyMapper = 1
+    }
+
+    settings {
+        senderEmailAddress = webmaster@slub-dresden.de
+        # hide the pagination
+        hidePagination = 0
+        # --------------
+        #  List
+        # --------------
+        list {
+            # Paginate configuration.
+            paginate {
+                itemsPerPage = 25
+                insertAbove = FALSE
+                insertBelow = TRUE
+                lessPages = TRUE
+                forcedNumberOfLinks = 5
+                pagesBefore = 3
+                pagesAfter = 3
+            }
+        }
+    }
 }
 
 # ajax for fullcalendar
 ajaxEvents = PAGE
 ajaxEvents {
-	typeNum = 182098
-	10 = USER_INT
-	10 {
-		userFunc = tx_extbase_core_bootstrap->run
-		pluginName = Eventlist
-		extensionName = SlubEvents
-		controller = Event
-		switchableControllerActions {
-			Event {
-				1 = ajax
-			}
-		}
-		settings =< plugin.tx_slubevents.settings
-		persistence =< plugin.tx_slubevents.persistence
-	}
-	config {
-		disableAllHeaderCode = 1
-		additionalHeaders = Content-type:application/json
-		xhtml_cleaning = 0
-		admPanel = 0
-		debug = 0
-	}
+    typeNum = 182098
+    10 = USER_INT
+    10 {
+        userFunc = tx_extbase_core_bootstrap->run
+        pluginName = Eventlist
+        extensionName = SlubEvents
+        controller = Event
+        switchableControllerActions {
+            Event {
+                1 = ajax
+            }
+        }
+
+        settings =< plugin.tx_slubevents.settings
+        persistence =< plugin.tx_slubevents.persistence
+    }
+
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+    }
 }

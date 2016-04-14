@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
@@ -34,7 +35,6 @@ namespace Slub\SlubEvents\Controller;
  */
 class ContactController extends AbstractController
 {
-
     /**
      * action list
      *
@@ -50,13 +50,11 @@ class ContactController extends AbstractController
      * action show
      *
      * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+     *
      * @return void
      */
     public function showAction(\Slub\SlubEvents\Domain\Model\Contact $contact)
     {
         $this->view->assign('contact', $contact);
     }
-
 }
-
-?>

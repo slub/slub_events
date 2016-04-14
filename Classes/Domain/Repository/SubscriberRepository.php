@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Repository;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -37,15 +39,15 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Finds subscriber by fe_user data
      *
-     * @param int pid
+     * @param int $pid
+     *
      * @return array The found Subscriber Objects
      */
     public function findAllByFeuser($pid = 0)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->equals('customerid', $GLOBALS['TSFE']->fe_user->user['username']);
         if ($pid) {
             $query->getQuerySettings()->setRespectStoragePage(false);
@@ -62,16 +64,16 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Finds subscriber by fe_user data
      *
-     * @param string editcode
-     * @param int pid
+     * @param string $editcode
+     * @param int    $pid
+     *
      * @return array The found Subscriber Objects
      */
     public function findAllByEditcode($editcode, $pid = 0)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->equals('editcode', $editcode);
         if ($pid) {
             $query->getQuerySettings()->setRespectStoragePage(false);
@@ -88,15 +90,15 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Count all Subscribers by number for a given event
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event event
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return array The found Subscriber Objects
      */
     public function countAllByEvent($event)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->equals('event', $event->getUid());
 
         if (count($constraints)) {
@@ -118,14 +120,14 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds subscriber by fe_user data
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
+     *
      * @return array The found Subscriber Objects
      */
     public function findAllByEvents($events)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->in('event', $events);
 
         if (count($constraints)) {
@@ -134,12 +136,9 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+            ['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]
         );
 
         return $query->execute();
     }
-
 }
-
-?>

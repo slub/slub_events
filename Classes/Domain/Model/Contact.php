@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
@@ -86,6 +87,7 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the name
      *
      * @param string $name
+     *
      * @return void
      */
     public function setName($name)
@@ -107,6 +109,7 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the email
      *
      * @param string $email
+     *
      * @return void
      */
     public function setEmail($email)
@@ -128,6 +131,7 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the telephone
      *
      * @param string $telephone
+     *
      * @return void
      */
     public function setTelephone($telephone)
@@ -149,6 +153,7 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description
+     *
      * @return void
      */
     public function setDescription($description)
@@ -170,13 +175,11 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the photo
      *
      * @param string $photo
+     *
      * @return void
      */
     public function setPhoto($photo)
     {
         $this->photo = $photo;
     }
-
 }
-
-?>

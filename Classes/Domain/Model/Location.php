@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
@@ -78,6 +79,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the name
      *
      * @param string $name
+     *
      * @return void
      */
     public function setName($name)
@@ -99,6 +101,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description
+     *
      * @return void
      */
     public function setDescription($description)
@@ -120,6 +123,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the link
      *
      * @param string $link
+     *
      * @return void
      */
     public function setLink($link)
@@ -128,9 +132,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * __construct
-     *
-     * @return void
+     * Location constructor.
      */
     public function __construct()
     {
@@ -157,6 +159,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Location
      *
      * @param \Slub\SlubEvents\Domain\Model\Location $parent
+     *
      * @return void
      */
     public function addParent(\Slub\SlubEvents\Domain\Model\Location $parent)
@@ -168,6 +171,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Location
      *
      * @param \Slub\SlubEvents\Domain\Model\Location $parentToRemove The Location to be removed
+     *
      * @return void
      */
     public function removeParent(\Slub\SlubEvents\Domain\Model\Location $parentToRemove)
@@ -189,13 +193,11 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the parent
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Location> $parent
+     *
      * @return void
      */
     public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent)
     {
         $this->parent = $parent;
     }
-
 }
-
-?>

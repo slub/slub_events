@@ -1,29 +1,30 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
- *  Copyright notice
- *
- *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+     *  Copyright notice
+     *
+     *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***************************************************************/
 
 /**
  *
@@ -76,6 +77,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the title
      *
      * @param string $title
+     *
      * @return void
      */
     public function setTitle($title)
@@ -97,6 +99,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description
+     *
      * @return void
      */
     public function setDescription($description)
@@ -134,6 +137,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Category
      *
      * @param \Slub\SlubEvents\Domain\Model\Category $parent
+     *
      * @return void
      */
     public function addParent(\Slub\SlubEvents\Domain\Model\Category $parent)
@@ -145,6 +149,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Category
      *
      * @param \Slub\SlubEvents\Domain\Model\Category $parentToRemove The Category to be removed
+     *
      * @return void
      */
     public function removeParent(\Slub\SlubEvents\Domain\Model\Category $parentToRemove)
@@ -166,6 +171,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the parent
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $parent
+     *
      * @return void
      */
     public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent)
@@ -182,7 +188,4 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->l10nParent;
     }
-
 }
-
-?>

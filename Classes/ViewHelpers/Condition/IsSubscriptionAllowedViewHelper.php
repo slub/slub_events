@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Condition;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -54,6 +56,7 @@ class IsSubscriptionAllowedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
      * injectSubscriberRepository
      *
      * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+     *
      * @return void
      */
     public function injectSubscriberRepository(
@@ -66,13 +69,13 @@ class IsSubscriptionAllowedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
      * Render the supplied DateTime object as a formatted date.
      *
      * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return boolean
      * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
      * @api
      */
     public function render($event)
     {
-
         $showLink = true;
 
         // limit reached already --> overbooked
@@ -93,9 +96,5 @@ class IsSubscriptionAllowedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
         }
 
         return $showLink;
-
-
     }
 }
-
-?>

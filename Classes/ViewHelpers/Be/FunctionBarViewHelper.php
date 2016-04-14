@@ -26,27 +26,63 @@ namespace Slub\SlubEvents\ViewHelpers\Be;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\Utility\IconUtility;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
     /**
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @var IconFactory
+     */
+    protected $iconFactory;
+
+    /**
+     * @var ObjectManagerInterface
+     */
+    protected $objectManager;
+
+    /**
+     * FunctionBarViewHelper constructor.
+     *
+     * Use dependency injection depending on TYPO3 version
+     *
+     * @param ObjectManagerInterface $objectManager
+     */
+    public function __construct(ObjectManagerInterface $objectManager)
+    {
+
+        $this->objectManager = $objectManager;
+
+        // iconFactory exists from TYPO3 7
+        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+
+            $this->iconFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
+
+        }
+
+    }
+
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     *
      * @return void
      */
-    public function injectConfigurationManager(
-        \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-    ) {
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
+    {
         $this->configurationManager = $configurationManager;
     }
 
     /**
+     * /**
      * Returns the Edit Icon with link
      *
      * @param string $table Table name
@@ -56,15 +92,12 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
     protected function getEditIcon($table, array $row)
     {
 
-        // back GET parameter have to be like this with '%26' instead of '&':
-        //~ $params = '%26selectedStartDateStamp='.$row['selectedStartDateStamp'];
-        //~ $params .= '%26selectedCategories='.$row['selectedCategories'];
         $params .= '&edit[' . $table . '][' . $row['uid'] . ']=edit';
         $title = LocalizationUtility::translate('be.editEvent', 'slub_events',
                 $arguments = null) . ' ' . $row['uid'] . ': ' . $row['title'];
         $icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath,
                 -1)) . '" title="' . $title . '">' .
-            IconUtility::getSpriteIcon('actions-document-open') .
+            $this->getSpriteIcon('actions-document-open') .
             '</a>';
 
         return $icon;
@@ -84,7 +117,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
         $title = LocalizationUtility::translate('be.newEvent', 'slub_events', $arguments = null);
         $icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath,
                 -1)) . '" title="' . $title . '">' .
-            IconUtility::getSpriteIcon('actions-document-new') .
+            $this->getSpriteIcon('actions-document-new') .
             '</a>';
 
         return $icon;
@@ -106,7 +139,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
             $params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=0';
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(\'' . $doc->issueCommand($params,
                         -1) . '\');') . '" title="' . $title . '">' .
-                IconUtility::getSpriteIcon('actions-edit-unhide') .
+                $this->getSpriteIcon('actions-edit-unhide') .
                 '</a>';
             // Hide
         } else {
@@ -114,7 +147,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
             $params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=1';
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(\'' . $doc->issueCommand($params,
                         -1) . '\');') . '" title="' . $title . '">' .
-                IconUtility::getSpriteIcon('actions-edit-hide') .
+                $this->getSpriteIcon('actions-edit-hide') .
                 '</a>';
         }
         return $icon;
@@ -146,7 +179,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
     protected function getDatePickerIcon()
     {
 
-        return IconUtility::getSpriteIcon(
+        return $this->getSpriteIcon(
             'actions-edit-pick-date',
             array(
                 'style' => 'cursor:pointer;',
@@ -175,7 +208,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
             $row['hidden'] = $event->getHidden();
         }
 
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $row['storagePid'] = $frameworkConfiguration['persistence']['storagePid'];
 
         switch ($icon) {
@@ -199,6 +232,33 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
         return $content;
 
     }
+
+    /**
+     * Get the requested Sprite Icon
+     *
+     * compatibility helper for TYPO3 6.2 and 7.7
+     *
+     * @param $iconName
+     * @param $options
+     *
+     * @return full HTML tag
+     */
+
+    private function getSpriteIcon($iconName, $options = [])
+    {
+
+        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+
+            return $this->iconFactory->getIcon($iconName, Icon::SIZE_SMALL);
+
+        } else {
+
+            return IconUtility::getSpriteIcon($iconName, $options);
+
+        }
+
+    }
+
 }
 
 ?>

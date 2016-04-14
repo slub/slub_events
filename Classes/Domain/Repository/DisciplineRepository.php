@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
@@ -38,15 +39,15 @@ class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Finds all datasets and return in tree order
      *
-     * @param string categories separated by comma
+     * @param string $disciplines categories separated by comma
+     *
      * @return array The found Category Objects
      */
     public function findAllByUidsTree($disciplines)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->in('uid', $disciplines);
 
         if (count($constraints)) {
@@ -54,19 +55,19 @@ class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         $query->setOrderings(
-            array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
         );
         $disciplines = $query->execute();
 
-        $flatCategories = array();
+        $flatCategories = [];
         foreach ($disciplines as $category) {
-            $flatCategories[$category->getUid()] = Array(
-                'item' => $category,
-                'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : null
-            );
+            $flatCategories[$category->getUid()] = [
+                'item'   => $category,
+                'parent' => ($category->getParent()->current()) ? $category->getParent()->current()->getUid() : null,
+            ];
         }
 
-        $tree = array();
+        $tree = [];
         foreach ($flatCategories as $id => &$node) {
             if ($node['parent'] === null) {
                 $tree[$id] = &$node;
@@ -82,13 +83,14 @@ class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds all datasets of current level and return in tree order
      *
      * @param integer $startCategory
+     *
      * @return array The found Category Ids
      */
     public function findAllChildDisciplines($startCategory = 0)
     {
+        $categories = self::findChildDisciplines($startCategory);
 
-        $childCategoriesIds = self::findChildDisciplines($startCategory);
-
+        $childCategoriesIds = [];
         foreach ($categories as $category) {
             $childCategoriesIds = array_merge($this->findChildDisciplines($category), $childCategoriesIds);
         }
@@ -100,14 +102,14 @@ class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds all categories recursive from given startCategory
      *
      * @param integer $startCategory
+     *
      * @return array The found Category Ids
      */
     private function findChildDisciplines($startCategory = 0)
     {
-
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
 
         $constraints[] = $query->equals('parent', $startCategory);
 
@@ -116,6 +118,7 @@ class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
         $categories = $query->execute();
 
+        $childCategoriesIds = [];
         foreach ($categories as $category) {
             $childCategoriesIds[] = $category->getUid();
 
@@ -127,7 +130,4 @@ class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         return $childCategoriesIds;
     }
-
 }
-
-?>

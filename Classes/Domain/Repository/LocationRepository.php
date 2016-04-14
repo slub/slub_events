@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
@@ -34,7 +35,4 @@ namespace Slub\SlubEvents\Domain\Repository;
  */
 class LocationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
 }
-
-?>

@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /*                                                                        *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -87,16 +89,17 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
     /**
      * Render the supplied DateTime object as a formatted date.
      *
-     * @param mixed $date either a DateTime object or a string that is accepted by DateTime constructor
+     * @param mixed  $date   either a DateTime object or a string that is accepted by DateTime constructor
      * @param string $format Format String which is taken to format the Date/Time
+     *
      * @return string Formatted date
+     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      * @author Christopher Hlubek <hlubek@networkteam.com>
      * @author Bastian Waidelich <bastian@typo3.org>
      * @api
      */
     public function render($date, $format = '%X')
     {
-
         global $TYPO3_CONF_VARS;
 
         if ($date === null) {
@@ -109,9 +112,11 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         if (!$date instanceof \DateTime) {
             try {
                 $date = new \DateTime($date);
-            } catch (Exception $exception) {
-                throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('"' . $date . '" could not be parsed by DateTime constructor.',
-                    1241722579);
+            } catch (\Exception $exception) {
+                throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception(
+                    '"' . $date . '" could not be parsed by DateTime constructor.',
+                    1241722579
+                );
             }
         }
 
@@ -120,8 +125,5 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         }
 
         return strftime($format, $date->getTimestamp());
-
     }
 }
-
-?>

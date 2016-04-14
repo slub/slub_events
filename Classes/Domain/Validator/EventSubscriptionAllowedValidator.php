@@ -1,5 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Domain\Validator;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -53,6 +54,7 @@ class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Va
      * Validation of given Params
      *
      * @param $event
+     *
      * @return bool
      */
     public function isValid($event)
@@ -79,9 +81,5 @@ class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Va
         }
 
         return $this->isValid;
-
     }
-
 }
-
-?>

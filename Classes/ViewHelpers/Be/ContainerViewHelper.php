@@ -1,5 +1,7 @@
 <?php
+
 namespace Slub\SlubEvents\ViewHelpers\Be;
+
 /*                                                                        *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -42,7 +44,7 @@ namespace Slub\SlubEvents\ViewHelpers\Be;
  * Custom CSS file EXT:your_extension/Resources/Public/styles/backend.css and JavaScript file EXT:your_extension/Resources/Public/scripts/main.js will be loaded
  * </output>
  *
- * @author Bastian Waidelich <bastian@typo3.org>
+ * @author  Bastian Waidelich <bastian@typo3.org>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 class ContainerViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
@@ -51,19 +53,20 @@ class ContainerViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
     /**
      * Render start page with template.php and pageTitle
      *
-     * @param string $pageTitle title tag of the module. Not required by default, as BE modules are shown in a frame
-     * @param boolean $enableJumpToUrl If TRUE, includes "jumpTpUrl" javascript function required by ActionMenu. Defaults to TRUE
-     * @param boolean $enableClickMenu If TRUE, loads clickmenu.js required by BE context menus. Defaults to TRUE
-     * @param boolean $loadPrototype specifies whether to load prototype library. Defaults to TRUE
-     * @param boolean $loadScriptaculous specifies whether to load scriptaculous libraries. Defaults to FALSE
-     * @param string $scriptaculousModule additionales modules for scriptaculous
-     * @param boolean $loadExtJs specifies whether to load ExtJS library. Defaults to FALSE
-     * @param boolean $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to FALSE
-     * @param string $extJsAdapter load alternative adapter (ext-base is default adapter)
-     * @param boolean $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only
-     * @param string $addCssFile Custom CSS file to be loaded
-     * @param string $addJsFile Custom JavaScript file to be loaded
-     * @param boolean $addJsDatepicker Load tceforms and datepicker
+     * @param string  $pageTitle           title tag of the module. Not required by default, as BE modules are shown in a frame
+     * @param boolean $enableJumpToUrl     If TRUE, includes "jumpTpUrl" javascript function required by ActionMenu. Defaults to TRUE
+     * @param boolean $enableClickMenu     If TRUE, loads clickmenu.js required by BE context menus. Defaults to TRUE
+     * @param boolean $loadPrototype       specifies whether to load prototype library. Defaults to TRUE
+     * @param boolean $loadScriptaculous   specifies whether to load scriptaculous libraries. Defaults to FALSE
+     * @param string  $scriptaculousModule additionales modules for scriptaculous
+     * @param boolean $loadExtJs           specifies whether to load ExtJS library. Defaults to FALSE
+     * @param boolean $loadExtJsTheme      whether to load ExtJS "grey" theme. Defaults to FALSE
+     * @param string  $extJsAdapter        load alternative adapter (ext-base is default adapter)
+     * @param boolean $enableExtJsDebug    if TRUE, debug version of ExtJS is loaded. Use this for development only
+     * @param string  $addCssFile          Custom CSS file to be loaded
+     * @param string  $addJsFile           Custom JavaScript file to be loaded
+     * @param boolean $addJsDatepicker     Load tceforms and datepicker
+     *
      * @return string
      * @see template
      * @see t3lib_PageRenderer
@@ -88,14 +91,14 @@ class ContainerViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
 
         if ($enableJumpToUrl) {
             $doc->JScode .= '
-				<script language="javascript" type="text/javascript">
-					script_ended = 0;
-					function jumpToUrl(URL)	{
-						document.location = URL;
-					}
-					' . $doc->redirectUrls() . '
-				</script>
-			';
+                <script language="javascript" type="text/javascript">
+                    script_ended = 0;
+                    function jumpToUrl(URL)    {
+                        document.location = URL;
+                    }
+                    ' . $doc->redirectUrls() . '
+                </script>
+            ';
         }
         if ($enableClickMenu) {
             $doc->loadJavascriptLib('js/clickmenu.js');
@@ -122,11 +125,11 @@ class ContainerViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
             $pageRenderer->addJsFile('../typo3/sysext/backend/Resources/Public/JavaScript/tceforms.js');
             $pageRenderer->addJsFile('../typo3/js/extjs/ux/Ext.ux.DateTimePicker.js');
             // Define settings for Date Picker
-            $typo3Settings = array(
+            $typo3Settings = [
                 'datePickerUSmode' => $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ? 1 : 0,
-                'dateFormat' => array('j-n-Y', 'G:i j-n-Y'),
-                'dateFormatUS' => array('n-j-Y', 'G:i n-j-Y'),
-            );
+                'dateFormat'       => ['j-n-Y', 'G:i j-n-Y'],
+                'dateFormatUS'     => ['n-j-Y', 'G:i n-j-Y'],
+            ];
             $pageRenderer->addInlineSettingArray('', $typo3Settings);
         }
 
@@ -136,5 +139,3 @@ class ContainerViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
         return $output;
     }
 }
-
-?>

@@ -28,9 +28,9 @@
  *
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class HookPreProcessing
 {
@@ -53,7 +53,6 @@ class HookPreProcessing
                 setlocale(LC_ALL, 'de_DE.utf8');
                 break;
         }
-
     }
 
 
@@ -63,16 +62,16 @@ class HookPreProcessing
      * We use it to disable saving of the current record if it has
      * categories assigned that are not allowed for the BE user.
      *
-     * @param    array $fieldArray : The field names and their values to be processed (passed by reference)
-     * @param    string $table : The table TCEmain is currently processing
-     * @param    string $id : The records id (if any)
-     * @param    object $pObj : Reference to the parent object (TCEmain)
+     * @param    array  $fieldArray : The field names and their values to be processed (passed by reference)
+     * @param    string $table      : The table TCEmain is currently processing
+     * @param    string $id         : The records id (if any)
+     * @param    object $pObj       : Reference to the parent object (TCEmain)
+     *
      * @return    void
      * @access public
      */
-    function processDatamap_preProcessFieldArray(&$fieldArray, $table, $id, &$pObj)
+    public function processDatamap_preProcessFieldArray(&$fieldArray, $table, $id, &$pObj)
     {
-
         if ($table == 'tx_slubevents_domain_model_event') { // prevent moving of categories into their rootline
 
             // fieldArray only contains the hidden field, if you click on the lamp
@@ -154,7 +153,6 @@ class HookPreProcessing
                 if ($fieldArray['start_date_time'] < $fieldArray['sub_end_date_time'] ||
                     ($fieldArray['min_subscriber'] > 0 && empty($fieldArray['sub_end_date_time']))
                 ) {
-
                     if (!empty($fieldArray['sub_end_date_time_select'])) {
                         $fieldArray['sub_end_date_time'] = $fieldArray['start_date_time'] - $fieldArray['sub_end_date_time_select'] * 60;
                         unset($fieldArray['sub_end_date_time_select']);
