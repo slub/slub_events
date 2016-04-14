@@ -87,6 +87,6 @@ if (TYPO3_MODE === 'BE') {
         'extension'        => $_EXTKEY,
         'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.name',
         'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.description',
-        'additionalFields' => 'Slub\\SlubEvents\\Task\\StatisticsTaskAdditionalFieldProvider',
+        'additionalFields' => 'Slub\\SlubEvents\\Task\\StatisticsTaskAdditionalFieldProvider'
     ];
 }

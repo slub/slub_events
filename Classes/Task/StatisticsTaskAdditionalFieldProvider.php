@@ -33,6 +33,7 @@ namespace Slub\SlubEvents\Task;
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
 {
@@ -104,13 +105,15 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
 
         $fieldId = 'task_receiverEmailAddress';
         $fieldCode = '<textarea cols="30" rows="5" name="tx_scheduler[slub_events][receiverEmailAddress]" id="' . $fieldId . '" >';
-        foreach ($taskInfo['receiverEmailAddress'] as $id => $emailAdd) {
-            if (!empty($emailAdd)) {
-                $fieldCode .= htmlspecialchars($emailAdd) . "\n";
+        if (is_array($taskInfo['receiverEmailAddress'])) {
+            foreach ($taskInfo['receiverEmailAddress'] as $id => $emailAdd) {
+                if (GeneralUtility::validEmail($emailAdd)) {
+                    $fieldCode .= htmlspecialchars($emailAdd) . "\n";
+                }
             }
+            // remove last newline:
+            $fieldCode = trim($fieldCode);
         }
-        // remove last newline:
-        $fieldCode = substr($fieldCode, 0, strlen($fieldCode) - 1);
         $fieldCode .= '</textarea>';
         $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.receiverEmailAddress');
         $label = BackendUtility::wrapInHelp('slub_events', $fieldId, $label);
