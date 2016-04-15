@@ -1,5 +1,6 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Validator;
+namespace Slub\SlubEvents\Domain\Validator;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -31,55 +32,54 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+{
 
-class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+    /**
+     * subscriberRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     * @inject
+     */
+    protected $subscriberRepository;
 
-	/**
-	 * subscriberRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-	 * @inject
-	 */
-	protected $subscriberRepository;
+    /**
+     * Return variable
+     *
+     * @var bool
+     */
+    private $isValid = true;
 
-	/**
-	 * Return variable
-	 *
-	 * @var bool
-	 */
-	private $isValid = true;
+    /**
+     * Validation of given Params
+     *
+     * @param $event
+     *
+     * @return bool
+     */
+    public function isValid($event)
+    {
 
-	/**
-	 * Validation of given Params
-	 *
-	 * @param $event
-	 * @return bool
-	 */
-	public function isValid($event) {
+        // limit reached already --> overbooked
+        if ($this->subscriberRepository->countAllByEvent($event) + 1 > $event->getMaxSubscriber()) {
+            $this->isValid = false;
+            $this->addError('val_event_overbooked', 1200);
+        }
 
-		// limit reached already --> overbooked
-		if ($this->subscriberRepository->countAllByEvent($event) + 1 > $event->getMaxSubscriber()) {
-			$this->isValid = FALSE;
-			$this->addError('val_event_overbooked', 1200);
-		}
+        // event is cancelled
+        if ($event->getCancelled()) {
+            $this->isValid = false;
+            $this->addError('val_event_cancelled', 1300);
+        }
 
-		// event is cancelled
-		if ($event->getCancelled()) {
-			$this->isValid = FALSE;
-			$this->addError('val_event_cancelled', 1300);
-		}
+        // deadline reached....
+        if (is_object($event->getSubEndDateTime())) {
+            if ($event->getSubEndDateTime()->getTimestamp() < time()) {
+                $this->isValid = false;
+                $this->addError('val_event_reacheddeadline', 1400);
+            }
+        }
 
-		// deadline reached....
-		if (is_object($event->getSubEndDateTime())) {
-			if ($event->getSubEndDateTime()->getTimestamp() < time()) {
-				$this->isValid = FALSE;
-				$this->addError('val_event_reacheddeadline', 1400);
-			}
-		}
-
-		return $this->isValid;
-
-  	}
-
+        return $this->isValid;
+    }
 }
-?>

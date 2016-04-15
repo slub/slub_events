@@ -1,5 +1,6 @@
 <?php
-    namespace Slub\SlubEvents\Domain\Repository;
+
+namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -34,7 +35,6 @@
  */
 class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Finds all datasets and return in tree order
      *
@@ -44,31 +44,17 @@ class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
 
         if (count($constraints)) {
             $query->matching($query->logicalAnd($constraints));
         }
 
         $query->setOrderings(
-            array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
         );
         $contacts = $query->execute();
 
         return $contacts;
-    }
-
-    /**
-     * Find contact by uid
-     *
-     * @return array The found Contact Objects
-     */
-    public function findById($uid)
-    {
-        $query = $this->createQuery();
-        $constraints = array();
-        $query->matching($query->equals('uid', $uid));
-        $contact = $query->execute();
-        return $contact;
     }
 }

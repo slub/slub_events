@@ -24,10 +24,10 @@ Configuration
 	:width: 500px
 	:alt: Wrong locale setting
 
-	Broken "Umlaute" because of missing or wrong locale settings.
+        	Broken "Umlaute" because of missing or wrong locale settings.
 
 
-  .. code-block:: none
+          .. code-block:: none
 
 	config.locale_all = de_DE.UTF-8
 

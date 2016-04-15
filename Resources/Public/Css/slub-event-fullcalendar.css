@@ -10,12 +10,15 @@
 	padding: 0 1px;
 	float: right;
 }
+
 .fc-event-inner {
 	line-height: 120%;
 }
+
 .fc-event-time {
 	white-space: nowrap;
 }
+
 .fc-event-title {
 	font-size: 10px;
 }
@@ -24,21 +27,23 @@ a.fc-event:hover {
 	z-index: 100;
 	border: 1px solid #a00;
 }
+
 a.fc-event {
 	border: 2px solid #900;
-	background: rgb(242,245,246);
-	background: -moz-linear-gradient(left, rgba(242,245,246,1) 0%, rgba(227,234,237,1) 37%, rgba(200,215,220,1) 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(242,245,246,1)), color-stop(37%,rgba(227,234,237,1)), color-stop(100%,rgba(200,215,220,1)));
-	background: -webkit-linear-gradient(left, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	background: -o-linear-gradient(left, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	background: -ms-linear-gradient(left, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	background: linear-gradient(to right, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=1 );
+	background: rgb(242, 245, 246);
+	background: -moz-linear-gradient(left, rgba(242, 245, 246, 1) 0%, rgba(227, 234, 237, 1) 37%, rgba(200, 215, 220, 1) 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(242, 245, 246, 1)), color-stop(37%, rgba(227, 234, 237, 1)), color-stop(100%, rgba(200, 215, 220, 1)));
+	background: -webkit-linear-gradient(left, rgba(242, 245, 246, 1) 0%, rgba(227, 234, 237, 1) 37%, rgba(200, 215, 220, 1) 100%);
+	background: -o-linear-gradient(left, rgba(242, 245, 246, 1) 0%, rgba(227, 234, 237, 1) 37%, rgba(200, 215, 220, 1) 100%);
+	background: -ms-linear-gradient(left, rgba(242, 245, 246, 1) 0%, rgba(227, 234, 237, 1) 37%, rgba(200, 215, 220, 1) 100%);
+	background: linear-gradient(to right, rgba(242, 245, 246, 1) 0%, rgba(227, 234, 237, 1) 37%, rgba(200, 215, 220, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f5f6', endColorstr='#c8d7dc', GradientType=1);
 }
 
 .home #leftcol h2 {
 	display: block;
 }
+
 .no_subscription {
 	opacity: 0.6;
 }
@@ -55,6 +60,7 @@ a.fc-event {
 	color: #000;
 	background: #ccc;
 }
+
 li#category-1 label {
 	color: #ccc;
 }
@@ -63,6 +69,7 @@ li#category-1 label {
 	color: #000;
 	background: #FFA3A3;
 }
+
 li#category-2 label {
 	color: #FFA3A3;
 }
@@ -71,15 +78,19 @@ li#category-2 label {
 	color: #000;
 	background: #A3AEFF;
 }
+
 li#category-3 label {
 	color: #A3AEFF;
 }
 
 .slubevents-category-4 {
 }
+
 .slubevents-category-5 {
 }
+
 .slubevents-category-6 {
 }
+
 .slubevents-category-7 {
 }

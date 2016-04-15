@@ -1,32 +1,38 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
-<p><f:translate key='text.salutation' /> {event.contact.name},</p>
+<p>
+	<f:translate key='text.salutation'/>
+	{event.contact.name},
+</p>
 
 <p>leider müssen wir folgende Veranstaltung absagen, da die Mindestteilnehmerzahl nicht erreicht wurde:</p>
 
 <p><b>{event.title}</b></p>
 
 <p>
-<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />" />
+	<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />"/>
 </p>
 
 <f:if condition="{helper.location}">
 	<f:then>
-<p><b>Veranstaltungsort:</b><br/>{helper.location}</p>
-<f:format.html parseFuncTSPath="">{event.location.description}</f:format.html>
+		<p><b>Veranstaltungsort:</b><br/>{helper.location}</p>
+		<f:format.html parseFuncTSPath="">{event.location.description}</f:format.html>
 	</f:then>
 </f:if>
 
 <f:if condition="{subscribers}">
-<f:then>
-<p><b>Teilnehmerliste</b><br/>
-		<f:render partial="Subscriber/ListAll" arguments="{subscribers: subscribers}"/>
-</p>
-</f:then>
+	<f:then>
+		<p><b>Teilnehmerliste</b><br/>
+			<f:render partial="Subscriber/ListAll" arguments="{subscribers: subscribers}"/>
+		</p>
+	</f:then>
 </f:if>
 
 <p>Anmeldungen sind nicht mehr möglich.</p>
 
-<p><f:translate key='text.closing' /></p>
+<p>
+	<f:translate key='text.closing'/>
+</p>
 <p>&nbsp;</p>
-<p>{event.contact.name} <br />
-<f:translate key='text.signature' /></p>
+<p>{event.contact.name} <br/>
+	<f:translate key='text.signature'/>
+</p>

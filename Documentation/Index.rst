@@ -15,38 +15,38 @@ slub_events
 .. only:: html
 
 	:Classification:
-		slub_events
+        		slub_events
 
-	:Version:
-		|release|
+        	:Version:
+        		|release|
 
 	:Language:
-		en
+        		en
 
-	:Description:
-		slub_events is an extbase/fluid based tool for event
-		registration and experts booking. It is developped and used in
-		production at the Saxony State and University Library (SLUB)
-		Dresden, Germany.
+        	:Description:
+        		slub_events is an extbase/fluid based tool for event
+        		registration and experts booking. It is developped and used in
+        		production at the Saxony State and University Library (SLUB)
+        		Dresden, Germany.
 
-	:Keywords:
-		events, registration
+        	:Keywords:
+        		events, registration
 
-	:Copyright:
-		2013-2014
+        	:Copyright:
+        		2013-2014
 
-	:Author:
-		Alexander Bigga (SLUB Dresden)
+        	:Author:
+        		Alexander Bigga (SLUB Dresden)
 
-	:Email:
-		alexander.bigga@slub-dresden.de
+        	:Email:
+        		alexander.bigga@slub-dresden.de
 
-	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
+        	:License:
+        		This document is published under the Open Content License
+        		available from http://www.opencontent.org/opl.shtml
 
 	:Rendered:
-		|today|
+        		|today|
 
 	The content of this document is related to TYPO3,
 	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
@@ -58,10 +58,10 @@ slub_events
 .. toctree::
 	:maxdepth: 5
 	:titlesonly:
-	:glob:
+        	:glob:
 
-	Introduction/Index
-	UsersManual/Index
-	AdministratorManual/Index
-	KnownProblems/Index
-	Support/Index
+        	Introduction/Index
+        	UsersManual/Index
+        	AdministratorManual/Index
+        	KnownProblems/Index
+        	Support/Index

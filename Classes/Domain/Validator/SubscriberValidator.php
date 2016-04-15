@@ -1,5 +1,6 @@
 <?php
-	namespace Slub\SlubEvents\Domain\Validator;
+namespace Slub\SlubEvents\Domain\Validator;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -31,103 +32,105 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-	use TYPO3\CMS\Core\Utility\GeneralUtility;
-class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-	/**
-	 * subscriberRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-	 * @inject
-	 */
-	protected $subscriberRepository;
+class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+{
 
-	/**
-	 * Object Manager
-	 *
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-	 * @inject
-	 */
-	protected $objectManager;
+    /**
+     * subscriberRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     * @inject
+     */
+    protected $subscriberRepository;
+
+    /**
+     * Object Manager
+     *
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @inject
+     */
+    protected $objectManager;
 
 
-	/**
-	 * Return variable
-	 *
-	 * @var bool
-	 */
-	private $isValid = TRUE;
+    /**
+     * Return variable
+     *
+     * @var bool
+     */
+    private $isValid = true;
 
-	/**
-	 * Get session data
-	 *
-	 * @return
-	 */
-	public function getSessionData($key) {
+    /**
+     * Get session data
+     *
+     * @return
+     */
+    public function getSessionData($key)
+    {
+        return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
+    }
 
-		return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
-
-	}
-
-        /**
-	 * Validation of given Params
-	 *
-	 * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
-	 * @return bool
-	 */
-	public function isValid($newSubscriber) {
-
-		if (strlen($newSubscriber->getName())<3) {
-			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_name', 1000);
-			$this->result->forProperty('name')->addError($error);
-			// usually $this->addError is enough but this doesn't set the CSS errorClass in the form-viewhelper :-(
+    /**
+     * Validation of given Params
+     *
+     * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
+     *
+     * @return bool
+     */
+    public function isValid($newSubscriber)
+    {
+        if (strlen($newSubscriber->getName()) < 3) {
+            $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_name', 1000);
+            $this->result->forProperty('name')->addError($error);
+            // usually $this->addError is enough but this doesn't set the CSS errorClass in the form-viewhelper :-(
 //			$this->addError('val_name', 1000);
 
-			$this->isValid = FALSE;
-		}
-		if (!GeneralUtility::validEmail($newSubscriber->getEmail())) {
-			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_email', 1100);
-			$this->result->forProperty('email')->addError($error);
+            $this->isValid = false;
+        }
+        if (!GeneralUtility::validEmail($newSubscriber->getEmail())) {
+            $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_email', 1100);
+            $this->result->forProperty('email')->addError($error);
 //			$this->addError('val_email', 1100);
 
-			$this->isValid = FALSE;
-		}
-		if (strlen($newSubscriber->getCustomerid()) > 0 &&
-			filter_var($newSubscriber->getCustomerid(), FILTER_VALIDATE_INT) === FALSE) {
-			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_customerid', 1110);
-			$this->result->forProperty('customerid')->addError($error);
+            $this->isValid = false;
+        }
+        if (strlen($newSubscriber->getCustomerid()) > 0 &&
+            filter_var($newSubscriber->getCustomerid(), FILTER_VALIDATE_INT) === false
+        ) {
+            $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_customerid', 1110);
+            $this->result->forProperty('customerid')->addError($error);
 //			$this->addError('val_customerid', 1110);
 
-			$this->isValid = FALSE;
-		}
-		if (strlen($newSubscriber->getNumber()) == 0 ||
-			filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === FALSE ||
-			$newSubscriber->getNumber() < 1) {
-
-			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_number', 1120);
-			$this->result->forProperty('number')->addError($error);
+            $this->isValid = false;
+        }
+        if (strlen($newSubscriber->getNumber()) == 0 ||
+            filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === false ||
+            $newSubscriber->getNumber() < 1
+        ) {
+            $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_number', 1120);
+            $this->result->forProperty('number')->addError($error);
 //			$this->addError('val_number', 1120);
 
-			$this->isValid = FALSE;
-		} else {
-			$event = $newSubscriber->getEvent();
-			// limit reached already --> overbooked
-			if ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber() > $event->getMaxSubscriber()) {
-			    $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_number', 1130);
-			    $this->result->forProperty('number')->addError($error);
+            $this->isValid = false;
+        } else {
+            $event = $newSubscriber->getEvent();
+            // limit reached already --> overbooked
+            if ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber() > $event->getMaxSubscriber()) {
+                $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_number', 1130);
+                $this->result->forProperty('number')->addError($error);
 //			    $this->addError('val_number', 1130);
 
-			    $this->isValid = FALSE;
-			}
-		}
-		if ($newSubscriber->getEditcode() != $this->getSessionData('editcode')) {
-			$error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_editcode', 1140);
-			$this->result->forProperty('editcode')->addError($error);
+                $this->isValid = false;
+            }
+        }
+        if ($newSubscriber->getEditcode() != $this->getSessionData('editcode')) {
+            $error = $this->objectManager->get('Tx_Extbase_Error_Error', 'val_editcode', 1140);
+            $this->result->forProperty('editcode')->addError($error);
 //			$this->addError('val_editcode', 1140);
-			$this->isValid = FALSE;
-		}
+            $this->isValid = false;
+        }
 
-		return $this->isValid;
-  	}
+        return $this->isValid;
+    }
 }
-?>

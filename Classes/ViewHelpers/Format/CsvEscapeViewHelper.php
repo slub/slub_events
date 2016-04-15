@@ -1,5 +1,7 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Format;
+
+namespace Slub\SlubEvents\ViewHelpers\Format;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,28 +29,23 @@
 /**
  * Remove not allowed signs (like """) from csv-Export
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class CsvEscapeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
+    /**
+     * Return the number of subscribers for a given event
+     *
+     * @return string
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render()
+    {
+        $value = $this->renderChildren();
+        $tidystring = str_replace('"', '""', $value);
 
-class CsvEscapeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
-
-
-	/**
-	 * Return the number of subscribers for a given event
-	 *
-	 * @return string
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render() {
-		$value = $this->renderChildren();
-
-		$tidystring = str_replace('"', '""', $value);
-
-		return $tidystring;
-
-	}
+        return $tidystring;
+    }
 }
-?>

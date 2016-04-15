@@ -1,183 +1,203 @@
 <T3DataStructure>
-	<meta>
-		<langDisable>1</langDisable>
-	</meta>
-	<sheets>
-		<sDEF>
-			<ROOT>
-				<TCEforms>
-					<sheetTitle>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventgeniusbar_title</sheetTitle>
-				</TCEforms>
-				<type>array</type>
-				<el>
-					<switchableControllerActions>
-						<TCEforms>
-							<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
-							<onChange>reload</onChange>
-							<config>
-								<type>select</type>
-								<items>
-									<numIndex index="0">
-										<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.knowledgebar_view</numIndex>
-										<numIndex index="1">Category->list;Category->gbList;Category->contactList</numIndex>
-									</numIndex>
-									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.contact_view</numIndex>
-										<numIndex index="1">Category->contactList;Category->list;Category->gbList</numIndex>
-									</numIndex>
-								</items>
-							</config>
-						</TCEforms>
-					</switchableControllerActions>
-					<settings.categorySelection>
-						<TCEforms>
-							<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories_start</label>
-							<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->list;Category->gbList;Category->contactList]]></displayCond>
-							<config>
-								<type>select</type>
-								<renderMode>tree</renderMode>
-								<treeConfig>
-									<parentField>parent</parentField>
-									<appearance>
-										<expandAll>TRUE</expandAll>
-										<showHeader>TRUE</showHeader>
-									</appearance>
-								</treeConfig>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventgeniusbar_title
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function
+                            </label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <items>
 
-								<foreign_table>tx_slubevents_domain_model_category</foreign_table>
-								<foreign_table_where>AND tx_slubevents_domain_model_category.genius_bar = 1 AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_category.sorting DESC</foreign_table_where>
-								<size>5</size>
-								<autoSizeMax>30</autoSizeMax>
-								<minitems>1</minitems>
-								<maxitems>1</maxitems>
-							</config>
-						</TCEforms>
-					</settings.categorySelection>
+                                    <numIndex index="0">
+                                        <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.knowledgebar_view</numIndex>
+                                        <numIndex index="1">Category->list;Category->gbList;Category->contactList</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.contact_view</numIndex>
+                                        <numIndex index="1">Category->contactList;Category->list;Category->gbList</numIndex>
+                                    </numIndex>
 
-					<settings.contactSelection>
-						<TCEforms>
-							<label>Ansprechpartner</label>
-							<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
-							<config>
-								<type>select</type>
-								<foreign_table>tx_slubevents_domain_model_contact</foreign_table>
-								<foreign_table_where>ORDER BY tx_slubevents_domain_model_contact.name, tx_slubevents_domain_model_contact.sorting</foreign_table_where>
-								<size>5</size>
-								<autoSizeMax>30</autoSizeMax>
-								<minitems>1</minitems>
-								<maxitems>1</maxitems>
-							</config>
-						</TCEforms>
-					</settings.contactSelection>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
 
-					<settings.showWiba>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>Wissensbar anzeigen</label>
-							<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</settings.showWiba>
+                    <settings.categorySelection>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories_start
+                            </label>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->list;Category->gbList;Category->contactList]]></displayCond>
+                            <config>
+                                <type>select</type>
+                                <renderMode>tree</renderMode>
+                                <treeConfig>
+                                    <parentField>parent</parentField>
+                                    <appearance>
+                                        <expandAll>TRUE</expandAll>
+                                        <showHeader>TRUE</showHeader>
+                                    </appearance>
+                                </treeConfig>
 
-					<settings.showEvent>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>Veranstaltungen anzeigen</label>
-							<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</settings.showEvent>
+                                <foreign_table>tx_slubevents_domain_model_category</foreign_table>
+                                <foreign_table_where>AND tx_slubevents_domain_model_category.genius_bar = 1 AND
+                                    (tx_slubevents_domain_model_category.sys_language_uid = 0 OR
+                                    tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY
+                                    tx_slubevents_domain_model_category.sorting DESC
+                                </foreign_table_where>
+                                <size>5</size>
+                                <autoSizeMax>30</autoSizeMax>
+                                <minitems>1</minitems>
+                                <maxitems>1</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.categorySelection>
 
-					<settings.showConsultation>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>Sprechstunden anzeigen</label>
-							<onChange>reload</onChange>
-							<displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</settings.showConsultation>
+                    <settings.contactSelection>
+                        <TCEforms>
+                            <label>Ansprechpartner</label>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
+                            <config>
+                                <type>select</type>
+                                <foreign_table>tx_slubevents_domain_model_contact</foreign_table>
+                                <foreign_table_where>ORDER BY tx_slubevents_domain_model_contact.name, tx_slubevents_domain_model_contact.sorting</foreign_table_where>
+                                <size>5</size>
+                                <autoSizeMax>30</autoSizeMax>
+                                <minitems>1</minitems>
+                                <maxitems>1</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.contactSelection>
 
-					<settings.consultationSelection>
-						<TCEforms>
-							<label>Kategorie mit Beratungsterminen</label>
-							<displayCond><![CDATA[FIELD:settings.showConsultation:REQ:true]]></displayCond>
-							<config>
-								<type>select</type>
-								<renderMode>tree</renderMode>
-								<treeConfig>
-									<parentField>parent</parentField>
-									<appearance>
-										<expandAll>TRUE</expandAll>
-										<showHeader>TRUE</showHeader>
-									</appearance>
-								</treeConfig>
+                    <settings.showWiba>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>Wissensbar anzeigen</label>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.showWiba>
 
-								<foreign_table>tx_slubevents_domain_model_category</foreign_table>
-								<foreign_table_where>AND tx_slubevents_domain_model_category.parent = 0 AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_category.sorting DESC</foreign_table_where>
-								<size>5</size>
-								<autoSizeMax>30</autoSizeMax>
-								<minitems>1</minitems>
-								<maxitems>1</maxitems>
-							</config>
-						</TCEforms>
-					</settings.consultationSelection>
+                    <settings.showEvent>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>Veranstaltungen anzeigen</label>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.showEvent>
 
-					<settings.pidListing>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view</label>
-							<config>
-								<type>group</type>
-								<internal_type>db</internal_type>
-								<allowed>pages</allowed>
-								<size>1</size>
-								<maxitems>1</maxitems>
-								<minitems>0</minitems>
-								<show_thumbs>1</show_thumbs>
-							</config>
-						</TCEforms>
-					</settings.pidListing>
+                    <settings.showConsultation>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>Sprechstunden anzeigen</label>
+                            <onChange>reload</onChange>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.showConsultation>
 
-					<settings.pidDetails>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_single_view</label>
-							<config>
-								<type>group</type>
-								<internal_type>db</internal_type>
-								<allowed>pages</allowed>
-								<size>1</size>
-								<maxitems>1</maxitems>
-								<minitems>0</minitems>
-								<show_thumbs>1</show_thumbs>
-							</config>
-						</TCEforms>
-					</settings.pidDetails>
+                    <settings.consultationSelection>
+                        <TCEforms>
+                            <label>Kategorie mit Beratungsterminen</label>
+                            <displayCond><![CDATA[FIELD:settings.showConsultation:REQ:true]]></displayCond>
+                            <config>
+                                <type>select</type>
+                                <renderMode>tree</renderMode>
+                                <treeConfig>
+                                    <parentField>parent</parentField>
+                                    <appearance>
+                                        <expandAll>TRUE</expandAll>
+                                        <showHeader>TRUE</showHeader>
+                                    </appearance>
+                                </treeConfig>
 
-					<settings.pidSubscribeForm>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe</label>
-							<config>
-								<type>group</type>
-								<internal_type>db</internal_type>
-								<allowed>pages</allowed>
-								<size>1</size>
-								<maxitems>1</maxitems>
-								<minitems>0</minitems>
-								<show_thumbs>1</show_thumbs>
-							</config>
-						</TCEforms>
-					</settings.pidSubscribeForm>
-				</el>
-			</ROOT>
-		</sDEF>
-	</sheets>
+                                <foreign_table>tx_slubevents_domain_model_category</foreign_table>
+                                <foreign_table_where>AND tx_slubevents_domain_model_category.parent = 0 AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_category.sorting DESC</foreign_table_where>
+                                <size>5</size>
+                                <autoSizeMax>30</autoSizeMax>
+                                <minitems>1</minitems>
+                                <maxitems>1</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.consultationSelection>
+
+                    <settings.pidListing>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>1</show_thumbs>
+                            </config>
+                        </TCEforms>
+                    </settings.pidListing>
+
+                    <settings.pidDetails>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_single_view
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>1</show_thumbs>
+                            </config>
+                        </TCEforms>
+                    </settings.pidDetails>
+
+                    <settings.pidSubscribeForm>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe
+                            </label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>1</show_thumbs>
+                            </config>
+                        </TCEforms>
+                    </settings.pidSubscribeForm>
+
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
 </T3DataStructure>

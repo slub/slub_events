@@ -1,5 +1,7 @@
 <?php
-	namespace Slub\SlubEvents\ViewHelpers\Condition;
+
+namespace Slub\SlubEvents\ViewHelpers\Condition;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,49 +29,47 @@
 /**
  * check if given category has subcategories
  *
-
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
+class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
+    /**
+     * categoryRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
+     */
+    protected $categoryRepository;
 
-class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+    /**
+     * injectCategoryRepository
+     *
+     * @param \Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository
+     *
+     * @return void
+     */
+    public function injectCategoryRepository(\Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
+    /**
+     * check if any events of categories below are present and free for booking
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     *
+     * @return int
+     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @api
+     */
+    public function render(\Slub\SlubEvents\Domain\Model\Category $category)
+    {
+        $categories = $this->categoryRepository->findCurrentBranch($category);
 
-	/**
-	 * categoryRepository
-	 *
-	 * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
-	 */
-	protected $categoryRepository;
-
-	/**
-	 * injectCategoryRepository
-	 *
-	 * @param \Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository
-	 * @return void
-	 */
-	public function injectCategoryRepository(\Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository) {
-		$this->categoryRepository = $categoryRepository;
-	}
-
-	/**
-	 * check if any events of categories below are present and free for booking
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $category
-	 * @return int
- 	 * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-	 * @api
-	 */
-	public function render(\Slub\SlubEvents\Domain\Model\Category $category) {
-
-		$categories = $this->categoryRepository->findCurrentBranch($category);
-
-		if (count($categories) == 0) {
-			return FALSE;
-		} else {
-			return TRUE;
-		}
-
-	}
+        if (count($categories) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
-?>
