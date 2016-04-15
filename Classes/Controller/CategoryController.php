@@ -1,5 +1,5 @@
 <?php
-	namespace Slub\SlubEvents\Controller;
+    namespace Slub\SlubEvents\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -32,153 +32,155 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-	use TYPO3\CMS\Core\Utility\GeneralUtility;
+    use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class CategoryController extends AbstractController {
+    class CategoryController extends AbstractController
+    {
 
-	/**
-	 * Initializes the current action
-	 *
-	 * idea from tx_news extension
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
+        /**
+     * Initializes the current action
+     *
+     * idea from tx_news extension
+     *
+     * @return void
+     */
+    public function initializeAction()
+    {
 
-		// Only do this in Frontend Context
-		if (!empty($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
-			// We only want to set the tag once in one request, so we have to cache that statically if it has been done
-			static $cacheTagsSet = FALSE;
+        // Only do this in Frontend Context
+        if (!empty($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
+            // We only want to set the tag once in one request, so we have to cache that statically if it has been done
+            static $cacheTagsSet = false;
 
-			/** @var $typoScriptFrontendController \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController  */
-			$typoScriptFrontendController = $GLOBALS['TSFE'];
-			if (!$cacheTagsSet) {
-				$typoScriptFrontendController->addCacheTags(array(0 => 'tx_slubevents_cat_' . $this->settings['storagePid']));
-				$cacheTagsSet = TRUE;
-			}
-			$this->typoScriptFrontendController = $typoScriptFrontendController;
-		}
-	}
+            /** @var $typoScriptFrontendController \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController  */
+            $typoScriptFrontendController = $GLOBALS['TSFE'];
+            if (!$cacheTagsSet) {
+                $typoScriptFrontendController->addCacheTags(array(0 => 'tx_slubevents_cat_' . $this->settings['storagePid']));
+                $cacheTagsSet = true;
+            }
+            $this->typoScriptFrontendController = $typoScriptFrontendController;
+        }
+    }
 
-	/**
-	 * action list
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $category
-	 * @ignorevalidation
-	 * @return void
-	 */
-	public function listAction(\Slub\SlubEvents\Domain\Model\Category $category = NULL) {
+    /**
+     * action list
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @ignorevalidation
+     * @return void
+     */
+    public function listAction(\Slub\SlubEvents\Domain\Model\Category $category = null)
+    {
 
-		// take the root category of the flexform
-		$category = $this->categoryRepository->findAllByUids(GeneralUtility::intExplode(',', $this->settings['categorySelection'], TRUE))->getFirst();
+        // take the root category of the flexform
+        $category = $this->categoryRepository->findAllByUids(GeneralUtility::intExplode(',', $this->settings['categorySelection'], true))->getFirst();
 
-		$categories = $this->categoryRepository->findCurrentBranch($category);
-		//~ $categories = $this->categoryRepository->findCurrentLevel($category);
+        $categories = $this->categoryRepository->findCurrentBranch($category);
+        //~ $categories = $this->categoryRepository->findCurrentLevel($category);
 
-		if (count($categories) == 0) {
-			// there are no further child categories --> show events
-			$this->forward('gbList');
-		} else {
-			$this->view->assign('categories', $categories);
-		}
-	}
+        if (count($categories) == 0) {
+            // there are no further child categories --> show events
+            $this->forward('gbList');
+        } else {
+            $this->view->assign('categories', $categories);
+        }
+    }
 
-	/**
-	 * action contactList
-	 *
-	 * List of genius bar events with category description, contact photo and calendar link
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $category
-	 * @ignorevalidation
-	 * @return void
-	 */
-	public function contactListAction(\Slub\SlubEvents\Domain\Model\Category $category = NULL) {
+    /**
+     * action contactList
+     *
+     * List of genius bar events with category description, contact photo and calendar link
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @ignorevalidation
+     * @return void
+     */
+    public function contactListAction(\Slub\SlubEvents\Domain\Model\Category $category = null)
+    {
+        if (!($this->settings['contactSelection'] > 0)) {
+            $this->view->assign('contactSelectionWarning', 1);
+        } else {
+            $this->view->assign('contacts', $this->contactRepository->findById($this->settings['contactSelection']));
+            if ($this->settings['showWiba']) {
+                $wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], 0);
+            }
+            if ($this->settings['showEvent']) {
+                $events = $this->eventRepository->findEventByContact($this->settings['contactSelection'], 0);
+            }
+            if ($this->settings['showConsultation'] && $this->settings['consultationSelection'] > 0) {
+                $consultation = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], $this->settings['consultationSelection']);
+            }
+        }
 
-		if(!($this->settings['contactSelection'] > 0)) {
-			$this->view->assign('contactSelectionWarning', 1);
-		} else {
-			$this->view->assign('contacts', $this->contactRepository->findById($this->settings['contactSelection']));
-			if($this->settings['showWiba']) {
-				$wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection'],0);
-			}
-			if($this->settings['showEvent']) {
-				$events = $this->eventRepository->findEventByContact($this->settings['contactSelection'],0);
-			}
-			if($this->settings['showConsultation'] && $this->settings['consultationSelection'] > 0 ) {
-				$consultation = $this->eventRepository->findWibaByContact($this->settings['contactSelection'],$this->settings['consultationSelection']);
-			}
-		}
 
+        #if ($category != NULL) {
+        #	$events = $this->eventRepository->findAllGbByCategory($category);
+        #}
 
-		#if ($category != NULL) {
-		#	$events = $this->eventRepository->findAllGbByCategory($category);
-		#}
+        // get Default Category
+        if (is_null($category)) {
+            $category = $this->categoryRepository->findDefaultGeniusbarCategory();
+        }
 
-		// get Default Category
-		if(is_null($category)) {
-			$category = $this->categoryRepository->findDefaultGeniusbarCategory();
-		}
+        $this->view->assign('category', $category);
 
-		$this->view->assign('category', $category);
+        $this->view->assign('wibas', $wibas);
+        $this->view->assign('events', $events);
+        $this->view->assign('consultation', $consultation);
+        $this->view->assign('showWiba', $this->settings['showWiba']);
+        $this->view->assign('showEvent', $this->settings['showEvent']);
+        $this->view->assign('showConsultation', $this->settings['showConsultation']);
+    }
 
-		$this->view->assign('wibas', $wibas);
-		$this->view->assign('events', $events);
-		$this->view->assign('consultation', $consultation);
-		$this->view->assign('showWiba', $this->settings['showWiba']);
-		$this->view->assign('showEvent', $this->settings['showEvent']);
-		$this->view->assign('showConsultation', $this->settings['showConsultation']);
-	}
+    /**
+     * action gbList
+     *
+     * List of genius bar events with category description, contact photo and calendar link
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @ignorevalidation
+     * @return void
+     */
+    public function gbListAction(\Slub\SlubEvents\Domain\Model\Category $category = null)
+    {
+        if ($category != null) {
+            $events = $this->eventRepository->findAllGbByCategory($category);
+        }
 
-	/**
-	 * action gbList
-	 *
-	 * List of genius bar events with category description, contact photo and calendar link
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $category
-	 * @ignorevalidation
-	 * @return void
-	 */
-	public function gbListAction(\Slub\SlubEvents\Domain\Model\Category $category = NULL) {
+        $this->view->assign('events', $events);
+        $this->view->assign('category', $category);
+        $this->view->assign('parentcategory', $category->getParent()->current());
+    }
 
-		if ($category != NULL) {
-			$events = $this->eventRepository->findAllGbByCategory($category);
-		}
+    /**
+     * action show
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @return void
+     */
+    public function showAction(\Slub\SlubEvents\Domain\Model\Category $category)
+    {
+        $this->view->assign('category', $category);
+    }
 
-		$this->view->assign('events', $events);
-		$this->view->assign('category', $category);
-		$this->view->assign('parentcategory', $category->getParent()->current());
-	}
+    /* Debugs a SQL query from a QueryResult
+    *
+    * @param \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult
+    * @param boolean $explainOutput
+    * @return void
+    */
+    public function debugQuery(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult, $explainOutput = false)
+    {
+        $GLOBALS['TYPO3_DB']->debugOuput = 2;
+        if ($explainOutput) {
+            $GLOBALS['TYPO3_DB']->explainOutput = true;
+        }
+        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
+        $queryResult->toArray();
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
 
-	/**
-	 * action show
-	 *
-	 * @param \Slub\SlubEvents\Domain\Model\Category $category
-	 * @return void
-	 */
-	public function showAction(\Slub\SlubEvents\Domain\Model\Category $category) {
-		$this->view->assign('category', $category);
-	}
-
-	/* Debugs a SQL query from a QueryResult
-	*
-	* @param \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult
-	* @param boolean $explainOutput
-	* @return void
-	*/
-	public function debugQuery(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult, $explainOutput = FALSE){
-	  $GLOBALS['TYPO3_DB']->debugOuput = 2;
-	  if($explainOutput){
-	    $GLOBALS['TYPO3_DB']->explainOutput = true;
-	  }
-	  $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
-	  $queryResult->toArray();
-	  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
-
-	  $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = false;
-	  $GLOBALS['TYPO3_DB']->explainOutput = false;
-	  $GLOBALS['TYPO3_DB']->debugOuput = false;
-	}
-
-}
-
-?>
+        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = false;
+        $GLOBALS['TYPO3_DB']->explainOutput = false;
+        $GLOBALS['TYPO3_DB']->debugOuput = false;
+    }
+    }
