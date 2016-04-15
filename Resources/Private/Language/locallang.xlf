@@ -131,6 +131,9 @@
 		<trans-unit id="tx_slubevents.gb.no_event">
 			<source>No events at the moment.</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.no_date_neither_event">
+			<source>No events neither Knowledge Bar dates at the moment.</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category">
 			<source>Event Category</source>
 		</trans-unit>

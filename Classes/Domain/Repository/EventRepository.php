@@ -67,15 +67,21 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Finds all datasets by MM relation contact
 	 *
 	 * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+	 * @param \Slub\SlubEvents\Domain\Model\Category $category
 	 * @return array The found Event Objects
 	 */
-	public function findWibaByContact($contact) {
+	public function findWibaByContact($contact, $category = 0) {
 
 		$query = $this->createQuery();
 
 		$constraints = array();
 		$constraints[] = $query->equals('contact', $contact);
 		$constraints[] = $query->equals('genius_bar', 1);
+		$constraints[] = $query->equals('cancelled', 0);
+		if($category > 0) {
+			$constraints[] = $query->equals('categories.uid', $category);
+		}
+		$constraints[] = $query->greaterThan('max_subscriber', 'subscribers');
 		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
 		if (count($constraints)) {
@@ -103,6 +109,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$constraints = array();
 		$constraints[] = $query->equals('contact', $contact);
 		$constraints[] = $query->equals('genius_bar', 0);
+		$constraints[] = $query->equals('cancelled', 0);
+		$constraints[] = $query->greaterThan('max_subscriber', 'subscribers');
 		$constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
 		if (count($constraints)) {

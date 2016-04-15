@@ -99,10 +99,13 @@ class CategoryController extends AbstractController {
 		} else {
 			$this->view->assign('contacts', $this->contactRepository->findById($this->settings['contactSelection']));
 			if($this->settings['showWiba']) {
-				$wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection']);
+				$wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection'],0);
 			}
 			if($this->settings['showEvent']) {
-				$events = $this->eventRepository->findEventByContact($this->settings['contactSelection']);
+				$events = $this->eventRepository->findEventByContact($this->settings['contactSelection'],0);
+			}
+			if($this->settings['showConsultation'] && $this->settings['consultationSelection'] > 0 ) {
+				$consultation = $this->eventRepository->findWibaByContact($this->settings['contactSelection'],$this->settings['consultationSelection']);
 			}
 		}
 
@@ -111,10 +114,19 @@ class CategoryController extends AbstractController {
 		#	$events = $this->eventRepository->findAllGbByCategory($category);
 		#}
 
+		// get Default Category
+		if(is_null($category)) {
+			$category = $this->categoryRepository->findDefaultGeniusbarCategory();
+		}
+
+		$this->view->assign('category', $category);
+
 		$this->view->assign('wibas', $wibas);
 		$this->view->assign('events', $events);
+		$this->view->assign('consultation', $consultation);
 		$this->view->assign('showWiba', $this->settings['showWiba']);
 		$this->view->assign('showEvent', $this->settings['showEvent']);
+		$this->view->assign('showConsultation', $this->settings['showConsultation']);
 	}
 
 	/**
@@ -145,6 +157,26 @@ class CategoryController extends AbstractController {
 	 */
 	public function showAction(\Slub\SlubEvents\Domain\Model\Category $category) {
 		$this->view->assign('category', $category);
+	}
+
+	/* Debugs a SQL query from a QueryResult
+	*
+	* @param \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult
+	* @param boolean $explainOutput
+	* @return void
+	*/
+	public function debugQuery(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult, $explainOutput = FALSE){
+	  $GLOBALS['TYPO3_DB']->debugOuput = 2;
+	  if($explainOutput){
+	    $GLOBALS['TYPO3_DB']->explainOutput = true;
+	  }
+	  $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
+	  $queryResult->toArray();
+	  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
+
+	  $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = false;
+	  $GLOBALS['TYPO3_DB']->explainOutput = false;
+	  $GLOBALS['TYPO3_DB']->debugOuput = false;
 	}
 
 }
