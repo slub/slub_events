@@ -6,9 +6,7 @@
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>
-                        LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventsubscribe_title
-                    </sheetTitle>
+                    <sheetTitle>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventsubscribe_title</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>

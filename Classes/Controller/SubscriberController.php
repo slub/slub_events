@@ -168,7 +168,7 @@ class SubscriberController extends AbstractController
         if ($newSubscriber === null) {
 
             /** @var \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber */
-            $newSubscriber = GeneralUtility::makeInstance(\Slub\SlubEvents\Domain\Model\Subscriber::class);
+            $newSubscriber = GeneralUtility::makeInstance('Slub\\SlubEvents\\Domain\\Model\\Subscriber');
             $newSubscriber->setNumber(1);
 
             if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {
@@ -448,7 +448,7 @@ class SubscriberController extends AbstractController
     public function clearAllEventListCache($isGeniusBar = false)
     {
         /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $tcemain */
-        $tcemain = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
+        $tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
 
         // next two lines are necessary... don't know why.
         $tcemain->stripslashes_values = 0;

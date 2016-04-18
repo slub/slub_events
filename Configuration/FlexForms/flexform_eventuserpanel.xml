@@ -6,9 +6,7 @@
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>
-                        LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventuserpanel_title
-                    </sheetTitle>
+                    <sheetTitle>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.eventuserpanel_title</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>
@@ -22,9 +20,7 @@
                                 <items>
 
                                     <numIndex index="0">
-                                        <numIndex index="0">
-                                            LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.userpanel_view
-                                        </numIndex>
+                                        <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.userpanel_view</numIndex>
                                         <numIndex index="1">Event->listOwn;Event->show</numIndex>
                                     </numIndex>
 
