@@ -137,16 +137,33 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
         if ($row['hidden']) {
             $title = LocalizationUtility::translate('be.unhideEvent', 'slub_events', $arguments = null);
             $params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=0';
-            $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(\'' . $doc->issueCommand($params,
-                        -1) . '\');') . '" title="' . $title . '">' .
+
+            $hideLink = '';
+            $quoteLink = "";
+            if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params,-1);
+            } else {
+                $hideLink = $doc->issueCommand($params,-1);
+                $quoteLink = "'";
+            }
+
+            $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
                 $this->getSpriteIcon('actions-edit-unhide') .
                 '</a>';
             // Hide
         } else {
             $title = LocalizationUtility::translate('be.hideEvent', 'slub_events', $arguments = null);
             $params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=1';
-            $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(\'' . $doc->issueCommand($params,
-                        -1) . '\');') . '" title="' . $title . '">' .
+
+            $hideLink = '';
+            if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params,-1);
+            } else {
+                $hideLink = $doc->issueCommand($params,-1);
+                $quoteLink = "'";
+            }
+
+            $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
                 $this->getSpriteIcon('actions-edit-hide') .
                 '</a>';
         }
