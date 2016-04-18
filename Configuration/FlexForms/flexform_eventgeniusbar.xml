@@ -67,7 +67,9 @@
 
                     <settings.contactSelection>
                         <TCEforms>
-                            <label>Ansprechpartner</label>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.contactperson
+                            </label>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
                                 <type>select</type>
@@ -84,7 +86,9 @@
                     <settings.showWiba>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>Wissensbar anzeigen</label>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showknowledgebar
+                            </label>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
                                 <type>check</type>
@@ -95,7 +99,9 @@
                     <settings.showEvent>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>Veranstaltungen anzeigen</label>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showevents
+                            </label>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
                                 <type>check</type>
@@ -106,7 +112,9 @@
                     <settings.showConsultation>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>Sprechstunden anzeigen</label>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showconsultations
+                            </label>
                             <onChange>reload</onChange>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
@@ -117,7 +125,9 @@
 
                     <settings.consultationSelection>
                         <TCEforms>
-                            <label>Kategorie mit Beratungsterminen</label>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.catforconsultations
+                            </label>
                             <displayCond><![CDATA[FIELD:settings.showConsultation:REQ:true]]></displayCond>
                             <config>
                                 <type>select</type>
