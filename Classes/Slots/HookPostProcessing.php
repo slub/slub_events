@@ -45,7 +45,7 @@ class HookPostProcessing
     public function clearAllEventListCache($pid = 0, $isGeniusBar = false)
     {
         /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $tcemain */
-        $tcemain = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
+        $tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
 
         // next two lines are necessary... don't know why.
         $tcemain->stripslashes_values = 0;
