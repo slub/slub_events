@@ -137,6 +137,22 @@
 			<source>We Consult You</source>
 			<target>Wir beraten Sie</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.i_consult_you" approved="yes">
+			<source>I Consult You</source>
+			<target>Ich berate Sie</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.no_date" approved="yes">
+			<source>No Knowledge Bar dates at the moment.</source>
+			<target>Zur Zeit gibt es leider keine Wissensbartermine.</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.no_event" approved="yes">
+			<source>No events at the moment.</source>
+			<target>Zur Zeit haben wir zu diesem Thema leider keine Veranstaltungen.</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.no_date_neither_event" approved="yes">
+			<source>No events neither Knowledge Bar dates at the moment.</source>
+			<target>Zur Zeit leider keine Veranstaltungen bzw. Wissensbartermine.</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
 			<source>Event Category</source>
 			<target>Kategorie</target>

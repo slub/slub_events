@@ -33,6 +33,9 @@
 		<trans-unit id="flexforms.knowledgebar_view">
 			<source>Knowledge Bar View</source>
 		</trans-unit>
+		<trans-unit id="flexforms.contact_view">
+			<source>Contact View</source>
+		</trans-unit>
 		<trans-unit id="flexforms.list_month_view">
 			<source>List Month View</source>
 		</trans-unit>
@@ -98,6 +101,21 @@
 		</trans-unit>
 		<trans-unit id="plugin.Eventuserpanel">
 			<source>SLUB: Events: User Panel</source>
+		</trans-unit>
+		<trans-unit id="flexforms.contactperson">
+			<source>Contact person</source>
+		</trans-unit>
+		<trans-unit id="flexforms.showknowledgebar">
+			<source>Show Knowledge Bar</source>
+		</trans-unit>
+		<trans-unit id="flexforms.showevents">
+			<source>Show events</source>
+		</trans-unit>
+		<trans-unit id="flexforms.showconsultations">
+			<source>Show consultations</source>
+		</trans-unit>
+		<trans-unit id="flexforms.catforconsultations">
+			<source>Consultations category</source>
 		</trans-unit>
 		</body>
 	</file>

@@ -281,4 +281,25 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
         return $tree;
     }
+
+    /**
+     * Get default WiBa Category, which has no parents
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Category The found Category
+     */
+    public function findDefaultGeniusbarCategory()
+    {
+        $query = $this->createQuery();
+        $constraints = array();
+
+        $constraints[] = $query->equals('parent', 0);
+        $constraints[] = $query->equals('genius_bar', 1);
+        $query->matching($query->logicalAnd($constraints));
+
+        // there should be only one !
+        $query->setLimit(1);
+
+        $cats = $query->execute();
+        return $cats[0];
+    }
 }

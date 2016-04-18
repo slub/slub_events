@@ -42,6 +42,10 @@
 			<source>Knowledge Bar View</source>
 			<target>Wissensbar</target>
 		</trans-unit>
+		<trans-unit id="flexforms.contact_view" approved="yes">
+			<source>Contact View</source>
+			<target>Personenansicht</target>
+		</trans-unit>
 		<trans-unit id="flexforms.list_month_view" approved="yes">
 			<source>List Month View</source>
 			<target>Monatsliste</target>
@@ -129,6 +133,26 @@
 		<trans-unit id="plugin.Eventuserpanel" approved="yes">
 			<source>SLUB: Events: User Panel</source>
 			<target>SLUB: Veranstaltungen: Meine Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="flexforms.contactperson" approved="yes">
+			<source>Contact person</source>
+			<target>Ansprechpartner</target>
+		</trans-unit>
+		<trans-unit id="flexforms.showknowledgebar" approved="yes">
+			<source>Show Knowledge Bar</source>
+			<target>Wissensbar anzeigen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.showevents" approved="yes">
+			<source>Show events</source>
+			<target>Veranstaltungen anzeigen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.showconsultations" approved="yes">
+			<source>Show consultations</source>
+			<target>Sprechstunden anzeigen</target>
+		</trans-unit>
+		<trans-unit id="flexforms.catforconsultations" approved="yes">
+			<source>Consultations category</source>
+			<target>Sprechstunden Kategorie</target>
 		</trans-unit>
 		</body>
 	</file>

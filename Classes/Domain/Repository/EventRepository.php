@@ -33,17 +33,18 @@ namespace Slub\SlubEvents\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-use Slub\SlubEvents\Domain\Model\Category;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+    use Slub\SlubEvents\Domain\Model\Category;
+    use TYPO3\CMS\Core\Database\DatabaseConnection;
+    use TYPO3\CMS\Core\Utility\GeneralUtility;
+    use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
-class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
-{
+    class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+    {
+
     /**
      * Finds all datasets by MM relation categories
      *
-     * @param Category $category
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
      *
      * @return array The found Event Objects
      */
@@ -62,6 +63,39 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
+            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+        );
+
+        return $query->execute();
+    }
+
+    /**
+     * Finds all datasets by MM relation contact
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @return array The found Event Objects
+     */
+    public function findWibaByContact($contact, $category = 0)
+    {
+        $query = $this->createQuery();
+
+        $constraints = array();
+        $constraints[] = $query->equals('contact', $contact);
+        $constraints[] = $query->equals('genius_bar', 1);
+        $constraints[] = $query->equals('cancelled', 0);
+        if ($category > 0) {
+            $constraints[] = $query->equals('categories.uid', $category);
+        }
+	$constraints[] = $query->lessThan('subscribers', '1');
+        $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        // order by start_date -> start_time...
+        $query->setOrderings(
             ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
@@ -69,6 +103,38 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
+     * Finds all datasets by MM relation contact
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+     *
+     * @return array The found Event Objects
+     */
+    public function findEventByContact($contact)
+    {
+        $query = $this->createQuery();
+
+        $constraints = [];
+        $constraints[] = $query->equals('contact', $contact);
+        $constraints[] = $query->equals('genius_bar', 0);
+        $constraints[] = $query->equals('cancelled', 0);
+        $constraints[] = $query->greaterThan('max_subscriber', 'subscribers');
+        $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        // order by start_date -> start_time...
+        $query->setOrderings(
+            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+        );
+
+        return $query->execute();
+    }
+
+    /**
+     * Finds all datasets by MM relation categories
+     *
      * @param array $categories separated by comma
      * @param bool  $fromNow    separated by comma
      *
