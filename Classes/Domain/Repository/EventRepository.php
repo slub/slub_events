@@ -87,7 +87,7 @@ namespace Slub\SlubEvents\Domain\Repository;
         if ($category > 0) {
             $constraints[] = $query->equals('categories.uid', $category);
         }
-        $constraints[] = $query->greaterThan('max_subscriber', 'subscribers');
+	$constraints[] = $query->lessThan('subscribers', '1');
         $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
         if (count($constraints)) {

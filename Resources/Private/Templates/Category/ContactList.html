@@ -54,9 +54,9 @@
 
 			<f:if condition="{showWiba}">
 				<f:then>
-					<h3>Wissensbar</h3>
 					<f:if condition="{wibas}">
 						<f:then>
+                                                        <h3>Wissensbar</h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: wibas, category: category}" />
@@ -76,9 +76,9 @@
 
 			<f:if condition="{showEvent}">
 				<f:then>
-					<h3>Veranstaltungen</h3>
 					<f:if condition="{events}">
 						<f:then>
+                                                        <h3>Veranstaltungen</h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: events, category: category}" />
@@ -98,9 +98,9 @@
 
 			<f:if condition="{showConsultation}">
 				<f:then>
-					<h3>Sprechstunden</h3>
 					<f:if condition="{consultation}">
 						<f:then>
+                                                        <h3>Sprechstunden</h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: consultation, category: category}" />
@@ -136,12 +136,6 @@
 			</f:if>
 		</f:else>
 	</f:if>
-
-	<f:comment>
-		<div class="submit">
-			<f:link.action action="list" class="button linkback" controller="Category" arguments="{category : parentcategory}"><f:translate key="paginate_back" /></f:link.action>
-		</div>
-	</f:comment>
 
 </div>
 
