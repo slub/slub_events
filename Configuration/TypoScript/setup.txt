@@ -102,6 +102,7 @@ ajaxEvents {
     10 = USER_INT
     10 {
         userFunc = tx_extbase_core_bootstrap->run
+        vendorName = Slub
         pluginName = Eventlist
         extensionName = SlubEvents
         controller = Event
