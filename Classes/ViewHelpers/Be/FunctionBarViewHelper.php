@@ -31,6 +31,7 @@ use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
@@ -47,6 +48,28 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
     protected $iconFactory;
 
     /**
+     * @var ObjectManagerInterface
+     */
+    protected $objectManager;
+
+    /**
+     * FunctionBarViewHelper constructor.
+     *
+     * Use dependency injection depending on TYPO3 version
+     *
+     * @param ObjectManagerInterface $objectManager
+     */
+    public function __construct(ObjectManagerInterface $objectManager)
+    {
+        $this->objectManager = $objectManager;
+
+        // iconFactory exists from TYPO3 7
+        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+            $this->iconFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
+        }
+    }
+
+    /**
      * @param ConfigurationManagerInterface $configurationManager
      *
      * @return void
@@ -54,14 +77,6 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
-    }
-
-    /**
-     * @param IconFactory $iconFactory
-     */
-    public function injectIconFactory(IconFactory $iconFactory)
-    {
-        $this->iconFactory = $iconFactory;
     }
 
     /**
@@ -95,7 +110,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
                 )
             )
             . '" title="' . $title . '">' .
-            $this->iconFactory->getIcon('actions-document-open', Icon::SIZE_SMALL) .
+            $this->getSpriteIcon('actions-document-open') .
             '</a>';
 
         return $icon;
@@ -122,7 +137,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
                 )
             )
             . '" title="' . $title . '">' .
-            $this->iconFactory->getIcon('actions-document-new', Icon::SIZE_SMALL) .
+            $this->getSpriteIcon('actions-document-new') .
             '</a>';
 
         return $icon;
@@ -142,19 +157,36 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
         if ($row['hidden']) {
             $title = LocalizationUtility::translate('be.unhideEvent', 'slub_events', $arguments = null);
             $params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=0';
-            $icon = '<a href="#" onclick="' .
-                htmlspecialchars('return jumpToUrl(' . $doc->issueCommand($params, -1) . ');')
-                . '" title="' . $title . '">' .
-                $this->iconFactory->getIcon('actions-edit-unhide', Icon::SIZE_SMALL)
-                . '</a>';
+
+            $hideLink = '';
+            $quoteLink = "";
+            if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+                $hideLink = BackendUtility::getLinkToDataHandlerAction($params, -1);
+            } else {
+                $hideLink = $doc->issueCommand($params, -1);
+                $quoteLink = "'";
+            }
+
+            $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
+                $this->getSpriteIcon('actions-edit-unhide') .
+                '</a>';
             // Hide
         } else {
             $title = LocalizationUtility::translate('be.hideEvent', 'slub_events', $arguments = null);
             $params = '&data[' . $table . '][' . $row['uid'] . '][hidden]=1';
+
+            $hideLink = '';
+            if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+                $hideLink = BackendUtility::getLinkToDataHandlerAction($params, -1);
+            } else {
+                $hideLink = $doc->issueCommand($params, -1);
+                $quoteLink = "'";
+            }
+
             $icon = '<a href="#" onclick="' .
-                htmlspecialchars('return jumpToUrl(' . $doc->issueCommand($params, -1) . ');')
-                . '" title="' . $title . '">' .
-                $this->iconFactory->getIcon('actions-edit-hide', Icon::SIZE_SMALL) .
+                htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') .
+                '" title="' . $title . '">' .
+                $this->getSpriteIcon('actions-edit-hide') .
                 '</a>';
         }
         return $icon;
@@ -185,7 +217,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
     {
         return $this->iconFactory->getIcon('actions-edit-pick-date', Icon::SIZE_SMALL);
 
-        return IconUtility::getSpriteIcon(
+        return $this->getSpriteIcon(
             'actions-edit-pick-date',
             [
                 'style' => 'cursor:pointer;',
@@ -238,5 +270,24 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
         }
 
         return $content;
+    }
+
+    /**
+     * Get the requested Sprite Icon
+     *
+     * compatibility helper for TYPO3 6.2 and 7.7
+     *
+     * @param $iconName
+     * @param $options
+     *
+     * @return string full HTML tag
+     */
+    private function getSpriteIcon($iconName, $options = [])
+    {
+        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+            return $this->iconFactory->getIcon($iconName, Icon::SIZE_SMALL);
+        } else {
+            return IconUtility::getSpriteIcon($iconName, $options);
+        }
     }
 }
