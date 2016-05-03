@@ -58,10 +58,10 @@ slub_events
 .. toctree::
 	:maxdepth: 5
 	:titlesonly:
-        	:glob:
+	:glob:
 
-        	Introduction/Index
-        	UsersManual/Index
-        	AdministratorManual/Index
-        	KnownProblems/Index
-        	Support/Index
+	Introduction/Index
+	UsersManual/Index
+	AdministratorManual/Index
+	KnownProblems/Index
+	Support/Index
