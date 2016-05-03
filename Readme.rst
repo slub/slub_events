@@ -12,4 +12,4 @@ HowTo Start
 * post an issue if you find one
 * contribute by creating a pull request
 
-.. _read the manual: Documentation/Index.rst
+.. _read the manual: https://docs.typo3.org/typo3cms/extensions/slub_events/
