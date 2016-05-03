@@ -14,9 +14,7 @@ $EM_CONF[$_EXTKEY] = [
     'title'            => 'SLUB: Event Registration',
     'description'      => 'Tool for event registration and experts booking.
 
-This extension is developped and used in production at the Saxony State and University Library (SLUB) Dresden, Germany.
-
-This extension was refactored to work with TYPO3 7.6 LTS by UDG United Digital Group GmbH',
+This extension is developped and used in production at the Saxony State and University Library (SLUB) Dresden, Germany.',
     'category'         => 'plugin',
     'author'           => 'Alexander Bigga',
     'author_email'     => 'alexander.bigga@slub-dresden.de',

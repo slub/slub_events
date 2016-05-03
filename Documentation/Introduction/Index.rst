@@ -30,9 +30,9 @@ The templates are not yet all localized but are easily changeable by
 overwriting templateRootPath etc. as usual with extbase/fluid
 extensions.
 
-Please use for your feedback the `Forge project website
-<http://forge.typo3.org/projects/extension-slub_events>`_ . There you
-find a issue tracker and the recent code in a repository.
+Please use for your feedback the `Github project website
+<https://github.com/slub/slub_events>`_ . Create issues and if possible,
+provide a pull request with a solution.
 
 
 Credits
@@ -40,3 +40,4 @@ Credits
 
 Some backend icons by `Yusuke Kamiyamane <http://p.yusukekamiyamane.com/>`_.
 Licensed under a `Creative Commons Attribution 3.0 License <http://creativecommons.org/licenses/by/3.0/>`_.
+Compatibility with TYPO3 7.6: `Manuel Selbach <https://github.com/manuelselbach>`_

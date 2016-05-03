@@ -46,9 +46,9 @@ Limitations
 
   To add new fields, you have to
   change the database scheme, the data model, the subscriber controler,
-  etc. If you have a better approach: please fill in a `feature request
-  on the Forge project website
-  <http://forge.typo3.org/projects/extension-slub_events>`_ and explain
+  etc. If you have a better approach: please fill in a `issue feature request
+  on the Github project website
+  <https://github.com/slub/slub_events>`_ and explain
   your solution.
 
   Thank you!

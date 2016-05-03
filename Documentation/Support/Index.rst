@@ -21,7 +21,7 @@ apply your patches if you sent it to us.
 Forge Bug- and Issuetracker
 ---------------------------
 
-Please use the `issue tracker on the Forge project website <http://forge.typo3.org/projects/extension-slub_events>`_
+Please use the `issue tracker on the Github project website <https://github.com/slub/slub_events>`_
 to report issues and feature requests. This helps us and others.
 
 
