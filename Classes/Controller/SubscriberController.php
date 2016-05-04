@@ -752,10 +752,10 @@ class SubscriberController extends AbstractController
                 \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
             );
             $templateRootPath = GeneralUtility::getFileAbsFileName(
-                $extbaseFrameworkConfiguration['view']['templateRootPath']
+                $extbaseFrameworkConfiguration['view']['templateRootPaths'][10]
             );
             $partialRootPath = GeneralUtility::getFileAbsFileName(
-                $extbaseFrameworkConfiguration['view']['partialRootPath']
+                $extbaseFrameworkConfiguration['view']['partialRootPaths'][10]
             );
 
             $emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . 'OnlineSurvey.html');
