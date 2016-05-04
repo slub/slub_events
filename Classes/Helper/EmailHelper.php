@@ -62,7 +62,7 @@ class EmailHelper
         $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
-        $emailViewHTML = $objectManager->get(\TYPO3\CMS\Fluid\View\StandaloneView::class);
+        $emailViewHTML = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
         $emailViewHTML->setFormat('html');
         $emailViewHTML->assignMultiple($variables);
@@ -135,7 +135,7 @@ class EmailHelper
         if ($variables['attachCsv'] == true) {
 
             /** @var \TYPO3\CMS\Fluid\View\StandaloneView $csv */
-            $csv = $objectManager->get(\TYPO3\CMS\Fluid\View\StandaloneView::class);
+            $csv = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
             $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
             $csv->setFormat('csv');
             $csv->assignMultiple($variables);
