@@ -1,5 +1,13 @@
 <?php
 
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
+use Slub\SlubEvents\Domain\Model\Event;
+use Slub\SlubEvents\Domain\Model\Category;
+use Slub\SlubEvents\Domain\Model\Subscriber;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +33,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_SlubEvents_Domain_Model_Event.
+ * Test case for Event.
  *
  * @version    $Id$
  * @copyright  Copyright belongs to the respective authors
@@ -36,28 +44,32 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Event
+     * @var Event
      */
-    protected $fixture;
+    protected $subject;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Event();
+        $this->subject = new Event();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getTitle()
+        );
     }
 
     /**
@@ -65,19 +77,23 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setTitleForStringSetsTitle()
     {
-        $this->fixture->setTitle('Conceived at T3CON10');
+        $this->subject->setTitle('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
     /**
      * @test
      */
-    public function getStartDateTimeReturnsInitialValueForDateTime()
+    public function getStartDateTimeInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getStartDateTime()
+        );
     }
 
     /**
@@ -85,6 +101,13 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setStartDateTimeForDateTimeSetsStartDateTime()
     {
+        $now = new \DateTime('2016-05-13');
+        $this->subject->setStartDateTime($now);
+
+        self::assertSame(
+            $now,
+            $this->subject->getStartDateTime()
+        );
     }
 
     /**
@@ -92,9 +115,9 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function getAllDayReturnsInitialValueForBoolean()
     {
-        $this->assertSame(
-            true,
-            $this->fixture->getAllDay()
+        self::assertSame(
+            false,
+            $this->subject->getAllDay()
         );
     }
 
@@ -103,19 +126,23 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setAllDayForBooleanSetsAllDay()
     {
-        $this->fixture->setAllDay(true);
+        $this->subject->setAllDay(true);
 
-        $this->assertSame(
+        self::assertSame(
             true,
-            $this->fixture->getAllDay()
+            $this->subject->getAllDay()
         );
     }
 
     /**
      * @test
      */
-    public function getEndDateTimeReturnsInitialValueForDateTime()
+    public function getEndDateTimeInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getEndDateTime()
+        );
     }
 
     /**
@@ -123,13 +150,25 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setEndDateTimeForDateTimeSetsEndDateTime()
     {
+        $now = new \DateTime('2016-05-13');
+        $this->subject->setEndDateTime($now);
+
+        self::assertSame(
+            $now,
+            $this->subject->getEndDateTime()
+        );
+
     }
 
     /**
      * @test
      */
-    public function getSubEndDateTimeReturnsInitialValueForDateTime()
+    public function getSubEndDateTimeInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getSubEndDateTime()
+        );
     }
 
     /**
@@ -137,13 +176,24 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setSubEndDateTimeForDateTimeSetsSubEndDateTime()
     {
+        $now = new \DateTime('2016-05-13');
+        $this->subject->setSubEndDateTime($now);
+
+        self::assertSame(
+            $now,
+            $this->subject->getSubEndDateTime()
+        );
     }
 
     /**
      * @test
      */
-    public function getTeaserReturnsInitialValueForString()
+    public function getTeaserInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getTeaser()
+        );
     }
 
     /**
@@ -151,11 +201,11 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setTeaserForStringSetsTeaser()
     {
-        $this->fixture->setTeaser('Conceived at T3CON10');
+        $this->subject->setTeaser('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getTeaser()
+            $this->subject->getTeaser()
         );
     }
 
@@ -171,11 +221,11 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setDescriptionForStringSetsDescription()
     {
-        $this->fixture->setDescription('Conceived at T3CON10');
+        $this->subject->setDescription('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -184,9 +234,9 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function getMinSubscriberReturnsInitialValueForInteger()
     {
-        $this->assertSame(
+        self::assertSame(
             0,
-            $this->fixture->getMinSubscriber()
+            $this->subject->getMinSubscriber()
         );
     }
 
@@ -195,11 +245,11 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setMinSubscriberForIntegerSetsMinSubscriber()
     {
-        $this->fixture->setMinSubscriber(12);
+        $this->subject->setMinSubscriber(12);
 
-        $this->assertSame(
+        self::assertSame(
             12,
-            $this->fixture->getMinSubscriber()
+            $this->subject->getMinSubscriber()
         );
     }
 
@@ -208,9 +258,9 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function getMaxSubscriberReturnsInitialValueForInteger()
     {
-        $this->assertSame(
+        self::assertSame(
             0,
-            $this->fixture->getMaxSubscriber()
+            $this->subject->getMaxSubscriber()
         );
     }
 
@@ -219,11 +269,11 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setMaxSubscriberForIntegerSetsMaxSubscriber()
     {
-        $this->fixture->setMaxSubscriber(12);
+        $this->subject->setMaxSubscriber(12);
 
-        $this->assertSame(
+        self::assertSame(
             12,
-            $this->fixture->getMaxSubscriber()
+            $this->subject->getMaxSubscriber()
         );
     }
 
@@ -232,9 +282,9 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function getAudienceReturnsInitialValueForInteger()
     {
-        $this->assertSame(
+        self::assertSame(
             0,
-            $this->fixture->getAudience()
+            $this->subject->getAudience()
         );
     }
 
@@ -243,11 +293,11 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setAudienceForIntegerSetsAudience()
     {
-        $this->fixture->setAudience(12);
+        $this->subject->setAudience(12);
 
-        $this->assertSame(
+        self::assertSame(
             12,
-            $this->fixture->getAudience()
+            $this->subject->getAudience()
         );
     }
 
@@ -256,9 +306,9 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function getSubEndDateInfoSentReturnsInitialValueForBoolean()
     {
-        $this->assertSame(
+        self::assertSame(
             true,
-            $this->fixture->getSubEndDateInfoSent()
+            $this->subject->getSubEndDateInfoSent()
         );
     }
 
@@ -267,11 +317,11 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setSubEndDateInfoSentForBooleanSetsSubEndDateInfoSent()
     {
-        $this->fixture->setSubEndDateInfoSent(true);
+        $this->subject->setSubEndDateInfoSent(true);
 
-        $this->assertSame(
+        self::assertSame(
             true,
-            $this->fixture->getSubEndDateInfoSent()
+            $this->subject->getSubEndDateInfoSent()
         );
     }
 
@@ -280,9 +330,9 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function getGeniusBarReturnsInitialValueForBoolean()
     {
-        $this->assertSame(
+        self::assertSame(
             true,
-            $this->fixture->getGeniusBar()
+            $this->subject->getGeniusBar()
         );
     }
 
@@ -291,11 +341,11 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setGeniusBarForBooleanSetsGeniusBar()
     {
-        $this->fixture->setGeniusBar(true);
+        $this->subject->setGeniusBar(true);
 
-        $this->assertSame(
+        self::assertSame(
             true,
-            $this->fixture->getGeniusBar()
+            $this->subject->getGeniusBar()
         );
     }
 
@@ -304,9 +354,9 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function getCancelledReturnsInitialValueForBoolean()
     {
-        $this->assertSame(
+        self::assertSame(
             true,
-            $this->fixture->getCancelled()
+            $this->subject->getCancelled()
         );
     }
 
@@ -315,39 +365,39 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function setCancelledForBooleanSetsCancelled()
     {
-        $this->fixture->setCancelled(true);
+        $this->subject->setCancelled(true);
 
-        $this->assertSame(
+        self::assertSame(
             true,
-            $this->fixture->getCancelled()
+            $this->subject->getCancelled()
         );
     }
 
     /**
      * @test
      */
-    public function getCategoriesReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Category()
+    public function getCategoriesReturnsInitialValueForObjectStorageContainingCategory()
     {
-        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-        $this->assertEquals(
+        $newObjectStorage = new ObjectStorage();
+        self::assertEquals(
             $newObjectStorage,
-            $this->fixture->getCategories()
+            $this->subject->getCategories()
         );
     }
 
     /**
      * @test
      */
-    public function setCategoriesForObjectStorageContainingTx_SlubEvents_Domain_Model_CategorySetsCategories()
+    public function setCategoriesForObjectStorageContainingCategorySetsCategories()
     {
-        $category = new Tx_SlubEvents_Domain_Model_Category();
-        $objectStorageHoldingExactlyOneCategories = new Tx_Extbase_Persistence_ObjectStorage();
+        $category = new Category();
+        $objectStorageHoldingExactlyOneCategories = new ObjectStorage();
         $objectStorageHoldingExactlyOneCategories->attach($category);
-        $this->fixture->setCategories($objectStorageHoldingExactlyOneCategories);
+        $this->subject->setCategories($objectStorageHoldingExactlyOneCategories);
 
-        $this->assertSame(
+        self::assertSame(
             $objectStorageHoldingExactlyOneCategories,
-            $this->fixture->getCategories()
+            $this->subject->getCategories()
         );
     }
 
@@ -356,14 +406,14 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function addCategoryToObjectStorageHoldingCategories()
     {
-        $category = new Tx_SlubEvents_Domain_Model_Category();
-        $objectStorageHoldingExactlyOneCategory = new Tx_Extbase_Persistence_ObjectStorage();
+        $category = new Category();
+        $objectStorageHoldingExactlyOneCategory = new ObjectStorage();
         $objectStorageHoldingExactlyOneCategory->attach($category);
-        $this->fixture->addCategory($category);
+        $this->subject->addCategory($category);
 
-        $this->assertEquals(
+        self::assertEquals(
             $objectStorageHoldingExactlyOneCategory,
-            $this->fixture->getCategories()
+            $this->subject->getCategories()
         );
     }
 
@@ -372,44 +422,44 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function removeCategoryFromObjectStorageHoldingCategories()
     {
-        $category = new Tx_SlubEvents_Domain_Model_Category();
-        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $category = new Category();
+        $localObjectStorage = new ObjectStorage();
         $localObjectStorage->attach($category);
         $localObjectStorage->detach($category);
-        $this->fixture->addCategory($category);
-        $this->fixture->removeCategory($category);
+        $this->subject->addCategory($category);
+        $this->subject->removeCategory($category);
 
-        $this->assertEquals(
+        self::assertEquals(
             $localObjectStorage,
-            $this->fixture->getCategories()
+            $this->subject->getCategories()
         );
     }
 
     /**
      * @test
      */
-    public function getSubscribersReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Subscriber()
+    public function getSubscribersReturnsInitialValueForObjectStorageContainingSubscriber()
     {
-        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-        $this->assertEquals(
+        $newObjectStorage = new ObjectStorage();
+        self::assertEquals(
             $newObjectStorage,
-            $this->fixture->getSubscribers()
+            $this->subject->getSubscribers()
         );
     }
 
     /**
      * @test
      */
-    public function setSubscribersForObjectStorageContainingTx_SlubEvents_Domain_Model_SubscriberSetsSubscribers()
+    public function setSubscribersForObjectStorageContainingSubscriberSetsSubscribers()
     {
-        $subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
-        $objectStorageHoldingExactlyOneSubscribers = new Tx_Extbase_Persistence_ObjectStorage();
+        $subscriber = new Subscriber();
+        $objectStorageHoldingExactlyOneSubscribers = new ObjectStorage();
         $objectStorageHoldingExactlyOneSubscribers->attach($subscriber);
-        $this->fixture->setSubscribers($objectStorageHoldingExactlyOneSubscribers);
+        $this->subject->setSubscribers($objectStorageHoldingExactlyOneSubscribers);
 
-        $this->assertSame(
+        self::assertSame(
             $objectStorageHoldingExactlyOneSubscribers,
-            $this->fixture->getSubscribers()
+            $this->subject->getSubscribers()
         );
     }
 
@@ -418,14 +468,14 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function addSubscriberToObjectStorageHoldingSubscribers()
     {
-        $subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
-        $objectStorageHoldingExactlyOneSubscriber = new Tx_Extbase_Persistence_ObjectStorage();
+        $subscriber = new Subscriber();
+        $objectStorageHoldingExactlyOneSubscriber = new ObjectStorage();
         $objectStorageHoldingExactlyOneSubscriber->attach($subscriber);
-        $this->fixture->addSubscriber($subscriber);
+        $this->subject->addSubscriber($subscriber);
 
-        $this->assertEquals(
+        self::assertEquals(
             $objectStorageHoldingExactlyOneSubscriber,
-            $this->fixture->getSubscribers()
+            $this->subject->getSubscribers()
         );
     }
 
@@ -434,58 +484,58 @@ class Tx_SlubEvents_Domain_Model_EventTest extends Tx_Extbase_Tests_Unit_BaseTes
      */
     public function removeSubscriberFromObjectStorageHoldingSubscribers()
     {
-        $subscriber = new Tx_SlubEvents_Domain_Model_Subscriber();
-        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $subscriber = new Subscriber();
+        $localObjectStorage = new ObjectStorage();
         $localObjectStorage->attach($subscriber);
         $localObjectStorage->detach($subscriber);
-        $this->fixture->addSubscriber($subscriber);
-        $this->fixture->removeSubscriber($subscriber);
+        $this->subject->addSubscriber($subscriber);
+        $this->subject->removeSubscriber($subscriber);
 
-        $this->assertEquals(
+        self::assertEquals(
             $localObjectStorage,
-            $this->fixture->getSubscribers()
+            $this->subject->getSubscribers()
         );
     }
 
     /**
      * @test
      */
-    public function getLocationReturnsInitialValueForTx_SlubEvents_Domain_Model_Location()
+    public function getLocationReturnsInitialValueForLocation()
     {
     }
 
     /**
      * @test
      */
-    public function setLocationForTx_SlubEvents_Domain_Model_LocationSetsLocation()
+    public function setLocationForLocationSetsLocation()
     {
     }
 
     /**
      * @test
      */
-    public function getDisciplineReturnsInitialValueForTx_SlubEvents_Domain_Model_Discipline()
+    public function getDisciplineReturnsInitialValueForDiscipline()
     {
     }
 
     /**
      * @test
      */
-    public function setDisciplineForTx_SlubEvents_Domain_Model_DisciplineSetsDiscipline()
+    public function setDisciplineForDisciplineSetsDiscipline()
     {
     }
 
     /**
      * @test
      */
-    public function getContactReturnsInitialValueForTx_SlubEvents_Domain_Model_Contact()
+    public function getContactReturnsInitialValueForContact()
     {
     }
 
     /**
      * @test
      */
-    public function setContactForTx_SlubEvents_Domain_Model_ContactSetsContact()
+    public function setContactForContactSetsContact()
     {
     }
 }

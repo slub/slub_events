@@ -1,5 +1,10 @@
 <?php
 
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use Slub\SlubEvents\Domain\Model\Contact;
+
+
 /***************************************************************
  *  Copyright notice
  *
@@ -36,28 +41,32 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class ContactTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Contact
+     * @var Contact
      */
-    protected $fixture;
+    protected $subject;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Contact();
+        $this->subject = new Contact();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getName()
+        );
     }
 
     /**
@@ -65,19 +74,23 @@ class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseT
      */
     public function setNameForStringSetsName()
     {
-        $this->fixture->setName('Conceived at T3CON10');
+        $this->subject->setName('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
     /**
      * @test
      */
-    public function getEmailReturnsInitialValueForString()
+    public function getEmailInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getEmail()
+        );
     }
 
     /**
@@ -85,19 +98,23 @@ class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseT
      */
     public function setEmailForStringSetsEmail()
     {
-        $this->fixture->setEmail('Conceived at T3CON10');
+        $this->subject->setEmail('slub@example.com');
 
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getEmail()
+        self::assertSame(
+            'slub@example.com',
+            $this->subject->getEmail()
         );
     }
 
     /**
      * @test
      */
-    public function getTelephoneReturnsInitialValueForString()
+    public function getTelephoneInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getTelephone()
+        );
     }
 
     /**
@@ -105,19 +122,23 @@ class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseT
      */
     public function setTelephoneForStringSetsTelephone()
     {
-        $this->fixture->setTelephone('Conceived at T3CON10');
+        $this->subject->setTelephone('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getTelephone()
+            $this->subject->getTelephone()
         );
     }
 
     /**
      * @test
      */
-    public function getDescriptionReturnsInitialValueForString()
+    public function getDescriptionInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getTelephone()
+        );
     }
 
     /**
@@ -125,19 +146,23 @@ class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseT
      */
     public function setDescriptionForStringSetsDescription()
     {
-        $this->fixture->setDescription('Conceived at T3CON10');
+        $this->subject->setDescription('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
     /**
      * @test
      */
-    public function getPhotoReturnsInitialValueForString()
+    public function getPhotoInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getPhoto()
+        );
     }
 
     /**
@@ -145,11 +170,11 @@ class Tx_SlubEvents_Domain_Model_ContactTest extends Tx_Extbase_Tests_Unit_BaseT
      */
     public function setPhotoForStringSetsPhoto()
     {
-        $this->fixture->setPhoto('Conceived at T3CON10');
+        $this->subject->setPhoto('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getPhoto()
+            $this->subject->getPhoto()
         );
     }
 }

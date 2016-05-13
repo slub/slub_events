@@ -1,5 +1,9 @@
 <?php
 
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use Slub\SlubEvents\Domain\Model\Discipline;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -36,21 +40,21 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_DisciplineTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class DisciplineTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Discipline
+     * @var Discipline
      */
-    protected $fixture;
+    protected $subject;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Discipline();
+        $this->subject = new Discipline();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
@@ -58,6 +62,10 @@ class Tx_SlubEvents_Domain_Model_DisciplineTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function getNameReturnsInitialValueForString()
     {
+        self::assertSame(
+            null,
+            $this->subject->getName()
+        );
     }
 
     /**
@@ -65,11 +73,11 @@ class Tx_SlubEvents_Domain_Model_DisciplineTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setNameForStringSetsName()
     {
-        $this->fixture->setName('Conceived at T3CON10');
+        $this->subject->setName('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 }

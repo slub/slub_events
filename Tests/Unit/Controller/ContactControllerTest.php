@@ -60,4 +60,5 @@ class Tx_Slub_events_Controller_ContactControllerTest extends Tx_Extbase_Tests_U
     {
         $this->markTestIncomplete();
     }
+    
 }

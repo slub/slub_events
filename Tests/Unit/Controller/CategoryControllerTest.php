@@ -1,5 +1,12 @@
 <?php
 
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use Slub\SlubEvents\Domain\Model\Category;
+use Slub\SlubEvents\Controller\CategoryController;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +32,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Slub_events_Controller_CategoryController.
+ * Test case for class CategoryController.
  *
  * @version    $Id$
  * @copyright  Copyright belongs to the respective authors
@@ -36,23 +43,55 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_Slub_events_Controller_CategoryControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class CategoryControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Category
+     * @var Category
      */
-    protected $fixture;
+    protected $subject = null;
+
+    /**
+     * @var ViewInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $view = null;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Category();
+        $this->subject = new CategoryController();
+
+        $this->view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $this->view);
+
+        $this->categoryRepository = $this->getMock('Slub\\SlubEvents\\Domain\\Repository\\CategoryRepository', [], [], '', false);
+        $this->inject($this->subject, 'categoryRepository', $this->categoryRepository);
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
+    /**
+     * @test
+     */
+    public function listActionCanBeCalled()
+    {
+        $this->subject->listAction();
+    }
+
+    /**
+     * @test
+     */
+    public function listActionPassOneCategoryAsCategorytreeToView()
+    {
+        $emptyCategoryArray = array();
+        $this->categoryRepository->expects(self::any())->method('findCurrentBranch')
+            ->will(self::returnValue($emptyCategoryArray));
+
+        $this->view->expects(self::once())->method('assign')->with('categories', $emptyCategoryArray);
+
+        $this->subject->listAction();
+    }
     /**
      * @test
      */

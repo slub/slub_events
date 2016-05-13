@@ -1,5 +1,10 @@
 <?php
 
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use Slub\SlubEvents\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +30,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_SlubEvents_Domain_Model_Category.
+ * Test case for class Category.
  *
  * @version    $Id$
  * @copyright  Copyright belongs to the respective authors
@@ -36,28 +41,32 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class CategoryTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Category
+     * @var Category
      */
-    protected $fixture;
+    protected $subject = null;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Category();
+        $this->subject = new Category();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getTitle()
+        );
     }
 
     /**
@@ -65,19 +74,23 @@ class Tx_SlubEvents_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function setTitleForStringSetsTitle()
     {
-        $this->fixture->setTitle('Conceived at T3CON10');
+        $this->subject->setTitle('Conceived at T3CON10');
 
-        $this->assertSame(
+       self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
     /**
      * @test
      */
-    public function getDescriptionReturnsInitialValueForString()
+    public function getDescriptionInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getDescription()
+        );
     }
 
     /**
@@ -85,39 +98,39 @@ class Tx_SlubEvents_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function setDescriptionForStringSetsDescription()
     {
-        $this->fixture->setDescription('Conceived at T3CON10');
+        $this->subject->setDescription('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
     /**
      * @test
      */
-    public function getParentReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Category()
+    public function getParentReturnsInitialValueForObjectStorageContainingCategory()
     {
-        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-        $this->assertEquals(
+        $newObjectStorage = new ObjectStorage();
+        self::assertEquals(
             $newObjectStorage,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 
     /**
      * @test
      */
-    public function setParentForObjectStorageContainingTx_SlubEvents_Domain_Model_CategorySetsParent()
+    public function setParentForObjectStorageContainingCategorySetsParent()
     {
-        $parent = new Tx_SlubEvents_Domain_Model_Category();
-        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $parent = new Category();
+        $objectStorageHoldingExactlyOneParent = new ObjectStorage();
         $objectStorageHoldingExactlyOneParent->attach($parent);
-        $this->fixture->setParent($objectStorageHoldingExactlyOneParent);
+        $this->subject->setParent($objectStorageHoldingExactlyOneParent);
 
-        $this->assertSame(
+       self::assertSame(
             $objectStorageHoldingExactlyOneParent,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 
@@ -126,14 +139,14 @@ class Tx_SlubEvents_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function addParentToObjectStorageHoldingParent()
     {
-        $parent = new Tx_SlubEvents_Domain_Model_Category();
-        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $parent = new Category();
+        $objectStorageHoldingExactlyOneParent = new ObjectStorage();
         $objectStorageHoldingExactlyOneParent->attach($parent);
-        $this->fixture->addParent($parent);
+        $this->subject->addParent($parent);
 
-        $this->assertEquals(
+        self::assertEquals(
             $objectStorageHoldingExactlyOneParent,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 
@@ -142,16 +155,16 @@ class Tx_SlubEvents_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function removeParentFromObjectStorageHoldingParent()
     {
-        $parent = new Tx_SlubEvents_Domain_Model_Category();
-        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $parent = new Category();
+        $localObjectStorage = new ObjectStorage();
         $localObjectStorage->attach($parent);
         $localObjectStorage->detach($parent);
-        $this->fixture->addParent($parent);
-        $this->fixture->removeParent($parent);
+        $this->subject->addParent($parent);
+        $this->subject->removeParent($parent);
 
-        $this->assertEquals(
+        self::assertEquals(
             $localObjectStorage,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 }

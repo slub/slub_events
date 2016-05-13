@@ -1,5 +1,10 @@
 <?php
 
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
+use Slub\SlubEvents\Domain\Model\Location;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +30,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_SlubEvents_Domain_Model_Location.
+ * Test case for class Location.
  *
  * @version    $Id$
  * @copyright  Copyright belongs to the respective authors
@@ -36,28 +41,32 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Location
+     * @var Location
      */
-    protected $fixture;
+    protected $subject;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Location();
+        $this->subject = new Location();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getName()
+        );
     }
 
     /**
@@ -65,19 +74,23 @@ class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function setNameForStringSetsName()
     {
-        $this->fixture->setName('Conceived at T3CON10');
+        $this->subject->setName('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
     /**
      * @test
      */
-    public function getDescriptionReturnsInitialValueForString()
+    public function getDescriptionInitiallyReturnsNull()
     {
+        self::assertSame(
+            null,
+            $this->subject->getDescription()
+        );
     }
 
     /**
@@ -85,11 +98,11 @@ class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function setDescriptionForStringSetsDescription()
     {
-        $this->fixture->setDescription('Conceived at T3CON10');
+        $this->subject->setDescription('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -105,39 +118,39 @@ class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function setLinkForStringSetsLink()
     {
-        $this->fixture->setLink('Conceived at T3CON10');
+        $this->subject->setLink('Conceived at T3CON10');
 
-        $this->assertSame(
+        self::assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getLink()
+            $this->subject->getLink()
         );
     }
 
     /**
      * @test
      */
-    public function getParentReturnsInitialValueForObjectStorageContainingTx_SlubEvents_Domain_Model_Location()
+    public function getParentReturnsInitialValueForObjectStorageContainingLocation()
     {
-        $newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-        $this->assertEquals(
+        $newObjectStorage = new ObjectStorage();
+        self::assertEquals(
             $newObjectStorage,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 
     /**
      * @test
      */
-    public function setParentForObjectStorageContainingTx_SlubEvents_Domain_Model_LocationSetsParent()
+    public function setParentForObjectStorageContainingLocationSetsParent()
     {
-        $parent = new Tx_SlubEvents_Domain_Model_Location();
-        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $parent = new Location();
+        $objectStorageHoldingExactlyOneParent = new ObjectStorage();
         $objectStorageHoldingExactlyOneParent->attach($parent);
-        $this->fixture->setParent($objectStorageHoldingExactlyOneParent);
+        $this->subject->setParent($objectStorageHoldingExactlyOneParent);
 
-        $this->assertSame(
+        self::assertSame(
             $objectStorageHoldingExactlyOneParent,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 
@@ -146,14 +159,14 @@ class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function addParentToObjectStorageHoldingParent()
     {
-        $parent = new Tx_SlubEvents_Domain_Model_Location();
-        $objectStorageHoldingExactlyOneParent = new Tx_Extbase_Persistence_ObjectStorage();
+        $parent = new Location();
+        $objectStorageHoldingExactlyOneParent = new ObjectStorage();
         $objectStorageHoldingExactlyOneParent->attach($parent);
-        $this->fixture->addParent($parent);
+        $this->subject->addParent($parent);
 
-        $this->assertEquals(
+        self::assertEquals(
             $objectStorageHoldingExactlyOneParent,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 
@@ -162,16 +175,16 @@ class Tx_SlubEvents_Domain_Model_LocationTest extends Tx_Extbase_Tests_Unit_Base
      */
     public function removeParentFromObjectStorageHoldingParent()
     {
-        $parent = new Tx_SlubEvents_Domain_Model_Location();
-        $localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+        $parent = new Location();
+        $localObjectStorage = new ObjectStorage();
         $localObjectStorage->attach($parent);
         $localObjectStorage->detach($parent);
-        $this->fixture->addParent($parent);
-        $this->fixture->removeParent($parent);
+        $this->subject->addParent($parent);
+        $this->subject->removeParent($parent);
 
-        $this->assertEquals(
+        self::assertEquals(
             $localObjectStorage,
-            $this->fixture->getParent()
+            $this->subject->getParent()
         );
     }
 }
