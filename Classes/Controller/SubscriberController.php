@@ -658,8 +658,7 @@ class SubscriberController extends AbstractController
     public function beListAction()
     {
         // get data from BE session
-        /** @noinspection PhpUndefinedMethodInspection */
-        $searchParameter = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
+        $searchParameter = $this->getSessionData('tx_slubevents');
 
         // set the startDateStamp
         if (empty($searchParameter['selectedStartDateStamp'])) {
@@ -676,8 +675,7 @@ class SubscriberController extends AbstractController
             $searchParameter = array_merge($searchParameter, $submittedSearchParams);
 
             // save session data
-            /** @noinspection PhpUndefinedMethodInspection */
-            $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $searchParameter);
+            $this->setSessionData('tx_slubevents', $searchParameter);
         }
 
         // Categories

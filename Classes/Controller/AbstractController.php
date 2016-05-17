@@ -77,6 +77,20 @@ class AbstractController extends ExtbaseActionController
      */
     protected $disciplineRepository;
 
+    protected function getUserGlobals()
+    {
+        if (TYPO3_MODE === 'BE') {
+
+            $userGlobals = $GLOBALS['BE_USER'];
+
+        } else if (TYPO3_MODE === 'FE') {
+
+            $userGlobals = $GLOBALS['TSFE']->fe_user;
+
+        }
+
+        return $userGlobals;
+    }
     /**
      * Set session data
      *
@@ -85,7 +99,9 @@ class AbstractController extends ExtbaseActionController
      */
     public function setSessionData($key, $data)
     {
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
+        $userGlobals = $this->getUserGlobals();
+
+        $userGlobals->setAndSaveSessionData($key, $data);
 
         return;
     }
@@ -99,7 +115,9 @@ class AbstractController extends ExtbaseActionController
      */
     public function getSessionData($key)
     {
-        return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
+        $userGlobals = $this->getUserGlobals();
+
+        return $userGlobals->getSessionData($key);
     }
 
     /**
