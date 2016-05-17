@@ -330,7 +330,7 @@ class SubscriberController extends AbstractController
         }
 
         // reset session data
-        $this->setSessionData('editcode', '');
+        $this->setSessionData('editcode', '', false);
 
         // we changed the event inside the repository and have to
         // update the repo manually as of TYPO3 6.1
