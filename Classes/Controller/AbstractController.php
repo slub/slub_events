@@ -79,6 +79,29 @@ class AbstractController extends ExtbaseActionController
     protected $disciplineRepository;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     */
+    protected $configurationManager;
+
+    /**
+     * injectConfigurationManager
+     *
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @return void
+     */
+    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
+
+        $this->configurationManager = $configurationManager;
+
+        $this->contentObj = $this->configurationManager->getContentObject();
+        $this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+
+        // merge the storagePid into settings for the cache tags
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $this->settings['storagePid'] = $frameworkConfiguration['persistence']['storagePid'];
+    }
+
+    /**
      * return the corresponding user GLOBALS for FE/BE
      *
      * @return mixed
