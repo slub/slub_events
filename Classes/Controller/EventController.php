@@ -268,6 +268,7 @@ class EventController extends AbstractController
 
         // if search was triggered
         $submittedSearchParams = $this->getParametersSafely('searchParameter');
+
         if (is_array($submittedSearchParams)) {
             // clean category array to prevent errors
             $searchParameter['category'] = $this->cleanArray($submittedSearchParams['category']);
@@ -286,7 +287,7 @@ class EventController extends AbstractController
         $categories = $this->categoryRepository->findAllTree();
 
         // check which categories have been selected
-        if (!is_array($submittedSearchParams['category'])) {
+        if (!is_array($searchParameter['category'])) {
             $allCategories = $this->categoryRepository->findAll()->toArray();
             foreach ($allCategories as $category) {
                 $searchParameter['category'][$category->getUid()] = $category->getUid();
