@@ -3,6 +3,7 @@ namespace Slub\SlubEvents\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController as ExtbaseActionController;
+use TYPO3\CMS\Extbase\Utility\ArrayUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -78,14 +79,48 @@ class AbstractController extends ExtbaseActionController
     protected $disciplineRepository;
 
     /**
+     * return the corresponding user GLOBALS for FE/BE
+     *
+     * @return mixed
+     */
+    protected function getUserGlobals()
+    {
+        if (TYPO3_MODE === 'BE') {
+
+            $userGlobals = $GLOBALS['BE_USER'];
+
+        } else if (TYPO3_MODE === 'FE') {
+
+            $userGlobals = $GLOBALS['TSFE']->fe_user;
+
+        }
+
+        return $userGlobals;
+    }
+    /**
      * Set session data
      *
      * @param string $key
      * @param string $data
+     * @param boolean $persist
      */
-    public function setSessionData($key, $data)
+    public function setSessionData($key, $data, $persist = null)
     {
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
+        $userGlobals = $this->getUserGlobals();
+
+        // write data to user configuration to persist over sessions
+        if ($persist === true && TYPO3_MODE === 'BE') {
+
+            $ucData = $userGlobals->uc['moduleData']['slubevents'];
+
+            $ucData[$key] = $data;
+
+            $userGlobals->uc['moduleData']['slubevents'] = $ucData;
+
+            $userGlobals->writeUC($userGlobals->uc);
+        }
+
+        $userGlobals->setAndSaveSessionData($key, $data);
 
         return;
     }
@@ -99,7 +134,33 @@ class AbstractController extends ExtbaseActionController
      */
     public function getSessionData($key)
     {
-        return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
+        $userGlobals = $this->getUserGlobals();
+
+        $sessionData = $userGlobals->getSessionData($key);
+
+        $configurationData = array();
+
+        if (TYPO3_MODE === 'BE') {
+
+            $ucData = $userGlobals->uc['moduleData']['slubevents'];
+
+            $configurationData = $ucData[$key];
+
+
+            if (!empty($configurationData) && !(empty($sessionData))) {
+                // merge session and configuration data
+                $sessionData = ArrayUtility::arrayMergeRecursiveOverrule($sessionData, $configurationData);
+
+            } else if (!empty($configurationData)) {
+                // there seems to be only configuration data (after fresh login)
+                $sessionData = $configurationData;
+
+            }
+
+        }
+
+        return $sessionData;
+
     }
 
     /**

@@ -258,17 +258,11 @@ class EventController extends AbstractController
      */
     public function beListAction()
     {
-        // get data from BE session
-        /** @noinspection PhpUndefinedMethodInspection */
-        $searchParameter = $GLOBALS['BE_USER']->getSessionData('tx_slubevents');
+        $searchParameter = array();
 
-        // set the startDateStamp
-        if (empty($searchParameter['selectedStartDateStamp'])) {
-            $searchParameter['selectedStartDateStamp'] = date('d-m-Y');
-        }
-
-        // if search was triggered
+        // if search was triggered, get search parameters from POST variables
         $submittedSearchParams = $this->getParametersSafely('searchParameter');
+
         if (is_array($submittedSearchParams)) {
             // clean category array to prevent errors
             $searchParameter['category'] = $this->cleanArray($submittedSearchParams['category']);
@@ -277,8 +271,15 @@ class EventController extends AbstractController
             $searchParameter = array_merge($searchParameter, $submittedSearchParams);
 
             // save session data
-            /** @noinspection PhpUndefinedMethodInspection */
-            $GLOBALS['BE_USER']->setAndSaveSessionData('tx_slubevents', $searchParameter);
+            $this->setSessionData('tx_slubevents', $searchParameter, true);
+        } else {
+            // no POST vars --> take BE user configuration
+            $searchParameter = $this->getSessionData('tx_slubevents');
+        }
+
+        // set the startDateStamp
+        if (empty($searchParameter['selectedStartDateStamp'])) {
+            $searchParameter['selectedStartDateStamp'] = date('d-m-Y');
         }
 
         // Categories
@@ -288,7 +289,7 @@ class EventController extends AbstractController
         $categories = $this->categoryRepository->findAllTree();
 
         // check which categories have been selected
-        if (!is_array($submittedSearchParams['category'])) {
+        if (!is_array($searchParameter['category'])) {
             $allCategories = $this->categoryRepository->findAll()->toArray();
             foreach ($allCategories as $category) {
                 $searchParameter['category'][$category->getUid()] = $category->getUid();

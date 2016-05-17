@@ -40,11 +40,14 @@ class EditCodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
      *
      * @param string $key
      * @param string $data
-     *
      */
     public function setSessionData($key, $data)
     {
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
+        $userGlobals = $GLOBALS['TSFE']->fe_user;
+
+        $userGlobals->setAndSaveSessionData($key, $data);
+
+        return;
     }
 
     /**
