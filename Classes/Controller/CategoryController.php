@@ -82,18 +82,18 @@ class CategoryController extends AbstractController
     public function listAction(Category $category = null)
     {
         // take the root category of the flexform
-//        $category = $this->categoryRepository->findAllByUids(
-//            GeneralUtility::intExplode(',', $this->settings['categorySelection'], true)
-//        )->getFirst();
-//
+        $category = $this->categoryRepository->findAllByUids(
+            GeneralUtility::intExplode(',', $this->settings['categorySelection'], true)
+        )->getFirst();
+
         $categories = $this->categoryRepository->findCurrentBranch($category);
 
-//        if (count($categories) == 0) {
-//            // there are no further child categories --> show events
-//            $this->forward('gbList');
-//        } else {
+        if (count($categories) == 0) {
+            // there are no further child categories --> show events
+            $this->forward('gbList');
+        } else {
             $this->view->assign('categories', $categories);
-//        }
+        }
     }
 
     /**
