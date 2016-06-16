@@ -54,7 +54,7 @@ return [
                 'subscribers,' .
                 '--div--;Extras,' .
                 'hidden;;1,' .
-                'onlinesurvey' .
+                'onlinesurvey,' .
                 'no_search',
         ],
     ],
