@@ -161,6 +161,10 @@
 			<source>Online Survey</source>
 			<target>Online Umfrage</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.no_search" approved="yes">
+			<source>Exclude from search</source>
+			<target>Aus Suche ausschließen</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes">
 			<source>Title</source>
 			<target>Titel</target>

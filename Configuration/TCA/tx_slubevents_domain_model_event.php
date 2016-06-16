@@ -28,7 +28,7 @@ return [
         'requestUpdate'            => 'genius_bar',
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, genius_bar, cancelled, categories, subscribers, location, discipline, contact',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, cancelled, categories, subscribers, location, discipline, contact',
     ],
     'types'     => [
         // Single event
@@ -54,7 +54,8 @@ return [
                 'subscribers,' .
                 '--div--;Extras,' .
                 'hidden;;1,' .
-                'onlinesurvey',
+                'onlinesurvey' .
+                'no_search',
         ],
     ],
     'palettes'  => [
@@ -357,6 +358,16 @@ return [
                 'default' => 0,
             ],
         ],
+
+        'no_search'   => [
+            'exclude' => 0,
+            'label'   => $LL . 'tx_slubevents_domain_model_event.no_search',
+            'config'  => [
+                'type'    => 'check',
+                'default' => 0,
+            ],
+        ],
+
         'genius_bar'               => [
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.genius_bar',
