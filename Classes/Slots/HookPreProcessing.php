@@ -88,7 +88,7 @@ class HookPreProcessing
             /** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
             $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 
-            if ($fieldArray['genius_bar'] === false) {
+            if (empty($fieldArray['genius_bar'])) {
                 $message = GeneralUtility::makeInstance(
                     'TYPO3\CMS\Core\Messaging\FlashMessage',
                     'Veranstaltung gespeichert: <b>"' . $fieldArray['title'] . '"</b> am ' . gmstrftime('%a, %x %H:%M:%S',
