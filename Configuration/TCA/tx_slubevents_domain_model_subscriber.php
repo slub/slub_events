@@ -200,27 +200,10 @@ return [
             ],
         ],
         'event'            => [
-            'exclude' => 0,
-            'label'   => $LL . 'tx_slubevents_domain_model_subscriber.event',
-            'config'  => [
-                'type'          => 'inline',
-                'foreign_table' => 'tx_slubevents_domain_model_event',
-                'minitems'      => 0,
-                'maxitems'      => 1,
-                'appearance'    => [
-                    'collapseAll'                     => 0,
-                    'levelLinksPosition'              => 'top',
-                    'showSynchronizationLink'         => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink'         => 1,
-                ],
+            'config' => [
+                'type' => 'passthrough',
             ],
         ],
-//        'event'            => [
-//            'config' => [
-//                'type' => 'passthrough',
-//            ],
-//        ],
     ],
 ];
 
