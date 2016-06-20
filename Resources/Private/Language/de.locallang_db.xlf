@@ -169,6 +169,10 @@
 			<source>Online Survey</source>
 			<target>Online Umfrage</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.no_search" approved="yes">
+			<source>Exlude from Search</source>
+			<target>Aus Suche ausschließen</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start" approved="yes">
 			<source></source>
 			<target>Beginn</target>

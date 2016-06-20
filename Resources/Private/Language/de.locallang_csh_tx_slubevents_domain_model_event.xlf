@@ -57,6 +57,10 @@
 			<source>Enter a full URI (http://...) to an online survey.</source>
 			<target>Geben Sie einen vollständigen Link (http:// ...) zu einem Online-Fragebogen ein.&lt;br /&gt;&lt;br /&gt;Eine Mail an die Teilnehmer kann _nach_ der Veranstaltung versendet werden. Dies wird manuell im Backend ausgelöst. </target>
 		</trans-unit>
+		<trans-unit id="no_search.description" approved="yes" xml:space="preserve">
+			<source>Check to exclude this event from being index by search engine e.g. solr</source>
+			<target>Setzten Sie die den Haken um dieses Event aus der Suchmaschinenindexierung auszuschließen.</target>
+		</trans-unit>
 		<trans-unit id="start_date_time.description" approved="yes" xml:space="preserve">
 			<source>Start of Event (Date and Time)</source>
 			<target>Beginn der Veranstaltung</target>

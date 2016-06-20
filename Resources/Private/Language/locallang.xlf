@@ -140,6 +140,9 @@
 		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey">
 			<source>Online Survey</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.no_search">
+			<source>Exclude from search</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.title">
 			<source>Title</source>
 		</trans-unit>
