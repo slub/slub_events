@@ -113,6 +113,9 @@
 		<trans-unit id="tx_slubevents_domain_model_event.onlinesurvey">
 			<source>Online Survey</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.no_search">
+			<source>Exclude from search</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_date_time">
 			<source>Start of Event (Date and Time)</source>
 		</trans-unit>

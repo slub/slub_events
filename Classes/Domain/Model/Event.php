@@ -123,6 +123,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $subEndDateInfoSent = false;
 
     /**
+     * Should this Event been indexed by search engine e.g. solr
+     *
+     * @var boolean
+     */
+    protected $noSearch = false;
+
+    /**
      * This is a genius bar event
      *
      * @var boolean
@@ -585,6 +592,26 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setSubEndDateInfoSent($subEndDateInfoSent)
     {
         $this->subEndDateInfoSent = $subEndDateInfoSent;
+    }
+
+    /**
+     * Returns the noSearch
+     *
+     * @return boolean $noSearch
+     */
+    public function getNoSearch()
+    {
+        return $this->noSearch;
+    }
+
+    /**
+     * Sets the noSearch
+     *
+     * @param boolean $noSearch
+     */
+    public function setNoSearch($noSearch)
+    {
+        $this->noSearch = $noSearch;
     }
 
     /**
