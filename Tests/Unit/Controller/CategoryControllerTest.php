@@ -1,6 +1,6 @@
 <?php
 
-namespace Slub\SlubEvents\Tests\Unit\Controller;
+namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
 
 use Slub\SlubEvents\Domain\Model\Category;
 use Slub\SlubEvents\Controller\CategoryController;

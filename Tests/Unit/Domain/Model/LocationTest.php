@@ -1,8 +1,8 @@
 <?php
 
-namespace Slub\SlubEvents\Tests\Unit\Controller;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
 
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use Slub\SlubEvents\Domain\Model\Location;
 
 /***************************************************************

@@ -1,6 +1,6 @@
 <?php
 
-namespace Slub\SlubEvents\Tests\Unit\Controller;
+namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
 
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -245,10 +245,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setMinSubscriberForIntegerSetsMinSubscriber()
     {
-        $this->subject->setMinSubscriber(12);
-
         self::assertSame(
-            12,
+            0,
             $this->subject->getMinSubscriber()
         );
     }
@@ -307,7 +305,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getSubEndDateInfoSentReturnsInitialValueForBoolean()
     {
         self::assertSame(
-            true,
+            false,
             $this->subject->getSubEndDateInfoSent()
         );
     }
@@ -331,7 +329,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getGeniusBarReturnsInitialValueForBoolean()
     {
         self::assertSame(
-            true,
+            false,
             $this->subject->getGeniusBar()
         );
     }
@@ -355,7 +353,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getCancelledReturnsInitialValueForBoolean()
     {
         self::assertSame(
-            true,
+            false,
             $this->subject->getCancelled()
         );
     }
