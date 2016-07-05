@@ -163,7 +163,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \Slub\SlubEvents\Domain\Model\Location
      */
-    protected $location;
+    protected $location = NULL;
 
     /**
      * Discipline IDs
@@ -177,7 +177,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \Slub\SlubEvents\Domain\Model\Contact
      */
-    protected $contact;
+    protected $contact = NULL;
 
     /**
      * onlinesurvey
@@ -407,6 +407,18 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Sets the discipline
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
+     *
+     * @return void
+     */
+    public function setDiscipline(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $discipline)
+    {
+        $this->discipline = $discipline;
+    }
+
+    /**
      * Returns the discipline
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
@@ -426,6 +438,18 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function addDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
     {
         $this->discipline->attach($discipline);
+    }
+
+    /**
+     * Removes a Discipline
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Discipline $disciplineToRemove The Discipline to be removed
+     *
+     * @return void
+     */
+    public function removeDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $disciplineToRemove)
+    {
+        $this->discipline->detach($disciplineToRemove);
     }
 
     /**

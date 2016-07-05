@@ -2,6 +2,9 @@
 
 namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
 
+use Slub\SlubEvents\Domain\Model\Contact;
+use Slub\SlubEvents\Domain\Model\Discipline;
+use Slub\SlubEvents\Domain\Model\Location;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 use Slub\SlubEvents\Domain\Model\Event;
@@ -500,6 +503,10 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getLocationReturnsInitialValueForLocation()
     {
+        self::assertEquals(
+            NULL,
+            $this->subject->getLocation()
+        );
     }
 
     /**
@@ -507,6 +514,13 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setLocationForLocationSetsLocation()
     {
+        $location = new Location();
+        $this->subject->setLocation($location);
+
+        self::assertSame(
+            $location,
+            $this->subject->getLocation()
+        );
     }
 
     /**
@@ -514,6 +528,11 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getDisciplineReturnsInitialValueForDiscipline()
     {
+        $newObjectStorage = new ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getDiscipline()
+        );
     }
 
     /**
@@ -521,6 +540,49 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setDisciplineForDisciplineSetsDiscipline()
     {
+        $discipline = new Discipline();
+        $objectStorageHoldingExactlyOneDiscipline = new ObjectStorage();
+        $objectStorageHoldingExactlyOneDiscipline->attach($discipline);
+        $this->subject->setDiscipline($objectStorageHoldingExactlyOneDiscipline);
+
+        self::assertSame(
+            $objectStorageHoldingExactlyOneDiscipline,
+            $this->subject->getDiscipline()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addDisciplineToObjectStorageHoldingDiscipline()
+    {
+        $discipline = new Discipline();
+        $objectStorageHoldingExactlyOneDiscipline = new ObjectStorage();
+        $objectStorageHoldingExactlyOneDiscipline->attach($discipline);
+        $this->subject->addDiscipline($discipline);
+
+        self::assertEquals(
+            $objectStorageHoldingExactlyOneDiscipline,
+            $this->subject->getDiscipline()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function removeDisciplineFromObjectStorageHoldingDiscipline()
+    {
+        $discipline = new Discipline();
+        $localObjectStorage = new ObjectStorage();
+        $localObjectStorage->attach($discipline);
+        $localObjectStorage->detach($discipline);
+        $this->subject->addDiscipline($discipline);
+        $this->subject->removeDiscipline($discipline);
+
+        self::assertEquals(
+            $localObjectStorage,
+            $this->subject->getDiscipline()
+        );
     }
 
     /**
@@ -528,6 +590,10 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getContactReturnsInitialValueForContact()
     {
+        self::assertEquals(
+            NULL,
+            $this->subject->getContact()
+        );
     }
 
     /**
@@ -535,5 +601,12 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setContactForContactSetsContact()
     {
+        $contact = new Contact();
+        $this->subject->setContact($contact);
+
+        self::assertSame(
+            $contact,
+            $this->subject->getContact()
+        );
     }
 }
