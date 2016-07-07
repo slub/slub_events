@@ -74,12 +74,9 @@ class CategoryController extends AbstractController
     /**
      * action list
      *
-     * @param Category $category
-     *
-     * @ignorevalidation
      * @return void
      */
-    public function listAction(Category $category = null)
+    public function listAction()
     {
         // take the root category of the flexform
         $category = $this->categoryRepository->findAllByUids(
