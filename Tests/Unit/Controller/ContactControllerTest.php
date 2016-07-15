@@ -1,4 +1,8 @@
 <?php
+namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
+
+use Slub\SlubEvents\Domain\Model\Contact;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /***************************************************************
  *  Copyright notice
@@ -25,7 +29,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Slub_events_Controller_ContactController.
+ * Test case for class ContactController.
  *
  * @version    $Id$
  * @copyright  Copyright belongs to the respective authors
@@ -36,21 +40,21 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_Slub_events_Controller_ContactControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class ContactControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Contact
+     * @var Contact
      */
-    protected $fixture;
+    protected $subject = null;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Contact();
+        $this->subject = new Contact();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
@@ -60,5 +64,5 @@ class Tx_Slub_events_Controller_ContactControllerTest extends Tx_Extbase_Tests_U
     {
         $this->markTestIncomplete();
     }
-    
+
 }

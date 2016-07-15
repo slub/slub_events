@@ -3,9 +3,7 @@
 namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
 
 use Slub\SlubEvents\Domain\Model\Category;
-use Slub\SlubEvents\Controller\CategoryController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
  *  Copyright notice
@@ -113,12 +111,5 @@ class CategoryControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $this->subject->listAction();
-    }
-    /**
-     * @test
-     */
-    public function dummyMethod()
-    {
-        $this->markTestIncomplete();
     }
 }
