@@ -1,4 +1,9 @@
 <?php
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use Slub\SlubEvents\Domain\Model\Event;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+
 
 /***************************************************************
  *  Copyright notice
@@ -25,7 +30,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Slub_events_Controller_EventController.
+ * Test case for class EventController.
  *
  * @version    $Id$
  * @copyright  Copyright belongs to the respective authors
@@ -36,21 +41,21 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_Slub_events_Controller_EventControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Event
+     * @var Event
      */
-    protected $fixture;
+    protected $subject = null;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Event();
+        $this->subject = new Event();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
+namespace Slub\SlubEvents\Tests\Unit\Controller;
 
 use Slub\SlubEvents\Domain\Model\Contact;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;

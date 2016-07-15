@@ -1,4 +1,8 @@
 <?php
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use Slub\SlubEvents\Domain\Model\Location;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /***************************************************************
  *  Copyright notice
@@ -25,7 +29,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Slub_events_Controller_LocationController.
+ * Test case for class LocationController.
  *
  * @version    $Id$
  * @copyright  Copyright belongs to the respective authors
@@ -36,21 +40,21 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_Slub_events_Controller_LocationControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class LocationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Location
+     * @var Location
      */
-    protected $fixture;
+    protected $subject;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Location();
+        $this->subject = new Location();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
