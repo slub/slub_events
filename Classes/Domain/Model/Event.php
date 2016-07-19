@@ -433,7 +433,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
+     * @return void
      */
     public function addDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
     {
@@ -665,7 +665,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param \Slub\SlubEvents\Domain\Model\Category $category
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> categories
+     * @return void
      */
     public function addCategory(\Slub\SlubEvents\Domain\Model\Category $category)
     {
