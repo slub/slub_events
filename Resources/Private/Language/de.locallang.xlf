@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-10-13T15:56:48Z" product-name="slub_events">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-08-10T14:21:28Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -109,17 +109,21 @@
 			<source>Best Regards</source>
 			<target>Mit freundlichen Grüßen</target>
 		</trans-unit>
-		<trans-unit id="text.error.could_find_subscriber" approved="yes">
-			<source>Couldn't find your subscription. Maybe you have already unsubscribed?</source>
-			<target>Ihre Anmeldung wurde nicht gefunden. Haben Sie sich vielleicht bereits abgemeldet?</target>
-		</trans-unit>
 		<trans-unit id="text.error.could_find_event" approved="yes">
 			<source>Sorry, we couldn't find the requested event.</source>
 			<target>Leider konnten wir die gesuchte Veranstaltung nicht finden.</target>
 		</trans-unit>
+		<trans-unit id="text.error.could_find_subscriber" approved="yes">
+			<source>Couldn't find your subscription. Maybe you have already unsubscribed?</source>
+			<target>Ihre Anmeldung wurde nicht gefunden. Haben Sie sich vielleicht bereits abgemeldet?</target>
+		</trans-unit>
 		<trans-unit id="text.salutation" approved="yes">
 			<source>Dear</source>
 			<target>Sehr geehrte(r)</target>
+		</trans-unit>
+		<trans-unit id="text.save_to_your_calendar" approved="yes">
+			<source>Save event to your local calendar.</source>
+			<target>Veranstaltung in Kalender übernehmen.</target>
 		</trans-unit>
 		<trans-unit id="text.signature" approved="yes">
 			<source>SLUB Dresden</source>
@@ -133,10 +137,6 @@
 			<source>List of Subscribers</source>
 			<target>Anmeldungen</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents.gb.we_consult_you" approved="yes">
-			<source>We Consult You</source>
-			<target>Wir beraten Sie</target>
-		</trans-unit>
 		<trans-unit id="tx_slubevents.gb.i_consult_you" approved="yes">
 			<source>I Consult You</source>
 			<target>Ich berate Sie</target>
@@ -145,25 +145,29 @@
 			<source>No Knowledge Bar dates at the moment.</source>
 			<target>Zur Zeit gibt es leider keine Wissensbartermine.</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.no_date_neither_event" approved="yes">
+			<source>No events neither Knowledge Bar dates at the moment.</source>
+			<target>Zur Zeit leider keine Veranstaltungen bzw. Wissensbartermine.</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents.gb.no_event" approved="yes">
 			<source>No events at the moment.</source>
 			<target>Zur Zeit haben wir zu diesem Thema leider keine Veranstaltungen.</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents.gb.no_date_neither_event" approved="yes">
-			<source>No events neither Knowledge Bar dates at the moment.</source>
-			<target>Zur Zeit leider keine Veranstaltungen bzw. Wissensbartermine.</target>
+		<trans-unit id="tx_slubevents.gb.we_consult_you" approved="yes">
+			<source>We Consult You</source>
+			<target>Wir beraten Sie</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
 			<source>Event Category</source>
 			<target>Kategorie</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey" approved="yes">
-			<source>Online Survey</source>
-			<target>Online Umfrage</target>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.no_search" approved="yes">
 			<source>Exclude from search</source>
 			<target>Aus Suche ausschließen</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey" approved="yes">
+			<source>Online Survey</source>
+			<target>Online Umfrage</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes">
 			<source>Title</source>

@@ -71,6 +71,9 @@
 		<trans-unit id="tasks.statistics.date">
 			<source>Date</source>
 		</trans-unit>
+		<trans-unit id="text.save_to_your_calendar">
+			<source>Save event to your local calendar.</source>
+		</trans-unit>
 		<trans-unit id="tasks.statistics.description">
 			<source>Send monthly report to given email addresses.</source>
 		</trans-unit>

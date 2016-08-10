@@ -31,6 +31,10 @@
 				<f:format.html>{event.location.description}</f:format.html>
 			</div>
 
+			<div class="ics">
+				<f:link.action action="printCal" arguments="{event : event}" pageType="1469051993" controller="Event" pluginName="Eventlist" format="ics" title="{f:translate(key:'text.save_to_your_calendar')}" class="btn">ics</f:link.action>
+			</div>
+
 			<div class="subscription">
 				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
 					<f:then>
