@@ -117,6 +117,12 @@
 		<trans-unit id="flexforms.catforconsultations">
 			<source>Consultations category</source>
 		</trans-unit>
+		<trans-unit id="persEvents">
+			<source>Events</source>
+		</trans-unit>
+		<trans-unit id="persConsultingHours">
+			<source>Consulting hours</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -188,6 +188,9 @@
 		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone">
 			<source>Telephone</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.selecttopic">
+			<source>Please select topic</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

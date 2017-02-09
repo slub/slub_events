@@ -1,0 +1,34 @@
+{namespace se=Slub\SlubEvents\ViewHelpers}
+
+<li class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
+	<f:render partial="Event/DateFromTo" arguments="{event : event}"/>
+
+	<div class="subscription">
+
+    <f:form name="subscribe_{event.uid}" object="{subscriber}" pageUid="{settings.pidSubscribeForm}" action="new" controller="Subscriber" arguments="{event : event}">
+        <f:comment><f:form.select name="category" style="width:200px;" class="form-control" options="{event.categories}" /></f:comment>
+
+        <select style="width:200px;" class="form-control" id="sel_{event.uid}" name="tx_slubevents_eventsubscribe[category]">
+            <option value="-1"><f:translate key="persSelectTopic" /></option>
+            <f:for each="{event.categories}" as="cat" key="key" iteration="singleEventIterator">
+                <option value="{cat.uid}">{cat.title}</option>
+            </f:for>
+        </select>
+        <label  for="sel_{event.uid}" class="error" id="slub-forms-select-{event.uid}-error">Bitte geben Sie eine gültige Email-Adresse ein.</label>
+
+        <f:comment><f:form.submit class="button submit" value="{f:translate(key: 'tx_slubevents_domain_model_event.subscribe')}" style="margin-top:0px" /></f:comment>
+        <a href="javascript:;" onclick="reg_wiba({event.uid});" class="button submit"><f:translate key="tx_slubevents_domain_model_event.subscribe"/></a>
+    </f:form>
+
+
+
+        <f:comment>
+        <f:link.action action="new" class="button submit" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"
+                       title="Anmelden bei {event.contact.name}" arguments="{event : event, category: category}">
+            <f:translate key="tx_slubevents_domain_model_event.subscribe"/>
+        </f:link.action>
+        </f:comment>
+
+	</div>
+	<div class="clear"></div>
+</li>

@@ -154,6 +154,14 @@
 			<source>Consultations category</source>
 			<target>Sprechstunden Kategorie</target>
 		</trans-unit>
+		<trans-unit id="persEvents" approved="yes">
+			<source>Events</source>
+			<target>Veranstaltungen</target>
+		</trans-unit>
+		<trans-unit id="persConsultingHours" approved="yes">
+			<source>Consulting hours</source>
+			<target>Sprechstunden</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
