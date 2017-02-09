@@ -1,4 +1,8 @@
 <?php
+namespace Slub\SlubEvents\Tests\Unit\Controller;
+
+use Slub\SlubEvents\Domain\Model\Subscriber;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /***************************************************************
  *  Copyright notice
@@ -36,21 +40,21 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_Slub_events_Controller_SubscriberControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class SubscriberControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Subscriber
+     * @var Subscriber
      */
-    protected $fixture;
+    protected $subscriber;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Subscriber();
+        $this->subscriber = new Subscriber();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subscriber);
     }
 
     /**

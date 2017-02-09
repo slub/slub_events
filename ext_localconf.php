@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
     'Slub.' . $_EXTKEY,
     'Eventlist',
     [
-        'Event' => 'list, show, showNotFound, new, update, create, delete',
+        'Event' => 'list, show, showNotFound, new, update, create, delete, printCal',
     ],
     // non-cacheable actions
     [

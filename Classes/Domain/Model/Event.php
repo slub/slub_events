@@ -98,14 +98,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer
      */
-    protected $minSubscriber;
+    protected $minSubscriber = 0;
 
     /**
      * Maximum of Subscribers
      *
      * @var integer
      */
-    protected $maxSubscriber;
+    protected $maxSubscriber = 0;
 
     /**
      * Target Audience
@@ -113,7 +113,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var integer
      * @validate NotEmpty
      */
-    protected $audience;
+    protected $audience = 0;
 
     /**
      * Sent Information about SubEndTime reached
@@ -163,7 +163,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \Slub\SlubEvents\Domain\Model\Location
      */
-    protected $location;
+    protected $location = NULL;
 
     /**
      * Discipline IDs
@@ -177,7 +177,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \Slub\SlubEvents\Domain\Model\Contact
      */
-    protected $contact;
+    protected $contact = NULL;
 
     /**
      * onlinesurvey
@@ -407,7 +407,19 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the categories
+     * Sets the discipline
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
+     *
+     * @return void
+     */
+    public function setDiscipline(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $discipline)
+    {
+        $this->discipline = $discipline;
+    }
+
+    /**
+     * Returns the discipline
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
      */
@@ -421,11 +433,23 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
+     * @return void
      */
     public function addDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
     {
         $this->discipline->attach($discipline);
+    }
+
+    /**
+     * Removes a Discipline
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Discipline $disciplineToRemove The Discipline to be removed
+     *
+     * @return void
+     */
+    public function removeDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $disciplineToRemove)
+    {
+        $this->discipline->detach($disciplineToRemove);
     }
 
     /**
@@ -637,6 +661,30 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Adds a category
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     *
+     * @return void
+     */
+    public function addCategory(\Slub\SlubEvents\Domain\Model\Category $category)
+    {
+        $this->categories->attach($category);
+    }
+
+    /**
+     * Removes a category
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> categories
+     */
+    public function removeCategory(\Slub\SlubEvents\Domain\Model\Category $categoryToBeRemoved)
+    {
+        $this->categories->detach($categoryToBeRemoved);
+    }
+
+    /**
      * Returns the categories
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $categories
@@ -647,16 +695,17 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Adds a categories
+     * Sets the categories
      *
-     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $categories
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> categories
+     * @return void
      */
-    public function addCategory(\Slub\SlubEvents\Domain\Model\Category $category)
+    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories)
     {
-        $this->categories->attach($category);
+        $this->categories = $categories;
     }
+
 
     /**
      * Returns the cancelled

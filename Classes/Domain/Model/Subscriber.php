@@ -77,7 +77,7 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer
      */
-    protected $number = 2;
+    protected $number = 1;
 
     /**
      * Message by the Customer

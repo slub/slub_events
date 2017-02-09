@@ -35,6 +35,13 @@ namespace Slub\SlubEvents\Domain\Repository;
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    // Order by BE sorting
+    protected $defaultOrderings = array(
+
+        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+
+    );
+
     /**
      * Finds all datasets by MM relation categories
      *
@@ -210,7 +217,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $constraints[] = $query->equals('parent', $startCategory);
 
         $query->setOrderings(
-            ['uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
+            ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]
         );
 
         if (count($constraints)) {

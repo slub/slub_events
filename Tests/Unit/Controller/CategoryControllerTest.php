@@ -3,9 +3,7 @@
 namespace Slub\SlubEvents\Tests\Unit\Controller;
 
 use Slub\SlubEvents\Domain\Model\Category;
-use Slub\SlubEvents\Controller\CategoryController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
  *  Copyright notice
@@ -51,19 +49,27 @@ class CategoryControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected $subject = null;
 
     /**
+     * categoryRepository
+     *
+     * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
+     */
+    protected $categoryRepository;
+
+    /**
      * @var ViewInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $view = null;
 
     public function setUp()
     {
-        $this->subject = new CategoryController();
+        $this->subject = $this->getMock('Slub\\SlubEvents\\Controller\\CategoryController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+
+        $this->categoryRepository = $this->getMock('Slub\\SlubEvents\\Domain\\Repository\\CategoryRepository', array(), array(), '', FALSE);
+        $this->inject($this->subject, 'categoryRepository', $this->categoryRepository);
 
         $this->view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $this->view);
 
-        $this->categoryRepository = $this->getMock('Slub\\SlubEvents\\Domain\\Repository\\CategoryRepository', [], [], '', false);
-        $this->inject($this->subject, 'categoryRepository', $this->categoryRepository);
     }
 
     public function tearDown()
@@ -74,9 +80,14 @@ class CategoryControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     /**
      * @test
      */
-    public function listActionCanBeCalled()
-    {
-        $this->subject->listAction();
+    public function showActionAssignsTheGivenCategoryToView() {
+        $category = new Category();
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+        $view->expects($this->once())->method('assign')->with('category', $category);
+
+        $this->subject->showAction($category);
     }
 
     /**
@@ -84,19 +95,21 @@ class CategoryControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function listActionPassOneCategoryAsCategorytreeToView()
     {
-        $emptyCategoryArray = array();
-        $this->categoryRepository->expects(self::any())->method('findCurrentBranch')
-            ->will(self::returnValue($emptyCategoryArray));
+        $mockedQueryResult = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\QueryResultInterface');
 
-        $this->view->expects(self::once())->method('assign')->with('categories', $emptyCategoryArray);
+        $allCategories = array();
+
+        $settings = array('categorySelection' => '1');
+
+        $this->inject($this->subject, 'settings', $settings);
+
+        $categoryRepository = $this->getMock('Slub\\SlubEvents\\Domain\\Repository\\CategoryRepository', array('findCurrentBranch', 'findAllByUids'), array(), '', FALSE);
+        $categoryRepository->expects($this->once())->method('findAllByUids')
+            ->will($this->returnValue($mockedQueryResult));
+        $categoryRepository->expects($this->once())->method('findCurrentBranch')
+            ->will($this->returnValue($allCategories));
+        $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $this->subject->listAction();
-    }
-    /**
-     * @test
-     */
-    public function dummyMethod()
-    {
-        $this->markTestIncomplete();
     }
 }

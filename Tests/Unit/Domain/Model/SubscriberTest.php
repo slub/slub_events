@@ -1,5 +1,10 @@
 <?php
 
+namespace Slub\SlubEvents\Tests\Unit\Domain\Model;
+
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use Slub\SlubEvents\Domain\Model\Subscriber;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -36,21 +41,21 @@
  *
  * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_BaseTestCase
+class SubscriberTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var Tx_SlubEvents_Domain_Model_Subscriber
+     * @var Subscriber
      */
-    protected $fixture;
+    protected $subject;
 
     public function setUp()
     {
-        $this->fixture = new Tx_SlubEvents_Domain_Model_Subscriber();
+        $this->subject = new Subscriber();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
@@ -65,11 +70,11 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setNameForStringSetsName()
     {
-        $this->fixture->setName('Conceived at T3CON10');
+        $this->subject->setName('Conceived at T3CON10');
 
         $this->assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
@@ -85,11 +90,11 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setEmailForStringSetsEmail()
     {
-        $this->fixture->setEmail('Conceived at T3CON10');
+        $this->subject->setEmail('Conceived at T3CON10');
 
         $this->assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getEmail()
+            $this->subject->getEmail()
         );
     }
 
@@ -105,11 +110,11 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setTelephoneForStringSetsTelephone()
     {
-        $this->fixture->setTelephone('Conceived at T3CON10');
+        $this->subject->setTelephone('Conceived at T3CON10');
 
         $this->assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getTelephone()
+            $this->subject->getTelephone()
         );
     }
 
@@ -125,11 +130,11 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setCustomeridForStringSetsCustomerid()
     {
-        $this->fixture->setCustomerid('Conceived at T3CON10');
+        $this->subject->setCustomerid('Conceived at T3CON10');
 
         $this->assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getCustomerid()
+            $this->subject->getCustomerid()
         );
     }
 
@@ -139,8 +144,8 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
     public function getNumberReturnsInitialValueForInteger()
     {
         $this->assertSame(
-            0,
-            $this->fixture->getNumber()
+            1,
+            $this->subject->getNumber()
         );
     }
 
@@ -149,11 +154,11 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setNumberForIntegerSetsNumber()
     {
-        $this->fixture->setNumber(12);
+        $this->subject->setNumber(12);
 
         $this->assertSame(
             12,
-            $this->fixture->getNumber()
+            $this->subject->getNumber()
         );
     }
 
@@ -169,11 +174,11 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setMessageForStringSetsMessage()
     {
-        $this->fixture->setMessage('Conceived at T3CON10');
+        $this->subject->setMessage('Conceived at T3CON10');
 
         $this->assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getMessage()
+            $this->subject->getMessage()
         );
     }
 
@@ -189,11 +194,11 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
      */
     public function setEditcodeForStringSetsEditcode()
     {
-        $this->fixture->setEditcode('Conceived at T3CON10');
+        $this->subject->setEditcode('Conceived at T3CON10');
 
         $this->assertSame(
             'Conceived at T3CON10',
-            $this->fixture->getEditcode()
+            $this->subject->getEditcode()
         );
     }
 
@@ -214,14 +219,14 @@ class Tx_SlubEvents_Domain_Model_SubscriberTest extends Tx_Extbase_Tests_Unit_Ba
     /**
      * @test
      */
-    public function getEventReturnsInitialValueForTx_SlubEvents_Domain_Model_Event()
+    public function getEventReturnsInitialValueForEvent()
     {
     }
 
     /**
      * @test
      */
-    public function setEventForTx_SlubEvents_Domain_Model_EventSetsEvent()
+    public function setEventForEventSetsEvent()
     {
     }
 }
