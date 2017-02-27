@@ -110,13 +110,13 @@ class CategoryController extends AbstractController
         } else {
             $this->view->assign('contacts', $this->contactRepository->findById($this->settings['contactSelection']));
             if ($this->settings['showWiba']) {
-                $wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], 0);
+                $wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], $this->settings['consultationSelection'], false);
             }
             if ($this->settings['showEvent']) {
                 $events = $this->eventRepository->findEventByContact($this->settings['contactSelection'], 0);
             }
             if ($this->settings['showConsultation'] && $this->settings['consultationSelection'] > 0) {
-                $consultation = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], $this->settings['consultationSelection']);
+                $consultation = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], $this->settings['consultationSelection'], false);
             }
         }
 

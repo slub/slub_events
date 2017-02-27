@@ -289,6 +289,10 @@
 			<source>Telephone</source>
 			<target>Telefonnummer</target>
 		</trans-unit>
-		</body>
+		<trans-unit id="tx_slubevents_domain_model_event.selecttopic" approved="yes">
+			<source>Please select topic</source>
+			<target>Bitte Thema wählen</target>
+		</trans-unit>
+	</body>
 	</file>
 </xliff>

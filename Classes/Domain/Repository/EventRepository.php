@@ -76,18 +76,22 @@ namespace Slub\SlubEvents\Domain\Repository;
      * @param \Slub\SlubEvents\Domain\Model\Category $category
      * @return array The found Event Objects
      */
-    public function findWibaByContact($contact, $category = 0)
+    public function findWibaByContact($contact, $category = 0, $bExcludeCategory)
     {
         $query = $this->createQuery();
 
-        $constraints = array();
+        $constraints = [];
         $constraints[] = $query->equals('contact', $contact);
         $constraints[] = $query->equals('genius_bar', 1);
         $constraints[] = $query->equals('cancelled', 0);
         if ($category > 0) {
-            $constraints[] = $query->equals('categories.uid', $category);
+            if ($bExcludeCategory) {
+                $constraints[] = $query->logicalNot($query->equals('categories.uid', $category));
+            } else {
+                $constraints[] = $query->equals('categories.uid', $category);
+            }
         }
-	$constraints[] = $query->lessThan('subscribers', '1');
+        $constraints[] = $query->lessThan('subscribers', '1');
         $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
         if (count($constraints)) {
@@ -96,7 +100,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
+            ['start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();

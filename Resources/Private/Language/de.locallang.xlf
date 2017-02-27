@@ -329,6 +329,18 @@
 			<source>My Events</source>
 			<target>Meine Veranstaltungen</target>
 		</trans-unit>
+		<trans-unit id="persSelectTopic" approved="yes">
+			<source>Please select topic</source>
+			<target>Bitte Thema wählen</target>
+		</trans-unit>
+		<trans-unit id="persEvents" approved="yes">
+			<source>Events</source>
+			<target>Veranstaltungen</target>
+		</trans-unit>
+		<trans-unit id="persConsultingHours" approved="yes">
+			<source>Consulting hours</source>
+			<target>Sprechstunden</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

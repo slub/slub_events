@@ -2,6 +2,29 @@
 <f:layout name="Default" />
 
 <f:section name="wibaListing">
+	<f:comment>
+	<style>
+		#book-me-now a.button.submit {
+		    position: relative;
+		    margin: 20px 0;
+		    padding: 2px 4px;
+		    border: 1px solid #2299aa;
+		    -webkit-border-radius: 15px;
+		    -moz-border-radius: 15px;
+		    border-radius: 15px;
+		    -webkit-border-top-left-radius: 5px;
+		    -moz-border-radius-topleft: 5px;
+		    border-top-left-radius: 5px;
+		    background: #e0edef;
+		    color: #2299aa;
+		    text-shadow: 1px 1px 0 #ffffff;
+		    font-weight: bold;
+		    cursor: pointer;
+		    font: 13.3333px Arial;
+		    font-weight: bold;
+		}
+	</style>
+	</f:comment>
 	<ul>
 		<f:for each="{wibas}" as="wiba" key="label" iteration="wibaIterator">
 	       <f:if condition="<se:format.newMonthTitle events='{wibas}' index='{label}' />">
@@ -9,18 +32,29 @@
 	                <li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{wibas}' index='{label}' />" format="%B %Y" /></h4></li>
 	            </f:then>
 	        </f:if>
-
 			<f:if condition="<se:condition.IsSubscriptionAllowed event='{wiba}' />">
 				<f:then>
 					<f:if condition="<se:format.freePlacesLeft event='{wiba}' /> >= 1">
 						<f:then>
-							<f:render partial="Event/GbItem" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+							<f:if condition="{kind} == 1">
+								<f:comment>Wissensbar</f:comment>
+								<f:render partial="Event/GbItemKind1" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+							</f:if>
+							<f:if condition="{kind} == 2">
+								<f:comment>Veranstaltungen</f:comment>
+								<f:render partial="Event/GbItemKind2" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+							</f:if>
+							<f:if condition="{kind} == 3">
+								<f:comment>Sprechstunden</f:comment>
+								<f:render partial="Event/GbItem" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+							</f:if>
 						</f:then>
 					</f:if>
 				</f:then>
 			</f:if>
 		</f:for>
 	</ul>
+
 </f:section>
 
 <f:section name="main">
@@ -56,17 +90,24 @@
 				<f:then>
 					<f:if condition="{wibas}">
 						<f:then>
-                                                        <h3>Wissensbar</h3>
+                            <h3><f:translate key="tx_slubevents_domain_model_event.genius_bar" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
-									<f:render section="wibaListing" arguments="{wibas: wibas, category: category}" />
+									<f:render section="wibaListing" arguments="{wibas: wibas, category: category, kind: 1}" />
 								</f:then>
 								<f:else>
 									<f:widget.paginate objects="{wibas}" as="paginatedWibas" configuration="{settings.list.paginate}">
-										<f:render section="wibaListing" arguments="{wibas: paginatedWibas, category: category}" />
+										<f:render section="wibaListing" arguments="{wibas: paginatedWibas, category: category, kind: 1}" />
 									</f:widget.paginate>
 								</f:else>
 							</f:if>
+							<script type="text/javascript">
+								function reg_wiba(id) {
+									if($('#sel_' + id).val() > 0) {
+										eval('subscribe_' + id + '.submit()');
+									}
+								}
+							</script>
 						</f:then>
 					</f:if>
 				</f:then>
@@ -78,14 +119,14 @@
 				<f:then>
 					<f:if condition="{events}">
 						<f:then>
-                                                        <h3>Veranstaltungen</h3>
+                            <h3><f:translate key="persEvents" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
-									<f:render section="wibaListing" arguments="{wibas: events, category: category}" />
+									<f:render section="wibaListing" arguments="{wibas: events, category: category, kind: 2}" />
 								</f:then>
 								<f:else>
 									<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-										<f:render section="wibaListing" arguments="{wibas: paginatedEvents, category: category}" />
+										<f:render section="wibaListing" arguments="{wibas: paginatedEvents, category: category, kind: 2}" />
 									</f:widget.paginate>
 								</f:else>
 							</f:if>
@@ -100,14 +141,14 @@
 				<f:then>
 					<f:if condition="{consultation}">
 						<f:then>
-                                                        <h3>Sprechstunden</h3>
+                            <h3><f:translate key="persConsultingHours" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
-									<f:render section="wibaListing" arguments="{wibas: consultation, category: category}" />
+									<f:render section="wibaListing" arguments="{wibas: consultation, category: category, kind: 3}" />
 								</f:then>
 								<f:else>
 									<f:widget.paginate objects="{consultation}" as="paginatedConsultation" configuration="{settings.list.paginate}">
-										<f:render section="wibaListing" arguments="{wibas: paginatedConsultation, category: category}" />
+										<f:render section="wibaListing" arguments="{wibas: paginatedConsultation, category: category, kind: 3}" />
 									</f:widget.paginate>
 								</f:else>
 							</f:if>

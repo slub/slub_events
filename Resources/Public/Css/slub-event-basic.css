@@ -513,3 +513,17 @@
 .slub-event-minimonth ul.week li.day-6-0 {
 	background-color: #ebebeb;
 }
+
+#leftcol .tx-slub-events label.error {
+    float: none;
+    padding: 10px;
+    line-height: 1.4;
+    color: #fff;
+    background: #f00;
+    position: absolute;
+    margin: 0;
+    z-index: 1;
+    clear: both;
+    left: 205px;
+    top: 0px;
+}

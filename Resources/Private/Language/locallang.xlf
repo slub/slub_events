@@ -260,6 +260,15 @@
 		<trans-unit id="view_my_events">
 			<source>My Events</source>
 		</trans-unit>
+		<trans-unit id="persSelectTopic">
+			<source>Please select topic</source>
+		</trans-unit>
+		<trans-unit id="persEvents">
+			<source>Events</source>
+		</trans-unit>
+		<trans-unit id="persConsultingHours">
+			<source>Consulting hours</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
