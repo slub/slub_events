@@ -26,6 +26,7 @@ CREATE TABLE tx_slubevents_domain_model_event (
 	discipline int(11) unsigned DEFAULT '0' NOT NULL,
 	contact int(11) unsigned DEFAULT '0',
 	no_search tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	external_registration varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

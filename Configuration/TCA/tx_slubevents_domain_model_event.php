@@ -25,7 +25,7 @@ return [
         ],
         'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,discipline,',
         'iconfile'                 => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('slub_events') . 'Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
-        'requestUpdate'            => 'genius_bar',
+        'requestUpdate'            => 'genius_bar, external_registration',
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, cancelled, categories, subscribers, location, discipline, contact',
@@ -43,6 +43,7 @@ return [
                 'description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css],' .
                 '--div--;Anmeldebedingungen,' .
                 'contact,' .
+                'external_registration,' .
                 'min_subscriber,' .
                 'max_subscriber,' .
                 '--palette--;' . $LL . 'tx_slubevents_domain_model_event.sub_end;paletteEndSubscription,' .
@@ -220,6 +221,7 @@ return [
             ],
         ],
         'sub_end_date_time'        => [
+            'displayCond' => 'FIELD:external_registration:REQ:false',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time',
             'config'  => [
@@ -231,7 +233,12 @@ return [
             ],
         ],
         'sub_end_date_time_select' => [
-            'displayCond' => 'FIELD:sub_end_date_time:=:0',
+            'displayCond' => [
+              'AND' => [
+                'FIELD:sub_end_date_time:=:0',
+                'displayCond' => 'FIELD:external_registration:REQ:false'
+              ]
+            ],
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time_select',
             'config'      => [
@@ -297,6 +304,7 @@ return [
             'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]',
         ],
         'min_subscriber'           => [
+          'displayCond' => 'FIELD:external_registration:REQ:false',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.min_subscriber',
             'config'  => [
@@ -306,6 +314,7 @@ return [
             ],
         ],
         'max_subscriber'           => [
+          'displayCond' => 'FIELD:external_registration:REQ:false',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.max_subscriber',
             'config'  => [
@@ -351,6 +360,7 @@ return [
             ],
         ],
         'sub_end_date_info_sent'   => [
+            'displayCond' => 'FIELD:external_registration:REQ:false',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.sub_end_date_info_sent',
             'config'  => [
@@ -491,17 +501,26 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_contact',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.deleted = 0 AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
                 'minitems'            => 1,
-                'maxitems'            => 2,    // this forces a working required select box!
+                'maxitems'            => 1,    // this forces a working required select box!
                 // stupid but true... it should be "1"
                 // --> bug in TYPO3 4.7
                 'size'                => 8,
-                'selectedListStyle'   => 'width:400px;',
-                'itemListStyle'       => 'width:400px;',
+                'selectedListStyle'   => 'width:600px;',
+                'itemListStyle'       => 'width:600px;',
             ],
         ],
         'onlinesurvey'             => [
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.onlinesurvey',
+            'config'  => [
+                'type' => 'input',
+                'size' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'external_registration'             => [
+            'exclude' => 0,
+            'label'   => $LL . 'tx_slubevents_domain_model_event.external_registration',
             'config'  => [
                 'type' => 'input',
                 'size' => 50,
