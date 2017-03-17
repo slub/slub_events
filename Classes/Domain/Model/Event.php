@@ -187,6 +187,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $onlinesurvey;
 
     /**
+     * external registration link
+     *
+     * @var string
+     */
+    protected $externalRegistration;
+
+    /**
      * Returns hidden
      *
      * @return boolean $hidden
@@ -759,5 +766,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOnlinesurvey($onlinesurvey)
     {
         $this->onlinesurvey = $onlinesurvey;
+    }
+
+    /**
+     * Returns the external registration link
+     *
+     * @return string $externalRegistration
+     */
+    public function getOnlinesurvey()
+    {
+        return $this->externalRegistration;
+    }
+
+    /**
+     * Sets the external registration link
+     *
+     * @param string $externalRegistration
+     *
+     * @return void
+     */
+    public function setOnlinesurvey($externalRegistration)
+    {
+        $this->externalRegistration = $externalRegistration;
     }
 }
