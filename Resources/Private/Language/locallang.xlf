@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-17T13:47:46Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-17T15:40:05Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -149,9 +149,6 @@
 		<trans-unit id="tx_slubevents_domain_model_category">
 			<source>Event Category</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.external_registration">
-			<source>External Registration Link</source>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.no_search">
 			<source>Exclude from search</source>
 		</trans-unit>
@@ -169,6 +166,9 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.description">
 			<source>description</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.external_registration">
+			<source>External Registration Link</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.freeplaces">
 			<source>free places</source>

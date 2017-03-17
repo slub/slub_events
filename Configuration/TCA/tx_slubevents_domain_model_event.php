@@ -501,9 +501,7 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_contact',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.deleted = 0 AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
                 'minitems'            => 1,
-                'maxitems'            => 1,    // this forces a working required select box!
-                // stupid but true... it should be "1"
-                // --> bug in TYPO3 4.7
+                'maxitems'            => 1,
                 'size'                => 8,
                 'selectedListStyle'   => 'width:600px;',
                 'itemListStyle'       => 'width:600px;',

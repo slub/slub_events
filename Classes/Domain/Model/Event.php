@@ -773,7 +773,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $externalRegistration
      */
-    public function getOnlinesurvey()
+    public function getExternalRegistration()
     {
         return $this->externalRegistration;
     }
@@ -785,7 +785,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setOnlinesurvey($externalRegistration)
+    public function setExternalRegistration($externalRegistration)
     {
         $this->externalRegistration = $externalRegistration;
     }

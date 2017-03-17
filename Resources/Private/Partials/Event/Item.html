@@ -17,8 +17,9 @@
 	</h4>
 
 	<strong><se:format.trim><f:render partial="Event/DateFromTo" arguments="{event : event}"/></se:format.trim></strong>,
-	<se:format.trim><f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}"/></se:format.trim>,
-	{event.contact.name}
+	<se:format.trim>
+		<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}" />
+	</se:format.trim>, {event.contact.name}
 
 	<div class="clear"></div>
 	<div class="teaser">
@@ -37,26 +38,38 @@
 			<f:then>
 				<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 1">
 					<f:then>
-						<f:translate key="tx_slubevents_domain_model_event.oneFreePlace"/>
+						<f:translate key="tx_slubevents_domain_model_event.oneFreePlace" />
 					</f:then>
 					<f:else>
-						<se:format.freePlacesLeft event="{event}"/> <f:translate key="tx_slubevents_domain_model_event.freeplaces"/>
+						<se:format.freePlacesLeft event="{event}" />
+						<f:translate key="tx_slubevents_domain_model_event.freeplaces" />
 					</f:else>
 				</f:if>
-				 --> <f:link.action action="new" class="button subscribe" controller="Subscriber"
-							   pageUid="{settings.pidSubscribeForm}" noCacheHash="1" arguments="{event : event}">
-					<f:translate key="tx_slubevents_domain_model_event.subscribe"/>
+				-->
+				<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}" noCacheHash="1" arguments="{event : event}">
+					<f:translate key="tx_slubevents_domain_model_event.subscribe" />
 				</f:link.action>
 			</f:then>
 			<f:else>
-				<f:if condition="{event.maxSubscriber} > 0">
+				<f:if condition="{event.externalRegistration}">
 					<f:then>
-						<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 0">
-							<f:then>Die maximale Teilnehmerzahl von {event.maxSubscriber} ist erreicht.</f:then>
-							<f:else>Es ist keine Anmeldung mehr möglich.</f:else>
-						</f:if>
+						<f:link.external uri="{event.externalRegistration}" class="button subscribe external">
+							<f:translate key="tx_slubevents_domain_model_event.external_registration" />
+						</f:link.external>
 					</f:then>
-					<f:else><!-- keine Anmeldung noetig oder moeglich --></f:else>
+					<f:else>
+						<f:if condition="{event.maxSubscriber} > 0">
+							<f:then>
+								<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 0">
+									<f:then>Die maximale Teilnehmerzahl von {event.maxSubscriber} ist erreicht.</f:then>
+									<f:else>Es ist keine Anmeldung mehr möglich.</f:else>
+								</f:if>
+							</f:then>
+							<f:else>
+								<!-- keine Anmeldung noetig oder moeglich -->
+							</f:else>
+						</f:if>
+					</f:else>
 				</f:if>
 			</f:else>
 		</f:if>

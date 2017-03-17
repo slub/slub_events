@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-17T13:47:46Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-17T15:40:05Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -181,10 +181,6 @@
 			<source>Event Category</source>
 			<target>Kategorie</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.external_registration" approved="yes">
-			<source>External Registration Link</source>
-			<target>Link zur externen Anmeldung</target>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.no_search" approved="yes">
 			<source>Exclude from search</source>
 			<target>Aus Suche ausschließen</target>
@@ -208,6 +204,10 @@
 		<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes">
 			<source>description</source>
 			<target>Beschreibung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.external_registration" approved="yes">
+			<source>External Registration Link</source>
+			<target>Link zur externen Anmeldung</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.freeplaces" approved="yes">
 			<source>free places</source>
