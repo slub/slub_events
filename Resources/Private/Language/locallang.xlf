@@ -269,6 +269,9 @@
 		<trans-unit id="persConsultingHours">
 			<source>Consulting hours</source>
 		</trans-unit>
+		<trans-unit id="selecttopictobook">
+			<source>Please select a topic.</source>
+		</trans-unit>
 		</body>
-	</file>
+	</file>		
 </xliff>

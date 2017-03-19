@@ -341,6 +341,10 @@
 			<source>Consulting hours</source>
 			<target>Sprechstunden</target>
 		</trans-unit>
+		<trans-unit id="selecttopictobook" approved="yes">
+			<source>Please select a topic.</source>
+			<target>Bitte wählen Sie ein Thema.</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
