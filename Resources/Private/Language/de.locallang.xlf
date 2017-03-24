@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-08-10T14:21:28Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-17T15:40:05Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -81,6 +81,18 @@
 			<source>Previous</source>
 			<target>Vorherige</target>
 		</trans-unit>
+		<trans-unit id="persConsultingHours" approved="yes">
+			<source>Consulting hours</source>
+			<target>Sprechstunden</target>
+		</trans-unit>
+		<trans-unit id="persEvents" approved="yes">
+			<source>Events</source>
+			<target>Veranstaltungen</target>
+		</trans-unit>
+		<trans-unit id="persSelectTopic" approved="yes">
+			<source>Please select topic</source>
+			<target>Bitte Thema wählen</target>
+		</trans-unit>
 		<trans-unit id="tasks.statistics.date" approved="yes">
 			<source>Date</source>
 			<target>Datum</target>
@@ -100,6 +112,14 @@
 		<trans-unit id="tasks.statistics.name" approved="yes">
 			<source>Statistics Report</source>
 			<target>Monatsstatistik</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.receiverEmailAddress" approved="yes">
+			<source>Receiver Email Address(es)</source>
+			<target>Empfänger Email-Adresse</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.senderEmailAddress" approved="yes">
+			<source>Sender Email Address</source>
+			<target>Absender Email-Adresse</target>
 		</trans-unit>
 		<trans-unit id="text.back_to_overview" approved="yes">
 			<source>Back to Overview</source>
@@ -184,6 +204,10 @@
 		<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes">
 			<source>description</source>
 			<target>Beschreibung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.external_registration" approved="yes">
+			<source>External Registration Link</source>
+			<target>Link zur externen Anmeldung</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.freeplaces" approved="yes">
 			<source>free places</source>
@@ -328,18 +352,6 @@
 		<trans-unit id="view_my_events" approved="yes">
 			<source>My Events</source>
 			<target>Meine Veranstaltungen</target>
-		</trans-unit>
-		<trans-unit id="persSelectTopic" approved="yes">
-			<source>Please select topic</source>
-			<target>Bitte Thema wählen</target>
-		</trans-unit>
-		<trans-unit id="persEvents" approved="yes">
-			<source>Events</source>
-			<target>Veranstaltungen</target>
-		</trans-unit>
-		<trans-unit id="persConsultingHours" approved="yes">
-			<source>Consulting hours</source>
-			<target>Sprechstunden</target>
 		</trans-unit>
 		</body>
 	</file>
