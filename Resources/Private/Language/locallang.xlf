@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2015-10-13T15:56:48Z" product-name="slub_events">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-17T15:40:05Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -68,11 +68,17 @@
 		<trans-unit id="paginate_previous">
 			<source>Previous</source>
 		</trans-unit>
+		<trans-unit id="persConsultingHours">
+			<source>Consulting hours</source>
+		</trans-unit>
+		<trans-unit id="persEvents">
+			<source>Events</source>
+		</trans-unit>
+		<trans-unit id="persSelectTopic">
+			<source>Please select topic</source>
+		</trans-unit>
 		<trans-unit id="tasks.statistics.date">
 			<source>Date</source>
-		</trans-unit>
-		<trans-unit id="text.save_to_your_calendar">
-			<source>Save event to your local calendar.</source>
 		</trans-unit>
 		<trans-unit id="tasks.statistics.description">
 			<source>Send monthly report to given email addresses.</source>
@@ -104,14 +110,17 @@
 		<trans-unit id="text.closing">
 			<source>Best Regards</source>
 		</trans-unit>
-		<trans-unit id="text.error.could_find_subscriber">
-			<source>Couldn't find your subscription. Maybe you have already unsubscribed?</source>
-		</trans-unit>
 		<trans-unit id="text.error.could_find_event">
 			<source>Sorry, we couldn't find the requested event.</source>
 		</trans-unit>
+		<trans-unit id="text.error.could_find_subscriber">
+			<source>Couldn't find your subscription. Maybe you have already unsubscribed?</source>
+		</trans-unit>
 		<trans-unit id="text.salutation">
 			<source>Dear</source>
+		</trans-unit>
+		<trans-unit id="text.save_to_your_calendar">
+			<source>Save event to your local calendar.</source>
 		</trans-unit>
 		<trans-unit id="text.signature">
 			<source>SLUB Dresden</source>
@@ -122,29 +131,29 @@
 		<trans-unit id="tx_slubevents.be.subscriberlist">
 			<source>List of Subscribers</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents.gb.we_consult_you">
-			<source>We Consult You</source>
-		</trans-unit>
 		<trans-unit id="tx_slubevents.gb.i_consult_you">
 			<source>I Consult You</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents.gb.no_date">
 			<source>No Knowledge Bar dates at the moment.</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents.gb.no_date_neither_event">
+			<source>No events neither Knowledge Bar dates at the moment.</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents.gb.no_event">
 			<source>No events at the moment.</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents.gb.no_date_neither_event">
-			<source>No events neither Knowledge Bar dates at the moment.</source>
+		<trans-unit id="tx_slubevents.gb.we_consult_you">
+			<source>We Consult You</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category">
 			<source>Event Category</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey">
-			<source>Online Survey</source>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.no_search">
 			<source>Exclude from search</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey">
+			<source>Online Survey</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.title">
 			<source>Title</source>
@@ -157,6 +166,9 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.description">
 			<source>description</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.external_registration">
+			<source>External Registration Link</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.freeplaces">
 			<source>free places</source>

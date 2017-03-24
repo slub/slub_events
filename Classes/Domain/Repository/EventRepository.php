@@ -415,6 +415,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
     /**
      * Finds all events in future where subscription time ended (deadline)
+     * and ignore events with external registration
      *
      * @param string categories separated by comma
      *
@@ -429,6 +430,7 @@ namespace Slub\SlubEvents\Domain\Repository;
         $constraints[] = $query->lessThan('sub_end_date_time', time());
         $constraints[] = $query->greaterThan('sub_end_date_time', 0);
         $constraints[] = $query->equals('sub_end_date_info_sent', '0');
+        $constraints[] = $query->equals('external_registration', '');
 
         if (count($constraints)) {
             $query->matching($query->logicalAnd($constraints));

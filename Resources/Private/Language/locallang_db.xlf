@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-20T13:35:58Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-17T14:03:45Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -41,11 +41,11 @@
 		<trans-unit id="tx_slubevents_domain_model_discipline">
 			<source>Discipline</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_discipline.parent">
-			<source>Parent discipline</source>
-		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_discipline.name">
 			<source>Name</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_discipline.parent">
+			<source>Parent discipline</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event">
 			<source>Event</source>
@@ -98,6 +98,9 @@
 		<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select_value">
 			<source>Time after Start of Event</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.external_registration">
+			<source>External Registration Link</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar">
 			<source>Knowledge Bar</source>
 		</trans-unit>
@@ -110,11 +113,14 @@
 		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber">
 			<source>Min Subscriber</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.no_search">
+			<source>Exclude from search</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.onlinesurvey">
 			<source>Online Survey</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.no_search">
-			<source>Exclude from search</source>
+		<trans-unit id="tx_slubevents_domain_model_event.selecttopic">
+			<source>Please select topic</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_date_time">
 			<source>Start of Event (Date and Time)</source>
@@ -187,9 +193,6 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone">
 			<source>Telephone</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.selecttopic">
-			<source>Please select topic</source>
 		</trans-unit>
 		</body>
 	</file>

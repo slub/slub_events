@@ -44,6 +44,9 @@
 		<trans-unit id="onlinesurvey.description" xml:space="preserve">
 			<source>Enter a full URI (http://...) to an online survey.</source>
 		</trans-unit>
+		<trans-unit id="external_registration.description" xml:space="preserve">
+			<source>Enter a full URI (http://...) to an external registration. All local registration settings will be ignored.</source>
+		</trans-unit>
 		<trans-unit id="no_search.description" xml:space="preserve">
 			<source>Check to exclude this event from beeing indexed.</source>
 		</trans-unit>
