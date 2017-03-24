@@ -105,7 +105,17 @@
 								function reg_wiba(id) {
 									if($('#sel_' + id).val() > 0) {
 										eval('subscribe_' + id + '.submit()');
+									} else {
+										check_wiba(id);
 									}
+								}
+								function check_wiba(id) {
+									if($('#sel_' + id).val() > 0) {
+										$('#slub-forms-select-' + id + '-error').hide();
+									} else {
+										$('#slub-forms-select-' + id + '-error').show();
+									}
+
 								}
 							</script>
 						</f:then>
