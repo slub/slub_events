@@ -40,4 +40,7 @@ This extension is developped and used in production at the Saxony State and Univ
         'suggests'  => [
         ],
     ],
+    'autoload' => [
+      'classmap' => ['Classes']
+    ],
 ];
