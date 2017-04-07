@@ -16,6 +16,8 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	{namespace se=Slub\SlubEvents\ViewHelpers}
 
 <div>
+
+<!-- Check if user is known by SLUB_Events -->
 <f:if condition="{subscribers}">
 	<f:then>
 	<ul>
@@ -50,9 +52,17 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</ul>
 	</f:then>
 	<f:else>
-	<div class="hint">
-		<p class="extrabox">Bitte melden Sie sich <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zu "<f:translate key="view_my_events" />" zurückgeleitet.</p>
-	</div>
+	<!-- Check if user is logged in -->
+	<f:security.ifAuthenticated>
+		<f:then>
+			<p>Sie sind zu keiner Veranstaltung angemeldet.</p>
+		</f:then>
+		<f:else>
+			<div class="hint">
+				<p class="extrabox">Bitte melden Sie sich <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zu "<f:translate key="view_my_events" />" zurückgeleitet.</p>
+			</div>
+		</f:else>
+	</f:if>
 	</f:else>
 </f:if>
 
