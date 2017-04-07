@@ -53,14 +53,14 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</f:then>
 	<f:else>
 	<!-- Check if user is logged in -->
-	<f:if condition="{isNotLoggedIn}">
+	<f:security.ifAuthenticated>
 		<f:then>
+			<p>Sie sind zu keiner Veranstaltung angemeldet.</p>
+		</f:then>
+		<f:else>
 			<div class="hint">
 				<p class="extrabox">Bitte melden Sie sich <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zu "<f:translate key="view_my_events" />" zurückgeleitet.</p>
 			</div>
-		</f:then>
-		<f:else>
-			<p>Sie sind zu keiner Veranstaltung angemeldet.</p>
 		</f:else>
 	</f:if>
 	</f:else>

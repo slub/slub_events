@@ -249,11 +249,8 @@ class EventController extends AbstractController
 
         $events = $this->eventRepository->findAllBySubscriber($subscribers);
 
-        $isNotLoggedIn = $GLOBALS['TSFE']->fe_user->user['username'] == NULL;
-
         $this->view->assign('subscribers', $subscribers);
         $this->view->assign('events', $events);
-        $this->view->assign('isNotLoggedIn', $isNotLoggedIn);
     }
 
     /**
