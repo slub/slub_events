@@ -62,7 +62,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 				<p class="extrabox">Bitte melden Sie sich <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zu "<f:translate key="view_my_events" />" zurückgeleitet.</p>
 			</div>
 		</f:else>
-	</f:if>
+	</f:security.ifAuthenticated>
 	</f:else>
 </f:if>
 
