@@ -177,6 +177,10 @@
 			<source>Online Survey</source>
 			<target>Online Umfrage</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.externalevent" approved="yes">
+			<source>External Event</source>
+			<target>Externe Veranstaltung</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.selecttopic" approved="yes">
 			<source>Please select topic</source>
 			<target>Bitte Thema wählen</target>

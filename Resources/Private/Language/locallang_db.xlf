@@ -119,6 +119,9 @@
 		<trans-unit id="tx_slubevents_domain_model_event.onlinesurvey">
 			<source>Online Survey</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.externalevent">
+			<source>External Event</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.selecttopic">
 			<source>Please select topic</source>
 		</trans-unit>
