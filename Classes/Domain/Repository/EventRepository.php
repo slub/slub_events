@@ -113,7 +113,7 @@ namespace Slub\SlubEvents\Domain\Repository;
      *
      * @return array The found Event Objects
      */
-    public function findEventByContact($contact)
+    public function findEventByContact($contact, $category = null)
     {
         $query = $this->createQuery();
 
@@ -121,6 +121,9 @@ namespace Slub\SlubEvents\Domain\Repository;
         $constraints[] = $query->equals('contact', $contact);
         $constraints[] = $query->equals('genius_bar', 0);
         $constraints[] = $query->equals('cancelled', 0);
+        if ($category != null) {
+            $constraints[] = $query->in('categories.uid', explode(',', $category));
+        }
         $constraints[] = $query->greaterThan('max_subscriber', 'subscribers');
         $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
