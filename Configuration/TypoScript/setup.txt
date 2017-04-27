@@ -1,6 +1,7 @@
 ## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
 
-web.includeCSS.slubeventsgb = EXT:slub_events/Resources/Public/Css/slub-event-gb.css
+page.includeCSS.slubevents = EXT:slub_events/Resources/Public/Css/slub-event-basic.css
+page.includeCSS.slubeventsgb = EXT:slub_events/Resources/Public/Css/slub-event-gb.css
 
 plugin.tx_slubevents {
 
