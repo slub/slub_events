@@ -2,29 +2,6 @@
 <f:layout name="Default" />
 
 <f:section name="wibaListing">
-	<f:comment>
-	<style>
-		#book-me-now a.button.submit {
-		    position: relative;
-		    margin: 20px 0;
-		    padding: 2px 4px;
-		    border: 1px solid #2299aa;
-		    -webkit-border-radius: 15px;
-		    -moz-border-radius: 15px;
-		    border-radius: 15px;
-		    -webkit-border-top-left-radius: 5px;
-		    -moz-border-radius-topleft: 5px;
-		    border-top-left-radius: 5px;
-		    background: #e0edef;
-		    color: #2299aa;
-		    text-shadow: 1px 1px 0 #ffffff;
-		    font-weight: bold;
-		    cursor: pointer;
-		    font: 13.3333px Arial;
-		    font-weight: bold;
-		}
-	</style>
-	</f:comment>
 	<ul>
 		<f:for each="{wibas}" as="wiba" key="label" iteration="wibaIterator">
 	       <f:if condition="<se:format.newMonthTitle events='{wibas}' index='{label}' />">
@@ -189,5 +166,14 @@
 	</f:if>
 
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('li.heading').each(function(index) {
+			if($(this).nextUntil('li.heading').length == 0) {
+				$(this).hide();
+		    }
+		});
+	});
+</script>
 
 </f:section>
