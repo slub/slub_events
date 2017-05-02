@@ -120,9 +120,6 @@ class CategoryController extends AbstractController
             }
         }
 
-
-        print_r($this->settings);
-
         #if ($category != NULL) {
         #	$events = $this->eventRepository->findAllGbByCategory($category);
         #}

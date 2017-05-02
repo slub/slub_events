@@ -73,7 +73,9 @@ namespace Slub\SlubEvents\Domain\Repository;
      * Finds all datasets by MM relation contact
      *
      * @param \Slub\SlubEvents\Domain\Model\Contact $contact
-     * @param \Slub\SlubEvents\Domain\Model\Category $category
+     * @param integer $category
+     * @param boolean $bExcludeCategory
+     *
      * @return array The found Event Objects
      */
     public function findWibaByContact($contact, $category = 0, $bExcludeCategory)
@@ -110,6 +112,7 @@ namespace Slub\SlubEvents\Domain\Repository;
      * Finds all datasets by MM relation contact
      *
      * @param \Slub\SlubEvents\Domain\Model\Contact $contact
+     * @param string $category
      *
      * @return array The found Event Objects
      */
