@@ -154,6 +154,10 @@
 			<source>Consultations category</source>
 			<target>Sprechstunden Kategorie</target>
 		</trans-unit>
+		<trans-unit id="flexforms.catsforevents" approved="yes">
+			<source>Events categories</source>
+			<target>Veranstaltungs Kategorien</target>
+		</trans-unit>
 		<trans-unit id="persEvents" approved="yes">
 			<source>Events</source>
 			<target>Veranstaltungen</target>

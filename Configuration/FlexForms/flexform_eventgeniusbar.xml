@@ -102,12 +102,40 @@
                             <label>
                                 LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showevents
                             </label>
+                            <onChange>reload</onChange>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
                                 <type>check</type>
                             </config>
                         </TCEforms>
                     </settings.showEvent>
+
+                    <settings.eventSelection>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.catsforevents
+                            </label>
+                            <displayCond><![CDATA[FIELD:settings.showEvent:REQ:true]]></displayCond>
+                            <config>
+                                <type>select</type>
+                                <renderMode>tree</renderMode>
+                                <treeConfig>
+                                    <parentField>parent</parentField>
+                                    <appearance>
+                                        <expandAll>TRUE</expandAll>
+                                        <showHeader>TRUE</showHeader>
+                                    </appearance>
+                                </treeConfig>
+
+                                <foreign_table>tx_slubevents_domain_model_category</foreign_table>
+                                <foreign_table_where>AND tx_slubevents_domain_model_category.parent = 0 AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY tx_slubevents_domain_model_category.sorting DESC</foreign_table_where>
+                                <size>5</size>
+                                <autoSizeMax>30</autoSizeMax>
+                                <minitems>1</minitems>
+                                <maxitems>99</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.eventSelection>
 
                     <settings.showConsultation>
                         <TCEforms>

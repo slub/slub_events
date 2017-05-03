@@ -117,6 +117,9 @@
 		<trans-unit id="flexforms.catforconsultations">
 			<source>Consultations category</source>
 		</trans-unit>
+		<trans-unit id="flexforms.catsforevents">
+			<source>Events categories</source>
+		</trans-unit>
 		<trans-unit id="persEvents">
 			<source>Events</source>
 		</trans-unit>

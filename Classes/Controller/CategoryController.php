@@ -113,13 +113,12 @@ class CategoryController extends AbstractController
                 $wibas = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], $this->settings['consultationSelection'], true);
             }
             if ($this->settings['showEvent']) {
-                $events = $this->eventRepository->findEventByContact($this->settings['contactSelection'], 0);
+                $events = $this->eventRepository->findEventByContact($this->settings['contactSelection'], $this->settings['eventSelection']);
             }
             if ($this->settings['showConsultation'] && $this->settings['consultationSelection'] > 0) {
                 $consultation = $this->eventRepository->findWibaByContact($this->settings['contactSelection'], $this->settings['consultationSelection'], false);
             }
         }
-
 
         #if ($category != NULL) {
         #	$events = $this->eventRepository->findAllGbByCategory($category);
