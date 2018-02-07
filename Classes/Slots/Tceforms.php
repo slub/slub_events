@@ -1,4 +1,5 @@
 <?php
+namespace Slub\SlubEvents\Slots;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,14 +29,12 @@
  *
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-class Tx_SlubEvents_Slots_Tceforms
+class Tceforms
 {
 
     public function getMainFields_preProcess($table, &$row, $tceform)
     {
         if ($table == 'tx_slubevents_domain_model_event') {
-            global $TCA;
-            t3lib_div::loadTCA('tx_slubevents_domain_model_event');
 
             if ($row['author'] == 0 || empty($row['author'])) {
                 $row['author'] = $GLOBALS['BE_USER']->user['uid'];
@@ -63,11 +62,6 @@ class Tx_SlubEvents_Slots_Tceforms
     {
         if ($table == 'tx_slubevents_domain_model_event') {
 
-            // bugfix for TYPO3 < 6.1
-//			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) <  '6001000') {
-//				if ($row['location'] == 0)
-//					$row['location'] = '';
-//			}
         }
     }
 }

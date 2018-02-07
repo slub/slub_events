@@ -67,20 +67,20 @@ if (TYPO3_MODE === 'BE') {
 
     // prefill BE user data in event form
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getMainFieldsClass'][] =
-        'EXT:' . $_EXTKEY . '/Classes/Slots/Tceforms.php:Tx_SlubEvents_Slots_Tceforms';
+        Slub\SlubEvents\Slots\Tceforms::class;
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'][] =
-        'EXT:' . $_EXTKEY . '/Classes/Slots/Tceforms.php:Tx_SlubEvents_Slots_Tceforms';
+        Slub\SlubEvents\Slots\Tceforms::class;
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
-        'EXT:' . $_EXTKEY . '/Classes/Slots/HookPreProcessing.php:HookPreProcessing';
+        Slub\SlubEvents\Slots\HookPreProcessing::class;
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
-        'EXT:' . $_EXTKEY . '/Classes/Slots/HookPostProcessing.php:HookPostProcessing';
+        Slub\SlubEvents\Slots\HookPostProcessing::class;
 
     // include cli command controller
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] =
-        'Slub\\SlubEvents\\Command\\CheckeventsCommandController';
+        Slub\SlubEvents\Command\CheckeventsCommandController::class;
 
     $languageDir = $_EXTKEY . '/Resources/Private/Language/';
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Slub\\SlubEvents\\Task\\StatisticsTask'] = [

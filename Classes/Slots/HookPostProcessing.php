@@ -1,4 +1,5 @@
 <?php
+namespace Slub\SlubEvents\Slots;
 /***************************************************************
  *  Copyright notice
  *
