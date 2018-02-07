@@ -514,7 +514,8 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_discipline',
                 'foreign_table_where' => ' AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) AND tx_slubevents_domain_model_discipline.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_discipline.deleted = 0 AND tx_slubevents_domain_model_discipline.hidden = 0 ORDER BY tx_slubevents_domain_model_discipline.sorting',
                 'MM'                  => 'tx_slubevents_event_discipline_mm',
-                'renderMode'          => 'tree',
+                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
