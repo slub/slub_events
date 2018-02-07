@@ -428,6 +428,22 @@ return [
                 'minitems'            => 1,
                 'maxitems'            => 30,
                 'multiple'            => false,
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_category',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'subscribers'              => [
@@ -471,6 +487,22 @@ return [
                 'minitems'            => 1,
                 'maxitems'            => 1,
                 'multiple'            => false,
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_location',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'discipline'               => [
@@ -498,6 +530,22 @@ return [
                 'minitems'            => 1,
                 'maxitems'            => 10,
                 'multiple'            => false,
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_discipline',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'contact'                  => [
@@ -514,6 +562,22 @@ return [
                 'size'                => 8,
                 'selectedListStyle'   => 'width:600px;',
                 'itemListStyle'       => 'width:600px;',
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_contact',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'onlinesurvey'             => [
