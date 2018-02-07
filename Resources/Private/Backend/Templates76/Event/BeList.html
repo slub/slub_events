@@ -17,6 +17,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<tr>
 				<th>
 					<se:be.functionBar icon="new"/>
+					<f:link.action action="beNewEvent" controller="Event"
+								   title="<f:translate key='be.createNewEvent' />"
+								   arguments="{step : '0'}">
+						<button type="button" class="btn btn-default" aria-label="Left Align">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						</button>
+					</f:link.action>
 				</th>
 				<th>
 					<f:translate key="tx_slubevents_domain_model_event.title"/>
@@ -149,14 +156,24 @@ Otherwise your changes will be overwritten the next time you save the extension 
 					</tr>
 					<tr>
 						<td class="td-input">
-							<span class="t3-tceforms-input-wrapper-date">
-								<f:form.textfield id="tceforms-datefield-1"
-												  property="selectedStartDateStamp"
-												  size="12"
-												  value="{selectedStartDateStamp}"/>
-								 <se:be.functionBar icon="datepicker" event="{event}" />
-							</span>
+							<div class="form-group">
+								<div class='input-group input-group-sm'>
+									<f:form.textfield id="datetimepicker1"
+													  property="selectedStartDateStamp"
+													  size="12"
+														data="{date-type:'date'}"
+													  value="{selectedStartDateStamp}"
+														class="form-control input-sm t3js-datetimepicker t3js-clearable"
+													   />
+									<span class="input-group-btn">
+											<label class="btn btn-default" for="datetimepicker1">
+												<span class="fa fa-calendar"></span>
+											</label>
+									</span>
+								</div>
+							</div>
 						</td>
+
 						<td class="foldtree">
 							<f:render partial="Event/CategoryTree"
 									  section="categoryTree"
@@ -179,6 +196,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 										   optionLabelField="name"
 										   multiple="1"
 										   size="15"
+										   class="form-control"
 										   value="{contactsSelected}"/>
 						</td>
 					</tr>
