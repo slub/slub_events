@@ -403,7 +403,8 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_category',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
                 'MM'                  => 'tx_slubevents_event_category_mm',
-                'renderMode'          => 'tree',
+                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
@@ -416,7 +417,6 @@ return [
 
                 ],
                 'size'                => 10,
-                'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 30,
                 'multiple'            => false,
@@ -447,7 +447,8 @@ return [
                 'type'                => 'select',
                 'foreign_table'       => 'tx_slubevents_domain_model_location',
                 'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_location.deleted = 0 AND tx_slubevents_domain_model_location.hidden = 0 ORDER BY tx_slubevents_domain_model_location.sorting',
-                'renderMode'          => 'tree',
+                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
@@ -459,7 +460,6 @@ return [
                     ],
                 ],
                 'size'                => 10,
-                'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 1,
                 'multiple'            => false,
