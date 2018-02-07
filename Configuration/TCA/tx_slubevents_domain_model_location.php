@@ -136,11 +136,12 @@ return [
                 'eval'    => 'trim',
                 'wizards' => [
                     'RTE' => [
-                        'icon'          => 'wizard_rte2.gif',
+                        'type'          => 'script',
+                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        'icon'          => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'notNewRecords' => 1,
                         'RTEonly'       => 1,
                         'module'        => ['name' => 'wizard_rte'],
-                        'title'         => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
                     ],
                 ],
             ],
