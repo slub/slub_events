@@ -42,6 +42,7 @@ return [
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config'  => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items'               => [
@@ -56,6 +57,7 @@ return [
             'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config'      => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'items'               => [
                     ['', 0],
                 ],
@@ -181,4 +183,3 @@ return [
         ],
     ],
 ];
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder

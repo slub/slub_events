@@ -79,6 +79,7 @@ return [
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config'  => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items'               => [
@@ -93,6 +94,7 @@ return [
             'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config'      => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'items'               => [
                     ['', 0],
                 ],
@@ -197,7 +199,8 @@ return [
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.end_date_time_select',
             'config'      => [
-                'type'     => 'select',
+                'type'    => 'select',
+                'renderType'  => 'selectSingle',
                 'items'    => [
                     [
                         $LL . 'tx_slubevents_domain_model_event.end_date_time_select_value',
@@ -242,7 +245,8 @@ return [
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time_select',
             'config'      => [
-                'type'     => 'select',
+                'type'    => 'select',
+                'renderType'  => 'selectSingle',
                 'items'    => [
                     [
                         $LL . 'tx_slubevents_domain_model_event.sub_end_date_time_select_value',
@@ -328,6 +332,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.audience',
             'config'  => [
                 'type'     => 'select',
+                'renderType' => 'selectSingle',
                 'items'    => [
                     [
                         $LL . 'tx_slubevents_domain_model_event.audience.I.0',
@@ -498,6 +503,7 @@ return [
             'config'  => [
                 'allowed'             => 'pages',
                 'type'                => 'select',
+                'renderType'          => 'selectMultipleSideBySide',
                 'foreign_table'       => 'tx_slubevents_domain_model_contact',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.deleted = 0 AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
                 'minitems'            => 1,
