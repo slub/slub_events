@@ -11,7 +11,7 @@ return [
         'cruser_id'                => 'cruser_id',
         'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
-        'versioningWS'             => 2,
+        'versioningWS'             => true,
         'versioning_followPages'   => true,
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
@@ -128,6 +128,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -144,6 +145,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -169,6 +171,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.start_date_time',
             'config'  => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 10,
                 'eval'     => 'datetime,required',
                 'checkbox' => 1,
@@ -188,6 +191,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.end_date_time',
             'config'  => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,
@@ -229,6 +233,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time',
             'config'  => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,

@@ -90,6 +90,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -106,6 +107,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -195,6 +197,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_subscriber.crdate',
             'config'  => [
                 'type'     => 'input',
+                'renderType' => 'inputDateTime',
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,
