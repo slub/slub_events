@@ -24,7 +24,7 @@ return [
             'endtime'   => 'endtime',
         ],
         'searchFields'             => 'title,parent,',
-        'iconfile'                 => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('slub_events') . 'Resources/Public/Icons/tx_slubevents_domain_model_category.gif',
+        'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_category.gif',
         'requestUpdate'            => 'genius_bar,sys_language_uid',
     ],
     'interface' => [
