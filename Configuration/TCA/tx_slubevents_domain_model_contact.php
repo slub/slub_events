@@ -91,7 +91,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'type'     => 'input',
-                'renderType' => 'inputDateTime',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -108,7 +108,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'type'     => 'input',
-                'renderType' => 'inputDateTime',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
