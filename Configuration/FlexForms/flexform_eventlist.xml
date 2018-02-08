@@ -45,6 +45,7 @@
                             <config>
                                 <type>select</type>
                                 <renderMode>tree</renderMode>
+                                <renderType>selectTree</renderType>
                                 <treeConfig>
                                     <parentField>parent</parentField>
                                     <appearance>
@@ -60,7 +61,6 @@
                                     tx_slubevents_domain_model_category.sorting ASC
                                 </foreign_table_where>
                                 <size>5</size>
-                                <autoSizeMax>30</autoSizeMax>
                                 <minitems>0</minitems>
                                 <maxitems>99</maxitems>
                             </config>
@@ -89,6 +89,7 @@
                             <config>
                                 <type>select</type>
                                 <renderMode>tree</renderMode>
+                                <renderType>selectTree</renderType>
                                 <treeConfig>
                                     <parentField>parent</parentField>
                                     <appearance>
@@ -102,7 +103,6 @@
                                     tx_slubevents_domain_model_discipline.sorting ASC
                                 </foreign_table_where>
                                 <size>5</size>
-                                <autoSizeMax>30</autoSizeMax>
                                 <minitems>0</minitems>
                                 <maxitems>99</maxitems>
                             </config>
@@ -165,7 +165,7 @@
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>select</type>
-                                <renderMode>checkbox</renderMode>
+                                <renderType>selectMultipleSideBySide</renderType>
                                 <foreign_table>tx_slubevents_domain_model_contact</foreign_table>
                                 <foreign_table_where>AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY
                                     tx_slubevents_domain_model_contact.sorting ASC
