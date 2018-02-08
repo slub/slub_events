@@ -51,6 +51,9 @@
 		<trans-unit id="flexforms.page_list_view">
 			<source>Page of List View</source>
 		</trans-unit>
+    <trans-unit id="flexforms.page_list_own">
+			<source>Page of MyEvents View</source>
+		</trans-unit>
 		<trans-unit id="flexforms.page_single_view">
 			<source>Page of Single View</source>
 		</trans-unit>
