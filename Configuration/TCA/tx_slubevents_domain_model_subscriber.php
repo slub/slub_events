@@ -11,7 +11,7 @@ return [
         'cruser_id'                => 'cruser_id',
         'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
-        'versioningWS'             => 2,
+        'versioningWS'             => true,
         'versioning_followPages'   => true,
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
@@ -24,7 +24,7 @@ return [
             'endtime'   => 'endtime',
         ],
         'searchFields'             => 'name,email,telephone,customerid,number,editcode,',
-        'iconfile'                 => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('slub_events') . 'Resources/Public/Icons/tx_slubevents_domain_model_subscriber.gif',
+        'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_subscriber.gif',
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, email, telephone, institution, customerid, number, message, editcode, crdate',
@@ -41,6 +41,7 @@ return [
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config'  => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items'               => [
@@ -55,6 +56,7 @@ return [
             'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config'      => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'items'               => [
                     ['', 0],
                 ],
@@ -88,6 +90,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -104,6 +107,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -193,6 +197,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_subscriber.crdate',
             'config'  => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,
@@ -206,6 +211,3 @@ return [
         ],
     ],
 ];
-
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
-

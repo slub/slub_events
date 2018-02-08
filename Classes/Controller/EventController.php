@@ -138,8 +138,8 @@ class EventController extends AbstractController
     {
         if ($event !== null) {
             // fill registers to be used in ts
-            $cObj = GeneralUtility::makeInstance('TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
-            $cObj->LOAD_REGISTER(
+            $cObj = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
+            $cObj->cObjGetSingle('LOAD_REGISTER',
                 [
                     'eventPageTitle' =>
                         LocalizationUtility::translate(
@@ -320,6 +320,10 @@ class EventController extends AbstractController
             $searchParameter['searchString'],
             $searchParameter['contacts']
         );
+
+        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer->loadJquery();
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
         $this->view->assign('searchString', $searchParameter['searchString']);

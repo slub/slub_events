@@ -95,6 +95,11 @@ module.tx_slubevents {
     }
 }
 
+[compatVersion = 7.6.0]
+module.tx_slubevents.view.layoutRootPaths.10 = EXT:slub_events/Resources/Private/Backend/Layouts76/
+module.tx_slubevents.view.templateRootPaths.11 = EXT:slub_events/Resources/Private/Backend/Templates76/
+[global]
+
 # iCal export
 printCal = PAGE
 printCal {

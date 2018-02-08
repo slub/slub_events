@@ -38,7 +38,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_own
                             </label>
                             <config>
                                 <type>group</type>
@@ -48,6 +48,11 @@
                                 <maxitems>1</maxitems>
                                 <minitems>0</minitems>
                                 <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
                             </config>
                         </TCEforms>
                     </settings.pidListOwn>
@@ -58,6 +63,7 @@
                             <label>
                                 LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe
                             </label>
+                            <displayCond>FIELD:switchableControllerActions:!=:Subscriber->new;Subscriber->create;Subscriber->eventNotFound;</displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -66,6 +72,11 @@
                                 <maxitems>1</maxitems>
                                 <minitems>0</minitems>
                                 <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
                             </config>
                         </TCEforms>
                     </settings.pidSubscribeForm>
@@ -76,6 +87,7 @@
                             <label>
                                 LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_unsubscribe
                             </label>
+                            <displayCond>FIELD:switchableControllerActions:!=:Subscriber->delete;Subscriber->eventNotFound;Subscriber->subscriberNotFound;</displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -84,6 +96,11 @@
                                 <maxitems>1</maxitems>
                                 <minitems>0</minitems>
                                 <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
                             </config>
                         </TCEforms>
                     </settings.pidUnSubscribeForm>

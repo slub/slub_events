@@ -11,7 +11,7 @@ return [
         'cruser_id'                => 'cruser_id',
         'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
-        'versioningWS'             => 2,
+        'versioningWS'             => true,
         'versioning_followPages'   => true,
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
@@ -24,7 +24,7 @@ return [
             'endtime'   => 'endtime',
         ],
         'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,discipline,',
-        'iconfile'                 => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('slub_events') . 'Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
+        'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
         'requestUpdate'            => 'genius_bar, external_registration',
     ],
     'interface' => [
@@ -79,6 +79,7 @@ return [
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config'  => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items'               => [
@@ -93,6 +94,7 @@ return [
             'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config'      => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'items'               => [
                     ['', 0],
                 ],
@@ -126,6 +128,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -142,6 +145,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -167,6 +171,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.start_date_time',
             'config'  => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 10,
                 'eval'     => 'datetime,required',
                 'checkbox' => 1,
@@ -186,6 +191,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.end_date_time',
             'config'  => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,
@@ -197,7 +203,8 @@ return [
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.end_date_time_select',
             'config'      => [
-                'type'     => 'select',
+                'type'    => 'select',
+                'renderType'  => 'selectSingle',
                 'items'    => [
                     [
                         $LL . 'tx_slubevents_domain_model_event.end_date_time_select_value',
@@ -226,6 +233,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time',
             'config'  => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,
@@ -242,7 +250,8 @@ return [
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time_select',
             'config'      => [
-                'type'     => 'select',
+                'type'    => 'select',
+                'renderType'  => 'selectSingle',
                 'items'    => [
                     [
                         $LL . 'tx_slubevents_domain_model_event.sub_end_date_time_select_value',
@@ -272,9 +281,11 @@ return [
                 'eval'    => 'trim',
                 'wizards' => [
                     'RTE' => [
-                        'icon'          => 'wizard_rte2.gif',
                         'notNewRecords' => 1,
                         'RTEonly'       => 1,
+                        'type'          => 'script',
+                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        'icon'          => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'module'        => ['name' => 'wizard_rte'],
                         'title'         => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
                     ],
@@ -293,11 +304,12 @@ return [
                 'eval'    => 'trim',
                 'wizards' => [
                     'RTE' => [
-                        'icon'          => 'wizard_rte2.gif',
+                        'type'          => 'script',
+                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        'icon'          => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'notNewRecords' => 1,
                         'RTEonly'       => 1,
                         'module'        => ['name' => 'wizard_rte'],
-                        'title'         => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
                     ],
                 ],
             ],
@@ -328,6 +340,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.audience',
             'config'  => [
                 'type'     => 'select',
+                'renderType' => 'selectSingle',
                 'items'    => [
                     [
                         $LL . 'tx_slubevents_domain_model_event.audience.I.0',
@@ -403,7 +416,8 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_category',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
                 'MM'                  => 'tx_slubevents_event_category_mm',
-                'renderMode'          => 'tree',
+                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
@@ -416,10 +430,25 @@ return [
 
                 ],
                 'size'                => 10,
-                'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 30,
                 'multiple'            => false,
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_category',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'subscribers'              => [
@@ -447,7 +476,8 @@ return [
                 'type'                => 'select',
                 'foreign_table'       => 'tx_slubevents_domain_model_location',
                 'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_location.deleted = 0 AND tx_slubevents_domain_model_location.hidden = 0 ORDER BY tx_slubevents_domain_model_location.sorting',
-                'renderMode'          => 'tree',
+                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
@@ -459,10 +489,25 @@ return [
                     ],
                 ],
                 'size'                => 10,
-                'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 1,
                 'multiple'            => false,
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_location',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'discipline'               => [
@@ -474,7 +519,8 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_discipline',
                 'foreign_table_where' => ' AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) AND tx_slubevents_domain_model_discipline.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_discipline.deleted = 0 AND tx_slubevents_domain_model_discipline.hidden = 0 ORDER BY tx_slubevents_domain_model_discipline.sorting',
                 'MM'                  => 'tx_slubevents_event_discipline_mm',
-                'renderMode'          => 'tree',
+                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
@@ -490,6 +536,22 @@ return [
                 'minitems'            => 1,
                 'maxitems'            => 10,
                 'multiple'            => false,
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_discipline',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'contact'                  => [
@@ -498,6 +560,7 @@ return [
             'config'  => [
                 'allowed'             => 'pages',
                 'type'                => 'select',
+                'renderType'          => 'selectMultipleSideBySide',
                 'foreign_table'       => 'tx_slubevents_domain_model_contact',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.deleted = 0 AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
                 'minitems'            => 1,
@@ -505,6 +568,22 @@ return [
                 'size'                => 8,
                 'selectedListStyle'   => 'width:600px;',
                 'itemListStyle'       => 'width:600px;',
+                'wizards' => [
+                     '_VERTICAL' => 1,
+                     'add' => [
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        'icon' => 'actions-add',
+                        'params' => array(
+                           'table' => 'tx_slubevents_domain_model_contact',
+                           'pid' => '###CURRENT_PID###',
+                           'setValue' => 'prepend'
+                        ),
+                        'module' => array(
+                           'name' => 'wizard_add'
+                        )
+                     ],
+                  ],
             ],
         ],
         'onlinesurvey'             => [

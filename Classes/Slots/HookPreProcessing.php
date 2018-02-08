@@ -1,4 +1,5 @@
 <?php
+namespace Slub\SlubEvents\Slots;
 /***************************************************************
  *  Copyright notice
  *
@@ -91,7 +92,7 @@ class HookPreProcessing
             if (empty($fieldArray['genius_bar'])) {
                 $message = GeneralUtility::makeInstance(
                     'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Veranstaltung gespeichert: <b>"' . $fieldArray['title'] . '"</b> am ' . gmstrftime('%a, %x %H:%M:%S',
+                    'Veranstaltung gespeichert: "' . $fieldArray['title'] . '" am ' . gmstrftime('%a, %x %H:%M:%S',
                         $fieldArray['start_date_time']) . '.',
                     'OK',
                     FlashMessage::OK,
@@ -110,7 +111,7 @@ class HookPreProcessing
                 }
                 if (!empty($category_text)) {
                     // get away last ', ' and add formating:
-                    $category_text = '<b>"' . substr($category_text, 0, strlen($category_text) - 2) . '"</b>';
+                    $category_text = '"' . substr($category_text, 0, strlen($category_text) - 2) . '"';
                 }
                 $message_text .= $category_text . ' am ' . gmstrftime('%a, %x %H:%M:%S',
                         $fieldArray['start_date_time']) . '.';
@@ -173,7 +174,7 @@ class HookPreProcessing
                     $message = GeneralUtility::makeInstance(
                         'TYPO3\CMS\Core\Messaging\FlashMessage',
                         'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S',
-                            $fieldArray['sub_end_date_time']) . ' ==> <b>' . (int)(($fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']) / 86400) . ' Tage</b> vorher!',
+                            $fieldArray['sub_end_date_time']) . ' ==> ' . (int)(($fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']) / 86400) . ' Tage vorher!',
                         'Bitte prüfen:',
                         FlashMessage::WARNING,
                         true);

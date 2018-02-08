@@ -11,7 +11,7 @@ return [
         'cruser_id'                => 'cruser_id',
         'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
-        'versioningWS'             => 2,
+        'versioningWS'             => true,
         'versioning_followPages'   => true,
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
@@ -24,7 +24,7 @@ return [
             'endtime'   => 'endtime',
         ],
         'searchFields'             => 'title,parent,',
-        'iconfile'                 => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('slub_events') . 'Resources/Public/Icons/tx_slubevents_domain_model_category.gif',
+        'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_category.gif',
         'requestUpdate'            => 'genius_bar,sys_language_uid',
     ],
     'interface' => [
@@ -42,6 +42,7 @@ return [
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config'  => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items'               => [
@@ -56,6 +57,7 @@ return [
             'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config'      => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'items'               => [
                     ['', 0],
                 ],
@@ -89,6 +91,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -105,6 +108,7 @@ return [
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'type'     => 'input',
+                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
@@ -143,13 +147,14 @@ return [
                 'eval'    => 'trim',
                 'wizards' => [
                     'RTE' => [
-                        'icon'          => 'wizard_rte2.gif',
+                        'type'          => 'script',
+                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        'icon'          => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'notNewRecords' => 1,
                         'RTEonly'       => 1,
                         'module'        => [
                             'name' => 'wizard_rte',
                         ],
-                        'title'         => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
                     ],
                 ],
             ],
@@ -163,7 +168,8 @@ return [
                 'type'                => 'select',
                 'foreign_table'       => 'tx_slubevents_domain_model_category',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
-                'renderMode'          => 'tree',
+                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
@@ -175,8 +181,7 @@ return [
                     ],
                 ],
                 'size'                => 10,
-                'autoSizeMax'         => 30,
-                'maxitems'            => 2,
+                'maxitems'            => 1,
             ],
         ],
         'category'         => [

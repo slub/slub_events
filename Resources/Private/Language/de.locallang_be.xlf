@@ -66,6 +66,10 @@
 			<source>Page of List View</source>
 			<target>Seite mit Listenansicht</target>
 		</trans-unit>
+    <trans-unit id="flexforms.page_list_own" approved="yes">
+			<source>Page of MyEvents View</source>
+			<target>Seite "Meine Veranstaltungen"</target>
+		</trans-unit>
 		<trans-unit id="flexforms.page_single_view" approved="yes">
 			<source>Page of Single View</source>
 			<target>Seite mit Einzelansicht</target>

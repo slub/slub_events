@@ -171,7 +171,7 @@ class EmailHelper
      *
      * @return string
      */
-    protected function html2rest($text)
+    public static function html2rest($text)
     {
         $text = strip_tags(
             html_entity_decode($text, ENT_COMPAT, 'UTF-8'),
