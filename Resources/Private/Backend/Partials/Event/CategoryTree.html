@@ -3,10 +3,10 @@
 	<ul class="category_tree">
 		<f:for each="{categories}" key="id" as="category">
 			<li>
-				<se:be.checkbox id="category-{category.item.uid}"
+				<f:form.checkbox id="category-{category.item.uid}"
 								name="searchParameter[category][{id}]"
 								value="{category.item.uid}"
-								selected="{categoriesSelected}"
+								checked="{categoriesSelected}"
 								onclick="checkBoxes(this)"/>
 				<label for="category-{category.item.uid}" title="{category.item.uid}">{category.item.title}</label>
 
@@ -18,4 +18,3 @@
 		</f:for>
 	</ul>
 </f:section>
-
