@@ -21,15 +21,15 @@ Configuration
   by an PHP function (strftime).
 
   .. figure:: ../Images/KnownProblems/slub-events-php-locales.jpg
-	:width: 500px
-	:alt: Wrong locale setting
+    :width: 500px
+    :alt: Wrong locale setting
 
-        	Broken "Umlaute" because of missing or wrong locale settings.
+    Broken "Umlaute" because of missing or wrong locale settings.
 
 
-          .. code-block:: none
+  .. code-block:: none
 
-	config.locale_all = de_DE.UTF-8
+  config.locale_all = de_DE.UTF-8
 
 - Not everything is localized yet. Especially some fluid templates have
   pure German texts. But these templates you have to customize anyway.

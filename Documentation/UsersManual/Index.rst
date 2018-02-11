@@ -53,11 +53,11 @@ column, called "Events" and select the Eventdata-folder or any page
 below the slub_events template in the middle column.
 
 .. figure:: ../Images/UserManual/slub-events-backend-module.jpg
-	:width: 500px
-	:alt: The Backend Module
+  :width: 500px
+  :alt: The Backend Module
 
-        	The backend module appears on the right column if a page in the
-        	pagetreeg has been selected.
+  The backend module appears on the right column if a page in the
+  pagetreeg has been selected.
 
 
 **Important:** You have to set the StoragePid of the Eventdata-folder on
@@ -72,10 +72,10 @@ following error message:
 
 
 .. figure:: ../Images/UserManual/slub-events-error-cannot-find-configuration.jpg
-	:width: 500px
-	:alt: Error: cannot find the configuration
+  :width: 500px
+  :alt: Error: cannot find the configuration
 
-        	Error if no page or folder is selected with the slub_events template.
+  Error if no page or folder is selected with the slub_events template.
 
 
 
@@ -142,33 +142,31 @@ dresden.de/>`_
 
 
 .. figure:: ../Images/UserManual/slub-events-list-view.jpg
-	:width: 500px
-	:alt: Listing View
+  :width: 500px
+  :alt: Listing View
 
-        	Listing of Events
+  Listing of Events
 
 
 
 .. figure:: ../Images/UserManual/slub-events-subscription-view.jpg
-	:width: 500px
-	:alt: Subscription View
+  :width: 500px
+  :alt: Subscription View
 
-        	Subscription Form
+  Subscription Form
 
 
 
 .. figure:: ../Images/UserManual/slub-events-category-wissensbar-event-list-view.jpg
-	:width: 500px
-	:alt: Knowledge Bar View
+  :width: 500px
+  :alt: Knowledge Bar View
 
-        	Knowledge Bar View
+  Knowledge Bar View
 
 
 
 .. figure:: ../Images/UserManual/slub-events-category-wissensbar-view.jpg
-	:width: 500px
-	:alt: Knowledge View
+  :width: 500px
+  :alt: Knowledge View
 
-        	Knowledge View
-
-
+  Knowledge View

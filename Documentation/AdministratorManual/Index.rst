@@ -173,19 +173,19 @@ the event.
          Argument
 
    :Example:
-                 Example
+         Example
 
-           :Description:
-                 Description
+   :Description:
+         Description
 
-         - :Argument:
-                 storagePid
+ - :Argument:
+         storagePid
 
-           :Example:
-        		1234
+   :Example:
+		1234
 
-           :Description:
-                 Set the storagePid of your ``Eventdata`` folder. The scheduler
+   :Description:
+         Set the storagePid of your ``Eventdata`` folder. The scheduler
          has no access to your page template. That's why you set it here
          again.
 
@@ -218,19 +218,19 @@ all events and the number of subscribers inline and as CSV attachment.
          Argument
 
    :Example:
-                 Example
+         Example
 
-           :Description:
-                 Description
+   :Description:
+         Description
 
-         - :Argument:
-                 storagePid
+ - :Argument:
+         storagePid
 
-           :Example:
-        		1234
+   :Example:
+		1234
 
-           :Description:
-                 Set the storagePid of your ``Eventdata`` folder. The scheduler
+   :Description:
+         Set the storagePid of your ``Eventdata`` folder. The scheduler
          has no access to your page template. That's why you set it here
          again.
 
@@ -241,18 +241,17 @@ all events and the number of subscribers inline and as CSV attachment.
         		``webmaster@slub-dresden.de``
 
    :Description:
-                 Set the sender email address of outgoing emails to the
-                 contact person.
-                 Emails to the subscribers get the contact persons email as
-                 sender address.
+         Set the sender email address of outgoing emails to the
+         contact person.
+         Emails to the subscribers get the contact persons email as
+         sender address.
 
-         - :Argument:
-                 receiverEmailAddress
+ - :Argument:
+         receiverEmailAddress
 
-           :Example:
-        		``abc@slub-dresden.de, dfg@slub-dresden.de``
+   :Example:
+		``abc@slub-dresden.de, dfg@slub-dresden.de``
 
    :Description:
-                 Set the receiver email address of the statistics report. You
-                 may enter a comma separated list.
-
+         Set the receiver email address of the statistics report. You
+         may enter a comma separated list.
