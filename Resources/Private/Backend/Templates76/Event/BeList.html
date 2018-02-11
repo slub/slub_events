@@ -16,14 +16,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<table class="tx_slubevents table table-bordered table-striped">
 			<tr>
 				<th>
-					<se:be.functionBar icon="new"/>
-					<f:link.action action="beNewEvent" controller="Event"
-								   title="<f:translate key='be.createNewEvent' />"
-								   arguments="{step : '0'}">
-						<button type="button" class="btn btn-default" aria-label="Left Align">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-						</button>
-					</f:link.action>
+          <f:format.raw>
+              <se:be.functionBar icon="new"/>
+        </f:format.raw>
 				</th>
 				<th>
 					<f:translate key="tx_slubevents_domain_model_event.title"/>
@@ -43,14 +38,21 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<f:for each="{events}" as="event" iteration="eventIterator">
 				<tr class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
 					<td>
-						<se:be.functionBar icon="edit" event="{event}"/>
+            <f:format.raw>
+                <se:be.functionBar icon="edit" event="{event}"/>
+            </f:format.raw>
 					</td>
 					<td>
-						<se:be.functionBar icon="geniusbar" event="{event}"/>
+            <f:format.raw>
+                <se:be.functionBar icon="geniusbar" event="{event}"/>
                     <span class="eventtitle"
-						  title="{event.description -> f:format.stripTags()}">{event.title}</span><br/>
+                          title="{event.description -> f:format.stripTags()}">{event.title}
+                    </span>
+                    <br/>
                     <span class="eventcontact">{event.contact.name}: <f:link.email
-						email="{event.contact.email}"/></span>
+                          email="{event.contact.email}"/>
+                    </span>
+            </f:format.raw>
 					</td>
 					<td>
 						<f:for each="{event.categories}" as="category">
@@ -74,14 +76,16 @@ Otherwise your changes will be overwritten the next time you save the extension 
 					<td>
 						<f:if condition="{event.hidden} == 0">
 							<f:then>
-								<f:be.buttons.icon icon="actions-edit-copy"
-												   uri="{f:uri.action(action:'beCopy' arguments:'{event:event}')}"
-												   title="<f:translate key='be.copyEvent' />"/>
+                   <f:link.action action="beCopy" arguments="{event: event}">
+                       <core:icon identifier="actions-edit-copy" size="small" />
+                   </f:link.action>
 							</f:then>
 						</f:if>
 					</td>
 					<td>
-						<se:be.functionBar icon="hide" event="{event}"/>
+            <f:format.raw>
+                <se:be.functionBar icon="hide" event="{event}"/>
+            </f:format.raw>
 					</td>
 					<td>
 						<f:if condition="{event.hidden} == 0">
