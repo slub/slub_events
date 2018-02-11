@@ -132,11 +132,7 @@ return [
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
-                'checkbox' => 0,
                 'default'  => 0,
-                'range'    => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
-                ],
             ],
         ],
         'endtime'                  => [
@@ -149,11 +145,7 @@ return [
                 'size'     => 13,
                 'max'      => 20,
                 'eval'     => 'datetime',
-                'checkbox' => 0,
                 'default'  => 0,
-                'range'    => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
-                ],
             ],
         ],
         'title'                    => [
@@ -172,10 +164,10 @@ return [
             'config'  => [
                 'type'     => 'input',
                 // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
-                'size'     => 10,
+                'size'     => 13,
+                'max'      => 20,
                 'eval'     => 'datetime,required',
-                'checkbox' => 1,
-                'default'  => time(),
+                'default'  => 0,
             ],
         ],
         'all_day'                  => [
@@ -192,9 +184,9 @@ return [
             'config'  => [
                 'type'     => 'input',
                 // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
-                'size'     => 10,
+                'size'     => 13,
+                'max'      => 20,
                 'eval'     => 'datetime',
-                'checkbox' => 1,
                 'default'  => 0,
             ],
         ],
@@ -224,7 +216,7 @@ return [
                 'size'     => 1,
                 'maxitems' => 1,
                 'eval'     => '',
-                'default'  => 0,
+                'default'  => 60,
             ],
         ],
         'sub_end_date_time'        => [
@@ -234,9 +226,9 @@ return [
             'config'  => [
                 'type'     => 'input',
                 // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
-                'size'     => 10,
+                'size'     => 13,
+                'max'      => 20,
                 'eval'     => 'datetime',
-                'checkbox' => 1,
                 'default'  => 0,
             ],
         ],
@@ -267,7 +259,7 @@ return [
                 'size'     => 1,
                 'maxitems' => 1,
                 'eval'     => '',
-                'default'  => 0,
+                'default'  => 1440,
             ],
         ],
         'teaser'                   => [
