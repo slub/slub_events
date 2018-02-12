@@ -171,14 +171,14 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 //      $GLOBALS['BE_USER']->uc['lang'] = 'de';
         $GLOBALS['LANG']->init('de');
 
-        $objectManager = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
 
         $this->eventRepository = $objectManager->get(
-            '\Slub\SlubEvents\Domain\Repository\EventRepository'
+            \Slub\SlubEvents\Domain\Repository\EventRepository::class
         );
 
         $this->configurationManager = $objectManager->get(
-            '\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface'
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::class
         );
     }
 
