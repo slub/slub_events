@@ -116,19 +116,23 @@ printCal {
 	config {
 		disableAllHeaderCode = 1
 		additionalHeaders = Content-type:text/calendar; charset=utf-8;|Content-Disposition: inline; filename="slubevent.ics"
-# 7.6 notation...
-#		additionalHeaders {
-#			10 {
-#				header = Content-type:text/calendar; charset=utf-8;
-#			}
-#			20 {
-#				header = Content-Disposition: inline; filename="slubevent.ics"
-#			}
-#		}
 		xhtml_cleaning = 0
 		admPanel = 0
 	}
 }
+# additionalHeaders has changed in TYPO3 7
+[compatVersion = 7.6.0]
+printCal.config {
+		additionalHeaders {
+			10 {
+				header = Content-type:text/calendar; charset=utf-8;
+			}
+			20 {
+				header = Content-Disposition: inline; filename="slubevent.ics"
+			}
+		}
+}
+[global]
 
 # ajax for fullcalendar
 ajaxEvents = PAGE
