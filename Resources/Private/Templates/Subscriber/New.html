@@ -46,7 +46,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:render partial="FormErrors" arguments="{obj: 'newSubscriber'}" />
 
-<f:form action="create" name="newSubscriber" object="{newSubscriber}" noCacheHash="1">
+<f:form action="create" name="newSubscriber" object="{newSubscriber}">
 
 	<f:if condition="{event.geniusBar}">
 		<f:then>
@@ -74,4 +74,3 @@ Otherwise your changes will be overwritten the next time you save the extension 
 </div>
 
 </f:section>
-
