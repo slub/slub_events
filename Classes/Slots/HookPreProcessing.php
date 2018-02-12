@@ -92,7 +92,7 @@ class HookPreProcessing
             if (empty($fieldArray['genius_bar'])) {
                 $message = GeneralUtility::makeInstance(
                     'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Veranstaltung gespeichert: "' . $fieldArray['title'] . '" am ' . gmstrftime('%a, %x %H:%M:%S',
+                    'Veranstaltung gespeichert: "' . $fieldArray['title'] . '" am ' . $this->gmstrftime(
                         $fieldArray['start_date_time']) . '.',
                     'OK',
                     FlashMessage::OK,
@@ -113,7 +113,7 @@ class HookPreProcessing
                     // get away last ', ' and add formating:
                     $category_text = '"' . substr($category_text, 0, strlen($category_text) - 2) . '"';
                 }
-                $message_text .= $category_text . ' am ' . gmstrftime('%a, %x %H:%M:%S',
+                $message_text .= $category_text . ' am ' . $this->gmstrftime(
                         $fieldArray['start_date_time']) . '.';
                 $message = GeneralUtility::makeInstance(
                     'TYPO3\CMS\Core\Messaging\FlashMessage',
@@ -127,8 +127,8 @@ class HookPreProcessing
             if ($fieldArray['start_date_time'] > $fieldArray['end_date_time'] && $fieldArray['end_date_time'] > 0) {
                 $message = GeneralUtility::makeInstance(
                     'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Ende (' . gmstrftime('%a, %x %H:%M:%S',
-                        $fieldArray['end_date_time']) . ') liegt vor dem Start (' . gmstrftime('%a, %x %H:%M:%S',
+                    'Ende (' . $this->gmstrftime(
+                        $fieldArray['end_date_time']) . ') liegt vor dem Start (' . $this->gmstrftime(
                         $fieldArray['start_date_time']) . ')',
                     'Fehler: Ende der Veranstaltung',
                     FlashMessage::ERROR,
@@ -138,11 +138,11 @@ class HookPreProcessing
 
             // use the select box value to calculate the end_date_time relative to start_date_time
             if (!empty($fieldArray['end_date_time_select'])) {
-                $fieldArray['end_date_time'] = $fieldArray['start_date_time'] + $fieldArray['end_date_time_select'] * 60;
+                $fieldArray['end_date_time'] = $this->calculateEndDateTime($fieldArray['start_date_time'], $fieldArray['end_date_time_select']);
                 unset($fieldArray['end_date_time_select']);
                 $message = GeneralUtility::makeInstance(
                     'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Ende der Veranstaltung gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S', $fieldArray['end_date_time']),
+                    'Ende der Veranstaltung gesetzt auf ' . $this->gmstrftime($fieldArray['end_date_time']),
                     'Bitte prüfen:',
                     FlashMessage::INFO,
                     true);
@@ -155,12 +155,11 @@ class HookPreProcessing
                     ($fieldArray['min_subscriber'] > 0 && empty($fieldArray['sub_end_date_time']))
                 ) {
                     if (!empty($fieldArray['sub_end_date_time_select'])) {
-                        $fieldArray['sub_end_date_time'] = $fieldArray['start_date_time'] - $fieldArray['sub_end_date_time_select'] * 60;
-                        unset($fieldArray['sub_end_date_time_select']);
+                        $fieldArray['sub_end_date_time'] = $this->calculateEndDateTime($fieldArray['start_date_time'], $fieldArray['sub_end_date_time_select'], FALSE);
 
                         $message = GeneralUtility::makeInstance(
                             'TYPO3\CMS\Core\Messaging\FlashMessage',
-                            'Ende der Anmeldungsfrist wurde gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S',
+                            'Ende der Anmeldungsfrist wurde gesetzt auf ' . $this->gmstrftime(
                                 $fieldArray['sub_end_date_time']),
                             'Bitte prüfen:',
                             FlashMessage::INFO,
@@ -168,12 +167,13 @@ class HookPreProcessing
                         $defaultFlashMessageQueue->enqueue($message);
                     }
                 }
+                unset($fieldArray['sub_end_date_time_select']);
 
                 // warn if subscription deadline is more than 3 days before the event.
                 if ($fieldArray['sub_end_date_time'] > 0 && ($fieldArray['start_date_time'] > $fieldArray['sub_end_date_time'] + (3 * 86400))) {
                     $message = GeneralUtility::makeInstance(
                         'TYPO3\CMS\Core\Messaging\FlashMessage',
-                        'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . gmstrftime('%a, %x %H:%M:%S',
+                        'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . $this->gmstrftime(
                             $fieldArray['sub_end_date_time']) . ' ==> ' . (int)(($fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']) / 86400) . ' Tage vorher!',
                         'Bitte prüfen:',
                         FlashMessage::WARNING,
@@ -181,6 +181,7 @@ class HookPreProcessing
                     $defaultFlashMessageQueue->enqueue($message);
                 }
             } else {
+                unset($fieldArray['sub_end_date_time_select']);
                 $fieldArray['sub_end_date_time'] = '';
             }
 
@@ -207,5 +208,57 @@ class HookPreProcessing
                 $defaultFlashMessageQueue->enqueue($message);
             }
         }
+    }
+
+    /**
+     * calculate end_date_time from selected time interval
+     *
+     * @param mixed $startDateTime
+     * @param mixed $selectedInterval
+     * @param boolean $add
+     *
+     * @return end_date_time
+     */
+    protected function calculateEndDateTime($startDateTime, $selectedInterval, $add = TRUE)
+    {
+        // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
+        if (version_compare(TYPO3_version, '8.7.0', '>=')) {
+            $sdt = new \DateTime($startDateTime);
+            $edt = new \DateTime();
+            if ($add === TRUE) {
+                $edt = $sdt->add(new \DateInterval("PT" . trim($selectedInterval) . "M"));
+            } else {
+                $edt = $sdt->sub(new \DateInterval("PT" . trim($selectedInterval) . "M"));
+            }
+            $endDateTime = $edt->format(\DateTime::ATOM);
+        } else {
+            if ($add === TRUE) {
+                $endDateTime = $startDateTime + $selectedInterval * 60;
+            } else {
+                $endDateTime = $startDateTime - $selectedInterval * 60;
+            }
+        }
+
+        return $endDateTime;
+    }
+
+    /**
+     * return formated timestring
+     *
+     * @param mixed $time
+     *
+     * @return string $formatedTimeString
+     */
+    protected function gmstrftime($time)
+    {
+      // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
+      if (version_compare(TYPO3_version, '8.7.0', '>=')) {
+          $dt = new \DateTime($time);
+          $formatedTimeString = gmstrftime('%a, %x %H:%M:%S', $dt->format('U'));
+      } else {
+          $formatedTimeString = gmstrftime('%a, %x %H:%M:%S', $time);
+      }
+
+      return $formatedTimeString;
     }
 }
