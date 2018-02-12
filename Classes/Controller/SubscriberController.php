@@ -576,11 +576,8 @@ class SubscriberController extends AbstractController
         // if search was triggered
         $submittedSearchParams = $this->getParametersSafely('searchParameter');
         if (is_array($submittedSearchParams)) {
-            // clean category array to prevent errors
-            $searchParameter['category'] = $this->cleanArray($submittedSearchParams['category']);
 
-            // merge search parameter
-            $searchParameter = array_merge($searchParameter, $submittedSearchParams);
+            $searchParameter = $submittedSearchParams;
 
             // save session data
             $this->setSessionData('tx_slubevents', $searchParameter);
@@ -721,15 +718,4 @@ class SubscriberController extends AbstractController
         $this->view->assign('emailText', $emailTextHTML);
     }
 
-    /**
-     * remove empty entries in array
-     *
-     * @param array $array
-     *
-     * @return array
-     */
-    protected function cleanArray(array $array)
-    {
-        return array_filter(array_map('trim', $array));
-    }
 }
