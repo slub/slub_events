@@ -56,7 +56,7 @@ class NewMonthTitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
     /**
      * Render the supplied DateTime object as a formatted date.
      *
-     * @param  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $events
+     * @param  \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $events
      * @param int $index
      *
      * @return int
