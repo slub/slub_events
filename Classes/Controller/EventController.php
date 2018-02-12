@@ -319,7 +319,6 @@ class EventController extends AbstractController
         );
 
         $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
-        $pageRenderer->loadJquery();
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);

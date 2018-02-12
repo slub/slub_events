@@ -616,6 +616,9 @@ class SubscriberController extends AbstractController
             $this->addFlashMessage('No events found.', 'Error', FlashMessage::ERROR);
         }
 
+        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
+
         $this->view->assign('categories', $categories);
         $this->view->assign('events', $events);
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
