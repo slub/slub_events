@@ -6,7 +6,7 @@
 				<f:form.checkbox id="category-{category.item.uid}"
 								name="searchParameter[category][{id}]"
 								value="{category.item.uid}"
-								checked="{categoriesSelected}"
+								checked="{se:condition.inArray(array: '{categoriesSelected}', value: '{category.item.uid}')}"
 								onclick="checkBoxes(this)"/>
 				<label for="category-{category.item.uid}" title="{category.item.uid}">{category.item.title}</label>
 
