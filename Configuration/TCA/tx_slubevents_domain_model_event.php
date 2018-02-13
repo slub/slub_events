@@ -40,7 +40,7 @@ return [
                 '--palette--;' . $LL . 'tx_slubevents_domain_model_event.end;paletteEnd,' .
                 'location,' .
                 'teaser,' .
-                'description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css],' .
+                'description,' .
                 '--div--;Anmeldebedingungen,' .
                 'contact,' .
                 'external_registration,' .
@@ -54,7 +54,7 @@ return [
                 '--div--;Angemeldete Teilnehmer,' .
                 'subscribers,' .
                 '--div--;Extras,' .
-                'hidden;;1,' .
+                'hidden, --palette--;;1,' .
                 'onlinesurvey,' .
                 'no_search',
         ],
