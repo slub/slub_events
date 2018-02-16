@@ -119,6 +119,9 @@
 		<trans-unit id="text.salutation">
 			<source>Dear</source>
 		</trans-unit>
+    <trans-unit id="text.subscriber.please_ask_your_question">
+			<source>Please ask your question(s) or describe your needs. Your message helps us very much to prepare the appointment as well as possible.</source>
+		</trans-unit>
 		<trans-unit id="text.save_to_your_calendar">
 			<source>Save event to your local calendar.</source>
 		</trans-unit>
@@ -285,5 +288,5 @@
 			<source>Please select a topic.</source>
 		</trans-unit>
 		</body>
-	</file>		
+	</file>
 </xliff>

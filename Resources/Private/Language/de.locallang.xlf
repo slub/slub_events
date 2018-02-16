@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-17T15:40:05Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-02-16T16:40:57Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -14,8 +14,8 @@
 			<target>Bearbeiten</target>
 		</trans-unit>
 		<trans-unit id="be.error.nofolderselected" approved="yes" xml:space="preserve">
-			<source>Cannot find the configuration! &lt;br /&gt;&lt;br /&gt;&lt;--  Please select a page or folder in the left tree to continue.</source>
-			<target>Keine Konfiguration gefunden! &lt;br /&gt;&lt;br /&gt; &lt;--- Bitte wählen Sie eine Seite oder einen Ordner im linken Seitenbaum aus.</target>
+			<source><![CDATA[Cannot find the configuration! <br /><br /><--  Please select a page or folder in the left tree to continue.]]></source>
+			<target><![CDATA[Keine Konfiguration gefunden! <br /><br /> <--- Bitte wählen Sie eine Seite oder einen Ordner im linken Seitenbaum aus.]]></target>
 		</trans-unit>
 		<trans-unit id="be.free" approved="yes">
 			<source>free</source>
@@ -93,6 +93,10 @@
 			<source>Please select topic</source>
 			<target>Bitte Thema wählen</target>
 		</trans-unit>
+		<trans-unit id="selecttopictobook" approved="yes">
+			<source>Please select a topic.</source>
+			<target>Bitte wählen Sie ein Thema.</target>
+		</trans-unit>
 		<trans-unit id="tasks.statistics.date" approved="yes">
 			<source>Date</source>
 			<target>Datum</target>
@@ -148,6 +152,10 @@
 		<trans-unit id="text.signature" approved="yes">
 			<source>SLUB Dresden</source>
 			<target>Ihre SLUB Dresden</target>
+		</trans-unit>
+		<trans-unit id="text.subscriber.please_ask_your_question" approved="yes">
+			<source>Please ask your question(s) or describe your needs. Your message helps us very much to prepare the appointment as well as possible.</source>
+			<target>Bitte stellen Sie uns Ihre Frage(n) zum Thema oder beschreiben Sie Ihr Anliegen etwas genauer. So können wir uns wir uns bestmöglich auf das Gespräch vorbereiten.</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents.be.eventmanagement" approved="yes">
 			<source>Event Management</source>
@@ -352,22 +360,6 @@
 		<trans-unit id="view_my_events" approved="yes">
 			<source>My Events</source>
 			<target>Meine Veranstaltungen</target>
-		</trans-unit>
-		<trans-unit id="persSelectTopic" approved="yes">
-			<source>Please select topic</source>
-			<target>Bitte Thema wählen</target>
-		</trans-unit>
-		<trans-unit id="persEvents" approved="yes">
-			<source>Events</source>
-			<target>Veranstaltungen</target>
-		</trans-unit>
-		<trans-unit id="persConsultingHours" approved="yes">
-			<source>Consulting hours</source>
-			<target>Sprechstunden</target>
-		</trans-unit>
-		<trans-unit id="selecttopictobook" approved="yes">
-			<source>Please select a topic.</source>
-			<target>Bitte wählen Sie ein Thema.</target>
 		</trans-unit>
 		</body>
 	</file>
