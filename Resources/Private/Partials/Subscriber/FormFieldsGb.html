@@ -23,8 +23,9 @@
 
 <label for="message">
 	<f:translate key="tx_slubevents_domain_model_subscriber.message"/>
+  <span class="required">*</span>
 </label>
-<f:form.textarea class="{readonly}" required="required" property="message" cols="60" rows="8"/><br/>
+<se:form.textarea class="{readonly}" required="required" property="message" cols="60" rows="8"/><br/>
 
 <f:form.hidden property="number" value="1"/>
 <f:form.hidden property="editcode" value="<se:format.editCode event='{event}' />"/>
