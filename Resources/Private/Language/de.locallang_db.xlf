@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-17T14:03:45Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-02-18T15:12:04Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -153,6 +153,10 @@
 			<source>External Registration Link</source>
 			<target>Link zur externen Anmeldung</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.externalevent" approved="yes">
+			<source>External Event</source>
+			<target>Externe Veranstaltung</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes">
 			<source>Knowledge Bar</source>
 			<target>Wissensbar-Veranstaltung</target>
@@ -177,9 +181,17 @@
 			<source>Online Survey</source>
 			<target>Online Umfrage</target>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.externalevent" approved="yes">
-			<source>External Event</source>
-			<target>Externe Veranstaltung</target>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
+			<source>Recurring Event</source>
+			<target>Wiederholende Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_end_date_time" approved="yes">
+			<source>Recurring End (Date and Time)</source>
+			<target>Ende der Wiederholung (Tag und Uhrzeit)</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options" approved="yes">
+			<source>Recurring Options</source>
+			<target>Wiederholungsoptionen</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.selecttopic" approved="yes">
 			<source>Please select topic</source>

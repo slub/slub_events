@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-02-16T16:40:57Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-02-18T15:14:46Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -16,6 +16,10 @@
 		<trans-unit id="be.error.nofolderselected" approved="yes" xml:space="preserve">
 			<source><![CDATA[Cannot find the configuration! <br /><br /><--  Please select a page or folder in the left tree to continue.]]></source>
 			<target><![CDATA[Keine Konfiguration gefunden! <br /><br /> <--- Bitte wählen Sie eine Seite oder einen Ordner im linken Seitenbaum aus.]]></target>
+		</trans-unit>
+		<trans-unit id="be.form.singe_event" approved="yes">
+			<source>Single Event</source>
+			<target>Einzel-Veranstaltung</target>
 		</trans-unit>
 		<trans-unit id="be.free" approved="yes">
 			<source>free</source>
@@ -113,6 +117,10 @@
 			<source>Invalid Email Address Given!</source>
 			<target>Falsche Email Adresse angegeben!</target>
 		</trans-unit>
+		<trans-unit id="tasks.statistics.invalidStoragePid" approved="yes">
+			<source>Invalid Storage Pid Given!</source>
+			<target>Ungültige Pid des Datenspeichers angegeben!</target>
+		</trans-unit>
 		<trans-unit id="tasks.statistics.name" approved="yes">
 			<source>Statistics Report</source>
 			<target>Monatsstatistik</target>
@@ -124,6 +132,10 @@
 		<trans-unit id="tasks.statistics.senderEmailAddress" approved="yes">
 			<source>Sender Email Address</source>
 			<target>Absender Email-Adresse</target>
+		</trans-unit>
+		<trans-unit id="tasks.statistics.storagePid" approved="yes">
+			<source>StoragePid</source>
+			<target>Datenspeicher Pid</target>
 		</trans-unit>
 		<trans-unit id="text.back_to_overview" approved="yes">
 			<source>Back to Overview</source>
@@ -240,6 +252,38 @@
 		<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" approved="yes">
 			<source>one free place</source>
 			<target>ein freier Platz</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
+			<source>Recurring Event</source>
+			<target>Wiederholende Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval" approved="yes">
+			<source>Recurring Interval</source>
+			<target>Wiederholungsintervall</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.2weekly" approved="yes">
+			<source>fortnightly</source>
+			<target>vierzehntägig</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.4weekly" approved="yes">
+			<source>four-week</source>
+			<target>vierwöchig</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.days" approved="yes">
+			<source>Recurring on given Days</source>
+			<target>Wiederholung an gewählten Wochentagen</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.monthly" approved="yes">
+			<source>monthly</source>
+			<target>monatlich</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.weekly" approved="yes">
+			<source>weekly</source>
+			<target>wöchentlich</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.yearly" approved="yes">
+			<source>yearly</source>
+			<target>jährlich</target>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes">
 			<source>Start of Event</source>
