@@ -7,6 +7,7 @@ CREATE TABLE tx_slubevents_domain_model_event (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	title varchar(255) DEFAULT '' NOT NULL,
+  parent int(11) unsigned DEFAULT '0' NOT NULL,
 	start_date_time int(11) DEFAULT '0' NOT NULL,
 	all_day tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	end_date_time int(11) DEFAULT '0' NOT NULL,
@@ -18,6 +19,9 @@ CREATE TABLE tx_slubevents_domain_model_event (
 	audience int(11) DEFAULT '0' NOT NULL,
 	sub_end_date_info_sent tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	genius_bar tinyint(1) unsigned DEFAULT '0' NOT NULL,
+  recurring tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	recurring_options varchar(255) DEFAULT '' NOT NULL,
+	recurring_end_date_time int(11) DEFAULT '0' NOT NULL,
 	cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	onlinesurvey varchar(255) DEFAULT '' NOT NULL,
 	categories int(11) unsigned DEFAULT '0' NOT NULL,
