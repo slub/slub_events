@@ -178,13 +178,33 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
      */
     protected function getGeniusBarIcon(\Slub\SlubEvents\Domain\Model\Event $event)
     {
-
         if ($event !== null) {
             if ($event->getGeniusBar()) {
-                return '<span title="Wissensbar-Termin" class="geniusbar">W&nbsp;</span>';
+                $title = LocalizationUtility::translate('tx_slubevents_domain_model_event.genius_bar', 'slub_events', $arguments = null);
+                return '<span title="' . $title . '" class="geniusbar">[W]&nbsp;</span>';
             }
         }
+    }
 
+    /**
+     * Returns the Recurring Icon
+     *
+     * @param event \Slub\SlubEvents\Domain\Model\Event
+     * @return string html output
+     */
+    protected function getRecurringIcon(\Slub\SlubEvents\Domain\Model\Event $event)
+    {
+        if ($event !== null) {
+            if ($event->isRecurring()) {
+                $title = LocalizationUtility::translate('tx_slubevents_domain_model_event.recurring', 'slub_events', $arguments = null);
+                return '<span title="' . $title . '" class="recuring">[R]&nbsp;</span>';
+            } else {
+                if ($event->getParent()) {
+                  $title = LocalizationUtility::translate('tx_slubevents_domain_model_event.recurring', 'slub_events', $arguments = null);
+                  return '<span title="' . $title . '" class="recuring">[RW]&nbsp;</span>';
+                }
+            }
+        }
     }
 
     /**
@@ -239,6 +259,9 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
                 break;
             case 'geniusbar':
                 $content = $this->getGeniusBarIcon($event);
+                break;
+            case 'recurring':
+                $content = $this->getRecurringIcon($event);
                 break;
             case 'datepicker':
                 $content = $this->getDatePickerIcon();

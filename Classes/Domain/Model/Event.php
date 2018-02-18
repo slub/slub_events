@@ -51,7 +51,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $title;
 
     /**
-     * Parent Event (in case of reccuring event)
+     * Parent Event (in case of recurring event)
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event>
      */

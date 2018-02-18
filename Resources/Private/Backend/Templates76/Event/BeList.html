@@ -44,14 +44,15 @@ Otherwise your changes will be overwritten the next time you save the extension 
 					</td>
 					<td>
             <f:format.raw>
+                <se:be.functionBar icon="recurring" event="{event}"/>
                 <se:be.functionBar icon="geniusbar" event="{event}"/>
-                    <span class="eventtitle"
-                          title="{event.description -> f:format.stripTags()}">{event.title}
-                    </span>
-                    <br/>
-                    <span class="eventcontact">{event.contact.name}: <f:link.email
-                          email="{event.contact.email}"/>
-                    </span>
+                <span class="eventtitle"
+                      title="{event.description -> f:format.stripTags()}">{event.title}
+                </span>
+                <br/>
+                <span class="eventcontact">{event.contact.name}: <f:link.email
+                      email="{event.contact.email}"/>
+                </span>
             </f:format.raw>
 					</td>
 					<td>
