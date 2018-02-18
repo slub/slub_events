@@ -207,6 +207,11 @@ class HookPreProcessing
                     true);
                 $defaultFlashMessageQueue->enqueue($message);
             }
+
+            // save recurring options as serialized Array
+            if (!empty($fieldArray['recurring_options'])) {
+              $fieldArray['recurring_options'] = serialize($fieldArray['recurring_options']);
+            }
         }
     }
 

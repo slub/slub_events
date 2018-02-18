@@ -25,7 +25,7 @@ return [
         ],
         'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,discipline,',
         'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
-        'requestUpdate'            => 'genius_bar, external_registration',
+        'requestUpdate'            => 'genius_bar, external_registration, recurring',
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, contact',
