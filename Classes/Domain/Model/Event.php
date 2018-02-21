@@ -53,7 +53,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Parent Event (in case of recurring event)
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event>
+     * @var \Slub\SlubEvents\Domain\Model\Event
      */
     protected $parent;
 
@@ -322,8 +322,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
          * It will be rewritten on each save in the extension builder
          * You may modify the constructor of this class instead
          */
-        $this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 
         $this->discipline = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -332,33 +330,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Adds an Event
-     *
-     * @param \Slub\SlubEvents\Domain\Model\Event $parent
-     *
-     * @return void
-     */
-    public function addParent(\Slub\SlubEvents\Domain\Model\Event $parent)
-    {
-        $this->parent->attach($parent);
-    }
-
-    /**
-     * Removes an Event
-     *
-     * @param \Slub\SlubEvents\Domain\Model\Event $parentToRemove The Event to be removed
-     *
-     * @return void
-     */
-    public function removeParent(\Slub\SlubEvents\Domain\Model\Event $parentToRemove)
-    {
-        $this->parent->detach($parentToRemove);
-    }
-
-    /**
      * Returns the parent
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $parent
+     * @return \Slub\SlubEvents\Domain\Model\Event $parent
      */
     public function getParent()
     {
@@ -368,11 +342,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the parent
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Event> $parent
+     * @param \Slub\SlubEvents\Domain\Model\Event $parent
      *
      * @return void
      */
-    public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent)
+    public function setParent(\Slub\SlubEvents\Domain\Model\Event $parent)
     {
         $this->parent = $parent;
     }

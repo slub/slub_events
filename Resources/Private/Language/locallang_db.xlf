@@ -104,6 +104,9 @@
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar">
 			<source>Knowledge Bar</source>
 		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.parent">
+			<source>Parent Event</source>
+		</trans-unit>
     <trans-unit id="tx_slubevents_domain_model_event.recurring">
 			<source>Recurring Event</source>
 		</trans-unit>

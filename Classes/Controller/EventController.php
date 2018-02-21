@@ -36,6 +36,7 @@ namespace Slub\SlubEvents\Controller;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class EventController extends AbstractController
 {
@@ -339,7 +340,7 @@ class EventController extends AbstractController
     {
         $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($event);
         /** @var \Slub\SlubEvents\Domain\Model\Event $newEvent */
-        $newEvent = $this->objectManager->get('Slub\SlubEvents\Domain\Model\Event');
+        $newEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
 
         foreach ($availableProperties as $propertyName) {
             if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
@@ -429,6 +430,95 @@ class EventController extends AbstractController
         $this->view->assign('disciplinesIds', explode(',', $this->settings['disciplineSelection']));
     }
 
+    /**
+     * Initializes the create childs action
+     *
+     * @return void
+     */
+    public function initializeCreateChildsAction()
+    {
+        $config = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $settings = $config['module.']['tx_slubevents.']['persistence.'];
+        // set storagePid to point extbase to the right repositories
+        $configurationArray = [
+            'persistence' => [
+                'storagePid' => $settings['storagePid'],
+            ],
+        ];
+        $this->configurationManager->setConfiguration($configurationArray);
+    }
+
+    /**
+     * action update
+     *
+     * @param integer $id
+     * @param array $recurring_options
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Event
+     */
+    public function createChildsAction($id, $recurring_options)
+    {
+        $this->initializeCreateChildsAction();
+
+        $parentEvent = $this->eventRepository->findOneByUid($id);
+
+        if ($parentEvent) {
+          $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($parentEvent);
+          /** @var \Slub\SlubEvents\Domain\Model\Event $newEvent */
+          $newEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
+
+          foreach ($availableProperties as $propertyName) {
+              if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
+                  && !in_array($propertyName, [
+                      'uid',
+                      'pid',
+                      'parent',
+                      'startDateTime',
+                      'endDateTime',
+                      'subscribers',
+                      'cancelled',
+                      'subEndDateTime',
+                      'subEndDateInfoSent',
+                      'categories',
+                      'discipline',
+                  ])
+              ) {
+                  $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($parentEvent, $propertyName);
+                  // special handling for onlinesurvey field to remove trailing timestamp with sent date
+                  if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
+                      $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
+                  }
+                  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
+              }
+          }
+
+          $newEvent->setParent($parentEvent);
+
+          $newEvent->setStartDateTime($parentEvent->getStartDateTime());
+
+          debug($parentEvent->getStartDateTime(), 'getStartDateTime');
+
+          foreach ($parentEvent->getCategories() as $cat) {
+              $newEvent->addCategory($cat);
+          }
+
+          foreach ($parentEvent->getDiscipline() as $discipline) {
+              $newEvent->addDiscipline($discipline);
+          }
+
+          if ($parentEvent->getGeniusBar()) {
+              $newEvent->setTitle('Wissensbar ' . $newEvent->getContact()->getName());
+          } else {
+              $newEvent->setTitle($newEvent->getTitle());
+          }
+
+          $this->eventRepository->add($newEvent);
+
+        }
+        //debug($parentEvent, 'parentEvent in EventController');
+        //$this->eventRepository->add($event);
+        //return $this->eventRepository->findall()->getFirst();
+    }
 
     /**
      * action errorAction

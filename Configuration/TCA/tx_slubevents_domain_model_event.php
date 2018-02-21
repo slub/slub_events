@@ -28,7 +28,7 @@ return [
         'requestUpdate'            => 'genius_bar, external_registration, recurring',
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, contact',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, contact',
     ],
     'types'     => [
         // Single event
@@ -72,7 +72,7 @@ return [
             'showitem'       => 'sub_end_date_time_select, --linebreak--,  sub_end_date_time, sub_end_date_info_sent',
         ],
         'paletteRecurring'       => [
-            'showitem'       => 'recurring, --linebreak--, recurring_options, recurring_end_date_time',
+            'showitem'       => 'parent, recurring, --linebreak--, recurring_options, recurring_end_date_time',
          ],
     ],
     'columns'   => [
@@ -394,7 +394,21 @@ return [
                 'default' => 0,
             ],
         ],
+        'parent'           => [
+            'displayCond' => 'FIELD:parent:REQ:true',
+            'exclude'   => 0,
+            'l10n_mode' => 'exclude',
+            'label'     => $LL . 'tx_slubevents_domain_model_event.parent',
+            'config'    => [
+                'type' => 'none',
+                'format' => 'user',
+                'format.' => [
+                  'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->eventParentString',
+                ],
+            ],
+        ],
         'recurring'               => [
+             'displayCond' => 'FIELD:parent:REQ:false',
              'exclude' => 0,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring',
              'config'  => [

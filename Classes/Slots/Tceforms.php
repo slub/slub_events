@@ -207,4 +207,13 @@ class Tceforms
 
       return $formField;
     }
+
+    /*
+     * format the parent event string in TCA form
+     */
+    public function eventParentString($PA, $fObj)
+    {
+      $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, title', 'tx_slubevents_domain_model_event', 'uid=' . (int)$PA['value'])->fetch_assoc();
+      return '[' . $parentEventRow['uid'] . '] ' . $parentEventRow['title'];
+    }
 }
