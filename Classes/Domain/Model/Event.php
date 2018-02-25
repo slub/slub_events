@@ -212,14 +212,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $recurring_options;
+    protected $recurringOptions;
 
     /**
      * The recurring end dateTime
      *
      * @var \DateTime
      */
-    protected $recurring_end_date_time;
+    protected $recurringEndDateTime;
 
     /**
      * Returns hidden
@@ -876,23 +876,23 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the recurring options
      *
-     * @return array $recurring_options
+     * @return array $recurringOptions
      */
     public function getRecurringOptions()
     {
-        return unserialize($this->recurring_options);
+        return unserialize($this->recurringOptions);
     }
 
     /**
      * Sets the recurring options
      *
-     * @param array $recurring_options
+     * @param array $recurringOptions
      *
      * @return void
      */
-    public function setRecurringOptions($recurring_options)
+    public function setRecurringOptions($recurringOptions)
     {
-        $this->recurring_options = serialize($recurring_options);
+        $this->recurringOptions = serialize($recurringOptions);
     }
 
     /**
