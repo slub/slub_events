@@ -432,17 +432,22 @@ class EventController extends AbstractController
 
     /**
      * Initializes the create childs action
+     * @param integer $id
      *
      * @return void
      */
-    public function initializeCreateChildsAction()
+    public function initializeCreateChildsAction($id)
     {
-        $config = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $settings = $config['module.']['tx_slubevents.']['persistence.'];
+        // this does not work reliable in this context (maybe a bug in TYPO3 7.6?)
+        // as the childs must be on the same storage pid as the parent, we take
+        // take the pid and set is as storagePid
+        //$config = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, pid', 'tx_slubevents_domain_model_event', 'uid=' . (int)$id)->fetch_assoc();
+        $this->settings['storagePid'] = $parentEventRow['pid'];
         // set storagePid to point extbase to the right repositories
         $configurationArray = [
             'persistence' => [
-                'storagePid' => $settings['storagePid'],
+                'storagePid' => $parentEventRow['pid'],
             ],
         ];
         $this->configurationManager->setConfiguration($configurationArray);
@@ -452,68 +457,99 @@ class EventController extends AbstractController
      * action update
      *
      * @param integer $id
-     * @param array $recurring_options
      *
      * @return \Slub\SlubEvents\Domain\Model\Event
      */
-    public function createChildsAction($id, $recurring_options)
+    public function createChildsAction($id)
     {
-        $this->initializeCreateChildsAction();
+        $this->initializeCreateChildsAction($id);
 
         $parentEvent = $this->eventRepository->findOneByUid($id);
 
         if ($parentEvent) {
-          $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($parentEvent);
-          /** @var \Slub\SlubEvents\Domain\Model\Event $newEvent */
-          $newEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
 
-          foreach ($availableProperties as $propertyName) {
-              if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
-                  && !in_array($propertyName, [
-                      'uid',
-                      'pid',
-                      'parent',
-                      'startDateTime',
-                      'endDateTime',
-                      'subscribers',
-                      'cancelled',
-                      'subEndDateTime',
-                      'subEndDateInfoSent',
-                      'categories',
-                      'discipline',
-                  ])
-              ) {
-                  $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($parentEvent, $propertyName);
-                  // special handling for onlinesurvey field to remove trailing timestamp with sent date
-                  if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
-                      $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
-                  }
-                  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
-              }
-          }
+            $allChildren = $this->eventRepository->findByParent($parentEvent);
 
-          $newEvent->setParent($parentEvent);
+            $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($parentEvent);
 
-          $newEvent->setStartDateTime($parentEvent->getStartDateTime());
+            $childDateTimes = $this->getChildDateTimes($parentEvent);
 
-          debug($parentEvent->getStartDateTime(), 'getStartDateTime');
+            foreach ($childDateTimes as $childDateTime) {
 
-          foreach ($parentEvent->getCategories() as $cat) {
-              $newEvent->addCategory($cat);
-          }
+                $isUpdate = FALSE;
 
-          foreach ($parentEvent->getDiscipline() as $discipline) {
-              $newEvent->addDiscipline($discipline);
-          }
+                $event = $this->eventRepository->findOneByStartDateTimeAndParent($childDateTime['startDateTime'], $parentEvent);
 
-          if ($parentEvent->getGeniusBar()) {
-              $newEvent->setTitle('Wissensbar ' . $newEvent->getContact()->getName());
-          } else {
-              $newEvent->setTitle($newEvent->getTitle());
-          }
+                if ($event) {
+                    $newEvent = $event;
+                    $isUpdate = TRUE;
+                } else {
+                  /** @var \Slub\SlubEvents\Domain\Model\Event $newEvent */
+                  $newEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
+                }
 
-          $this->eventRepository->add($newEvent);
+                foreach ($availableProperties as $propertyName) {
+                    if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
+                        && !in_array($propertyName, [
+                            'uid',
+                            'pid',
+                            'parent',
+                            'recurring',
+                            'recurring_options',
+                            'recurring_end_date_time',
+                            'startDateTime',
+                            'endDateTime',
+                            'subscribers',
+                            'cancelled',
+                            'subEndDateTime',
+                            'subEndDateInfoSent',
+                            'categories',
+                            'discipline',
+                        ])
+                    ) {
+                        $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($parentEvent, $propertyName);
+                        // special handling for onlinesurvey field to remove trailing timestamp with sent date
+                        if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
+                            $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
+                        }
+                        \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
+                    }
+                }
 
+                $newEvent->setParent($parentEvent);
+
+                $newEvent->setStartDateTime($childDateTime['startDateTime']);
+
+                $newEvent->setEndDateTime($childDateTime['endDateTime']);
+
+                if ($childDateTime['subEndDateTime']) {
+                    $newEvent->setSubEndDateTime($childDateTime['subEndDateTime']);
+                }
+
+                foreach ($parentEvent->getCategories() as $cat) {
+                    $newEvent->addCategory($cat);
+                }
+
+                foreach ($parentEvent->getDiscipline() as $discipline) {
+                    $newEvent->addDiscipline($discipline);
+                }
+
+                if ($parentEvent->getGeniusBar()) {
+                    $newEvent->setTitle('Wissensbar ' . $newEvent->getContact()->getName());
+                } else {
+                    $newEvent->setTitle($newEvent->getTitle());
+                }
+
+                if ($isUpdate === TRUE) {
+                    $this->eventRepository->update($newEvent);
+                } else {
+                    $this->eventRepository->add($newEvent);
+                }
+
+            }
+
+            $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+            $persistenceManager->persistAll();
         }
         //debug($parentEvent, 'parentEvent in EventController');
         //$this->eventRepository->add($event);
@@ -635,8 +671,8 @@ class EventController extends AbstractController
     /**
      * action printCal
      *
-     * @param @param \Slub\SlubEvents\Domain\Model\Event $event
-
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     *
      * @return void
      */
     public function printCalAction(\Slub\SlubEvents\Domain\Model\Event $event = null)
@@ -665,4 +701,53 @@ class EventController extends AbstractController
         $this->view->assign('event', $event);
     }
 
+    /**
+     * calculate all child dateTime fields (start_date_time, end_date_time, sub_end_date_time ...)
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event $parentEvent
+     *
+     * @return void
+     */
+    public function getChildDateTimes($parentEvent)
+    {
+        $recurring_options = $parentEvent->getRecurringOptions();
+        $recurringEndDateTime = $parentEvent->getRecurringEndDateTime();
+
+        $parentStartDateTime = $parentEvent->getStartDateTime();
+        $parentEndDateTime = $parentEvent->getEndDateTime();
+        $parentSubEndDateTime = $parentEvent->getSubEndDateTime();
+
+        if (!$recurringEndDateTime) {
+          // if no recurringEndDateTime is given, set it to ... 3 monts for now
+          $recurringEndDateTime = clone $parentStartDateTime;
+          $recurringEndDateTime->add(new \DateInterval("P3M"));
+        }
+
+        $childDateTimes = array();
+
+        if ($recurring_options['interval'] == 'weekly') {
+            $eventStartDateTime = clone $parentStartDateTime;
+            $eventEndDateTime = clone $parentEndDateTime;
+            if ($parentSubEndDateTime) {
+                $eventSubEndDateTime = clone $parentSubEndDateTime;
+            }
+            $oneWeekInterval = new \DateInterval("P1W");
+            do {
+                $eventEndDateTime->add($oneWeekInterval);
+                $eventStartDateTime->add($oneWeekInterval);
+                if ($parentSubEndDateTime) {
+                    $eventSubEndDateTime->add($oneWeekInterval);
+                }
+                $childDateTime = array();
+                $childDateTime['endDateTime'] = clone $eventEndDateTime;
+                $childDateTime['startDateTime'] = clone $eventStartDateTime;
+                if ($parentSubEndDateTime) {
+                    $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
+                }
+                $childDateTimes[] = $childDateTime;
+            } while ($eventStartDateTime < $recurringEndDateTime);
+        }
+        debug($childDateTimes, '$childDateTimes');
+        return $childDateTimes;
+    }
 }

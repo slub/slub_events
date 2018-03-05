@@ -114,6 +114,22 @@ class HookPostProcessing
             // should be already unset in HookPreProcessing
             unset($fieldArray['end_date_time_select']);
             unset($fieldArray['sub_end_date_time_select']);
+
+            // we need to search and update or create all child events
+            if ($status == "update" && isset($fieldArray['recurring_options'])) {
+
+                $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+
+                $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
+
+              $eventFound = $eventController->createChildsAction($id);
+            }
+
+            if ($status == "new") {
+
+                debug($id, 'id new');
+
+            }
         }
     }
 
@@ -142,7 +158,7 @@ class HookPostProcessing
 
             // unfortunately I cannot access the category IDs only the amount of categories
             // but at least I get the start_date_time so I will delete all cached files around this
-            // start_date_tim
+            // start_date_time
             $this->clearAjaxCacheFiles($pObj->checkValue_currentRecord['start_date_time']);
         }
     }

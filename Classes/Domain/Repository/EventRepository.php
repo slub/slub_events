@@ -450,6 +450,37 @@ namespace Slub\SlubEvents\Domain\Repository;
         return $query->execute();
     }
 
+
+    /**
+     * Finds one events with given startDateTime and parent
+     *
+     * @param \DateTime $startDateStamp
+     * @param Event $parent
+     *
+     * @return array The found Event Objects
+     */
+    public function findOneByStartDateTimeAndParent($startDateStamp, $parent)
+    {
+        $query = $this->createQuery();
+
+        $constraints = [];
+
+        $constraints[] = $query->equals('start_date_time', $startDateStamp);
+        $constraints[] = $query->equals('parent', $parent);
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        // order by start_date -> start_time...
+        $query->setOrderings(
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
+        );
+
+        return $query->execute()->getFirst();
+    }
+
+
     /**
      * Returns the name of the Event-Table
      * @return string
