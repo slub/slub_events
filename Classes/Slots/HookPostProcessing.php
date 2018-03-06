@@ -116,13 +116,13 @@ class HookPostProcessing
             unset($fieldArray['sub_end_date_time_select']);
 
             // we need to search and update or create all child events
-            if ($status == "update" && isset($fieldArray['recurring_options'])) {
+            if ($status == "update") {
 
                 $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
 
                 $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
 
-              $eventFound = $eventController->createChildsAction($id);
+                $eventFound = $eventController->createChildsAction($id);
             }
 
             if ($status == "new") {

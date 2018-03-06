@@ -454,11 +454,11 @@ class EventController extends AbstractController
     }
 
     /**
-     * action update
+     * create or update child events for given event id
      *
      * @param integer $id
      *
-     * @return \Slub\SlubEvents\Domain\Model\Event
+     * @return void
      */
     public function createChildsAction($id)
     {
@@ -478,18 +478,19 @@ class EventController extends AbstractController
 
                 $isUpdate = FALSE;
 
-                $event = $this->eventRepository->findOneByStartDateTimeAndParent($childDateTime['startDateTime'], $parentEvent);
+                $childEvent = $this->eventRepository->findOneByStartDateTimeAndParent($childDateTime['startDateTime'], $parentEvent);
 
-                if ($event) {
-                    $newEvent = $event;
+                // a childevent for the given startDateTime already exists
+                if ($childEvent) {
                     $isUpdate = TRUE;
                 } else {
-                  /** @var \Slub\SlubEvents\Domain\Model\Event $newEvent */
-                  $newEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
+                  // no child event found - create a new one
+                  /** @var \Slub\SlubEvents\Domain\Model\Event $childEvent */
+                  $childEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
                 }
 
                 foreach ($availableProperties as $propertyName) {
-                    if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
+                    if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($childEvent, $propertyName)
                         && !in_array($propertyName, [
                             'uid',
                             'pid',
@@ -512,38 +513,38 @@ class EventController extends AbstractController
                         if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
                             $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
                         }
-                        \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
+                        \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($childEvent, $propertyName, $propertyValue);
                     }
                 }
 
-                $newEvent->setParent($parentEvent);
+                $childEvent->setParent($parentEvent);
 
-                $newEvent->setStartDateTime($childDateTime['startDateTime']);
+                $childEvent->setStartDateTime($childDateTime['startDateTime']);
 
-                $newEvent->setEndDateTime($childDateTime['endDateTime']);
+                $childEvent->setEndDateTime($childDateTime['endDateTime']);
 
                 if ($childDateTime['subEndDateTime']) {
-                    $newEvent->setSubEndDateTime($childDateTime['subEndDateTime']);
+                    $childEvent->setSubEndDateTime($childDateTime['subEndDateTime']);
                 }
 
                 foreach ($parentEvent->getCategories() as $cat) {
-                    $newEvent->addCategory($cat);
+                    $childEvent->addCategory($cat);
                 }
 
                 foreach ($parentEvent->getDiscipline() as $discipline) {
-                    $newEvent->addDiscipline($discipline);
+                    $childEvent->addDiscipline($discipline);
                 }
 
                 if ($parentEvent->getGeniusBar()) {
-                    $newEvent->setTitle('Wissensbar ' . $newEvent->getContact()->getName());
+                    $childEvent->setTitle('Wissensbar ' . $childEvent->getContact()->getName());
                 } else {
-                    $newEvent->setTitle($newEvent->getTitle());
+                    $childEvent->setTitle($childEvent->getTitle());
                 }
 
                 if ($isUpdate === TRUE) {
-                    $this->eventRepository->update($newEvent);
+                    $this->eventRepository->update($childEvent);
                 } else {
-                    $this->eventRepository->add($newEvent);
+                    $this->eventRepository->add($childEvent);
                 }
 
             }
@@ -551,9 +552,7 @@ class EventController extends AbstractController
             $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
             $persistenceManager->persistAll();
         }
-        //debug($parentEvent, 'parentEvent in EventController');
-        //$this->eventRepository->add($event);
-        //return $this->eventRepository->findall()->getFirst();
+
     }
 
     /**
