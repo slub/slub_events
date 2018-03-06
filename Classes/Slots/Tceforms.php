@@ -71,39 +71,42 @@ class Tceforms
     {
       $recurring_options = unserialize($PA['itemFormElValue']);
 
-      $week = [
-        1 => strftime("%a", strtotime('last Monday')),
-        2 => strftime("%a", strtotime('last Tuesday')),
-        3 => strftime("%a", strtotime('last Wednesday')),
-        4 => strftime("%a", strtotime('last Thursday')),
-        5 => strftime("%a", strtotime('last Friday')),
-        6 => strftime("%a", strtotime('last Saturday')),
-        7 => strftime("%a", strtotime('last Sunday')),
-      ];
-      $formField .= '<h4>'. LocalizationUtility::translate(
-          'tx_slubevents_domain_model_event.recurring_options.interval.days',
-          'slub_events').'</h4>';
-      $formField .= '<div class="btn-group" data-toggle="buttons">';
+      // working form part for later implementation
+      // recurring event on multiple weekdays
+      //
+      // $week = [
+      //   1 => strftime("%a", strtotime('last Monday')),
+      //   2 => strftime("%a", strtotime('last Tuesday')),
+      //   3 => strftime("%a", strtotime('last Wednesday')),
+      //   4 => strftime("%a", strtotime('last Thursday')),
+      //   5 => strftime("%a", strtotime('last Friday')),
+      //   6 => strftime("%a", strtotime('last Saturday')),
+      //   7 => strftime("%a", strtotime('last Sunday')),
+      // ];
+      // $formField .= '<h4>'. LocalizationUtility::translate(
+      //     'tx_slubevents_domain_model_event.recurring_options.interval.days',
+      //     'slub_events').'</h4>';
+      // $formField .= '<div class="btn-group" data-toggle="buttons">';
+      //
+      // for ($i=1; $i<8; $i++) {
+      //   if (is_array($recurring_options['weekday']) && in_array($i, $recurring_options['weekday'])) {
+      //     $active = 'active';
+      //     $checked = 'checked="checked"';
+      //   } else {
+      //     $active = '';
+      //     $checked = '';
+      //   }
+      //   $formField .= '<label for="weekday-'.$i.'" class="btn btn-primary '.$active.'">';
+      //   $formField .= '<input type="checkbox"  name="' . $PA['itemFormElName'] . '[weekday][]"';
+      //   $formField .= ' value="'.$i.'" '.$checked;
+      //   $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
+      //   $formField .= $PA['onFocus'];
+      //   $formField .= ' />';
+      //   $formField .= $week[$i] . '</label>';
+      //   //$formField .= '<label for="weekday-'.$i.'" class="btn btn-primary">' . $week[$i] . '</label>';
+      // }
+      // $formField .= '</div>';
 
-      for ($i=1; $i<8; $i++) {
-        if (is_array($recurring_options['weekday']) && in_array($i, $recurring_options['weekday'])) {
-          $active = 'active';
-          $checked = 'checked="checked"';
-        } else {
-          $active = '';
-          $checked = '';
-        }
-        $formField .= '<label for="weekday-'.$i.'" class="btn btn-primary '.$active.'">';
-        $formField .= '<input type="checkbox"  name="' . $PA['itemFormElName'] . '[weekday][]"';
-        $formField .= ' value="'.$i.'" '.$checked;
-        $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
-        $formField .= $PA['onFocus'];
-        $formField .= ' />';
-        $formField .= $week[$i] . '</label>';
-        //$formField .= '<label for="weekday-'.$i.'" class="btn btn-primary">' . $week[$i] . '</label>';
-      }
-
-      $formField .= '</div>';
       $formField .= '<h4>'. LocalizationUtility::translate(
           'tx_slubevents_domain_model_event.recurring_options.interval',
           'slub_events').'</h4>';
@@ -194,7 +197,7 @@ class Tceforms
         $checked = '';
       }
       $formField .= '<label for="interval-yearly" class="btn btn-primary '.$active.'">'.LocalizationUtility::translate(
-          'tx_slubevents_domain_model_event.recurring_options.interval.weekly',
+          'tx_slubevents_domain_model_event.recurring_options.interval.yearly',
           'slub_events'
       );
       $formField .= '<input type="radio" id="interval-yearly" name="' . $PA['itemFormElName'] . '[interval]"';
@@ -215,5 +218,37 @@ class Tceforms
     {
       $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, title', 'tx_slubevents_domain_model_event', 'uid=' . (int)$PA['value'])->fetch_assoc();
       return '[' . $parentEventRow['uid'] . '] ' . $parentEventRow['title'];
+    }
+
+    /*
+     * list all recurring childevents
+     */
+    public function recurring_events($PA, $fObj)
+    {
+        if ($PA['table'] == 'tx_slubevents_domain_model_event') {
+
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+            $configurationManager = $objectManager->get(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class);
+
+            $configurationArray = [
+                'persistence' => [
+                    'storagePid' => $PA['row']['pid'],
+                ],
+            ];
+            $configurationManager->setConfiguration($configurationArray);
+
+            //$eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
+            $eventRepository = $objectManager->get(\Slub\SlubEvents\Domain\Repository\EventRepository::class);
+
+            $childEvents = $eventRepository->findFutureByParent($PA['row']['uid']);
+
+            $output = '<ul>';
+            foreach ($childEvents as $childEvent) {
+                $output .= '<li>' . strftime('%a, %d.%m.%Y %H:%M', $childEvent->getStartDateTime()->getTimestamp()) . '</li>';
+            }
+            $output .= '</ul>';
+
+            return $output;
+        }
     }
 }

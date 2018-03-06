@@ -72,7 +72,7 @@ return [
             'showitem'       => 'sub_end_date_time_select, --linebreak--,  sub_end_date_time, sub_end_date_info_sent',
         ],
         'paletteRecurring'       => [
-            'showitem'       => 'parent, recurring, --linebreak--, recurring_options, recurring_end_date_time',
+            'showitem'       => 'parent, recurring, --linebreak--, recurring_options, recurring_end_date_time, --linebreak--, recurring_events',
          ],
     ],
     'columns'   => [
@@ -424,6 +424,19 @@ return [
                  'type'  => 'user',
                  'size'  => 60,
                  'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->recurring_options',
+                 'parameters' => array(
+                    'color' => 'green'
+                 )
+             ],
+         ],
+         'recurring_events'        => [
+             'displayCond' => 'FIELD:recurring:REQ:true',
+             'exclude' => 0,
+             'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_events',
+             'config'  => [
+                 'type'  => 'user',
+                 'size'  => 60,
+                 'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->recurring_events',
                  'parameters' => array(
                     'color' => 'green'
                  )

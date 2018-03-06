@@ -480,6 +480,32 @@ namespace Slub\SlubEvents\Domain\Repository;
         return $query->execute()->getFirst();
     }
 
+    /**
+     * Find all future childevent of given parent
+     *
+     * @param Event $parent
+     *
+     * @return array The found Event Objects
+     */
+    public function findFutureByParent($parent)
+    {
+        $query = $this->createQuery();
+
+        $constraints = [];
+        $constraints[] = $query->equals('parent', $parent);
+        $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        // order by start_date -> start_time...
+        $query->setOrderings(
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
+        );
+
+        return $query->execute();
+    }
 
     /**
      * Returns the name of the Event-Table

@@ -484,9 +484,9 @@ class EventController extends AbstractController
                 if ($childEvent) {
                     $isUpdate = TRUE;
                 } else {
-                  // no child event found - create a new one
-                  /** @var \Slub\SlubEvents\Domain\Model\Event $childEvent */
-                  $childEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
+                    // no child event found - create a new one
+                    /** @var \Slub\SlubEvents\Domain\Model\Event $childEvent */
+                    $childEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
                 }
 
                 foreach ($availableProperties as $propertyName) {
@@ -724,29 +724,44 @@ class EventController extends AbstractController
 
         $childDateTimes = array();
 
-        if ($recurring_options['interval'] == 'weekly') {
-            $eventStartDateTime = clone $parentStartDateTime;
-            $eventEndDateTime = clone $parentEndDateTime;
-            if ($parentSubEndDateTime) {
-                $eventSubEndDateTime = clone $parentSubEndDateTime;
-            }
-            $oneWeekInterval = new \DateInterval("P1W");
-            do {
-                $eventEndDateTime->add($oneWeekInterval);
-                $eventStartDateTime->add($oneWeekInterval);
-                if ($parentSubEndDateTime) {
-                    $eventSubEndDateTime->add($oneWeekInterval);
-                }
-                $childDateTime = array();
-                $childDateTime['endDateTime'] = clone $eventEndDateTime;
-                $childDateTime['startDateTime'] = clone $eventStartDateTime;
-                if ($parentSubEndDateTime) {
-                    $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
-                }
-                $childDateTimes[] = $childDateTime;
-            } while ($eventStartDateTime < $recurringEndDateTime);
+        $eventStartDateTime = clone $parentStartDateTime;
+        $eventEndDateTime = clone $parentEndDateTime;
+        if ($parentSubEndDateTime) {
+            $eventSubEndDateTime = clone $parentSubEndDateTime;
         }
-        debug($childDateTimes, '$childDateTimes');
+        switch ($recurring_options['interval']) {
+            case 'weekly':
+                  $dateTimeInterval = new \DateInterval("P1W");
+                  break;
+            case '2weekly':
+                  $dateTimeInterval = new \DateInterval("P2W");
+                  break;
+            case '4weekly':
+                  $dateTimeInterval = new \DateInterval("P4W");
+                  break;
+            case 'monthly':
+                  $dateTimeInterval = new \DateInterval("P1M");
+                  break;
+            case 'yearly':
+                  $dateTimeInterval = new \DateInterval("P1Y");
+                  break;
+        }
+        do {
+            $eventEndDateTime->add($dateTimeInterval);
+            $eventStartDateTime->add($dateTimeInterval);
+            if ($parentSubEndDateTime) {
+                $eventSubEndDateTime->add($dateTimeInterval);
+            }
+            $childDateTime = array();
+            $childDateTime['endDateTime'] = clone $eventEndDateTime;
+            $childDateTime['startDateTime'] = clone $eventStartDateTime;
+            if ($parentSubEndDateTime) {
+                $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
+            }
+            $childDateTimes[] = $childDateTime;
+        } while ($eventStartDateTime < $recurringEndDateTime);
+
+        //debug($childDateTimes, '$childDateTimes');
         return $childDateTimes;
     }
 }
