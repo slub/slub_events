@@ -71,41 +71,53 @@ class Tceforms
     {
       $recurring_options = unserialize($PA['itemFormElValue']);
 
+      $startDateTime = $PA['row']['start_date_time'];
+
       // working form part for later implementation
       // recurring event on multiple weekdays
       //
-      // $week = [
-      //   1 => strftime("%a", strtotime('last Monday')),
-      //   2 => strftime("%a", strtotime('last Tuesday')),
-      //   3 => strftime("%a", strtotime('last Wednesday')),
-      //   4 => strftime("%a", strtotime('last Thursday')),
-      //   5 => strftime("%a", strtotime('last Friday')),
-      //   6 => strftime("%a", strtotime('last Saturday')),
-      //   7 => strftime("%a", strtotime('last Sunday')),
-      // ];
-      // $formField .= '<h4>'. LocalizationUtility::translate(
-      //     'tx_slubevents_domain_model_event.recurring_options.interval.days',
-      //     'slub_events').'</h4>';
-      // $formField .= '<div class="btn-group" data-toggle="buttons">';
-      //
-      // for ($i=1; $i<8; $i++) {
-      //   if (is_array($recurring_options['weekday']) && in_array($i, $recurring_options['weekday'])) {
-      //     $active = 'active';
-      //     $checked = 'checked="checked"';
-      //   } else {
-      //     $active = '';
-      //     $checked = '';
-      //   }
-      //   $formField .= '<label for="weekday-'.$i.'" class="btn btn-primary '.$active.'">';
-      //   $formField .= '<input type="checkbox"  name="' . $PA['itemFormElName'] . '[weekday][]"';
-      //   $formField .= ' value="'.$i.'" '.$checked;
-      //   $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
-      //   $formField .= $PA['onFocus'];
-      //   $formField .= ' />';
-      //   $formField .= $week[$i] . '</label>';
-      //   //$formField .= '<label for="weekday-'.$i.'" class="btn btn-primary">' . $week[$i] . '</label>';
-      // }
-      // $formField .= '</div>';
+      $week = [
+        1 => strftime("%a", strtotime('last Monday')),
+        2 => strftime("%a", strtotime('last Tuesday')),
+        3 => strftime("%a", strtotime('last Wednesday')),
+        4 => strftime("%a", strtotime('last Thursday')),
+        5 => strftime("%a", strtotime('last Friday')),
+        6 => strftime("%a", strtotime('last Saturday')),
+        7 => strftime("%a", strtotime('last Sunday')),
+      ];
+      $formField .= '<h4>'. LocalizationUtility::translate(
+          'tx_slubevents_domain_model_event.recurring_options.interval.days',
+          'slub_events').'</h4>';
+      $formField .= '<div class="btn-group" data-toggle="buttons">';
+
+      for ($i=1; $i<8; $i++) {
+        $disabled = FALSE;
+        if (strftime("%u", $startDateTime) == $i) {
+            $active = 'active';
+            $disabled = TRUE;
+        } else if (is_array($recurring_options['weekday']) && in_array($i, $recurring_options['weekday'])) {
+          $active = 'active';
+          $checked = 'checked="checked"';
+        } else {
+          $active = '';
+          $checked = '';
+        }
+        $formField .= '<label for="weekday-'.$i.'" class="btn btn-primary '.$active.'">';
+        if ($disabled) {
+          $formField .= '<input type="hidden"  name="' . $PA['itemFormElName'] . '[weekday][]"';
+          $formField .= ' value="'.$i.'"';
+          $formField .= ' />';
+        } else {
+          $formField .= '<input type="checkbox"  name="' . $PA['itemFormElName'] . '[weekday][]"';
+          $formField .= ' value="'.$i.'" '.$checked;
+          $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
+          $formField .= $PA['onFocus'];
+          $formField .= ' />';
+        }
+        $formField .= $week[$i] . '</label>';
+        //$formField .= '<label for="weekday-'.$i.'" class="btn btn-primary">' . $week[$i] . '</label>';
+      }
+      $formField .= '</div>';
 
       $formField .= '<h4>'. LocalizationUtility::translate(
           'tx_slubevents_domain_model_event.recurring_options.interval',
