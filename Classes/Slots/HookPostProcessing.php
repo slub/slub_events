@@ -115,21 +115,6 @@ class HookPostProcessing
             unset($fieldArray['end_date_time_select']);
             unset($fieldArray['sub_end_date_time_select']);
 
-            // we need to search and update or create all child events
-            if ($status == "update") {
-
-                $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-
-                $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
-
-                $eventFound = $eventController->createChildsAction($id);
-            }
-
-            if ($status == "new") {
-
-                debug($id, 'id new');
-
-            }
         }
     }
 
@@ -151,6 +136,21 @@ class HookPostProcessing
         if ($table == 'tx_slubevents_domain_model_event' &&
             $pObj->checkValue_currentRecord['hidden'] == '0'
         ) {
+            // we need to search and update or create all child events
+            if ($status == "update") {
+                $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+
+                $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
+
+                $eventFound = $eventController->createChildsAction($idElement);
+            }
+
+            if ($status == "new") {
+
+                debug($id, 'id new');
+
+            }
+
             $this->clearAllEventListCache(
                 $pObj->checkValue_currentRecord['pid'],
                 $pObj->checkValue_currentRecord['genius_bar']
