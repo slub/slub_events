@@ -452,14 +452,14 @@ namespace Slub\SlubEvents\Domain\Repository;
 
 
     /**
-     * Finds one events with given startDateTime and parent
+     * Finds all events with given startDateTime and parent
      *
      * @param \DateTime $startDateStamp
      * @param Event $parent
      *
      * @return array The found Event Objects
      */
-    public function findOneByStartDateTimeAndParent($startDateStamp, $parent)
+    public function findByStartDateTimeAndParent($startDateStamp, $parent)
     {
         $query = $this->createQuery();
 
@@ -477,7 +477,55 @@ namespace Slub\SlubEvents\Domain\Repository;
             ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
-        return $query->execute()->getFirst();
+        return $query->execute();
+    }
+
+    /**
+     * Finds one events with given startDateTime and parent
+     *
+     * @param \DateTime $startDateStamp
+     * @param Event $parent
+     *
+     * @return array The found Event Objects
+     */
+    public function findOneByStartDateTimeAndParent($startDateStamp, $parent)
+    {
+        return $this->findByStartDateTimeAndParent($startDateStamp, $parent)->getFirst();
+    }
+
+    /**
+     * Delete all child events which are not in the list of allowed startDateTimes
+     *
+     * @param array $childDateTimes
+     * @param Event $parent
+     *
+     * @return void
+     */
+    public function deleteAllNotAllowedChildren($childDateTimes, $parent)
+    {
+        $query = $this->createQuery();
+
+        $constraints = [];
+
+        foreach ($childDateTimes as $childDateTime) {
+            foreach ($this->findByStartDateTimeAndParent($childDateTime['startDateTime'], $parent) as $childEvent) {
+                $uidsAllowed[] = $childEvent->getUid();
+            };
+        }
+
+        $constraints[] = $query->logicalNot($query->in('uid', $uidsAllowed));
+        $constraints[] = $query->equals('parent', $parent);
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        $eventsToBeRemoved = $query->execute();
+
+        foreach($eventsToBeRemoved as $eventRemove) {
+            $this->remove($eventRemove);
+        }
+
     }
 
     /**

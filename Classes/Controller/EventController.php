@@ -474,6 +474,9 @@ class EventController extends AbstractController
 
             $childDateTimes = $this->getChildDateTimes($parentEvent);
 
+            // delete all present child events which are not requested (e.g. from former settings)
+            $this->eventRepository->deleteAllNotAllowedChildren($childDateTimes, $parentEvent);
+
             foreach ($childDateTimes as $childDateTime) {
 
                 $isUpdate = FALSE;
