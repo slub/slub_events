@@ -713,11 +713,21 @@ class EventController extends AbstractController
         $recurringEndDateTime = $parentEvent->getRecurringEndDateTime();
 
         $parentStartDateTime = $parentEvent->getStartDateTime();
+
+        //$diffDays[] = new \DateInterval("PT0S");
+        $nextEventWeekday = 0;
+        foreach($recurring_options['weekday'] as $id => $weekday) {
+            $nextEventWeekday = (int)$weekday + 7 - $parentStartDateTime->format('N') - $nextEventWeekday;
+            if ((int)$weekday != $parentStartDateTime->format('N')) {
+                $diffDays[] = new \DateInterval("P" . $nextEventWeekday . "D");
+            }
+        }
+
         $parentEndDateTime = $parentEvent->getEndDateTime();
         $parentSubEndDateTime = $parentEvent->getSubEndDateTime();
 
         if (!$recurringEndDateTime) {
-          // if no recurringEndDateTime is given, set it to ... 3 monts for now
+          // if no recurringEndDateTime is given, set it to ... 3 months for now
           $recurringEndDateTime = clone $parentStartDateTime;
           $recurringEndDateTime->add(new \DateInterval("P3M"));
         }
@@ -747,21 +757,44 @@ class EventController extends AbstractController
                   break;
         }
         do {
-            $eventEndDateTime->add($dateTimeInterval);
             $eventStartDateTime->add($dateTimeInterval);
+            $eventEndDateTime->add($dateTimeInterval);
             if ($parentSubEndDateTime) {
                 $eventSubEndDateTime->add($dateTimeInterval);
             }
             $childDateTime = array();
             $childDateTime['endDateTime'] = clone $eventEndDateTime;
             $childDateTime['startDateTime'] = clone $eventStartDateTime;
-            if ($parentSubEndDateTime) {
+            if ($eventSubEndDateTime) {
                 $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
             }
             $childDateTimes[] = $childDateTime;
+
+            if (!empty($diffDays)) {
+                $diffDayEventStartDateTime = clone $eventStartDateTime;
+                $diffDayEventEndDateTime = clone $eventEndDateTime;
+                if ($eventSubEndDateTime) {
+                    $diffDayEventSubEndDateTime = clone $eventSubEndDateTime;
+                }
+                foreach ($diffDays as $weekDayInterval) {
+                    $diffDayEventEndDateTime->add($weekDayInterval);
+                    $diffDayEventStartDateTime->add($weekDayInterval);
+                    if ($diffDayEventSubEndDateTime) {
+                        $diffDayEventSubEndDateTime->add($weekDayInterval);
+                    }
+
+                    $childDateTime = array();
+                    $childDateTime['endDateTime'] = clone $diffDayEventEndDateTime;
+                    $childDateTime['startDateTime'] = clone $diffDayEventStartDateTime;
+                    if ($eventSubEndDateTime) {
+                        $childDateTime['subEndDateTime'] = clone $diffDayEventSubEndDateTime;
+                    }
+                    $childDateTimes[] = $childDateTime;
+                }
+            }
         } while ($eventStartDateTime < $recurringEndDateTime);
 
-        //debug($childDateTimes, '$childDateTimes');
+        // debug($childDateTimes, '$childDateTimes');
         return $childDateTimes;
     }
 }
