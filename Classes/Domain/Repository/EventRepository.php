@@ -507,13 +507,17 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         $constraints = [];
 
+        $uidsAllowed = [];
+
         foreach ($childDateTimes as $childDateTime) {
             foreach ($this->findByStartDateTimeAndParent($childDateTime['startDateTime'], $parent) as $childEvent) {
                 $uidsAllowed[] = $childEvent->getUid();
             };
         }
 
-        $constraints[] = $query->logicalNot($query->in('uid', $uidsAllowed));
+        if (!empty($uidsAllowed)) {
+            $constraints[] = $query->logicalNot($query->in('uid', $uidsAllowed));
+        }
         $constraints[] = $query->equals('parent', $parent);
 
         if (count($constraints)) {

@@ -137,7 +137,9 @@ class HookPostProcessing
             $pObj->checkValue_currentRecord['hidden'] == '0'
         ) {
             // we need to search and update or create all child events
-            if ($status == "update") {
+            if ($status == "update" &&
+                $pObj->checkValue_currentRecord['recurring'] == 1) {
+
                 $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
 
                 $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
