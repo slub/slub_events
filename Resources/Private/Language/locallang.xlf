@@ -198,7 +198,7 @@
 			<source>fortnightly</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.4weekly">
-			<source>four-week</source>
+			<source>four-weekly</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.monthly">
 			<source>monthly</source>
