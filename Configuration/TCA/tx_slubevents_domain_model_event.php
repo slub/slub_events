@@ -400,11 +400,8 @@ return [
             'l10n_mode' => 'exclude',
             'label'     => $LL . 'tx_slubevents_domain_model_event.parent',
             'config'    => [
-                'type' => 'none',
-                'format' => 'user',
-                'format.' => [
-                  'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->eventParentString',
-                ],
+                'type' => 'user',
+                'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->eventParentString',
             ],
         ],
         'recurring'               => [

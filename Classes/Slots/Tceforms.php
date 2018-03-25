@@ -24,6 +24,7 @@ namespace Slub\SlubEvents\Slots;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * This hook extends the tcemain class.
@@ -228,8 +229,8 @@ class Tceforms
      */
     public function eventParentString($PA, $fObj)
     {
-      $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, title', 'tx_slubevents_domain_model_event', 'uid=' . (int)$PA['value'])->fetch_assoc();
-      return '[' . $parentEventRow['uid'] . '] ' . $parentEventRow['title'];
+      $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, title', 'tx_slubevents_domain_model_event', 'uid=' . (int)$PA['row']['parent'])->fetch_assoc();
+      return $this->getEditLink('tx_slubevents_domain_model_event', $parentEventRow);
     }
 
     /*
@@ -263,4 +264,27 @@ class Tceforms
             return $output;
         }
     }
+
+    /**
+     * /**
+     * Returns the Edit Icon with link
+     *
+     * @param string $table Table name
+     * @param array $row Data row
+     * @return string html output
+     */
+    protected function getEditLink($table, array $row)
+    {
+        $params .= '&edit[' . $table . '][' . $row['uid'] . ']=edit';
+        $title = LocalizationUtility::translate('be.editEvent', 'slub_events',
+                $arguments = null) . ' ' .
+                LocalizationUtility::translate('tx_slubevents_domain_model_event.recurring', 'slub_events',
+                $arguments = null) . ' `' . $row['title'] . '`';
+        $link = '<a href="#" class="btn btn-info" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath)) . '" title="' . $title . '">' .
+                '[' . $row['uid'] . '] ' . $row['title'] .
+            '</a>';
+
+        return $link;
+    }
+
 }
