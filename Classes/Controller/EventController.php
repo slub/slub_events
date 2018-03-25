@@ -353,6 +353,7 @@ class EventController extends AbstractController
                     'subEndDateInfoSent',
                     'categories',
                     'discipline',
+                    'parent'
                 ])
             ) {
                 $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($event, $propertyName);
