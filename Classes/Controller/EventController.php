@@ -719,10 +719,14 @@ class EventController extends AbstractController
 
         $parentStartDateTime = $parentEvent->getStartDateTime();
 
-        $nextEventWeekday = 0;
+        $sumDiffDays = 0;
         foreach($recurring_options['weekday'] as $id => $weekday) {
-            $nextEventWeekday = (int)$weekday + 7 - $parentStartDateTime->format('N') - $nextEventWeekday;
             if ((int)$weekday != $parentStartDateTime->format('N')) {
+                $nextEventWeekday = (int)$weekday - $parentStartDateTime->format('N') - $sumDiffDays;
+                if ($nextEventWeekday < 0) {
+                    $nextEventWeekday += 7;
+                }
+                $sumDiffDays += $nextEventWeekday;
                 $diffDays[] = new \DateInterval("P" . $nextEventWeekday . "D");
             }
         }
@@ -802,7 +806,7 @@ class EventController extends AbstractController
         if ($eventStartDateTime > $recurringEndDateTime) {
             array_pop($childDateTimes);
         }
-        // debug($childDateTimes, '$childDateTimes');
+//        debug($childDateTimes, '$childDateTimes');
         return $childDateTimes;
     }
 }
