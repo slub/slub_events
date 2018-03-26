@@ -25,6 +25,9 @@ namespace Slub\SlubEvents\Slots;
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+use Slub\SlubEvents\Helper\IconsHelper;
 
 /**
  * This hook extends the tcemain class.
@@ -74,9 +77,6 @@ class Tceforms
 
       $startDateTime = $PA['row']['start_date_time'];
 
-      // working form part for later implementation
-      // recurring event on multiple weekdays
-      //
       $week = [
         1 => strftime("%a", strtotime('last Monday')),
         2 => strftime("%a", strtotime('last Tuesday')),
@@ -86,6 +86,12 @@ class Tceforms
         6 => strftime("%a", strtotime('last Saturday')),
         7 => strftime("%a", strtotime('last Sunday')),
       ];
+
+      // Weekday Settings ------
+      if (!is_array($recurring_options['weekday'])) {
+          // initialize empty array if new recurring settings
+          $recurring_options['weekday'] = [];
+      }
       $formField .= '<h4>'. LocalizationUtility::translate(
           'tx_slubevents_domain_model_event.recurring_options.interval.days',
           'slub_events').'</h4>';
@@ -95,8 +101,9 @@ class Tceforms
         $disabled = FALSE;
         if (strftime("%u", $startDateTime) == $i) {
             $active = 'active';
+            $checked = 'checked="checked"';
             $disabled = TRUE;
-        } else if (is_array($recurring_options['weekday']) && in_array($i, $recurring_options['weekday'])) {
+        } else if (in_array($i, $recurring_options['weekday'])) {
           $active = 'active';
           $checked = 'checked="checked"';
         } else {
@@ -105,21 +112,27 @@ class Tceforms
         }
         $formField .= '<label for="weekday-'.$i.'" class="btn btn-primary '.$active.'">';
         if ($disabled) {
-          $formField .= '<input type="hidden"  name="' . $PA['itemFormElName'] . '[weekday][]"';
-          $formField .= ' value="'.$i.'"';
-          $formField .= ' />';
-        } else {
-          $formField .= '<input type="checkbox"  name="' . $PA['itemFormElName'] . '[weekday][]"';
-          $formField .= ' value="'.$i.'" '.$checked;
-          $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
-          $formField .= $PA['onFocus'];
-          $formField .= ' />';
+            // send the current value as hidden field and show the checkbox as disabled to the user
+           $formField .= '<input type="hidden" name="' . $PA['itemFormElName'] . '[weekday][]" value="' . $i . '" />';
         }
+        $formField .= '<input type="checkbox"  name="' . $PA['itemFormElName'] . '[weekday][]"';
+        $formField .= ' value="' . $i . '" ' . $checked;
+        if ($disabled) {
+            $formField .= ' readonly disabled';
+        }
+        $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
+        $formField .= $PA['onFocus'];
+        $formField .= ' />';
         $formField .= $week[$i] . '</label>';
         //$formField .= '<label for="weekday-'.$i.'" class="btn btn-primary">' . $week[$i] . '</label>';
       }
       $formField .= '</div>';
 
+      // Interval Settings ------
+      if (empty($recurring_options['interval'])) {
+          // initialize empty array if new recurring settings
+          $recurring_options['interval'] = 'weekly';
+      }
       $formField .= '<h4>'. LocalizationUtility::translate(
           'tx_slubevents_domain_model_event.recurring_options.interval',
           'slub_events').'</h4>';
@@ -250,14 +263,33 @@ class Tceforms
             ];
             $configurationManager->setConfiguration($configurationArray);
 
-            //$eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
             $eventRepository = $objectManager->get(\Slub\SlubEvents\Domain\Repository\EventRepository::class);
 
             $childEvents = $eventRepository->findFutureByParent($PA['row']['uid']);
 
-            $output = '<ul>';
+            $output = '<h4>'. LocalizationUtility::translate(
+                'tx_slubevents_domain_model_event.recurring',
+                'slub_events').'</h4>';
+            $output .= '<ul>';
+
+            $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
             foreach ($childEvents as $childEvent) {
-                $output .= '<li>' . strftime('%a, %d.%m.%Y %H:%M', $childEvent->getStartDateTime()->getTimestamp()) . '</li>';
+              if ($childEvent->getHidden() === TRUE) {
+                  $checked = '';
+              } else {
+                  $checked = 'checked="checked"';
+              }
+
+              if ($childEvent->getHidden() == TRUE) {
+                  $classHidden = ' style="text-decoration: line-through;"';
+              } else {
+                  $classHidden = '';
+              }
+              $output .= '<li' . $classHidden . '>';
+              $output .= $iconHelper->getHideIcon('tx_slubevents_domain_model_event', $childEvent->getUid(), $childEvent->getHidden());
+              $output .= ' ' . strftime('%A, %d.%m.%Y %H:%M', $childEvent->getStartDateTime()->getTimestamp());
+              $output .= '</li>';
+
             }
             $output .= '</ul>';
 

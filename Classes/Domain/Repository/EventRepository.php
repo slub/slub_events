@@ -542,6 +542,8 @@ namespace Slub\SlubEvents\Domain\Repository;
     public function findFutureByParent($parent)
     {
         $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
 
         $constraints = [];
         $constraints[] = $query->equals('parent', $parent);
