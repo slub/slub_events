@@ -462,6 +462,8 @@ namespace Slub\SlubEvents\Domain\Repository;
     public function findByStartDateTimeAndParent($startDateStamp, $parent)
     {
         $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
 
         $constraints = [];
 
@@ -504,6 +506,8 @@ namespace Slub\SlubEvents\Domain\Repository;
     public function deleteAllNotAllowedChildren($childDateTimes, $parent)
     {
         $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
 
         $constraints = [];
 

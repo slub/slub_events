@@ -498,6 +498,7 @@ class EventController extends AbstractController
                         && !in_array($propertyName, [
                             'uid',
                             'pid',
+                            'hidden',
                             'parent',
                             'recurring',
                             'recurring_options',
@@ -718,7 +719,6 @@ class EventController extends AbstractController
 
         $parentStartDateTime = $parentEvent->getStartDateTime();
 
-        //$diffDays[] = new \DateInterval("PT0S");
         $nextEventWeekday = 0;
         foreach($recurring_options['weekday'] as $id => $weekday) {
             $nextEventWeekday = (int)$weekday + 7 - $parentStartDateTime->format('N') - $nextEventWeekday;
