@@ -78,13 +78,13 @@ class Tceforms
       $startDateTime = $PA['row']['start_date_time'];
 
       $week = [
-        1 => strftime("%a", strtotime('last Monday')),
-        2 => strftime("%a", strtotime('last Tuesday')),
-        3 => strftime("%a", strtotime('last Wednesday')),
-        4 => strftime("%a", strtotime('last Thursday')),
-        5 => strftime("%a", strtotime('last Friday')),
-        6 => strftime("%a", strtotime('last Saturday')),
-        7 => strftime("%a", strtotime('last Sunday')),
+        1 => strftime("%A", strtotime('last Monday')),
+        2 => strftime("%A", strtotime('last Tuesday')),
+        3 => strftime("%A", strtotime('last Wednesday')),
+        4 => strftime("%A", strtotime('last Thursday')),
+        5 => strftime("%A", strtotime('last Friday')),
+        6 => strftime("%A", strtotime('last Saturday')),
+        7 => strftime("%A", strtotime('last Sunday')),
       ];
 
       // Weekday Settings ------
@@ -95,7 +95,7 @@ class Tceforms
       $formField .= '<h4>'. LocalizationUtility::translate(
           'tx_slubevents_domain_model_event.recurring_options.interval.days',
           'slub_events').'</h4>';
-      $formField .= '<div class="btn-group" data-toggle="buttons">';
+      $formField .= '<div class="btn-group-vertical" data-toggle="buttons">';
 
       for ($i=1; $i<8; $i++) {
         $disabled = FALSE;
@@ -124,6 +124,7 @@ class Tceforms
         $formField .= $PA['onFocus'];
         $formField .= ' />';
         $formField .= $week[$i] . '</label>';
+        $formField .= '<br />';
         //$formField .= '<label for="weekday-'.$i.'" class="btn btn-primary">' . $week[$i] . '</label>';
       }
       $formField .= '</div>';
@@ -136,7 +137,7 @@ class Tceforms
       $formField .= '<h4>'. LocalizationUtility::translate(
           'tx_slubevents_domain_model_event.recurring_options.interval',
           'slub_events').'</h4>';
-      $formField .= '<div class="btn-group" data-toggle="buttons">';
+      $formField .= '<div class="btn-group-vertical" data-toggle="buttons">';
 
       // ---weekly
       if ($recurring_options['interval'] == 'weekly') {
@@ -146,15 +147,16 @@ class Tceforms
         $active = '';
         $checked = '';
       }
-      $formField .= '<label for="interval-weekly" class="btn btn-primary '.$active.'">'.LocalizationUtility::translate(
-          'tx_slubevents_domain_model_event.recurring_options.interval.weekly',
-          'slub_events');
+      $formField .= '<label for="interval-weekly" class="btn btn-primary '.$active.'">';
       $formField .= '<input type="radio" id="interval-weekly" name="' . $PA['itemFormElName'] . '[interval]"';
       $formField .= ' value="weekly" '.$checked;
       $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
       $formField .= $PA['onFocus'];
       $formField .= ' />';
-      $formField .= '</label>';
+      $formField .= LocalizationUtility::translate(
+          'tx_slubevents_domain_model_event.recurring_options.interval.weekly',
+          'slub_events') . '</label>';
+      $formField .= '<br />';
 
       // --- 2weekly
       if ($recurring_options['interval'] == '2weekly') {
@@ -164,17 +166,16 @@ class Tceforms
         $active = '';
         $checked = '';
       }
-      $formField .= '<label for="interval-2weekly" class="btn btn-primary '.$active.'">'.LocalizationUtility::translate(
-          'tx_slubevents_domain_model_event.recurring_options.interval.2weekly',
-          'slub_events'
-      );
+      $formField .= '<label for="interval-2weekly" class="btn btn-primary '.$active.'">';
       $formField .= '<input type="radio" id="interval-2weekly" name="' . $PA['itemFormElName'] . '[interval]"';
       $formField .= ' value="2weekly" '.$checked;
       $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
       $formField .= $PA['onFocus'];
       $formField .= ' />';
-      $formField .= '</label>';
-
+      $formField .= LocalizationUtility::translate(
+          'tx_slubevents_domain_model_event.recurring_options.interval.2weekly',
+          'slub_events') . '</label>';
+      $formField .= '<br />';
 
       // --- 4weekly
       if ($recurring_options['interval'] == '4weekly') {
@@ -184,16 +185,16 @@ class Tceforms
         $active = '';
         $checked = '';
       }
-      $formField .= '<label for="interval-4weekly" class="btn btn-primary '.$active.'">'.LocalizationUtility::translate(
-          'tx_slubevents_domain_model_event.recurring_options.interval.4weekly',
-          'slub_events'
-      );
+      $formField .= '<label for="interval-4weekly" class="btn btn-primary '.$active.'">';
       $formField .= '<input type="radio" id="interval-4weekly" name="' . $PA['itemFormElName'] . '[interval]"';
       $formField .= ' value="4weekly" '.$checked;
       $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
       $formField .= $PA['onFocus'];
       $formField .= ' />';
-      $formField .= '</label>';
+      $formField .= LocalizationUtility::translate(
+          'tx_slubevents_domain_model_event.recurring_options.interval.4weekly',
+          'slub_events') . '</label>';
+      $formField .= '<br />';
 
       // --- monthly
       if ($recurring_options['interval'] == 'monthly') {
@@ -203,16 +204,16 @@ class Tceforms
         $active = '';
         $checked = '';
       }
-      $formField .= '<label for="interval-monthly" class="btn btn-primary '.$active.'">'.LocalizationUtility::translate(
-          'tx_slubevents_domain_model_event.recurring_options.interval.monthly',
-          'slub_events'
-      );
+      $formField .= '<label for="interval-monthly" class="btn btn-primary '.$active.'">';
       $formField .= '<input type="radio" id="interval-monthly" name="' . $PA['itemFormElName'] . '[interval]"';
       $formField .= ' value="monthly" '.$checked;
       $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
       $formField .= $PA['onFocus'];
       $formField .= ' />';
-      $formField .= '</label>';
+      $formField .= LocalizationUtility::translate(
+          'tx_slubevents_domain_model_event.recurring_options.interval.monthly',
+          'slub_events') . '</label>';
+      $formField .= '<br />';
 
       // --- yearly
       if ($recurring_options['interval'] == 'yearly') {
@@ -222,16 +223,15 @@ class Tceforms
         $active = '';
         $checked = '';
       }
-      $formField .= '<label for="interval-yearly" class="btn btn-primary '.$active.'">'.LocalizationUtility::translate(
-          'tx_slubevents_domain_model_event.recurring_options.interval.yearly',
-          'slub_events'
-      );
+      $formField .= '<label for="interval-yearly" class="btn btn-primary '.$active.'">';
       $formField .= '<input type="radio" id="interval-yearly" name="' . $PA['itemFormElName'] . '[interval]"';
       $formField .= ' value="yearly" '.$checked;
       $formField .= ' onchange="' . htmlspecialchars(implode('', $PA['fieldChangeFunc'])) . '"';
       $formField .= $PA['onFocus'];
       $formField .= ' />';
-      $formField .= '</label>';
+      $formField .= LocalizationUtility::translate(
+          'tx_slubevents_domain_model_event.recurring_options.interval.yearly',
+          'slub_events') . '</label>';
       $formField .= '</div>';
 
       return $formField;
@@ -281,9 +281,9 @@ class Tceforms
               }
 
               if ($childEvent->getHidden() == TRUE) {
-                  $classHidden = ' style="text-decoration: line-through;"';
+                  $classHidden = ' class="list-group-item list-group-item-warning" style="text-decoration: line-through;"';
               } else {
-                  $classHidden = '';
+                  $classHidden = ' class="list-group-item list-group-item-success"';
               }
               $output .= '<li' . $classHidden . '>';
               $output .= $iconHelper->getHideIcon('tx_slubevents_domain_model_event', $childEvent->getUid(), $childEvent->getHidden());
