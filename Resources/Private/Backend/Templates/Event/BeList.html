@@ -39,7 +39,16 @@ Otherwise your changes will be overwritten the next time you save the extension 
 						<se:be.functionBar icon="edit" event="{event}"/>
 					</td>
 					<td>
-            <se:be.functionBar icon="recurring" event="{event}"/>
+            <f:if condition="{event.parent}">
+                <f:then>
+                    <img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
+                </f:then>
+                <f:else>
+                    <f:if condition="{event.recurring}">
+                        <img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
+                    </f:if>
+                </f:else>
+            </f:if>
 						<se:be.functionBar icon="geniusbar" event="{event}"/>
                     <span class="eventtitle"
 						  title="{event.description -> f:format.stripTags()}">{event.title}</span><br/>

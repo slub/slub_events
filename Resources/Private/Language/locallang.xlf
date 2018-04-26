@@ -185,6 +185,9 @@
     <trans-unit id="tx_slubevents_domain_model_event.recurring">
 			<source>Recurring Event</source>
 		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.recurring_parent">
+			<source>Recurring Parent Event</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.days">
 			<source>Recurring on given Days</source>
 		</trans-unit>

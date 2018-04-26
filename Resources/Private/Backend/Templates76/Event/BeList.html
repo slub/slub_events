@@ -38,14 +38,23 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</tr>
 			<f:for each="{events}" as="event" iteration="eventIterator">
 				<tr class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
-					<td>
+					<td class="be-icon">
             <f:format.raw>
                 <se:be.functionBar icon="edit" event="{event}"/>
             </f:format.raw>
 					</td>
 					<td>
             <f:format.raw>
-                <se:be.functionBar icon="recurring" event="{event}"/>
+                <f:if condition="{event.parent}">
+                    <f:then>
+                        <img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{event.recurring}">
+                            <img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
+                        </f:if>
+                    </f:else>
+                </f:if>
                 <se:be.functionBar icon="geniusbar" event="{event}"/>
                 <span class="eventtitle"
                       title="{event.description -> f:format.stripTags()}">{event.title}
@@ -75,7 +84,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 							</f:else>
 						</f:if> / {event.maxSubscriber}
 					</td>
-					<td>
+					<td class="be-icon">
 						<f:if condition="{event.hidden} == 0">
 							<f:then>
                    <f:link.action action="beCopy" arguments="{event: event}">
@@ -84,12 +93,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 							</f:then>
 						</f:if>
 					</td>
-					<td>
+					<td class="be-icon">
             <f:format.raw>
                 <se:be.functionBar icon="hide" event="{event}"/>
             </f:format.raw>
 					</td>
-					<td>
+					<td class="be-icon">
 						<f:if condition="{event.hidden} == 0">
 							<f:then>
 								<f:link.action action="beIcsInvitation"
@@ -102,7 +111,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 							</f:then>
 						</f:if>
 					</td>
-					<td>
+					<td class="be-icon">
 						<f:if condition="{event.onlinesurvey}">
 							<f:then>
 								<f:if condition="<se:condition.IsPastEvent event='{event}' />">
