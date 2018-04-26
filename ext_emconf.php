@@ -28,7 +28,7 @@ This extension is developped and used in production at the Saxony State and Univ
     'modify_tables'    => '',
     'clearCacheOnLoad' => 0,
     'lockType'         => '',
-    'version'          => '2.3.0',
+    'version'          => '2.4.0',
     'constraints'      => [
         'depends'   => [
             'typo3'   => '6.2.0-8.7.99',
@@ -37,8 +37,5 @@ This extension is developped and used in production at the Saxony State and Univ
         ],
         'suggests'  => [
         ],
-    ],
-    'autoload' => [
-      'classmap' => ['Classes']
     ],
 ];
