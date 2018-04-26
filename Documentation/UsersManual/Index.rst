@@ -31,7 +31,8 @@ plugins onto these pages:
 Backend Module
 --------------
 
-With the TYPO3 list module, you have to add three basic datatypes to the
+On creating an event, some required datafields must be present already. Use the
+the TYPO3 list module to create these four datatypes on the
 "Eventdate" folder:
 
 #. **Category**: The categories of your events like "Tutorial",
@@ -42,9 +43,6 @@ With the TYPO3 list module, you have to add three basic datatypes to the
    of the knowledge bar.
 #. **Location**: Add location with title, descriptions and links. The
    title will be shown in the ics-invitation.
-
-Optional you can add:
-
 #. **Disciplines**: Disciplines can be used as another filter tree for
    the list view.
 

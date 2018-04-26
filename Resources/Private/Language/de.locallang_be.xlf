@@ -87,7 +87,7 @@
 			<target>Funktion</target>
 		</trans-unit>
 		<trans-unit id="flexforms.show_categories" approved="yes">
-			<source>Show Selected Categories</source>
+			<source>Show Only Selected Categories</source>
 			<target>Nur gewählte Kategorien anzeigen</target>
 		</trans-unit>
 		<trans-unit id="flexforms.show_categories_start" approved="yes">
