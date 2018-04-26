@@ -19,6 +19,11 @@ table.tx_slubevents td {
 	font-weight: normal;
 	padding: 4px;
 }
+table.tx_slubevents td.be-icon {
+  text-align: center;
+  min-width: 20px;
+  padding: 4px;
+}
 
 table.tx_slubevents td.td-input {
 	width: 200px;

@@ -114,6 +114,7 @@ class HookPostProcessing
             // should be already unset in HookPreProcessing
             unset($fieldArray['end_date_time_select']);
             unset($fieldArray['sub_end_date_time_select']);
+
         }
     }
 
@@ -135,6 +136,23 @@ class HookPostProcessing
         if ($table == 'tx_slubevents_domain_model_event' &&
             $pObj->checkValue_currentRecord['hidden'] == '0'
         ) {
+            // we need to search and update or create all child events
+            if ($status == "update" &&
+                $pObj->checkValue_currentRecord['recurring'] == 1) {
+
+                $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+
+                $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
+
+                $eventFound = $eventController->createChildsAction($idElement);
+            }
+
+            if ($status == "new") {
+
+                // debug($id, 'id new');
+
+            }
+
             $this->clearAllEventListCache(
                 $pObj->checkValue_currentRecord['pid'],
                 $pObj->checkValue_currentRecord['genius_bar']
@@ -142,7 +160,7 @@ class HookPostProcessing
 
             // unfortunately I cannot access the category IDs only the amount of categories
             // but at least I get the start_date_time so I will delete all cached files around this
-            // start_date_tim
+            // start_date_time
             $this->clearAjaxCacheFiles($pObj->checkValue_currentRecord['start_date_time']);
         }
     }

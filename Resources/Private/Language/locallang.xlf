@@ -20,6 +20,9 @@
 		<trans-unit id="be.hideEvent">
 			<source>Hide Event</source>
 		</trans-unit>
+    <trans-unit id="be.form.singe_event">
+			<source>Single Event</source>
+		</trans-unit>
 		<trans-unit id="be.icsInvitation">
 			<source>ICS Invitation</source>
 		</trans-unit>
@@ -178,6 +181,33 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar">
 			<source>Knowledge Bar</source>
+		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.recurring">
+			<source>Recurring Event</source>
+		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.recurring_parent">
+			<source>Recurring Parent Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.days">
+			<source>Recurring on given Days</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval">
+			<source>Recurring Interval</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.weekly">
+			<source>weekly</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.2weekly">
+			<source>fortnightly</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.4weekly">
+			<source>four-weekly</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.monthly">
+			<source>monthly</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.yearly">
+			<source>yearly</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.individual_appointment">
 			<source>Indivdual Appointment</source>

@@ -51,6 +51,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $title;
 
     /**
+     * Parent Event (in case of recurring event)
+     *
+     * @var \Slub\SlubEvents\Domain\Model\Event
+     */
+    protected $parent;
+
+    /**
      * startDateTime
      *
      * @var \DateTime
@@ -194,6 +201,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $externalRegistration;
 
     /**
+     * This is a recurring event
+     *
+     * @var boolean
+     */
+    protected $recurring = false;
+
+    /**
+     * The recurring options
+     *
+     * @var string
+     */
+    protected $recurringOptions;
+
+    /**
+     * The recurring end dateTime
+     *
+     * @var \DateTime
+     */
+    protected $recurringEndDateTime;
+
+    /**
      * Returns hidden
      *
      * @return boolean $hidden
@@ -299,6 +327,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->discipline = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 
         $this->subscribers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Returns the parent
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Event $parent
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Sets the parent
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Event $parent
+     *
+     * @return void
+     */
+    public function setParent(\Slub\SlubEvents\Domain\Model\Event $parent)
+    {
+        $this->parent = $parent;
     }
 
     /**
@@ -789,4 +839,80 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->externalRegistration = $externalRegistration;
     }
+
+
+    /**
+     * Returns the recurring value
+     *
+     * @return boolean $recurring
+     */
+    public function getRecurring()
+    {
+        return $this->recurring;
+    }
+
+    /**
+     * Sets the recurring state
+     *
+     * @param boolean $recurring
+     *
+     * @return void
+     */
+    public function setRecurring($recurring)
+    {
+        $this->recurring = $recurring;
+    }
+
+    /**
+     * Returns the boolean state of recurring
+     *
+     * @return boolean recurring
+     */
+    public function isRecurring()
+    {
+        return $this->getRecurring();
+    }
+
+    /**
+     * Returns the recurring options
+     *
+     * @return array $recurringOptions
+     */
+    public function getRecurringOptions()
+    {
+        return unserialize($this->recurringOptions);
+    }
+
+    /**
+     * Sets the recurring options
+     *
+     * @param array $recurringOptions
+     *
+     * @return void
+     */
+    public function setRecurringOptions($recurringOptions)
+    {
+        $this->recurringOptions = serialize($recurringOptions);
+    }
+
+    /**
+     * Returns the recurring end dateTime
+     *
+     * @return \DateTime recurringEndDateTime
+     */
+    public function getRecurringEndDateTime()
+    {
+        return $this->recurringEndDateTime;
+    }
+
+    /**
+     * Sets the recurring end dateTime
+     *
+     * @param \DateTime $startDateTime
+     */
+    public function setRecurringDateTime($recurringEndDateTime)
+    {
+        $this->recurringEndDateTime = $recurringEndDateTime;
+    }
+
 }

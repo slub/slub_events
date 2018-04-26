@@ -104,6 +104,18 @@
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar">
 			<source>Knowledge Bar</source>
 		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.parent">
+			<source>Parent Event</source>
+		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.recurring">
+			<source>Recurring Event</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options">
+			<source>Recurring Options</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_end_date_time">
+			<source>Recurring End (Date and Time)</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.location">
 			<source>Location</source>
 		</trans-unit>

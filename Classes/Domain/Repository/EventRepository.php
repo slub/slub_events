@@ -450,6 +450,121 @@ namespace Slub\SlubEvents\Domain\Repository;
         return $query->execute();
     }
 
+
+    /**
+     * Finds all events with given startDateTime and parent
+     *
+     * @param \DateTime $startDateStamp
+     * @param Event $parent
+     *
+     * @return array The found Event Objects
+     */
+    public function findByStartDateTimeAndParent($startDateStamp, $parent)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+
+        $constraints = [];
+
+        $constraints[] = $query->equals('start_date_time', $startDateStamp);
+        $constraints[] = $query->equals('parent', $parent);
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        // order by start_date -> start_time...
+        $query->setOrderings(
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
+        );
+
+        return $query->execute();
+    }
+
+    /**
+     * Finds one events with given startDateTime and parent
+     *
+     * @param \DateTime $startDateStamp
+     * @param Event $parent
+     *
+     * @return array The found Event Objects
+     */
+    public function findOneByStartDateTimeAndParent($startDateStamp, $parent)
+    {
+        return $this->findByStartDateTimeAndParent($startDateStamp, $parent)->getFirst();
+    }
+
+    /**
+     * Delete all child events which are not in the list of allowed startDateTimes
+     *
+     * @param array $childDateTimes
+     * @param Event $parent
+     *
+     * @return void
+     */
+    public function deleteAllNotAllowedChildren($childDateTimes, $parent)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+
+        $constraints = [];
+
+        $uidsAllowed = [];
+
+        foreach ($childDateTimes as $childDateTime) {
+            foreach ($this->findByStartDateTimeAndParent($childDateTime['startDateTime'], $parent) as $childEvent) {
+                $uidsAllowed[] = $childEvent->getUid();
+            };
+        }
+
+        if (!empty($uidsAllowed)) {
+            $constraints[] = $query->logicalNot($query->in('uid', $uidsAllowed));
+        }
+        $constraints[] = $query->equals('parent', $parent);
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        $eventsToBeRemoved = $query->execute();
+
+        foreach($eventsToBeRemoved as $eventRemove) {
+            $this->remove($eventRemove);
+        }
+
+    }
+
+    /**
+     * Find all future childevent of given parent
+     *
+     * @param Event $parent
+     *
+     * @return array The found Event Objects
+     */
+    public function findFutureByParent($parent)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+
+        $constraints = [];
+        $constraints[] = $query->equals('parent', $parent);
+        $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        // order by start_date -> start_time...
+        $query->setOrderings(
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
+        );
+
+        return $query->execute();
+    }
+
     /**
      * Returns the name of the Event-Table
      * @return string

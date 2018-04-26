@@ -67,7 +67,7 @@
 			<source>Select Function</source>
 		</trans-unit>
 		<trans-unit id="flexforms.show_categories">
-			<source>Show Selected Categories</source>
+			<source>Show Only Selected Categories</source>
 		</trans-unit>
 		<trans-unit id="flexforms.show_categories_start">
 			<source>Select Root Category</source>
