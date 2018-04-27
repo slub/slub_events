@@ -161,6 +161,10 @@
 			<source>Knowledge Bar</source>
 			<target>Wissensbar-Veranstaltung</target>
 		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.parent">
+			<source>Parent Event</source>
+      <target>Hauptveranstaltung</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.location" approved="yes">
 			<source>Location</source>
 			<target>Ort</target>
