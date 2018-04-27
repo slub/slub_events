@@ -406,7 +406,7 @@ return [
         ],
         'recurring'               => [
              'displayCond' => 'FIELD:parent:REQ:false',
-             'exclude' => 0,
+             'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring',
              'config'  => [
                  'type'    => 'check',
@@ -415,7 +415,7 @@ return [
          ],
          'recurring_options'        => [
              'displayCond' => 'FIELD:recurring:REQ:true',
-             'exclude' => 0,
+             'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_options',
              'config'  => [
                  'type'  => 'user',
@@ -428,7 +428,7 @@ return [
          ],
          'recurring_events'        => [
              'displayCond' => 'FIELD:recurring:REQ:true',
-             'exclude' => 0,
+             'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_events',
              'config'  => [
                  'type'  => 'user',
@@ -441,7 +441,7 @@ return [
          ],
          'recurring_end_date_time'        => [
              'displayCond' => 'FIELD:recurring:REQ:true',
-             'exclude' => 0,
+             'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_end_date_time',
              'config'  => [
                  'type'     => 'input',
