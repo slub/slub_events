@@ -257,6 +257,10 @@
 				<source>Recurring Event</source>
 				<target>Wiederholende Veranstaltung</target>
 			</trans-unit>
+      <trans-unit id="tx_slubevents_domain_model_event.recurring_events">
+        <source>Recurring Events</source>
+        <target>Wiederholende Veranstaltungen</target>
+      </trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval" approved="yes">
 				<source>Recurring Interval</source>
 				<target>Wiederholungsintervall</target>
