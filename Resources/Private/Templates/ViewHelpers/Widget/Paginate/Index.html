@@ -1,11 +1,11 @@
 <f:if condition="{configuration.insertAbove}">
-	<f:render section="paginator" arguments="{pagination: pagination}"/>
+    <f:render section="paginator" arguments="{pagination: pagination, section: configuration.section}"/>
 </f:if>
 
 <f:renderChildren arguments="{contentArguments}"/>
 
 <f:if condition="{configuration.insertBelow}">
-	<f:render section="paginator" arguments="{pagination: pagination}"/>
+    <f:render section="paginator" arguments="{pagination: pagination, section: configuration.section}"/>
 </f:if>
 
 <f:section name="paginator">
@@ -16,12 +16,12 @@
 					<li class="previous">
 						<f:if condition="{pagination.previousPage} > 1">
 							<f:then>
-								<f:widget.link section="book-me-now" arguments="{currentPage: pagination.previousPage}">
+								<f:widget.link section="{section}" arguments="{currentPage: pagination.previousPage}">
 									<f:translate key="widget.pagination.previous"/>
 								</f:widget.link>
 							</f:then>
 							<f:else>
-								<f:widget.link section="book-me-now">
+								<f:widget.link section="{section}">
 									<f:translate key="widget.pagination.previous"/>
 								</f:widget.link>
 							</f:else>
@@ -30,7 +30,7 @@
 				</f:if>
 				<f:if condition="{pagination.displayRangeStart} > 1">
 					<li class="first">
-						<f:widget.link section="book-me-now">1</f:widget.link>
+						<f:widget.link section="{section}">1</f:widget.link>
 					</li>
 				</f:if>
 				<f:if condition="{pagination.hasLessPages}">
@@ -47,12 +47,12 @@
 							<li>
 								<f:if condition="{page.number} > 1">
 									<f:then>
-										<f:widget.link section="book-me-now" arguments="{currentPage: page.number}">
+										<f:widget.link section="{section}" arguments="{currentPage: page.number}">
 											{page.number}
 										</f:widget.link>
 									</f:then>
 									<f:else>
-										<f:widget.link section="book-me-now" action="index">{page.number}
+										<f:widget.link section="{section}" action="index">{page.number}
 										</f:widget.link>
 									</f:else>
 								</f:if>
@@ -65,14 +65,14 @@
 				</f:if>
 				<f:if condition="{pagination.displayRangeEnd} < {pagination.numberOfPages}">
 					<li class="last">
-						<f:widget.link section="book-me-now" arguments="{currentPage: pagination.numberOfPages}">
+						<f:widget.link section="{section}" arguments="{currentPage: pagination.numberOfPages}">
 							{pagination.numberOfPages}
 						</f:widget.link>
 					</li>
 				</f:if>
 				<f:if condition="{pagination.nextPage}">
 					<li class="next">
-						<f:widget.link section="book-me-now" arguments="{currentPage: pagination.nextPage}">
+						<f:widget.link section="{section}" arguments="{currentPage: pagination.nextPage}">
 							<f:translate key="widget.pagination.next"/>
 						</f:widget.link>
 					</li>

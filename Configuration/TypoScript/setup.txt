@@ -43,6 +43,7 @@ plugin.tx_slubevents {
                 forcedNumberOfLinks = 5
                 pagesBefore = 3
                 pagesAfter = 3
+                section = book-me-now
             }
         }
 
@@ -86,6 +87,7 @@ module.tx_slubevents {
                 forcedNumberOfLinks = 5
                 pagesBefore = 3
                 pagesAfter = 3
+                section = results
             }
         }
     }
