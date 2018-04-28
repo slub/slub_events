@@ -104,35 +104,30 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
  * -----
  *
  * */
-.slub-event-list {
+.container-fluid {
 	background: transparent;
 }
 
-#leftcol .slub-event-list ul {
-	margin: 0px;
-
-}
-
-.slub-event-list li {
+.container-fluid li {
 	margin: 0.2em 0;
 	vertical-align: middle;
 	text-align: left;
 	list-style: none;
 }
 
-.slub-event-list li.heading {
+.container-fluid li.heading {
 	list-style: none;
 	border: none;
 }
 
-.slub-event-list ul.f3-widget-paginator {
+.container-fluid ul.f3-widget-paginator {
 	width: 80%;
 	border: 1px dotted red;
 	display: inline-block;
 	margin: 2px;
 }
 
-.slub-event-list ul.f3-widget-paginator li {
+.container-fluid ul.f3-widget-paginator li {
 	float: left;
 	font-size: 140%;
 	list-style: none;
@@ -141,18 +136,18 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 	padding: 0.5em;
 }
 
-.slub-event-list ul.f3-widget-paginator li:hover {
+.container-fluid ul.f3-widget-paginator li:hover {
 	background-color: #dedede;
 }
 
-.slub-event-list ul.f3-widget-paginator li.current {
+.container-fluid ul.f3-widget-paginator li.current {
 	background-color: #dedede;
 }
 
-.slub-event-list li.Odd {
+.container-fluid li.Odd {
 }
 
-.slub-event-list li.Even {
+.container-fluid li.Even {
 	background: #e1f4f7;
 }
 
