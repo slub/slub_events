@@ -56,7 +56,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 		<f:flashMessages/>
 
-		<f:form action="beList" section="results" name="searchParameter" method="post">
+		<f:form action="beList" section="book-me-now" name="searchParameter" method="post">
 			<table class="tx_slubevents">
 				<tr>
 					<th><label for="selectedStartDateStamp">
@@ -85,11 +85,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 				</tr>
 
 				<tr>
-					<td colspan="2" id="results">
+					<td colspan="2">
 						<f:form.submit value="Suchen..."/>
 					</td>
 				</tr>
 		</f:form>
+
+    <div id="book-me-now">&nbsp;</div>
 
     <f:if condition="{subscribers}">
       <f:then>
