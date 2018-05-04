@@ -61,13 +61,11 @@
 				<div class="clear"></div>
 			</div>
 
-			<br style="clear:both">
-
 			<f:if condition="{showWiba}">
 				<f:then>
 					<f:if condition="{wibas}">
 						<f:then>
-                            <h3><f:translate key="tx_slubevents_domain_model_event.genius_bar" /></h3>
+              <h3><f:translate key="tx_slubevents_domain_model_event.genius_bar" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: wibas, category: category, kind: 1}" />
@@ -92,21 +90,20 @@
 									} else {
 										$('#slub-forms-select-' + id + '-error').show();
 									}
-
 								}
 							</script>
+              <br style="clear:both">
 						</f:then>
 					</f:if>
 				</f:then>
 			</f:if>
 
-			<br style="clear:both">
 
 			<f:if condition="{showEvent}">
 				<f:then>
 					<f:if condition="{events}">
 						<f:then>
-                            <h3><f:translate key="persEvents" /></h3>
+              <h3><f:translate key="persEvents" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: events, category: category, kind: 2}" />
@@ -117,18 +114,18 @@
 									</f:widget.paginate>
 								</f:else>
 							</f:if>
+              <br style="clear:both">
 						</f:then>
 					</f:if>
 				</f:then>
 			</f:if>
 
-			<br style="clear:both">
 
 			<f:if condition="{showConsultation}">
 				<f:then>
 					<f:if condition="{consultation}">
 						<f:then>
-                            <h3><f:translate key="persConsultingHours" /></h3>
+              <h3><f:translate key="persConsultingHours" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: consultation, category: category, kind: 3}" />
@@ -146,24 +143,28 @@
 		</f:else>
 	</f:if>
 
-	<f:if condition="{wibas}">
-		<f:then></f:then>
-		<f:else>
-			<f:if condition="{events}">
-				<f:then></f:then>
-				<f:else>
-					<f:if condition="{consultation}">
-						<f:then></f:then>
-						<f:else>
-							<ul>
-								<li><f:translate key="tx_slubevents.gb.no_date_neither_event" /></li>
-							</ul>
-						</f:else>
-					</f:if>
-				</f:else>
-			</f:if>
-		</f:else>
-	</f:if>
+  <f:if condition="{showEvent}{showWiba}{showConsultation}">
+      <f:then>
+          <f:if condition="{wibas}">
+              <f:then></f:then>
+              <f:else>
+                  <f:if condition="{events}">
+                      <f:then></f:then>
+                      <f:else>
+                          <f:if condition="{consultation}">
+                              <f:then></f:then>
+                              <f:else>
+                                  <ul>
+                                      <li><f:translate key="tx_slubevents.gb.no_date_neither_event" /></li>
+                                  </ul>
+                              </f:else>
+                          </f:if>
+                      </f:else>
+                  </f:if>
+              </f:else>
+          </f:if>
+      </f:then>
+  </f:if>
 
 </div>
 <script type="text/javascript">
