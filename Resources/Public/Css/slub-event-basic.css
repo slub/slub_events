@@ -112,11 +112,6 @@
 	border: 1px solid #999;
 }
 
-.slub-event-gblist .single-contact .description,
-.slub-event-show .single-contact .description {
-	font-size: 11px;
-}
-
 .slub-event-gblist .single-contact .description p,
 .slub-event-show .single-contact .description p {
 	margin: 0 !important;

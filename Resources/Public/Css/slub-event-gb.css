@@ -245,7 +245,6 @@
 #leftcol .slub-event-gblist .contacts > p:first-child {
 	color: #999;
 	font-weight: 600;
-	font-size: 11px;
 	margin: 0 55px 0 0;
 	float: right;
 }
@@ -276,10 +275,6 @@
 	width: 100px;
 	height: auto;
 	border: 1px solid #999;
-}
-
-.slub-event-gblist .single-contact .description {
-	font-size: 11px;
 }
 
 .slub-event-gblist .single-contact .description p {
