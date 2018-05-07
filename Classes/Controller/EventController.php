@@ -441,7 +441,7 @@ class EventController extends AbstractController
     {
         // this does not work reliable in this context (maybe a bug in TYPO3 7.6?)
         // as the childs must be on the same storage pid as the parent, we take
-        // take the pid and set is as storagePid
+        // the pid and set is as storagePid
         //$config = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
         $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, pid', 'tx_slubevents_domain_model_event', 'uid=' . (int)$id)->fetch_assoc();
         $this->settings['storagePid'] = $parentEventRow['pid'];
@@ -471,9 +471,9 @@ class EventController extends AbstractController
 
             $allChildren = $this->eventRepository->findByParent($parentEvent);
 
-            $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($parentEvent);
-
             $childDateTimes = $this->getChildDateTimes($parentEvent);
+
+            $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($parentEvent);
 
             // delete all present child events which are not requested (e.g. from former settings)
             $this->eventRepository->deleteAllNotAllowedChildren($childDateTimes, $parentEvent);
@@ -556,6 +556,33 @@ class EventController extends AbstractController
 
             $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
             $persistenceManager->persistAll();
+        }
+
+    }
+
+    /**
+     * delete child events for given event id
+     *
+     * @param integer $id
+     *
+     * @return void
+     */
+    public function deleteChildsAction($id)
+    {
+        $this->initializeCreateChildsAction($id);
+
+        $parentEvent = $this->eventRepository->findOneByUid($id);
+
+        if ($parentEvent) {
+
+            $allChildren = $this->eventRepository->findByParent($parentEvent);
+
+            // delete all present child events
+            $this->eventRepository->deleteAllNotAllowedChildren(array(), $parentEvent);
+
+            $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+            $persistenceManager->persistAll();
+
         }
 
     }

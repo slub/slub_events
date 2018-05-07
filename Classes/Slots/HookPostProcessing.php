@@ -136,15 +136,19 @@ class HookPostProcessing
         if ($table == 'tx_slubevents_domain_model_event' &&
             $pObj->checkValue_currentRecord['hidden'] == '0'
         ) {
-            // we need to search and update or create all child events
-            if ($status == "update" &&
-                $pObj->checkValue_currentRecord['recurring'] == 1) {
+            // we need to update/create or delete all child events
+            if ($status == "update") {
 
                 $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-
                 $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
 
-                $eventFound = $eventController->createChildsAction($idElement);
+                if ($pObj->checkValue_currentRecord['recurring'] == 1) {
+                    $eventController->createChildsAction($idElement);
+                } else if ($pObj->checkValue_currentRecord['recurring'] == 0) {
+                    $eventController->deleteChildsAction($idElement);
+                }
+
+
             }
 
             if ($status == "new") {
