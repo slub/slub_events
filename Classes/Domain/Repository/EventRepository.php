@@ -231,6 +231,10 @@ namespace Slub\SlubEvents\Domain\Repository;
             );
         }
 
+        if (!empty($settings['limit']) && (int)$settings['limit'] > 0) {
+            $query->setLimit((int)$settings['limit']);
+        }
+
         return $query->execute();
     }
 
