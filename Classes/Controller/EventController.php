@@ -117,7 +117,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function listUpcommingAction()
+    public function listUpcomingAction()
     {
         if (!empty($this->settings['categorySelection'])) {
             $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);

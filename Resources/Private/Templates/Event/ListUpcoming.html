@@ -14,7 +14,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:section name="eventListing">
     <ul>
         <f:for each="{events}" as="event" key="label" iteration="eventIterator">
-            <f:render partial="Event/Item" arguments="{event: event, settings:settings, label:label, eventIterator:eventIterator, view:'list'}" />
+            <f:render partial="Event/Item" arguments="{event: event, label:label, eventIterator:eventIterator, view:'list'}" />
         </f:for>
     </ul>
 </f:section>
