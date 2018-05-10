@@ -102,7 +102,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 						<f:if condition="{event.hidden} == 0">
 							<f:then>
 								<f:link.action action="beIcsInvitation"
-											   controller="Subscriber"
+											   controller="Event"
 											   title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}"
 											   arguments="{event : event}">
 									<img

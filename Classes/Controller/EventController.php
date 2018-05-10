@@ -33,6 +33,8 @@ namespace Slub\SlubEvents\Controller;
  *
  */
 
+use Slub\SlubEvents\Domain\Model\Event;
+use Slub\SlubEvents\Helper\EmailHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -130,12 +132,12 @@ class EventController extends AbstractController
     /**
      * action show
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event $event
      * @ignorevalidation $event
      *
      * @return void
      */
-    public function showAction(\Slub\SlubEvents\Domain\Model\Event $event = null)
+    public function showAction(Event $event = null)
     {
         if ($event !== null) {
             // fill registers to be used in ts
@@ -171,12 +173,12 @@ class EventController extends AbstractController
     /**
      * action new
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $newEvent
+     * @param Event $newEvent
      * @ignorevalidation $newEvent
      *
      * @return void
      */
-    public function newAction(\Slub\SlubEvents\Domain\Model\Event $newEvent = null)
+    public function newAction(Event $newEvent = null)
     {
         $this->view->assign('newEvent', $newEvent);
     }
@@ -184,11 +186,11 @@ class EventController extends AbstractController
     /**
      * action create
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $newEvent
+     * @param Event $newEvent
      *
      * @return void
      */
-    public function createAction(\Slub\SlubEvents\Domain\Model\Event $newEvent)
+    public function createAction(Event $newEvent)
     {
         $this->eventRepository->add($newEvent);
         $this->addFlashMessage('Your new Event was created.');
@@ -198,12 +200,12 @@ class EventController extends AbstractController
     /**
      * action edit
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event $event
      * @ignorevalidation $event
      *
      * @return void
      */
-    public function editAction(\Slub\SlubEvents\Domain\Model\Event $event)
+    public function editAction(Event $event)
     {
         $this->view->assign('event', $event);
     }
@@ -211,11 +213,11 @@ class EventController extends AbstractController
     /**
      * action update
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event $event
      *
      * @return void
      */
-    public function updateAction(\Slub\SlubEvents\Domain\Model\Event $event)
+    public function updateAction(Event $event)
     {
         $this->eventRepository->update($event);
         $this->addFlashMessage('Your Event was updated.');
@@ -225,11 +227,11 @@ class EventController extends AbstractController
     /**
      * action delete
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event $event
      *
      * @return void
      */
-    public function deleteAction(\Slub\SlubEvents\Domain\Model\Event $event)
+    public function deleteAction(Event $event)
     {
         $this->eventRepository->remove($event);
         $this->addFlashMessage('Your Event was removed.');
@@ -332,15 +334,15 @@ class EventController extends AbstractController
     /**
      * action beCopy
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event $event
      *
      * @return void
      */
-    public function beCopyAction(\Slub\SlubEvents\Domain\Model\Event $event)
+    public function beCopyAction(Event $event)
     {
         $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($event);
-        /** @var \Slub\SlubEvents\Domain\Model\Event $newEvent */
-        $newEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
+        /** @var Event $newEvent */
+        $newEvent = $this->objectManager->get(Event::class);
 
         foreach ($availableProperties as $propertyName) {
             if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
@@ -384,6 +386,71 @@ class EventController extends AbstractController
         $this->eventRepository->add($newEvent);
         $this->addFlashMessage('Die Veranstaltung ' . $newEvent->getTitle() . ' wurde kopiert.');
         $this->redirect('beList');
+    }
+
+    /**
+     * action beIcsInvitation
+     *
+     * --> see ics template in Resources/Private/Backend/Templates/Email/
+     *
+     * @param Event $event
+     * @ignorevalidation $event
+     *
+     * @return void
+     */
+    public function beIcsInvitationAction(Event $event)
+    {
+        // startDateTime may never be empty
+        $helper['start'] = $event->getStartDateTime()->getTimestamp();
+        // endDateTime may be empty
+        if (($event->getEndDateTime() instanceof \DateTime)
+            && ($event->getStartDateTime() != $event->getEndDateTime())
+        ) {
+            $helper['end'] = $event->getEndDateTime()->getTimestamp();
+        } else {
+            $helper['end'] = $helper['start'];
+        }
+
+        if ($event->isAllDay()) {
+            $helper['allDay'] = 1;
+        }
+
+        $helper['now'] = time();
+        $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
+        // location may be empty...
+        if (is_object($event->getLocation())) {
+            if (is_object($event->getLocation()->getParent()->current())) {
+                $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
+                $helper['locationics'] =
+                    $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
+            }
+            $helper['location'] = $event->getLocation()->getName();
+            $helper['locationics'] = $this->foldline($event->getLocation()->getName());
+        }
+        $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+
+        EmailHelper::sendTemplateEmail(
+            [$event->getContact()->getEmail() => $event->getContact()->getName()],
+            [
+                $this->settings['senderEmailAddress'] => LocalizationUtility::translate(
+                    'tx_slubevents.be.eventmanagement',
+                    'slub_events'
+                ),
+            ],
+            'Termineinladung: ' . $event->getTitle(),
+            'Invitation',
+            [
+                'event'       => $event,
+                'subscribers' => $event->getSubscribers(),
+                'helper'      => $helper,
+                'settings'    => $this->settings,
+                'attachCsv'   => true,
+                'attachIcs'   => true,
+            ],
+            $this->configurationManager
+        );
+
+        $this->view->assign('event', $event);
     }
 
     /**
@@ -489,8 +556,8 @@ class EventController extends AbstractController
                     $isUpdate = TRUE;
                 } else {
                     // no child event found - create a new one
-                    /** @var \Slub\SlubEvents\Domain\Model\Event $childEvent */
-                    $childEvent = $this->objectManager->get(\Slub\SlubEvents\Domain\Model\Event::class);
+                    /** @var Event $childEvent */
+                    $childEvent = $this->objectManager->get(Event::class);
                 }
 
                 foreach ($availableProperties as $propertyName) {
@@ -617,7 +684,7 @@ class EventController extends AbstractController
         ]);
 
         $cObj = $this->configurationManager->getContentObject();
-        /** @var \Slub\SlubEvents\Domain\Model\Event $event */
+        /** @var Event $event */
         foreach ($events as $event) {
             $foundevent = [];
 
@@ -702,11 +769,11 @@ class EventController extends AbstractController
     /**
      * action printCal
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
+     * @param Event $event
      *
      * @return void
      */
-    public function printCalAction(\Slub\SlubEvents\Domain\Model\Event $event = null)
+    public function printCalAction(Event $event = null)
     {
         $helper['now'] = time();
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
@@ -735,7 +802,7 @@ class EventController extends AbstractController
     /**
      * calculate all child dateTime fields (start_date_time, end_date_time, sub_end_date_time ...)
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $parentEvent
+     * @param Event $parentEvent
      *
      * @return void
      */
