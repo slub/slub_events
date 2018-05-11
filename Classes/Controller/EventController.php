@@ -261,6 +261,9 @@ class EventController extends AbstractController
      */
     public function beListAction()
     {
+        // get current event of last beIcsInvitationAction
+        $currentActiveEvent = $this->getParametersSafely('currentActiveEvent');
+
         $searchParameter = array();
 
         // if search was triggered, get search parameters from POST variables
@@ -329,6 +332,7 @@ class EventController extends AbstractController
         $this->view->assign('categories', $categories);
         $this->view->assign('events', $events);
         $this->view->assign('contacts', $contacts);
+        $this->view->assign('currentActiveEvent', $currentActiveEvent);
     }
 
     /**
@@ -385,7 +389,16 @@ class EventController extends AbstractController
 
         $this->eventRepository->add($newEvent);
         $this->addFlashMessage('Die Veranstaltung ' . $newEvent->getTitle() . ' wurde kopiert.');
-        $this->redirect('beList');
+
+        $currentWidgetPage = $this->getParametersSafely('@widget_0');
+        if (!$currentWidgetPage) {
+          $currentWidgetPage = [ 'currentPage' => 0 ];
+        }
+        $this->redirect('beList', NULL, NULL, [
+          'currentActiveEvent' => $event->getUid(),
+          '@widget_0' => $currentWidgetPage
+        ]);
+
     }
 
     /**
@@ -437,7 +450,10 @@ class EventController extends AbstractController
                     'slub_events'
                 ),
             ],
-            'Termineinladung: ' . $event->getTitle(),
+            LocalizationUtility::translate(
+                'be.icsInvitation',
+                'slub_events'
+            ) . ':' . $event->getTitle(),
             'Invitation',
             [
                 'event'       => $event,
@@ -450,7 +466,24 @@ class EventController extends AbstractController
             $this->configurationManager
         );
 
-        $this->view->assign('event', $event);
+        $this->addFlashMessage(LocalizationUtility::translate(
+            'be.icsInvitation',
+            'slub_events'
+        ) . ' "'.$event->getTitle().'" '. LocalizationUtility::translate(
+            'be.sentTo',
+            'slub_events'
+        ) .' ' . $event->getContact()->getEmail() . '.');
+
+        $currentWidgetPage = $this->getParametersSafely('@widget_0');
+        if (!$currentWidgetPage) {
+          $currentWidgetPage = [ 'currentPage' => 0 ];
+        }
+
+        $this->redirect('beList', NULL, NULL, [
+          'currentActiveEvent' => $event->getUid(),
+          '@widget_0' => $currentWidgetPage
+        ]);
+
     }
 
     /**

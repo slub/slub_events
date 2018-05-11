@@ -76,6 +76,15 @@ CheckBoxContacts.init = function () {
 addEvent(window, "load", initTreeFolder);
 function initTreeFolder() {
     TreeFolder.init();
+    var active = document.getElementsByClassName('active')[0];
+    if (active) {
+      var message = document.getElementsByClassName('typo3-messages')[0];
+      if (message) {
+          active.insertAdjacentHTML('beforebegin', '<tr id="t3message" class="active"><td colspan="9"> ' + message.innerHTML +'</td></tr>');
+          active = document.getElementById('t3message');
+      }
+      active.scrollIntoView();
+    }
 }
 
 // add class name

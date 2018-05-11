@@ -122,7 +122,7 @@ class IconsHelper
             $hideLink = '';
             $quoteLink = "'";
             if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params, '');
+                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
             } else {
                 $hideLink = $GLOBALS['SOBE']->doc->issueCommand($params, '');
                 $quoteLink = "'";
@@ -139,7 +139,7 @@ class IconsHelper
             $hideLink = '';
             $quoteLink = "'";
             if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params, '');
+                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
             } else {
                 $hideLink = $GLOBALS['SOBE']->doc->issueCommand($params, '');
                 $quoteLink = "'";

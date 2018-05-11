@@ -26,6 +26,9 @@
 		<trans-unit id="be.icsInvitation">
 			<source>ICS Invitation</source>
 		</trans-unit>
+    <trans-unit id="be.sentTo">
+			<source>sent to</source>
+		</trans-unit>
 		<trans-unit id="be.newEvent">
 			<source>New Event</source>
 		</trans-unit>
