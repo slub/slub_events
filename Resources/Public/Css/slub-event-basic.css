@@ -521,3 +521,7 @@
     left: 205px;
     top: 0px;
 }
+
+p.events-privacy-info {
+    width: 100%;
+}
