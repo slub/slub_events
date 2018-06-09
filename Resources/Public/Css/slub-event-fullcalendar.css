@@ -20,7 +20,8 @@
 }
 
 .fc-event-title {
-	font-size: 10px;
+  font-size: 120%;
+  line-height: 130%;
 }
 
 a.fc-event:hover {
@@ -46,6 +47,8 @@ a.fc-event {
 
 .no_subscription {
 	opacity: 0.6;
+  font-size: 70%;
+  color: #777 !important;
 }
 
 #content #calendar a {

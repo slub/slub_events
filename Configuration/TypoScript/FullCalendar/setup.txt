@@ -1,0 +1,49 @@
+page {
+    includeCSS {
+        fullCalendar = EXT:slub_events/Resources/Public/Css/slub-event-fullcalendar.css
+    }
+    includeJSFooterlibs {
+        jquery = EXT:slub_events/Resources/Public/Js/Contrib/JQuery/jquery-2.2.4.min.js
+        jquery.forceOnTop = 1
+        js-moment = EXT:slub_events/Resources/Public/Js/Contrib/Moment/moment.min.js
+        js-fullcalendar = EXT:slub_events/Resources/Public/Js/Contrib/Fullcalendar/fullcalendar.min.js
+        js-slub-fullcalendar = EXT:slub_events/Resources/Public/Js/slub-events-fullcalendar.js
+    }
+}
+
+// assume L=0: default == German; L=1: English
+page.includeJSFooterlibs.js-fullcalendar-l18n = EXT:slub_events/Resources/Public/Js/Contrib/Fullcalendar/lang/de.js
+#[globalVar = GP:L=1]
+#page.includeJSFooterlibs.js-fullcalendar-l18n = EXT:slub_events/Resources/Public/Js/Contrib/Fullcalendar/lang/en.js
+#[global]
+
+
+# ajax for fullcalendar
+ajaxEvents = PAGE
+ajaxEvents {
+    typeNum = 182098
+    10 = USER_INT
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        vendorName = Slub
+        pluginName = Eventlist
+        extensionName = SlubEvents
+        controller = Event
+        switchableControllerActions {
+            Event {
+                1 = ajax
+            }
+        }
+
+        settings =< plugin.tx_slubevents.settings
+        persistence =< plugin.tx_slubevents.persistence
+    }
+
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+    }
+}

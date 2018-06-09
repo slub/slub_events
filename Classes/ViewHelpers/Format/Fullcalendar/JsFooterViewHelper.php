@@ -49,8 +49,7 @@ class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
      */
     public function render($categories = null, $settings = null, $link = null)
     {
-        // get field configuration
-        $js1 = '<script>';
+        $js1 = '';
 
         $js1 .= "$(document).ready(function() {";
         $js1 .= "$('#calendar').fullCalendar({";
@@ -104,12 +103,10 @@ class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         // close $(document).ready()
         $js1 .= '});';
 
-        // add the eventcatX variables at the end
-        $js1 .= '</script>';
+        $GLOBALS['TSFE']->getPageRenderer()->addJsFooterInlineCode('js-slub-fullcalendar-config', $js1);
 
-        // dirty but working. Has to be called after the <form> and the jqueryvalidation validate()
-        // getPagerender() doesn't work in 4.7.x....
-        // see: http://forge.typo3.org/issues/22273
-        $GLOBALS['TSFE']->additionalFooterData['tx_slub_forms'] .= $js1;
+        if (empty($settings['fullCalendarJS'])) {
+            $GLOBALS['TSFE']->getPageRenderer()->addJsFooterLibrary('js-slub-fullcalendar-init', 'typo3conf/ext/slub_events/Resources/Public/Js/slub-events-fullcalendar-init.js');
+        }
     }
 }

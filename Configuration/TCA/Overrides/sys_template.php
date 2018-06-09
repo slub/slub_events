@@ -9,3 +9,9 @@ if (!defined('TYPO3_MODE')) {
     'Configuration/TypoScript',
     'SLUB: Event Registration'
 );
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'slub_events',
+    'Configuration/TypoScript/FullCalendar',
+    'SLUB: Event Registration - FullCalendar support'
+);

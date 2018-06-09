@@ -1,5 +1,11 @@
-page.includeCSS.slubevents = EXT:slub_events/Resources/Public/Css/slub-event-basic.css
-page.includeCSS.slubeventsgb = EXT:slub_events/Resources/Public/Css/slub-event-gb.css
+page {
+    includeCSS {
+        slubevents = EXT:slub_events/Resources/Public/Css/slub-event-basic.css
+        slubeventsgb = EXT:slub_events/Resources/Public/Css/slub-event-gb.css
+    }
+    includeJSFooterlibs {
+    }
+}
 
 plugin.tx_slubevents {
 
@@ -133,33 +139,3 @@ printCal.config {
 		}
 }
 [global]
-
-# ajax for fullcalendar
-ajaxEvents = PAGE
-ajaxEvents {
-    typeNum = 182098
-    10 = USER_INT
-    10 {
-        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-        vendorName = Slub
-        pluginName = Eventlist
-        extensionName = SlubEvents
-        controller = Event
-        switchableControllerActions {
-            Event {
-                1 = ajax
-            }
-        }
-
-        settings =< plugin.tx_slubevents.settings
-        persistence =< plugin.tx_slubevents.persistence
-    }
-
-    config {
-        disableAllHeaderCode = 1
-        additionalHeaders = Content-type:application/json
-        xhtml_cleaning = 0
-        admPanel = 0
-        debug = 0
-    }
-}
