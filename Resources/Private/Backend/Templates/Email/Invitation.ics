@@ -19,12 +19,13 @@ TZOFFSETFROM:+0200
 TZOFFSETTO:+0100
 END:STANDARD
 END:VTIMEZONE
+<f:for each="{helpers}" as="helper">
 BEGIN:VEVENT
 ORGANIZER;CN="{event.contact.name}":MAILTO:{event.contact.email}
 DESCRIPTION:{helper.description}
 SUMMARY:{event.title}
-UID:{event.uid}-event-slub-dresden
-<f:if condition="{helper.allDay} == 1"><f:then>
+UID:{helper.eventuid}-event-slub-dresden
+<f:if condition="{event.allDay} == 1"><f:then>
 DTSTART;VALUE=DATE:<f:format.date date="@{helper.start}" format="Ymd" />
 <f:if condition="{helper.end}"><f:then>
 DTEND;VALUE=DATE:<f:format.date date="@{helper.end}" format="Ymd" />
@@ -46,4 +47,5 @@ STATUS:CONFIRMED
 X-MICROSOFT-CDO-BUSYSTATUS:FREE
 X-MICROSOFT-CDO-IMPORTANCE:1
 END:VEVENT
+</f:for>
 END:VCALENDAR

@@ -58,7 +58,7 @@ class EmailHelper
         $configurationManager = null
     ) {
 
-        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
@@ -102,7 +102,6 @@ class EmailHelper
 
         // attach ics-File
         if ($variables['attachIcs'] == true) {
-
             /** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
             $ics = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
             $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
@@ -114,11 +113,11 @@ class EmailHelper
             // the total basename length must not be more than 60 characters --> see writeFileToTypo3tempDir()
             $eventIcsFile = PATH_site . 'typo3temp/tx_slubevents/' .
                 substr(
-                    preg_replace('/[^\w]/', '', $variables['helper']['nameto']),
+                    preg_replace('/[^\w]/', '', strtolower($variables['event']->getContact()->getName())),
                     0,
                     20
                 )
-                . '-inv-' . strtolower($templateName) . '-' . $variables['event']->getUid() . '.ics';
+                . '-' . strtolower($templateName) . '-' . $variables['event']->getUid() . '.ics';
             GeneralUtility::writeFileToTypo3tempDir(
                 $eventIcsFile,
                 implode("\n", array_filter(explode("\n", $ics->render())))
@@ -145,11 +144,11 @@ class EmailHelper
 
             $eventCsvFile = PATH_site . 'typo3temp/tx_slubevents/' .
                 substr(
-                    preg_replace('/[^\w]/', '', $variables['helper']['nameto']),
+                    preg_replace('/[^\w]/', '', strtolower($variables['event']->getContact()->getName())),
                     0,
                     20
                 )
-                . '-sub-' . strtolower($templateName) . '.csv';
+                . '-' . strtolower($templateName) . '.csv';
             GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
 
             // attach CSV-File

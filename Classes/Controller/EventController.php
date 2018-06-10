@@ -413,34 +413,50 @@ class EventController extends AbstractController
      */
     public function beIcsInvitationAction(Event $event)
     {
-        // startDateTime may never be empty
-        $helper['start'] = $event->getStartDateTime()->getTimestamp();
-        // endDateTime may be empty
-        if (($event->getEndDateTime() instanceof \DateTime)
-            && ($event->getStartDateTime() != $event->getEndDateTime())
-        ) {
-            $helper['end'] = $event->getEndDateTime()->getTimestamp();
-        } else {
-            $helper['end'] = $helper['start'];
-        }
+        $allEvents = [];
 
-        if ($event->isAllDay()) {
-            $helper['allDay'] = 1;
+        // add all child events if this is a parent recurring event
+        if ($event->isRecurring()) {
+            $allEvents = $this->eventRepository->findByParent($event)->toArray();
         }
+        // put (parent) event to top of array
+        array_unshift($allEvents, $event);
 
-        $helper['now'] = time();
-        $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
-        // location may be empty...
-        if (is_object($event->getLocation())) {
-            if (is_object($event->getLocation()->getParent()->current())) {
-                $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] =
-                    $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
+        foreach ($allEvents as $singleEvent) {
+            // startDateTime may never be empty
+            $helper['start'] = $singleEvent->getStartDateTime()->getTimestamp();
+            // endDateTime may be empty
+            if (($singleEvent->getEndDateTime() instanceof \DateTime)
+                && ($singleEvent->getStartDateTime() != $singleEvent->getEndDateTime())
+            ) {
+                $helper['end'] = $singleEvent->getEndDateTime()->getTimestamp();
+            } else {
+                $helper['end'] = $helper['start'];
             }
-            $helper['location'] = $event->getLocation()->getName();
-            $helper['locationics'] = $this->foldline($event->getLocation()->getName());
+
+            if ($event->isAllDay) {
+                $helper['allDay'] = 1;
+            }
+
+            $helper['now'] = time();
+            $helper['description'] = $this->foldline($this->html2rest($singleEvent->getDescription()));
+            // location may be empty...
+            if (is_object($singleEvent->getLocation())) {
+                if (is_object($singleEvent->getLocation()->getParent()->current())) {
+                    $helper['location'] = $singleEvent->getLocation()->getParent()->current()->getName() . ', ';
+
+                    $helper['locationics'] =
+                        $this->foldline($singleEvent->getLocation()->getParent()->current()->getName()) . ', ';
+                }
+                $helper['location'] = $singleEvent->getLocation()->getName();
+                $helper['locationics'] = $this->foldline($singleEvent->getLocation()->getName());
+            }
+            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $singleEvent->getContact()->getName()));
+
+            $helper['eventuid'] = $singleEvent->getUid();
+
+            $icsHelpers[] = $helper;
         }
-        $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
         EmailHelper::sendTemplateEmail(
             [$event->getContact()->getEmail() => $event->getContact()->getName()],
@@ -458,7 +474,7 @@ class EventController extends AbstractController
             [
                 'event'       => $event,
                 'subscribers' => $event->getSubscribers(),
-                'helper'      => $helper,
+                'helpers'     => $icsHelpers,
                 'settings'    => $this->settings,
                 'attachCsv'   => true,
                 'attachIcs'   => true,
