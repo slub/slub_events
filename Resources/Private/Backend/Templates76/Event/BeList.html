@@ -161,43 +161,62 @@ Otherwise your changes will be overwritten the next time you save the extension 
       <f:form action="beList" section="results" name="searchParameter" method="post">
         <table class="tx_slubevents table table-bordered">
           <tr>
-            <th><label for="tceforms-datefield-1">
-              <f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
-            </label>
+            <th>
+                <f:translate key="be.searchConstraints"/>
             </th>
             <th>
-              <f:translate key="tx_slubevents_domain_model_category"/>
+                <f:translate key="tx_slubevents_domain_model_category"/>
             </th>
-            <th><label for="field-contact-search">
-              <f:translate key="be.searchContacts"/>
-            </label></th>
+            <th>
+              <label for="field-contact-search">
+                <f:translate key="be.searchContacts"/>
+              </label>
+            </th>
           </tr>
           <tr>
-            <td class="td-input">
+            <td class="td-input" rowspan="1">
               <div class="form-group">
-                <div class='input-group input-group-sm'>
-                  <f:form.textfield id="datetimepicker1"
-                            property="selectedStartDateStamp"
-                            size="12"
-                            data="{date-type:'date'}"
-                            value="{selectedStartDateStamp}"
-                            class="form-control input-sm t3js-datetimepicker t3js-clearable"
-                             />
-                  <span class="input-group-btn">
-                      <label class="btn btn-default" for="datetimepicker1">
-                        <span class="fa fa-calendar"></span>
-                      </label>
-                  </span>
-                </div>
+                <label for="tceforms-datefield-1">
+                    <f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
+                    <div class='input-group input-group-sm'>
+                          <f:form.textfield id="datetimepicker1"
+                                    property="selectedStartDateStamp"
+                                    size="12"
+                                    data="{date-type:'date'}"
+                                    value="{selectedStartDateStamp}"
+                                    class="form-control input-sm t3js-datetimepicker t3js-clearable"
+                                     />
+                          <span class="input-group-btn">
+                              <label class="btn btn-default" for="datetimepicker1">
+                                <span class="fa fa-calendar"></span>
+                              </label>
+                          </span>
+                    </div>
+                </label>
+                <hr>
+                <label for="searchString">
+                    <f:translate key="be.searchString"/> <br />
+                    <f:form.textfield class="" property="searchString"
+                            placeholder="<f:translate key='be.searchInTitle' />"
+                            value="{searchString}"/>
+                </label>
+                <hr>
+                <label for="checkbox-only-recurring">
+                    <f:form.checkbox id="checkbox-only-recurring"
+                             property="recurring"
+                             checked="{f:if(condition:'{recurring} == 1', then: '1')}"
+                             value="1" />
+                     <f:translate key="be.searchOnlyRecurring"/>
+                </label>
               </div>
             </td>
 
-            <td class="foldtree">
+            <td class="foldtree" rowspan="1">
               <f:render partial="Event/CategoryTree"
                     section="categoryTree"
                     arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
             </td>
-            <td>
+            <td rowspan="1">
               <label for="category-{category.item.uid}"
                    title="{category.item.uid}">{category.item.title}</label>
               <f:form.checkbox id="checkbox-all-contacts"
@@ -216,30 +235,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
                        size="15"
                        class="form-control"
                        value="{contactsSelected}"/>
-            </td>
-          </tr>
-
-          <tr>
-            <th>
-              <label for="searchString">
-                <f:translate key="be.searchString"/>
-              </label>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-          </tr>
-
-          <tr>
-            <td class="td-input">
-              <f:form.textfield class="" property="searchString"
-                        placeholder="<f:translate key='be.searchInTitle' />"
-                        value="{searchString}"/>
-            </td>
-            <td>
-            </td>
-            <td>
             </td>
           </tr>
 
@@ -268,6 +263,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
           </f:if>
         </f:then>
         <f:else>
+          <h2 class="slub-backend-error"><f:translate key="be.nothingFoundForGivenSearch"/></h2>
           <f:render section="eventListing" arguments="{events: events, currentActiveEvent: currentActiveEvent}"/>
         </f:else>
       </f:if>

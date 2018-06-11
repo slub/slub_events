@@ -269,13 +269,14 @@ namespace Slub\SlubEvents\Domain\Repository;
      * INCLUDE hidden events for backend usage only!
      *
      * @param string $categories separated by comma
-     * @param int    $startDateStamp
      * @param string $searchString
+     * @param int    $startDateStamp
      * @param array  $contacts   separated by comma
+     * @param int    $recurring   is recurring event
      *
      * @return array The found Event Objects
      */
-    public function findAllByCategoriesAndDate($categories, $startDateStamp, $searchString = '', $contacts = [])
+    public function findAllByCategoriesAndDate($categories, $startDateStamp, $searchString = '', $contacts = [], $recurring = 0)
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
@@ -297,6 +298,10 @@ namespace Slub\SlubEvents\Domain\Repository;
             // escape strings
             $searchString = $this->getDbConnection()->quoteStr($searchString, $this->getTableName());
             $constraints[] = $query->like('title', '%' . $searchString . '%');
+        }
+
+        if (!empty($recurring)) {
+            $constraints[] = $query->equals('recurring', $recurring);
         }
 
         if (count($constraints)) {

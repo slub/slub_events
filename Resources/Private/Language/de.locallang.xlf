@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-04-26T19:26:36Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-06-11T08:58:49Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -37,9 +37,17 @@
 				<source>New Event</source>
 				<target>Neue Veranstaltung anlegen</target>
 			</trans-unit>
+			<trans-unit id="be.nothingFoundForGivenSearch" approved="yes">
+				<source>No event found for given search constraints (see above).</source>
+				<target>Keine Veranstaltung gefunden. Bitte prüfen Sie Ihre Suche (siehe oben).</target>
+			</trans-unit>
 			<trans-unit id="be.searchAllContacts" approved="yes">
 				<source>Select all</source>
 				<target>alle auswählen</target>
+			</trans-unit>
+			<trans-unit id="be.searchConstraints" approved="yes">
+				<source>Search Constraints</source>
+				<target>Suchkriterien</target>
 			</trans-unit>
 			<trans-unit id="be.searchContacts" approved="yes">
 				<source>Contacts</source>
@@ -48,6 +56,10 @@
 			<trans-unit id="be.searchInTitle" approved="yes">
 				<source>Search in Title</source>
 				<target>Nach Titel suchen</target>
+			</trans-unit>
+			<trans-unit id="be.searchOnlyRecurring" approved="yes">
+				<source>Show only Recurring Parent Events</source>
+				<target>Nur Terminserien</target>
 			</trans-unit>
 			<trans-unit id="be.searchString" approved="yes">
 				<source>Search String</source>
@@ -68,6 +80,10 @@
 			<trans-unit id="be.sendOnlineSurveyNotYetPossible" approved="yes">
 				<source>Sending of Online Survey not yet possible.</source>
 				<target>Das Versenden der Online-Umfrage ist noch nicht möglich.</target>
+			</trans-unit>
+			<trans-unit id="be.sentTo" approved="yes">
+				<source>sent to</source>
+				<target>gesendet an</target>
 			</trans-unit>
 			<trans-unit id="be.unhideEvent" approved="yes">
 				<source>Unhide Event</source>
@@ -257,10 +273,10 @@
 				<source>Recurring Event</source>
 				<target>Wiederholende Veranstaltung</target>
 			</trans-unit>
-      <trans-unit id="tx_slubevents_domain_model_event.recurring_events">
-        <source>Recurring Events</source>
-        <target>Wiederholende Veranstaltungen</target>
-      </trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.recurring_events" approved="yes">
+				<source>Recurring Events</source>
+				<target>Wiederholende Veranstaltungen</target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval" approved="yes">
 				<source>Recurring Interval</source>
 				<target>Wiederholungsintervall</target>

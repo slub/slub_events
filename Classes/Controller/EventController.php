@@ -313,7 +313,6 @@ class EventController extends AbstractController
             }
         }
         $this->view->assign('contactsSelected', $searchParameter['contacts']);
-
         // Events
         // ------------------------------------------------------------------------------------
         // get the events to show
@@ -321,11 +320,14 @@ class EventController extends AbstractController
             $searchParameter['category'],
             strtotime($searchParameter['selectedStartDateStamp']),
             $searchParameter['searchString'],
-            $searchParameter['contacts']
+            $searchParameter['contacts'],
+            $searchParameter['recurring']
         );
 
-        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
+        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
+            $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+            $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
+        }
 
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
         $this->view->assign('searchString', $searchParameter['searchString']);
@@ -333,6 +335,7 @@ class EventController extends AbstractController
         $this->view->assign('events', $events);
         $this->view->assign('contacts', $contacts);
         $this->view->assign('currentActiveEvent', $currentActiveEvent);
+        $this->view->assign('recurring', $searchParameter['recurring']);
     }
 
     /**

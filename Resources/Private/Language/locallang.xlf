@@ -65,6 +65,15 @@
 		<trans-unit id="be.unhideEvent">
 			<source>Unhide Event</source>
 		</trans-unit>
+    <trans-unit id="be.searchOnlyRecurring">
+			<source>Show only Recurring Parent Events</source>
+		</trans-unit>
+    <trans-unit id="be.nothingFoundForGivenSearch">
+			<source>No event found for given search constraints (see above).</source>
+		</trans-unit>
+    <trans-unit id="be.searchConstraints">
+			<source>Search Constraints</source>
+		</trans-unit>
 		<trans-unit id="paginate_back">
 			<source>Back</source>
 		</trans-unit>

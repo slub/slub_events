@@ -34,7 +34,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <th colspan="4"></th>
       </tr>
       <f:for each="{events}" as="event" iteration="eventIterator">
-        <tr class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
+        <tr class="{f:if(condition:'{event.uid}=={currentActiveEvent}', then:'active')} {f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
           <td>
             <se:be.functionBar icon="edit" event="{event}"/>
           </td>
@@ -78,7 +78,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
             <f:if condition="{event.hidden} == 0">
               <f:then>
                 <f:be.buttons.icon icon="actions-edit-copy"
-                           uri="{f:uri.action(action:'beCopy' arguments:'{event:event}')}"
+                           uri="{f:uri.action(action:'beCopy', arguments:'{event:event}', addQueryString:'1')}"
                            title="<f:translate key='be.copyEvent' />"/>
               </f:then>
             </f:if>
@@ -90,9 +90,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
             <f:if condition="{event.hidden} == 0">
               <f:then>
                 <f:link.action action="beIcsInvitation"
-                         controller="Subscriber"
+                         controller="Event"
                          title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}"
-                         arguments="{event : event}">
+                         arguments="{event : event}"
+                         addQueryString="1">
                   <img
                     src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/calendar-import.png'/>
                 </f:link.action>
@@ -147,12 +148,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <table class="tx_slubevents table table-bordered">
           <tr>
             <th>
-              <label for="tceforms-datefield-1">
-                <f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
-              </label>
+                <f:translate key="be.searchConstraints"/>
             </th>
             <th>
-              <f:translate key="tx_slubevents_domain_model_category"/>
+                <f:translate key="tx_slubevents_domain_model_category"/>
             </th>
             <th>
               <label for="field-contact-search">
@@ -162,13 +161,31 @@ Otherwise your changes will be overwritten the next time you save the extension 
           </tr>
           <tr>
             <td class="td-input">
-              <span class="t3-tceforms-input-wrapper-date">
-                <f:form.textfield id="tceforms-datefield-1"
-                          property="selectedStartDateStamp"
-                          size="12"
-                          value="{selectedStartDateStamp}"/>
-                 <se:be.functionBar icon="datepicker" event="{event}" />
-              </span>
+              <label for="tceforms-datefield-1">
+                  <f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
+                  <span class="t3-tceforms-input-wrapper-date">
+                    <f:form.textfield id="tceforms-datefield-1"
+                              property="selectedStartDateStamp"
+                              size="12"
+                              value="{selectedStartDateStamp}"/>
+                     <se:be.functionBar icon="datepicker" event="{event}" />
+                  </span>
+              </label>
+              <hr>
+              <label for="searchString">
+                  <f:translate key="be.searchString"/> <br />
+                  <f:form.textfield class="" property="searchString"
+                          placeholder="<f:translate key='be.searchInTitle' />"
+                          value="{searchString}"/>
+              </label>
+              <hr>
+              <label for="checkbox-only-recurring">
+                  <f:form.checkbox id="checkbox-only-recurring"
+                           property="recurring"
+                           checked="{f:if(condition:'{recurring} == 1', then: '1')}"
+                           value="1" />
+                   <f:translate key="be.searchOnlyRecurring"/>
+              </label>
             </td>
             <td class="foldtree">
               <f:render partial="Event/CategoryTree"
@@ -197,30 +214,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
           </tr>
 
           <tr>
-            <th>
-              <label for="searchString">
-                <f:translate key="be.searchString"/>
-              </label>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-          </tr>
-
-          <tr>
-            <td class="td-input">
-              <f:form.textfield class="" property="searchString"
-                        placeholder="<f:translate key='be.searchInTitle' />"
-                        value="{searchString}"/>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-          </tr>
-
-          <tr>
             <td colspan="3">
               <f:form.submit value="Suchen..."/>
             </td>
@@ -239,13 +232,14 @@ Otherwise your changes will be overwritten the next time you save the extension 
             <f:else>
               <f:widget.paginate objects="{events}" as="paginatedEvents"
                          configuration="{settings.list.paginate}">
-                <f:render section="eventListing" arguments="{events: paginatedEvents}"/>
+                <f:render section="eventListing" arguments="{events: paginatedEvents, currentActiveEvent: currentActiveEvent}"/>
               </f:widget.paginate>
             </f:else>
           </f:if>
         </f:then>
         <f:else>
-          <f:render section="eventListing" arguments="{events: events}"/>
+          <h2 class="slub-backend-error"><f:translate key="be.nothingFoundForGivenSearch"/></h2>
+          <f:render section="eventListing" arguments="{events: events, currentActiveEvent: currentActiveEvent}"/>
         </f:else>
       </f:if>
     </div>
