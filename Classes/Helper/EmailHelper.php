@@ -120,7 +120,7 @@ class EmailHelper
                 . '-' . strtolower($templateName) . '-' . $variables['event']->getUid() . '.ics';
             GeneralUtility::writeFileToTypo3tempDir(
                 $eventIcsFile,
-                implode("\n", array_filter(explode("\n", $ics->render())))
+                implode("\r\n", array_filter(explode("\r\n", $ics->render())))
             );
 
             // attach additionally ics as file
@@ -128,7 +128,7 @@ class EmailHelper
                 ->setContentType('text/calendar'));
 
             // add ics as part
-            $message->addPart(implode("\n", array_filter(explode("\n", $ics->render()))), 'text/calendar', 'utf-8');
+            $message->addPart(implode("\r\n", array_filter(explode("\r\n", $ics->render()))), 'text/calendar', 'utf-8');
         }
         // attach CSV-File
         if ($variables['attachCsv'] == true) {
