@@ -79,9 +79,12 @@ class HookPostProcessing
         } else {
             $files = scandir($dir);
             foreach ($files as $file) {
+                // example filename: calfile_571ea50f5d4f02ca0151c8bd2b1e23a5_1536098400_1536184800
                 $fileDetails = preg_split('/_/', $file);
-                if ($startDate > $fileDetails[2] && $startDate < $fileDetails[3]) {
-                    system('rm ' . $dir . $file);
+                if ($fileDetails[0] == 'calfile') {
+                    if ($startDate > $fileDetails[2] && $startDate < $fileDetails[3]) {
+                        system('rm ' . $dir . $file);
+                    }
                 }
             }
         }
