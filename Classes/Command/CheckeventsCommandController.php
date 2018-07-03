@@ -147,7 +147,8 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                 $helper['allDay'] = 1;
             }
             $helper['now'] = time();
-            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+            // used to name the csv file...
+            $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
             $helper['description'] = $this->foldline($event->getDescription());
             // location may be empty...
             if (is_object($event->getLocation())) {
@@ -211,6 +212,7 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
                     [
                         'event' => $event,
                         'subscribers' => $event->getSubscribers(),
+                        'nameTo' => $nameTo,
                         'helper' => $helper,
                         'attachCsv' => true,
                         'attachIcs' => true,

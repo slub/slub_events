@@ -113,7 +113,7 @@ class EmailHelper
             // the total basename length must not be more than 60 characters --> see writeFileToTypo3tempDir()
             $eventIcsFile = PATH_site . 'typo3temp/tx_slubevents/' .
                 substr(
-                    preg_replace('/[^\w]/', '', strtolower($variables['event']->getContact()->getName())),
+                    preg_replace('/[^\w]/', '', strtolower($variables['nameTo'])),
                     0,
                     20
                 )
@@ -144,7 +144,7 @@ class EmailHelper
 
             $eventCsvFile = PATH_site . 'typo3temp/tx_slubevents/' .
                 substr(
-                    preg_replace('/[^\w]/', '', strtolower($variables['event']->getContact()->getName())),
+                    preg_replace('/[^\w]/', '', strtolower($variables['nameTo'])),
                     0,
                     20
                 )

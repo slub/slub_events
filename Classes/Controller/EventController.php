@@ -454,12 +454,12 @@ class EventController extends AbstractController
                 $helper['location'] = $singleEvent->getLocation()->getName();
                 $helper['locationics'] = $this->foldline($singleEvent->getLocation()->getName());
             }
-            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $singleEvent->getContact()->getName()));
-
             $helper['eventuid'] = $singleEvent->getUid();
 
             $icsHelpers[] = $helper;
         }
+
+        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
         EmailHelper::sendTemplateEmail(
             [$event->getContact()->getEmail() => $event->getContact()->getName()],
@@ -477,6 +477,7 @@ class EventController extends AbstractController
             [
                 'event'       => $event,
                 'subscribers' => $event->getSubscribers(),
+                'nameTo'      => $nameTo,
                 'helpers'     => $icsHelpers,
                 'settings'    => $this->settings,
                 'attachCsv'   => true,

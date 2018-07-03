@@ -230,7 +230,7 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         $allevents = $this->eventRepository->findAllByDateInterval($startDateTime, $endDateTime);
 
         // used to name the csv file...
-        $helper['nameto'] = strftime('%Y%m', $startDateTime);
+        $nameTo = strftime('%Y%m', $startDateTime);
 
         // email to all receivers...
         $msg = 'Statistik Report Veranstaltungen: %s - %s';
@@ -242,6 +242,7 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             [
                 'events'    => $allevents,
                 'helper'    => $helper,
+                'nameTo'    => $nameTo,
                 'attachCsv' => true,
                 'attachIcs' => false,
             ]

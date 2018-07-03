@@ -235,7 +235,7 @@ class SubscriberController extends AbstractController
             $helper['location'] .= $event->getLocation()->getName();
             $helper['locationics'] .= $this->foldline($event->getLocation()->getName());
         }
-        $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
+        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
 
         // startDateTime may never be empty
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
@@ -260,6 +260,7 @@ class SubscriberController extends AbstractController
             [
                 'event'      => $event,
                 'subscriber' => $newSubscriber,
+                'nameTo'     => $nameTo,
                 'helper'     => $helper,
                 'settings'   => $this->settings,
                 'attachCsv'  => false,
@@ -272,7 +273,7 @@ class SubscriberController extends AbstractController
         if ($this->settings['emailToContact']['sendEmailOnMaximumReached'] &&
             ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()
         ) {
-            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+            $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
             // email to event owner
             EmailHelper::sendTemplateEmail(
@@ -290,6 +291,7 @@ class SubscriberController extends AbstractController
                 [
                     'event'       => $event,
                     'subscribers' => $event->getSubscribers(),
+                    'nameTo'      => $nameTo,
                     'helper'      => $helper,
                     'settings'    => $this->settings,
                     'attachCsv'   => true,
@@ -300,7 +302,7 @@ class SubscriberController extends AbstractController
         } // send to contact, on every booking if TS setting is present:
         else {
             if ($this->settings['emailToContact']['sendEmailOnEveryBooking']) {
-                $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+                $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
                 // email to event owner
                 EmailHelper::sendTemplateEmail(
@@ -319,6 +321,7 @@ class SubscriberController extends AbstractController
                         'event'         => $event,
                         'newsubscriber' => $newSubscriber,
                         'subscribers'   => $event->getSubscribers(),
+                        'nameTo'        => $nameTo,
                         'helper'        => $helper,
                         'settings'      => $this->settings,
                         'attachCsv'     => false,
@@ -417,7 +420,7 @@ class SubscriberController extends AbstractController
             $helper['location'] = $event->getLocation()->getName();
             $helper['locationics'] = $this->foldline($event->getLocation()->getName());
         }
-        $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
+        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
 
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
 
@@ -442,7 +445,7 @@ class SubscriberController extends AbstractController
             ($this->subscriberRepository->countAllByEvent($event) >= $event->getMinSubscriber()) &&
             ($this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber()) < $event->getMinSubscriber()
         ) {
-            $helper['nameto'] = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+            $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
 
             // email to event owner
             EmailHelper::sendTemplateEmail(
@@ -459,6 +462,7 @@ class SubscriberController extends AbstractController
                     'event'           => $event,
                     'subscribers'     => $event->getSubscribers(),
                     'subscriberCount' => $this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber(),
+                    'nameTo'          => $nameTo,
                     'helper'          => $helper,
                     'settings'        => $this->settings,
                     'attachCsv'       => false,
@@ -476,6 +480,7 @@ class SubscriberController extends AbstractController
             [
                 'event'      => $event,
                 'subscriber' => $subscriber,
+                'nameTo'     => $nameTo,
                 'helper'     => $helper,
                 'settings'   => $this->settings,
                 'attachCsv'  => false,
