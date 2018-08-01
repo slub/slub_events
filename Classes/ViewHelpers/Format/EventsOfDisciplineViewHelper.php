@@ -44,7 +44,7 @@ class EventsOfDisciplineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
     protected $eventRepository;
 
     /**
-     * check if any events of categories below are present and free for booking
+     * check if any events of discipline below are present and free for booking
      *
      * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
      *
@@ -54,6 +54,10 @@ class EventsOfDisciplineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
     public function render(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
     {
         $events = $this->eventRepository->findAllBySettings(['disciplineList' => [0 => $discipline]]);
-        return count($events);
+        if ($events) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 }

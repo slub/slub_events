@@ -54,6 +54,10 @@ class EventsOfCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
     public function render(\Slub\SlubEvents\Domain\Model\Category $category)
     {
         $events = $this->eventRepository->findAllBySettings(['categoryList' => [0 => $category]]);
-        return count($events);
+        if ($events) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 }
