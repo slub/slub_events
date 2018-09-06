@@ -35,14 +35,16 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 </div>
 
-<f:if condition="{loggedIn}">
-	<f:then>	</f:then>
-	<f:else>
-<div class="hint">
-	<p class="extrabox">Haben Sie bereits ein SLUB-Nutzerkonto? Dann melden Sie sich bitte <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zur Veranstaltungsanmeldung zurückgeleitet.</p>
-</div>
-</f:else>
-</f:if>
+<f:security.ifAuthenticated>
+    <f:then></f:then>
+    <f:else>
+        <div class="hint">
+            <p class="extrabox">
+              <f:translate key="register.pleaseloginfirst" arguments="{0: '<a href=\'https://www.slub-dresden.de/Shibboleth.sso/Login?target={f:uri.page(absolute:\'1\', addQueryString:\'1\')->f:format.urlencode()}\'>', 1: '</a>'}" />
+            </p>
+        </div>
+    </f:else>
+</f:security.ifAuthenticated>
 
 <f:render partial="FormErrors" arguments="{obj: 'newSubscriber'}" />
 
@@ -62,7 +64,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<f:form.hidden name="event" value="{event}" />
 
 	<p class="events-privacy-info">Informationen zur Datenverarbeitung finden Sie in unserer <a href="https://www.slub-dresden.de/datenschutzerklaerung/">Datenschutzerklärung</a>.</p>
-	
+
 	<div class="submit">
 		<div class="subscription">
 			<f:form.submit class="button submit" value="<f:translate key='tx_slubevents_domain_model_subscriber.submit_registration' />" />

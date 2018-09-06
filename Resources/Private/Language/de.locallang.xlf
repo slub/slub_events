@@ -1,433 +1,437 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-06-11T08:58:49Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-09-06T16:35:44Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
 		<body>
 			<trans-unit id="be.copyEvent" approved="yes">
-				<source>Copy Event</source>
-				<target>Kopieren</target>
+				<source><![CDATA[Copy Event]]></source>
+				<target><![CDATA[Kopieren]]></target>
 			</trans-unit>
 			<trans-unit id="be.editEvent" approved="yes">
-				<source>Edit</source>
-				<target>Bearbeiten</target>
+				<source><![CDATA[Edit]]></source>
+				<target><![CDATA[Bearbeiten]]></target>
 			</trans-unit>
 			<trans-unit id="be.error.nofolderselected" approved="yes" xml:space="preserve">
 				<source><![CDATA[Cannot find the configuration! <br /><br /><--  Please select a page or folder in the left tree to continue.]]></source>
 				<target><![CDATA[Keine Konfiguration gefunden! <br /><br /> <--- Bitte wählen Sie eine Seite oder einen Ordner im linken Seitenbaum aus.]]></target>
 			</trans-unit>
 			<trans-unit id="be.form.singe_event" approved="yes">
-				<source>Single Event</source>
-				<target>Einzel-Veranstaltung</target>
+				<source><![CDATA[Single Event]]></source>
+				<target><![CDATA[Einzel-Veranstaltung]]></target>
 			</trans-unit>
 			<trans-unit id="be.free" approved="yes">
-				<source>free</source>
-				<target>frei</target>
+				<source><![CDATA[free]]></source>
+				<target><![CDATA[frei]]></target>
 			</trans-unit>
 			<trans-unit id="be.hideEvent" approved="yes">
-				<source>Hide Event</source>
-				<target>Verstecken</target>
+				<source><![CDATA[Hide Event]]></source>
+				<target><![CDATA[Verstecken]]></target>
 			</trans-unit>
 			<trans-unit id="be.icsInvitation" approved="yes">
-				<source>ICS Invitation</source>
-				<target>Termineinladung</target>
+				<source><![CDATA[ICS Invitation]]></source>
+				<target><![CDATA[Termineinladung]]></target>
 			</trans-unit>
 			<trans-unit id="be.newEvent" approved="yes">
-				<source>New Event</source>
-				<target>Neue Veranstaltung anlegen</target>
+				<source><![CDATA[New Event]]></source>
+				<target><![CDATA[Neue Veranstaltung anlegen]]></target>
 			</trans-unit>
 			<trans-unit id="be.nothingFoundForGivenSearch" approved="yes">
-				<source>No event found for given search constraints (see above).</source>
-				<target>Keine Veranstaltung gefunden. Bitte prüfen Sie Ihre Suche (siehe oben).</target>
+				<source><![CDATA[No event found for given search constraints (see above).]]></source>
+				<target><![CDATA[Keine Veranstaltung gefunden. Bitte prüfen Sie Ihre Suche (siehe oben).]]></target>
 			</trans-unit>
 			<trans-unit id="be.searchAllContacts" approved="yes">
-				<source>Select all</source>
-				<target>alle auswählen</target>
+				<source><![CDATA[Select all]]></source>
+				<target><![CDATA[alle auswählen]]></target>
 			</trans-unit>
 			<trans-unit id="be.searchConstraints" approved="yes">
-				<source>Search Constraints</source>
-				<target>Suchkriterien</target>
+				<source><![CDATA[Search Constraints]]></source>
+				<target><![CDATA[Suchkriterien]]></target>
 			</trans-unit>
 			<trans-unit id="be.searchContacts" approved="yes">
-				<source>Contacts</source>
-				<target>Ansprechpartner</target>
+				<source><![CDATA[Contacts]]></source>
+				<target><![CDATA[Ansprechpartner]]></target>
 			</trans-unit>
 			<trans-unit id="be.searchInTitle" approved="yes">
-				<source>Search in Title</source>
-				<target>Nach Titel suchen</target>
+				<source><![CDATA[Search in Title]]></source>
+				<target><![CDATA[Nach Titel suchen]]></target>
 			</trans-unit>
 			<trans-unit id="be.searchOnlyRecurring" approved="yes">
-				<source>Show only Recurring Parent Events</source>
-				<target>Nur Terminserien</target>
+				<source><![CDATA[Show only Recurring Parent Events]]></source>
+				<target><![CDATA[Nur Terminserien]]></target>
 			</trans-unit>
 			<trans-unit id="be.searchString" approved="yes">
-				<source>Search String</source>
-				<target>Suchbegriff</target>
+				<source><![CDATA[Search String]]></source>
+				<target><![CDATA[Suchbegriff]]></target>
 			</trans-unit>
 			<trans-unit id="be.sendIcsInvitationTo" approved="yes">
-				<source>Send ICS Invitation to:</source>
-				<target>Schicke Termineinladung an: </target>
+				<source><![CDATA[Send ICS Invitation to:]]></source>
+				<target><![CDATA[Schicke Termineinladung an: ]]></target>
 			</trans-unit>
 			<trans-unit id="be.sendOnlineSurvey" approved="yes">
-				<source>Send Online Survey Request to Subscribers</source>
-				<target>Online-Umfrage an Teilnehmer senden.</target>
+				<source><![CDATA[Send Online Survey Request to Subscribers]]></source>
+				<target><![CDATA[Online-Umfrage an Teilnehmer senden.]]></target>
 			</trans-unit>
 			<trans-unit id="be.sendOnlineSurveyNoSubscribers" approved="yes">
-				<source>Sending of Online Survey not possible as no subscribers are present.</source>
-				<target>Das Versenden der Online-Umfrage ist nicht möglich, da es keine Teilnehmer gibt.</target>
+				<source><![CDATA[Sending of Online Survey not possible as no subscribers are present.]]></source>
+				<target><![CDATA[Das Versenden der Online-Umfrage ist nicht möglich, da es keine Teilnehmer gibt.]]></target>
 			</trans-unit>
 			<trans-unit id="be.sendOnlineSurveyNotYetPossible" approved="yes">
-				<source>Sending of Online Survey not yet possible.</source>
-				<target>Das Versenden der Online-Umfrage ist noch nicht möglich.</target>
+				<source><![CDATA[Sending of Online Survey not yet possible.]]></source>
+				<target><![CDATA[Das Versenden der Online-Umfrage ist noch nicht möglich.]]></target>
 			</trans-unit>
 			<trans-unit id="be.sentTo" approved="yes">
-				<source>sent to</source>
-				<target>gesendet an</target>
+				<source><![CDATA[sent to]]></source>
+				<target><![CDATA[gesendet an]]></target>
 			</trans-unit>
 			<trans-unit id="be.unhideEvent" approved="yes">
-				<source>Unhide Event</source>
-				<target>Aktivieren</target>
+				<source><![CDATA[Unhide Event]]></source>
+				<target><![CDATA[Aktivieren]]></target>
 			</trans-unit>
 			<trans-unit id="paginate_back" approved="yes">
-				<source>Back</source>
-				<target>Zurück</target>
+				<source><![CDATA[Back]]></source>
+				<target><![CDATA[Zurück]]></target>
 			</trans-unit>
 			<trans-unit id="paginate_next" approved="yes">
-				<source>Next</source>
-				<target>Nächste </target>
+				<source><![CDATA[Next]]></source>
+				<target><![CDATA[Nächste ]]></target>
 			</trans-unit>
 			<trans-unit id="paginate_previous" approved="yes">
-				<source>Previous</source>
-				<target>Vorherige</target>
+				<source><![CDATA[Previous]]></source>
+				<target><![CDATA[Vorherige]]></target>
 			</trans-unit>
 			<trans-unit id="persConsultingHours" approved="yes">
-				<source>Consulting hours</source>
-				<target>Sprechstunden</target>
+				<source><![CDATA[Consulting hours]]></source>
+				<target><![CDATA[Sprechstunden]]></target>
 			</trans-unit>
 			<trans-unit id="persEvents" approved="yes">
-				<source>Events</source>
-				<target>Veranstaltungen</target>
+				<source><![CDATA[Events]]></source>
+				<target><![CDATA[Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="persSelectTopic" approved="yes">
-				<source>Please select topic</source>
-				<target>Bitte Thema wählen</target>
+				<source><![CDATA[Please select topic]]></source>
+				<target><![CDATA[Bitte Thema wählen]]></target>
+			</trans-unit>
+			<trans-unit id="register.pleaseloginfirst" approved="yes">
+				<source><![CDATA[Do you have a SLUB user account? Please login to your account %s first. %s You will be redirected to this event registration automatically.]]></source>
+				<target><![CDATA[Haben Sie bereits ein SLUB-Nutzerkonto? Dann melden Sie sich bitte %s zunächst in Ihrem Konto an.%s Sie werden automatisch zur Veranstaltungsanmeldung zurückgeleitet.]]></target>
 			</trans-unit>
 			<trans-unit id="selecttopictobook" approved="yes">
-				<source>Please select a topic.</source>
-				<target>Bitte wählen Sie ein Thema.</target>
+				<source><![CDATA[Please select a topic.]]></source>
+				<target><![CDATA[Bitte wählen Sie ein Thema.]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.date" approved="yes">
-				<source>Date</source>
-				<target>Datum</target>
+				<source><![CDATA[Date]]></source>
+				<target><![CDATA[Datum]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.description" approved="yes">
-				<source>Send monthly report to given email addresses.</source>
-				<target>Monatsberichte an angegebene Adressen schicken.</target>
+				<source><![CDATA[Send monthly report to given email addresses.]]></source>
+				<target><![CDATA[Monatsberichte an angegebene Adressen schicken.]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.duration" approved="yes">
-				<source>Duration (min)</source>
-				<target>Dauer (Minuten)</target>
+				<source><![CDATA[Duration (min)]]></source>
+				<target><![CDATA[Dauer (Minuten)]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.invalidEmail" approved="yes">
-				<source>Invalid Email Address Given!</source>
-				<target>Falsche Email Adresse angegeben!</target>
+				<source><![CDATA[Invalid Email Address Given!]]></source>
+				<target><![CDATA[Falsche Email Adresse angegeben!]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.invalidStoragePid" approved="yes">
-				<source>Invalid Storage Pid Given!</source>
-				<target>Ungültige Pid des Datenspeichers angegeben!</target>
+				<source><![CDATA[Invalid Storage Pid Given!]]></source>
+				<target><![CDATA[Ungültige Pid des Datenspeichers angegeben!]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.name" approved="yes">
-				<source>Statistics Report</source>
-				<target>Monatsstatistik</target>
+				<source><![CDATA[Statistics Report]]></source>
+				<target><![CDATA[Monatsstatistik]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.receiverEmailAddress" approved="yes">
-				<source>Receiver Email Address(es)</source>
-				<target>Empfänger Email-Adresse</target>
+				<source><![CDATA[Receiver Email Address(es)]]></source>
+				<target><![CDATA[Empfänger Email-Adresse]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.senderEmailAddress" approved="yes">
-				<source>Sender Email Address</source>
-				<target>Absender Email-Adresse</target>
+				<source><![CDATA[Sender Email Address]]></source>
+				<target><![CDATA[Absender Email-Adresse]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.storagePid" approved="yes">
-				<source>StoragePid</source>
-				<target>Datenspeicher Pid</target>
+				<source><![CDATA[StoragePid]]></source>
+				<target><![CDATA[Datenspeicher Pid]]></target>
 			</trans-unit>
 			<trans-unit id="text.back_to_overview" approved="yes">
-				<source>Back to Overview</source>
-				<target>Zurück zur Übersicht</target>
+				<source><![CDATA[Back to Overview]]></source>
+				<target><![CDATA[Zurück zur Übersicht]]></target>
 			</trans-unit>
 			<trans-unit id="text.closing" approved="yes">
-				<source>Best Regards</source>
-				<target>Mit freundlichen Grüßen</target>
+				<source><![CDATA[Best Regards]]></source>
+				<target><![CDATA[Mit freundlichen Grüßen]]></target>
 			</trans-unit>
 			<trans-unit id="text.error.could_find_event" approved="yes">
-				<source>Sorry, we couldn't find the requested event.</source>
-				<target>Leider konnten wir die gesuchte Veranstaltung nicht finden.</target>
+				<source><![CDATA[Sorry, we couldn't find the requested event.]]></source>
+				<target><![CDATA[Leider konnten wir die gesuchte Veranstaltung nicht finden.]]></target>
 			</trans-unit>
 			<trans-unit id="text.error.could_find_subscriber" approved="yes">
-				<source>Couldn't find your subscription. Maybe you have already unsubscribed?</source>
-				<target>Ihre Anmeldung wurde nicht gefunden. Haben Sie sich vielleicht bereits abgemeldet?</target>
+				<source><![CDATA[Couldn't find your subscription. Maybe you have already unsubscribed?]]></source>
+				<target><![CDATA[Ihre Anmeldung wurde nicht gefunden. Haben Sie sich vielleicht bereits abgemeldet?]]></target>
 			</trans-unit>
 			<trans-unit id="text.salutation" approved="yes">
-				<source>Dear</source>
-				<target>Sehr geehrte(r)</target>
+				<source><![CDATA[Dear]]></source>
+				<target><![CDATA[Sehr geehrte(r)]]></target>
 			</trans-unit>
 			<trans-unit id="text.save_to_your_calendar" approved="yes">
-				<source>Save event to your local calendar.</source>
-				<target>Veranstaltung in Kalender übernehmen.</target>
+				<source><![CDATA[Save event to your local calendar.]]></source>
+				<target><![CDATA[Veranstaltung in Kalender übernehmen.]]></target>
 			</trans-unit>
 			<trans-unit id="text.signature" approved="yes">
-				<source>SLUB Dresden</source>
-				<target>Ihre SLUB Dresden</target>
+				<source><![CDATA[SLUB Dresden]]></source>
+				<target><![CDATA[Ihre SLUB Dresden]]></target>
 			</trans-unit>
 			<trans-unit id="text.subscriber.please_ask_your_question" approved="yes">
-				<source>Please ask your question(s) or describe your needs. Your message helps us very much to prepare the appointment as well as possible.</source>
-				<target>Bitte stellen Sie uns Ihre Frage(n) zum Thema oder beschreiben Sie Ihr Anliegen etwas genauer. So können wir uns wir uns bestmöglich auf das Gespräch vorbereiten.</target>
+				<source><![CDATA[Please ask your question(s) or describe your needs. Your message helps us very much to prepare the appointment as well as possible.]]></source>
+				<target><![CDATA[Bitte stellen Sie uns Ihre Frage(n) zum Thema oder beschreiben Sie Ihr Anliegen etwas genauer. So können wir uns wir uns bestmöglich auf das Gespräch vorbereiten.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents.be.eventmanagement" approved="yes">
-				<source>Event Management</source>
-				<target>SLUB Veranstaltungsmanagement</target>
+				<source><![CDATA[Event Management]]></source>
+				<target><![CDATA[SLUB Veranstaltungsmanagement]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents.be.subscriberlist" approved="yes">
-				<source>List of Subscribers</source>
-				<target>Anmeldungen</target>
+				<source><![CDATA[List of Subscribers]]></source>
+				<target><![CDATA[Anmeldungen]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents.gb.i_consult_you" approved="yes">
-				<source>I Consult You</source>
-				<target>Ich berate Sie</target>
+				<source><![CDATA[I Consult You]]></source>
+				<target><![CDATA[Ich berate Sie]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents.gb.no_date" approved="yes">
-				<source>No Knowledge Bar dates at the moment.</source>
-				<target>Zur Zeit gibt es leider keine Wissensbartermine.</target>
+				<source><![CDATA[No Knowledge Bar dates at the moment.]]></source>
+				<target><![CDATA[Zur Zeit gibt es leider keine Wissensbartermine.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents.gb.no_date_neither_event" approved="yes">
-				<source>No events neither Knowledge Bar dates at the moment.</source>
-				<target>Zur Zeit leider keine Veranstaltungen bzw. Wissensbartermine.</target>
+				<source><![CDATA[No events neither Knowledge Bar dates at the moment.]]></source>
+				<target><![CDATA[Zur Zeit leider keine Veranstaltungen bzw. Wissensbartermine.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents.gb.no_event" approved="yes">
-				<source>No events at the moment.</source>
-				<target>Zur Zeit haben wir zu diesem Thema leider keine Veranstaltungen.</target>
+				<source><![CDATA[No events at the moment.]]></source>
+				<target><![CDATA[Zur Zeit haben wir zu diesem Thema leider keine Veranstaltungen.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents.gb.we_consult_you" approved="yes">
-				<source>We Consult You</source>
-				<target>Wir beraten Sie</target>
+				<source><![CDATA[We Consult You]]></source>
+				<target><![CDATA[Wir beraten Sie]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
-				<source>Event Category</source>
-				<target>Kategorie</target>
+				<source><![CDATA[Event Category]]></source>
+				<target><![CDATA[Kategorie]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_category.no_search" approved="yes">
-				<source>Exclude from search</source>
-				<target>Aus Suche ausschließen</target>
+				<source><![CDATA[Exclude from search]]></source>
+				<target><![CDATA[Aus Suche ausschließen]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_category.onlinesurvey" approved="yes">
-				<source>Online Survey</source>
-				<target>Online Umfrage</target>
+				<source><![CDATA[Online Survey]]></source>
+				<target><![CDATA[Online Umfrage]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes">
-				<source>Title</source>
-				<target>Titel</target>
+				<source><![CDATA[Title]]></source>
+				<target><![CDATA[Titel]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event" approved="yes">
-				<source>Event</source>
-				<target>Veranstaltung</target>
+				<source><![CDATA[Event]]></source>
+				<target><![CDATA[Veranstaltung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes">
-				<source>Category Ids</source>
-				<target>Kategorien</target>
+				<source><![CDATA[Category Ids]]></source>
+				<target><![CDATA[Kategorien]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes">
-				<source>description</source>
-				<target>Beschreibung</target>
+				<source><![CDATA[description]]></source>
+				<target><![CDATA[Beschreibung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.external_registration" approved="yes">
-				<source>External Registration Link</source>
-				<target>Link zur externen Anmeldung</target>
+				<source><![CDATA[External Registration Link]]></source>
+				<target><![CDATA[Link zur externen Anmeldung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.freeplaces" approved="yes">
-				<source>free places</source>
-				<target>freie Plätze</target>
+				<source><![CDATA[free places]]></source>
+				<target><![CDATA[freie Plätze]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes">
-				<source>Knowledge Bar</source>
-				<target>Wissensbar</target>
+				<source><![CDATA[Knowledge Bar]]></source>
+				<target><![CDATA[Wissensbar]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.individual_appointment" approved="yes">
-				<source>Indivdual Appointment</source>
-				<target>Beratungstermin</target>
+				<source><![CDATA[Indivdual Appointment]]></source>
+				<target><![CDATA[Beratungstermin]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" approved="yes">
-				<source>Maximum of Subscribers</source>
-				<target>Maximale Teilnehmerzahl</target>
+				<source><![CDATA[Maximum of Subscribers]]></source>
+				<target><![CDATA[Maximale Teilnehmerzahl]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes">
-				<source>Minimum of Subscribers</source>
-				<target>Mindesteilnehmerzahl</target>
+				<source><![CDATA[Minimum of Subscribers]]></source>
+				<target><![CDATA[Mindesteilnehmerzahl]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" approved="yes">
-				<source>one free place</source>
-				<target>ein freier Platz</target>
+				<source><![CDATA[one free place]]></source>
+				<target><![CDATA[ein freier Platz]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
-				<source>Recurring Event</source>
-				<target>Wiederholende Veranstaltung</target>
+				<source><![CDATA[Recurring Event]]></source>
+				<target><![CDATA[Wiederholende Veranstaltung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_events" approved="yes">
-				<source>Recurring Events</source>
-				<target>Wiederholende Veranstaltungen</target>
+				<source><![CDATA[Recurring Events]]></source>
+				<target><![CDATA[Wiederholende Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval" approved="yes">
-				<source>Recurring Interval</source>
-				<target>Wiederholungsintervall</target>
+				<source><![CDATA[Recurring Interval]]></source>
+				<target><![CDATA[Wiederholungsintervall]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.2weekly" approved="yes">
-				<source>fortnightly</source>
-				<target>vierzehntägig</target>
+				<source><![CDATA[fortnightly]]></source>
+				<target><![CDATA[vierzehntägig]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.4weekly" approved="yes">
-				<source>four-weekly</source>
-				<target>vierwöchig</target>
+				<source><![CDATA[four-weekly]]></source>
+				<target><![CDATA[vierwöchig]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.days" approved="yes">
-				<source>Recurring on given Days</source>
-				<target>Wiederholung an gewählten Wochentagen</target>
+				<source><![CDATA[Recurring on given Days]]></source>
+				<target><![CDATA[Wiederholung an gewählten Wochentagen]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.monthly" approved="yes">
-				<source>monthly</source>
-				<target>monatlich</target>
+				<source><![CDATA[monthly]]></source>
+				<target><![CDATA[monatlich]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.weekly" approved="yes">
-				<source>weekly</source>
-				<target>wöchentlich</target>
+				<source><![CDATA[weekly]]></source>
+				<target><![CDATA[wöchentlich]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.yearly" approved="yes">
-				<source>yearly</source>
-				<target>jährlich</target>
+				<source><![CDATA[yearly]]></source>
+				<target><![CDATA[jährlich]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_parent" approved="yes">
-				<source>Recurring Parent Event</source>
-				<target>Terminserie</target>
+				<source><![CDATA[Recurring Parent Event]]></source>
+				<target><![CDATA[Terminserie]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes">
-				<source>Start of Event</source>
-				<target>Beginn</target>
+				<source><![CDATA[Start of Event]]></source>
+				<target><![CDATA[Beginn]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.subscribe" approved="yes">
-				<source>Subscribe</source>
-				<target>Anmeldung</target>
+				<source><![CDATA[Subscribe]]></source>
+				<target><![CDATA[Anmeldung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.subscribers" approved="yes">
-				<source>Category Ids</source>
-				<target>Kategorien</target>
+				<source><![CDATA[Category Ids]]></source>
+				<target><![CDATA[Kategorien]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes">
-				<source>teaser</source>
-				<target>Kurzbeschreibung</target>
+				<source><![CDATA[teaser]]></source>
+				<target><![CDATA[Kurzbeschreibung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.time_oclock" approved="yes">
-				<source></source>
-				<target>Uhr</target>
+				<source><![CDATA[]]></source>
+				<target><![CDATA[Uhr]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.title" approved="yes">
-				<source>Title</source>
-				<target>Name der Veranstaltung</target>
+				<source><![CDATA[Title]]></source>
+				<target><![CDATA[Name der Veranstaltung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.unsubscribe" approved="yes">
-				<source>Unsubscribe</source>
-				<target>Abmelden</target>
+				<source><![CDATA[Unsubscribe]]></source>
+				<target><![CDATA[Abmelden]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_location" approved="yes">
-				<source>Location</source>
-				<target>Ort</target>
+				<source><![CDATA[Location]]></source>
+				<target><![CDATA[Ort]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes">
-				<source>Subscriber Details</source>
-				<target>Teilnehmer Details</target>
+				<source><![CDATA[Subscriber Details]]></source>
+				<target><![CDATA[Teilnehmer Details]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes">
-				<source>Subscription Date</source>
-				<target>Anmeldezeitpunkt</target>
+				<source><![CDATA[Subscription Date]]></source>
+				<target><![CDATA[Anmeldezeitpunkt]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes">
-				<source>customerid</source>
-				<target>Benutzernummer</target>
+				<source><![CDATA[customerid]]></source>
+				<target><![CDATA[Benutzernummer]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes">
-				<source>Email</source>
-				<target>E-Mail</target>
+				<source><![CDATA[Email]]></source>
+				<target><![CDATA[E-Mail]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes">
-				<source>Institution</source>
-				<target>Institution</target>
+				<source><![CDATA[Institution]]></source>
+				<target><![CDATA[Institution]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.message" approved="yes">
-				<source>Message</source>
-				<target>Nachricht</target>
+				<source><![CDATA[Message]]></source>
+				<target><![CDATA[Nachricht]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes">
-				<source>Name</source>
-				<target>Name</target>
+				<source><![CDATA[Name]]></source>
+				<target><![CDATA[Name]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes">
-				<source>Number</source>
-				<target>Anzahl der Personen</target>
+				<source><![CDATA[Number]]></source>
+				<target><![CDATA[Anzahl der Personen]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.number_max" approved="yes">
-				<source>Number of Persons (max. %1$s)</source>
-				<target>Anzahl der Personen (max. %1$s)</target>
+				<source><![CDATA[Number of Persons (max. %1$s)]]></source>
+				<target><![CDATA[Anzahl der Personen (max. %1$s)]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.submit_registration" approved="yes">
-				<source>Submit Registration</source>
-				<target>Verbindliche Anmeldung</target>
+				<source><![CDATA[Submit Registration]]></source>
+				<target><![CDATA[Verbindliche Anmeldung]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" approved="yes">
-				<source>telephone</source>
-				<target>Telefon</target>
+				<source><![CDATA[telephone]]></source>
+				<target><![CDATA[Telefon]]></target>
 			</trans-unit>
 			<trans-unit id="val_event_overbooked" approved="yes">
-				<source></source>
-				<target>Die Veranstaltung ist bereits ausgebucht.</target>
+				<source><![CDATA[]]></source>
+				<target><![CDATA[Die Veranstaltung ist bereits ausgebucht.]]></target>
 			</trans-unit>
 			<trans-unit id="val_event_reacheddeadline" approved="yes">
-				<source></source>
-				<target>Die Anmeldefrist ist bereits überschritten.</target>
+				<source><![CDATA[]]></source>
+				<target><![CDATA[Die Anmeldefrist ist bereits überschritten.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_customerid" approved="yes">
-				<source>The given customer id is not valid.</source>
-				<target>Bitte geben Sie eine gültige SLUB-Benutzernummer ein.</target>
+				<source><![CDATA[The given customer id is not valid.]]></source>
+				<target><![CDATA[Bitte geben Sie eine gültige SLUB-Benutzernummer ein.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_editcode" approved="yes">
-				<source>Please start the registration from the beginning.</source>
-				<target>Es ist ein Fehler bei der Anmeldung aufgetreten. Bitte starten Sie die Anmeldung erneut.</target>
+				<source><![CDATA[Please start the registration from the beginning.]]></source>
+				<target><![CDATA[Es ist ein Fehler bei der Anmeldung aufgetreten. Bitte starten Sie die Anmeldung erneut.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_email" approved="yes">
-				<source>Please enter a valid email-address.</source>
-				<target>Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
+				<source><![CDATA[Please enter a valid email-address.]]></source>
+				<target><![CDATA[Bitte geben Sie eine gültige E-Mail-Adresse ein.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_event_cancelled" approved="yes">
-				<source>Sorry, the event has been cancelled.</source>
-				<target>Die Veranstaltung wurde abgesagt.</target>
+				<source><![CDATA[Sorry, the event has been cancelled.]]></source>
+				<target><![CDATA[Die Veranstaltung wurde abgesagt.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_event_overbooked" approved="yes">
-				<source>Sorry, the event is already complete.</source>
-				<target>Die Veranstaltung ist bereits ausgebucht.</target>
+				<source><![CDATA[Sorry, the event is already complete.]]></source>
+				<target><![CDATA[Die Veranstaltung ist bereits ausgebucht.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_event_reacheddeadline" approved="yes">
-				<source>Sorry, the deadline for subscription is already reached.</source>
-				<target>Die Anmeldefrist ist bereits abgelaufen.</target>
+				<source><![CDATA[Sorry, the deadline for subscription is already reached.]]></source>
+				<target><![CDATA[Die Anmeldefrist ist bereits abgelaufen.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_name" approved="yes">
-				<source>Please enter your name.</source>
-				<target>Bitte geben Sie Ihren Namen ein.</target>
+				<source><![CDATA[Please enter your name.]]></source>
+				<target><![CDATA[Bitte geben Sie Ihren Namen ein.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_number" approved="yes">
-				<source>The given amount of subscribers is not valid.</source>
-				<target>Die eingegebene Anzahl der Personen ist nicht gültig.</target>
+				<source><![CDATA[The given amount of subscribers is not valid.]]></source>
+				<target><![CDATA[Die eingegebene Anzahl der Personen ist nicht gültig.]]></target>
 			</trans-unit>
 			<trans-unit id="view_my_events" approved="yes">
-				<source>My Events</source>
-				<target>Meine Veranstaltungen</target>
+				<source><![CDATA[My Events]]></source>
+				<target><![CDATA[Meine Veranstaltungen]]></target>
 			</trans-unit>
 		</body>
 	</file>

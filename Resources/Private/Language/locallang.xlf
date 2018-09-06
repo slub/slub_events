@@ -332,6 +332,9 @@
 		<trans-unit id="selecttopictobook">
 			<source>Please select a topic.</source>
 		</trans-unit>
+    <trans-unit id="register.pleaseloginfirst">
+			<source>Do you have a SLUB user account? Please login to your account %s first. %s You will be redirected to this event registration automatically.</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
