@@ -1,15 +1,15 @@
 table.tx_slubevents, div.tx_slubevents {
-	width: 80%;
+  width: 80%;
 
-	border: 1px dotted red;
+  border: 1px dotted red;
   padding: 10px;
-	margin: 2px;
-	border-spacing: 0;
+  margin: 2px;
+  border-spacing: 0;
 }
 
 table.tx_slubevents>tbody>tr>th {
   font-size: 12pt;
-	font-weight: bold;
+  font-weight: bold;
   padding: 4px;
   text-align: left;
 }
@@ -21,7 +21,7 @@ table.tx_slubevents tr.active {
 
 table.tx_slubevents td {
   font-size: 11pt;
-	font-weight: normal;
+  font-weight: normal;
   padding: 4px;
 }
 table.tx_slubevents td.be-icon {
@@ -34,47 +34,47 @@ table.tx_slubevents td.td-input {
 }
 
 table.tx_slubevents td span.green {
-	color: green;
+  color: green;
 }
 
 table.tx_slubevents td span.red {
-	color: red;
+  color: red;
 }
 
 table.tx_slubevents td span.eventcontact {
-	font-size: 70%;
+  font-size: 70%;
 }
 
 table.tx_slubevents td span.geniusbar {
-	color: red;
-	cursor: pointer;
+  color: red;
+  cursor: pointer;
 }
 
 table.tx_slubevents tr.Even {
-	background-color: #dedede;
+  background-color: #dedede;
 }
 
 div.tx_slubevents p, div.tx_slubevents div {
-	font-weight: normal;
-	line-height: 120%;
+  font-weight: normal;
+  line-height: 120%;
 }
 
 div.tx_slubevents h3 {
-	font-size: 12pt;
-	font-weight: bold;
+  font-size: 12pt;
+  font-weight: bold;
 }
 
 table.tx_slubevents ul.category_tree {
-	padding: 3px 0 3px 1.5em;
+  padding: 3px 0 3px 1.5em;
 }
 
 table.tx_slubevents .foldicon {
-	font-size: 150%;
-	width: 20px;
-	float: left;
-	position: relative;
-	left: -2px;
-	text-align: center;
+  font-size: 150%;
+  width: 20px;
+  float: left;
+  position: relative;
+  left: -2px;
+  text-align: center;
 }
 
 table.tx_slubevents .open input[type="checkbox"] {
@@ -83,21 +83,21 @@ table.tx_slubevents .open input[type="checkbox"] {
 
 table.tx_slubevents td.foldtree > ul > li.open,
 table.tx_slubevents td.foldtree > ul > li.closed {
-	position: relative;
-	left: -20px;
-	border-left: none;
+  position: relative;
+  left: -20px;
+  border-left: none;
 }
 
 table.tx_slubevents td.foldtree > ul > li.open ul li {
-	border-left: 1px dashed #ccc;
+  border-left: 1px dashed #ccc;
 }
 
 table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
-	border-left: 1px dashed #a00;
+  border-left: 1px dashed #a00;
 }
 
 #field-contact-search {
-	width: 150px;
+  width: 150px;
 }
 
 /*
@@ -107,78 +107,78 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
  *
  * */
 .container-fluid {
-	background: transparent;
+  background: transparent;
 }
 
 .container-fluid li {
-	margin: 0.2em 0;
-	vertical-align: middle;
-	text-align: left;
-	list-style: none;
+  margin: 0.2em 0;
+  vertical-align: middle;
+  text-align: left;
+  list-style: none;
 }
 
 .container-fluid li.heading {
-	list-style: none;
-	border: none;
+  list-style: none;
+  border: none;
 }
 
 .container-fluid ul.f3-widget-paginator {
-	width: 80%;
-	border: 1px dotted red;
-	display: inline-block;
-	margin: 2px;
+  width: 80%;
+  border: 1px dotted red;
+  display: inline-block;
+  margin: 2px;
 }
 
 .container-fluid ul.f3-widget-paginator li {
-	float: left;
-	font-size: 140%;
-	list-style: none;
-	border: none;
-	margin: 0;
-	padding: 0.5em;
+  float: left;
+  font-size: 140%;
+  list-style: none;
+  border: none;
+  margin: 0;
+  padding: 0.5em;
 }
 
 .container-fluid ul.f3-widget-paginator li:hover {
-	background-color: #dedede;
+  background-color: #dedede;
 }
 
 .container-fluid ul.f3-widget-paginator li.current {
-	background-color: #dedede;
+  background-color: #dedede;
 }
 
 .container-fluid li.Odd {
 }
 
 .container-fluid li.Even {
-	background: #e1f4f7;
+  background: #e1f4f7;
 }
 
 .slub-event-register ul.slub-event-error {
-	padding: 1em 1em 1em 2em;
-	border: 1px solid red;
-	font-size: 120%;
-	font-weight: bold;
+  padding: 1em 1em 1em 2em;
+  border: 1px solid red;
+  font-size: 120%;
+  font-weight: bold;
 }
 
 .slub-event-register form label.error {
-	color: red;
-	font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 #leftcol .slub-event-register form input.error[type="text"] {
-	border-bottom: 1px solid red;
+  border-bottom: 1px solid red;
 }
 
 .slub-event-register .event-short ul {
-	margin: 0.2em 0;
-	padding: 0.3em 0.5em;
-	border: 1px solid #bdd;
-	vertical-align: middle;
-	text-align: left;
+  margin: 0.2em 0;
+  padding: 0.3em 0.5em;
+  border: 1px solid #bdd;
+  vertical-align: middle;
+  text-align: left;
 }
 
 .slub-event-register .event-short ul li {
-	list-style: none;
+  list-style: none;
 }
 
 /*
@@ -187,45 +187,45 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
  */
 
 .slub-backend-error {
-	border: 2px solid red;
-	background: white;
-	display: block;
-	width: 80%;
-	padding: 20px;
+  border: 2px solid red;
+  background: white;
+  display: block;
+  width: 80%;
+  padding: 20px;
 }
 
 .slub-backend-error h1 {
-	text-align: center;
+  text-align: center;
 }
 
 .slub-backend-error p {
   font-size: 200%;
-	text-align: left;
+  text-align: left;
 }
 
 .tx_slubevents .emailtext {
-	background: #fff;
-	border: 1px solid #ccc;
-	padding: 30px;
-	width: 500px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 30px;
+  width: 500px;
 }
 
 .tx_slubevents .emailtext ul {
-	list-style-type: disc;
-	padding: 20px 0 0 20px;
+  list-style-type: disc;
+  padding: 20px 0 0 20px;
 }
 
 .tx_slubevents .error {
-	background: white;
-	border: 5px solid red;
-	color: red;
-	font-weight: bold;
-	padding: 30px;
-	width: 500px;
+  background: white;
+  border: 5px solid red;
+  color: red;
+  font-weight: bold;
+  padding: 30px;
+  width: 500px;
 
 }
 
 img.inactive {
-	filter: gray;
-	-webkit-filter: grayscale(100%);
+  filter: gray;
+  -webkit-filter: grayscale(100%);
 }
