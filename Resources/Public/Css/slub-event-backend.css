@@ -2,16 +2,16 @@ table.tx_slubevents, div.tx_slubevents {
 	width: 80%;
 
 	border: 1px dotted red;
-	padding: 10px;
+  padding: 10px;
 	margin: 2px;
 	border-spacing: 0;
 }
 
-table.tx_slubevents th {
-	font-size: 12pt;
+table.tx_slubevents>tbody>tr>th {
+  font-size: 12pt;
 	font-weight: bold;
-	padding: 4px;
-	text-align: left;
+  padding: 4px;
+  text-align: left;
 }
 
 table.tx_slubevents tr.active {
@@ -20,18 +20,17 @@ table.tx_slubevents tr.active {
 }
 
 table.tx_slubevents td {
-	font-size: 11pt;
+  font-size: 11pt;
 	font-weight: normal;
-	padding: 4px;
+  padding: 4px;
 }
 table.tx_slubevents td.be-icon {
   text-align: center;
   min-width: 20px;
-  padding: 4px;
 }
 
 table.tx_slubevents td.td-input {
-	width: 200px;
+  width: 200px;
 }
 
 table.tx_slubevents td span.green {
@@ -56,7 +55,6 @@ table.tx_slubevents tr.Even {
 }
 
 div.tx_slubevents p, div.tx_slubevents div {
-	font-size: 110%;
 	font-weight: normal;
 	line-height: 120%;
 }
@@ -64,10 +62,9 @@ div.tx_slubevents p, div.tx_slubevents div {
 div.tx_slubevents h3 {
 	font-size: 12pt;
 	font-weight: bold;
-	padding: 4px;
 }
 
-table.tx_slubevents ul {
+table.tx_slubevents ul.category_tree {
 	padding: 3px 0 3px 1.5em;
 }
 
@@ -202,7 +199,7 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
 }
 
 .slub-backend-error p {
-	font-size: 200%;
+  font-size: 200%;
 	text-align: left;
 }
 
