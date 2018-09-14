@@ -12,9 +12,7 @@
                 <el>
                     <switchableControllerActions>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
                             <config>
                                 <type>select</type>
                                 <items>
@@ -37,9 +35,7 @@
                     <settings.pidListOwn>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_own
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_own</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -60,9 +56,7 @@
                     <settings.pidSubscribeForm>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Subscriber->new;Subscriber->create;Subscriber->eventNotFound;</displayCond>
                             <config>
                                 <type>group</type>
@@ -84,9 +78,7 @@
                     <settings.pidUnSubscribeForm>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_unsubscribe
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_unsubscribe</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Subscriber->delete;Subscriber->eventNotFound;Subscriber->subscriberNotFound;</displayCond>
                             <config>
                                 <type>group</type>

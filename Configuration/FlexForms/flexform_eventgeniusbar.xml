@@ -12,9 +12,7 @@
                 <el>
                     <switchableControllerActions>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
                             <onChange>reload</onChange>
                             <config>
                                 <type>select</type>
@@ -36,9 +34,7 @@
 
                     <settings.categorySelection>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories_start
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories_start</label>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->list;Category->gbList;Category->contactList]]></displayCond>
                             <config>
                                 <type>select</type>
@@ -67,9 +63,7 @@
 
                     <settings.contactSelection>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.contactperson
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.contactperson</label>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
                                 <type>select</type>
@@ -86,9 +80,7 @@
                     <settings.showWiba>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showknowledgebar
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showknowledgebar</label>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
                                 <type>check</type>
@@ -99,9 +91,7 @@
                     <settings.showEvent>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showevents
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showevents</label>
                             <onChange>reload</onChange>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
@@ -112,9 +102,7 @@
 
                     <settings.eventSelection>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.catsforevents
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.catsforevents</label>
                             <displayCond><![CDATA[FIELD:settings.showEvent:REQ:true]]></displayCond>
                             <config>
                                 <type>select</type>
@@ -140,9 +128,7 @@
                     <settings.showConsultation>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showconsultations
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.showconsultations</label>
                             <onChange>reload</onChange>
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
@@ -153,9 +139,7 @@
 
                     <settings.consultationSelection>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.catforconsultations
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.catforconsultations</label>
                             <displayCond><![CDATA[FIELD:settings.showConsultation:REQ:true]]></displayCond>
                             <config>
                                 <type>select</type>
@@ -181,9 +165,7 @@
                     <settings.pidListing>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -204,9 +186,7 @@
                     <settings.pidDetails>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_single_view
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_single_view</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -227,9 +207,7 @@
                     <settings.pidSubscribeForm>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>

@@ -12,9 +12,7 @@
                 <el>
                     <switchableControllerActions>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
                             <onChange>reload</onChange>
                             <config>
                                 <type>select</type>
@@ -38,9 +36,7 @@
 
                     <settings.categorySelection>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_categories</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>select</type>
@@ -69,9 +65,7 @@
 
                     <settings.categorySelectionRecursive>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.categories_recursive
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.categories_recursive</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>check</type>
@@ -82,9 +76,7 @@
 
                     <settings.disciplineSelection>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_discipline
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_discipline</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>select</type>
@@ -111,9 +103,7 @@
 
                     <settings.disciplineSelectionRecursive>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.discipline_recursive
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.discipline_recursive</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>check</type>
@@ -124,9 +114,7 @@
 
                     <settings.showPastEvents>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_past_events
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_past_events</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>check</type>
@@ -137,9 +125,7 @@
 
                     <settings.eventOrdering>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.event_ordering
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.event_ordering</label>
                             <displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>select</type>
@@ -159,9 +145,7 @@
 
                     <settings.contactsSelection>
                         <TCEforms>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_contacts
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_contacts</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>select</type>
@@ -181,9 +165,7 @@
                     <settings.pidListing>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_list_view</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -204,9 +186,7 @@
                     <settings.pidDetails>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_single_view
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_single_view</label>
                             <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>group</type>
@@ -228,9 +208,7 @@
                     <settings.pidSubscribeForm>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.page_subscribe</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -263,9 +241,7 @@
                     <settings.fullCalendarJS>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>
-                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.fullcalendar_js
-                            </label>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.fullcalendar_js</label>
                             <config>
                                 <type>text</type>
                                 <cols>100</cols>
