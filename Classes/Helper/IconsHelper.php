@@ -55,12 +55,7 @@ class IconsHelper
 
         $this->objectManager = $objectManager;
 
-        // iconFactory exists from TYPO3 7
-        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-
-            $this->iconFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
-
-        }
+        $this->iconFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
 
     }
 
@@ -121,12 +116,7 @@ class IconsHelper
 
             $hideLink = '';
             $quoteLink = "'";
-            if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
-            } else {
-                $hideLink = $GLOBALS['SOBE']->doc->issueCommand($params, '');
-                $quoteLink = "'";
-            }
+            $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
 
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
                 $this->getSpriteIcon('actions-edit-unhide') .
@@ -138,12 +128,7 @@ class IconsHelper
 
             $hideLink = '';
             $quoteLink = "'";
-            if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-                $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
-            } else {
-                $hideLink = $GLOBALS['SOBE']->doc->issueCommand($params, '');
-                $quoteLink = "'";
-            }
+            $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
 
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
                 $this->getSpriteIcon('actions-edit-hide') .
@@ -153,31 +138,9 @@ class IconsHelper
     }
 
     /**
-     * Returns the Datepicker img
-     *
-     * only needed in TYPO3 6.2
-     *
-     * @return string html output
-     */
-    public function getDatePickerIcon()
-    {
-
-        return $this->getSpriteIcon(
-            'actions-edit-pick-date',
-            array(
-                'style' => 'cursor:pointer;',
-                'id' => 'picker-tceforms-datefield-1',
-                'class' => 't3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date'
-            )
-        );
-
-    }
-
-
-    /**
      * Get the requested Sprite Icon
      *
-     * compatibility helper for TYPO3 6.2 and 7.6
+     * (was) compatibility helper for TYPO3 6.2 and 7.6
      *
      * @param $iconName
      * @param $options
@@ -188,15 +151,7 @@ class IconsHelper
     private function getSpriteIcon($iconName, $options = [])
     {
 
-        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-
-            return $this->iconFactory->getIcon($iconName, Icon::SIZE_SMALL);
-
-        } else {
-
-            return IconUtility::getSpriteIcon($iconName, $options);
-
-        }
+        return $this->iconFactory->getIcon($iconName, Icon::SIZE_SMALL);
 
     }
 

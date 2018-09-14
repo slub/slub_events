@@ -161,7 +161,6 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_category',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
                 'renderType'          => 'selectTree', /* TYPO3 7.6 */
-                'renderMode'          => 'tree', /* TYPO3 6.2 */
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',

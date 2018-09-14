@@ -1,3 +1,4 @@
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Default"/>
 
 This Template is responsible for creating a table of domain objects.
@@ -16,7 +17,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <table class="tx_slubevents table table-bordered table-striped">
       <tr>
         <th>
-          <se:be.functionBar icon="new"/>
+          <f:format.raw>
+              <se:be.functionBar icon="new"/>
+        </f:format.raw>
         </th>
         <th>
           <f:translate key="tx_slubevents_domain_model_event.title"/>
@@ -34,26 +37,33 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <th colspan="4"></th>
       </tr>
       <f:for each="{events}" as="event" iteration="eventIterator">
-        <tr class="{f:if(condition:'{event.uid}=={currentActiveEvent}', then:'active')} {f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
-          <td>
-            <se:be.functionBar icon="edit" event="{event}"/>
+        <tr id="event-{event.uid}" class="{f:if(condition:'{event.uid}=={currentActiveEvent}', then:'active')} {f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
+          <td class="be-icon">
+            <f:format.raw>
+                <se:be.functionBar icon="edit" event="{event}"/>
+            </f:format.raw>
           </td>
           <td>
-            <f:if condition="{event.parent}">
-                <f:then>
-                    <img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
-                </f:then>
-                <f:else>
-                    <f:if condition="{event.recurring}">
-                        <img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
-                    </f:if>
-                </f:else>
-            </f:if>
-            <se:be.functionBar icon="geniusbar" event="{event}"/>
-                    <span class="eventtitle"
-              title="{event.description -> f:format.stripTags()}">{event.title}</span><br/>
-                    <span class="eventcontact">{event.contact.name}: <f:link.email
-            email="{event.contact.email}"/></span>
+            <f:format.raw>
+                <f:if condition="{event.parent}">
+                    <f:then>
+                        <img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{event.recurring}">
+                            <img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
+                        </f:if>
+                    </f:else>
+                </f:if>
+                <se:be.functionBar icon="geniusbar" event="{event}"/>
+                <span class="eventtitle"
+                      title="{event.description -> f:format.stripTags()}">{event.title}
+                </span>
+                <br/>
+                <span class="eventcontact">{event.contact.name}: <f:link.email
+                      email="{event.contact.email}"/>
+                </span>
+            </f:format.raw>
           </td>
           <td>
             <f:for each="{event.categories}" as="category">
@@ -74,19 +84,23 @@ Otherwise your changes will be overwritten the next time you save the extension 
               </f:else>
             </f:if> / {event.maxSubscriber}
           </td>
-          <td>
+          <td class="be-icon">
             <f:if condition="{event.hidden} == 0">
               <f:then>
-                <f:be.buttons.icon icon="actions-edit-copy"
-                           uri="{f:uri.action(action:'beCopy', arguments:'{event:event}', addQueryString:'1')}"
-                           title="<f:translate key='be.copyEvent' />"/>
+                   <f:link.action action="beCopy"
+                            arguments="{event: event}"
+                            addQueryString="1">
+                       <core:icon identifier="actions-edit-copy" size="small" />
+                   </f:link.action>
               </f:then>
             </f:if>
           </td>
-          <td>
-            <se:be.functionBar icon="hide" event="{event}"/>
+          <td class="be-icon">
+            <f:format.raw>
+                <se:be.functionBar icon="hide" event="{event}"/>
+            </f:format.raw>
           </td>
-          <td>
+          <td class="be-icon">
             <f:if condition="{event.hidden} == 0">
               <f:then>
                 <f:link.action action="beIcsInvitation"
@@ -100,7 +114,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
               </f:then>
             </f:if>
           </td>
-          <td>
+          <td class="be-icon">
             <f:if condition="{event.onlinesurvey}">
               <f:then>
                 <f:if condition="<se:condition.IsPastEvent event='{event}' />">
@@ -144,7 +158,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
       <f:flashMessages/>
 
-      <f:form action="beList" section="book-me-now" name="searchParameter" method="post">
+      <f:form action="beList" section="results" name="searchParameter" method="post">
         <table class="tx_slubevents table table-bordered">
           <tr>
             <th>
@@ -160,39 +174,49 @@ Otherwise your changes will be overwritten the next time you save the extension 
             </th>
           </tr>
           <tr>
-            <td class="td-input">
-              <label for="tceforms-datefield-1">
-                  <f:translate key="tx_slubevents_domain_model_event.start_date_time"/> <br />
-                  <span class="t3-tceforms-input-wrapper-date">
-                    <f:form.textfield id="tceforms-datefield-1"
-                              property="selectedStartDateStamp"
-                              size="12"
-                              value="{selectedStartDateStamp}"/>
-                     <se:be.functionBar icon="datepicker" event="{event}" />
-                  </span>
-              </label>
-              <hr>
-              <label for="searchString">
-                  <f:translate key="be.searchString"/> <br />
-                  <f:form.textfield class="" property="searchString"
-                          placeholder="<f:translate key='be.searchInTitle' />"
-                          value="{searchString}"/>
-              </label>
-              <hr>
-              <label for="checkbox-only-recurring">
-                  <f:form.checkbox id="checkbox-only-recurring"
-                           property="recurring"
-                           checked="{f:if(condition:'{recurring} == 1', then: '1')}"
-                           value="1" />
-                   <f:translate key="be.searchOnlyRecurring"/>
-              </label>
+            <td class="td-input" rowspan="1">
+              <div class="form-group">
+                <label for="tceforms-datefield-1">
+                    <f:translate key="tx_slubevents_domain_model_event.start_date_time"/> <br />
+                    <div class='input-group input-group-sm'>
+                          <f:form.textfield id="datetimepicker1"
+                                    property="selectedStartDateStamp"
+                                    size="12"
+                                    data="{date-type:'date'}"
+                                    value="{selectedStartDateStamp}"
+                                    class="form-control input-sm t3js-datetimepicker t3js-clearable"
+                                     />
+                          <span class="input-group-btn">
+                              <label class="btn btn-default" for="datetimepicker1">
+                                <span class="fa fa-calendar"></span>
+                              </label>
+                          </span>
+                    </div>
+                </label>
+                <hr>
+                <label for="searchString">
+                    <f:translate key="be.searchString"/> <br />
+                    <f:form.textfield class="" property="searchString"
+                            placeholder="<f:translate key='be.searchInTitle' />"
+                            value="{searchString}"/>
+                </label>
+                <hr>
+                <label for="checkbox-only-recurring">
+                    <f:form.checkbox id="checkbox-only-recurring"
+                             property="recurring"
+                             checked="{f:if(condition:'{recurring} == 1', then: '1')}"
+                             value="1" />
+                     <f:translate key="be.searchOnlyRecurring"/>
+                </label>
+              </div>
             </td>
-            <td class="foldtree">
+
+            <td class="foldtree" rowspan="1">
               <f:render partial="Event/CategoryTree"
                     section="categoryTree"
                     arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
             </td>
-            <td>
+            <td rowspan="1">
               <label for="category-{category.item.uid}"
                    title="{category.item.uid}">{category.item.title}</label>
               <f:form.checkbox id="checkbox-all-contacts"
@@ -209,6 +233,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
                        optionLabelField="name"
                        multiple="1"
                        size="15"
+                       class="form-control"
                        value="{contactsSelected}"/>
             </td>
           </tr>
@@ -221,7 +246,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
         </table>
       </f:form>
 
-      <div id="book-me-now">&nbsp;</div>
+      <div id="results">&nbsp;</div>
 
       <f:if condition="{events}">
         <f:then>

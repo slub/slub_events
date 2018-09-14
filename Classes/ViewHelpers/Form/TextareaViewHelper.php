@@ -66,20 +66,14 @@ class TextareaViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormF
         $required = $this->arguments['required'];
         $name = $this->getName();
         $this->registerFieldNameForFormTokenGeneration($name);
-        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-            $this->setRespectSubmittedDataValue(true);
-        }
+        $this->setRespectSubmittedDataValue(true);
 
         $this->tag->forceClosingTag(true);
         $this->tag->addAttribute('name', $name);
         if ($required === "required") {
             $this->tag->addAttribute('required', 'required');
         }
-        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-            $this->tag->setContent(htmlspecialchars($this->getValueAttribute()));
-        } else {
-            $this->tag->setContent(htmlspecialchars($this->getValue()));
-        }
+        $this->tag->setContent(htmlspecialchars($this->getValueAttribute()));
         $this->addAdditionalIdentityPropertiesIfNeeded();
         $this->setErrorClassAttribute();
 

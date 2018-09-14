@@ -324,10 +324,8 @@ class EventController extends AbstractController
             $searchParameter['recurring']
         );
 
-        if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-            $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
-            $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
-        }
+        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
         $this->view->assign('searchString', $searchParameter['searchString']);

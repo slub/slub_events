@@ -56,7 +56,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 		<f:flashMessages/>
 
-		<f:form action="beList" section="book-me-now" name="searchParameter" method="post">
+		<f:form action="beList" section="results" name="searchParameter" method="post">
 			<table class="tx_slubevents">
 				<tr>
 					<th><label for="selectedStartDateStamp">
@@ -69,12 +69,24 @@ Otherwise your changes will be overwritten the next time you save the extension 
 					<th></th>
 				</tr>
 				<tr>
-					<td class="td-input">
-						<f:form.textfield id="tceforms-datefield-1"
-										  property="selectedStartDateStamp"
-										  value="{selectedStartDateStamp}"/>
-						<se:be.functionBar icon="datepicker" event="{event}" />
-					</td>
+          <td class="td-input">
+            <div class="form-group">
+              <div class='input-group input-group-sm'>
+                <f:form.textfield id="datetimepicker1"
+                          property="selectedStartDateStamp"
+                          size="12"
+                          data="{date-type:'date'}"
+                          value="{selectedStartDateStamp}"
+                          class="form-control input-sm t3js-datetimepicker t3js-clearable"
+                           />
+                <span class="input-group-btn">
+                    <label class="btn btn-default" for="datetimepicker1">
+                      <span class="fa fa-calendar"></span>
+                    </label>
+                </span>
+              </div>
+            </div>
+          </td>
 					<td class="foldtree">
 						<f:render partial="Event/CategoryTree"
 								  section="categoryTree"
@@ -92,7 +104,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
       </table>
 		</f:form>
 
-    <div id="book-me-now">&nbsp;</div>
+    <div id="results">&nbsp;</div>
 
     <f:if condition="{subscribers}">
       <f:then>
@@ -104,7 +116,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
                   <f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
                       configuration="{settings.list.paginate}">
                   <f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
-                  </f:widget.paginate>
+                </f:widget.paginate>
               </f:else>
           </f:if>
       </f:then>
