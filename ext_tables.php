@@ -38,34 +38,28 @@ if (TYPO3_MODE === 'BE') {
     'tx_slubevents_domain_model_event',
     'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_event.xlf'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_slubevents_domain_model_event');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_slubevents_domain_model_category',
     'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_category.xlf'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_slubevents_domain_model_category');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_slubevents_domain_model_subscriber',
     'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_subscriber.xlf'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_slubevents_domain_model_subscriber');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_slubevents_domain_model_location',
     'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_location.xlf'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_slubevents_domain_model_location');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_slubevents_domain_model_discipline',
     'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_discipline.xlf'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_slubevents_domain_model_discipline');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_slubevents_domain_model_contact',
     'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_contact.xlf'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_slubevents_domain_model_contact');
