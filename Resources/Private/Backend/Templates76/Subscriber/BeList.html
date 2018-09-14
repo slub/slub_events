@@ -113,10 +113,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
                   <f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
               </f:then>
               <f:else>
-                  <f:be.widget.paginate objects="{subscribers}" as="paginatedSubscribers"
+                  <f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
                       configuration="{settings.list.paginate}">
                   <f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
-                </f:be.widget.paginate>
+                </f:widget.paginate>
               </f:else>
           </f:if>
       </f:then>

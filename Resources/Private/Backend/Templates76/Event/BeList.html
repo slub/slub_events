@@ -255,10 +255,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
               <f:render section="eventListing" arguments="{events: events}"/>
             </f:then>
             <f:else>
-              <f:be.widget.paginate objects="{events}" as="paginatedEvents"
+              <f:widget.paginate objects="{events}" as="paginatedEvents"
                          configuration="{settings.list.paginate}">
                 <f:render section="eventListing" arguments="{events: paginatedEvents, currentActiveEvent: currentActiveEvent}"/>
-              </f:be.widget.paginate>
+              </f:widget.paginate>
             </f:else>
           </f:if>
         </f:then>
