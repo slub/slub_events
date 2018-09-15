@@ -12,7 +12,7 @@ return [
         'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
-        'versioning_followPages'   => true,
+        'versioning_followPages'   => true, /* TYPO3 7.6 */
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
         'transOrigPointerField'    => 'l10n_parent',
@@ -141,7 +141,7 @@ return [
                     'RTE' => [
                         'type'          => 'script',
                         'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon'          => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
+                        'icon'          => 'actions-wizard-rte',
                         'notNewRecords' => 1,
                         'RTEonly'       => 1,
                         'module'        => [
@@ -149,8 +149,9 @@ return [
                         ],
                     ],
                 ],
+                'enableRichtext' => true, /* TYPO3 8.7 */
             ],
-            'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]',
+            'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]', /* TYPO3 7.6 */
         ],
         'parent'           => [
             'exclude'   => 0,

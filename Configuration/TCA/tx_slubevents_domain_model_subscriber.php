@@ -12,7 +12,7 @@ return [
         'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
-        'versioning_followPages'   => true,
+        'versioning_followPages'   => true, /* TYPO3 7.6 */
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
         'transOrigPointerField'    => 'l10n_parent',
