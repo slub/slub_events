@@ -74,7 +74,7 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
     /**
      * Validation of given Params
      *
-     * @param Tx_SlubEvents_Domain_Model_Subscriber $newSubscriber
+     * @param \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber
      *
      * @return bool
      */
