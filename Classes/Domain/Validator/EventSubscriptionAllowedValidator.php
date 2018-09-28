@@ -53,7 +53,7 @@ class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Va
     /**
      * Validation of given Params
      *
-     * @param $event
+     * @param \Slub\SlubEvents\Domain\Model\Event $event
      *
      * @return bool
      */
