@@ -168,7 +168,6 @@ return [
                 'type'          => 'group',
                 'internal_type' => 'file',
                 'allowed'       => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-                'max_size'      => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
                 'uploadfolder'  => 'uploads/tx_slubevents',
                 'show_thumbs'   => 1,
                 'size'          => 1,
