@@ -120,8 +120,8 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
             }
         }
 
-        if ($TYPO3_CONF_VARS['SYS']['phpTimeZone']) {
-            $date->setTimezone(new \DateTimeZone($TYPO3_CONF_VARS['SYS']['phpTimeZone']));
+        if ($GLOBALS['TYPO3_CONF_VARS']['SYS']['phpTimeZone']) {
+            $date->setTimezone(new \DateTimeZone($GLOBALS['TYPO3_CONF_VARS']['SYS']['phpTimeZone']));
         }
 
         return strftime($format, $date->getTimestamp());
