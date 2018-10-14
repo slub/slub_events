@@ -469,15 +469,16 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_category',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
                 'MM'                  => 'tx_slubevents_event_category_mm',
-                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderType'          => 'selectTree',
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
                     'appearance'  => [
                         'expandAll'  => true,
-                        'showHeader' => false,
+                        'showHeader' => true,
+                        'allowRecursiveMode' => false,
                         'maxLevels'  => 10,
-                        'width'      => 400,
+                        'width'      => 600,
                     ],
 
                 ],
@@ -528,15 +529,15 @@ return [
                 'type'                => 'select',
                 'foreign_table'       => 'tx_slubevents_domain_model_location',
                 'foreign_table_where' => ' AND (tx_slubevents_domain_model_location.sys_language_uid = 0 OR tx_slubevents_domain_model_location.l10n_parent = 0) AND tx_slubevents_domain_model_location.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_location.deleted = 0 AND tx_slubevents_domain_model_location.hidden = 0 ORDER BY tx_slubevents_domain_model_location.sorting',
-                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderType'          => 'selectTree',
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
                     'appearance'  => [
-                        'expandAll'          => false,
+                        'expandAll'          => true,
                         'showHeader'         => true,
                         'allowRecursiveMode' => false,
-                        'width'              => 500,
+                        'width'              => 600,
                     ],
                 ],
                 'size'                => 10,
@@ -570,15 +571,15 @@ return [
                 'foreign_table'       => 'tx_slubevents_domain_model_discipline',
                 'foreign_table_where' => ' AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) AND tx_slubevents_domain_model_discipline.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_discipline.deleted = 0 AND tx_slubevents_domain_model_discipline.hidden = 0 ORDER BY tx_slubevents_domain_model_discipline.sorting',
                 'MM'                  => 'tx_slubevents_event_discipline_mm',
-                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderType'          => 'selectTree',
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
                     'appearance'  => [
-                        'expandAll'          => false,
-                        'showHeader'         => false,
+                        'expandAll'          => true,
+                        'showHeader'         => true,
                         'allowRecursiveMode' => false,
-                        'width'              => 500,
+                        'width'              => 600,
                     ],
                 ],
                 'size'                => 10,

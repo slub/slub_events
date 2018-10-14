@@ -11,7 +11,7 @@ return [
         'cruser_id'                => 'cruser_id',
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
-        'versioning_followPages'   => true, /* TYPO3 7.6 */
+        'versioning_followPages'   => true,
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
         'transOrigPointerField'    => 'l10n_parent',
@@ -126,14 +126,14 @@ return [
                 'type'                => 'select',
                 'foreign_table'       => 'tx_slubevents_domain_model_discipline',
                 'foreign_table_where' => ' AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) AND tx_slubevents_domain_model_discipline.pid = ###CURRENT_PID### ORDER BY tx_slubevents_domain_model_discipline.sorting',
-                'renderType'          => 'selectTree', /* TYPO3 7.6 */
+                'renderType'          => 'selectTree',
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
                     'appearance'  => [
                         'expandAll'  => true,
-                        'showHeader' => false,
-                        'width'      => 500,
+                        'showHeader' => true,
+                        'width'      => 600,
                     ],
                 ],
                 'minitems'            => 0,
