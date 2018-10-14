@@ -9,7 +9,6 @@ return [
         'tstamp'                   => 'tstamp',
         'crdate'                   => 'crdate',
         'cruser_id'                => 'cruser_id',
-        'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
         'versioning_followPages'   => true, /* TYPO3 7.6 */
