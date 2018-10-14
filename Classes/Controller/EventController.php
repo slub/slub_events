@@ -604,7 +604,6 @@ class EventController extends AbstractController
         // this does not work reliable in this context (maybe a bug in TYPO3 7.6?)
         // as the childs must be on the same storage pid as the parent, we take
         // the pid and set is as storagePid
-        //$config = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
         $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, pid', 'tx_slubevents_domain_model_event', 'uid=' . (int)$id)->fetch_assoc();
         $this->settings['storagePid'] = $parentEventRow['pid'];
         // set storagePid to point extbase to the right repositories
@@ -953,11 +952,29 @@ class EventController extends AbstractController
                   $dateTimeInterval = new \DateInterval("P1Y");
                   break;
         }
+        $adjustDlstRun = 1;
         do {
             $eventStartDateTime->add($dateTimeInterval);
+            $daylightOffset = 0;
+
+            //  we need to calculate the transitions out of a new DateTimeZone object
+            $timeZone = new \DateTimeZone(date_default_timezone_get());
+            $transitions = $timeZone->getTransitions($parentStartDateTime->getTimestamp(), $eventStartDateTime->getTimestamp());
+
+            if (count($transitions) > 1 && $adjustDlstRun < count($transitions)) {
+                $adjustDlstRun++;
+                // there seems to be a dailight saving switch
+                $last_transition = array_pop($transitions);
+                $previous_transition = array_pop($transitions);
+                $daylightOffset = $previous_transition['offset'] - $last_transition['offset'];
+                $this->daylightOffset($eventStartDateTime, $daylightOffset);
+            }
+
             $eventEndDateTime->add($dateTimeInterval);
+            $this->daylightOffset($eventEndDateTime, $daylightOffset);
             if ($parentSubEndDateTime) {
                 $eventSubEndDateTime->add($dateTimeInterval);
+                $this->daylightOffset($eventSubEndDateTime, $daylightOffset);
             }
             $childDateTime = array();
             $childDateTime['endDateTime'] = clone $eventEndDateTime;
@@ -975,9 +992,12 @@ class EventController extends AbstractController
                 }
                 foreach ($diffDays as $weekDayInterval) {
                     $diffDayEventEndDateTime->add($weekDayInterval);
+                    $this->daylightOffset($diffDayEventEndDateTime, $daylightOffset);
                     $diffDayEventStartDateTime->add($weekDayInterval);
+                    $this->daylightOffset($diffDayEventStartDateTime, $daylightOffset);
                     if ($diffDayEventSubEndDateTime) {
                         $diffDayEventSubEndDateTime->add($weekDayInterval);
+                        $this->daylightOffset($diffDayEventSubEndDateTime, $daylightOffset);
                     }
 
                     $childDateTime = array();
@@ -997,5 +1017,22 @@ class EventController extends AbstractController
         }
 //        debug($childDateTimes, '$childDateTimes');
         return $childDateTimes;
+    }
+
+    /**
+     * add offset to given DateTime
+     *
+     * @param \DateTime $dateTimeValue
+     * @param integer $offset in seconds
+     *
+     * @return void
+     */
+    private function daylightOffset($dateTimeValue, $offset)
+    {
+      if ($offset > 0) {
+          $dateTimeValue->add(new \DateInterval('PT'.$offset.'S'));
+      } else if ($offset < 0) {
+          $dateTimeValue->sub(new \DateInterval('PT'.(-1) * $offset.'S'));
+      }
     }
 }
