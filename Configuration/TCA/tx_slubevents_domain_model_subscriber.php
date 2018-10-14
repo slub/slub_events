@@ -9,7 +9,6 @@ return [
         'tstamp'                   => 'tstamp',
         'crdate'                   => 'crdate',
         'cruser_id'                => 'cruser_id',
-        'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',

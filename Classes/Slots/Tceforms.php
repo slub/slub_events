@@ -38,39 +38,6 @@ use Slub\SlubEvents\Helper\IconsHelper;
 class Tceforms
 {
 
-    public function getMainFields_preProcess($table, &$row, $tceform)
-    {
-        if ($table == 'tx_slubevents_domain_model_event') {
-
-            if ($row['author'] == 0 || empty($row['author'])) {
-                $row['author'] = $GLOBALS['BE_USER']->user['uid'];
-            }
-
-            if (empty($row['contact_name'])) {
-                $row['contact_name'] = $GLOBALS['BE_USER']->user['realName'];
-            }
-
-            if (empty($row['contact_email'])) {
-                $row['contact_email'] = $GLOBALS['BE_USER']->user['email'];
-            }
-
-            if (empty($row['end_date_time_select']) && empty($row['end_date_time'])) {
-                $row['end_date_time_select'] = 60;
-            }
-
-            if (empty($row['sub_end_date_time_select']) && empty($row['sub_end_date_time'])) {
-                $row['sub_end_date_time_select'] = 1440;
-            }
-        }
-    }
-
-    public function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj)
-    {
-        if ($table == 'tx_slubevents_domain_model_event') {
-
-        }
-    }
-
     public function recurring_options($PA, $fObj)
     {
       $recurring_options = unserialize($PA['itemFormElValue']);

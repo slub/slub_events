@@ -385,46 +385,6 @@ namespace Slub\SlubEvents\Domain\Repository;
     }
 
     /**
-     * Finds all start dates for past and future events
-     *
-     * @return array The found Event Objects
-     */
-    public function findAllStartMonths()
-    {
-        // TODO: why is $BE_USER defined here?
-        global $BE_USER;
-
-        // we don't want to get an extbase object but an ordinary PHP array:
-        $query = $this->createQuery();
-        $query->getQuerySettings()->setReturnRawQueryResult(true);
-        // order by start_date -> start_time...
-        $query->setOrderings(
-            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
-        );
-        $query->setLimit(1);
-
-        $oldest = $query->execute();
-
-        $query = $this->createQuery();
-        $query->getQuerySettings()->setReturnRawQueryResult(true);
-        // order by start_date -> start_time...
-        $query->setOrderings(
-            ['start_date_time' => QueryInterface::ORDER_DESCENDING]
-        );
-        $query->setLimit(1);
-
-        $newest = $query->execute();
-
-        $startDate = strtotime('first day of this month 00:00:00', $oldest['0']['start_date_time']);
-
-        for ($date = $startDate; $date <= $newest['0']['start_date_time']; $date = strtotime('+1 month', $date)) {
-            $dateShow[$date] = strftime('%d %B %Y', $date);
-        }
-
-        return $dateShow;
-    }
-
-    /**
      * Finds all events in future where subscription time ended (deadline)
      * and ignore events with external registration
      *

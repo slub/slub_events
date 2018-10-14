@@ -362,7 +362,6 @@ class SubscriberController extends AbstractController
         $tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
 
         // next two lines are necessary... don't know why.
-        $tcemain->stripslashes_values = 0;
         $tcemain->start([], []);
 
         if ($isGeniusBar) {

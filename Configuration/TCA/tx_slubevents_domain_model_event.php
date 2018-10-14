@@ -9,7 +9,6 @@ return [
         'tstamp'                   => 'tstamp',
         'crdate'                   => 'crdate',
         'cruser_id'                => 'cruser_id',
-        'dividers2tabs'            => true,
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
         'versioning_followPages'   => true, /* TYPO3 7.6 */
@@ -612,6 +611,7 @@ return [
                 'allowed'             => 'pages',
                 'type'                => 'select',
                 'renderType'          => 'selectMultipleSideBySide',
+                'enableMultiSelectFilterTextfield' => TRUE,
                 'foreign_table'       => 'tx_slubevents_domain_model_contact',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_contact.deleted = 0 AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY tx_slubevents_domain_model_contact.sorting',
                 'minitems'            => 1,

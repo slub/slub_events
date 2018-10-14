@@ -25,7 +25,7 @@ namespace Slub\SlubEvents\ViewHelpers\Format\Fullcalendar;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use TYPO3\CMS\Core\Page\PageRenderer;
 /**
  * Add Fullcalendar specific JS code
  *
@@ -103,10 +103,12 @@ class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         // close $(document).ready()
         $js1 .= '});';
 
-        $GLOBALS['TSFE']->getPageRenderer()->addJsFooterInlineCode('js-slub-fullcalendar-config', $js1);
+        /** @var $pageRenderer PageRenderer */
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+        $pageRenderer->addJsFooterInlineCode('js-slub-fullcalendar-config', $js1);
 
         if (empty($settings['fullCalendarJS'])) {
-            $GLOBALS['TSFE']->getPageRenderer()->addJsFooterLibrary('js-slub-fullcalendar-init', 'typo3conf/ext/slub_events/Resources/Public/Js/slub-events-fullcalendar-init.js');
+            $pageRenderer->addJsFooterLibrary('js-slub-fullcalendar-init', 'typo3conf/ext/slub_events/Resources/Public/Js/slub-events-fullcalendar-init.js');
         }
     }
 }

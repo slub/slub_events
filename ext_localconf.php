@@ -66,12 +66,6 @@ $TYPO3_CONF_VARS['FE']['eID_include']['slubCal'] = 'EXT:slub_events/Ajaxproxy/Aj
 if (TYPO3_MODE === 'BE') {
 
     // prefill BE user data in event form
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getMainFieldsClass'][] =
-        Slub\SlubEvents\Slots\Tceforms::class;
-
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'][] =
-        Slub\SlubEvents\Slots\Tceforms::class;
-
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
         Slub\SlubEvents\Slots\HookPreProcessing::class;
 
@@ -87,6 +81,6 @@ if (TYPO3_MODE === 'BE') {
         'extension'        => $_EXTKEY,
         'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.name',
         'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.description',
-        'additionalFields' => 'Slub\\SlubEvents\\Task\\StatisticsTaskAdditionalFieldProvider'
+        'additionalFields' => Slub\SlubEvents\Task\StatisticsTaskAdditionalFieldProvider::class
     ];
 }

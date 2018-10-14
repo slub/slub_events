@@ -23,6 +23,7 @@ namespace Slub\SlubEvents\Task;
      *
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /**
  * Scheduler Task for Statistics, Additional Field Provider
@@ -145,14 +146,14 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
             $isValid = false;
             $schedulerModule->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidStoragePid') . ': ' . $submittedData['slub_events']['storagePid'],
-                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+                FlashMessage::ERROR
             );
         }
 
         if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
             $isValid = false;
             $schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail'),
-                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+                FlashMessage::ERROR);
         }
 
         if (!empty($submittedData['slub_events']['receiverEmailAddress'])) {
@@ -162,7 +163,7 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
                 if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($emailAdd)) {
                     $isValid = false;
                     $schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail') . ': ' . $emailAdd,
-                        \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+                        FlashMessage::ERROR);
                 }
             }
         }
