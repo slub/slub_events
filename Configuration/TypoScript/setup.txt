@@ -27,7 +27,7 @@ plugin.tx_slubevents {
     settings {
         # hide the pagination
         hidePagination = 0
-        senderEmailAddress = webmaster@slub-dresden.de
+        senderEmailAddress = webmaster@example.com
         emailToContact {
             # send email if the maxSubscriber limit is reached
             sendEmailOnMaximumReached = 1
@@ -73,12 +73,10 @@ module.tx_slubevents {
     }
 
     features {
-        # uncomment the following line to enable the new Property Mapper.
-        rewrittenPropertyMapper = 1
     }
 
     settings {
-        senderEmailAddress = webmaster@slub-dresden.de
+        senderEmailAddress = webmaster@example.com
         # hide the pagination
         hidePagination = 0
         # --------------
