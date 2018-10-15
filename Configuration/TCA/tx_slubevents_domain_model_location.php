@@ -167,7 +167,7 @@ return [
                         'width'      => 600,
                     ],
                 ],
-                'maxitems'   => 2,
+                'maxitems'   => 1,
             ],
         ],
         'location'         => [
