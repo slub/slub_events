@@ -56,7 +56,6 @@ class HookPreProcessing
         }
     }
 
-
     /**
      * This method is called by a hook in the TYPO3 Core Engine (TCEmain)
      * when a record is saved.

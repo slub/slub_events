@@ -65,11 +65,13 @@ $TYPO3_CONF_VARS['FE']['eID_include']['slubCal'] = 'EXT:slub_events/Ajaxproxy/Aj
  */
 if (TYPO3_MODE === 'BE') {
 
-    // prefill BE user data in event form
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
         Slub\SlubEvents\Slots\HookPreProcessing::class;
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
+        Slub\SlubEvents\Slots\HookPostProcessing::class;
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] =
         Slub\SlubEvents\Slots\HookPostProcessing::class;
 
     // include cli command controller

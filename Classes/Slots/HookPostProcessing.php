@@ -171,4 +171,43 @@ class HookPostProcessing
             }
         }
     }
+
+    /**
+     *
+     * @param    string $table      : The table TCEmain is currently processing
+     * @param    string $id         : The records id (if any)
+     * @param    string $recordToDelete         : The records id (if any)
+     * @param    string $recordWasDeleted         : The records id (if any)
+     * @param    array  $fieldArray : The field names and their values to be processed (passed by reference)
+     *
+     * @return    void
+     * @access public
+     */
+    public function processCmdmap_deleteAction($table, $id, $recordToDelete, &$recordWasDeleted, $fieldArray)
+    {
+      if ($table == 'tx_slubevents_domain_model_event') {
+
+          if ($recordToDelete['parent'] == 0) {
+              //in case of a parent (recurring) event, delete all children, too
+              $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+              $configurationManager = $objectManager->get(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class);
+
+              $configurationArray = [
+                  'persistence' => [
+                      'storagePid' => $recordToDelete['pid'],
+                  ],
+              ];
+              $configurationManager->setConfiguration($configurationArray);
+
+              $eventRepository = $objectManager->get(\Slub\SlubEvents\Domain\Repository\EventRepository::class);
+
+              $eventRepository->deleteAllNotAllowedChildren(array(), $id);
+
+              $persistenceManager = $objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+              $persistenceManager->persistAll();
+
+          }
+      }
+    }
+
 }
