@@ -461,6 +461,30 @@ namespace Slub\SlubEvents\Domain\Repository;
     }
 
     /**
+     * Finds one events - even if hidden
+     *
+     * @param int $uid
+     *
+     * @return array The found Event Objects
+     */
+    public function findOneByUidIncludeHidden($uid)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+
+        $constraints = [];
+        $constraints[] = $query->equals('uid', $uid);
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        return $query->execute()->getFirst();
+
+    }
+
+    /**
      * Delete all child events which are not in the list of allowed startDateTimes
      *
      * @param array $childDateTimes

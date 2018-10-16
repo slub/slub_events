@@ -582,7 +582,7 @@ class EventController extends AbstractController
     {
         $this->initializeCreateChildsAction($id);
 
-        $parentEvent = $this->eventRepository->findOneByUid($id);
+        $parentEvent = $this->eventRepository->findOneByUidIncludeHidden($id);
 
         if ($parentEvent) {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-09-06T16:35:44Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-10-16T12:01:46Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -276,6 +276,14 @@
 			<trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
 				<source><![CDATA[Recurring Event]]></source>
 				<target><![CDATA[Wiederholende Veranstaltung]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.recurring.event_hidden" approved="yes">
+				<source><![CDATA[The current parent event is hidden! All recurring child events will be active by default. Please hide them manually or change the recurring options.]]></source>
+				<target><![CDATA[Die aktuelle Terminserie (Haupttermin) ist versteckt! Alle wiederholenden Veranstaltungen werden als aktiv angelegt. Bitte verstecken Sie diese manuell oder ändern Sie die Einstellungen zum Wiederholungsintervall.]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.recurring.no_future_children" approved="yes">
+				<source><![CDATA[There are no child events in the future (yet). Please save this event and/or modifiy the recurring options.]]></source>
+				<target><![CDATA[Es gibt (noch) keine wiederholdenden Veranstaltungen. Bitte speichern Sie diese Terminserie (Haupttermin) und/oder passen Sie die Einstellungen zum Wiederholungsintervall an.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_events" approved="yes">
 				<source><![CDATA[Recurring Events]]></source>

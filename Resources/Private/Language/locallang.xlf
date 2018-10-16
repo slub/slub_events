@@ -197,6 +197,12 @@
     <trans-unit id="tx_slubevents_domain_model_event.recurring">
 			<source>Recurring Event</source>
 		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.recurring.event_hidden">
+			<source>The current parent event is hidden! All recurring child events will be active by default. Please hide them manually or change the recurring options.</source>
+		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.recurring.no_future_children">
+			<source>There are no child events in the future (yet). Please save this event and/or modifiy the recurring options.</source>
+		</trans-unit>
     <trans-unit id="tx_slubevents_domain_model_event.recurring_events">
 			<source>Recurring Events</source>
 		</trans-unit>
