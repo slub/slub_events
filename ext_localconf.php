@@ -78,6 +78,9 @@ if (TYPO3_MODE === 'BE') {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
         Slub\SlubEvents\Slots\HookPostProcessing::class;
 
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] =
+        Slub\SlubEvents\Slots\HookPostProcessing::class;
+
     // include cli command controller
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] =
         Slub\SlubEvents\Command\CheckeventsCommandController::class;
