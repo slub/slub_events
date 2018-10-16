@@ -136,9 +136,7 @@ class HookPostProcessing
     public function processDatamap_afterDatabaseOperations($status, $table, $idElement, &$fieldArray, &$pObj)
     {
         // we are only interested in tx_slubevents_domain_model_event
-        if ($table == 'tx_slubevents_domain_model_event' &&
-            $pObj->checkValue_currentRecord['hidden'] == '0'
-        ) {
+        if ($table == 'tx_slubevents_domain_model_event') {
             // we need to update/create or delete all child events
             if ($status == "update") {
 
@@ -160,15 +158,18 @@ class HookPostProcessing
 
             }
 
-            $this->clearAllEventListCache(
-                $pObj->checkValue_currentRecord['pid'],
-                $pObj->checkValue_currentRecord['genius_bar']
-            );
+            // clear cache only if event is not hidden
+            if ($pObj->checkValue_currentRecord['hidden'] == '0') {
+                $this->clearAllEventListCache(
+                    $pObj->checkValue_currentRecord['pid'],
+                    $pObj->checkValue_currentRecord['genius_bar']
+                );
 
-            // unfortunately I cannot access the category IDs only the amount of categories
-            // but at least I get the start_date_time so I will delete all cached files around this
-            // start_date_time
-            $this->clearAjaxCacheFiles($pObj->checkValue_currentRecord['start_date_time']);
+                // unfortunately I cannot access the category IDs only the amount of categories
+                // but at least I get the start_date_time so I will delete all cached files around this
+                // start_date_time
+                $this->clearAjaxCacheFiles($pObj->checkValue_currentRecord['start_date_time']);
+            }
         }
     }
 }

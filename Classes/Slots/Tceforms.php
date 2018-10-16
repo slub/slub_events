@@ -267,31 +267,53 @@ class Tceforms
 
             $childEvents = $eventRepository->findFutureByParent($PA['row']['uid']);
 
-            $output = '<h4>'. LocalizationUtility::translate(
+            $parentEvent = $eventRepository->findOneByUidIncludeHidden($PA['row']['uid']);
+
+            $output .= '<h4>'. LocalizationUtility::translate(
                 'tx_slubevents_domain_model_event.recurring',
                 'slub_events').'</h4>';
-            $output .= '<ul>';
 
-            $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
-            foreach ($childEvents as $childEvent) {
-              if ($childEvent->getHidden() === TRUE) {
-                  $checked = '';
-              } else {
-                  $checked = 'checked="checked"';
-              }
-
-              if ($childEvent->getHidden() == TRUE) {
-                  $classHidden = ' class="list-group-item list-group-item-warning" style="text-decoration: line-through;"';
-              } else {
-                  $classHidden = ' class="list-group-item list-group-item-success"';
-              }
-              $output .= '<li' . $classHidden . '>';
-              $output .= $iconHelper->getHideIcon('tx_slubevents_domain_model_event', $childEvent->getUid(), $childEvent->getHidden());
-              $output .= ' ' . strftime('%A, %d.%m.%Y %H:%M', $childEvent->getStartDateTime()->getTimestamp());
-              $output .= '</li>';
-
+            if ($PA['row']['hidden'] == 1) {
+                $output .= '<div class="alert alert-warning">'.LocalizationUtility::translate(
+                    'tx_slubevents_domain_model_event.recurring.event_hidden',
+                    'slub_events');
+            } else {
+                $output .= '<div class="alert alert-success">'.LocalizationUtility::translate(
+                    'tx_slubevents_domain_model_event.recurring_parent',
+                    'slub_events');
             }
-            $output .= '</ul>';
+            $output .= ' <br /><strong>' . strftime('%A, %d.%m.%Y %H:%M', $parentEvent->getStartDateTime()->getTimestamp())
+            .'</strong></div>';
+
+            if (count($childEvents)>0) {
+                $output .= '<ul>';
+
+                $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
+                foreach ($childEvents as $childEvent) {
+                  if ($childEvent->getHidden() === TRUE) {
+                      $checked = '';
+                  } else {
+                      $checked = 'checked="checked"';
+                  }
+
+                  if ($childEvent->getHidden() == TRUE) {
+                      $classHidden = ' class="list-group-item list-group-item-warning" style="text-decoration: line-through;"';
+                  } else {
+                      $classHidden = ' class="list-group-item list-group-item-success"';
+                  }
+                  $output .= '<li' . $classHidden . '>';
+                  $output .= $iconHelper->getHideIcon('tx_slubevents_domain_model_event', $childEvent->getUid(), $childEvent->getHidden());
+                  $output .= ' ' . strftime('%A, %d.%m.%Y %H:%M', $childEvent->getStartDateTime()->getTimestamp());
+                  $output .= '</li>';
+
+                }
+                $output .= '</ul>';
+            } else {
+                $output .= '<div class="alert alert-warning">'.LocalizationUtility::translate(
+                    'tx_slubevents_domain_model_event.recurring.no_future_children',
+                    'slub_events').'</div>'
+                    ;
+            }
 
             return $output;
         }
