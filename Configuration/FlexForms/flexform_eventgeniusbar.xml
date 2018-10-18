@@ -45,6 +45,7 @@
                                     <appearance>
                                         <expandAll>TRUE</expandAll>
                                         <showHeader>TRUE</showHeader>
+                                        <width>600</width>
                                     </appearance>
                                 </treeConfig>
 
@@ -54,7 +55,6 @@
                                     tx_slubevents_domain_model_category.l10n_parent = 0) ORDER BY
                                     tx_slubevents_domain_model_category.sorting ASC
                                 </foreign_table_where>
-                                <size>5</size>
                                 <minitems>1</minitems>
                                 <maxitems>1</maxitems>
                             </config>
@@ -67,10 +67,13 @@
                             <displayCond><![CDATA[FIELD:switchableControllerActions:=:Category->contactList;Category->list;Category->gbList]]></displayCond>
                             <config>
                                 <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <enableMultiSelectFilterTextfield>TRUE</enableMultiSelectFilterTextfield>
                                 <foreign_table>tx_slubevents_domain_model_contact</foreign_table>
-                                <foreign_table_where>ORDER BY tx_slubevents_domain_model_contact.name, tx_slubevents_domain_model_contact.sorting</foreign_table_where>
-                                <size>5</size>
-                                <autoSizeMax>30</autoSizeMax>
+                                <foreign_table_where>AND tx_slubevents_domain_model_contact.hidden = 0 ORDER BY
+                                    tx_slubevents_domain_model_contact.sorting ASC
+                                </foreign_table_where>
+                                <autoSizeMax>10</autoSizeMax>
                                 <minitems>1</minitems>
                                 <maxitems>1</maxitems>
                             </config>
