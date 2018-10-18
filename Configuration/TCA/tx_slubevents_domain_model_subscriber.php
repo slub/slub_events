@@ -11,7 +11,6 @@ return [
         'cruser_id'                => 'cruser_id',
         'sortby'                   => 'sorting',
         'origUid'                  => 't3_origuid',
-        'languageField'            => 'sys_language_uid',
         'delete'                   => 'deleted',
         'enablecolumns'            => [
             'disabled'  => 'hidden',
