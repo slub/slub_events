@@ -80,10 +80,7 @@
 				<div class="category">
 					<f:translate key="tx_slubevents_domain_model_category" />:
 					<f:for each="{event.categories}" as="category" iteration="categoryIterator">
-						{category.title}
-						<f:if condition="{categoryIterator.isLast}">
-							<f:else>,</f:else>
-						</f:if>
+						{category.title}<f:if condition="{categoryIterator.isLast}"><f:else>,</f:else></f:if>
 					</f:for>
 				</div>
 
