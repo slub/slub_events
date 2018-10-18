@@ -483,9 +483,9 @@ return [
 
                 ],
                 'size'                => 10,
+                'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 30,
-                'multiple'            => false,
                 'wizards' => [
                      '_VERTICAL' => 1,
                      'add' => [
@@ -543,7 +543,6 @@ return [
                 'size'                => 10,
                 'minitems'            => 1,
                 'maxitems'            => 1,
-                'multiple'            => false,
                 'wizards' => [
                      '_VERTICAL' => 1,
                      'add' => [
@@ -586,7 +585,6 @@ return [
                 'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 10,
-                'multiple'            => false,
                 'wizards' => [
                      '_VERTICAL' => 1,
                      'add' => [
