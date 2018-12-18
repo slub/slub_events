@@ -263,6 +263,9 @@
 		<trans-unit id="tx_slubevents_domain_model_event.unsubscribe">
 			<source>Unsubscribe</source>
 		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.has_been_cancelled">
+			<source>The event has been cancelled.</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_location">
 			<source>Location</source>
 		</trans-unit>
@@ -295,6 +298,9 @@
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.submit_registration">
 			<source>Submit Registration</source>
+		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_subscriber.not_registered_to_events">
+			<source>You are not registered to any event.</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone">
 			<source>telephone</source>

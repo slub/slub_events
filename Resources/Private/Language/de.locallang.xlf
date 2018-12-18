@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-10-16T12:01:46Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-12-18T17:29:12Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -257,6 +257,10 @@
 				<source><![CDATA[Knowledge Bar]]></source>
 				<target><![CDATA[Wissensbar]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.has_been_cancelled" approved="yes">
+				<source><![CDATA[The event has been cancelled.]]></source>
+				<target><![CDATA[Die Veranstaltung wurde abgesagt.]]></target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.individual_appointment" approved="yes">
 				<source><![CDATA[Indivdual Appointment]]></source>
 				<target><![CDATA[Beratungstermin]]></target>
@@ -380,6 +384,10 @@
 			<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes">
 				<source><![CDATA[Name]]></source>
 				<target><![CDATA[Name]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_subscriber.not_registered_to_events" approved="yes">
+				<source><![CDATA[You are not registered to any event.]]></source>
+				<target><![CDATA[Sie sind zu keiner Veranstaltung angemeldet.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes">
 				<source><![CDATA[Number]]></source>

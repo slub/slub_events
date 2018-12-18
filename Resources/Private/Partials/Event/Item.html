@@ -25,7 +25,7 @@
 	<div class="teaser">
 		<f:if condition="{event.cancelled}">
 			<f:then>
-				<h4>Die Veranstaltung wurde abgesagt.</h4>
+				<h4><f:translate key="tx_slubevents_domain_model_event.has_been_cancelled" /></h4>
 			</f:then>
 			<f:else>
 				<f:format.html>{event.teaser}</f:format.html>

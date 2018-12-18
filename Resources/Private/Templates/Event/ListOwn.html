@@ -46,7 +46,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			</f:for>
 		</f:then>
 		<f:else>
-			<p>Sie sind zu keiner Veranstaltung angemeldet.</p>
+			<p><f:translate key="tx_slubevents_domain_model_subscriber.not_registered_to_events" /></p>
 		</f:else>
 	</f:if>
 	</ul>
@@ -55,7 +55,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<!-- Check if user is logged in -->
 	<f:security.ifAuthenticated>
 		<f:then>
-			<p>Sie sind zu keiner Veranstaltung angemeldet.</p>
+			<p><f:translate key="tx_slubevents_domain_model_subscriber.not_registered_to_events" /></p>
 		</f:then>
 		<f:else>
 			<div class="hint">
