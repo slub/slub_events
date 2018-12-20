@@ -113,6 +113,48 @@ class EventController extends AbstractController
     }
 
     /**
+     * action listUpcomming
+     *
+     * @return void
+     */
+    public function listUpcomingAction()
+    {
+        if (!empty($this->settings['categorySelection'])) {
+            $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);
+
+            if ($this->settings['categorySelectionRecursive']) {
+                // add somehow the other categories...
+                foreach ($categoriesIds as $category) {
+                    $foundRecusiveCategories = $this->categoryRepository->findAllChildCategories($category);
+                    if (count($foundRecusiveCategories) > 0) {
+                        $categoriesIds = array_merge($foundRecusiveCategories, $categoriesIds);
+                    }
+                }
+            }
+            $this->settings['categoryList'] = $categoriesIds;
+        }
+
+        if (!empty($this->settings['disciplineSelection'])) {
+            $disciplineIds = GeneralUtility::intExplode(',', $this->settings['disciplineSelection'], true);
+
+            if ($this->settings['disciplineSelectionRecursive']) {
+                // add somehow the other categories...
+                foreach ($disciplineIds as $discipline) {
+                    $foundRecusiveDisciplines = $this->disciplineRepository->findAllChildDisciplines($discipline);
+                    if (count($foundRecusiveDisciplines) > 0) {
+                        $disciplineIds = array_merge($foundRecusiveDisciplines, $disciplineIds);
+                    }
+                }
+            }
+            $this->settings['disciplineList'] = $disciplineIds;
+        }
+
+        $events = $this->eventRepository->findAllBySettings($this->settings);
+
+        $this->view->assign('events', $events);
+    }
+
+    /**
      * action initializeShow
      *
      * @return void

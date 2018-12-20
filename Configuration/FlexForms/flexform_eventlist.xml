@@ -29,6 +29,10 @@
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_month_view</numIndex>
                                         <numIndex index="1">Event->listMonth</numIndex>
                                     </numIndex>
+                                    <numIndex index="3">
+                                        <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_view_upcoming</numIndex>
+                                        <numIndex index="1">Event->listUpcoming</numIndex>
+                                    </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
@@ -122,6 +126,20 @@
                             </config>
                         </TCEforms>
                     </settings.showPastEvents>
+
+                    <settings.limit>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.limit_events
+                            </label>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->listUpcoming</displayCond>
+                            <config>
+                                <type>input</type>
+                                <default>10</default>
+                                <eval>int</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.limit>
 
                     <settings.eventOrdering>
                         <TCEforms>

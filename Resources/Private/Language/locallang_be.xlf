@@ -42,6 +42,12 @@
 		<trans-unit id="flexforms.list_view">
 			<source>List View</source>
 		</trans-unit>
+    <trans-unit id="flexforms.list_view_upcoming">
+			<source>List Upcoming Events</source>
+		</trans-unit>
+    <trans-unit id="flexforms.limit_events">
+			<source>Show only Given Amount of Events</source>
+		</trans-unit>
 		<trans-unit id="flexforms.ordering_ascending">
 			<source>Ascending</source>
 		</trans-unit>
