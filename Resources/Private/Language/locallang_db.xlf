@@ -110,6 +110,9 @@
     <trans-unit id="tx_slubevents_domain_model_event.recurring">
 			<source>Recurring Event</source>
 		</trans-unit>
+    <trans-unit id="tx_slubevents_domain_model_event.recurring_events">
+			<source>Recurring Events</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.recurring_options">
 			<source>Recurring Options</source>
 		</trans-unit>
