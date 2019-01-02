@@ -267,7 +267,7 @@ return [
         ],
         'teaser'                   => [
             'displayCond'   => 'FIELD:genius_bar:<:1',
-            'exclude'       => 0,
+            'exclude'       => 1,
             'label'         => $LL . 'tx_slubevents_domain_model_event.teaser',
             'config'        => [
                 'type'    => 'text',
