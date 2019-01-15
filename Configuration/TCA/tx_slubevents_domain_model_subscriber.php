@@ -10,7 +10,7 @@ return [
         'crdate'                   => 'crdate',
         'cruser_id'                => 'cruser_id',
         'dividers2tabs'            => true,
-        'sortby'                   => 'sorting',
+        'sortby'                   => 'tstamp',
         'origUid'                  => 't3_origuid',
         'delete'                   => 'deleted',
         'enablecolumns'            => [
