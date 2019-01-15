@@ -136,11 +136,8 @@ CREATE TABLE tx_slubevents_domain_model_subscriber (
     starttime int(11) unsigned DEFAULT '0' NOT NULL,
     endtime int(11) unsigned DEFAULT '0' NOT NULL,
 
-    sorting int(11) DEFAULT '0' NOT NULL,
-
     PRIMARY KEY (uid),
     KEY parent (pid),
-
 );
 
 #

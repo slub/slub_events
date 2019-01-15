@@ -9,7 +9,7 @@ return [
         'tstamp'                   => 'tstamp',
         'crdate'                   => 'crdate',
         'cruser_id'                => 'cruser_id',
-        'sortby'                   => 'sorting',
+        'sortby'                   => 'tstamp',
         'origUid'                  => 't3_origuid',
         'delete'                   => 'deleted',
         'enablecolumns'            => [
