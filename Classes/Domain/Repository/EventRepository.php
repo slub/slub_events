@@ -204,6 +204,11 @@ namespace Slub\SlubEvents\Domain\Repository;
             );
         }
 
+        // if its the homepage view hide past events exactly to the minute
+        if ($settings['exactlyToTheMinute']) {
+            $constraints[] = $query->greaterThan('start_date_time', strtotime('now'));
+        }
+
         // default is to show only future events
         if ($settings['showPastEvents'] != true) {
             $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));

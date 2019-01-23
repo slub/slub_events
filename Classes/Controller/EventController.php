@@ -149,6 +149,8 @@ class EventController extends AbstractController
             $this->settings['disciplineList'] = $disciplineIds;
         }
 
+        $this->settings['exactlyToTheMinute'] = true;
+
         $events = $this->eventRepository->findAllBySettings($this->settings);
 
         $this->view->assign('events', $events);
