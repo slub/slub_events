@@ -1,27 +1,11 @@
 <f:if condition="{configuration.insertAbove}">
-    <f:if condition="{configuration.section}">
-        <f:then>
-            <f:render section="paginator" arguments="{pagination: pagination, section: configuration.section}"/>
-        </f:then>
-        <f:else>
-            <f:comment>Hack for 6.2 as configuration.section is empty in viewhelper.</f:comment>
-            <f:render section="paginator" arguments="{pagination: pagination, section: 'book-me-now'}"/>
-        </f:else>
-    </f:if>
+    <f:render section="paginator" arguments="{pagination: pagination, section: configuration.section}"/>
 </f:if>
 
 <f:renderChildren arguments="{contentArguments}"/>
 
 <f:if condition="{configuration.insertBelow}">
-    <f:if condition="{configuration.section}">
-        <f:then>
-            <f:render section="paginator" arguments="{pagination: pagination, section: configuration.section}"/>
-        </f:then>
-        <f:else>
-            <f:comment>Hack for 6.2 as configuration.section is empty in viewhelper.</f:comment>
-            <f:render section="paginator" arguments="{pagination: pagination, section: 'book-me-now'}"/>
-        </f:else>
-    </f:if>
+    <f:render section="paginator" arguments="{pagination: pagination, section: configuration.section}"/>
 </f:if>
 
 <f:section name="paginator">
