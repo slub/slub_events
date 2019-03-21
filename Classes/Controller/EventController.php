@@ -982,7 +982,9 @@ class EventController extends AbstractController
             if ($eventSubEndDateTime) {
                 $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
             }
-            $childDateTimes[] = $childDateTime;
+            if ($childDateTime['startDateTime'] < $recurringEndDateTime){
+              $childDateTimes[] = $childDateTime;
+            }
 
             if (!empty($diffDays)) {
                 $diffDayEventStartDateTime = clone $eventStartDateTime;
@@ -1006,16 +1008,13 @@ class EventController extends AbstractController
                     if ($eventSubEndDateTime) {
                         $childDateTime['subEndDateTime'] = clone $diffDayEventSubEndDateTime;
                     }
-                    $childDateTimes[] = $childDateTime;
+                    if ($childDateTime['startDateTime'] < $recurringEndDateTime){
+                      $childDateTimes[] = $childDateTime;
+                    }
                 }
             }
         } while ($eventStartDateTime < $recurringEndDateTime);
 
-        // remove last event if recurringEndDateTime is already passed
-        if ($eventStartDateTime > $recurringEndDateTime) {
-            array_pop($childDateTimes);
-        }
-//        debug($childDateTimes, '$childDateTimes');
         return $childDateTimes;
     }
 
