@@ -962,13 +962,14 @@ class EventController extends AbstractController
             $transitions = $timeZone->getTransitions($parentStartDateTime->getTimestamp(), $eventStartDateTime->getTimestamp());
 
             if (count($transitions) > 1 && $adjustDlstRun < count($transitions)) {
+                // only adjust offset once
                 $adjustDlstRun++;
                 // there seems to be a dailight saving switch
                 $last_transition = array_pop($transitions);
                 $previous_transition = array_pop($transitions);
                 $daylightOffset = $previous_transition['offset'] - $last_transition['offset'];
-                $this->daylightOffset($eventStartDateTime, $daylightOffset);
             }
+            $this->daylightOffset($eventStartDateTime, $daylightOffset);
 
             $eventEndDateTime->add($dateTimeInterval);
             $this->daylightOffset($eventEndDateTime, $daylightOffset);
@@ -983,20 +984,35 @@ class EventController extends AbstractController
                 $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
             }
             if ($childDateTime['startDateTime'] < $recurringEndDateTime){
-              $childDateTimes[] = $childDateTime;
+                $childDateTimes[] = $childDateTime;
             }
 
+            // create the child days within a week
             if (!empty($diffDays)) {
                 $diffDayEventStartDateTime = clone $eventStartDateTime;
                 $diffDayEventEndDateTime = clone $eventEndDateTime;
                 if ($eventSubEndDateTime) {
                     $diffDayEventSubEndDateTime = clone $eventSubEndDateTime;
                 }
+                $adjustDlstDone = FALSE;
                 foreach ($diffDays as $weekDayInterval) {
+                    $diffDayEventStartDateTime->add($weekDayInterval);
+                    $transitions = $timeZone->getTransitions($eventStartDateTime->getTimestamp(), $diffDayEventStartDateTime->getTimestamp());
+                    // if there is a transition between startDateStamp and
+                    // following weekday in series adjust only once the offset.
+                    if (count($transitions) > 1 && $adjustDlstDone === FALSE) {
+                        $adjustDlstDone = TRUE;
+                        // there seems to be a dailight saving switch
+                        $last_transition = array_pop($transitions);
+                        $previous_transition = array_pop($transitions);
+                        $daylightOffset = $previous_transition['offset'] - $last_transition['offset'];
+                    } else {
+                      $daylightOffset = 0;
+                    }
+
+                    $this->daylightOffset($diffDayEventStartDateTime, $daylightOffset);
                     $diffDayEventEndDateTime->add($weekDayInterval);
                     $this->daylightOffset($diffDayEventEndDateTime, $daylightOffset);
-                    $diffDayEventStartDateTime->add($weekDayInterval);
-                    $this->daylightOffset($diffDayEventStartDateTime, $daylightOffset);
                     if ($diffDayEventSubEndDateTime) {
                         $diffDayEventSubEndDateTime->add($weekDayInterval);
                         $this->daylightOffset($diffDayEventSubEndDateTime, $daylightOffset);
