@@ -293,7 +293,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         $constraints = [];
 
-        if (!empty($categories)) {
+        if (!empty($contacts) && is_array($contacts)) {
             $constraints[] = $query->in('categories.uid', $categories);
         }
 
