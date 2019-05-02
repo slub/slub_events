@@ -46,7 +46,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
     </f:else>
 </f:security.ifAuthenticated>
 
-<f:render partial="FormErrors" arguments="{obj: 'newSubscriber'}" />
+<f:render partial="FormErrors" arguments="{_all}" />
 
 <f:form action="create" name="newSubscriber" object="{newSubscriber}">
 
