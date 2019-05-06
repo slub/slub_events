@@ -187,12 +187,12 @@ namespace Slub\SlubEvents\Domain\Repository;
         $constraints[] = $query->equals('genius_bar', $geniusBar);
 
         // are categories selected?
-        if (count($settings['categoryList']) > 0) {
+        if (is_array($settings['categoryList']) && count($settings['categoryList']) > 0) {
             $constraints[] = $query->in('categories.uid', $settings['categoryList']);
         }
 
         // are disciplines selected?
-        if (count($settings['disciplineList']) > 0) {
+        if (is_array($settings['disciplineList']) && count($settings['disciplineList']) > 0) {
             $constraints[] = $query->in('discipline.uid', $settings['disciplineList']);
         }
 
@@ -297,7 +297,7 @@ namespace Slub\SlubEvents\Domain\Repository;
             $constraints[] = $query->in('categories.uid', $categories);
         }
 
-        if (!empty($contacts)) {
+        if (!empty($contacts) && is_array($contacts)) {
             $constraints[] = $query->in('contact', $contacts);
         }
 

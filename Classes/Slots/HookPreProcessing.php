@@ -104,7 +104,7 @@ class HookPreProcessing
                 // 5,11,12
                 foreach (explode(',', $fieldArray['categories']) as $category) {
                     $catarray = explode('|', $category);
-                    if (count($catarray) > 1) {
+                    if ($catarray && count($catarray) > 1) {
                         $category_text .= urldecode($catarray[1]) . ', ';
                     }
                 }

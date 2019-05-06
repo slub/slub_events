@@ -961,7 +961,7 @@ class EventController extends AbstractController
             $timeZone = new \DateTimeZone(date_default_timezone_get());
             $transitions = $timeZone->getTransitions($parentStartDateTime->getTimestamp(), $eventStartDateTime->getTimestamp());
 
-            if (count($transitions) > 1 && $adjustDlstRun < count($transitions)) {
+            if ($transitions && count($transitions) > 1 && $adjustDlstRun < count($transitions)) {
                 // only adjust offset once
                 $adjustDlstRun++;
                 // there seems to be a dailight saving switch
@@ -1000,7 +1000,7 @@ class EventController extends AbstractController
                     $transitions = $timeZone->getTransitions($eventStartDateTime->getTimestamp(), $diffDayEventStartDateTime->getTimestamp());
                     // if there is a transition between startDateStamp and
                     // following weekday in series adjust only once the offset.
-                    if (count($transitions) > 1 && $adjustDlstDone === FALSE) {
+                    if ($transitions && count($transitions) > 1 && $adjustDlstDone === FALSE) {
                         $adjustDlstDone = TRUE;
                         // there seems to be a dailight saving switch
                         $last_transition = array_pop($transitions);

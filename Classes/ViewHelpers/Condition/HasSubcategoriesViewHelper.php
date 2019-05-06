@@ -66,7 +66,7 @@ class HasSubcategoriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
     {
         $categories = $this->categoryRepository->findCurrentBranch($category);
 
-        if (count($categories) == 0) {
+        if ($categories && count($categories) == 0) {
             return false;
         } else {
             return true;

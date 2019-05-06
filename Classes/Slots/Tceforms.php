@@ -247,7 +247,7 @@ class Tceforms
             $output .= ' <br /><strong>' . strftime('%A, %d.%m.%Y %H:%M', $parentEvent->getStartDateTime()->getTimestamp())
             .'</strong></div>';
 
-            if (count($childEvents)>0) {
+            if ($childEvents && count($childEvents)>0) {
                 $output .= '<ul>';
 
                 $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);

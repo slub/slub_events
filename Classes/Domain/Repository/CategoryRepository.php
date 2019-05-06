@@ -225,6 +225,8 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
         $categories = $query->execute();
 
+        $childCategoriesIds = [];
+
         foreach ($categories as $category) {
             $childCategoriesIds[] = $category->getUid();
             $recursiveCategoriesIds = self::findChildCategories($category->getUid());
