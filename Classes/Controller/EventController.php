@@ -352,6 +352,7 @@ class EventController extends AbstractController
 
         // if no contacts selection in user settings present --> look for the root categories
         if (!is_array($searchParameter['contacts'])) {
+            $searchParameter['contacts'] = [];
             foreach ($contacts as $uid => $contact) {
                 $searchParameter['contacts'][$uid] = $contact->getUid();
             }
