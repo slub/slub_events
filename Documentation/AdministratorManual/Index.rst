@@ -75,7 +75,7 @@ Configure Email Handling
          Set the sender email address of all outgoing mails.
 
    Default
-         ``webmaster@slub-dresden.de``
+         ``webmaster@example.com``
 
 .. container:: table-row
 
@@ -193,13 +193,13 @@ the event.
          senderEmailAddress
 
    :Example:
-        		``webmaster@slub-dresden.de``
+        ``webmaster@example.com``
 
    :Description:
-                 Set the sender email address of outgoing emails to the
-                 contact person.
-                 Emails to the subscribers get the contact persons email as
-                 sender address.
+         Set the sender email address of outgoing emails to the
+         contact person.
+         Emails to the subscribers get the contact persons email as
+         sender address.
 
 
 
@@ -238,7 +238,7 @@ all events and the number of subscribers inline and as CSV attachment.
          senderEmailAddress
 
    :Example:
-        		``webmaster@slub-dresden.de``
+        ``webmaster@example.com``
 
    :Description:
          Set the sender email address of outgoing emails to the
@@ -250,7 +250,7 @@ all events and the number of subscribers inline and as CSV attachment.
          receiverEmailAddress
 
    :Example:
-		``abc@slub-dresden.de, dfg@slub-dresden.de``
+        ``abc@example.com, dfg@example.com``
 
    :Description:
          Set the receiver email address of the statistics report. You

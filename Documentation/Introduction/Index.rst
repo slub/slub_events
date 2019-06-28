@@ -26,6 +26,10 @@ On subscription, the customer receives an email including an
 ics-calendar invitation. MS Outlook and Thunderbird/Lightning recognize
 this component as calendar event.
 
+The contact person receives an email on end of the subscription period or if
+not enough subscribers where found before the subscription end. In all cases an
+ics-calendar invitation is appended to the mails.
+
 The templates are not yet all localized but are easily changeable by
 overwriting templateRootPath etc. as usual with extbase/fluid
 extensions.

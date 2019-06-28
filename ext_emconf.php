@@ -17,7 +17,7 @@ $EM_CONF[$_EXTKEY] = [
 This extension is developped and used in production at the Saxony State and University Library (SLUB) Dresden, Germany.',
     'category'         => 'plugin',
     'author'           => 'Alexander Bigga',
-    'author_email'     => 'alexander.bigga@slub-dresden.de',
+    'author_email'     => 'typo3@slub-dresden.de',
     'author_company'   => 'SLUB Dresden',
     'shy'              => '',
     'priority'         => '',
@@ -28,7 +28,7 @@ This extension is developped and used in production at the Saxony State and Univ
     'modify_tables'    => '',
     'clearCacheOnLoad' => 0,
     'lockType'         => '',
-    'version'          => '3.0.1',
+    'version'          => '3.0.2',
     'constraints'      => [
         'depends'   => [
             'typo3'   => '7.6.0-8.7.99',

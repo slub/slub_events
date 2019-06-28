@@ -30,7 +30,7 @@ slub_events
   	events, registration
 
   :Copyright:
-  	2013-2018
+  	2013-2019
 
   :Author:
   	Alexander Bigga (SLUB Dresden)
