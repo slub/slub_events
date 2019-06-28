@@ -23,6 +23,7 @@
  ***************************************************************/
 
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -44,7 +45,8 @@ class ext_update
     public function main()
     {
         $this->processUpdates();
-        return $this->generateOutput();
+        $this->generateOutput();
+        return;
     }
 
     /**
@@ -55,10 +57,12 @@ class ext_update
      */
     public function access()
     {
-
         // we act only, if mm-table is still empty
-        $countMmTable = $GLOBALS['TYPO3_DB']->exec_SELECTcountRows('*', 'tx_slubevents_event_discipline_mm', '1=1');
-
+        $countMmTable = $GLOBALS['TYPO3_DB']->exec_SELECTcountRows(
+            '*',
+            'tx_slubevents_event_discipline_mm',
+            '1=1'
+        );
         $countGeniusBarEvent = $GLOBALS['TYPO3_DB']->exec_SELECTcountRows(
             '*',
             'tx_slubevents_domain_model_event',
@@ -70,10 +74,10 @@ class ext_update
             'genius_bar=1'
         );
 
-        if ($countMmTable > 0 && ($countGeniusBarEvent > 0 && $countGeniusBarCategory > 0)) {
-            return false;
-        } else {
+        if ($countMmTable == 0 || ($countGeniusBarEvent > 0 && $countsGeniusBarCategory > 0)) {
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -220,11 +224,15 @@ class ext_update
     /**
      * Generates output by using flash messages
      *
-     * @return string
+     * @return void
      */
     protected function generateOutput()
     {
-        $output = '';
+        /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
+        $flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+        /** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+
         foreach ($this->messageArray as $messageItem) {
             $flashMessage = GeneralUtility::makeInstance(
                 'TYPO3\CMS\Core\Messaging\FlashMessage',
@@ -232,9 +240,7 @@ class ext_update
                 $messageItem[1],
                 $messageItem[0]
             );
-            $output .= $flashMessage->render();
+            $defaultFlashMessageQueue->enqueue($flashMessage);
         }
-
-        return $output;
     }
 }
