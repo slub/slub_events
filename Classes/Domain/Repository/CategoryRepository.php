@@ -152,7 +152,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $childCategorieIds = $this->findAllChildCategories($startCategory->getUid());
 
         // ups, no children found...
-        if ($childCategorieIds === null) {
+        if (count($childCategorieIds) == 0) {
             return [];
         }
 
