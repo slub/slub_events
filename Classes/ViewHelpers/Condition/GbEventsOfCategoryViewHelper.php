@@ -72,7 +72,7 @@ class GbEventsOfCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
         $categories = $this->categoryRepository->findCurrentBranch($category);
 
         $showLink = false;
-        if (($categories && count($categories) == 0) || ($events && count($events) == 0)) {
+        if (empty($categories) || empty($events)) {
             /** @var \Slub\SlubEvents\Domain\Model\Event $event */
             foreach ($events as $event) {
                 $showLink = true;
