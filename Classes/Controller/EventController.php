@@ -770,6 +770,20 @@ class EventController extends AbstractController
     {
         $jsonevent = [];
 
+        // we do a simple file caching for performance reasons
+        // compose the filename
+        $calfile = PATH_site . 'typo3temp/tx_slubevents/calfile_' . md5($_GET['disciplines'] . $_GET['categories']) . '_' . strtotime($_GET['start']) . '_' . strtotime($_GET['end']) . '.json';
+        // if file exists and is not too old - take it
+        if (file_exists($calfile)) {
+            // if not older than one day:
+            if ((time() - filemtime($calfile) < 86400)) {
+                $fp = fopen($calfile, 'r');
+                fpassthru($fp);
+                exit;
+            }
+        }
+
+        // no valid caching file --> we do a new query and save the result
         $events = $this->eventRepository->findAllBySettings([
             'categoryList'   => GeneralUtility::intExplode(',', $_GET['categories'], true),
             'disciplineList' => GeneralUtility::intExplode(',', $_GET['disciplines'], true),
@@ -858,7 +872,16 @@ class EventController extends AbstractController
             $jsonevent[] = $foundevent;
         }
 
-        return json_encode($jsonevent);
+        $outputJson = json_encode($jsonevent);
+
+        // cache the output for further requests
+        $fp = fopen($calfile, 'w');
+        if ($fp) {
+            fwrite($fp, $outputJson);
+            fclose($fp);
+        }
+
+        return $outputJson;
     }
 
     /**

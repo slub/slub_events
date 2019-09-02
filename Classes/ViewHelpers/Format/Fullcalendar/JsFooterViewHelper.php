@@ -59,7 +59,7 @@ class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         }
 
         $js1 .= "events: {
-                    url: '?eID=slubCal',
+                    url: '".$link."',
                     data: function() {
                         var eventurl = '';
                         var disurl = '';
