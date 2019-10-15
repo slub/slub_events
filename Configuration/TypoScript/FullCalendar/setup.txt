@@ -3,8 +3,14 @@ page {
         fullCalendar = EXT:slub_events/Resources/Public/Css/slub-event-fullcalendar.css
     }
     includeJSFooterlibs {
-        jquery = EXT:slub_events/Resources/Public/Js/Contrib/JQuery/jquery-2.2.4.min.js
-        jquery.forceOnTop = 1
+        jquery = //code.jquery.com/jquery-3.4.1.min.js
+        jquery {
+            external = 1
+            disableCompression = 1
+            integrity = sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=
+            excludeFromConcatenation = 1
+            forceOnTop = 1
+        }
         js-moment = EXT:slub_events/Resources/Public/Js/Contrib/Moment/moment.min.js
         js-fullcalendar = EXT:slub_events/Resources/Public/Js/Contrib/Fullcalendar/fullcalendar.min.js
         js-slub-fullcalendar = EXT:slub_events/Resources/Public/Js/slub-events-fullcalendar.js
