@@ -184,8 +184,9 @@ class EventController extends AbstractController
     public function showAction(Event $event = null)
     {
         if ($event !== null) {
+            $shortDescription = $event->getTeaser() ? $event->getTeaser() : $event->getDescription();
             // get description and cut to 200 chars, strip tags its an rte field
-            $shortDescription = substr( strip_tags( $event->getDescription() ) , 0, 200);
+            $shortDescription = substr( strip_tags( $shortDescription ) , 0, 200);
             // cut it at last space
             $shortDescription = trim(substr($shortDescription , 0, strrpos($shortDescription, ' ')));
 
