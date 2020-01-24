@@ -93,7 +93,7 @@ class AbstractController extends ExtbaseActionController
 
         $this->configurationManager = $configurationManager;
 
-        $this->contentObj = $this->configurationManager->getContentObject();
+        $this->contentObj = $this->configurationManager->getContentObjectRenderer();
         $this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
 
         // merge the storagePid into settings for the cache tags

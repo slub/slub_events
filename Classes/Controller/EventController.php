@@ -798,7 +798,7 @@ class EventController extends AbstractController
             'showPastEvents' => true,
         ]);
 
-        $cObj = $this->configurationManager->getContentObject();
+        $cObj = $this->configurationManager->getContentObjectRenderer();
         /** @var Event $event */
         foreach ($events as $event) {
             $foundevent = [];
