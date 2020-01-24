@@ -238,7 +238,7 @@ class AbstractController extends ExtbaseActionController
             }
             return $param;
         } else {
-            return GeneralUtility::removeXSS($param);
+            return htmlspecialchars($param);
         }
     }
 
