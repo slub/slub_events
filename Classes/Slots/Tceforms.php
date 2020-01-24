@@ -204,7 +204,25 @@ class Tceforms
      */
     public function eventParentString($PA, $fObj)
     {
-      $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, title', 'tx_slubevents_domain_model_event', 'uid=' . (int)$PA['row']['parent'])->fetch_assoc();
+      $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+      ->getQueryBuilderForTable('tx_slubevents_domain_model_event');
+
+      $result = $queryBuilder
+          ->select('uid', 'title')
+          ->from('tx_slubevents_domain_model_event')
+          ->where(
+              $queryBuilder->expr()->eq(
+                  'uid',
+                  $queryBuilder->createNamedParameter((int) $PA['row']['parent'], Connection::PARAM_INT)
+              )
+          )
+          ->setMaxResults(1)
+          ->execute();
+
+      if ($resArray = $result->fetch()) {
+        $parentEventRow = $resArray;
+      }
+
       return $this->getEditLink('tx_slubevents_domain_model_event', $parentEventRow);
     }
 

@@ -612,6 +612,26 @@ class EventController extends AbstractController
         // as the childs must be on the same storage pid as the parent, we take
         // the pid and set is as storagePid
         $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, pid', 'tx_slubevents_domain_model_event', 'uid=' . (int)$id)->fetch_assoc();
+
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+        ->getQueryBuilderForTable('tx_slubevents_domain_model_event');
+
+        $result = $queryBuilder
+            ->select('uid', 'pid')
+            ->from('tx_slubevents_domain_model_event')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter((int) $id, Connection::PARAM_INT)
+                )
+            )
+            ->setMaxResults(1)
+            ->execute();
+
+        if ($resArray = $result->fetch()) {
+          $parentEventRow = $resArray;
+        }
+
         $this->settings['storagePid'] = $parentEventRow['pid'];
         // set storagePid to point extbase to the right repositories
         $configurationArray = [
