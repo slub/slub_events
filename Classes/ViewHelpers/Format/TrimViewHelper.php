@@ -26,6 +26,8 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 /**
  * trim output
  *
@@ -34,24 +36,36 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  */
 class TrimViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithContentArgumentAndRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('value', 'string', 'string to format');
+    }
+
     /**
      * trim whitespaces before and after
      *
-     * @param string $htmlString
-     *
-     * @return string
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render($htmlString = null)
-    {
-        if ($htmlString === null) {
-            $htmlString = $this->renderChildren();
-            if ($htmlString === null) {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $value = $renderChildrenClosure();
+        if ($value === null) {
+            if ($value === null) {
                 return '';
             }
         }
 
-        return trim($htmlString);
+        return trim($value);
     }
 }

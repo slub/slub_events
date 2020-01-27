@@ -26,6 +26,17 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
 
+use \Slub\SlubEvents\Domain\Model\Category;
+use \Slub\SlubEvents\Domain\Repository\CategoryRepository;
+
+use \Slub\SlubEvents\Domain\Repository\EventRepository;
+use \Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * Counts events of given category
  *
@@ -34,49 +45,59 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  */
 class GbEventsOfCategoryViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('category', Category::class, 'Category', true);
+    }
     /**
      * eventRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-     * @inject
+     * @var EventRepository
      */
-    protected $eventRepository;
+    protected static $eventRepository = null;
 
     /**
      * categoryRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
-     * @inject
+     * @var CategoryRepository
      */
-    protected $categoryRepository;
+    protected static $categoryRepository = null;
 
     /**
      * subscriberRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-     * @inject
+     * @var SubscriberRepository
      */
-    protected $subscriberRepository;
+    protected static $subscriberRepository = null;
 
     /**
      * check if any events of categories below are present and free for booking
      *
-     * @param \Slub\SlubEvents\Domain\Model\Category $category
-     *
-     * @return boolean
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render(\Slub\SlubEvents\Domain\Model\Category $category)
-    {
-        $events = $this->eventRepository->findAllGbByCategory($category);
-        $categories = $this->categoryRepository->findCurrentBranch($category);
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $category = $arguments['category'];
+        $events = self::getEventRepository()->findAllGbByCategory($category);
+        $categories = self::getCategoryRepository()->findCurrentBranch($category);
 
         $showLink = false;
         if (empty($categories) || empty($events)) {
             /** @var \Slub\SlubEvents\Domain\Model\Event $event */
             foreach ($events as $event) {
                 $showLink = true;
-                if ($this->subscriberRepository->countAllByEvent($event) >= $event->getMaxSubscriber()) {
+                if (self::getSubscriberRepository()->countAllByEvent($event) >= $event->getMaxSubscriber()) {
                     $showLink = false;
                 }
                 // event is cancelled
@@ -97,5 +118,50 @@ class GbEventsOfCategoryViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abs
         }
 
         return $showLink;
+    }
+
+    /**
+     * Initialize the eventRepository
+     *
+     * return eventRepository
+     */
+    private static function getEventRepository()
+    {
+        if (null === static::$eventRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$eventRepository = $objectManager->get(eventRepository::class);
+        }
+
+        return static::$eventRepository;
+    }
+
+    /**
+     * Initialize the categoryRepository
+     *
+     * return categoryRepository
+     */
+    private static function getCategoryRepository()
+    {
+        if (null === static::$categoryRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$categoryRepository = $objectManager->get(categoryRepository::class);
+        }
+
+        return static::$categoryRepository;
+    }
+
+    /**
+     * Initialize the subscriberRepository
+     *
+     * return subscriberRepository
+     */
+    private static function getSubscriberRepository()
+    {
+        if (null === static::$subscriberRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$subscriberRepository = $objectManager->get(subscriberRepository::class);
+        }
+
+        return static::$subscriberRepository;
     }
 }

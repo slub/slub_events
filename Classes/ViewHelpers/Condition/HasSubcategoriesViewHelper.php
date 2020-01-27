@@ -26,6 +26,14 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Slub\SlubEvents\Domain\Model\Category;
+use \Slub\SlubEvents\Domain\Repository\CategoryRepository;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * check if given category has subcategories
  *
@@ -34,37 +42,38 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  */
 class HasSubcategoriesViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('category', Category::class, 'Category', true);
+    }
+
     /**
      * categoryRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
+     * @var CategoryRepository
      */
-    protected $categoryRepository;
-
-    /**
-     * injectCategoryRepository
-     *
-     * @param \Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository
-     *
-     * @return void
-     */
-    public function injectCategoryRepository(\Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
+    protected static $categoryRepository = null;
 
     /**
      * check if any events of categories below are present and free for booking
      *
-     * @param \Slub\SlubEvents\Domain\Model\Category $category
-     *
-     * @return int
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render(\Slub\SlubEvents\Domain\Model\Category $category)
-    {
-        $categories = $this->categoryRepository->findCurrentBranch($category);
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $category = $arguments['category'];
+        $categories = self::getCategoryRepository()->findCurrentBranch($category);
 
         if (empty($categories)) {
             return false;
@@ -72,4 +81,20 @@ class HasSubcategoriesViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abstr
             return true;
         }
     }
+
+    /**
+     * Initialize the categoryRepository
+     *
+     * return categoryRepository
+     */
+    private static function getCategoryRepository()
+    {
+        if (null === static::$categoryRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$categoryRepository = $objectManager->get(categoryRepository::class);
+        }
+
+        return static::$categoryRepository;
+    }
+
 }

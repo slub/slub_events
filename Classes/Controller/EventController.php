@@ -36,9 +36,9 @@ namespace Slub\SlubEvents\Controller;
 use Slub\SlubEvents\Domain\Model\Event;
 use Slub\SlubEvents\Helper\EmailHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class EventController extends AbstractController
 {
@@ -608,11 +608,9 @@ class EventController extends AbstractController
      */
     public function initializeCreateChildsAction($id)
     {
-        // this does not work reliable in this context (maybe a bug in TYPO3 7.6?)
+        // this does not work reliable in this context (--> has to be verified again!)
         // as the childs must be on the same storage pid as the parent, we take
         // the pid and set is as storagePid
-        $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, pid', 'tx_slubevents_domain_model_event', 'uid=' . (int)$id)->fetch_assoc();
-
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
         ->getQueryBuilderForTable('tx_slubevents_domain_model_event');
 
