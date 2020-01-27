@@ -11,7 +11,6 @@ return [
         'cruser_id'                => 'cruser_id',
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
-        'versioning_followPages'   => true,
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
         'transOrigPointerField'    => 'l10n_parent',
@@ -24,7 +23,6 @@ return [
         ],
         'searchFields'             => 'title,parent,',
         'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_category.gif',
-        'requestUpdate'            => 'genius_bar,sys_language_uid',
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, genius_bar, parent',
@@ -49,6 +47,7 @@ return [
                     ['LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
                 ],
             ],
+            'onChange'  => 'reload',
         ],
         'l10n_parent'      => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -86,26 +85,30 @@ return [
         ],
         'starttime'        => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
         ],
         'endtime'          => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
@@ -127,6 +130,7 @@ return [
                 'type'    => 'check',
                 'default' => 0,
             ],
+            'onChange'  => 'reload',
         ],
         'description'      => [
             'exclude'       => 0,
@@ -136,21 +140,16 @@ return [
                 'cols'    => 40,
                 'rows'    => 15,
                 'eval'    => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'type'          => 'script',
-                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon'          => 'actions-wizard-rte',
-                        'notNewRecords' => 1,
-                        'RTEonly'       => 1,
-                        'module'        => [
-                            'name' => 'wizard_rte',
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
                         ],
                     ],
                 ],
-                'enableRichtext' => true, /* TYPO3 8.7 */
+                'enableRichtext' => true,
             ],
-            'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]', /* TYPO3 7.6 */
         ],
         'parent'           => [
             'exclude'   => 0,
@@ -168,7 +167,6 @@ return [
                         'expandAll'  => true,
                         'showHeader' => true,
                         'maxLevels'  => 10,
-                        'width'      => 600,
                     ],
                 ],
                 'maxitems'            => 1,

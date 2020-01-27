@@ -11,7 +11,6 @@ return [
         'cruser_id'                => 'cruser_id',
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
-        'versioning_followPages'   => true, /* TYPO3 7.6 */
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
         'transOrigPointerField'    => 'l10n_parent',
@@ -24,7 +23,6 @@ return [
         ],
         'searchFields'             => 'name,',
         'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_contact.gif',
-        'requestUpdate'            => 'sys_language_uid',
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, email, telephone, description, photo',
@@ -49,6 +47,7 @@ return [
                     ['LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
                 ],
             ],
+            'onChange'  => 'reload',
         ],
         'l10n_parent'      => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -86,26 +85,30 @@ return [
         ],
         'starttime'        => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
         ],
         'endtime'          => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
@@ -145,21 +148,16 @@ return [
                 'cols'    => 40,
                 'rows'    => 15,
                 'eval'    => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'type'          => 'script',
-                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon'          => 'actions-wizard-rte',
-                        'notNewRecords' => 1,
-                        'RTEonly'       => 1,
-                        'module' => array(
-                            'name' => 'wizard_rte',
-                        ),
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        ],
                     ],
                 ],
-                'enableRichtext' => true, /* TYPO3 8.7 */
+                'enableRichtext' => true,
             ],
-            'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]', /* TYPO3 7.6 */
         ],
         'photo'            => [
             'exclude' => 0,
@@ -169,7 +167,6 @@ return [
                 'internal_type' => 'file',
                 'allowed'       => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                 'uploadfolder'  => 'uploads/tx_slubevents',
-                'show_thumbs'   => 1,
                 'size'          => 1,
                 'minitems'      => 0,
                 'maxitems'      => 1,

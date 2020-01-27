@@ -39,26 +39,30 @@ return [
         ],
         'starttime'        => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
         ],
         'endtime'          => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
@@ -142,7 +146,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_subscriber.crdate',
             'config'  => [
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,

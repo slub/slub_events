@@ -11,7 +11,6 @@ return [
         'cruser_id'                => 'cruser_id',
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
-        'versioning_followPages'   => true, /* TYPO3 7.6 */
         'origUid'                  => 't3_origuid',
         'languageField'            => 'sys_language_uid',
         'transOrigPointerField'    => 'l10n_parent',
@@ -24,7 +23,6 @@ return [
         ],
         'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,discipline,',
         'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
-        'requestUpdate'            => 'genius_bar, external_registration, recurring',
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, contact',
@@ -88,6 +86,7 @@ return [
                     ['LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
                 ],
             ],
+            'onChange'  => 'reload',
         ],
         'l10n_parent'              => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -125,26 +124,30 @@ return [
         ],
         'starttime'                => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
         ],
         'endtime'                  => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
@@ -164,9 +167,8 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.start_date_time',
             'config'  => [
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime,required',
                 'default'  => 0,
             ],
@@ -184,9 +186,8 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.end_date_time',
             'config'  => [
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
@@ -226,9 +227,8 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time',
             'config'  => [
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
@@ -273,20 +273,16 @@ return [
                 'cols'    => 40,
                 'rows'    => 15,
                 'eval'    => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'notNewRecords' => 1,
-                        'RTEonly'       => 1,
-                        'type'          => 'script',
-                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon'          => 'actions-wizard-rte',
-                        'module'        => ['name' => 'wizard_rte'],
-                        'title'         => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        ],
                     ],
                 ],
-                'enableRichtext' => true, /* TYPO3 8.7 */
+                'enableRichtext' => true,
             ],
-            'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]', /* TYPO3 7.6 */
         ],
         'description'              => [
             'displayCond'   => 'FIELD:genius_bar:<:1',
@@ -297,19 +293,16 @@ return [
                 'cols'    => 40,
                 'rows'    => 15,
                 'eval'    => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'type'          => 'script',
-                        'title'         => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'icon'          => 'actions-wizard-rte',
-                        'notNewRecords' => 1,
-                        'RTEonly'       => 1,
-                        'module'        => ['name' => 'wizard_rte'],
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        ],
                     ],
                 ],
-                'enableRichtext' => true, /* TYPO3 8.7 */
+                'enableRichtext' => true,
             ],
-            'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]', /* TYPO3 7.6 */
         ],
         'min_subscriber'           => [
           'displayCond' => 'FIELD:external_registration:REQ:false',
@@ -394,6 +387,7 @@ return [
                 'type'    => 'check',
                 'default' => 0,
             ],
+            'onChange'  => 'reload',
         ],
         'parent'           => [
             'displayCond' => 'FIELD:parent:REQ:true',
@@ -413,7 +407,8 @@ return [
                  'type'    => 'check',
                  'default' => 0,
              ],
-         ],
+             'onChange'  => 'reload',
+        ],
          'recurring_options'        => [
              'displayCond' => 'FIELD:recurring:REQ:true',
              'exclude' => 1,
@@ -446,6 +441,7 @@ return [
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_end_date_time',
              'config'  => [
                  'type'     => 'input',
+                 'renderType' => 'inputDateTime',
                  'size'     => 10,
                  'eval'     => 'datetime',
                  'checkbox' => 1,
@@ -462,9 +458,12 @@ return [
         ],
         'categories'               => [
             'exclude'   => 0,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
             'label'     => $LL . 'tx_slubevents_domain_model_event.categories',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'                => 'select',
                 'foreign_table'       => 'tx_slubevents_domain_model_category',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
@@ -476,32 +475,12 @@ return [
                     'appearance'  => [
                         'expandAll'  => true,
                         'showHeader' => true,
-                        'allowRecursiveMode' => false,
                         'maxLevels'  => 10,
-                        'width'      => 600,
                     ],
-
                 ],
                 'size'                => 10,
-                'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 30,
-                'wizards' => [
-                     '_VERTICAL' => 1,
-                     'add' => [
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
-                        'icon' => 'actions-add',
-                        'params' => array(
-                           'table' => 'tx_slubevents_domain_model_category',
-                           'pid' => '###CURRENT_PID###',
-                           'setValue' => 'prepend'
-                        ),
-                        'module' => array(
-                           'name' => 'wizard_add'
-                        )
-                     ],
-                  ],
             ],
         ],
         'subscribers'              => [
@@ -536,29 +515,11 @@ return [
                     'appearance'  => [
                         'expandAll'          => true,
                         'showHeader'         => true,
-                        'allowRecursiveMode' => false,
-                        'width'              => 600,
                     ],
                 ],
                 'size'                => 10,
                 'minitems'            => 1,
                 'maxitems'            => 1,
-                'wizards' => [
-                     '_VERTICAL' => 1,
-                     'add' => [
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
-                        'icon' => 'actions-add',
-                        'params' => array(
-                           'table' => 'tx_slubevents_domain_model_location',
-                           'pid' => '###CURRENT_PID###',
-                           'setValue' => 'prepend'
-                        ),
-                        'module' => array(
-                           'name' => 'wizard_add'
-                        )
-                     ],
-                  ],
             ],
         ],
         'discipline'               => [
@@ -577,30 +538,11 @@ return [
                     'appearance'  => [
                         'expandAll'          => true,
                         'showHeader'         => true,
-                        'allowRecursiveMode' => false,
-                        'width'              => 600,
                     ],
                 ],
                 'size'                => 10,
-                'autoSizeMax'         => 30,
                 'minitems'            => 1,
                 'maxitems'            => 10,
-                'wizards' => [
-                     '_VERTICAL' => 1,
-                     'add' => [
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
-                        'icon' => 'actions-add',
-                        'params' => array(
-                           'table' => 'tx_slubevents_domain_model_discipline',
-                           'pid' => '###CURRENT_PID###',
-                           'setValue' => 'prepend'
-                        ),
-                        'module' => array(
-                           'name' => 'wizard_add'
-                        )
-                     ],
-                  ],
             ],
         ],
         'contact'                  => [
@@ -618,21 +560,14 @@ return [
                 'size'                => 8,
                 'selectedListStyle'   => 'width:600px;',
                 'itemListStyle'       => 'width:600px;',
-                'wizards' => [
-                     '_VERTICAL' => 1,
-                     'add' => [
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
-                        'icon' => 'actions-add',
-                        'params' => array(
-                           'table' => 'tx_slubevents_domain_model_contact',
-                           'pid' => '###CURRENT_PID###',
-                           'setValue' => 'prepend'
-                        ),
-                        'module' => array(
-                           'name' => 'wizard_add'
-                        )
-                     ],
+                  'fieldControl' => [
+                        'disabled' => 'false',
+                        'options' => [
+                            'pid' => '###CURRENT_PID###',
+                            'setValue' => 'prepend',
+                            'table' => 'tx_slubevents_domain_model_contact',
+                            'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
+                        ],
                   ],
             ],
         ],
@@ -653,6 +588,7 @@ return [
                 'size' => 50,
                 'eval' => 'trim',
             ],
+            'onChange'  => 'reload',
         ],
     ],
 ];
