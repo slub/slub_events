@@ -72,7 +72,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
             </f:for>
           </td>
           <td>
-            <se:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M"/>
+            <f:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M"/>
           </td>
           <td>
             <f:if condition="<se:format.freePlacesLeft event='{event}' /> == 0">

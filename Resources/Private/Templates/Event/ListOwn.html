@@ -59,7 +59,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		</f:then>
 		<f:else>
 			<div class="hint">
-				<p class="extrabox">Bitte melden Sie sich <a href="<f:uri.external uri="https://katalog.slub-dresden.de/pds?func=load-login&calling_system=primo&institute=SLUB&url=https://www.slub-dresden.de/"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zu "<f:translate key="view_my_events" />" zurückgeleitet.</p>
+				<p class="extrabox">
+					<f:translate key="register.pleaseloginfirst" arguments="{0: '<a href=\'https://www.slub-dresden.de/Shibboleth.sso/Login?target={f:uri.page(absolute:\'1\', addQueryString:\'1\')->f:format.urlencode()}\'>', 1: '</a>'}" />
+				</p>
 			</div>
 		</f:else>
 	</f:security.ifAuthenticated>

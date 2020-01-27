@@ -26,6 +26,9 @@ namespace Slub\SlubEvents\ViewHelpers\Link;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * Check if given link is local or not
  *
@@ -44,16 +47,28 @@ namespace Slub\SlubEvents\ViewHelpers\Link;
  */
 class IslocalViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
 
     /**
-     * @param string $link the given link as integer uid or string
-     *
-     * @return boolean
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * Initialize arguments.
      */
-    public function render($link)
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('link', 'string', 'Link', true);
+    }
+
+    /**
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $link = $arguments['link'];
         if ($link === null) {
             return false;
         }

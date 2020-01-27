@@ -26,13 +26,20 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Slub\SlubEvents\Domain\Model\Event;
+use \Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
- * Check if given link is local or not
+ * Check if subscription is allowed for the given event
  *
  * = Examples =
  *
  * <code title="Defaults">
- * <f:if condition="<se:link.islocal link='{event.location.link}' />">
+ * <f:if condition="<se:condition.isSubscriptionAllowed event='{event}' />">
  * </code>
  * <output>
  * 1
@@ -44,42 +51,41 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  */
 class IsSubscriptionAllowedViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', Event::class, 'Events', true);
+    }
 
     /**
      * subscriberRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
+     * @var SubscriberRepository
      */
-    protected $subscriberRepository;
+    protected static $subscriberRepository = null;
 
     /**
-     * injectSubscriberRepository
+     * Return true or false
      *
-     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
-     *
-     * @return void
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function injectSubscriberRepository(
-        \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
     ) {
-        $this->subscriberRepository = $subscriberRepository;
-    }
-
-    /**
-     * Render the supplied DateTime object as a formatted date.
-     *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
-     *
-     * @return boolean
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
-     */
-    public function render($event)
-    {
         $showLink = true;
+        $event = $arguments['event'];
 
         // limit reached already --> overbooked
-        if ($this->subscriberRepository->countAllByEvent($event) >= $event->getMaxSubscriber()) {
+        if (self::getSubscriberRepository()->countAllByEvent($event) >= $event->getMaxSubscriber()) {
             $showLink = false;
         }
 
@@ -96,5 +102,20 @@ class IsSubscriptionAllowedViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\
         }
 
         return $showLink;
+    }
+
+    /**
+     * Initialize the subscriberRepository
+     *
+     * return SubscriberRepository
+     */
+    private static function getSubscriberRepository()
+    {
+        if (null === static::$subscriberRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$subscriberRepository = $objectManager->get(SubscriberRepository::class);
+        }
+
+        return static::$subscriberRepository;
     }
 }

@@ -26,13 +26,16 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * Check if value is in array
  *
  * = Examples =
  *
  * <code title="Defaults">
- * <f:if condition="<se:link.islocal link='{event.location.link}' />">
+ * <f:if condition="<se:condition.inArray array='{categoriesSelected}' value='{category.item.uid}' />">
  * </code>
  * <output>
  * 1
@@ -44,23 +47,34 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  */
 class InArrayViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
 
     /**
-     * Checks if Saturday or Sunday
-     *
-     * @param array $array
-     * @param mixed $value
-     *
-     * @return boolean
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * Initialize arguments.
      */
-    public function render($array, $value)
+    public function initializeArguments()
     {
-      if (is_array($array)) {
-          return in_array($value, $array);
-      } else {
-          return FALSE;
-      }
+        parent::initializeArguments();
+        $this->registerArgument('array', 'array', 'Array', true);
+        $this->registerArgument('value', 'mixed', 'value', true);
+    }
+
+    /**
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $array = $arguments['array'];
+        $value = $arguments['value'];
+        if (is_array($array)) {
+            return in_array($value, $array);
+        } else {
+            return FALSE;
+        }
     }
 }
