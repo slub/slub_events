@@ -26,75 +26,42 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Get diff of DateTime object.
  *
- * = Examples =
- *
- * <code title="Defaults">
- * <f:format.date>{dateObject}</f:format.date>
- * </code>
- * <output>
- * 1980-12-13
- * (depending on the current date)
- * </output>
- *
- * <code title="Custom date format">
- * <f:format.date format="H:i">{dateObject}</f:format.date>
- * </code>
- * <output>
- * 01:23
- * (depending on the current time)
- * </output>
- *
- * <code title="strtotime string">
- * <f:format.date format="d.m.Y - H:i:s">+1 week 2 days 4 hours 2 seconds</f:format.date>
- * </code>
- * <output>
- * 13.12.1980 - 21:03:42
- * (depending on the current time, see http://www.php.net/manual/en/function.strtotime.php)
- * </output>
- *
- * <code title="output date from unix timestamp">
- * <f:format.date format="d.m.Y - H:i:s">@{someTimestamp}</f:format.date>
- * </code>
- * <output>
- * 13.12.1980 - 21:03:42
- * (depending on the current time. Don't forget the "@" in front of the timestamp see http://www.php.net/manual/en/function.strtotime.php)
- * </output>
- *
- * <code title="Inline notation">
- * {f:format.date(date: dateObject)}
- * </code>
- * <output>
- * 1980-12-13
- * (depending on the value of {dateObject})
- * </output>
- *
- * <code title="Inline notation (2nd variant)">
- * {dateObject -> f:format.date()}
- * </code>
- * <output>
- * 1980-12-13
- * (depending on the value of {dateObject})
- * </output>
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- * @api
  */
 class DateDiffViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
     /**
-     * Render the supplied DateTime object as a formatted date.
-     *
-     * @param DateTime object with end
-     * @param DateTime object with start
-     *
-     * @return string with diff
+     * Initialize arguments.
      */
-    public function render($dateEnd, $dateStart)
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('dateEnd', \DateTime::class, 'End DateTimestamp', true);
+        $this->registerArgument('dateStart', \DateTime::class, 'Start DateTimestamp', true);
+    }
+    /**
+     * Returns the difference of two DateTime objects in minutes
+     *
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $dateEnd = $arguments['dateEnd'];
+        $dateStart = $arguments['dateStart'];
         $diff = null;
         if ($dateEnd instanceof \DateTime
             && $dateStart instanceof \DateTime
