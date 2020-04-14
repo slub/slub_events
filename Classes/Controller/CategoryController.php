@@ -87,7 +87,7 @@ class CategoryController extends AbstractController
 
         if (count($categories) == 0) {
             // there are no further child categories --> show events
-            $this->forward('gbList');
+            $this->forward('gbList', null, null, ['category' => $category]);
         } else {
             $this->view->assign('categories', $categories);
         }
@@ -152,13 +152,16 @@ class CategoryController extends AbstractController
     public function gbListAction(Category $category = null)
     {
         $events = [];
+        $parentcategory = null;
+
         if ($category != null) {
             $events = $this->eventRepository->findAllGbByCategory($category);
+            $parentcategory = $category->getParent()->current();
         }
 
         $this->view->assign('events', $events);
         $this->view->assign('category', $category);
-        $this->view->assign('parentcategory', $category->getParent()->current());
+        $this->view->assign('parentcategory', $parentcategory);
     }
 
     /**
