@@ -560,15 +560,6 @@ return [
                 'size'                => 8,
                 'selectedListStyle'   => 'width:600px;',
                 'itemListStyle'       => 'width:600px;',
-                  'fieldControl' => [
-                        'disabled' => 'false',
-                        'options' => [
-                            'pid' => '###CURRENT_PID###',
-                            'setValue' => 'prepend',
-                            'table' => 'tx_slubevents_domain_model_contact',
-                            'title' => 'LLL:EXT:lang/locallang_tca.xlf:be_users.usergroup_add_title',
-                        ],
-                  ],
             ],
         ],
         'onlinesurvey'             => [
