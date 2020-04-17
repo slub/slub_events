@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-12-18T17:29:12Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-04-17T19:12:05Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -276,6 +276,10 @@
 			<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" approved="yes">
 				<source><![CDATA[one free place]]></source>
 				<target><![CDATA[ein freier Platz]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.only_future_events" approved="yes">
+				<source><![CDATA[Only future child events are listed below.]]></source>
+				<target><![CDATA[Nur Veranstaltungen in der Zukunft werden hier aufgelistet.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
 				<source><![CDATA[Recurring Event]]></source>

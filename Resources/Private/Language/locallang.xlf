@@ -194,19 +194,22 @@
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar">
 			<source>Knowledge Bar</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.recurring">
+		<trans-unit id="tx_slubevents_domain_model_event.recurring">
 			<source>Recurring Event</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.recurring.event_hidden">
+		<trans-unit id="tx_slubevents_domain_model_event.only_future_events">
+			<source>Only future child events are listed below.</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring.event_hidden">
 			<source>The current parent event is hidden! All recurring child events will be active by default. Please hide them manually or change the recurring options.</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.recurring.no_future_children">
+		<trans-unit id="tx_slubevents_domain_model_event.recurring.no_future_children">
 			<source>There are no child events in the future (yet). Please save this event and/or modifiy the recurring options.</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.recurring_events">
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_events">
 			<source>Recurring Events</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.recurring_parent">
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_parent">
 			<source>Recurring Parent Event</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.days">

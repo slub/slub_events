@@ -314,7 +314,7 @@ class EventController extends AbstractController
         // get current event of last beIcsInvitationAction
         $currentActiveEvent = $this->getParametersSafely('currentActiveEvent');
 
-        $searchParameter = array();
+        $searchParameter = [];
 
         // if search was triggered, get search parameters from POST variables
         $submittedSearchParams = $this->getParametersSafely('searchParameter');
@@ -954,9 +954,19 @@ class EventController extends AbstractController
         $recurringEndDateTime = $parentEvent->getRecurringEndDateTime();
 
         $parentStartDateTime = $parentEvent->getStartDateTime();
+        $parentEndDateTime = $parentEvent->getEndDateTime();
+        $parentSubEndDateTime = $parentEvent->getSubEndDateTime();
+
+        if (!$recurringEndDateTime) {
+          // if no recurringEndDateTime is given, set it to ... 3 months for now
+          $recurringEndDateTime = clone $parentStartDateTime;
+          $recurringEndDateTime->add(new \DateInterval("P3M"));
+        }
 
         $sumDiffDays = 0;
+        $diffDays = []; // interval to parent or previous event date (used for recurring on multiple days per week)
         foreach($recurring_options['weekday'] as $id => $weekday) {
+            // if it is not the parent start_date weekday
             if ((int)$weekday != $parentStartDateTime->format('N')) {
                 $nextEventWeekday = (int)$weekday - $parentStartDateTime->format('N') - $sumDiffDays;
                 if ($nextEventWeekday < 0) {
@@ -967,17 +977,10 @@ class EventController extends AbstractController
             }
         }
 
-        $parentEndDateTime = $parentEvent->getEndDateTime();
-        $parentSubEndDateTime = $parentEvent->getSubEndDateTime();
 
-        if (!$recurringEndDateTime) {
-          // if no recurringEndDateTime is given, set it to ... 3 months for now
-          $recurringEndDateTime = clone $parentStartDateTime;
-          $recurringEndDateTime->add(new \DateInterval("P3M"));
-        }
+        $childDateTimes = []; // will hold all child events
 
-        $childDateTimes = array();
-
+        // start cloning
         $eventStartDateTime = clone $parentStartDateTime;
         $eventEndDateTime = clone $parentEndDateTime;
         if ($parentSubEndDateTime) {
@@ -1001,12 +1004,59 @@ class EventController extends AbstractController
                   break;
         }
         $adjustDlstRun = 1;
+
+        //  we need to calculate the transitions out of a new DateTimeZone object
+        $timeZone = new \DateTimeZone(date_default_timezone_get());
+
+        // first make events within the first week
+        // create the child days within a week
+        if (!empty($diffDays)) {
+            $diffDayEventStartDateTime = clone $eventStartDateTime;
+            $diffDayEventEndDateTime = clone $eventEndDateTime;
+            if ($eventSubEndDateTime) {
+                $diffDayEventSubEndDateTime = clone $eventSubEndDateTime;
+            }
+            $adjustDlstDone = FALSE;
+            foreach ($diffDays as $weekDayInterval) {
+                $diffDayEventStartDateTime->add($weekDayInterval);
+                $transitions = $timeZone->getTransitions($eventStartDateTime->getTimestamp(), $diffDayEventStartDateTime->getTimestamp());
+                // if there is a transition between startDateStamp and
+                // following weekday in series adjust only once the offset.
+                if ($transitions && count($transitions) > 1 && $adjustDlstDone === FALSE) {
+                    $adjustDlstDone = TRUE;
+                    // there seems to be a dailight saving switch
+                    $last_transition = array_pop($transitions);
+                    $previous_transition = array_pop($transitions);
+                    $daylightOffset = $previous_transition['offset'] - $last_transition['offset'];
+                } else {
+                    $daylightOffset = 0;
+                }
+
+                $this->daylightOffset($diffDayEventStartDateTime, $daylightOffset);
+                $diffDayEventEndDateTime->add($weekDayInterval);
+                $this->daylightOffset($diffDayEventEndDateTime, $daylightOffset);
+                if ($diffDayEventSubEndDateTime) {
+                    $diffDayEventSubEndDateTime->add($weekDayInterval);
+                    $this->daylightOffset($diffDayEventSubEndDateTime, $daylightOffset);
+                }
+
+                // single child event --> initialize new array
+                $childDateTime = [];
+                $childDateTime['endDateTime'] = clone $diffDayEventEndDateTime;
+                $childDateTime['startDateTime'] = clone $diffDayEventStartDateTime;
+                if ($eventSubEndDateTime) {
+                    $childDateTime['subEndDateTime'] = clone $diffDayEventSubEndDateTime;
+                }
+                if ($childDateTime['startDateTime'] < $recurringEndDateTime){
+                    $childDateTimes[] = $childDateTime;
+                }
+            }
+        }
+        // second make events in selected intervals
         do {
             $eventStartDateTime->add($dateTimeInterval);
             $daylightOffset = 0;
 
-            //  we need to calculate the transitions out of a new DateTimeZone object
-            $timeZone = new \DateTimeZone(date_default_timezone_get());
             $transitions = $timeZone->getTransitions($parentStartDateTime->getTimestamp(), $eventStartDateTime->getTimestamp());
 
             if ($transitions && count($transitions) > 1 && $adjustDlstRun < count($transitions)) {
@@ -1025,9 +1075,9 @@ class EventController extends AbstractController
                 $eventSubEndDateTime->add($dateTimeInterval);
                 $this->daylightOffset($eventSubEndDateTime, $daylightOffset);
             }
-            $childDateTime = array();
-            $childDateTime['endDateTime'] = clone $eventEndDateTime;
+            $childDateTime = [];
             $childDateTime['startDateTime'] = clone $eventStartDateTime;
+            $childDateTime['endDateTime'] = clone $eventEndDateTime;
             if ($eventSubEndDateTime) {
                 $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
             }
@@ -1055,7 +1105,7 @@ class EventController extends AbstractController
                         $previous_transition = array_pop($transitions);
                         $daylightOffset = $previous_transition['offset'] - $last_transition['offset'];
                     } else {
-                      $daylightOffset = 0;
+                        $daylightOffset = 0;
                     }
 
                     $this->daylightOffset($diffDayEventStartDateTime, $daylightOffset);
@@ -1066,7 +1116,8 @@ class EventController extends AbstractController
                         $this->daylightOffset($diffDayEventSubEndDateTime, $daylightOffset);
                     }
 
-                    $childDateTime = array();
+                // single child event --> initialize new array
+                    $childDateTime = [];
                     $childDateTime['endDateTime'] = clone $diffDayEventEndDateTime;
                     $childDateTime['startDateTime'] = clone $diffDayEventStartDateTime;
                     if ($eventSubEndDateTime) {
