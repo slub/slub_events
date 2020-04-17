@@ -153,7 +153,7 @@ class HookPreProcessing
                 if ($fieldArray['start_date_time'] < $fieldArray['sub_end_date_time'] ||
                     ($fieldArray['min_subscriber'] > 0 && empty($fieldArray['sub_end_date_time']))
                 ) {
-                    if (!empty($fieldArray['sub_end_date_time_select'])) {
+                    if ($fieldArray['sub_end_date_time_select'] >= 0) {
                         $fieldArray['sub_end_date_time'] = $this->calculateEndDateTime($fieldArray['start_date_time'], $fieldArray['sub_end_date_time_select'], FALSE);
 
                         $message = GeneralUtility::makeInstance(
