@@ -248,8 +248,9 @@ return [
                 'items'    => [
                     [
                         $LL . 'tx_slubevents_domain_model_event.sub_end_date_time_select_value',
-                        0,
+                        -1,
                     ],
+                    ['00:00', 0],
                     ['01:00', 60],
                     ['02:00', 120],
                     ['04:00', 240],
