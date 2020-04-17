@@ -248,6 +248,10 @@ class Tceforms
             .'</strong></div>';
 
             if ($childEvents && count($childEvents)>0) {
+
+                $output .= '<p class="alert alert-info">'.LocalizationUtility::translate(
+                  'tx_slubevents_domain_model_event.only_future_events',
+                  'slub_events').'</p>';
                 $output .= '<ul>';
 
                 $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
