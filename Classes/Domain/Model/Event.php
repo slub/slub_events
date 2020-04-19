@@ -115,6 +115,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $maxSubscriber = 0;
 
     /**
+     * Maximum amount of Persons per Subscription
+     *
+     * @var integer
+     */
+    protected $maxNumber = 0;
+
+    /**
      * Target Audience
      *
      * @var integer
@@ -394,6 +401,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setMaxSubscriber($maxSubscriber)
     {
         $this->maxSubscriber = $maxSubscriber;
+    }
+
+    /**
+     * Returns maxNumber
+     *
+     * @return integer $maxNumber
+     */
+    public function getMaxNumber()
+    {
+        return $this->maxNumber;
+    }
+
+    /**
+     * Sets the maxSubscriber
+     *
+     * @param integer $maxNumber
+     *
+     * @return void
+     */
+    public function setMaxNumber($maxNumber)
+    {
+        $this->maxNumber = $maxNumber;
     }
 
     /**

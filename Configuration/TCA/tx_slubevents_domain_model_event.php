@@ -43,8 +43,7 @@ return [
                 '--div--;Anmeldebedingungen,' .
                 'contact,' .
                 'external_registration,' .
-                'min_subscriber,' .
-                'max_subscriber,' .
+                '--palette--;' . $LL . 'tx_slubevents_domain_model_event.subscribers;paletteSubscribers,' .
                 '--palette--;' . $LL . 'tx_slubevents_domain_model_event.sub_end;paletteEndSubscription,' .
                 '--div--;Kategorisierung,' .
                 'audience,' .
@@ -66,6 +65,9 @@ return [
         ],
         'paletteEnd'             => [
             'showitem'       => 'end_date_time_select, --linebreak--, end_date_time',
+        ],
+        'paletteSubscribers' => [
+            'showitem'       => 'min_subscriber,max_subscriber,max_number',
         ],
         'paletteEndSubscription' => [
             'showitem'       => 'sub_end_date_time_select, --linebreak--,  sub_end_date_time, sub_end_date_info_sent',
@@ -332,7 +334,16 @@ return [
                 'eval' => 'int',
             ],
         ],
-        'audience'                 => [
+        'max_number'           => [
+            'displayCond' => 'FIELD:external_registration:REQ:false',
+              'exclude' => 0,
+              'label'   => $LL . 'tx_slubevents_domain_model_event.max_number',
+              'config'  => [
+                  'type' => 'input',
+                  'size' => 4,
+                  'eval' => 'int'              ],
+          ],
+          'audience'                 => [
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.audience',
             'config'  => [
