@@ -18,7 +18,7 @@
 				  property="customerid"/><br/>
 
 <label for="number">
-	<f:if condition="{event.maxNumber} >= {se:format.freePlacesLeft(event:'{event}')} || {event.maxNumber} == 0">
+	<f:if condition="{event.maxNumber} >= {se:format.freePlacesLeft(event:'{event}')}">
 		<f:then>
 			<f:format.printf arguments="{0: '<se:format.freePlacesLeft event=\'{event}\' />'}">
 				<f:translate key="tx_slubevents_domain_model_subscriber.number_max"/>
@@ -33,7 +33,7 @@
 	<span class="required">*</span>
 </label>
 
-<f:if condition="{event.maxNumber} >= {se:format.freePlacesLeft(event:'{event}')} || {event.maxNumber} == 0">
+<f:if condition="{event.maxNumber} >= {se:format.freePlacesLeft(event:'{event}')}">
 	<f:then>
 		<f:form.textfield property="number" type="number"
 		additionalAttributes="{min: '1', max: '<se:format.freePlacesLeft event=\'{event}\' />'}"
