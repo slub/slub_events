@@ -80,4 +80,10 @@ if (TYPO3_MODE === 'BE') {
         'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.description',
         'additionalFields' => Slub\SlubEvents\Task\StatisticsTaskAdditionalFieldProvider::class
     ];
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Slub\\SlubEvents\\Task\\CleanUpTask'] = [
+        'extension'        => $_EXTKEY,
+        'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.cleanup.name',
+        'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.cleanup.description',
+        'additionalFields' => Slub\SlubEvents\Task\CleanUpTaskAdditionalFieldProvider::class
+    ];
 }
