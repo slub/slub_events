@@ -207,6 +207,10 @@ class HookPreProcessing
                 $defaultFlashMessageQueue->enqueue($message);
             }
 
+            if ($fieldArray['max_subscriber'] > 0 && $fieldArray['max_number'] == 0) {
+                $fieldArray['max_number'] = $fieldArray['max_subscriber'];
+            }
+
             // save recurring options as serialized Array
             if (!empty($fieldArray['recurring_options'])) {
               $fieldArray['recurring_options'] = serialize($fieldArray['recurring_options']);

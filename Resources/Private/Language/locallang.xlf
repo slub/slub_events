@@ -302,7 +302,7 @@
 		<trans-unit id="tx_slubevents_domain_model_subscriber.submit_registration">
 			<source>Submit Registration</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_subscriber.not_registered_to_events">
+		<trans-unit id="tx_slubevents_domain_model_subscriber.not_registered_to_events">
 			<source>You are not registered to any event.</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone">
