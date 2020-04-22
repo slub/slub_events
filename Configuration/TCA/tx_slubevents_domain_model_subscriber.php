@@ -39,7 +39,7 @@ return [
         ],
         'starttime'        => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
+            'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'behaviour' => [
@@ -54,7 +54,7 @@ return [
         ],
         'endtime'          => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank', // deprecated in 8.7 but kept for upgrade wizard
+            'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'behaviour' => [
