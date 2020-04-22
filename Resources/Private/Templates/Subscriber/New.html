@@ -2,15 +2,6 @@
 
 This template displays a NEW form for the current domain object.
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        New.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
 
 	{namespace se=Slub\SlubEvents\ViewHelpers}
@@ -35,16 +26,18 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 </div>
 
-<f:security.ifAuthenticated>
-    <f:then></f:then>
-    <f:else>
-        <div class="hint">
-            <p class="extrabox">
-              <f:translate key="register.pleaseloginfirst" arguments="{0: '<a href=\'https://www.slub-dresden.de/Shibboleth.sso/Login?target={f:uri.page(absolute:\'1\', addQueryString:\'1\')->f:format.urlencode()}\'>', 1: '</a>'}" />
-            </p>
-        </div>
-    </f:else>
-</f:security.ifAuthenticated>
+<div class="hint">
+	<f:security.ifAuthenticated>
+		<f:then>
+			<p><f:translate key="register.alreadyloggedin" /></p>
+		</f:then>
+		<f:else>
+			<p>
+				<f:translate key="register.pleaseloginfirst" arguments="{0: '<a href=\'https://www.slub-dresden.de/Shibboleth.sso/Login?target={f:uri.page(absolute:\'1\', addQueryString:\'1\')->f:format.urlencode()}\'>', 1: '</a>'}" />
+			</p>
+		</f:else>
+	</f:security.ifAuthenticated>
+</div>
 
 <f:render partial="FormErrors" arguments="{_all}" />
 

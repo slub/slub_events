@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-04-17T19:12:05Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-04-22T12:14:22Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -113,6 +113,10 @@
 				<source><![CDATA[Please select topic]]></source>
 				<target><![CDATA[Bitte Thema wählen]]></target>
 			</trans-unit>
+			<trans-unit id="register.alreadyloggedin" approved="yes">
+				<source><![CDATA[You are already logged in. That's why we already completed your data.]]></source>
+				<target><![CDATA[Sie sind bereits angemeldet. Deshalb haben wir Ihre Daten bereits automatisch ergänzt.]]></target>
+			</trans-unit>
 			<trans-unit id="register.pleaseloginfirst" approved="yes">
 				<source><![CDATA[Do you have a SLUB user account? Please login to your account %s first. %s You will be redirected to this event registration automatically.]]></source>
 				<target><![CDATA[Haben Sie bereits ein SLUB-Nutzerkonto? Dann melden Sie sich bitte %s zunächst in Ihrem Konto an.%s Sie werden automatisch zur Veranstaltungsanmeldung zurückgeleitet.]]></target>
@@ -120,6 +124,22 @@
 			<trans-unit id="selecttopictobook" approved="yes">
 				<source><![CDATA[Please select a topic.]]></source>
 				<target><![CDATA[Bitte wählen Sie ein Thema.]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.cleanupDays" approved="yes">
+				<source><![CDATA[Cleanup all subscribers older than the given amount of days]]></source>
+				<target><![CDATA[Löschen von Teilnehmern, die sich vor mehr als der angegebenen Anzahl Tagen angemeldet haben.]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.invalidCleanupDays" approved="yes">
+				<source><![CDATA[Invalid day periode given!]]></source>
+				<target><![CDATA[Ungültige Zeitperiode in Tagen angegeben!]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.name" approved="yes">
+				<source><![CDATA[Cleanup Report]]></source>
+				<target><![CDATA[Aufräum Job]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.storagePid" approved="yes">
+				<source><![CDATA[StoragePid]]></source>
+				<target><![CDATA[Storage Pid (Veranstaltungsordner)]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.date" approved="yes">
 				<source><![CDATA[Date]]></source>
