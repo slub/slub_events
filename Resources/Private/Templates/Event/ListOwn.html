@@ -1,19 +1,8 @@
+{namespace se=Slub\SlubEvents\ViewHelpers}
+
 <f:layout name="Default" />
 
-This Template is responsible for creating a table of domain objects.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-
-	{namespace se=Slub\SlubEvents\ViewHelpers}
 
 <div>
 
@@ -59,7 +48,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		</f:then>
 		<f:else>
 			<div class="hint">
-				<p class="extrabox">Bitte melden Sie sich <a href="<f:uri.external uri="https://www.slub-dresden.de/Shibboleth.sso/Login?target=https://www.slub-dresden.de"></f:uri.external><f:uri.page addQueryString="1"></f:uri.page>">zunächst in Ihrem Konto an</a>. Sie werden automatisch zu "<f:translate key="view_my_events" />" zurückgeleitet.</p>
+				<f:format.raw>
+					<f:translate key="register.pleaseloginfirst" arguments="{0: '<a href=\'https://www.slub-dresden.de/Shibboleth.sso/Login?target={f:uri.page(absolute:\'1\', addQueryString:\'1\')->f:format.urlencode()}\'>', 1: '</a>'}" />
+				</f:format.raw>
 			</div>
 		</f:else>
 	</f:security.ifAuthenticated>
