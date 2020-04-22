@@ -120,6 +120,7 @@ return [
         ],
         'hidden'                   => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config'  => [
                 'type' => 'check',
@@ -127,7 +128,7 @@ return [
         ],
         'starttime'                => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'type'     => 'input',
@@ -140,7 +141,7 @@ return [
         ],
         'endtime'                  => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'type'     => 'input',
@@ -163,6 +164,7 @@ return [
         ],
         'start_date_time'          => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.start_date_time',
             'config'  => [
                 'type'     => 'input',
@@ -175,6 +177,7 @@ return [
         ],
         'all_day'                  => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.all_day',
             'config'  => [
                 'type'    => 'check',
@@ -183,6 +186,7 @@ return [
         ],
         'end_date_time'            => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.end_date_time',
             'config'  => [
                 'type'     => 'input',
@@ -195,6 +199,7 @@ return [
         ],
         'end_date_time_select'     => [
             'displayCond' => 'FIELD:end_date_time:=:0',
+            'l10n_mode' => 'exclude',
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.end_date_time_select',
             'config'      => [
@@ -224,6 +229,7 @@ return [
         ],
         'sub_end_date_time'        => [
             'displayCond' => 'FIELD:external_registration:REQ:false',
+            'l10n_mode' => 'exclude',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time',
             'config'  => [
@@ -242,6 +248,7 @@ return [
                 'displayCond' => 'FIELD:external_registration:REQ:false'
               ]
             ],
+            'l10n_mode' => 'exclude',
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.sub_end_date_time_select',
             'config'      => [
@@ -315,7 +322,8 @@ return [
             'defaultExtras' => 'richtext[]:rte_transform[mode=ts_css]', /* TYPO3 7.6 */
         ],
         'min_subscriber'           => [
-          'displayCond' => 'FIELD:external_registration:REQ:false',
+            'displayCond' => 'FIELD:external_registration:REQ:false',
+            'l10n_mode' => 'exclude',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.min_subscriber',
             'config'  => [
@@ -325,7 +333,8 @@ return [
             ],
         ],
         'max_subscriber'           => [
-          'displayCond' => 'FIELD:external_registration:REQ:false',
+            'displayCond' => 'FIELD:external_registration:REQ:false',
+            'l10n_mode' => 'exclude',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.max_subscriber',
             'config'  => [
@@ -336,15 +345,18 @@ return [
         ],
         'max_number'           => [
             'displayCond' => 'FIELD:external_registration:REQ:false',
-              'exclude' => 0,
-              'label'   => $LL . 'tx_slubevents_domain_model_event.max_number',
-              'config'  => [
-                  'type' => 'input',
-                  'size' => 4,
-                  'eval' => 'int'              ],
+            'l10n_mode' => 'exclude',
+            'exclude' => 0,
+            'label'   => $LL . 'tx_slubevents_domain_model_event.max_number',
+            'config'  => [
+                'type' => 'input',
+                'size' => 4,
+                'eval' => 'int'
+            ],
           ],
           'audience'                 => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.audience',
             'config'  => [
                 'type'     => 'select',
@@ -382,6 +394,7 @@ return [
         ],
         'sub_end_date_info_sent'   => [
             'displayCond' => 'FIELD:external_registration:REQ:false',
+            'l10n_mode' => 'exclude',
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_event.sub_end_date_info_sent',
             'config'  => [
@@ -392,6 +405,7 @@ return [
 
         'no_search'   => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.no_search',
             'config'  => [
                 'type'    => 'check',
@@ -401,6 +415,7 @@ return [
 
         'genius_bar'               => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.genius_bar',
             'config'  => [
                 'type'    => 'check',
@@ -409,6 +424,7 @@ return [
         ],
         'parent'           => [
             'displayCond' => 'FIELD:parent:REQ:true',
+            'l10n_mode' => 'exclude',
             'exclude'   => 0,
             'l10n_mode' => 'exclude',
             'label'     => $LL . 'tx_slubevents_domain_model_event.parent',
@@ -419,6 +435,7 @@ return [
         ],
         'recurring'               => [
              'displayCond' => 'FIELD:parent:REQ:false',
+             'l10n_mode' => 'exclude',
              'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring',
              'config'  => [
@@ -428,6 +445,7 @@ return [
          ],
          'recurring_options'        => [
              'displayCond' => 'FIELD:recurring:REQ:true',
+             'l10n_mode' => 'exclude',
              'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_options',
              'config'  => [
@@ -441,6 +459,7 @@ return [
          ],
          'recurring_events'        => [
              'displayCond' => 'FIELD:recurring:REQ:true',
+             'l10n_mode' => 'exclude',
              'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_events',
              'config'  => [
@@ -454,6 +473,7 @@ return [
          ],
          'recurring_end_date_time'        => [
              'displayCond' => 'FIELD:recurring:REQ:true',
+             'l10n_mode' => 'exclude',
              'exclude' => 1,
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_end_date_time',
              'config'  => [
@@ -466,6 +486,7 @@ return [
          ],
         'cancelled'                => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.cancelled',
             'config'  => [
                 'type'    => 'check',
@@ -474,7 +495,7 @@ return [
         ],
         'categories'               => [
             'exclude'   => 0,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'exclude',
             'label'     => $LL . 'tx_slubevents_domain_model_event.categories',
             'config'    => [
                 'type'                => 'select',
@@ -518,6 +539,7 @@ return [
         ],
         'subscribers'              => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.subscribers',
             'config'  => [
                 'type'          => 'inline',
@@ -536,6 +558,7 @@ return [
         ],
         'location'                 => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.location',
             'config'  => [
                 'type'                => 'select',
@@ -575,6 +598,7 @@ return [
         ],
         'discipline'               => [
             'displayCond' => 'FIELD:genius_bar:<:1',
+            'l10n_mode' => 'exclude',
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.discipline',
             'config'      => [
@@ -617,6 +641,7 @@ return [
         ],
         'contact'                  => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.contact',
             'config'  => [
                 'allowed'             => 'pages',
@@ -650,6 +675,7 @@ return [
         ],
         'onlinesurvey'             => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.onlinesurvey',
             'config'  => [
                 'type' => 'input',
@@ -659,6 +685,7 @@ return [
         ],
         'external_registration'             => [
             'exclude' => 0,
+            'l10n_mode' => 'exclude',
             'label'   => $LL . 'tx_slubevents_domain_model_event.external_registration',
             'config'  => [
                 'type' => 'input',
