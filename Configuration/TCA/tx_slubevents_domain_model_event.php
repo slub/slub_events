@@ -479,9 +479,7 @@ return [
              'config'  => [
                  'type'     => 'input',
                  'size'     => 10,
-                 'eval'     => 'datetime',
-                 'checkbox' => 1,
-                 'default'  => 0,
+                 'eval'     => 'datetime'
              ],
          ],
         'cancelled'                => [

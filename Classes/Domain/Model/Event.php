@@ -938,9 +938,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the recurring end dateTime
      *
-     * @param \DateTime $startDateTime
+     * @param \DateTime $recurringEndDateTime
      */
-    public function setRecurringDateTime($recurringEndDateTime)
+    public function setRecurringEndDateTime($recurringEndDateTime)
     {
         $this->recurringEndDateTime = $recurringEndDateTime;
     }
