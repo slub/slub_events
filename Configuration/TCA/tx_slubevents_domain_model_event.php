@@ -463,19 +463,16 @@ return [
                 )
             ],
          ],
-        'recurring_end_date_time'        => [
-            'displayCond' => 'FIELD:recurring:REQ:true',
-            'exclude' => 1,
-            'l10n_mode' => 'exclude',
-            'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_end_date_time',
-            'config'  => [
-                'type'     => 'input',
-                'renderType' => 'inputDateTime',
-                'size'     => 10,
-                'eval'     => 'datetime',
-                'checkbox' => 1,
-                'default'  => 0,
-            ],
+         'recurring_end_date_time'        => [
+             'displayCond' => 'FIELD:recurring:REQ:true',
+             'l10n_mode' => 'exclude',
+             'exclude' => 1,
+             'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_end_date_time',
+             'config'  => [
+                 'type'     => 'input',
+                 'size'     => 10,
+                 'eval'     => 'datetime'
+             ],
          ],
         'cancelled'                => [
             'exclude' => 0,
