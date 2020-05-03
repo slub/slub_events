@@ -564,6 +564,30 @@ namespace Slub\SlubEvents\Domain\Repository;
     }
 
     /**
+	 * Find all events older than given days
+	 *
+	 * @param integer $days
+	 * @return objects found old events
+	 */
+	public function findOlderThan($days) {
+
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+
+        $constraints = [];
+
+        $constraints[] = $query->lessThanOrEqual('end_date_time', strtotime(' - ' . $days . ' days'));
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        return $query->execute();
+
+    }
+
+    /**
      * Returns the name of the Event-Table
      * @return string
      */

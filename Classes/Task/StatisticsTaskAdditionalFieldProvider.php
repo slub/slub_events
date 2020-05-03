@@ -87,7 +87,7 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
         }
 
         $fieldId = 'task_storagePid';
-        $fieldCode = '<input type="text" name="tx_scheduler[slub_events][storagePid]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['storagePid']) . '"/>';
+        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][storagePid]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['storagePid']) . '"/>';
         $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.storagePid');
         $label = BackendUtility::wrapInHelp('slub_events', $fieldId, $label);
         $additionalFields[$fieldId] = [
@@ -96,7 +96,7 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
         ];
 
         $fieldId = 'task_senderEmailAddress';
-        $fieldCode = '<input type="text" name="tx_scheduler[slub_events][senderEmailAddress]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['senderEmailAddress']) . '"/>';
+        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][senderEmailAddress]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['senderEmailAddress']) . '"/>';
         $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.senderEmailAddress');
         $label = BackendUtility::wrapInHelp('slub_events', $fieldId, $label);
         $additionalFields[$fieldId] = [

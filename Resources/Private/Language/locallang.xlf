@@ -132,9 +132,15 @@
 			<source>Invalid Storage Pid given!</source>
 		</trans-unit>
 		<trans-unit id="tasks.cleanup.cleanupDays">
-			<source>Cleanup all subscribers older than the given amount of days</source>
+			<source>Anonymize all subscribers of events older than given amount of days</source>
 		</trans-unit>
 		<trans-unit id="tasks.cleanup.invalidCleanupDays">
+			<source>Invalid day periode given!</source>
+		</trans-unit>
+		<trans-unit id="tasks.cleanup.cleanupDaysEvents">
+			<source>Delete all events including subscribers older than given amount of days</source>
+		</trans-unit>
+		<trans-unit id="tasks.cleanup.invalidCleanupDaysEvents">
 			<source>Invalid day periode given!</source>
 		</trans-unit>
 		<trans-unit id="text.back_to_overview">

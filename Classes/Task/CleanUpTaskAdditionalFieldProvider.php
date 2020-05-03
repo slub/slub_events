@@ -75,8 +75,18 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
             }
         }
 
+        if (empty($taskInfo['cleanupDaysEvents'])) {
+            if ($schedulerModule->CMD == 'add') {
+                $taskInfo['cleanupDaysEvents'] = '';
+            } elseif ($schedulerModule->CMD == 'edit') {
+                $taskInfo['cleanupDaysEvents'] = $task->getCleanupDaysEvents();
+            } else {
+                $taskInfo['cleanupDaysEvents'] = $task->getCleanupDaysEvents();
+            }
+        }
+
         $fieldId = 'task_storagePid';
-        $fieldCode = '<input type="text" name="tx_scheduler[slub_events][storagePid]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['storagePid']) . '"/>';
+        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][storagePid]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['storagePid']) . '"/>';
         $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.storagePid');
         $additionalFields[$fieldId] = [
             'code'  => $fieldCode,
@@ -84,8 +94,16 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         ];
 
         $fieldId = 'task_cleanupDays';
-        $fieldCode = '<input type="text" name="tx_scheduler[slub_events][cleanupDays]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['cleanupDays']) . '"/>';
+        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][cleanupDays]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['cleanupDays']) . '"/>';
         $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.cleanupDays');
+        $additionalFields[$fieldId] = [
+            'code'  => $fieldCode,
+            'label' => $label
+        ];
+
+        $fieldId = 'task_cleanupDaysEvents';
+        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][cleanupDaysEvents]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['cleanupDaysEvents']) . '"/>';
+        $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.cleanupDaysEvents');
         $additionalFields[$fieldId] = [
             'code'  => $fieldCode,
             'label' => $label
@@ -125,6 +143,14 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
             );
         }
 
+        if (!MathUtility::canBeInterpretedAsInteger($submittedData['slub_events']['cleanupDaysEvents'])) {
+            $isValid = false;
+            $schedulerModule->addMessage(
+                $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidCleanupDaysEvents') . ': ' . $submittedData['slub_events']['cleanupDaysEvents'],
+                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+            );
+        }
+
         return $isValid;
     }
 
@@ -142,5 +168,6 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         /** @var $task CleanUpTask */
         $task->setStoragePid($submittedData['slub_events']['storagePid']);
         $task->setCleanupDays($submittedData['slub_events']['cleanupDays']);
+        $task->setCleanupDaysEvents($submittedData['slub_events']['cleanupDaysEvents']);
     }
 }
