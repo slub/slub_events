@@ -62,14 +62,6 @@ class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     protected $persistenceManager;
 
     /**
-     * emailRepository
-     *
-     * @var \Slub\SlubForms\Domain\Repository\EmailRepository
-     * @inject
-     */
-    protected $emailRepository;
-
-    /**
      * injectConfigurationManager
      *
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
@@ -121,13 +113,35 @@ class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     }
 
     /**
-     * Get the value of the storage pid
+     * Get the value of maximum days
      *
      * @return integer $cleanupDays days
      */
     public function getCleanupDays()
     {
         return $this->cleanupDays;
+    }
+
+    /**
+     * Set the maximum days, events are stored
+     *
+     * @param integer $cleanupDaysEvents days
+     *
+     * @return void
+     */
+    public function setCleanupDaysEvents($cleanupDaysEvents)
+    {
+        $this->cleanupDaysEvents = $cleanupDaysEvents;
+    }
+
+    /**
+     * Get the value of maximum storage days for events
+     *
+     * @return integer $cleanupDaysEvents days
+     */
+    public function getCleanupDaysEvents()
+    {
+        return $this->cleanupDaysEvents;
     }
 
     /**
@@ -142,6 +156,10 @@ class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         $this->subscriberRepository = $objectManager->get(
             \Slub\SlubEvents\Domain\Repository\SubscriberRepository::class
+        );
+
+        $this->eventRepository = $objectManager->get(
+            \Slub\SlubEvents\Domain\Repository\EventRepository::class
         );
 
         $this->configurationManager = $objectManager->get(
@@ -177,20 +195,53 @@ class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             $this->configurationManager->setConfiguration($configurationArray);
 
             // start the work...
-            // Get old emails to be deleted.
-            $oldSubscribers = $this->subscriberRepository->findOlderThan($this->cleanupDays);
-            foreach ($oldSubscribers AS $object) {
-                // anonymize or remove one by one
-                if ($object->getEvent()) {
-                    $object->setEmail('anonymous@example.com');
-                    $object->setName('anonymous');
-                    $object->setCustomerid('1234567');
-                    $object->setMessage('');
-                    $this->subscriberRepository->update($object);
-                } else {
-                    $this->subscriberRepository->remove($object);
+
+            // 1. Get old events to be deleted
+            $oldEvents = $this->eventRepository->findOlderThan($this->cleanupDaysEvents);
+            foreach($oldEvents AS $event) {
+                if ($event->getRecurring() === FALSE) {
+                    // it's a normal event or a child event of a recurring event
+                    $this->eventRepository->remove($event);
+                } else if ($event->getParent() == 0
+                    && $this->eventRepository->findByParent($event->getUid())->count() == 0
+                ) {
+                    // it's a recurring parent event without children
+                    $this->eventRepository->remove($event);
                 }
             }
+            // persist the repository
+            $this->persistenceManager->persistAll();
+
+            // 2. Get subscribers to be anonymized of events which still exists
+            $anonymizeEvents = $this->eventRepository->findOlderThan($this->cleanupDays);
+            if ($anonymizeEvents->count() > 0) {
+                $anonymizeSubscribers = $this->subscriberRepository->findAllByEvents($anonymizeEvents);
+                foreach ($anonymizeSubscribers AS $subscriber) {
+                    // anonymize one by one
+                    $subscriber->setEmail('anonymous@example.com');
+                    $subscriber->setName('anonymous');
+                    $subscriber->setCustomerid('1234567');
+                    $subscriber->setMessage('');
+                    $this->subscriberRepository->update($subscriber);
+                }
+            }
+
+            // 3. Get zombie subscribers to be deleted of events which does not exist anymore
+            $zombieSubscribers = $this->subscriberRepository->findOlderThan($this->cleanupDays);
+            foreach ($zombieSubscribers AS $subscriber) {
+                // anonymize or remove one by one
+                if ($subscriber->getEvent()) {
+                    // this should never be necessary as already done in step 2.
+                    $subscriber->setEmail('anonymous@example.com');
+                    $subscriber->setName('anonymous');
+                    $subscriber->setCustomerid('1234567');
+                    $subscriber->setMessage('');
+                    $this->subscriberRepository->update($subscriber);
+                } else {
+                    $this->subscriberRepository->remove($subscriber);
+                }
+            }
+
             // persist the repository
             $this->persistenceManager->persistAll();
         }

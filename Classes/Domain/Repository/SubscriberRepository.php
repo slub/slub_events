@@ -151,6 +151,8 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 	public function findOlderThan($days) {
 
         $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
 
         $constraints = [];
 
