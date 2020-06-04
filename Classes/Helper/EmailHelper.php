@@ -203,7 +203,7 @@ class EmailHelper
      * @param ConfigurationManagerInterface $configurationManager
      * @return string[]
      */
-    public function resolveTemplateRootPaths($configurationManager = null)
+    public static function resolveTemplateRootPaths($configurationManager = null)
     {
         if ($configurationManager) {
             $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
@@ -221,7 +221,7 @@ class EmailHelper
      * @param ConfigurationManagerInterface $configurationManager
      * @return string[]
      */
-    public function resolvePartialRootPaths($configurationManager = null)
+    public static function resolvePartialRootPaths($configurationManager = null)
     {
         if ($configurationManager) {
             $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
