@@ -597,8 +597,6 @@ class SubscriberController extends AbstractController
             $emailViewHTML->setTemplateRootPaths(EmailHelper::resolveTemplateRootPaths($this->configurationManager));
             $emailViewHTML->setPartialRootPaths(EmailHelper::resolvePartialRootPaths($this->configurationManager));
 
-            $emailViewHTML->setTemplateRootPaths($templateRootPaths);
-            $emailViewHTML->setPartialRootPaths($partialRootPaths);
             $emailViewHTML->setTemplate('Email/' . 'OnlineSurvey.html');
 
             $emailTextHTML = $emailViewHTML->render();
