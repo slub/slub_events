@@ -293,6 +293,14 @@
 			<source>Editcode</source>
 			<target>Bearbeitungscode</target>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp" approved="yes">
+			<source>Privacy Policy</source>
+			<target>Datenschutzerklärung</target>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp.accepted" approved="yes">
+			<source>Accepted</source>
+			<target>Akzeptiert</target>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes">
 			<source>Email</source>
 			<target>Email-Adresse</target>

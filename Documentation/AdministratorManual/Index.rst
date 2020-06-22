@@ -255,3 +255,19 @@ all events and the number of subscribers inline and as CSV attachment.
    :Description:
          Set the receiver email address of the statistics report. You
          may enter a comma separated list.
+
+Add a Privacy-Checkbox to registration form
+-------------------------------------------
+
+If you need a checkbox to confirm the acceptance of a Privacy Policy, simply add these line to your registration form template.
+
+``
+<f:form.checkbox value="1" property="acceptpp" id="acceptpp"/>
+<label for="acceptpp">
+	<f:translate key="tx_slubevents_domain_model_subscriber.acceptpp"/>
+	<span class="required">*</span>
+</label>
+
+``
+
+While the property ``acceptpp`` is submitted, it's needed to be checked to submit a valid registration.

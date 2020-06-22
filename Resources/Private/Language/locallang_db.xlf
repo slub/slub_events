@@ -194,6 +194,12 @@
 		<trans-unit id="tx_slubevents_domain_model_subscriber.editcode">
 			<source>Editcode</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp">
+			<source>Privacy Policy</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp.accepted">
+			<source>Accepted</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.email">
 			<source>Email</source>
 		</trans-unit>

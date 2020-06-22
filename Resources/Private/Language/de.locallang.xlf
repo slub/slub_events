@@ -381,6 +381,10 @@
 				<source><![CDATA[Message]]></source>
 				<target><![CDATA[Nachricht]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp" approved="yes">
+				<source><![CDATA[I have read the Privacy Policy and accept them.]]></source>
+				<target><![CDATA[Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.]]></target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes">
 				<source><![CDATA[Name]]></source>
 				<target><![CDATA[Name]]></target>
@@ -420,6 +424,10 @@
 			<trans-unit id="validationerror_val_editcode" approved="yes">
 				<source><![CDATA[Please start the registration from the beginning.]]></source>
 				<target><![CDATA[Es ist ein Fehler bei der Anmeldung aufgetreten. Bitte starten Sie die Anmeldung erneut.]]></target>
+			</trans-unit>
+			<trans-unit id="validationerror_val_acceptpp" approved="yes">
+				<source><![CDATA[The privacy policy must be accepted to finish the registration.]]></source>
+				<target><![CDATA[Die Datenschutzerklärung muss akzeptiert werden, um die Anmeldung abzuschließen.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_email" approved="yes">
 				<source><![CDATA[Please enter a valid email-address.]]></source>
