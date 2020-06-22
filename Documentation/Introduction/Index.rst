@@ -31,7 +31,7 @@ not enough subscribers where found before the subscription end. In all cases an
 ics-calendar invitation is appended to the mails.
 
 The templates are not yet all localized but are easily changeable by
-overwriting templateRootPath etc. as usual with extbase/fluid
+overwriting templateRootPaths etc. as usual with extbase/fluid
 extensions.
 
 Please use for your feedback the `Github project website

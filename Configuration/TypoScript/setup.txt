@@ -11,16 +11,16 @@ plugin.tx_slubevents {
 
     view {
         templateRootPaths {
-            10 = EXT:slub_events/Resources/Private/Templates/
-            20 = {$plugin.tx_slubevents.view.templateRootPath}
+            0 = EXT:slub_events/Resources/Private/Templates/
+            10 = {$plugin.tx_slubevents.view.templateRootPath}
         }
         partialRootPaths {
-            10 = EXT:slub_events/Resources/Private/Partials/
-            20 = {$plugin.tx_slubevents.view.partialRootPath}
+            0 = EXT:slub_events/Resources/Private/Partials/
+            10 = {$plugin.tx_slubevents.view.partialRootPath}
         }
         layoutRootPaths {
-            10 = EXT:slub_events/Resources/Private/Layouts/
-            20 = {$plugin.tx_slubevents.view.layoutRootPath}
+            0 = EXT:slub_events/Resources/Private/Layouts/
+            10 = {$plugin.tx_slubevents.view.layoutRootPath}
         }
         widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
     }
