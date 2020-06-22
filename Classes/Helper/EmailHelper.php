@@ -67,23 +67,10 @@ class EmailHelper
         $emailViewHTML->setFormat('html');
         $emailViewHTML->assignMultiple($variables);
 
-        if ($configurationManager) {
-            $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
-                ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-            );
-            $templateRootPath = GeneralUtility::getFileAbsFileName(
-                $extbaseFrameworkConfiguration['view']['templateRootPaths'][10]
-            );
-            $partialRootPath = GeneralUtility::getFileAbsFileName(
-                $extbaseFrameworkConfiguration['view']['partialRootPaths'][10]
-            );
-        } else {
-            $templateRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/';
-            $partialRootPath = PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/';
-        }
+        $emailViewHTML->setTemplateRootPaths(self::resolveTemplateRootPaths($configurationManager));
+        $emailViewHTML->setPartialRootPaths(self::resolvePartialRootPaths($configurationManager));
 
-        $emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.html');
-        $emailViewHTML->setPartialRootPaths([$partialRootPath]);
+        $emailViewHTML->setTemplate('Email/' . $templateName . '.html');
 
         /** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
         $message = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
@@ -108,7 +95,10 @@ class EmailHelper
             $ics->setFormat('ics');
             $ics->assignMultiple($variables);
 
-            $ics->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.ics');
+            $ics->setTemplateRootPaths(self::resolveTemplateRootPaths($configurationManager));
+            $ics->setPartialRootPaths(self::resolvePartialRootPaths($configurationManager));
+
+            $ics->setTemplate('Email/' . $templateName . '.ics');
 
             // the total basename length must not be more than 60 characters --> see writeFileToTypo3tempDir()
             $eventIcsFile = PATH_site . 'typo3temp/tx_slubevents/' .
@@ -139,8 +129,10 @@ class EmailHelper
             $csv->setFormat('csv');
             $csv->assignMultiple($variables);
 
-            $csv->setTemplatePathAndFilename($templateRootPath . 'Email/' . $templateName . '.csv');
-            $csv->setPartialRootPaths([$partialRootPath]);
+            $csv->setTemplateRootPaths(self::resolveTemplateRootPaths($configurationManager));
+            $csv->setPartialRootPaths(self::resolvePartialRootPaths($configurationManager));
+
+            $csv->setTemplate('Email/' . $templateName . '.csv');
 
             $eventCsvFile = PATH_site . 'typo3temp/tx_slubevents/' .
                 substr(
@@ -205,5 +197,41 @@ class EmailHelper
         $text = strip_tags($text);
 
         return $text;
+    }
+
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     * @return string[]
+     */
+    public static function resolveTemplateRootPaths($configurationManager = null)
+    {
+        if ($configurationManager) {
+            $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+            );
+            $templateRootPaths = $extbaseFrameworkConfiguration['view']['templateRootPaths'];
+        } else {
+            $templateRootPaths = [PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/'];
+        }
+
+        return $templateRootPaths;
+    }
+
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     * @return string[]
+     */
+    public static function resolvePartialRootPaths($configurationManager = null)
+    {
+        if ($configurationManager) {
+            $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+            );
+            $partialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
+        } else {
+            $partialRootPaths = [PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/'];
+        }
+
+        return $partialRootPaths;
     }
 }

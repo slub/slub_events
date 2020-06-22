@@ -594,18 +594,10 @@ class SubscriberController extends AbstractController
             $emailViewHTML->assign('event', $event);
             $emailViewHTML->assign('subscriber', ['name' => '###Name wird automatisch ausgefüllt###']);
 
-            $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-                \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-            );
-            $templateRootPath = GeneralUtility::getFileAbsFileName(
-                $extbaseFrameworkConfiguration['view']['templateRootPaths'][10]
-            );
-            $partialRootPath = GeneralUtility::getFileAbsFileName(
-                $extbaseFrameworkConfiguration['view']['partialRootPaths'][10]
-            );
+            $emailViewHTML->setTemplateRootPaths(EmailHelper::resolveTemplateRootPaths($this->configurationManager));
+            $emailViewHTML->setPartialRootPaths(EmailHelper::resolvePartialRootPaths($this->configurationManager));
 
-            $emailViewHTML->setTemplatePathAndFilename($templateRootPath . 'Email/' . 'OnlineSurvey.html');
-            $emailViewHTML->setPartialRootPaths([$partialRootPath]);
+            $emailViewHTML->setTemplate('Email/' . 'OnlineSurvey.html');
 
             $emailTextHTML = $emailViewHTML->render();
         }
