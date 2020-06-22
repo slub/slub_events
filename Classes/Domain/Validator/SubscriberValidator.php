@@ -130,6 +130,11 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
 //			$this->addError('val_editcode', 1140);
             $this->isValid = false;
         }
+        if ($newSubscriber->getAcceptpp() !== null && $newSubscriber->getAcceptpp() === false) {
+            $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_acceptpp', 1150);
+            $this->result->forProperty('acceptpp')->addError($error);
+            $this->isValid = false;
+        }
 
         return $this->isValid;
     }
