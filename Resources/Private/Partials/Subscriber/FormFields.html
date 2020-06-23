@@ -18,15 +18,31 @@
 				  property="customerid"/><br/>
 
 <label for="number">
-	<f:format.printf arguments="{0: '<se:format.freePlacesLeft event=\'{event}\' />'}">
-		<f:translate key="tx_slubevents_domain_model_subscriber.number_max"/>
-	</f:format.printf>
+	<f:if condition="{event.maxNumber} >= {se:format.freePlacesLeft(event:'{event}')} || {event.maxNumber} == 0">
+		<f:then>
+			<f:format.printf arguments="{0: '<se:format.freePlacesLeft event=\'{event}\' />'}">
+				<f:translate key="tx_slubevents_domain_model_subscriber.number_max"/>
+			</f:format.printf>
+		</f:then>
+		<f:else>
+			<f:format.printf arguments="{0: '{event.maxNumber}'}">
+				<f:translate key="tx_slubevents_domain_model_subscriber.number_max"/>
+			</f:format.printf>
+		</f:else>
+	</f:if>
 	<span class="required">*</span>
 </label>
 
-<f:form.textfield property="number" type="number"
-				  additionalAttributes="{min: '1', max: '<se:format.freePlacesLeft event=\'{event}\' />'}"
-				  required="required"/>
+<f:if condition="{event.maxNumber} >= {se:format.freePlacesLeft(event:'{event}')} || {event.maxNumber} == 0">
+	<f:then>
+		<f:form.textfield property="number" type="number"
+		additionalAttributes="{min: '1', max: '<se:format.freePlacesLeft event=\'{event}\' />'}"
+		required="required"/>
+	</f:then>
+	<f:else>
+		<f:form.textfield property="number" type="number"
+		additionalAttributes="{min: '1', max: '{event.maxNumber}'}"
+		required="required"/>
+	</f:else>
+</f:if>
 <f:form.hidden property="editcode" value="<se:format.editCode event='{event}' />"/>
-
-

@@ -141,4 +141,29 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         return $query->execute();
     }
+
+  /**
+	 * Find all subscriber older than given days
+	 *
+	 * @param integer $days
+	 * @return objects found old emails
+	 */
+	public function findOlderThan($days) {
+
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored('hidden');
+
+        $constraints = [];
+
+        $constraints[] = $query->lessThanOrEqual('crdate', strtotime(' - ' . $days . ' days'));
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        return $query->execute();
+
+    }
+
 }
