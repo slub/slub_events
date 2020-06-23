@@ -34,7 +34,6 @@ namespace Slub\SlubEvents\Domain\Repository;
  *
  */
     use Slub\SlubEvents\Domain\Model\Category;
-    use TYPO3\CMS\Core\Database\DatabaseConnection;
     use TYPO3\CMS\Core\Utility\GeneralUtility;
     use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
@@ -304,8 +303,6 @@ namespace Slub\SlubEvents\Domain\Repository;
         $constraints[] = $query->greaterThan('start_date_time', $startDateStamp);
 
         if (!empty($searchString)) {
-            // escape strings
-            $searchString = $this->getDbConnection()->quoteStr($searchString, $this->getTableName());
             $constraints[] = $query->like('title', '%' . $searchString . '%');
         }
 
@@ -603,13 +600,5 @@ namespace Slub\SlubEvents\Domain\Repository;
         return $dataMapper
             ->getDataMap('Slub\\SlubEvents\\Domain\\Model\\Event')
             ->getTableName();
-    }
-
-    /**
-     * @return DatabaseConnection
-     */
-    protected static function getDbConnection()
-    {
-        return $GLOBALS['TYPO3_DB'];
     }
 }
