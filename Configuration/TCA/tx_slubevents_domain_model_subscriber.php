@@ -32,33 +32,37 @@ return [
     'columns'   => [
         'hidden'           => [
             'exclude' => 1,
-            'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
+            'label'   => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config'  => [
                 'type' => 'check',
             ],
         ],
         'starttime'        => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
-            'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
         ],
         'endtime'          => [
             'exclude'   => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
-            'label'     => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config'    => [
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 13,
-                'max'      => 20,
                 'eval'     => 'datetime',
                 'default'  => 0,
             ],
@@ -153,7 +157,7 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_subscriber.crdate',
             'config'  => [
                 'type'     => 'input',
-                // 'renderType' => 'inputDateTime', /* required as of TYPO3 8.7 */
+                'renderType' => 'inputDateTime',
                 'size'     => 10,
                 'eval'     => 'datetime',
                 'checkbox' => 1,

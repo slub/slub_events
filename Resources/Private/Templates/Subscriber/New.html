@@ -40,7 +40,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <f:else>
         <div class="hint">
             <p class="extrabox">
-              <f:translate key="register.pleaseloginfirst" arguments="{0: '<a href=\'https://www.slub-dresden.de/Shibboleth.sso/Login?target={f:uri.page(absolute:\'1\', addQueryString:\'1\')->f:format.urlencode()}\'>', 1: '</a>'}" />
+				<f:format.raw>
+					<f:translate key="register.pleaseloginfirst" arguments="{0: '<a href=\'https://www.slub-dresden.de/Shibboleth.sso/Login?target={f:uri.page(absolute:\'1\', addQueryString:\'1\')->f:format.urlencode()}\'>', 1: '</a>'}" />
+				</f:format.raw>
             </p>
         </div>
     </f:else>

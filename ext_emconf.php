@@ -28,10 +28,10 @@ This extension is developped and used in production at the Saxony State and Univ
     'modify_tables'    => '',
     'clearCacheOnLoad' => 0,
     'lockType'         => '',
-    'version'          => '3.0.3',
+    'version'          => '4.0.0',
     'constraints'      => [
         'depends'   => [
-            'typo3'   => '7.6.0-8.7.99',
+            'typo3'   => '8.7.0-9.5.99',
         ],
         'conflicts' => [
         ],

@@ -207,6 +207,10 @@ class HookPreProcessing
                 $defaultFlashMessageQueue->enqueue($message);
             }
 
+            if ($fieldArray['max_subscriber'] > 0 && $fieldArray['max_number'] == 0) {
+                $fieldArray['max_number'] = $fieldArray['max_subscriber'];
+            }
+
             // save recurring options as serialized Array
             if (!empty($fieldArray['recurring_options'])) {
               $fieldArray['recurring_options'] = serialize($fieldArray['recurring_options']);
@@ -226,22 +230,14 @@ class HookPreProcessing
     protected function calculateEndDateTime($startDateTime, $selectedInterval, $add = TRUE)
     {
         // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
-        if (version_compare(TYPO3_version, '8.7.0', '>=')) {
-            $sdt = new \DateTime($startDateTime);
-            $edt = new \DateTime();
-            if ($add === TRUE) {
-                $edt = $sdt->add(new \DateInterval("PT" . trim($selectedInterval) . "M"));
-            } else {
-                $edt = $sdt->sub(new \DateInterval("PT" . trim($selectedInterval) . "M"));
-            }
-            $endDateTime = $edt->format(\DateTime::ATOM);
+        $sdt = new \DateTime($startDateTime);
+        $edt = new \DateTime();
+        if ($add === TRUE) {
+            $edt = $sdt->add(new \DateInterval("PT" . trim($selectedInterval) . "M"));
         } else {
-            if ($add === TRUE) {
-                $endDateTime = $startDateTime + $selectedInterval * 60;
-            } else {
-                $endDateTime = $startDateTime - $selectedInterval * 60;
-            }
+            $edt = $sdt->sub(new \DateInterval("PT" . trim($selectedInterval) . "M"));
         }
+        $endDateTime = $edt->format(\DateTime::ATOM);
 
         return $endDateTime;
     }
@@ -256,13 +252,9 @@ class HookPreProcessing
     protected function gmstrftime($time)
     {
       // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
-      if (version_compare(TYPO3_version, '8.7.0', '>=')) {
-          $dt = new \DateTime($time);
-          $formatedTimeString = gmstrftime('%a, %x %H:%M:%S', $dt->format('U'));
-      } else {
-          $formatedTimeString = gmstrftime('%a, %x %H:%M:%S', $time);
-      }
+        $dt = new \DateTime($time);
+        $formatedTimeString = gmstrftime('%a, %x %H:%M:%S', $dt->format('U'));
 
-      return $formatedTimeString;
+        return $formatedTimeString;
     }
 }

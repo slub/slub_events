@@ -16,7 +16,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<f:for each="{events}" as="event" key="label" iteration="eventIterator">
 		<f:if condition="<se:format.newMonthTitle events='{events}' index='{label}' />">
 			<f:then>
-				<li class="heading"><h4><se:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
+				<li class="heading"><h4><f:format.date date="<se:format.newMonthTitle events='{events}' index='{label}' />" format="%B %Y" /></h4></li>
 			</f:then>
 		</f:if>
 		<f:render partial="Event/Item" arguments="{event: event, settings:settings, label:label, eventIterator:eventIterator, view:'list'}" />

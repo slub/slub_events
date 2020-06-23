@@ -26,39 +26,76 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Slub\SlubEvents\Domain\Model\Event;
+
+use \Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * Return Booked Places
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class BookedPlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class BookedPlacesViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', Event::class, 'Event', true);
+    }
+
     /**
      * subscriberRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-     * @inject
+     * @var SubscriberRepository
      */
-    protected $subscriberRepository;
+    protected static $subscriberRepository = null;
 
     /**
      * Return the number of subscribers for a given event
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
-     *
-     * @return int
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render(\Slub\SlubEvents\Domain\Model\Event $event = null)
-    {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $event = $arguments['event'];
         if ($event != null) {
-            $booked = $this->subscriberRepository->countAllByEvent($event);
+            $booked = self::getSubscriberRepository()->countAllByEvent($event);
         } else {
             $booked = 0;
         }
 
         return $booked;
     }
+
+    /**
+     * Initialize the subscriberRepository
+     *
+     * return subscriberRepository
+     */
+    private static function getSubscriberRepository()
+    {
+        if (null === static::$subscriberRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$subscriberRepository = $objectManager->get(subscriberRepository::class);
+        }
+
+        return static::$subscriberRepository;
+    }
+
 }

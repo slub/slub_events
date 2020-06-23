@@ -3,7 +3,7 @@ namespace Slub\SlubEvents\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController as ExtbaseActionController;
-use TYPO3\CMS\Extbase\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -172,7 +172,7 @@ class AbstractController extends ExtbaseActionController
 
             if (!empty($configurationData) && !(empty($sessionData))) {
                 // merge session and configuration data
-                $sessionData = ArrayUtility::arrayMergeRecursiveOverrule($sessionData, $configurationData);
+                ArrayUtility::mergeRecursiveWithOverrule($sessionData, $configurationData);
 
             } else if (!empty($configurationData)) {
                 // there seems to be only configuration data (after fresh login)
@@ -238,7 +238,7 @@ class AbstractController extends ExtbaseActionController
             }
             return $param;
         } else {
-            return GeneralUtility::removeXSS($param);
+            return htmlspecialchars($param);
         }
     }
 

@@ -24,14 +24,31 @@ namespace Slub\SlubEvents\ViewHelpers\Be;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use \Slub\SlubEvents\Domain\Model\Event;
 
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('icon', 'string', 'Icon', true);
+        $this->registerArgument('event', Event::class, 'Events', false);
+    }
 
     /**
      * @var ConfigurationManagerInterface
@@ -45,36 +62,12 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
     protected $objectManager;
 
     /**
-     * FunctionBarViewHelper constructor.
-     *
-     * Use dependency injection depending on TYPO3 version
-     *
-     * @param ObjectManagerInterface $objectManager
-     */
-    public function __construct(ObjectManagerInterface $objectManager)
-    {
-
-        $this->objectManager = $objectManager;
-
-    }
-
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     *
-     * @return void
-     */
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
-    }
-
-    /**
      * Returns the Genius Bar Icon
      *
-     * @param event \Slub\SlubEvents\Domain\Model\Event
+     * @param Event event
      * @return string html output
      */
-    protected function getGeniusBarIcon(\Slub\SlubEvents\Domain\Model\Event $event)
+    protected static function getGeniusBarIcon(Event $event)
     {
         if ($event !== null) {
             if ($event->getGeniusBar()) {
@@ -88,23 +81,29 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
      * Renders a record list as known from the TYPO3 list module
      * Note: This feature is experimental!
      *
-     * @param icon string
-     * @param event \Slub\SlubEvents\Domain\Model\Event
-     * @return string the rendered record list
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render($icon = 'edit', \Slub\SlubEvents\Domain\Model\Event $event = null)
-    {
-
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $icon = $arguments['icon'];
+        $event = $arguments['event'];
         if ($event !== null) {
             $row['uid'] = $event->getUid();
             $row['title'] = $event->getTitle();
             $row['hidden'] = $event->getHidden();
         }
 
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+        $frameworkConfiguration = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $storagePid = $frameworkConfiguration['persistence']['storagePid'];
 
-        $iconHelper = $this->objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
 
         switch ($icon) {
             case 'new':
@@ -117,7 +116,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
                 $content = $iconHelper->getHideIcon('tx_slubevents_domain_model_event', $row['uid'], $row['hidden']);
                 break;
             case 'geniusbar':
-                $content = $this->getGeniusBarIcon($event);
+                $content = self::getGeniusBarIcon($event);
                 break;
             case 'datepicker':
                 $content = $iconHelper->getDatePickerIcon();

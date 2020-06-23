@@ -26,6 +26,10 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Slub\SlubEvents\Domain\Model\Event;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * Check if the given event is already in the past
  *
@@ -42,20 +46,32 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class IsPastEventViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class IsPastEventViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', Event::class, 'Events', true);
+    }
 
     /**
      * Render the supplied DateTime object as a formatted date.
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
-     *
-     * @return boolean
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render($event)
-    {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $event = $arguments['event'];
         $isPast = false;
 
         // deadline reached...

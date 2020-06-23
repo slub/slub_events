@@ -25,6 +25,8 @@ namespace Slub\SlubEvents\Slots;
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 use Slub\SlubEvents\Helper\IconsHelper;
@@ -204,7 +206,25 @@ class Tceforms
      */
     public function eventParentString($PA, $fObj)
     {
-      $parentEventRow = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, title', 'tx_slubevents_domain_model_event', 'uid=' . (int)$PA['row']['parent'])->fetch_assoc();
+      $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+      ->getQueryBuilderForTable('tx_slubevents_domain_model_event');
+
+      $result = $queryBuilder
+          ->select('uid', 'title')
+          ->from('tx_slubevents_domain_model_event')
+          ->where(
+              $queryBuilder->expr()->eq(
+                  'uid',
+                  $queryBuilder->createNamedParameter((int) $PA['row']['parent'], Connection::PARAM_INT)
+              )
+          )
+          ->setMaxResults(1)
+          ->execute();
+
+      if ($resArray = $result->fetch()) {
+        $parentEventRow = $resArray;
+      }
+
       return $this->getEditLink('tx_slubevents_domain_model_event', $parentEventRow);
     }
 
@@ -248,6 +268,10 @@ class Tceforms
             .'</strong></div>';
 
             if ($childEvents && count($childEvents)>0) {
+
+                $output .= '<p class="alert alert-info">'.LocalizationUtility::translate(
+                  'tx_slubevents_domain_model_event.only_future_events',
+                  'slub_events').'</p>';
                 $output .= '<ul>';
 
                 $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);

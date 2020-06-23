@@ -26,26 +26,41 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * returns one single line
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class OneLineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class OneLineViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('htmlString', 'string', 'Html String', true);
+    }
+
     /**
      * Render
      *
-     * @param string $htmlString
-     *
-     * @return string
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render($htmlString)
-    {
-        $text = str_replace("\t", ' ', $htmlString);
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $text = str_replace("\t", ' ', $arguments['htmlString']);
         $text = str_replace('<br />', ' ', $text);
         // remove more than one empty line
         $text = preg_replace('/[\n]{1,}/', ' ', $text);

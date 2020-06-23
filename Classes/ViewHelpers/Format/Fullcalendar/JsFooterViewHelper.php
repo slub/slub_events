@@ -25,8 +25,11 @@ namespace Slub\SlubEvents\ViewHelpers\Format\Fullcalendar;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Add Fullcalendar specific JS code
  *
@@ -36,20 +39,37 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @api
  * @scope prototype
  */
-class JsFooterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class JsFooterViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
     /**
-     * Looks for already checked form from last request
-     *
-     * @param array  $categories
-     * @param array  $settings
-     * @param string $link
-     *
-     * @return string
-     * @api
+     * Initialize arguments.
      */
-    public function render($categories = null, $settings = null, $link = null)
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('categories', 'array', 'Categories', true);
+        $this->registerArgument('settings', 'array', 'Settings', true);
+        $this->registerArgument('link', 'string', 'Link', true);
+    }
+
+
+   /**
+     *
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $categories = $arguments['categories'];
+        $settings = $arguments['settings'];
+        $link = $arguments['link'];
+
         $js1 = '';
 
         $js1 .= "$(document).ready(function() {";

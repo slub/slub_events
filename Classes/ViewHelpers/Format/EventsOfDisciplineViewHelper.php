@@ -26,38 +26,74 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Slub\SlubEvents\Domain\Model\Discipline;
+use \Slub\SlubEvents\Domain\Repository\EventRepository;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * Counts future events of given discipline
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class EventsOfDisciplineViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class EventsOfDisciplineViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
 
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('discipline', Discipline::class, 'Discipline', true);
+    }
     /**
      * eventRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-     * @inject
+     * @var EventRepository
      */
-    protected $eventRepository;
+    protected static $eventRepository = null;
+
 
     /**
      * check if any events of discipline below are present and free for booking
      *
-     * @param \Slub\SlubEvents\Domain\Model\Discipline $discipline
-     *
-     * @return boolean
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
-    {
-        $events = $this->eventRepository->findAllBySettings(['disciplineList' => [0 => $discipline]]);
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $discipline = $arguments['discipline'];
+        $events = self::getEventRepository()->findAllBySettings(['disciplineList' => [0 => $discipline]]);
         if ($events) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
+
+    /**
+     * Initialize the eventRepository
+     *
+     * return eventRepository
+     */
+    private static function getEventRepository()
+    {
+        if (null === static::$eventRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$eventRepository = $objectManager->get(eventRepository::class);
+        }
+
+        return static::$eventRepository;
+    }
+
 }

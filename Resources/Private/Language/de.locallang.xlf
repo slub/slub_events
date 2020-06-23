@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-12-18T17:29:12Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-05-03T18:08:08Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -40,6 +40,10 @@
 			<trans-unit id="be.nothingFoundForGivenSearch" approved="yes">
 				<source><![CDATA[No event found for given search constraints (see above).]]></source>
 				<target><![CDATA[Keine Veranstaltung gefunden. Bitte prüfen Sie Ihre Suche (siehe oben).]]></target>
+			</trans-unit>
+			<trans-unit id="be.scheduler.checkevents" approved="yes">
+				<source><![CDATA[Event Check and Report Task]]></source>
+				<target><![CDATA[Job zur Prüfung und Benachrichtigung von Veranstaltungsanmeldungen]]></target>
 			</trans-unit>
 			<trans-unit id="be.searchAllContacts" approved="yes">
 				<source><![CDATA[Select all]]></source>
@@ -120,6 +124,22 @@
 			<trans-unit id="selecttopictobook" approved="yes">
 				<source><![CDATA[Please select a topic.]]></source>
 				<target><![CDATA[Bitte wählen Sie ein Thema.]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.cleanupDays" approved="yes">
+				<source><![CDATA[Anonymize all subscribers of events older than given amount of days]]></source>
+				<target><![CDATA[Anonymisiere alle Teilnehmer von Veranstaltungen, die länger als die angegebene Tage abgelaufen sind.]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.cleanupDaysEvents" approved="yes">
+				<source><![CDATA[Delete all events including subscribers older than given amount of days]]></source>
+				<target><![CDATA[Lösche alle Veranstaltungen, die länger als die angegebenen Tage abgelaufen sind.]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.name" approved="yes">
+				<source><![CDATA[Cleanup Report]]></source>
+				<target><![CDATA[Job zum Löschen von alten Veranstaltungen und Teilnehmern]]></target>
+			</trans-unit>
+			<trans-unit id="tasks.cleanup.storagePid" approved="yes">
+				<source><![CDATA[StoragePid]]></source>
+				<target><![CDATA[Speicher PID]]></target>
 			</trans-unit>
 			<trans-unit id="tasks.statistics.date" approved="yes">
 				<source><![CDATA[Date]]></source>
@@ -276,6 +296,10 @@
 			<trans-unit id="tx_slubevents_domain_model_event.oneFreePlace" approved="yes">
 				<source><![CDATA[one free place]]></source>
 				<target><![CDATA[ein freier Platz]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.only_future_events" approved="yes">
+				<source><![CDATA[Only future child events are listed below.]]></source>
+				<target><![CDATA[Nur Veranstaltungen in der Zukunft werden hier aufgelistet.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
 				<source><![CDATA[Recurring Event]]></source>

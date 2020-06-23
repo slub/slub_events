@@ -32,12 +32,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 				<td><span class="subscriber"><f:link.email email="{subscriber.email}">{subscriber.name}
 				</f:link.email></span></td>
 				<td>
-					<se:format.date date="{subscriber.crdate}" format="%d.%m.%Y %H:%M"/>
+					<f:format.date date="{subscriber.crdate}" format="%d.%m.%Y %H:%M"/>
 				</td>
 				<td>
 					<se:be.functionBar icon="geniusbar" event="{subscriber.event}"/>
                     <span class="eventtitle"
-						  title="<se:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">{subscriber.event.title}</span>
+						  title="<f:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">{subscriber.event.title}</span>
 				</td>
 				<td>{subscriber.number}</td>
 			</tr>

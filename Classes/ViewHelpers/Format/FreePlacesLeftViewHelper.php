@@ -26,40 +26,74 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Slub\SlubEvents\Domain\Model\Event;
+use \Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+
 /**
  * Calculate Free Places
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class FreePlacesLeftViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class FreePlacesLeftViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', Event::class, 'Events', true);
+    }
 
     /**
      * subscriberRepository
      *
-     * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-     * @inject
+     * @var SubscriberRepository
      */
-    protected $subscriberRepository;
+    protected static $subscriberRepository = null;
 
     /**
      * Calculate the free places for a given event.
      *
-     * @param \Slub\SlubEvents\Domain\Model\Event $event
-     *
-     * @return int
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
-     * @api
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      */
-    public function render(\Slub\SlubEvents\Domain\Model\Event $event = null)
-    {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $event = $arguments['event'];
         if ($event != null) {
-            $free = $event->getMaxSubscriber() - $this->subscriberRepository->countAllByEvent($event);
+            $free = $event->getMaxSubscriber() - self::getSubscriberRepository()->countAllByEvent($event);
         } else {
             $free = 0;
         }
 
         return ($free > 0) ? $free : 0;
     }
+
+    /**
+     * Initialize the subscriberRepository
+     *
+     * return SubscriberRepository
+     */
+    private static function getSubscriberRepository()
+    {
+        if (null === static::$subscriberRepository) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            static::$subscriberRepository = $objectManager->get(SubscriberRepository::class);
+        }
+
+        return static::$subscriberRepository;
+    }
+
 }
