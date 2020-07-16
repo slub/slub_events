@@ -128,6 +128,7 @@ CREATE TABLE tx_slubevents_domain_model_subscriber (
     number int(11) DEFAULT '0' NOT NULL,
     message text NOT NULL,
     editcode varchar(255) DEFAULT '' NOT NULL,
+    acceptpp tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,
     crdate int(11) unsigned DEFAULT '0' NOT NULL,

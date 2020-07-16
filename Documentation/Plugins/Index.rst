@@ -35,8 +35,6 @@ Page of Subscribe Form
 Page which contains the subscription form plugi (see `SLUB: Events: Registration`_).
 
 
-.. _configuration:plugin-eventlist
-
 SLUB: Events: Listing
 ---------------------
 
@@ -91,8 +89,6 @@ Show only event of the selected contact(s).
 
 
 
-.. _configuration:plugin-eventsubscribe
-
 SLUB: Events: Registration
 --------------------------
 
@@ -122,8 +118,6 @@ Page of Unsubscribe Form
 
 Page which contains this plugin with the unsubscribe view.
 
-
-.. _configuration:plugin-eventsubscribe
 
 SLUB: Events: User Panel
 ------------------------

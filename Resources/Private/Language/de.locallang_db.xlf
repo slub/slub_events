@@ -269,6 +269,14 @@
 				<source><![CDATA[Editcode]]></source>
 				<target><![CDATA[Bearbeitungscode]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp" approved="yes">
+				<source><![CDATA[Privacy Policy]]></source>
+				<target><![CDATA[Datenschutzerklärung]]></target>
+			</trans-unit>
+				<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp.accepted" approved="yes">
+				<source><![CDATA[Accepted]]></source>
+				<target><![CDATA[Akzeptiert]]></target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes">
 				<source><![CDATA[Email]]></source>
 				<target><![CDATA[Email-Adresse]]></target>

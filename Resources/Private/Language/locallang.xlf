@@ -314,6 +314,9 @@
 		<trans-unit id="tx_slubevents_domain_model_subscriber.message">
 			<source>Message</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp">
+			<source>I have read the Privacy Policy and accept them.</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_subscriber.name">
 			<source>Name</source>
 		</trans-unit>
@@ -337,6 +340,9 @@
 		</trans-unit>
 		<trans-unit id="validationerror_val_editcode">
 			<source>Please start the registration from the beginning.</source>
+		</trans-unit>
+		<trans-unit id="validationerror_val_acceptpp">
+			<source>The privacy policy must be accepted to finish the registration.</source>
 		</trans-unit>
 		<trans-unit id="validationerror_val_email">
 			<source>Please enter a valid email-address.</source>

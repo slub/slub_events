@@ -95,6 +95,13 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $editcode;
 
     /**
+     * Accept privacy policy
+     *
+     * @var bool
+     */
+    protected $acceptpp;
+
+    /**
      * Creation Date
      *
      * @var \DateTime
@@ -276,6 +283,26 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setMessage($message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * Returns true or false for accepted privacy policy
+     *
+     * @return bool
+     */
+    public function getAcceptpp()
+    {
+        return $this->acceptpp;
+    }
+
+    /**
+     * Sets acceptpp
+     *
+     * @param bool $acceptpp
+     */
+    public function setAcceptpp($acceptpp)
+    {
+        $this->acceptpp = $acceptpp;
     }
 
     /**

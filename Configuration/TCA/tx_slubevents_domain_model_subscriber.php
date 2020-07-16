@@ -24,7 +24,7 @@ return [
         'showRecordFieldList' => 'hidden, name, email, telephone, institution, customerid, number, message, editcode, crdate',
     ],
     'types'     => [
-        '1' => ['showitem' => 'hidden, --palette--;;1, name, email, telephone, institution, customerid, number, message, editcode, crdate,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'hidden, --palette--;;1, name, email, telephone, institution, customerid, number, message, editcode, acceptpp, crdate,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'],
     ],
     'palettes'  => [
         '1' => ['showitem' => ''],
@@ -140,6 +140,17 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
             ],
+        ],
+        'acceptpp' => [
+            'exclude' => 1,
+            'label' => $LL . 'tx_slubevents_domain_model_subscriber.acceptpp',
+            'config' => [
+                'type' => 'check',
+                'readOnly' => true,
+                'items' => [
+                    [$LL . 'tx_slubevents_domain_model_subscriber.acceptpp.accepted', ''],
+                ],
+            ]
         ],
         'crdate'           => [
             'exclude' => 1,
