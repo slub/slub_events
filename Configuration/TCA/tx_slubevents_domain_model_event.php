@@ -471,9 +471,11 @@ return [
              'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_end_date_time',
              'config'  => [
                  'type'     => 'input',
-                 'size'     => 10,
-                 'eval'     => 'datetime'
-             ],
+                 'renderType' => 'inputDateTime',
+                 'size'     => 13,
+                 'eval'     => 'datetime',
+                 'default'  => 0,
+              ],
          ],
         'cancelled'                => [
             'exclude' => 0,
