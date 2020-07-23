@@ -796,7 +796,7 @@ class EventController extends AbstractController
 
         // we do a simple file caching for performance reasons
         // compose the filename
-        $calfile = PATH_site . 'typo3temp/tx_slubevents/calfile_' . md5($_GET['disciplines'] . $_GET['categories']) . '_' . strtotime($_GET['start']) . '_' . strtotime($_GET['end']) . '.json';
+        $calfile = PATH_site . 'typo3temp/tx_slubevents/calfile_' . md5(GeneralUtility::_GET('disciplines') . GeneralUtility::_GET('categories')) . '_' . strtotime(GeneralUtility::_GET('start')) . '_' . strtotime(GeneralUtility::_GET('end')) . '.json';
         // if file exists and is not too old - take it
         if (file_exists($calfile)) {
             // if not older than one day:
@@ -809,10 +809,10 @@ class EventController extends AbstractController
 
         // no valid caching file --> we do a new query and save the result
         $events = $this->eventRepository->findAllBySettings([
-            'categoryList'   => GeneralUtility::intExplode(',', $_GET['categories'], true),
-            'disciplineList' => GeneralUtility::intExplode(',', $_GET['disciplines'], true),
-            'startTimestamp' => $_GET['start'],
-            'stopTimestamp'  => $_GET['stop'],
+            'categoryList'   => GeneralUtility::intExplode(',', GeneralUtility::_GET('categories'), true),
+            'disciplineList' => GeneralUtility::intExplode(',', GeneralUtility::_GET('disciplines'), true),
+            'startTimestamp' => strtotime(GeneralUtility::_GET('start')),
+            'stopTimestamp'  => strtotime(GeneralUtility::_GET('end')),
             'showPastEvents' => true,
         ]);
 
@@ -835,7 +835,7 @@ class EventController extends AbstractController
 
             $conf = [
                 // Link to current page
-                'parameter'        => $_GET['detailPid'],
+                'parameter'        => GeneralUtility::_GET('detailPid'),
                 // Set additional parameters
                 'additionalParams' => '&type=0&tx_slubevents_eventlist%5Bevent%5D=' . $event->getUid() . '&tx_slubevents_eventlist%5Baction%5D=show',
                 // We must add cHash because we use parameters
