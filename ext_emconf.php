@@ -21,7 +21,7 @@ This extension is developped and used in production at the Saxony State and Univ
     'author_company'   => 'SLUB Dresden',
     'shy'              => '',
     'priority'         => '',
-    'state'            => 'beta',
+    'state'            => 'stable',
     'internal'         => '',
     'uploadfolder'     => 1,
     'createDirs'       => 'typo3temp/tx_slubevents/',
