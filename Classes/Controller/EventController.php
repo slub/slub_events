@@ -946,19 +946,26 @@ class EventController extends AbstractController
         }
 
         $sumDiffDays = 0;
-        $diffDays = []; // interval to parent or previous event date (used for recurring on multiple days per week)
+        // interval to parent or previous event date (used for recurring on multiple days per week)
+        $diffDays = [];
+        // helper array to calculate the day intervall from parent event
+        $weekdaysAfterParent = [];
+
         foreach($recurring_options['weekday'] as $id => $weekday) {
-            // if it is not the parent start_date weekday
-            if ((int)$weekday != $parentStartDateTime->format('N')) {
-                $nextEventWeekday = (int)$weekday - $parentStartDateTime->format('N') - $sumDiffDays;
-                if ($nextEventWeekday < 0) {
-                    $nextEventWeekday += 7;
-                }
-                $sumDiffDays += $nextEventWeekday;
-                $diffDays[] = new \DateInterval("P" . $nextEventWeekday . "D");
+            if ($weekday < $parentStartDateTime->format('N')) {
+                $weekdaysAfterParent[] = $weekday + 7;
+            } else if ($weekday > $parentStartDateTime->format('N')){
+                $weekdaysAfterParent[] = $weekday;
             }
         }
 
+        sort($weekdaysAfterParent);
+
+        foreach($weekdaysAfterParent as $id => $item) {
+            $nextEventWeekday = $item - $parentStartDateTime->format('N') - $sumDiffDays;
+            $sumDiffDays += $nextEventWeekday;
+            $diffDays[] = new \DateInterval("P" . $nextEventWeekday . "D");
+        }
 
         $childDateTimes = []; // will hold all child events
 
