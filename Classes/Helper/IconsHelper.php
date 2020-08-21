@@ -52,11 +52,8 @@ class IconsHelper
      */
     public function __construct(ObjectManagerInterface $objectManager)
     {
-
         $this->objectManager = $objectManager;
-
         $this->iconFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
-
     }
 
     /**
@@ -68,25 +65,15 @@ class IconsHelper
      */
     public function getEditIcon($table, array $row)
     {
-
         $params .= '&edit[' . $table . '][' . $row['uid'] . ']=edit';
         $title = LocalizationUtility::translate('be.editEvent', 'slub_events',
                 $arguments = null) . ' ' . $row['uid'] . ': ' . $row['title'];
         $icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath,
                 -1)) . '" title="' . $title . '">' .
-            $this->getSpriteIcon('actions-document-open') .
+            $this->iconFactory->getIcon('actions-document-open', Icon::SIZE_SMALL)->render() .
             '</a>';
-
         return $icon;
     }
-
-    /**
-     * Returns the New Icon with link
-     *
-     * @param string $table Table name
-     * @param array $row Data row
-     * @return string html output
-     */
     public function getNewIcon($table, $storagePid)
     {
 
@@ -94,7 +81,7 @@ class IconsHelper
         $title = LocalizationUtility::translate('be.newEvent', 'slub_events', $arguments = null);
         $icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath,
                 -1)) . '" title="' . $title . '">' .
-            $this->getSpriteIcon('actions-document-new') .
+            $this->iconFactory->getIcon('actions-document-new', Icon::SIZE_SMALL)->render() .
             '</a>';
 
         return $icon;
@@ -104,7 +91,8 @@ class IconsHelper
      * Returns the Hide Icon with link
      *
      * @param string $table Table name
-     * @param array $row Data row
+     * @param integer $uid uid of data row
+     * @param boolean $hidden hidden flag
      * @return string html output
      */
     public function getHideIcon($table, $uid, $hidden)
@@ -119,7 +107,7 @@ class IconsHelper
             $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
 
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
-                $this->getSpriteIcon('actions-edit-unhide') .
+                $this->iconFactory->getIcon('actions-edit-unhide', Icon::SIZE_SMALL)->render() .
                 '</a>';
             // Hide
         } else {
@@ -131,28 +119,76 @@ class IconsHelper
             $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
 
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
-                $this->getSpriteIcon('actions-edit-hide') .
+                $this->iconFactory->getIcon('actions-edit-hide', Icon::SIZE_SMALL)->render() .
                 '</a>';
         }
         return $icon;
     }
 
     /**
-     * Get the requested Sprite Icon
+     * Returns the Hide Icon
      *
-     * (was) compatibility helper for TYPO3 6.2 and 7.6
-     *
-     * @param $iconName
-     * @param $options
-     *
-     * @return full HTML tag
+     * @param string $table Table name
+     * @param integer $uid uid of data row
+     * @param boolean $hidden hidden flag
+     * @return string html output
      */
-
-    private function getSpriteIcon($iconName, $options = [])
+    public function getHiddenCheckbox($table, $uid, $hidden)
     {
+        if ($hidden) {
+            $hidden = 1;
+            $inline = true;
+            $invert = false;
+            $visible = 'hidden';
+            $hiddenIcon = $this->iconFactory->getIcon('actions-edit-unhide', Icon::SIZE_SMALL)->render();
+            $title = LocalizationUtility::translate('be.unhideEvent', 'slub_events', $arguments = null);
+            $toggleTitle = LocalizationUtility::translate('be.hideEvent', 'slub_events', $arguments = null);
+        } else {
+            $hidden = 0;
+            $inline = true;
+            $invert = true;
+            $visible = 'visible';
+            $hiddenIcon = $this->iconFactory->getIcon('actions-edit-hide', Icon::SIZE_SMALL)->render();
+            $title = LocalizationUtility::translate('be.hideEvent', 'slub_events', $arguments = null);
+            $toggleTitle = LocalizationUtility::translate('be.unhideEvent', 'slub_events', $arguments = null);
+        }
 
-        return $this->iconFactory->getIcon($iconName, Icon::SIZE_SMALL);
-
+        return '
+            <td class="col-icon nowrap">
+                <div class="btn-group" role="group">
+                    <a class="btn btn-default t3js-record-hide" data-state="'.$visible.'" href="#"
+                    data-params="data['.$table.']['.$uid.'][hidden]='.(($hidden == 1) ? 0 : 1).'"
+                    title="'.$title.'"
+                    data-toggle-title="'.$toggleTitle.'"
+                    >
+                        ' . $hiddenIcon . '
+                    </a>
+                </div>
+            </td>
+        ';
     }
 
+    /**
+     * Returns the Record Icon with hidden state
+     *
+     * @param string $table Table name
+     * @param integer $uid uid of data row
+     * @param boolean $hidden hidden flag
+     * @return string html output
+     */
+    public function getHiddenRecordIcon($table, $uid, $hidden)
+    {
+        $hiddenRecordIcon = $this->iconFactory->getIconForRecord($table, ['uid' => $uid, 'hidden' => $hidden], Icon::SIZE_SMALL)->render();
+
+        return '
+        <td class="col-icon nowrap">
+            <a href="#" class="t3js-contextmenutrigger" data-table="'.$table.'" data-uid="'.$uid.'">
+            <span data-toggle="tooltip" data-title=" id='.$uid.'" data-html="true" data-placement="right" data-original-title="" title="">
+            <span class="t3js-icon icon icon-size-small icon-state-default icon-tcarecords-'.$table.'-default"
+            data-identifier="tcarecords-'.$table.'-default">
+            ' . $hiddenRecordIcon . '
+            </a><
+        /td>
+        ';
+    }
 }
