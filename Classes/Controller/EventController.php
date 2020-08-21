@@ -39,6 +39,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class EventController extends AbstractController
 {
@@ -177,7 +178,7 @@ class EventController extends AbstractController
      * action show
      *
      * @param Event $event
-     * @ignorevalidation $event
+     * @Extbase\IgnoreValidation("event")
      *
      * @return void
      */
@@ -224,7 +225,7 @@ class EventController extends AbstractController
      * action new
      *
      * @param Event $newEvent
-     * @ignorevalidation $newEvent
+     * @Extbase\IgnoreValidation("newEvent")
      *
      * @return void
      */
@@ -251,7 +252,7 @@ class EventController extends AbstractController
      * action edit
      *
      * @param Event $event
-     * @ignorevalidation $event
+     * @Extbase\IgnoreValidation("event")
      *
      * @return void
      */
@@ -459,7 +460,7 @@ class EventController extends AbstractController
      * --> see ics template in Resources/Private/Backend/Templates/Email/
      *
      * @param Event $event
-     * @ignorevalidation $event
+     * @Extbase\IgnoreValidation("event")
      *
      * @return void
      */

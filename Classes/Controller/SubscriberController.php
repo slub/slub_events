@@ -40,6 +40,7 @@ use Slub\SlubEvents\Helper\EmailHelper;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class SubscriberController extends AbstractController
 {
@@ -144,9 +145,9 @@ class SubscriberController extends AbstractController
      * @param Subscriber $newSubscriber
      * @param Event      $event
      * @param Category   $category
-     * @ignorevalidation $newSubscriber
-     * @ignorevalidation $event
-     * @ignorevalidation $category
+     * @Extbase\IgnoreValidation("newSubscriber")
+     * @Extbase\IgnoreValidation("event")
+     * @Extbase\IgnoreValidation("category")
      *
      * @return void
      */
@@ -201,7 +202,7 @@ class SubscriberController extends AbstractController
      * @param Event      $event
      * @param Category   $category
      * @validate $event \Slub\SlubEvents\Domain\Validator\EventSubscriptionAllowedValidator
-     * @ignorevalidation $category
+     * @Extbase\IgnoreValidation("category")
      *
      * @return void
      */
@@ -377,7 +378,7 @@ class SubscriberController extends AbstractController
      *
      * @param Event  $event
      * @param string $editcode
-     * @ignorevalidation $event
+     * @Extbase\IgnoreValidation("event")
      *
      * @return void
      */
@@ -572,7 +573,7 @@ class SubscriberController extends AbstractController
      *
      * @param Event   $event
      * @param integer $step
-     * @ignorevalidation $event
+     * @Extbase\IgnoreValidation("event")
      *
      * @return void
      */
