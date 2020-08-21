@@ -32,6 +32,7 @@ namespace Slub\SlubEvents\Task;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
@@ -68,9 +69,16 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * eventRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-     * @inject
      */
     protected $eventRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
+     */
+    public function injectEventRepository(EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
 
     /**
      * injectConfigurationManager

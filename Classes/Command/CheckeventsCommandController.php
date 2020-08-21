@@ -1,28 +1,28 @@
 <?php
 namespace Slub\SlubEvents\Command;
 
-    /***************************************************************
-     *  Copyright notice
-     *
-     *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>
-     *  All rights reserved
-     *
-     *  This script is part of the Typo3 project. The Typo3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 2 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>
+ *  All rights reserved
+ *
+ *  This script is part of the Typo3 project. The Typo3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * Command Controller for CLI
@@ -32,6 +32,8 @@ namespace Slub\SlubEvents\Command;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -43,17 +45,31 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
      * eventRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-     * @inject
      */
     protected $eventRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
+     */
+    public function injectEventRepository(EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
 
     /**
      * subscriberRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-     * @inject
      */
     protected $subscriberRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+     */
+    public function injectSubscriberRepository(EventRepository $subscriberRepository)
+    {
+        $this->subscriberRepository = $subscriberRepository;
+    }
 
     /**
      * @var ConfigurationManagerInterface

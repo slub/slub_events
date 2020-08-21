@@ -25,6 +25,8 @@ namespace Slub\SlubEvents\Domain\Validator;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+
 /**
  *
  *
@@ -39,9 +41,16 @@ class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Va
      * subscriberRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-     * @inject
      */
     protected $subscriberRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+     */
+    public function injectSubscriberRepository(EventRepository $subscriberRepository)
+    {
+        $this->subscriberRepository = $subscriberRepository;
+    }
 
     /**
      * Return variable

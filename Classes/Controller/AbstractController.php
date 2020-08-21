@@ -29,6 +29,12 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use Slub\SlubEvents\Domain\Repository\CategoryRepository;
+use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use Slub\SlubEvents\Domain\Repository\ContactRepository;
+use Slub\SlubEvents\Domain\Repository\DisciplineRepository;
+
 /**
  *
  *
@@ -42,41 +48,76 @@ class AbstractController extends ExtbaseActionController
      * eventRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\EventRepository
-     * @inject
      */
     protected $eventRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
+     */
+    public function injectEventRepository(EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
 
     /**
      * categoryRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\CategoryRepository
-     * @inject
      */
     protected $categoryRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository
+     */
+    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * subscriberRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\SubscriberRepository
-     * @inject
      */
     protected $subscriberRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
+     */
+    public function injectSubscriberRepository(EventRepository $subscriberRepository)
+    {
+        $this->subscriberRepository = $subscriberRepository;
+    }
 
     /**
      * contactRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\ContactRepository
-     * @inject
      */
     protected $contactRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\ContactRepository $contactRepository
+     */
+    public function injectContactRepository(ContactRepository $contactRepository)
+    {
+        $this->contactRepository = $contactRepository;
+    }
 
     /**
      * disciplineRepository
      *
      * @var \Slub\SlubEvents\Domain\Repository\DisciplineRepository
-     * @inject
      */
     protected $disciplineRepository;
+
+	/**
+     * @param \Slub\SlubEvents\Domain\Repository\DisciplineRepository $disciplineRepository
+     */
+    public function injectDisciplineRepository(DisciplineRepository $disciplineRepository)
+    {
+        $this->disciplineRepository = $disciplineRepository;
+    }
 
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
