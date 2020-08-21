@@ -101,13 +101,8 @@ class CheckeventsCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Com
      */
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {
-
         $this->configurationManager = $configurationManager;
-
-        $this->contentObj = $this->configurationManager->getContentObject();
-
         $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
-
     }
 
     /**
