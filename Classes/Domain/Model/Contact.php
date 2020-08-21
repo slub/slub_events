@@ -1,5 +1,4 @@
 <?php
-
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
@@ -26,6 +25,8 @@ namespace Slub\SlubEvents\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+
 /**
  *
  *
@@ -39,16 +40,16 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Name of Contact
      *
+     * @Extbase\Validate("NotEmpty")
      * @var string
-     * @validate NotEmpty
      */
     protected $name;
 
     /**
      * Email
      *
+     * @Extbase\Validate("NotEmpty")
      * @var string
-     * @validate NotEmpty
      */
     protected $email;
 

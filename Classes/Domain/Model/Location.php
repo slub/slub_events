@@ -1,5 +1,4 @@
 <?php
-
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
@@ -26,6 +25,8 @@ namespace Slub\SlubEvents\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+
 /**
  *
  *
@@ -39,8 +40,8 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Name of the Location
      *
+     * @Extbase\Validate("NotEmpty")
      * @var string
-     * @validate NotEmpty
      */
     protected $name;
 
