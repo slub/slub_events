@@ -62,7 +62,7 @@ class EmailHelper
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+        /** @var \TYPO3Fluid\Fluid\View\StandaloneView $emailViewHTML */
         $emailViewHTML = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
         $emailViewHTML->setFormat('html');
@@ -90,7 +90,7 @@ class EmailHelper
 
         // attach ics-File
         if ($variables['attachIcs'] == true) {
-            /** @var \TYPO3\CMS\Fluid\View\StandaloneView $ics */
+            /** @var \TYPO3Fluid\Fluid\View\StandaloneView $ics */
             $ics = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
             $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
             $ics->setFormat('ics');
@@ -124,7 +124,7 @@ class EmailHelper
         // attach CSV-File
         if ($variables['attachCsv'] == true) {
 
-            /** @var \TYPO3\CMS\Fluid\View\StandaloneView $csv */
+            /** @var \TYPO3Fluid\Fluid\View\StandaloneView $csv */
             $csv = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
             $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
             $csv->setFormat('csv');

@@ -586,7 +586,7 @@ class SubscriberController extends AbstractController
         $event->setOnlinesurvey($onlineSurveyLink[0]);
 
         if ($step == 0) {
-            /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailViewHTML */
+            /** @var \TYPO3Fluid\Fluid\View\StandaloneView $emailViewHTML */
             $emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 
             $emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);

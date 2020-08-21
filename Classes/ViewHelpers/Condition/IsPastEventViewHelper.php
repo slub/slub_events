@@ -27,7 +27,7 @@ namespace Slub\SlubEvents\ViewHelpers\Condition;
  ***************************************************************/
 
 use \Slub\SlubEvents\Domain\Model\Event;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
