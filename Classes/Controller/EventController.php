@@ -1,29 +1,29 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
-    /***************************************************************
-     *  Copyright notice
-     *
-     *  (c) 2012-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2012-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  *
@@ -38,6 +38,7 @@ use Slub\SlubEvents\Helper\EmailHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
@@ -797,7 +798,7 @@ class EventController extends AbstractController
 
         // we do a simple file caching for performance reasons
         // compose the filename
-        $calfile = PATH_site . 'typo3temp/tx_slubevents/calfile_' . md5(GeneralUtility::_GET('disciplines') . GeneralUtility::_GET('categories')) . '_' . strtotime(GeneralUtility::_GET('start')) . '_' . strtotime(GeneralUtility::_GET('end')) . '.json';
+        $calfile = Environment::getPublicPath() . '/typo3temp/tx_slubevents/calfile_' . md5(GeneralUtility::_GET('disciplines') . GeneralUtility::_GET('categories')) . '_' . strtotime(GeneralUtility::_GET('start')) . '_' . strtotime(GeneralUtility::_GET('end')) . '.json';
         // if file exists and is not too old - take it
         if (file_exists($calfile)) {
             // if not older than one day:

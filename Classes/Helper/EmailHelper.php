@@ -1,28 +1,28 @@
 <?php
 namespace Slub\SlubEvents\Helper;
 
-    /***************************************************************
-     *  Copyright notice
-     *
-     *  (c) 2015 Alexander Bigga <alexander.bigga@slub-dresden.de>
-     *  All rights reserved
-     *
-     *  This script is part of the Typo3 project. The Typo3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 2 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2015 Alexander Bigga <alexander.bigga@slub-dresden.de>
+ *  All rights reserved
+ *
+ *  This script is part of the Typo3 project. The Typo3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * Scheduler Task for Statistics
@@ -32,6 +32,7 @@ namespace Slub\SlubEvents\Helper;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class EmailHelper
@@ -101,7 +102,7 @@ class EmailHelper
             $ics->setTemplate('Email/' . $templateName . '.ics');
 
             // the total basename length must not be more than 60 characters --> see writeFileToTypo3tempDir()
-            $eventIcsFile = PATH_site . 'typo3temp/tx_slubevents/' .
+            $eventIcsFile = Environment::getPublicPath() . '/typo3temp/tx_slubevents/' .
                 substr(
                     preg_replace('/[^\w]/', '', strtolower($variables['nameTo'])),
                     0,
@@ -134,7 +135,7 @@ class EmailHelper
 
             $csv->setTemplate('Email/' . $templateName . '.csv');
 
-            $eventCsvFile = PATH_site . 'typo3temp/tx_slubevents/' .
+            $eventCsvFile = Environment::getPublicPath() . '/typo3temp/tx_slubevents/' .
                 substr(
                     preg_replace('/[^\w]/', '', strtolower($variables['nameTo'])),
                     0,
@@ -211,7 +212,7 @@ class EmailHelper
             );
             $templateRootPaths = $extbaseFrameworkConfiguration['view']['templateRootPaths'];
         } else {
-            $templateRootPaths = [PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Templates/'];
+            $templateRootPaths = [Environment::getPublicPath() . '/typo3conf/ext/slub_events/Resources/Private/Backend/Templates/'];
         }
 
         return $templateRootPaths;
@@ -229,7 +230,7 @@ class EmailHelper
             );
             $partialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
         } else {
-            $partialRootPaths = [PATH_site . 'typo3conf/ext/slub_events/Resources/Private/Backend/Partials/'];
+            $partialRootPaths = [Environment::getPublicPath() . '/typo3conf/ext/slub_events/Resources/Private/Backend/Partials/'];
         }
 
         return $partialRootPaths;

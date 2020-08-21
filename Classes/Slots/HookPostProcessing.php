@@ -30,6 +30,7 @@ namespace Slub\SlubEvents\Slots;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\Environment;
 
 class HookPostProcessing
 {
@@ -69,7 +70,7 @@ class HookPostProcessing
      */
     public function clearAjaxCacheFiles($startDate = null)
     {
-        $dir = PATH_site . 'typo3temp/tx_slubevents/';
+        $dir = Environment::getPublicPath() . '/typo3temp/tx_slubevents/';
         if (!file_exists($dir)) {
             mkdir($dir);
         }
