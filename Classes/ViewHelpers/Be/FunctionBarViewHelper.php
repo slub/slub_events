@@ -36,7 +36,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
-class FunctionBarViewHelper extends \TYPO3Fluid\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
+class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
 {
     use CompileWithRenderStatic;
 

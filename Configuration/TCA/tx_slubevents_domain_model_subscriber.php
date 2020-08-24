@@ -35,6 +35,7 @@ return [
             'label'   => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config'  => [
                 'type' => 'check',
+                'renderType' => 'checkboxToggle',
             ],
         ],
         'starttime'        => [
