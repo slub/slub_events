@@ -84,7 +84,7 @@ class AbstractController extends ExtbaseActionController
 	/**
      * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
      */
-    public function injectSubscriberRepository(EventRepository $subscriberRepository)
+    public function injectSubscriberRepository(SubscriberRepository $subscriberRepository)
     {
         $this->subscriberRepository = $subscriberRepository;
     }
