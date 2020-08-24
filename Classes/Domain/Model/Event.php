@@ -169,8 +169,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Subscriber Ids
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber>
-     * @lazy
-     * @cascade remove
+     * @Extbase\ORM\Lazy
+     * @Extbase\ORM\Cascade("remove")
      */
     protected $subscribers;
 

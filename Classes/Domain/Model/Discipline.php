@@ -49,7 +49,6 @@ class Discipline extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * parent
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline>
-     * @lazy
      */
     protected $parent;
 
