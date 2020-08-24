@@ -34,15 +34,17 @@ namespace Slub\SlubEvents\Task;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
+use TYPO3\CMS\Scheduler\Task\Enumeration\Action;
 
-class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
+class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
 
     /**
      * Render additional information fields within the scheduler backend.
      *
-     * @param array                                                     $taskInfo        Array information of task to return
-     * @param CleanUpTask                                            $task            Task object
+     * @param array $taskInfo Array information of task to return
+     * @param CleanUpTask $task Task object
      * @param \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule Reference to the BE module of the Scheduler
      *
      * @return array Additional fields
@@ -54,11 +56,12 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
     ) {
         $additionalFields = [];
+        $currentSchedulerModuleAction = $schedulerModule->getCurrentAction();
 
         if (empty($taskInfo['storagePid'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($currentSchedulerModuleAction->equals(Action::ADD)) {
                 $taskInfo['storagePid'] = '';
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
                 $taskInfo['storagePid'] = $task->getStoragePid();
             } else {
                 $taskInfo['storagePid'] = $task->getStoragePid();
@@ -66,9 +69,9 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         }
 
         if (empty($taskInfo['cleanupDays'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($currentSchedulerModuleAction->equals(Action::ADD)) {
                 $taskInfo['cleanupDays'] = '';
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
                 $taskInfo['cleanupDays'] = $task->getCleanupDays();
             } else {
                 $taskInfo['cleanupDays'] = $task->getCleanupDays();
@@ -76,9 +79,9 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         }
 
         if (empty($taskInfo['cleanupDaysEvents'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($currentSchedulerModuleAction->equals(Action::ADD)) {
                 $taskInfo['cleanupDaysEvents'] = '';
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
                 $taskInfo['cleanupDaysEvents'] = $task->getCleanupDaysEvents();
             } else {
                 $taskInfo['cleanupDaysEvents'] = $task->getCleanupDaysEvents();
@@ -129,7 +132,7 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
 
         if (!MathUtility::canBeInterpretedAsInteger($submittedData['slub_events']['storagePid'])) {
             $isValid = false;
-            $schedulerModule->addMessage(
+            $this->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidStoragePid') . ': ' . $submittedData['slub_events']['cleanupDays'],
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
@@ -137,7 +140,7 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
 
         if (!MathUtility::canBeInterpretedAsInteger($submittedData['slub_events']['cleanupDays'])) {
             $isValid = false;
-            $schedulerModule->addMessage(
+            $this->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidCleanupDays') . ': ' . $submittedData['slub_events']['cleanupDays'],
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
@@ -145,7 +148,7 @@ class CleanUpTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
 
         if (!MathUtility::canBeInterpretedAsInteger($submittedData['slub_events']['cleanupDaysEvents'])) {
             $isValid = false;
-            $schedulerModule->addMessage(
+            $this->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidCleanupDaysEvents') . ': ' . $submittedData['slub_events']['cleanupDaysEvents'],
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );

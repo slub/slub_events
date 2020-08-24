@@ -35,15 +35,17 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
+use TYPO3\CMS\Scheduler\Task\Enumeration\Action;
 
-class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
+class StatisticsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
 
     /**
      * Render additional information fields within the scheduler backend.
      *
-     * @param array                                                     $taskInfo        Array information of task to return
-     * @param StatisticsTask                                            $task            Task object
+     * @param array $taskInfo Array information of task to return
+     * @param StatisticsTask $task Task object
      * @param \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule Reference to the BE module of the Scheduler
      *
      * @return array Additional fields
@@ -55,11 +57,12 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
         \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
     ) {
         $additionalFields = [];
+        $currentSchedulerModuleAction = $schedulerModule->getCurrentAction();
 
         if (empty($taskInfo['storagePid'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($currentSchedulerModuleAction->equals(Action::ADD)) {
                 $taskInfo['storagePid'] = '';
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
                 $taskInfo['storagePid'] = $task->getStoragePid();
             } else {
                 $taskInfo['storagePid'] = $task->getStoragePid();
@@ -67,9 +70,9 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
         }
 
         if (empty($taskInfo['senderEmailAddress'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($currentSchedulerModuleAction->equals(Action::ADD)) {
                 $taskInfo['senderEmailAddress'] = '';
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
                 $taskInfo['senderEmailAddress'] = $task->getSenderEmailAddress();
             } else {
                 $taskInfo['senderEmailAddress'] = $task->getSenderEmailAddress();
@@ -77,9 +80,9 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
         }
 
         if (empty($taskInfo['receiverEmailAddress'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($currentSchedulerModuleAction->equals(Action::ADD)) {
                 $taskInfo['receiverEmailAddress'] = '';
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
                 $taskInfo['receiverEmailAddress'] = $task->getReceiverEmailAddress();
             } else {
                 $taskInfo['receiverEmailAddress'] = $task->getReceiverEmailAddress();
@@ -144,7 +147,7 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
 
         if (!MathUtility::canBeInterpretedAsInteger($submittedData['slub_events']['storagePid'])) {
             $isValid = false;
-            $schedulerModule->addMessage(
+            $this->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidStoragePid') . ': ' . $submittedData['slub_events']['storagePid'],
                 FlashMessage::ERROR
             );
@@ -152,7 +155,7 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
 
         if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
             $isValid = false;
-            $schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail'),
+            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail'),
                 FlashMessage::ERROR);
         }
 
@@ -162,7 +165,7 @@ class StatisticsTaskAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addi
             foreach ($emailList as $emailAdd) {
                 if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($emailAdd)) {
                     $isValid = false;
-                    $schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail') . ': ' . $emailAdd,
+                    $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail') . ': ' . $emailAdd,
                         FlashMessage::ERROR);
                 }
             }
