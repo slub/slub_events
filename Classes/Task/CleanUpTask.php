@@ -179,13 +179,14 @@ class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     public function execute()
     {
-        $successfullyExecuted = true;
+        $successfullyExecuted = false;
 
         // do some init work...
         $this->initializeAction();
 
         // if a valid storagePid is given, only delete in this repository
         if (MathUtility::canBeInterpretedAsInteger($this->storagePid)) {
+            $successfullyExecuted = true;
             // set storagePid to point extbase to the right repositories
             $configurationArray = [
                 'persistence' => [

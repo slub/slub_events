@@ -110,7 +110,6 @@ module.tx_slubevents {
                 forcedNumberOfLinks = 5
                 pagesBefore = 3
                 pagesAfter = 3
-                # section works as of TYPO3 7.6
                 section = results
             }
         }

@@ -41,7 +41,7 @@
 				<source><![CDATA[No event found for given search constraints (see above).]]></source>
 				<target><![CDATA[Keine Veranstaltung gefunden. Bitte prüfen Sie Ihre Suche (siehe oben).]]></target>
 			</trans-unit>
-			<trans-unit id="be.scheduler.checkevents" approved="yes">
+			<trans-unit id="tasks.checkevents.name" approved="yes">
 				<source><![CDATA[Event Check and Report Task]]></source>
 				<target><![CDATA[Job zur Prüfung und Benachrichtigung von Veranstaltungsanmeldungen]]></target>
 			</trans-unit>

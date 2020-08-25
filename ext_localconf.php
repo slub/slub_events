@@ -69,11 +69,13 @@ if (TYPO3_MODE === 'BE') {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] =
         Slub\SlubEvents\Slots\HookPostProcessing::class;
 
-    // include cli command controller
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] =
-        Slub\SlubEvents\Command\CheckeventsCommandController::class;
-
     $languageDir = $_EXTKEY . '/Resources/Private/Language/';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Slub\\SlubEvents\\Task\\CheckeventsTask'] = [
+        'extension'        => $_EXTKEY,
+        'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.checkevents.name',
+        'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.checkevents.description',
+        'additionalFields' => Slub\SlubEvents\Task\CheckeventsTaskAdditionalFieldProvider::class
+    ];
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Slub\\SlubEvents\\Task\\StatisticsTask'] = [
         'extension'        => $_EXTKEY,
         'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.name',

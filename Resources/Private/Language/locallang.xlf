@@ -32,11 +32,14 @@
 		<trans-unit id="be.newEvent">
 			<source>New Event</source>
 		</trans-unit>
-		<trans-unit id="be.scheduler.checkevents">
+		<trans-unit id="tasks.checkevents.name">
 			<source>Event Check and Report Task</source>
 		</trans-unit>
-		<trans-unit id="be.scheduler.checkevents.description">
+		<trans-unit id="tasks.checkevents.description">
 			<source>Long description of Task &quot;Check and Report&quot;</source>
+		</trans-unit>
+		<trans-unit id="tasks.checkevents.language">
+			<source>Language in automatic Emails</source>
 		</trans-unit>
 		<trans-unit id="be.searchAllContacts">
 			<source>Select all</source>

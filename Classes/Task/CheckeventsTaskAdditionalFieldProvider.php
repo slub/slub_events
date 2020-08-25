@@ -37,7 +37,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Task\Enumeration\Action;
 
-class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
+class CheckeventsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
 
     /**
@@ -62,29 +62,29 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             if ($currentSchedulerModuleAction->equals(Action::ADD)) {
                 $taskInfo['storagePid'] = '';
             } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
-                $taskInfo['storagePid'] = $task->getStoragePid();
+                $taskInfo['storagePid'] = $task->storagePid;
             } else {
-                $taskInfo['storagePid'] = $task->getStoragePid();
+                $taskInfo['storagePid'] = $task->storagePid;
             }
         }
 
-        if (empty($taskInfo['cleanupDays'])) {
+        if (empty($taskInfo['senderEmailAddress'])) {
             if ($currentSchedulerModuleAction->equals(Action::ADD)) {
-                $taskInfo['cleanupDays'] = '';
+                $taskInfo['senderEmailAddress'] = '';
             } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
-                $taskInfo['cleanupDays'] = $task->getCleanupDays();
+                $taskInfo['senderEmailAddress'] = $task->senderEmailAddress;
             } else {
-                $taskInfo['cleanupDays'] = $task->getCleanupDays();
+                $taskInfo['senderEmailAddress'] = $task->senderEmailAddress;
             }
         }
 
-        if (empty($taskInfo['cleanupDaysEvents'])) {
+        if (empty($taskInfo['language'])) {
             if ($currentSchedulerModuleAction->equals(Action::ADD)) {
-                $taskInfo['cleanupDaysEvents'] = '';
+                $taskInfo['language'] = 'en';
             } elseif ($currentSchedulerModuleAction->equals(Action::EDIT)) {
-                $taskInfo['cleanupDaysEvents'] = $task->getCleanupDaysEvents();
+                $taskInfo['language'] = $task->language;
             } else {
-                $taskInfo['cleanupDaysEvents'] = $task->getCleanupDaysEvents();
+                $taskInfo['language'] = $task->language;
             }
         }
 
@@ -96,17 +96,22 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             'label' => $label
         ];
 
-        $fieldId = 'task_cleanupDays';
-        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][cleanupDays]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['cleanupDays']) . '"/>';
-        $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.cleanupDays');
+        $fieldId = 'task_senderEmailAddress';
+        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][senderEmailAddress]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['senderEmailAddress']) . '"/>';
+        $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.senderEmailAddress');
+        $label = BackendUtility::wrapInHelp('slub_events', $fieldId, $label);
         $additionalFields[$fieldId] = [
             'code'  => $fieldCode,
-            'label' => $label
+            'label' => $label,
         ];
 
-        $fieldId = 'task_cleanupDaysEvents';
-        $fieldCode = '<input class="form-control" type="text" name="tx_scheduler[slub_events][cleanupDaysEvents]" id="' . $fieldId . '" value="' . htmlspecialchars($taskInfo['cleanupDaysEvents']) . '"/>';
-        $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.cleanupDaysEvents');
+        $fieldId = 'task_language';
+        $fieldCode = '<select class="form-control" name="tx_scheduler[slub_events][language]" id="' . $fieldId . '">
+                        <option value="en" '.($taskInfo['language'] === 'en' ? 'selected' : '').' />English</option>
+                        <option value="de" '.($taskInfo['language'] === 'de' ? 'selected' : '').' />Deutsch</option>
+                      </select>
+                        ';
+        $label = $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.checkevents.language');
         $additionalFields[$fieldId] = [
             'code'  => $fieldCode,
             'label' => $label
@@ -138,20 +143,10 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             );
         }
 
-        if (!MathUtility::canBeInterpretedAsInteger($submittedData['slub_events']['cleanupDays'])) {
+        if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
             $isValid = false;
-            $this->addMessage(
-                $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidCleanupDays') . ': ' . $submittedData['slub_events']['cleanupDays'],
-                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
-            );
-        }
-
-        if (!MathUtility::canBeInterpretedAsInteger($submittedData['slub_events']['cleanupDaysEvents'])) {
-            $isValid = false;
-            $this->addMessage(
-                $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidCleanupDaysEvents') . ': ' . $submittedData['slub_events']['cleanupDaysEvents'],
-                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
-            );
+            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail'),
+                FlashMessage::ERROR);
         }
 
         return $isValid;
@@ -168,9 +163,9 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
      */
     public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
     {
-        /** @var $task CleanUpTask */
-        $task->setStoragePid($submittedData['slub_events']['storagePid']);
-        $task->setCleanupDays($submittedData['slub_events']['cleanupDays']);
-        $task->setCleanupDaysEvents($submittedData['slub_events']['cleanupDaysEvents']);
+        /** @var $task CheckeventTask */
+        $task->storagePid = $submittedData['slub_events']['storagePid'];
+        $task->senderEmailAddress = $submittedData['slub_events']['senderEmailAddress'];
+        $task->language = $submittedData['slub_events']['language'];
     }
 }
