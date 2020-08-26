@@ -16,12 +16,10 @@
                             <config>
                                 <type>select</type>
                                 <items>
-
                                     <numIndex index="0">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.userpanel_view</numIndex>
                                         <numIndex index="1">Event->listOwn;Event->show</numIndex>
                                     </numIndex>
-
                                 </items>
                             </config>
                         </TCEforms>
