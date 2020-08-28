@@ -163,15 +163,22 @@ return [
         'photo'            => [
             'exclude' => 0,
             'label'   => $LL . 'tx_slubevents_domain_model_contact.photo',
-            'config'  => [
-                'type'          => 'group',
-                'internal_type' => 'file',
-                'allowed'       => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-                'uploadfolder'  => 'uploads/tx_slubevents',
-                'size'          => 1,
-                'minitems'      => 0,
-                'maxitems'      => 1,
-            ],
+            // https://review.typo3.org/c/Packages/TYPO3.CMS/+/54830
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'photo',
+                [
+                    'maxitems' => 1,
+                    'appearance' => [
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                    ],
+                    'foreign_match_fields' => [
+                        'fieldname' => 'photo',
+                        'tablenames' => 'tx_slubevents_domain_model_contact',
+                        'table_local' => 'sys_file',
+                    ],
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            )
         ],
     ],
 ];

@@ -19,7 +19,7 @@
 					<f:then>
 						<div class="single-contact">
 							<div class="photo">
-								<f:image src='uploads/tx_slubevents/{event.contact.photo}' alt="Porträt von {event.contact.name}" title="{event.contact.name -> f:format.stripTags()}" maxWidth="100" />
+								<f:image src="{contact.photo.uid}" treatIdAsReference="TRUE"  alt="Porträt von {contact.name}" title="{contact.name -> f:format.stripTags()}"  maxWidth="100" />
 							</div>
 							<div class="description"><span class="name">{event.contact.name}</span>
 								<f:format.html>{event.contact.description}</f:format.html>

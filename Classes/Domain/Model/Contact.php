@@ -62,15 +62,12 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Description Field
-     *
-     * @var string
-     */
-    protected $description;
+     *string
 
     /**
      * Photo of Contact Person
      *
-     * @var string
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $photo;
 
@@ -165,7 +162,7 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the photo
      *
-     * @return string $photo
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $photo
      */
     public function getPhoto()
     {
@@ -175,11 +172,11 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the photo
      *
-     * @param string $photo
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $photo
      *
      * @return void
      */
-    public function setPhoto($photo)
+    public function setPhoto(\TYPO3\CMS\Extbase\Domain\Model\FileReference $photo)
     {
         $this->photo = $photo;
     }
