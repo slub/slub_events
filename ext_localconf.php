@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Slub.' . $_EXTKEY,
+    'Slub.SlubEvents',
     'Eventlist',
     [
         'Event' => 'list, show, showNotFound, listUpcoming, new, update, create, delete, printCal',
@@ -16,7 +16,7 @@ if (!defined('TYPO3_MODE')) {
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Slub.' . $_EXTKEY,
+    'Slub.SlubEvents',
     'Eventsubscribe',
     [
         'Subscriber' => 'new, create, delete, eventNotFound, subscriberNotFound',
@@ -28,7 +28,7 @@ if (!defined('TYPO3_MODE')) {
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Slub.' . $_EXTKEY,
+    'Slub.SlubEvents',
     'Eventuserpanel',
     [
         'Event'      => 'listOwn, show',
@@ -41,7 +41,7 @@ if (!defined('TYPO3_MODE')) {
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Slub.' . $_EXTKEY,
+    'Slub.SlubEvents',
     'Eventgeniusbar',
     [
         'Category' => 'list, gbList',
@@ -69,21 +69,21 @@ if (TYPO3_MODE === 'BE') {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] =
         Slub\SlubEvents\Slots\HookPostProcessing::class;
 
-    $languageDir = $_EXTKEY . '/Resources/Private/Language/';
+    $languageDir = 'slub_events/Resources/Private/Language/';
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Slub\\SlubEvents\\Task\\CheckeventsTask'] = [
-        'extension'        => $_EXTKEY,
+        'extension'        => 'slub_events',
         'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.checkevents.name',
         'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.checkevents.description',
         'additionalFields' => Slub\SlubEvents\Task\CheckeventsTaskAdditionalFieldProvider::class
     ];
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Slub\\SlubEvents\\Task\\StatisticsTask'] = [
-        'extension'        => $_EXTKEY,
+        'extension'        => 'slub_events',
         'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.name',
         'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.statistics.description',
         'additionalFields' => Slub\SlubEvents\Task\StatisticsTaskAdditionalFieldProvider::class
     ];
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Slub\\SlubEvents\\Task\\CleanUpTask'] = [
-        'extension'        => $_EXTKEY,
+        'extension'        => 'slub_events',
         'title'            => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.cleanup.name',
         'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.cleanup.description',
         'additionalFields' => Slub\SlubEvents\Task\CleanUpTaskAdditionalFieldProvider::class

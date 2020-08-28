@@ -12,7 +12,7 @@ if (TYPO3_MODE === 'BE') {
      * Registers a Backend Module
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'Slub.' . $_EXTKEY,
+        'Slub.SlubEvents',
         'web',           // Make module a submodule of 'web'
         'slubevents',    // Submodule key
         '',              // Position
@@ -24,8 +24,8 @@ if (TYPO3_MODE === 'BE') {
         ],
         [
             'access' => 'user,group',
-            'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
-            'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_slubevents.xlf',
+            'icon'   => 'EXT:slub_events/ext_icon.gif',
+            'labels' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_slubevents.xlf',
         ]
     );
 }
