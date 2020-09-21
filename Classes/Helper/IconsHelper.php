@@ -23,12 +23,15 @@ namespace Slub\SlubEvents\Helper;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\Utility\IconUtility;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 class IconsHelper
@@ -65,22 +68,37 @@ class IconsHelper
      */
     public function getEditIcon($table, array $row)
     {
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+
         $params .= '&edit[' . $table . '][' . $row['uid'] . ']=edit';
         $title = LocalizationUtility::translate('be.editEvent', 'slub_events',
                 $arguments = null) . ' ' . $row['uid'] . ': ' . $row['title'];
-        $icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath,
-                -1)) . '" title="' . $title . '">' .
+        $clickUrl = $uriBuilder->buildUriFromRoute('record_edit') . $params
+        . '&returnUrl=' . rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
+
+        $icon = '<a href="'. $clickUrl .'" title="' . $title . '">'  .
             $this->iconFactory->getIcon('actions-document-open', Icon::SIZE_SMALL)->render() .
             '</a>';
         return $icon;
     }
+
+    /**
+     * Returns the New Icon with link
+     *
+     * @param string $table Table name
+     * @param array $row Data row
+     * @return string html output
+     */
     public function getNewIcon($table, $storagePid)
     {
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
-        $params .= '&edit[' . $table . '][' . $storagePid . ']=new';
+        $params = '&edit[' . $table . '][' . $storagePid . ']=new';
         $title = LocalizationUtility::translate('be.newEvent', 'slub_events', $arguments = null);
-        $icon = '<a href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath,
-                -1)) . '" title="' . $title . '">' .
+        $clickUrl = $uriBuilder->buildUriFromRoute('record_edit') . $params
+            . '&returnUrl=' . rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
+
+        $icon = '<a href="'. $clickUrl .'" title="' . $title . '">' .
             $this->iconFactory->getIcon('actions-document-new', Icon::SIZE_SMALL)->render() .
             '</a>';
 

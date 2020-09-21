@@ -24,6 +24,7 @@ namespace Slub\SlubEvents\Slots;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -307,13 +308,18 @@ class Tceforms
      */
     protected function getEditLink($table, array $row)
     {
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+
         $params .= '&edit[' . $table . '][' . $row['uid'] . ']=edit';
         $title = LocalizationUtility::translate('be.editEvent', 'slub_events',
-                $arguments = null) . ' ' .
-                LocalizationUtility::translate('tx_slubevents_domain_model_event.recurring', 'slub_events',
-                $arguments = null) . ' `' . $row['title'] . '`';
-        $link = '<a href="#" class="btn btn-info" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, $this->backPath)) . '" title="' . $title . '">' .
-                '[' . $row['uid'] . '] ' . $row['title'] .
+              $arguments = null) . ' ' .
+              LocalizationUtility::translate('tx_slubevents_domain_model_event.recurring', 'slub_events',
+              $arguments = null) . ' `' . $row['title'] . '`';
+        $clickUrl = $uriBuilder->buildUriFromRoute('record_edit') . $params
+            . '&returnUrl=' . rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
+
+        $link = '<a href="'. $clickUrl .'" class="btn btn-info" title="' . $title . '">'  .
+            '[' . $row['uid'] . '] ' . $row['title'] .
             '</a>';
 
         return $link;
