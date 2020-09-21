@@ -88,4 +88,20 @@ if (TYPO3_MODE === 'BE') {
         'description'      => 'LLL:EXT:' . $languageDir . 'locallang.xlf:tasks.cleanup.description',
         'additionalFields' => Slub\SlubEvents\Task\CleanUpTaskAdditionalFieldProvider::class
     ];
+
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1600698292] = [
+        'nodeName' => 'recurringOptions',
+        'priority' => 40,
+        'class' => Slub\SlubEvents\Helper\Form\Element\RecurringOptionsElement::class
+    ];
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1600701794] = [
+        'nodeName' => 'recurringEvents',
+        'priority' => 40,
+        'class' => Slub\SlubEvents\Helper\Form\Element\RecurringEventsElement::class
+    ];
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1600702566] = [
+        'nodeName' => 'recurringParent',
+        'priority' => 40,
+        'class' => Slub\SlubEvents\Helper\Form\Element\RecurringParentElement::class
+    ];
 }

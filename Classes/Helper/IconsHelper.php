@@ -205,8 +205,8 @@ class IconsHelper
             <span class="t3js-icon icon icon-size-small icon-state-default icon-tcarecords-'.$table.'-default"
             data-identifier="tcarecords-'.$table.'-default">
             ' . $hiddenRecordIcon . '
-            </a><
-        /td>
+            </a>
+        </td>
         ';
     }
 }

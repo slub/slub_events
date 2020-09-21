@@ -423,7 +423,7 @@ return [
             'label'     => $LL . 'tx_slubevents_domain_model_event.parent',
             'config'    => [
                 'type' => 'user',
-                'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->eventParentString',
+                'renderType' => 'recurringParent',
             ],
         ],
         'recurring'               => [
@@ -444,8 +444,8 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_options',
             'config'  => [
                 'type'  => 'user',
+                'renderType' => 'recurringOptions',
                 'size'  => 60,
-                'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->recurring_options',
                 'parameters' => array(
                 'color' => 'green'
                 )
@@ -458,8 +458,8 @@ return [
             'label'   => $LL . 'tx_slubevents_domain_model_event.recurring_events',
             'config'  => [
                 'type'  => 'user',
+                'renderType' => 'recurringEvents',
                 'size'  => 60,
-                'userFunc' => 'Slub\\SlubEvents\\Slots\\Tceforms->recurring_events',
                 'parameters' => array(
                 'color' => 'green'
                 )
