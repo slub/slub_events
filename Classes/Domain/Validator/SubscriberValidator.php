@@ -49,7 +49,7 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
 	/**
      * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
      */
-    public function injectSubscriberRepository(EventRepository $subscriberRepository)
+    public function injectSubscriberRepository(SubscriberRepository $subscriberRepository)
     {
         $this->subscriberRepository = $subscriberRepository;
     }
