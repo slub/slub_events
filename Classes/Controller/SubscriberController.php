@@ -201,6 +201,7 @@ class SubscriberController extends AbstractController
      * @param Subscriber $newSubscriber
      * @param Event      $event
      * @param Category   $category
+     * @Extbase\Validate("\Slub\SlubEvents\Domain\Validator\SubscriberValidator", param="newSubscriber")
      * @Extbase\Validate("\Slub\SlubEvents\Domain\Validator\EventSubscriptionAllowedValidator", param="event")
      * @Extbase\IgnoreValidation("category")
      *
