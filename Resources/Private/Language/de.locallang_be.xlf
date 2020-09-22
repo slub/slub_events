@@ -1,182 +1,186 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-05-09T08:46:20Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-09-22T11:47:51Z">
 		<header>
 			<generator>LFEditor</generator>
 			<authorName>Alexander Bigga</authorName>
 		</header>
 		<body>
 			<trans-unit id="flexforms.categories_recursive" approved="yes">
-				<source>Include Child Categories</source>
-				<target>Untergeordnete Kategorien einschließen</target>
+				<source><![CDATA[Include Child Categories]]></source>
+				<target><![CDATA[Untergeordnete Kategorien einschließen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.catforconsultations" approved="yes">
-				<source>Consultations category</source>
-				<target>Sprechstunden Kategorie</target>
+				<source><![CDATA[Consultations category]]></source>
+				<target><![CDATA[Sprechstunden Kategorie]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.catsforevents" approved="yes">
-				<source>Events categories</source>
-				<target>Veranstaltungs Kategorien</target>
+				<source><![CDATA[Events categories]]></source>
+				<target><![CDATA[Veranstaltungs Kategorien]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.contact_view" approved="yes">
-				<source>Contact View</source>
-				<target>Personenansicht</target>
+				<source><![CDATA[Contact View]]></source>
+				<target><![CDATA[Personenansicht]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.contactperson" approved="yes">
-				<source>Contact person</source>
-				<target>Ansprechpartner</target>
+				<source><![CDATA[Contact person]]></source>
+				<target><![CDATA[Ansprechpartner]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.discipline_recursive" approved="yes">
-				<source>Include Child Disciplines</source>
-				<target>Untergeordnete Fachdiszipline einschließen</target>
+				<source><![CDATA[Include Child Disciplines]]></source>
+				<target><![CDATA[Untergeordnete Fachdiszipline einschließen]]></target>
+			</trans-unit>
+			<trans-unit id="flexforms.dont_clear_cached_events" approved="yes">
+				<source><![CDATA[Don't clear cached event plugins]]></source>
+				<target><![CDATA[Gecachte Veranstaltungs-Plugins nicht löschen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.event_ordering" approved="yes">
-				<source>Event Ordering</source>
-				<target>Sortierung der Liste</target>
+				<source><![CDATA[Event Ordering]]></source>
+				<target><![CDATA[Sortierung der Liste]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.eventgeniusbar_title" approved="yes">
-				<source>Knowledge Bar View Settings</source>
-				<target>Einstellungen Wissensbar</target>
+				<source><![CDATA[Knowledge Bar View Settings]]></source>
+				<target><![CDATA[Einstellungen Wissensbar]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.eventlist_title" approved="yes">
-				<source>List and Single View Settings</source>
-				<target>Einstellungen Listen- und Einzelansicht</target>
+				<source><![CDATA[List and Single View Settings]]></source>
+				<target><![CDATA[Einstellungen Listen- und Einzelansicht]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.eventsubscribe_title" approved="yes">
-				<source>Registration View Settings</source>
-				<target>Einstellungen Anmeldung</target>
+				<source><![CDATA[Registration View Settings]]></source>
+				<target><![CDATA[Einstellungen Anmeldung]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.eventuserpanel_title" approved="yes">
-				<source>Registration Userpanel Settings</source>
-				<target>Einstellungen Meine Veranstaltungen</target>
+				<source><![CDATA[Registration Userpanel Settings]]></source>
+				<target><![CDATA[Einstellungen Meine Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.fullcalendar_js" approved="yes">
-				<source>Fullcalendar Javascript</source>
-				<target>Fullcalendar Javascript</target>
+				<source><![CDATA[Fullcalendar Javascript]]></source>
+				<target><![CDATA[Fullcalendar Javascript]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.knowledgebar_view" approved="yes">
-				<source>Knowledge Bar View</source>
-				<target>Wissensbar</target>
+				<source><![CDATA[Knowledge Bar View]]></source>
+				<target><![CDATA[Wissensbar]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.limit_events" approved="yes">
-				<source>Show only Given Amount of Events</source>
-				<target>Anzahl der nächsten Veranstaltungen</target>
+				<source><![CDATA[Show only Given Amount of Events]]></source>
+				<target><![CDATA[Anzahl der nächsten Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.list_month_view" approved="yes">
-				<source>List Month View</source>
-				<target>Monatsliste</target>
+				<source><![CDATA[List Month View]]></source>
+				<target><![CDATA[Monatsliste]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.list_view" approved="yes">
-				<source>List View</source>
-				<target>Listenansicht</target>
+				<source><![CDATA[List View]]></source>
+				<target><![CDATA[Listenansicht]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.list_view_upcoming" approved="yes">
-				<source>List Upcoming Events</source>
-				<target>Liste der nächsten Veranstaltungen</target>
+				<source><![CDATA[List Upcoming Events]]></source>
+				<target><![CDATA[Liste der nächsten Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.ordering_ascending" approved="yes">
-				<source>Ascending</source>
-				<target>Aufsteigend</target>
+				<source><![CDATA[Ascending]]></source>
+				<target><![CDATA[Aufsteigend]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.ordering_descending" approved="yes">
-				<source>Descending</source>
-				<target>Absteigend</target>
+				<source><![CDATA[Descending]]></source>
+				<target><![CDATA[Absteigend]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.page_list_own" approved="yes">
-				<source>Page of MyEvents View</source>
-				<target>Seite &quot;Meine Veranstaltungen&quot;</target>
+				<source><![CDATA[Page of MyEvents View]]></source>
+				<target><![CDATA[Seite "Meine Veranstaltungen"]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.page_list_view" approved="yes">
-				<source>Page of List View</source>
-				<target>Seite mit Listenansicht</target>
+				<source><![CDATA[Page of List View]]></source>
+				<target><![CDATA[Seite mit Listenansicht]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.page_single_view" approved="yes">
-				<source>Page of Single View</source>
-				<target>Seite mit Einzelansicht</target>
+				<source><![CDATA[Page of Single View]]></source>
+				<target><![CDATA[Seite mit Einzelansicht]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.page_subscribe" approved="yes">
-				<source>Page of Subscribe Form</source>
-				<target>Seite mit Anmeldeformular</target>
+				<source><![CDATA[Page of Subscribe Form]]></source>
+				<target><![CDATA[Seite mit Anmeldeformular]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.page_unsubscribe" approved="yes">
-				<source>Page of Unsubscribe Form</source>
-				<target>Seite mit Abmeldeformular</target>
+				<source><![CDATA[Page of Unsubscribe Form]]></source>
+				<target><![CDATA[Seite mit Abmeldeformular]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.select_function" approved="yes">
-				<source>Select Function</source>
-				<target>Funktion</target>
+				<source><![CDATA[Select Function]]></source>
+				<target><![CDATA[Funktion]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.show_categories" approved="yes">
-				<source>Show Only Selected Categories</source>
-				<target>Nur gewählte Kategorien anzeigen</target>
+				<source><![CDATA[Show Only Selected Categories]]></source>
+				<target><![CDATA[Nur gewählte Kategorien anzeigen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.show_categories_start" approved="yes">
-				<source>Select Root Category</source>
-				<target>Wurzel-Kategorie wählen</target>
+				<source><![CDATA[Select Root Category]]></source>
+				<target><![CDATA[Wurzel-Kategorie wählen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.show_contacts" approved="yes">
-				<source>Show Only Selected Contacts</source>
-				<target>Nur gewählte Kontakte anzeigen</target>
+				<source><![CDATA[Show Only Selected Contacts]]></source>
+				<target><![CDATA[Nur gewählte Kontakte anzeigen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.show_discipline" approved="yes">
-				<source>Show Only Selected Disciplines</source>
-				<target>Nur gewählte Fachdisziplinen anzeigen</target>
+				<source><![CDATA[Show Only Selected Disciplines]]></source>
+				<target><![CDATA[Nur gewählte Fachdisziplinen anzeigen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.show_past_events" approved="yes">
-				<source>Show Past Events</source>
-				<target>Zeige vergangene Veranstaltungen</target>
+				<source><![CDATA[Show Past Events]]></source>
+				<target><![CDATA[Zeige vergangene Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.showconsultations" approved="yes">
-				<source>Show consultations</source>
-				<target>Sprechstunden anzeigen</target>
+				<source><![CDATA[Show consultations]]></source>
+				<target><![CDATA[Sprechstunden anzeigen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.showevents" approved="yes">
-				<source>Show events</source>
-				<target>Veranstaltungen anzeigen</target>
+				<source><![CDATA[Show events]]></source>
+				<target><![CDATA[Veranstaltungen anzeigen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.showknowledgebar" approved="yes">
-				<source>Show Knowledge Bar</source>
-				<target>Wissensbar anzeigen</target>
+				<source><![CDATA[Show Knowledge Bar]]></source>
+				<target><![CDATA[Wissensbar anzeigen]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.single_view" approved="yes">
-				<source>Single View</source>
-				<target>Einzelansicht</target>
+				<source><![CDATA[Single View]]></source>
+				<target><![CDATA[Einzelansicht]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.subscribe_view" approved="yes">
-				<source>Subscribe View</source>
-				<target>Anmelden</target>
+				<source><![CDATA[Subscribe View]]></source>
+				<target><![CDATA[Anmelden]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.unsubscribe_view" approved="yes">
-				<source>Unsubscribe View</source>
-				<target>Abmelden</target>
+				<source><![CDATA[Unsubscribe View]]></source>
+				<target><![CDATA[Abmelden]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.userpanel_view" approved="yes">
-				<source>Userpanel View</source>
-				<target>Meine Veranstaltungen</target>
+				<source><![CDATA[Userpanel View]]></source>
+				<target><![CDATA[Meine Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="persConsultingHours" approved="yes">
-				<source>Consulting hours</source>
-				<target>Sprechstunden</target>
+				<source><![CDATA[Consulting hours]]></source>
+				<target><![CDATA[Sprechstunden]]></target>
 			</trans-unit>
 			<trans-unit id="persEvents" approved="yes">
-				<source>Events</source>
-				<target>Veranstaltungen</target>
+				<source><![CDATA[Events]]></source>
+				<target><![CDATA[Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="plugin.Eventgeniusbar" approved="yes">
-				<source>SLUB: Events: Knowledge Bar</source>
-				<target>SLUB: Veranstaltungen: Wissensbar</target>
+				<source><![CDATA[SLUB: Events: Knowledge Bar]]></source>
+				<target><![CDATA[SLUB: Veranstaltungen: Wissensbar]]></target>
 			</trans-unit>
 			<trans-unit id="plugin.Eventlist" approved="yes">
-				<source>SLUB: Events: Listing</source>
-				<target>SLUB: Veranstaltungen: Listenansicht</target>
+				<source><![CDATA[SLUB: Events: Listing]]></source>
+				<target><![CDATA[SLUB: Veranstaltungen: Listenansicht]]></target>
 			</trans-unit>
 			<trans-unit id="plugin.Eventsubscribe" approved="yes">
-				<source>SLUB: Events: Registration</source>
-				<target>SLUB: Veranstaltungen: Registrierung</target>
+				<source><![CDATA[SLUB: Events: Registration]]></source>
+				<target><![CDATA[SLUB: Veranstaltungen: Registrierung]]></target>
 			</trans-unit>
 			<trans-unit id="plugin.Eventuserpanel" approved="yes">
-				<source>SLUB: Events: User Panel</source>
-				<target>SLUB: Veranstaltungen: Meine Veranstaltung</target>
+				<source><![CDATA[SLUB: Events: User Panel]]></source>
+				<target><![CDATA[SLUB: Veranstaltungen: Meine Veranstaltung]]></target>
 			</trans-unit>
 		</body>
 	</file>

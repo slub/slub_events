@@ -42,10 +42,10 @@
 		<trans-unit id="flexforms.list_view">
 			<source>List View</source>
 		</trans-unit>
-    <trans-unit id="flexforms.list_view_upcoming">
+    	<trans-unit id="flexforms.list_view_upcoming">
 			<source>List Upcoming Events</source>
 		</trans-unit>
-    <trans-unit id="flexforms.limit_events">
+    	<trans-unit id="flexforms.limit_events">
 			<source>Show only Given Amount of Events</source>
 		</trans-unit>
 		<trans-unit id="flexforms.ordering_ascending">
@@ -57,7 +57,7 @@
 		<trans-unit id="flexforms.page_list_view">
 			<source>Page of List View</source>
 		</trans-unit>
-    <trans-unit id="flexforms.page_list_own">
+    	<trans-unit id="flexforms.page_list_own">
 			<source>Page of MyEvents View</source>
 		</trans-unit>
 		<trans-unit id="flexforms.page_single_view">
@@ -135,6 +135,10 @@
 		<trans-unit id="persConsultingHours">
 			<source>Consulting hours</source>
 		</trans-unit>
+		<trans-unit id="flexforms.dont_clear_cached_events">
+			<source>Don't clear cached event plugins</source>
+		</trans-unit>
+
 		</body>
 	</file>
 </xliff>
