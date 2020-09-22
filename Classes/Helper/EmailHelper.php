@@ -62,6 +62,12 @@ class EmailHelper
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
+        if (version_compare(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version(), '10.0.0', '<')) {
+            $useSimfonyMailer = false;
+        } else {
+            $useSimfonyMailer = true;
+        }
+
         /** @var \TYPO3Fluid\Fluid\View\StandaloneView $emailViewHTML */
         $emailViewHTML = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
@@ -77,16 +83,19 @@ class EmailHelper
         $message = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($recipient)
             ->setFrom($sender)
-            ->setCharset('utf-8')
             ->setSubject($subject);
 
         // Plain text example
         $emailTextHTML = $emailViewHTML->render();
 
-        $message->setBody(EmailHelper::html2rest($emailTextHTML));
+        if ($useSimfonyMailer) {
+            $message->text(EmailHelper::html2rest($emailTextHTML));
+            $message->html($emailTextHTML);
+        } else {
+            $message->setBody(EmailHelper::html2rest($emailTextHTML));
+            $message->addPart($emailTextHTML, 'text/html');
+    }
 
-        // HTML Email
-        $message->addPart($emailTextHTML, 'text/html');
 
         // attach ics-File
         if ($variables['attachIcs'] == true) {
@@ -115,11 +124,15 @@ class EmailHelper
             );
 
             // attach additionally ics as file
-            $message->attach(\Swift_Attachment::fromPath($eventIcsFile)
-                ->setContentType('text/calendar'));
+            if ($useSimfonyMailer) {
+                $message->attachFromPath($eventIcsFile);
+            } else {
+                $message->attach(\Swift_Attachment::fromPath($eventIcsFile)
+                    ->setContentType('text/calendar'));
+                // add ics as part
+                $message->addPart(implode("\r\n", array_filter(explode("\r\n", $ics->render()))), 'text/calendar', 'utf-8');
+            }
 
-            // add ics as part
-            $message->addPart(implode("\r\n", array_filter(explode("\r\n", $ics->render()))), 'text/calendar', 'utf-8');
         }
         // attach CSV-File
         if ($variables['attachCsv'] == true) {
@@ -145,8 +158,12 @@ class EmailHelper
             GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
 
             // attach CSV-File
-            $message->attach(\Swift_Attachment::fromPath($eventCsvFile)
-                ->setContentType('text/csv'));
+            if ($useSimfonyMailer) {
+                $message->attachFromPath($eventCsvFile);
+            } else {
+                $message->attach(\Swift_Attachment::fromPath($eventCsvFile)
+                    ->setContentType('text/csv'));
+            }
         }
 
         $message->send();
@@ -235,4 +252,5 @@ class EmailHelper
 
         return $partialRootPaths;
     }
+
 }

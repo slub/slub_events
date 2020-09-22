@@ -25,7 +25,7 @@ namespace Slub\SlubEvents\Task;
  ***************************************************************/
 
 /**
- *
+ * Scheduler Task to check for events with subscription end reached.
  *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
