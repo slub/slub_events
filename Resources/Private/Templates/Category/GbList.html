@@ -54,7 +54,7 @@
 					<f:if condition="{contact.photo}">
 						<f:then>
 							<div class="photo">
-								<f:image src="{contact.photo.uid}" treatIdAsReference="TRUE"  alt="Porträt von {contact.name}" title="{contact.name -> f:format.stripTags()}"  maxWidth="100" />
+								<f:image image="{contact.photo.uid}" alt="Porträt von {contact.name}" title="{contact.name -> f:format.stripTags()}"  maxWidth="100" />
 							</div>
 							<div class="description"><span class="name">{contact.name}</span><f:format.html>{contact.description}</f:format.html></div>
 						</f:then>
