@@ -914,33 +914,38 @@ class EventController extends AbstractController
      * action printCal
      *
      * @param Event $event
+     * @Extbase\IgnoreValidation("event")
      *
      * @return void
      */
-    public function printCalAction(Event $event)
+    public function printCalAction(Event $event = null)
     {
-        $helper['now'] = time();
-        $helper['start'] = $event->getStartDateTime()->getTimestamp();
-        // endDate may be empty
-        if ($event->getEndDateTime() instanceof \DateTime && $event->getStartDateTime() != $event->getEndDateTime()) {
-            $helper['end'] = $event->getEndDateTime()->getTimestamp();
+		if ($event === null) {
+            $this->redirect('showNotFound');
         } else {
-            $helper['allDay'] = 1;
-            $helper['end'] = $helper['start'];
-        }
-        $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
-        // location may be empty...
-        if (is_object($event->getLocation())) {
-            if (is_object($event->getLocation()->getParent()->current())) {
-                $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] =
-                    $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
+            $helper['now'] = time();
+            $helper['start'] = $event->getStartDateTime()->getTimestamp();
+            // endDate may be empty
+            if ($event->getEndDateTime() instanceof \DateTime && $event->getStartDateTime() != $event->getEndDateTime()) {
+                $helper['end'] = $event->getEndDateTime()->getTimestamp();
+            } else {
+                $helper['allDay'] = 1;
+                $helper['end'] = $helper['start'];
             }
-            $helper['location'] = $event->getLocation()->getName();
-            $helper['locationics'] = $this->foldline($event->getLocation()->getName());
+            $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
+            // location may be empty...
+            if (is_object($event->getLocation())) {
+                if (is_object($event->getLocation()->getParent()->current())) {
+                    $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
+                    $helper['locationics'] =
+                        $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
+                }
+                $helper['location'] = $event->getLocation()->getName();
+                $helper['locationics'] = $this->foldline($event->getLocation()->getName());
+            }
+            $this->view->assign('helper', $helper);
+            $this->view->assign('event', $event);
         }
-        $this->view->assign('helper', $helper);
-        $this->view->assign('event', $event);
     }
 
     /**
