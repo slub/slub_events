@@ -917,7 +917,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function printCalAction(Event $event = null)
+    public function printCalAction(Event $event)
     {
         $helper['now'] = time();
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
