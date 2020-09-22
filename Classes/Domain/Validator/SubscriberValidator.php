@@ -61,6 +61,13 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
      */
     protected $objectManager;
 
+	/**
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
 
     /**
      * Return variable
