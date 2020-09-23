@@ -64,11 +64,10 @@ class EventController extends AbstractController
             $typoScriptFrontendController = $GLOBALS['TSFE'];
             if (!$cacheTagsSet) {
                 $typoScriptFrontendController->addCacheTags(
-                    [1 => 'tx_slubevents_' . $this->settings['persistence']['storagePid']]
+                    [1 => 'tx_slubevents_' . $this->settings['storagePid']]
                 );
                 $cacheTagsSet = true;
             }
-            $this->typoScriptFrontendController = $typoScriptFrontendController;
         }
     }
 

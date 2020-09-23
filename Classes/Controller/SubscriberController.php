@@ -342,7 +342,7 @@ class SubscriberController extends AbstractController
         $this->eventRepository->update($event);
 
         // clear cache on all cached list pages
-        if ($this->settings['dontClearCachedEvents']) {
+        if (!$this->settings['dontClearCachedEvents']) {
             $this->clearAllEventListCache($event->getGeniusBar());
         }
         $this->view->assign('event', $event);
@@ -369,9 +369,9 @@ class SubscriberController extends AbstractController
         $tcemain->start([], []);
 
         if ($isGeniusBar) {
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $this->settings['persistence']['storagePid']);
+            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $this->settings['storagePid']);
         } else {
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $this->settings['persistence']['storagePid']);
+            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $this->settings['storagePid']);
         }
         return;
     }
@@ -496,7 +496,7 @@ class SubscriberController extends AbstractController
         // update the repo manually as of TYPO3 6.1
         $this->eventRepository->update($event);
 
-        if ($this->settings['dontClearCachedEvents']) {
+        if (!$this->settings['dontClearCachedEvents']) {
             $this->clearAllEventListCache($event->getGeniusBar());
         }
         $this->view->assign('event', $event);

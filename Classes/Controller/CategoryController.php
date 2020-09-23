@@ -64,11 +64,10 @@ class CategoryController extends AbstractController
             $typoScriptFrontendController = $GLOBALS['TSFE'];
             if (!$cacheTagsSet) {
                 $typoScriptFrontendController->addCacheTags(
-                    [0 => 'tx_slubevents_cat_' . $this->settings['persistence']['storagePid']]
+                    [0 => 'tx_slubevents_cat_' . $this->settings['storagePid']]
                 );
                 $cacheTagsSet = true;
             }
-            $this->typoScriptFrontendController = $typoScriptFrontendController;
         }
     }
 
