@@ -144,7 +144,7 @@
                             <label>
                                 LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.limit_events
                             </label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->listUpcoming</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>input</type>
                                 <default>10</default>
@@ -153,12 +153,27 @@
                         </TCEforms>
                     </settings.limit>
 
+                    <settings.limitByNextWeeks>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.limit_events_by_next_weeks
+                            </label>
+                            <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
+                            <config>
+                                <type>input</type>
+                                <default>0</default>
+                                <eval>int</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.limitByNextWeeks>
+
                     <settings.eventOrdering>
                         <TCEforms>
                             <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.event_ordering</label>
                             <displayCond>FIELD:switchableControllerActions:=:Event->list;Event->show;Event->showNotFound</displayCond>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items>
                                     <numIndex index="0">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.ordering_ascending</numIndex>

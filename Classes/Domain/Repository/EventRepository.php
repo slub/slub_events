@@ -217,6 +217,13 @@ namespace Slub\SlubEvents\Domain\Repository;
             }
         }
 
+        // limit to next weeks
+        if ($settings['limitByNextWeeks'] >= 1) {
+            $now = new \DateTime();
+            $dateTimeInterval = new \DateInterval("P" . (int)$settings['limitByNextWeeks'] . "W");
+            $constraints[] = $query->lessThanOrEqual('start_date_time', $now->add($dateTimeInterval));
+        }
+
         // default is to show only future events
         if (!empty($settings['startTimestamp']) && !empty($settings['stopTimestamp'])) {
             $constraints[] = $query->greaterThanOrEqual('start_date_time', $settings['startTimestamp']);

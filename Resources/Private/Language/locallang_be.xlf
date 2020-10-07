@@ -48,6 +48,9 @@
     	<trans-unit id="flexforms.limit_events">
 			<source>Show only Given Amount of Events</source>
 		</trans-unit>
+		<trans-unit id="flexforms.limit_events_by_next_weeks">
+			<source>Show only Events in Next Weeks (0 disables limitation)</source>
+		</trans-unit>
 		<trans-unit id="flexforms.ordering_ascending">
 			<source>Ascending</source>
 		</trans-unit>
