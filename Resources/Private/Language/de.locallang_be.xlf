@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-09-22T11:47:51Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-10-07T12:54:16Z">
 		<header>
 			<generator>LFEditor</generator>
 			<authorName>Alexander Bigga</authorName>
@@ -125,6 +125,10 @@
 			<trans-unit id="flexforms.show_discipline" approved="yes">
 				<source><![CDATA[Show Only Selected Disciplines]]></source>
 				<target><![CDATA[Nur gewählte Fachdisziplinen anzeigen]]></target>
+			</trans-unit>
+			<trans-unit id="flexforms.show_events_from_now" approved="yes">
+				<source><![CDATA[Show Events from Now and Not from Start of Today]]></source>
+				<target><![CDATA[Zeige Veranstaltungen ab jetzt und nicht ab Beginn des Tages]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.show_past_events" approved="yes">
 				<source><![CDATA[Show Past Events]]></source>

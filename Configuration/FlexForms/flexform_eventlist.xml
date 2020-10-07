@@ -128,6 +128,17 @@
                         </TCEforms>
                     </settings.showPastEvents>
 
+                    <settings.showEventsFromNow>
+                        <TCEforms>
+                            <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.show_events_from_now</label>
+                            <displayCond>FIELD:switchableControllerActions:!=:Event->show;Event->showNotFound</displayCond>
+                            <config>
+                                <type>check</type>
+                                <default>0</default>
+                            </config>
+                        </TCEforms>
+                    </settings.showEventsFromNow>
+
                     <settings.limit>
                         <TCEforms>
                             <label>

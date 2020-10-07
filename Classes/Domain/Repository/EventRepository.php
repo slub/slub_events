@@ -208,9 +208,13 @@ namespace Slub\SlubEvents\Domain\Repository;
             $constraints[] = $query->greaterThan('start_date_time', strtotime('now'));
         }
 
-        // default is to show only future events
+        // default is to show events beginning with today
         if ($settings['showPastEvents'] != true) {
-            $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+            if ($settings['showEventsFromNow']) {
+                $constraints[] = $query->greaterThan('end_date_time', strtotime('now'));
+            } else {
+                $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
+            }
         }
 
         // default is to show only future events
