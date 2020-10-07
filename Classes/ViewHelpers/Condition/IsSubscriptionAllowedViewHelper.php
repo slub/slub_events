@@ -81,27 +81,26 @@ class IsSubscriptionAllowedViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
-        $showLink = true;
         $event = $arguments['event'];
-
-        // limit reached already --> overbooked
-        if (self::getSubscriberRepository()->countAllByEvent($event) >= $event->getMaxSubscriber()) {
-            $showLink = false;
-        }
 
         // event is cancelled
         if ($event->getCancelled()) {
-            $showLink = false;
+            return false;
         }
 
         // deadline reached....
         if (is_object($event->getSubEndDateTime())) {
             if ($event->getSubEndDateTime()->getTimestamp() < time()) {
-                $showLink = false;
+                return false;
             }
         }
 
-        return $showLink;
+        // limit reached already --> overbooked
+        if (self::getSubscriberRepository()->countAllByEvent($event) >= $event->getMaxSubscriber()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
