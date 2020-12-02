@@ -181,7 +181,7 @@ class HookPreProcessing
                 }
             } else {
                 unset($fieldArray['sub_end_date_time_select']);
-                $fieldArray['sub_end_date_time'] = '';
+                $fieldArray['sub_end_date_time'] = 0;
             }
 
             if ($fieldArray['genius_bar'] == false && count(explode(',', $fieldArray['categories'])) > 1) {

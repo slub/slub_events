@@ -40,12 +40,15 @@ return [
             'config'  => [
                 'type'                => 'select',
                 'renderType'          => 'selectSingle',
-                'foreign_table'       => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items'               => [
-                    ['LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
+                'special' => 'languages',
+                'items' => [
+                    [
+                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ],
                 ],
+                'default' => 0,
             ],
             'onChange'  => 'reload',
         ],
@@ -61,6 +64,7 @@ return [
                 ],
                 'foreign_table'       => 'tx_slubevents_domain_model_contact',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_contact.pid=###CURRENT_PID### AND tx_slubevents_domain_model_contact.sys_language_uid IN (-1,0)',
+                'default' => 0,
             ],
         ],
         'l10n_diffsource'  => [
@@ -176,6 +180,7 @@ return [
                         'tablenames' => 'tx_slubevents_domain_model_contact',
                         'table_local' => 'sys_file',
                     ],
+                    'default' => 0,
                 ],
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             )

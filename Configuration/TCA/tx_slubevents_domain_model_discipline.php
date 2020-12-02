@@ -40,12 +40,15 @@ return [
             'config'  => [
                 'type'                => 'select',
                 'renderType'          => 'selectSingle',
-                'foreign_table'       => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items'               => [
-                    ['LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
+                'special' => 'languages',
+                'items' => [
+                    [
+                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ],
                 ],
+                'default' => 0,
             ],
             'onChange'  => 'reload',
         ],
@@ -61,6 +64,7 @@ return [
                 ],
                 'foreign_table'       => 'tx_slubevents_domain_model_discipline',
                 'foreign_table_where' => 'AND tx_slubevents_domain_model_discipline.pid=###CURRENT_PID### AND tx_slubevents_domain_model_discipline.sys_language_uid IN (-1,0)',
+                'default' => 0,
             ],
         ],
         'l10n_diffsource'  => [
@@ -141,6 +145,7 @@ return [
                 ],
                 'minitems'            => 0,
                 'maxitems'            => 1,
+                'default' => 0,
             ],
         ],
         'discipline'       => [

@@ -154,7 +154,7 @@ class HookPostProcessing
 
             if ($status == "new") {
 
-                // debug($id, 'id new');
+//                debug($fieldArray, 'id new');
 
             }
 
