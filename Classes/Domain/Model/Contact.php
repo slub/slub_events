@@ -62,7 +62,10 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Description Field
-     *string
+     *
+     * @var string
+     */
+    protected $description;
 
     /**
      * Photo of Contact Person
