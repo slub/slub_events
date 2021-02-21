@@ -56,7 +56,7 @@
 
 <f:if condition="{subscriber.customerid}">
 	<f:then>
-		<p>Eine Liste Ihrer Veranstaltungen an der SLUB finden Sie unter folgendem Link:<br/>
+		<p>{f:translate(key: 'text.my_events.intro')}:<br/>
 			<f:link.action absolute="1" class="slub-event-link" action="listOwn" controller="Event"
 						   pageUid="{settings.pidListOwn}" pluginName="Eventuserpanel">
 				<f:translate key="view_my_events"/>

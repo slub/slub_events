@@ -170,6 +170,9 @@
 		<trans-unit id="text.signature">
 			<source>SLUB Dresden</source>
 		</trans-unit>
+			<trans-unit id="text.my_events.intro">
+				<source>You can find a list of your events at the SLUB under the following link</source>
+			</trans-unit>
 		<trans-unit id="tx_slubevents.be.eventmanagement">
 			<source>Event Management</source>
 		</trans-unit>
