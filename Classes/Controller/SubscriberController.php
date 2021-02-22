@@ -196,12 +196,11 @@ class SubscriberController extends AbstractController
 
     /**
      * action create
-     * // gets validated automatically if name is like this: ...Tx_SlubEvents_Domain_Validator_SubscriberValidator
+     * // gets validated automatically if name is like this: Slub\SlubEvents\Domain\Validator\SubscriberValidator
      *
      * @param Subscriber $newSubscriber
      * @param Event      $event
      * @param Category   $category
-     * @Extbase\Validate("\Slub\SlubEvents\Domain\Validator\SubscriberValidator", param="newSubscriber")
      * @Extbase\Validate("\Slub\SlubEvents\Domain\Validator\EventSubscriptionAllowedValidator", param="event")
      * @Extbase\IgnoreValidation("category")
      *
@@ -328,7 +327,7 @@ class SubscriberController extends AbstractController
                         'settings'      => $this->settings,
                         'attachCsv'     => false,
                         'attachIcs'     => false,
-                    ],
+                        FormErrors   ],
                     $this->configurationManager
                 );
             }

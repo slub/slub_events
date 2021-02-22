@@ -50,6 +50,17 @@ class EditCodeViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewH
     }
 
     /**
+     * Get session data
+     *
+     * @param string $key
+     * @return string
+     */
+    protected static function getSessionData($key)
+    {
+        return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
+    }
+
+    /**
      * Set session data
      *
      * @param string $key
@@ -75,8 +86,15 @@ class EditCodeViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewH
         RenderingContextInterface $renderingContext
     ) {
         $event = $arguments['event'];
+
+        $editCodeDummy = self::getSessionData('editcode');
+
+        // create new editcode-dummy code
+        if (empty($editCodeDummy)) {
+            $editCodeDummy = hash('sha256', rand() . $event->getTitle() . time() . 'dummy');
+        }
+
         // set editcode-dummy for Spam/Form-double-sent protection
-        $editCodeDummy = hash('sha256', rand() . $event->getTitle() . time() . 'dummy');
         self::setSessionData('editcode', $editCodeDummy);
 
         return $editCodeDummy;
