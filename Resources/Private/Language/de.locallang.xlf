@@ -437,14 +437,6 @@
 				<source><![CDATA[telephone]]></source>
 				<target><![CDATA[Telefon]]></target>
 			</trans-unit>
-			<trans-unit id="val_event_overbooked" approved="yes">
-				<source><![CDATA[]]></source>
-				<target><![CDATA[Die Veranstaltung ist bereits ausgebucht.]]></target>
-			</trans-unit>
-			<trans-unit id="val_event_reacheddeadline" approved="yes">
-				<source><![CDATA[]]></source>
-				<target><![CDATA[Die Anmeldefrist ist bereits überschritten.]]></target>
-			</trans-unit>
 			<trans-unit id="validationerror_val_customerid" approved="yes">
 				<source><![CDATA[The given customer id is not valid.]]></source>
 				<target><![CDATA[Bitte geben Sie eine gültige SLUB-Benutzernummer ein.]]></target>
