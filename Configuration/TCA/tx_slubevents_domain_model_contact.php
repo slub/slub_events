@@ -155,10 +155,7 @@ return [
                 'eval'    => 'trim',
                 'fieldControl' => [
                     'fullScreenRichtext' => [
-                        'disabled' => false,
-                        'options' => [
-                            'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        ],
+                        'disabled' => false
                     ],
                 ],
                 'enableRichtext' => true,
