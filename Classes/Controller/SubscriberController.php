@@ -327,7 +327,7 @@ class SubscriberController extends AbstractController
                         'settings'      => $this->settings,
                         'attachCsv'     => false,
                         'attachIcs'     => false,
-                   ],
+                    ],
                     $this->configurationManager
                 );
             }
