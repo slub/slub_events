@@ -138,13 +138,13 @@
 			<source>Anonymize all subscribers of events older than given amount of days</source>
 		</trans-unit>
 		<trans-unit id="tasks.cleanup.invalidCleanupDays">
-			<source>Invalid day periode given!</source>
+			<source>Invalid day period given!</source>
 		</trans-unit>
 		<trans-unit id="tasks.cleanup.cleanupDaysEvents">
 			<source>Delete all events including subscribers older than given amount of days</source>
 		</trans-unit>
 		<trans-unit id="tasks.cleanup.invalidCleanupDaysEvents">
-			<source>Invalid day periode given!</source>
+			<source>Invalid day period given!</source>
 		</trans-unit>
 		<trans-unit id="text.back_to_overview">
 			<source>Back to Overview</source>
@@ -170,6 +170,9 @@
 		<trans-unit id="text.signature">
 			<source>SLUB Dresden</source>
 		</trans-unit>
+			<trans-unit id="text.my_events.intro">
+				<source>You can find a list of your events at the SLUB under the following link</source>
+			</trans-unit>
 		<trans-unit id="tx_slubevents.be.eventmanagement">
 			<source>Event Management</source>
 		</trans-unit>
