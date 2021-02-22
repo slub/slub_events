@@ -1,7 +1,11 @@
-{namespace core = TYPO3\CMS\Core\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+			xmlns:se="http://typo3.org/ns/Slub/SlubEvents/ViewHelpers"
+			data-namespace-typo3-fluid="true">
+
 <f:layout name="Default"/>
 
-<div xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<div>
 
   <f:section name="eventListing">
     <table class="tx_slubevents table table-bordered table-striped">
@@ -140,7 +144,6 @@
   </f:section>
 
   <f:section name="content">
-    {namespace se=Slub\SlubEvents\ViewHelpers}
 
     <div class="container-fluid">
       <h1>
@@ -261,3 +264,5 @@
     </div>
   </f:section>
 </div>
+
+</html>
