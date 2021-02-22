@@ -1,11 +1,10 @@
+{namespace se=Slub\SlubEvents\ViewHelpers}
 <f:layout name="Default"/>
 
 <f:section name="content">
 	<f:flashMessages/>
 
 		<h1>Online Umfrage versenden.</h1>
-
-		{namespace se=Slub\SlubEvents\ViewHelpers}
 
 		<div class="tx_slubevents">
 			<f:form action="beOnlineSurvey" controller="Subscriber" name="onlineSurvey" method="post">

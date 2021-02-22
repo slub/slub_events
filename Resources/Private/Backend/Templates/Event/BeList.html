@@ -1,17 +1,11 @@
-{namespace core = TYPO3\CMS\Core\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+			xmlns:se="http://typo3.org/ns/Slub/SlubEvents/ViewHelpers"
+			data-namespace-typo3-fluid="true">
+
 <f:layout name="Default"/>
 
-This Template is responsible for creating a table of domain objects.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-Resources:
-Private:
-Templates:
-List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-<div xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<div>
 
   <f:section name="eventListing">
     <table class="tx_slubevents table table-bordered table-striped">
@@ -150,7 +144,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
   </f:section>
 
   <f:section name="content">
-    {namespace se=Slub\SlubEvents\ViewHelpers}
 
     <div class="container-fluid">
       <h1>
@@ -177,7 +170,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
           <tr>
             <td class="td-input" rowspan="1">
               <div class="form-group">
-                <label for="tceforms-datefield-1">
+                <label for="datetimepicker1">
                     <f:translate key="tx_slubevents_domain_model_event.start_date_time"/> <br />
                     <div class='input-group input-group-sm'>
                           <f:form.textfield id="datetimepicker1"
@@ -197,7 +190,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
                 <hr>
                 <label for="searchString">
                     <f:translate key="be.searchString"/> <br />
-                    <f:form.textfield class="" property="searchString"
+                    <f:form.textfield id="searchString" class="" property="searchString"
                             placeholder="<f:translate key='be.searchInTitle' />"
                             value="{searchString}"/>
                 </label>
@@ -218,8 +211,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
                     arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
             </td>
             <td rowspan="1">
-              <label for="category-{category.item.uid}"
-                   title="{category.item.uid}">{category.item.title}</label>
               <f:form.checkbox id="checkbox-all-contacts"
                        name="checkbox-all-contacts"
                        value="1"
@@ -271,3 +262,5 @@ Otherwise your changes will be overwritten the next time you save the extension 
     </div>
   </f:section>
 </div>
+
+</html>
