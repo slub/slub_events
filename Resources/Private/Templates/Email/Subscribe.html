@@ -6,7 +6,7 @@
 		</head>
 	</f:format.raw>
 </f:if>
-<p>Sehr geehrte(r) {subscriber.name},</p>
+<p>{f:translate(key: 'text.salutation')} {subscriber.name},</p>
 
 <p>vielen Dank für Ihre Anmeldung zu folgender Veranstaltung:</p>
 
@@ -51,12 +51,12 @@
 </ul>
 
 
-<p><b>Beschreibung: </b></p>
+<p><b>{f:translate(key: 'tx_slubevents_domain_model_event.description')}: </b></p>
 <f:format.html>{event.description}</f:format.html>
 
 <f:if condition="{subscriber.customerid}">
 	<f:then>
-		<p>Eine Liste Ihrer Veranstaltungen an der SLUB finden Sie unter folgendem Link:<br/>
+		<p>{f:translate(key: 'text.my_events.intro')}:<br/>
 			<f:link.action absolute="1" class="slub-event-link" action="listOwn" controller="Event"
 						   pageUid="{settings.pidListOwn}" pluginName="Eventuserpanel">
 				<f:translate key="view_my_events"/>
@@ -74,9 +74,9 @@
 	</f:link.action>
 </p>
 
-<p>Mit freundlichen Grüßen</p>
+<p>{f:translate(key: 'text.closing')}</p>
 
 <p>&nbsp;</p>
 
-<p>{event.contact.name} <br/>SLUB Dresden</p>
+<p>{event.contact.name} <br/>{f:translate(key: 'text.signature')}</p>
 

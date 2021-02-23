@@ -79,9 +79,10 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
     /**
      * Get session data
      *
-     * @return
+     * @param string $key
+     * @return string
      */
-    public function getSessionData($key)
+    protected static function getSessionData($key)
     {
         return $GLOBALS['TSFE']->fe_user->getKey('ses', $key);
     }
@@ -139,6 +140,7 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
                 $this->isValid = false;
             }
         }
+        $currentSessionData = $this->getSessionData('editcode');
         if ($newSubscriber->getEditcode() != $this->getSessionData('editcode')) {
             $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_editcode', 1140);
             $this->result->forProperty('editcode')->addError($error);

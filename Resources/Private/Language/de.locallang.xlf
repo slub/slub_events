@@ -209,6 +209,10 @@
 				<source><![CDATA[Please ask your question(s) or describe your needs. Your message helps us very much to prepare the appointment as well as possible.]]></source>
 				<target><![CDATA[Bitte stellen Sie uns Ihre Frage(n) zum Thema oder beschreiben Sie Ihr Anliegen etwas genauer. So können wir uns wir uns bestmöglich auf das Gespräch vorbereiten.]]></target>
 			</trans-unit>
+			<trans-unit id="text.my_events.intro" approved="yes">
+				<source>You can find a list of your events at the SLUB under the following link</source>
+				<target>Eine Liste Ihrer Veranstaltungen an der SLUB finden Sie unter folgendem Link</target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents.be.eventmanagement" approved="yes">
 				<source><![CDATA[Event Management]]></source>
 				<target><![CDATA[SLUB Veranstaltungsmanagement]]></target>
@@ -432,14 +436,6 @@
 			<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" approved="yes">
 				<source><![CDATA[telephone]]></source>
 				<target><![CDATA[Telefon]]></target>
-			</trans-unit>
-			<trans-unit id="val_event_overbooked" approved="yes">
-				<source><![CDATA[]]></source>
-				<target><![CDATA[Die Veranstaltung ist bereits ausgebucht.]]></target>
-			</trans-unit>
-			<trans-unit id="val_event_reacheddeadline" approved="yes">
-				<source><![CDATA[]]></source>
-				<target><![CDATA[Die Anmeldefrist ist bereits überschritten.]]></target>
 			</trans-unit>
 			<trans-unit id="validationerror_val_customerid" approved="yes">
 				<source><![CDATA[The given customer id is not valid.]]></source>

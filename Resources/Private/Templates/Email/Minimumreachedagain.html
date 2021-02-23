@@ -1,5 +1,5 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
-<p>Sehr geehrte(r) {event.contact.name},</p>
+<p>{f:translate(key: 'text.salutation')} {event.contact.name},</p>
 
 <p>die folgende Veranstaltung hat nur noch {subscriberCount} und liegt damit unter der minimalen Teilnehmerzahl von
 	{event.minSubscriber}:</p>
@@ -40,9 +40,9 @@
 
 <p>Bitte bedenken Sie, dass sich die Teilnehmerliste durch Ab- und Anmeldungen noch ändern kann.</p>
 
-<p>Mit freundlichen Grüßen</p>
+<p>{f:translate(key: 'text.closing')}</p>
 
 <p>&nbsp;</p>
 
-<p>SLUB Dresden</p>
+<p>{f:translate(key: 'text.signature')}</p>
 
