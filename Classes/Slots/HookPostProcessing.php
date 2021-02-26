@@ -30,6 +30,7 @@ namespace Slub\SlubEvents\Slots;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Core\Environment;
 
 class HookPostProcessing
@@ -46,19 +47,12 @@ class HookPostProcessing
      */
     public function clearAllEventListCache($pid = 0, $isGeniusBar = false)
     {
-        /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $tcemain */
-        $tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
-
-        // next two lines are necessary... don't know why.
-        $tcemain->start([], []);
-
         if ($isGeniusBar) {
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $pid);
+            $cacheTag = 'tx_slubevents_cat_' . $pid;
         } else {
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $pid);
+            $cacheTag = 'tx_slubevents_' . $pid;
         }
-
-        return;
+        $this->getCacheManager()->flushCachesInGroupByTags('pages', [$cacheTag]);
     }
 
     /**
@@ -209,6 +203,16 @@ class HookPostProcessing
 
           }
       }
+    }
+
+    /**
+     * Create and returns an instance of the CacheManager
+     *
+     * @return CacheManager
+     */
+    protected function getCacheManager()
+    {
+        return GeneralUtility::makeInstance(CacheManager::class);
     }
 
 }
