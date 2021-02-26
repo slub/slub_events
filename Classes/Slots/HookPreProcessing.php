@@ -230,7 +230,8 @@ class HookPreProcessing
     protected function calculateEndDateTime($startDateTime, $selectedInterval, $add = TRUE)
     {
         // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
-        $sdt = new \DateTime($startDateTime);
+        $sdt = new \DateTime();
+        $sdt->setTimestamp($startDateTime);
         $edt = new \DateTime();
         if ($add === TRUE) {
             $edt = $sdt->add(new \DateInterval("PT" . trim($selectedInterval) . "M"));
@@ -251,8 +252,9 @@ class HookPreProcessing
      */
     protected function gmstrftime($time)
     {
-      // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
-        $dt = new \DateTime($time);
+        // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
+        $dt = new \DateTime();
+        $dt->setTimestamp($time);
         $formatedTimeString = gmstrftime('%a, %x %H:%M:%S', $dt->format('U'));
 
         return $formatedTimeString;
