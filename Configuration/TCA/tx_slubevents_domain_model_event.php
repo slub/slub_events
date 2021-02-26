@@ -551,6 +551,7 @@ return [
                 'size'                => 10,
                 'minitems'            => 1,
                 'maxitems'            => 1,
+                'default' => 0
             ],
         ],
         'discipline'               => [
@@ -575,6 +576,7 @@ return [
                 'size'                => 10,
                 'minitems'            => 1,
                 'maxitems'            => 10,
+                'default' => 0
             ],
         ],
         'contact'                  => [
@@ -593,6 +595,7 @@ return [
                 'size'                => 8,
                 'selectedListStyle'   => 'width:600px;',
                 'itemListStyle'       => 'width:600px;',
+                'default' => 0
             ],
         ],
         'onlinesurvey'             => [
