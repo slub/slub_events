@@ -37,6 +37,7 @@ use Slub\SlubEvents\Domain\Model\Category;
 use Slub\SlubEvents\Domain\Model\Event;
 use Slub\SlubEvents\Domain\Model\Subscriber;
 use Slub\SlubEvents\Helper\EmailHelper;
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -361,18 +362,12 @@ class SubscriberController extends AbstractController
      */
     public function clearAllEventListCache($isGeniusBar = false)
     {
-        /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $tcemain */
-        $tcemain = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
-
-        // next two lines are necessary... don't know why.
-        $tcemain->start([], []);
-
         if ($isGeniusBar) {
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_cat_' . $this->settings['storagePid']);
+            $cacheTag = 'tx_slubevents_cat_' . $this->settings['storagePid'];
         } else {
-            $tcemain->clear_cacheCmd('cachetag:tx_slubevents_' . $this->settings['storagePid']);
+            $cacheTag = 'tx_slubevents_' . $this->settings['storagePid'];
         }
-        return;
+        $this->getCacheManager()->flushCachesInGroupByTags('pages', [$cacheTag]);
     }
 
     /**
@@ -658,4 +653,13 @@ class SubscriberController extends AbstractController
         $this->view->assign('emailText', $emailTextHTML);
     }
 
+    /**
+     * Create and returns an instance of the CacheManager
+     *
+     * @return CacheManager
+     */
+    protected function getCacheManager()
+    {
+        return GeneralUtility::makeInstance(CacheManager::class);
+    }
 }
