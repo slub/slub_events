@@ -30,11 +30,17 @@ namespace Slub\SlubEvents\Slots;
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class HookPreProcessing
 {
+    /**
+     * Array of flash messages (params) array[][status,title,message]
+     *
+     * @var array
+     */
+    protected $messages = [];
 
     /**
      * initializeAction
@@ -43,7 +49,6 @@ class HookPreProcessing
      */
     protected function initialize()
     {
-
         // TYPO3 doesn't set locales for backend-users --> so do it manually like this...
         // is needed especially with gmstrftime
         switch ($GLOBALS['BE_USER']->uc['lang']) {
@@ -83,19 +88,13 @@ class HookPreProcessing
 
             $this->initialize();
 
-            /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-            $flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
-            /** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
-            $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-
             if (empty($fieldArray['genius_bar'])) {
-                $message = GeneralUtility::makeInstance(
-                    'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Veranstaltung gespeichert: "' . $fieldArray['title'] . '" am ' . $this->gmstrftime(
-                        $fieldArray['start_date_time']) . '.',
-                    'OK',
+                $this->messages[] = [
                     FlashMessage::OK,
-                    true);
+                    'OK',
+                    'Veranstaltung gespeichert: "' . $fieldArray['title'] . '" am ' . $this->gmstrftime(
+                        $fieldArray['start_date_time']) . '.'
+                ];
             } else {
                 $message_text = 'Wissensbar-Veranstaltung gespeichert: ';
                 // most time the category field is something like
@@ -114,38 +113,32 @@ class HookPreProcessing
                 }
                 $message_text .= $category_text . ' am ' . $this->gmstrftime(
                         $fieldArray['start_date_time']) . '.';
-                $message = GeneralUtility::makeInstance(
-                    'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    $message_text,
-                    'OK',
+                $this->messages[] = [
                     FlashMessage::OK,
-                    true);
+                    'OK',
+                    $message_text
+                ];
             }
-            $defaultFlashMessageQueue->enqueue($message);
 
             if ($fieldArray['start_date_time'] > $fieldArray['end_date_time'] && $fieldArray['end_date_time'] > 0) {
-                $message = GeneralUtility::makeInstance(
-                    'TYPO3\CMS\Core\Messaging\FlashMessage',
+                $this->messages[] = [
+                    FlashMessage::ERROR,
+                    'Fehler: Ende der Veranstaltung',
                     'Ende (' . $this->gmstrftime(
                         $fieldArray['end_date_time']) . ') liegt vor dem Start (' . $this->gmstrftime(
-                        $fieldArray['start_date_time']) . ')',
-                    'Fehler: Ende der Veranstaltung',
-                    FlashMessage::ERROR,
-                    true);
-                $defaultFlashMessageQueue->enqueue($message);
+                        $fieldArray['start_date_time']) . ')'
+                ];
             }
 
             // use the select box value to calculate the end_date_time relative to start_date_time
             if (!empty($fieldArray['end_date_time_select'])) {
                 $fieldArray['end_date_time'] = $this->calculateEndDateTime($fieldArray['start_date_time'], $fieldArray['end_date_time_select']);
                 unset($fieldArray['end_date_time_select']);
-                $message = GeneralUtility::makeInstance(
-                    'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Ende der Veranstaltung gesetzt auf ' . $this->gmstrftime($fieldArray['end_date_time']),
-                    'Bitte prüfen:',
+                $this->messages[] = [
                     FlashMessage::INFO,
-                    true);
-                $defaultFlashMessageQueue->enqueue($message);
+                    'Bitte prüfen:',
+                    'Ende der Veranstaltung gesetzt auf ' . $this->gmstrftime($fieldArray['end_date_time'])
+                ];
             } elseif (empty($fieldArray['end_date_time'])) {
                 $fieldArray['end_date_time'] = 0;
             }
@@ -157,29 +150,24 @@ class HookPreProcessing
                 ) {
                     if (!empty($fieldArray['sub_end_date_time_select'])) {
                         $fieldArray['sub_end_date_time'] = $this->calculateEndDateTime($fieldArray['start_date_time'], $fieldArray['sub_end_date_time_select'], FALSE);
-
-                        $message = GeneralUtility::makeInstance(
-                            'TYPO3\CMS\Core\Messaging\FlashMessage',
-                            'Ende der Anmeldungsfrist wurde gesetzt auf ' . $this->gmstrftime(
-                                $fieldArray['sub_end_date_time']),
-                            'Bitte prüfen:',
+                        $this->messages[] = [
                             FlashMessage::INFO,
-                            true);
-                        $defaultFlashMessageQueue->enqueue($message);
+                            'Bitte prüfen:',
+                            'Ende der Anmeldungsfrist wurde gesetzt auf ' . $this->gmstrftime(
+                                $fieldArray['sub_end_date_time'])
+                        ];
                     }
                 }
                 unset($fieldArray['sub_end_date_time_select']);
 
                 // warn if subscription deadline is more than 3 days before the event.
                 if ($fieldArray['sub_end_date_time'] > 0 && ($fieldArray['start_date_time'] > $fieldArray['sub_end_date_time'] + (3 * 86400))) {
-                    $message = GeneralUtility::makeInstance(
-                        'TYPO3\CMS\Core\Messaging\FlashMessage',
-                        'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . $this->gmstrftime(
-                            $fieldArray['sub_end_date_time']) . ' ==> ' . (int)(($fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']) / 86400) . ' Tage vorher!',
-                        'Bitte prüfen:',
+                    $this->messages[] = [
                         FlashMessage::WARNING,
-                        true);
-                    $defaultFlashMessageQueue->enqueue($message);
+                        'Bitte prüfen:',
+                        'Ende der Anmeldungsfrist ist aktuell gesetzt auf ' . $this->gmstrftime(
+                            $fieldArray['sub_end_date_time']) . ' ==> ' . (int)(($fieldArray['start_date_time'] - $fieldArray['sub_end_date_time']) / 86400) . ' Tage vorher!'
+                    ];
                 }
 
                 // if sub_end_date_time has been cleared, it is empty ("") here --> set it to 0.
@@ -192,26 +180,22 @@ class HookPreProcessing
             }
 
             if ($fieldArray['genius_bar'] == false && count(explode(',', $fieldArray['categories'])) > 1) {
-                $message = GeneralUtility::makeInstance(
-                    'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Sie haben ' . count(explode(',', $fieldArray['categories'])) . ' Kategorien ausgewählt. ',
-                    'Bitte prüfen: ',
+                $this->messages[] = [
                     FlashMessage::INFO,
-                    true);
-                $defaultFlashMessageQueue->enqueue($message);
+                    'Bitte prüfen:',
+                    'Sie haben ' . count(explode(',', $fieldArray['categories'])) . ' Kategorien ausgewählt. '
+                ];
             }
 
             // force genius bar events with min_ and max_subscriber == 1
             if ($fieldArray['genius_bar'] == true && ($fieldArray['min_subscriber'] != 1 || $fieldArray['max_subscriber'] != 1)) {
                 $fieldArray['min_subscriber'] = 1;
                 $fieldArray['max_subscriber'] = 1;
-                $message = GeneralUtility::makeInstance(
-                    'TYPO3\CMS\Core\Messaging\FlashMessage',
-                    'Die Mindest- und Maximalteilnehmerzahl beträgt in der Wissensbar immer 1. Dies wurde automatisch korrigiert. ',
-                    'Bitte prüfen: ',
+                $this->messages[] = [
                     FlashMessage::INFO,
-                    true);
-                $defaultFlashMessageQueue->enqueue($message);
+                    'Bitte prüfen:',
+                    'Die Mindest- und Maximalteilnehmerzahl beträgt in der Wissensbar immer 1. Dies wurde automatisch korrigiert. '
+                ];
             }
 
             if ($fieldArray['max_subscriber'] > 0 && $fieldArray['max_number'] == 0) {
@@ -222,6 +206,8 @@ class HookPreProcessing
             if (!empty($fieldArray['recurring_options'])) {
               $fieldArray['recurring_options'] = serialize($fieldArray['recurring_options']);
             }
+
+            $this->generateOutput();
         }
     }
 
@@ -265,5 +251,29 @@ class HookPreProcessing
         $formatedTimeString = gmstrftime('%a, %x %H:%M:%S', $dt->format('U'));
 
         return $formatedTimeString;
+    }
+
+    /**
+     * Generates output by using flash messages
+     *
+     * @return string
+     */
+    protected function generateOutput() {
+        $flashMessages = [];
+
+        foreach ($this->messages as $messageItem) {
+            /** @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
+            $flashMessages[] = GeneralUtility::makeInstance(FlashMessage::class, $messageItem[2], $messageItem[1], $messageItem[0]);
+        }
+
+        // render flash messages as text on CLI commands like impexp:import
+        /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
+        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
+        /** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+
+        foreach ($flashMessages as $flashMessage) {
+            $defaultFlashMessageQueue->enqueue($flashMessage);
+        }
     }
 }
