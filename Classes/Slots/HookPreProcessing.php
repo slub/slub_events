@@ -146,6 +146,8 @@ class HookPreProcessing
                     FlashMessage::INFO,
                     true);
                 $defaultFlashMessageQueue->enqueue($message);
+            } elseif (empty($fieldArray['end_date_time'])) {
+                $fieldArray['end_date_time'] = 0;
             }
 
             // touch the subscribtion end only if minimum subscribers are set
@@ -178,6 +180,11 @@ class HookPreProcessing
                         FlashMessage::WARNING,
                         true);
                     $defaultFlashMessageQueue->enqueue($message);
+                }
+
+                // if sub_end_date_time has been cleared, it is empty ("") here --> set it to 0.
+                if (empty($fieldArray['sub_end_date_time'])) {
+                    $fieldArray['sub_end_date_time'] = 0;
                 }
             } else {
                 unset($fieldArray['sub_end_date_time_select']);
