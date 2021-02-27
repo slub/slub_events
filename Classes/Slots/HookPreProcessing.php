@@ -247,7 +247,7 @@ class HookPreProcessing
         // TYPO3 is working with dateTime values instead of unix timestamps in fieldArray
         // But on importing data, $time is a Unix timestamp
 
-        if (is_int($time)) {
+        if ((string)(int)$time === $time) {
             $dt = new \DateTime();
             $dt->setTimestamp($time);
         } else {
