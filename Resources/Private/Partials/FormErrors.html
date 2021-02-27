@@ -2,15 +2,11 @@
 	<f:if condition="{validationResults.flattenedErrors}">
 		<ul class="slub-event-error">
 			<f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
-				<f:for each="{errors}" as="singleError">
-					<f:if condition="{singleError.code} < 2000">
-						<f:then>
-							<li>
-								<f:translate key="validationerror_{singleError.message}"/>
-							</li>
-						</f:then>
-					</f:if>
-				</f:for>
+				<f:groupedFor each="{errors}" as="errorsGrouped" groupBy="message" groupKey="message">
+					<li>
+						<f:translate key="validationerror_{message}"/>
+					</li>
+				</f:groupedFor>
 			</f:for>
 		</ul>
 	</f:if>

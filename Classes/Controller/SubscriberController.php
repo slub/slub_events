@@ -197,12 +197,15 @@ class SubscriberController extends AbstractController
 
     /**
      * action create
-     * // gets validated automatically if name is like this: Slub\SlubEvents\Domain\Validator\SubscriberValidator
+     *
+     * note (from docs): Up until version 10, Extbase “magically” applied validators based on a naming convention.
+     * Starting with TYPO3 v10, all validators need to be explicitly registered.
      *
      * @param Subscriber $newSubscriber
      * @param Event      $event
      * @param Category   $category
-     * @Extbase\Validate("\Slub\SlubEvents\Domain\Validator\EventSubscriptionAllowedValidator", param="event")
+     * @Extbase\Validate("Slub\SlubEvents\Domain\Validator\SubscriberValidator", param="newSubscriber")
+     * @Extbase\Validate("Slub\SlubEvents\Domain\Validator\EventSubscriptionAllowedValidator", param="event")
      * @Extbase\IgnoreValidation("category")
      *
      * @return void

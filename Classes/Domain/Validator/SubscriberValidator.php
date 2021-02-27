@@ -97,59 +97,40 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
     public function isValid($newSubscriber)
     {
         if (strlen($newSubscriber->getName()) < 3) {
-            $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_name', 1000);
-            $this->result->forProperty('name')->addError($error);
-            // usually $this->addError is enough but this doesn't set the CSS errorClass in the form-viewhelper :-(
-//			$this->addError('val_name', 1000);
-
+			$this->addError('val_name', 1000);
             $this->isValid = false;
         }
         if (!GeneralUtility::validEmail($newSubscriber->getEmail())) {
-            $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_email', 1100);
-            $this->result->forProperty('email')->addError($error);
-//			$this->addError('val_email', 1100);
-
+			$this->addError('val_email', 1100);
             $this->isValid = false;
         }
         if (strlen($newSubscriber->getCustomerid()) > 0 &&
             filter_var($newSubscriber->getCustomerid(), FILTER_VALIDATE_INT) === false
         ) {
-            $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_customerid', 1110);
-            $this->result->forProperty('customerid')->addError($error);
-//			$this->addError('val_customerid', 1110);
-
+			$this->addError('val_customerid', 1110);
             $this->isValid = false;
         }
         if (strlen($newSubscriber->getNumber()) == 0 ||
             filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === false ||
             $newSubscriber->getNumber() < 1
         ) {
-            $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_number', 1120);
-            $this->result->forProperty('number')->addError($error);
-//			$this->addError('val_number', 1120);
-
+			$this->addError('val_number', 1120);
             $this->isValid = false;
         } else {
             $event = $newSubscriber->getEvent();
             // limit reached already --> overbooked
             if ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber() > $event->getMaxSubscriber()) {
-                $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_number', 1130);
-                $this->result->forProperty('number')->addError($error);
-//			    $this->addError('val_number', 1130);
-
+			    $this->addError('val_number', 1130);
                 $this->isValid = false;
             }
         }
         $currentSessionData = $this->getSessionData('editcode');
         if ($newSubscriber->getEditcode() != $this->getSessionData('editcode')) {
-            $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_editcode', 1140);
-            $this->result->forProperty('editcode')->addError($error);
-//			$this->addError('val_editcode', 1140);
+			$this->addError('val_editcode', 1140);
             $this->isValid = false;
         }
         if ($newSubscriber->getAcceptpp() !== null && $newSubscriber->getAcceptpp() === false) {
-            $error = $this->objectManager->get(\TYPO3\CMS\Extbase\Error\Error::class, 'val_acceptpp', 1150);
-            $this->result->forProperty('acceptpp')->addError($error);
+            $this->addError('val_acceptpp', 1140);
             $this->isValid = false;
         }
 
