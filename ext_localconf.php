@@ -104,4 +104,9 @@ if (TYPO3_MODE === 'BE') {
         'priority' => 40,
         'class' => Slub\SlubEvents\Helper\Form\Element\RecurringParentElement::class
     ];
+
+    // register update wizard
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['slubEventsFileLocationUpdater']
+            = Slub\SlubEvents\Updates\FileLocationUpdater::class;
+
 }

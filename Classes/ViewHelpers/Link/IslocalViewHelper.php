@@ -1,5 +1,4 @@
 <?php
-
 namespace Slub\SlubEvents\ViewHelpers\Link;
 
 /***************************************************************
