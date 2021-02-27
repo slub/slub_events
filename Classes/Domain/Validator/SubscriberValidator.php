@@ -116,13 +116,6 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
         ) {
 			$this->addError('val_number', 1120);
             $this->isValid = false;
-        } else {
-            $event = $newSubscriber->getEvent();
-            // limit reached already --> overbooked
-            if ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber() > $event->getMaxSubscriber()) {
-			    $this->addError('val_number', 1130);
-                $this->isValid = false;
-            }
         }
         $currentSessionData = $this->getSessionData('editcode');
         if ($newSubscriber->getEditcode() != $this->getSessionData('editcode')) {
