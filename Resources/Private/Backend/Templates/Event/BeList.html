@@ -8,138 +8,142 @@
 <div>
 
   <f:section name="eventListing">
-    <table class="tx_slubevents table table-bordered table-striped">
-      <tr>
-        <th>
-          <f:format.raw>
-              <se:be.functionBar icon="new"/>
-        </f:format.raw>
-        </th>
-        <th>
-          <f:translate key="tx_slubevents_domain_model_event.title"/>
-        </th>
-        <th>
-          <f:translate key="tx_slubevents_domain_model_category"/>
-        </th>
-        <th>
-          <f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
-        </th>
-        <th>
-          <f:translate key='be.free'/>
-          / max
-        </th>
-        <th colspan="4"></th>
-      </tr>
-      <f:for each="{events}" as="event" iteration="eventIterator">
-        <tr id="event-{event.uid}" class="{f:if(condition:'{event.uid}=={currentActiveEvent}', then:'active')} {f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
-          <td class="be-icon">
-            <f:format.raw>
-                <se:be.functionBar icon="edit" event="{event}"/>
-            </f:format.raw>
-          </td>
-          <td>
-            <f:format.raw>
-                <f:if condition="{event.parent}">
-                    <f:then>
-                        <img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
-                    </f:then>
-                    <f:else>
-                        <f:if condition="{event.recurring}">
-                            <img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
-                        </f:if>
-                    </f:else>
-                </f:if>
-                <se:be.functionBar icon="geniusbar" event="{event}"/>
-                <span class="eventtitle"
-                      title="{event.description -> f:format.stripTags()}">{event.title}
-                </span>
-                <br/>
-                <span class="eventcontact">{event.contact.name}: <f:link.email
-                      email="{event.contact.email}"/>
-                </span>
-            </f:format.raw>
-          </td>
-          <td>
-            <f:for each="{event.categories}" as="category">
-                        <span class="categorytitle"
-                title="{event.description -> f:format.stripTags()}">{category.title}</span><br/>
-            </f:for>
-          </td>
-          <td>
-            <f:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M"/>
-          </td>
-          <td>
-            <f:if condition="<se:format.freePlacesLeft event='{event}' /> == 0">
-              <f:then>
-                <span class="red"><se:format.freePlacesLeft event="{event}"/></span>
-              </f:then>
-              <f:else>
-                <span class="green"><se:format.freePlacesLeft event="{event}"/></span>
-              </f:else>
-            </f:if> / {event.maxSubscriber}
-          </td>
-          <td class="be-icon">
-            <f:if condition="{event.hidden} == 0">
-              <f:then>
-                   <f:link.action action="beCopy"
-                            arguments="{event: event}"
-                            title="<f:translate key='be.copyEvent' />"
-                            addQueryString="1">
-                       <core:icon identifier="actions-edit-copy" size="small" />
-                   </f:link.action>
-              </f:then>
-            </f:if>
-          </td>
-          <td class="be-icon">
-            <f:format.raw>
-                <se:be.functionBar icon="hide" event="{event}"/>
-            </f:format.raw>
-          </td>
-          <td class="be-icon">
-            <f:if condition="{event.hidden} == 0">
-              <f:then>
-                <f:link.action action="beIcsInvitation"
-                         controller="Event"
-                         title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}"
-                         arguments="{event : event}"
-                         addQueryString="1">
-                  <img
-                    src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/calendar-import.png'/>
-                </f:link.action>
-              </f:then>
-            </f:if>
-          </td>
-          <td class="be-icon">
-            <f:if condition="{event.onlinesurvey}">
-              <f:then>
-                <f:if condition="<se:condition.IsPastEvent event='{event}' />">
-                  <f:then>
-                    <f:if condition="<f:count subject='{event.subscribers}' />">
-                      <f:then>
-                        <f:link.action action="beOnlineSurvey" controller="Subscriber"
-                                 title="<f:translate key='be.sendOnlineSurvey' />"
-                                 arguments="{event : event}">
-                          <img src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
-                        </f:link.action>
-                      </f:then>
-                      <f:else>
-                        <img class="inactive"
-                           title="<f:translate key='be.sendOnlineSurveyNoSubscribers' />"
-                           src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
-                      </f:else>
-                    </f:if>
-                  </f:then>
-                  <f:else>
-                    <img class="inactive"
-                       title="<f:translate key='be.sendOnlineSurveyNotYetPossible' />"
-                       src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
-                  </f:else>
-                </f:if>
-              </f:then>
-            </f:if>
-          </td>
-        </tr>
-      </f:for>
+    <table class="tx_slubevents table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th>
+						<f:format.raw>
+								<se:be.functionBar icon="new"/>
+					</f:format.raw>
+					</th>
+					<th>
+						<f:translate key="tx_slubevents_domain_model_event.title"/>
+					</th>
+					<th>
+						<f:translate key="tx_slubevents_domain_model_category"/>
+					</th>
+					<th>
+						<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
+					</th>
+					<th>
+						<f:translate key='be.free'/>
+						/ max
+					</th>
+					<th colspan="4"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<f:for each="{events}" as="event" iteration="eventIterator">
+					<tr id="event-{event.uid}" class="{f:if(condition:'{event.uid}=={currentActiveEvent}', then:'active')} {f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
+						<td class="be-icon">
+							<f:format.raw>
+									<se:be.functionBar icon="edit" event="{event}"/>
+							</f:format.raw>
+						</td>
+						<td>
+							<f:format.raw>
+									<f:if condition="{event.parent}">
+											<f:then>
+													<img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
+											</f:then>
+											<f:else>
+													<f:if condition="{event.recurring}">
+															<img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
+													</f:if>
+											</f:else>
+									</f:if>
+									<se:be.functionBar icon="geniusbar" event="{event}"/>
+									<span class="eventtitle"
+												title="{event.description -> f:format.stripTags()}">{event.title}
+									</span>
+									<br/>
+									<span class="eventcontact">{event.contact.name}: <f:link.email
+												email="{event.contact.email}"/>
+									</span>
+							</f:format.raw>
+						</td>
+						<td>
+							<f:for each="{event.categories}" as="category">
+													<span class="categorytitle"
+									title="{event.description -> f:format.stripTags()}">{category.title}</span><br/>
+							</f:for>
+						</td>
+						<td>
+							<f:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M"/>
+						</td>
+						<td>
+							<f:if condition="<se:format.freePlacesLeft event='{event}' /> == 0">
+								<f:then>
+									<span class="red"><se:format.freePlacesLeft event="{event}"/></span>
+								</f:then>
+								<f:else>
+									<span class="green"><se:format.freePlacesLeft event="{event}"/></span>
+								</f:else>
+							</f:if> / {event.maxSubscriber}
+						</td>
+						<td class="be-icon">
+							<f:if condition="{event.hidden} == 0">
+								<f:then>
+										 <f:link.action action="beCopy"
+															arguments="{event: event}"
+															title="<f:translate key='be.copyEvent' />"
+															addQueryString="1">
+												 <core:icon identifier="actions-edit-copy" size="small" />
+										 </f:link.action>
+								</f:then>
+							</f:if>
+						</td>
+						<td class="be-icon">
+							<f:format.raw>
+									<se:be.functionBar icon="hide" event="{event}"/>
+							</f:format.raw>
+						</td>
+						<td class="be-icon">
+							<f:if condition="{event.hidden} == 0">
+								<f:then>
+									<f:link.action action="beIcsInvitation"
+													 controller="Event"
+													 title="<f:translate key='be.sendIcsInvitationTo' /> {event.contact.name}, {event.contact.email}"
+													 arguments="{event : event}"
+													 addQueryString="1">
+										<img
+											src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/calendar-import.png'/>
+									</f:link.action>
+								</f:then>
+							</f:if>
+						</td>
+						<td class="be-icon">
+							<f:if condition="{event.onlinesurvey}">
+								<f:then>
+									<f:if condition="<se:condition.IsPastEvent event='{event}' />">
+										<f:then>
+											<f:if condition="<f:count subject='{event.subscribers}' />">
+												<f:then>
+													<f:link.action action="beOnlineSurvey" controller="Subscriber"
+																	 title="<f:translate key='be.sendOnlineSurvey' />"
+																	 arguments="{event : event}">
+														<img src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+													</f:link.action>
+												</f:then>
+												<f:else>
+													<img class="inactive"
+														 title="<f:translate key='be.sendOnlineSurveyNoSubscribers' />"
+														 src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+												</f:else>
+											</f:if>
+										</f:then>
+										<f:else>
+											<img class="inactive"
+												 title="<f:translate key='be.sendOnlineSurveyNotYetPossible' />"
+												 src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+										</f:else>
+									</f:if>
+								</f:then>
+							</f:if>
+						</td>
+					</tr>
+				</f:for>
+			</tbody>
     </table>
   </f:section>
 
