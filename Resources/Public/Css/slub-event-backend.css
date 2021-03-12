@@ -1,22 +1,8 @@
-table.tx_slubevents, div.tx_slubevents {
-  width: 80%;
-
-  border: 1px dotted red;
-  padding: 10px;
-  margin: 2px;
-  border-spacing: 0;
-}
-
 table.tx_slubevents tr.active {
     border-left: 4px solid green;
     border-right: 4px solid green;
 }
 
-table.tx_slubevents td {
-  font-size: 11pt;
-  font-weight: normal;
-  padding: 4px;
-}
 table.tx_slubevents td.be-icon {
   text-align: center;
   min-width: 20px;
@@ -43,17 +29,12 @@ table.tx_slubevents td span.geniusbar {
   cursor: pointer;
 }
 
-table.tx_slubevents tr.Even {
-  background-color: #dedede;
-}
-
 div.tx_slubevents p, div.tx_slubevents div {
   font-weight: normal;
   line-height: 120%;
 }
 
 div.tx_slubevents h3 {
-  font-size: 12pt;
   font-weight: bold;
 }
 
