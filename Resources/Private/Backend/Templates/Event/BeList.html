@@ -57,16 +57,21 @@
 												title="{event.description -> f:format.stripTags()}">{event.title}
 									</span>
 									<br/>
-									<span class="eventcontact">{event.contact.name}: <f:link.email
+									<small class="eventcontact">{event.contact.name}: <f:link.email
 												email="{event.contact.email}"/>
-									</span>
+									</small>
 							</f:format.raw>
 						</td>
 						<td>
-							<f:for each="{event.categories}" as="category">
-													<span class="categorytitle"
-									title="{event.description -> f:format.stripTags()}">{category.title}</span><br/>
-							</f:for>
+							<f:if condition="{event.categories}">
+								<ul class="event-categories-list">
+									<f:for each="{event.categories}" as="category">
+													<li class="categorytitle"
+																title="{event.description -> f:format.stripTags()}">{category.title}</li>
+									</f:for>
+								</ul>
+							</f:if>
+
 						</td>
 						<td>
 							<f:format.date date="{event.startDateTime}" format="%d.%m.%Y %H:%M"/>

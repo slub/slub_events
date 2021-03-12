@@ -9,6 +9,11 @@
 	margin-bottom: 12px;
 }
 
+ul.event-categories-list {
+	padding-left: 1.5em;
+	margin: 0;
+}
+
 table.tx_slubevents tr.active {
     border-left: 4px solid green;
     border-right: 4px solid green;
@@ -51,6 +56,12 @@ div.tx_slubevents h3 {
 
 ul.category_tree {
   padding: 3px 0 3px 1.5em;
+}
+ul.category_tree li {
+	margin: 0.2em 0;
+	vertical-align: middle;
+	text-align: left;
+	list-style: none;
 }
 
 .category_tree .foldicon {
@@ -108,13 +119,6 @@ ul.category_tree {
  * */
 .container-fluid {
   background: transparent;
-}
-
-.container-fluid li {
-  margin: 0.2em 0;
-  vertical-align: middle;
-  text-align: left;
-  list-style: none;
 }
 
 .container-fluid li.heading {
