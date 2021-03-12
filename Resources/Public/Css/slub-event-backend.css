@@ -7,13 +7,6 @@ table.tx_slubevents, div.tx_slubevents {
   border-spacing: 0;
 }
 
-table.tx_slubevents>tbody>tr>th {
-  font-size: 12pt;
-  font-weight: bold;
-  padding: 4px;
-  text-align: left;
-}
-
 table.tx_slubevents tr.active {
     border-left: 4px solid green;
     border-right: 4px solid green;
