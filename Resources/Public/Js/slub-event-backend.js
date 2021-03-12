@@ -133,12 +133,10 @@ var TreeFolder = new function () {
 // init
 TreeFolder.init = function () {
     // Find td with classname 'foldtree' which contains the foldable tree
-    if (!document.getElementsByTagName) return;
-    var aUls = document.getElementsByTagName("td");
+    if (!document.getElementsByClassName) return;
+    var aUls = document.getElementsByClassName("foldtree");
     for (var i = 0; i < aUls.length; i++) {
-        if (isClassName(aUls[i], "foldtree")) {
-            TreeFolder.prepare(aUls[i]);
-        }
+        TreeFolder.prepare(aUls[i]);
     }
 };
 
