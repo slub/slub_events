@@ -41,26 +41,24 @@
 							</f:format.raw>
 						</td>
 						<td>
-							<f:format.raw>
-									<f:if condition="{event.parent}">
-											<f:then>
-													<img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
-											</f:then>
-											<f:else>
-													<f:if condition="{event.recurring}">
-															<img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
-													</f:if>
-											</f:else>
-									</f:if>
-									<se:be.functionBar icon="geniusbar" event="{event}"/>
-									<span class="eventtitle"
-												title="{event.description -> f:format.stripTags()}">{event.title}
-									</span>
-									<br/>
-									<small class="eventcontact">{event.contact.name}: <f:link.email
-												email="{event.contact.email}"/>
-									</small>
-							</f:format.raw>
+							<f:if condition="{event.parent}">
+									<f:then>
+											<img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
+									</f:then>
+									<f:else>
+											<f:if condition="{event.recurring}">
+													<img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
+											</f:if>
+									</f:else>
+							</f:if>
+							<se:be.functionBar icon="geniusbar" event="{event}"/>
+							<span class="eventtitle"
+										title="{event.description -> f:format.stripTags()}">{event.title}
+							</span>
+							<br/>
+							<small class="eventcontact">{event.contact.name}: <f:link.email
+										email="{event.contact.email}"/>
+							</small>
 						</td>
 						<td>
 							<f:if condition="{event.categories}">
