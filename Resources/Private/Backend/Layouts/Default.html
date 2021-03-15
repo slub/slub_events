@@ -10,30 +10,31 @@
 	}">
 	<div class="typo3-fullDoc">
 		<div id="typo3-docheader">
-			<div id="typo3-docheader-row1">
-				<div class="buttonsleft">
 
-				</div>
-				<div class="buttonsright">
-					<f:be.buttons.shortcut />
-				</div>
-			</div>
-			<div id="typo3-docheader-row2">
-				<div class="docheader-row2-left">
-					<f:be.buttons.csh />
+			<div class="typo3-docheader-functions">
+				<div class="left">
 					<f:be.menus.actionMenu>
 						<f:be.menus.actionMenuItem label="<f:translate key='tx_slubevents.be.eventmanagement' />" controller="" action="beList" />
 						<f:be.menus.actionMenuItem label="<f:translate key='tx_slubevents.be.subscriberlist' />" controller="Subscriber" action="beList" />
 					</f:be.menus.actionMenu>
-
 				</div>
-				<div class="docheader-row2-right">
+				<div class="right">
 					<f:be.pagePath />
 					<f:be.pageInfo />
+					<f:be.buttons.csh />
+				</div>
+			</div>
+
+			<div class="typo3-docheader-buttons">
+				<div class="left">
+				</div>
+				<div class="right">
+					<f:be.buttons.shortcut />
 				</div>
 			</div>
 
 		</div>
+
 		<div id="typo3-docbody">
 			<div id="typo3-inner-docbody">
 				<f:flashMessages />
