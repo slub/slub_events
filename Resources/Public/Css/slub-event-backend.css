@@ -190,23 +190,6 @@ ul.category_tree li {
  *
  */
 
-.slub-backend-error {
-  border: 2px solid red;
-  background: white;
-  display: block;
-  width: 80%;
-  padding: 20px;
-}
-
-.slub-backend-error h1 {
-  text-align: center;
-}
-
-.slub-backend-error p {
-  font-size: 200%;
-  text-align: left;
-}
-
 .tx_slubevents .emailtext {
   background: #fff;
   border: 1px solid #ccc;

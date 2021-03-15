@@ -267,7 +267,7 @@
           </f:if>
         </f:then>
         <f:else>
-          <h2 class="slub-backend-error"><f:translate key="be.nothingFoundForGivenSearch"/></h2>
+					<f:be.infobox state="2">{f:translate(key: 'be.nothingFoundForGivenSearch')}</f:be.infobox>
           <f:render section="eventListing" arguments="{events: events, currentActiveEvent: currentActiveEvent}"/>
         </f:else>
       </f:if>
