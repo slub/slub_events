@@ -126,37 +126,6 @@ ul.category_tree li {
   border: none;
 }
 
-.container-fluid ul.f3-widget-paginator {
-  width: 80%;
-  border: 1px dotted red;
-  display: inline-block;
-  margin: 2px;
-}
-
-.container-fluid ul.f3-widget-paginator li {
-  float: left;
-  font-size: 140%;
-  list-style: none;
-  border: none;
-  margin: 0;
-  padding: 0.5em;
-}
-
-.container-fluid ul.f3-widget-paginator li:hover {
-  background-color: #dedede;
-}
-
-.container-fluid ul.f3-widget-paginator li.current {
-  background-color: #dedede;
-}
-
-.container-fluid li.Odd {
-}
-
-.container-fluid li.Even {
-  background: #e1f4f7;
-}
-
 .slub-event-register ul.slub-event-error {
   padding: 1em 1em 1em 2em;
   border: 1px solid red;

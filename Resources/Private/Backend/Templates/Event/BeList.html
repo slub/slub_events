@@ -259,10 +259,9 @@
               <f:render section="eventListing" arguments="{events: events}"/>
             </f:then>
             <f:else>
-              <f:widget.paginate objects="{events}" as="paginatedEvents"
-                         configuration="{settings.list.paginate}">
-                <f:render section="eventListing" arguments="{events: paginatedEvents, currentActiveEvent: currentActiveEvent}"/>
-              </f:widget.paginate>
+							<f:be.widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
+								<f:render section="eventListing" arguments="{events: paginatedEvents, currentActiveEvent: currentActiveEvent}"/>
+							</f:be.widget.paginate>
             </f:else>
           </f:if>
         </f:then>
