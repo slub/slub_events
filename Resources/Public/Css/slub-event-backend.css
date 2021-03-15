@@ -77,6 +77,7 @@ ul.category_tree li {
 	display: block;
 	width: 100%;
 	padding: 6px 6px;
+	margin: 0 0 12px 0;
 	font-size: 12px;
 	line-height: 1.5;
 	color: #333;

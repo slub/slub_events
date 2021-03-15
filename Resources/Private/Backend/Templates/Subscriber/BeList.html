@@ -2,7 +2,7 @@
 <f:layout name="Default"/>
 
 <f:section name="subscriberListing">
-	<table class="tx_slubevents">
+	<table class="tx_slubevents table table-striped table-hover">
 		<tr>
 			<th>
 				<f:translate key="tx_slubevents_domain_model_subscriber.name"/>
@@ -26,8 +26,9 @@
 				</td>
 				<td>
 					<se:be.functionBar icon="geniusbar" event="{subscriber.event}"/>
-                    <span class="eventtitle"
-						  title="<f:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">{subscriber.event.title}</span>
+					<span class="eventtitle" title="<f:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">
+						{subscriber.event.title}
+					</span>
 				</td>
 				<td>{subscriber.number}</td>
 			</tr>
@@ -45,28 +46,21 @@
 
 		<f:flashMessages/>
 
-		<f:form action="beList" section="results" name="searchParameter" method="post">
-			<table class="tx_slubevents">
-				<tr>
-					<th><label for="datetimepicker1">
-						<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
-					</label>
-					</th>
-					<th>
-						<f:translate key="tx_slubevents_domain_model_category"/>
-					</th>
-					<th></th>
-				</tr>
-				<tr>
-          <td class="td-input">
+		<div class="filter-panel">
+			<f:form action="beList" section="results" name="searchParameter" method="post">
+				<div class="row">
+					<div class="col-sm-3">
             <div class="form-group">
-              <div class='input-group input-group-sm'>
+							<label for="datetimepicker1" class="control-label">
+								<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
+							</label>
+              <div class='input-group'>
                 <f:form.textfield id="datetimepicker1"
                           property="selectedStartDateStamp"
                           size="12"
                           data="{date-type:'date'}"
                           value="{selectedStartDateStamp}"
-                          class="form-control input-sm t3js-datetimepicker t3js-clearable"
+                          class="form-control t3js-datetimepicker t3js-clearable"
                            />
                 <span class="input-group-btn">
                     <label class="btn btn-default" for="datetimepicker1">
@@ -75,23 +69,24 @@
                 </span>
               </div>
             </div>
-          </td>
-					<td class="foldtree">
-						<f:render partial="Event/CategoryTree"
-								  section="categoryTree"
-								  arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
-					</td>
-					<td>
-					</td>
-				</tr>
+					</div>
+					<div class="col-sm-6">
+						<f:translate key="tx_slubevents_domain_model_category"/>
+						<div class="foldtree">
+							<f:render partial="Event/CategoryTree"
+												section="categoryTree"
+												arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
+						</div>
+					</div>
+				</div>
 
-				<tr>
-					<td colspan="2">
-						<f:form.submit value="Suchen..."/>
-					</td>
-				</tr>
-      </table>
-		</f:form>
+				<div class="row">
+					<div class="col-xs-12">
+						<f:form.submit class="btn btn-primary" value="Suchen..."/>
+					</div>
+				</div>
+			</f:form>
+		</div>
 
     <div id="results">&nbsp;</div>
 
