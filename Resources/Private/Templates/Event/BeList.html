@@ -6,14 +6,9 @@ The proper backend module template is located in /Resources/Private/Backend/...
 
 <f:section name="content">
 
-<div class="slub-backend-error">
 <f:flashMessages />
+<f:be.infobox title="{f:translate(key: 'tx_slubevents.be.eventmanagement')}" state="2">
+	{f:translate(key: 'be.error.nofolderselected') -> f:format.raw()}
+</f:be.infobox>
 
-<h1><f:translate key="tx_slubevents.be.eventmanagement" /></h1>
-	<p>
-    <f:format.raw>
-        <f:translate key="be.error.nofolderselected" />
-    </f:format.raw>
-	</p>
-</div>
 </f:section>

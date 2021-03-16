@@ -1,17 +1,17 @@
-table.tx_slubevents, div.tx_slubevents {
-  width: 80%;
-
-  border: 1px dotted red;
-  padding: 10px;
-  margin: 2px;
-  border-spacing: 0;
+.filter-panel {
+	background-color: #ededed;
+	border-top: 1px solid #cdcdcd;
+	border-bottom: 1px solid #cdcdcd;
+	padding: 12px;
+	margin-bottom: 24px;
+}
+.filter-panel .form-group {
+	margin-bottom: 12px;
 }
 
-table.tx_slubevents>tbody>tr>th {
-  font-size: 12pt;
-  font-weight: bold;
-  padding: 4px;
-  text-align: left;
+ul.event-categories-list {
+	padding-left: 1.5em;
+	margin: 0;
 }
 
 table.tx_slubevents tr.active {
@@ -19,11 +19,6 @@ table.tx_slubevents tr.active {
     border-right: 4px solid green;
 }
 
-table.tx_slubevents td {
-  font-size: 11pt;
-  font-weight: normal;
-  padding: 4px;
-}
 table.tx_slubevents td.be-icon {
   text-align: center;
   min-width: 20px;
@@ -50,25 +45,26 @@ table.tx_slubevents td span.geniusbar {
   cursor: pointer;
 }
 
-table.tx_slubevents tr.Even {
-  background-color: #dedede;
-}
-
 div.tx_slubevents p, div.tx_slubevents div {
   font-weight: normal;
   line-height: 120%;
 }
 
 div.tx_slubevents h3 {
-  font-size: 12pt;
   font-weight: bold;
 }
 
-table.tx_slubevents ul.category_tree {
+ul.category_tree {
   padding: 3px 0 3px 1.5em;
 }
+ul.category_tree li {
+	margin: 0.2em 0;
+	vertical-align: middle;
+	text-align: left;
+	list-style: none;
+}
 
-table.tx_slubevents .foldicon {
+.category_tree .foldicon {
   font-size: 150%;
   width: 20px;
   float: left;
@@ -77,27 +73,43 @@ table.tx_slubevents .foldicon {
   text-align: center;
 }
 
-table.tx_slubevents .open input[type="checkbox"] {
+.foldtree {
+	display: block;
+	width: 100%;
+	padding: 6px 6px;
+	margin: 0 0 12px 0;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #333;
+	background-color: #fefefe;
+	background-image: none;
+	border: 1px solid #bbb;
+	border-radius: 2px;
+	box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 
 }
+.foldtree, #field-contact-search {
+	min-height: 156px;
+	max-height: 356px;
+	overflow-y: scroll;
+}
 
-table.tx_slubevents td.foldtree > ul > li.open,
-table.tx_slubevents td.foldtree > ul > li.closed {
+/** Todo: check if used in template **/
+.category_tree .foldtree > ul > li.open,
+.category_tree .foldtree > ul > li.closed {
   position: relative;
   left: -20px;
   border-left: none;
 }
 
-table.tx_slubevents td.foldtree > ul > li.open ul li {
+.foldtree > ul > li.open ul li {
   border-left: 1px dashed #ccc;
 }
 
-table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
+.foldtree > ul > li.open ul li.closed {
   border-left: 1px dashed #a00;
-}
-
-#field-contact-search {
-  width: 150px;
 }
 
 /*
@@ -110,47 +122,9 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
   background: transparent;
 }
 
-.container-fluid li {
-  margin: 0.2em 0;
-  vertical-align: middle;
-  text-align: left;
-  list-style: none;
-}
-
 .container-fluid li.heading {
   list-style: none;
   border: none;
-}
-
-.container-fluid ul.f3-widget-paginator {
-  width: 80%;
-  border: 1px dotted red;
-  display: inline-block;
-  margin: 2px;
-}
-
-.container-fluid ul.f3-widget-paginator li {
-  float: left;
-  font-size: 140%;
-  list-style: none;
-  border: none;
-  margin: 0;
-  padding: 0.5em;
-}
-
-.container-fluid ul.f3-widget-paginator li:hover {
-  background-color: #dedede;
-}
-
-.container-fluid ul.f3-widget-paginator li.current {
-  background-color: #dedede;
-}
-
-.container-fluid li.Odd {
-}
-
-.container-fluid li.Even {
-  background: #e1f4f7;
 }
 
 .slub-event-register ul.slub-event-error {
@@ -185,23 +159,6 @@ table.tx_slubevents td.foldtree > ul > li.open ul li.closed {
  *
  *
  */
-
-.slub-backend-error {
-  border: 2px solid red;
-  background: white;
-  display: block;
-  width: 80%;
-  padding: 20px;
-}
-
-.slub-backend-error h1 {
-  text-align: center;
-}
-
-.slub-backend-error p {
-  font-size: 200%;
-  text-align: left;
-}
 
 .tx_slubevents .emailtext {
   background: #fff;
