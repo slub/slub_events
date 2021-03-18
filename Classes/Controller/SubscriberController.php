@@ -229,15 +229,15 @@ class SubscriberController extends AbstractController
         // send email(s)
         $helper['now'] = time();
         // rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
-        $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
+        $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
         // location may be empty...
         if (is_object($event->getLocation())) {
             if (is_object($event->getLocation()->getParent()->current())) {
                 $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
+                $helper['locationics'] = TextUtility::foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
             }
             $helper['location'] .= $event->getLocation()->getName();
-            $helper['locationics'] .= $this->foldline($event->getLocation()->getName());
+            $helper['locationics'] .= TextUtility::foldline($event->getLocation()->getName());
         }
         $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
 
@@ -408,16 +408,16 @@ class SubscriberController extends AbstractController
         // some helper timestamps for ics-file
         $helper['now'] = time();
         $helper['isdelete'] = 1;
-        $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
+        $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
         // location may be empty...
         if (is_object($event->getLocation())) {
             if (is_object($event->getLocation()->getParent()->current())) {
                 $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
                 $helper['locationics'] =
-                    $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
+                    TextUtility::foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
             }
             $helper['location'] = $event->getLocation()->getName();
-            $helper['locationics'] = $this->foldline($event->getLocation()->getName());
+            $helper['locationics'] = TextUtility::foldline($event->getLocation()->getName());
         }
         $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
 
@@ -606,16 +606,16 @@ class SubscriberController extends AbstractController
 
         if ($step == 1) {
             $helper['now'] = time();
-            $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
+            $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
             // location may be empty...
             if (is_object($event->getLocation())) {
                 if (is_object($event->getLocation()->getParent()->current())) {
                     $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
                     $helper['locationics'] =
-                        $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
+                        TextUtility::foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
                 }
                 $helper['location'] = $event->getLocation()->getName();
-                $helper['locationics'] = $this->foldline($event->getLocation()->getName());
+                $helper['locationics'] = TextUtility::foldline($event->getLocation()->getName());
             }
 
             $allSubscribers = $event->getSubscribers();
