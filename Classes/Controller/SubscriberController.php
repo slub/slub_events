@@ -36,6 +36,8 @@ use Slub\SlubEvents\Domain\Model\Category;
 use Slub\SlubEvents\Domain\Model\Event;
 use Slub\SlubEvents\Domain\Model\Subscriber;
 use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Helper\EventHelper;
+use Slub\SlubEvents\Utility\TextUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -230,15 +232,8 @@ class SubscriberController extends AbstractController
         $helper['now'] = time();
         // rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
         $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
-        // location may be empty...
-        if (is_object($event->getLocation())) {
-            if (is_object($event->getLocation()->getParent()->current())) {
-                $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] = TextUtility::foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-            }
-            $helper['location'] .= $event->getLocation()->getName();
-            $helper['locationics'] .= TextUtility::foldline($event->getLocation()->getName());
-        }
+        $helper['location'] = EventHelper::getLocationNameWithParent($event);
+        $helper['locationics'] = TextUtility::foldline($helper['location']);
         $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
 
         // startDateTime may never be empty
@@ -409,16 +404,8 @@ class SubscriberController extends AbstractController
         $helper['now'] = time();
         $helper['isdelete'] = 1;
         $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
-        // location may be empty...
-        if (is_object($event->getLocation())) {
-            if (is_object($event->getLocation()->getParent()->current())) {
-                $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] =
-                    TextUtility::foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-            }
-            $helper['location'] = $event->getLocation()->getName();
-            $helper['locationics'] = TextUtility::foldline($event->getLocation()->getName());
-        }
+        $helper['location'] = EventHelper::getLocationNameWithParent($event);
+        $helper['locationics'] = TextUtility::foldline($helper['location']);
         $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
 
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
@@ -607,16 +594,8 @@ class SubscriberController extends AbstractController
         if ($step == 1) {
             $helper['now'] = time();
             $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
-            // location may be empty...
-            if (is_object($event->getLocation())) {
-                if (is_object($event->getLocation()->getParent()->current())) {
-                    $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                    $helper['locationics'] =
-                        TextUtility::foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-                }
-                $helper['location'] = $event->getLocation()->getName();
-                $helper['locationics'] = TextUtility::foldline($event->getLocation()->getName());
-            }
+            $helper['location'] = EventHelper::getLocationNameWithParent($event);
+            $helper['locationics'] = TextUtility::foldline($helper['location']);
 
             $allSubscribers = $event->getSubscribers();
             foreach ($allSubscribers as $uid => $subscriber) {

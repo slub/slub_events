@@ -34,6 +34,7 @@ namespace Slub\SlubEvents\Task;
 use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Domain\Repository\EventRepository;
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use Slub\SlubEvents\Helper\EventHelper;
 use Slub\SlubEvents\Utility\TextUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -171,11 +172,8 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                 // used to name the csv file...
                 $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
                 $helper['description'] = TextUtility::foldline($event->getDescription());
-                // location may be empty...
-                if (is_object($event->getLocation())) {
-                    $helper['location'] = $event->getLocation()->getName();
-                    $helper['locationics'] = TextUtility::foldline($event->getLocation()->getName());
-                }
+                $helper['location'] = EventHelper::getLocationNameWithParent($event);
+                $helper['locationics'] = TextUtility::foldline($helper['location']);
 
                 // check if we have to cancel the event
                 if ($this->subscriberRepository->countAllByEvent($event) < $event->getMinSubscriber()) {

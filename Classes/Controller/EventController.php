@@ -35,6 +35,7 @@ namespace Slub\SlubEvents\Controller;
 
 use Slub\SlubEvents\Domain\Model\Event;
 use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Helper\EventHelper;
 use Slub\SlubEvents\Utility\TextUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\Connection;
@@ -448,17 +449,8 @@ class EventController extends AbstractController
 
             $helper['now'] = time();
             $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($singleEvent->getDescription()));
-            // location may be empty...
-            if (is_object($singleEvent->getLocation())) {
-                if (is_object($singleEvent->getLocation()->getParent()->current())) {
-                    $helper['location'] = $singleEvent->getLocation()->getParent()->current()->getName() . ', ';
-
-                    $helper['locationics'] =
-                        TextUtility::foldline($singleEvent->getLocation()->getParent()->current()->getName()) . ', ';
-                }
-                $helper['location'] = $singleEvent->getLocation()->getName();
-                $helper['locationics'] = TextUtility::foldline($singleEvent->getLocation()->getName());
-            }
+            $helper['location'] = EventHelper::getLocationNameWithParent($singleEvent);
+            $helper['locationics'] = TextUtility::foldline($helper['location']);
             $helper['eventuid'] = $singleEvent->getUid();
 
             $icsHelpers[] = $helper;
@@ -867,16 +859,8 @@ class EventController extends AbstractController
                 $helper['end'] = $helper['start'];
             }
             $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
-            // location may be empty...
-            if (is_object($event->getLocation())) {
-                if (is_object($event->getLocation()->getParent()->current())) {
-                    $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                    $helper['locationics'] =
-                        TextUtility::foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-                }
-                $helper['location'] = $event->getLocation()->getName();
-                $helper['locationics'] = TextUtility::foldline($event->getLocation()->getName());
-            }
+            $helper['location'] = EventHelper::getLocationNameWithParent($event);
+            $helper['locationics'] = TextUtility::foldline($helper['location']);
             $this->view->assign('helper', $helper);
             $this->view->assign('event', $event);
         }
