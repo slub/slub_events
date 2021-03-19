@@ -253,4 +253,15 @@ class EmailHelper
         return $partialRootPaths;
     }
 
+    /**
+     * Prepare name to use it in emails
+     *
+     * @param string Name string
+     *
+     * @return string Manipulated string
+     */
+    public static function prepareNameTo($name)
+    {
+        return strtolower(str_replace([',', ' '], ['', '-'], $name));
+    }
 }

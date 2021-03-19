@@ -170,7 +170,7 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                 }
                 $helper['now'] = time();
                 // used to name the csv file...
-                $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+                $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
                 $helper['description'] = TextUtility::foldline($event->getDescription());
                 $helper['location'] = EventHelper::getLocationNameWithParent($event);
                 $helper['locationics'] = TextUtility::foldline($helper['location']);

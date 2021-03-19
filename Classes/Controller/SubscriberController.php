@@ -235,7 +235,8 @@ class SubscriberController extends AbstractController
         $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
         $helper['location'] = EventHelper::getLocationNameWithParent($event);
         $helper['locationics'] = TextUtility::foldline($helper['location']);
-        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
+        $nameTo = EmailHelper::prepareNameTo($newSubscriber->getName());
+
 
         // startDateTime may never be empty
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
@@ -273,7 +274,7 @@ class SubscriberController extends AbstractController
         if ($this->settings['emailToContact']['sendEmailOnMaximumReached'] &&
             ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()
         ) {
-            $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+            $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
             // email to event owner
             EmailHelper::sendTemplateEmail(
@@ -302,7 +303,7 @@ class SubscriberController extends AbstractController
         } // send to contact, on every booking if TS setting is present:
         else {
             if ($this->settings['emailToContact']['sendEmailOnEveryBooking']) {
-                $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+                $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
                 // email to event owner
                 EmailHelper::sendTemplateEmail(
@@ -407,7 +408,7 @@ class SubscriberController extends AbstractController
         $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
         $helper['location'] = EventHelper::getLocationNameWithParent($event);
         $helper['locationics'] = TextUtility::foldline($helper['location']);
-        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
+        $nameTo = EmailHelper::prepareNameTo($subscriber->getName());
 
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
 
@@ -432,7 +433,7 @@ class SubscriberController extends AbstractController
             ($this->subscriberRepository->countAllByEvent($event) >= $event->getMinSubscriber()) &&
             ($this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber()) < $event->getMinSubscriber()
         ) {
-            $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+            $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
             // email to event owner
             EmailHelper::sendTemplateEmail(

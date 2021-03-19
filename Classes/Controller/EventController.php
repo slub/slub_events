@@ -456,7 +456,7 @@ class EventController extends AbstractController
             $icsHelpers[] = $helper;
         }
 
-        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+        $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
         EmailHelper::sendTemplateEmail(
             [$event->getContact()->getEmail() => $event->getContact()->getName()],
