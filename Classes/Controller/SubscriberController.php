@@ -38,6 +38,7 @@ use Slub\SlubEvents\Domain\Model\Subscriber;
 use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Helper\EventHelper;
 use Slub\SlubEvents\Utility\TextUtility;
+use Symfony\Component\Mime\Email;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -231,7 +232,7 @@ class SubscriberController extends AbstractController
         // send email(s)
         $helper['now'] = time();
         // rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
-        $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
+        $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
         $helper['location'] = EventHelper::getLocationNameWithParent($event);
         $helper['locationics'] = TextUtility::foldline($helper['location']);
         $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
@@ -403,7 +404,7 @@ class SubscriberController extends AbstractController
         // some helper timestamps for ics-file
         $helper['now'] = time();
         $helper['isdelete'] = 1;
-        $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
+        $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
         $helper['location'] = EventHelper::getLocationNameWithParent($event);
         $helper['locationics'] = TextUtility::foldline($helper['location']);
         $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
