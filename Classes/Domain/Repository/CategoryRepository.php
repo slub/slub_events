@@ -1,6 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -34,12 +36,12 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class CategoryRepository extends Repository
 {
     // Order by BE sorting
     protected $defaultOrderings = array(
 
-        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'sorting' => QueryInterface::ORDER_ASCENDING
 
     );
 
@@ -116,7 +118,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         $query->setOrderings(
-            ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
+            ['sorting' => QueryInterface::ORDER_ASCENDING]
         );
         $categories = $query->execute();
 
@@ -218,7 +220,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $constraints[] = $query->equals('parent', $startCategory);
 
         $query->setOrderings(
-            ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]
+            ['sorting' => QueryInterface::ORDER_DESCENDING]
         );
 
         if (count($constraints)) {

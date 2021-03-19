@@ -1,6 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Slub\SlubEvents\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  *
  *
@@ -32,7 +33,7 @@ namespace Slub\SlubEvents\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class DisciplineRepository extends Repository
 {
 
     /**
@@ -54,7 +55,7 @@ class DisciplineRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         $query->setOrderings(
-            ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
+            ['sorting' => QueryInterface::ORDER_ASCENDING]
         );
         $disciplines = $query->execute();
 

@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Helper;
 
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -62,7 +63,7 @@ class EmailHelper
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-        if (version_compare(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version(), '10.0.0', '<')) {
+        if (version_compare(VersionNumberUtility::getNumericTypo3Version(), '10.0.0', '<')) {
             $useSimfonyMailer = false;
         } else {
             $useSimfonyMailer = true;

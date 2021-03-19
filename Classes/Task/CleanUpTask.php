@@ -1,5 +1,11 @@
 <?php
 namespace Slub\SlubEvents\Task;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -34,7 +40,7 @@ namespace Slub\SlubEvents\Task;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
-class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class CleanUpTask extends AbstractTask
 {
 
     /**
@@ -69,12 +75,12 @@ class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * @return void
      */
     public function injectConfigurationManager(
-        \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+        ConfigurationManagerInterface $configurationManager
     ) {
         $this->configurationManager = $configurationManager;
 
         $this->settings = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
         );
     }
 
@@ -152,22 +158,22 @@ class CleanUpTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     protected function initializeAction()
     {
 
-        $objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         $this->subscriberRepository = $objectManager->get(
-            \Slub\SlubEvents\Domain\Repository\SubscriberRepository::class
+            SubscriberRepository::class
         );
 
         $this->eventRepository = $objectManager->get(
-            \Slub\SlubEvents\Domain\Repository\EventRepository::class
+            EventRepository::class
         );
 
         $this->configurationManager = $objectManager->get(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::class
+            ConfigurationManagerInterface::class
         );
 
         $this->persistenceManager = $objectManager->get(
-            \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
+            PersistenceManager::class
         );
     }
 

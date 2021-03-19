@@ -1,6 +1,9 @@
 <?php
 namespace Slub\SlubEvents\Task;
 
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -36,7 +39,7 @@ use Slub\SlubEvents\Domain\Repository\EventRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
-class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class StatisticsTask extends AbstractTask
 {
 
     /**
@@ -88,12 +91,12 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * @return void
      */
     public function injectConfigurationManager(
-        \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+        ConfigurationManagerInterface $configurationManager
     ) {
         $this->configurationManager = $configurationManager;
 
         $this->settings = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
         );
     }
 
@@ -179,14 +182,14 @@ class StatisticsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 //      $GLOBALS['BE_USER']->uc['lang'] = 'de';
         $GLOBALS['LANG']->init('de');
 
-        $objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         $this->eventRepository = $objectManager->get(
-            \Slub\SlubEvents\Domain\Repository\EventRepository::class
+            EventRepository::class
         );
 
         $this->configurationManager = $objectManager->get(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::class
+            ConfigurationManagerInterface::class
         );
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -34,7 +35,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Subscriber extends AbstractEntity
 {
     /**
      * name
@@ -333,7 +334,7 @@ class Subscriber extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setEvent(\Slub\SlubEvents\Domain\Model\Event $event)
+    public function setEvent(Event $event)
     {
         $this->event = $event;
     }

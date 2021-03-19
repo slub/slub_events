@@ -1,5 +1,7 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Be;
+use TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper;
+use Slub\SlubEvents\Helper\IconsHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -36,7 +38,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
-class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
+class FunctionBarViewHelper extends AbstractBackendViewHelper
 {
     use CompileWithRenderStatic;
 
@@ -110,7 +112,7 @@ class FunctionBarViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBack
         $storagePid = $frameworkConfiguration['persistence']['storagePid'];
 
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
+        $iconHelper = $objectManager->get(IconsHelper::class);
 
         switch ($icon) {
             case 'new':

@@ -1,5 +1,10 @@
 <?php
 namespace Slub\SlubEvents\Slots;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use Slub\SlubEvents\Controller\EventController;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -134,8 +139,8 @@ class HookPostProcessing
             // we need to update/create or delete all child events
             if ($status == "update") {
 
-                $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-                $eventController = $objectManager->get(\Slub\SlubEvents\Controller\EventController::class);
+                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+                $eventController = $objectManager->get(EventController::class);
 
                 if ($pObj->checkValue_currentRecord['recurring'] == 1) {
                     $eventController->createChildsAction($idElement);
@@ -184,8 +189,8 @@ class HookPostProcessing
 
           if ($recordToDelete['parent'] == 0) {
               //in case of a parent (recurring) event, delete all children, too
-              $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-              $configurationManager = $objectManager->get(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class);
+              $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+              $configurationManager = $objectManager->get(ConfigurationManager::class);
 
               $configurationArray = [
                   'persistence' => [
@@ -194,11 +199,11 @@ class HookPostProcessing
               ];
               $configurationManager->setConfiguration($configurationArray);
 
-              $eventRepository = $objectManager->get(\Slub\SlubEvents\Domain\Repository\EventRepository::class);
+              $eventRepository = $objectManager->get(EventRepository::class);
 
               $eventRepository->deleteAllNotAllowedChildren(array(), $id);
 
-              $persistenceManager = $objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+              $persistenceManager = $objectManager->get(PersistenceManager::class);
               $persistenceManager->persistAll();
 
           }

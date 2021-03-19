@@ -1,6 +1,8 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Format;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 /***************************************************************
  *  Copyright notice
  *
@@ -34,7 +36,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class NewMonthTitleViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class NewMonthTitleViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 
@@ -44,7 +46,7 @@ class NewMonthTitleViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abstract
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('events', \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult::class, 'Events', true);
+        $this->registerArgument('events', QueryResult::class, 'Events', true);
         $this->registerArgument('index', 'int', 'Index', true);
     }
 

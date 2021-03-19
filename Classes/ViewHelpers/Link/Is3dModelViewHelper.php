@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Link;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -44,7 +45,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class Is3dModelViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class Is3dModelViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 

@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
+use TYPO3\CMS\Core\Page\PageRenderer;
 /***************************************************************
  *  Copyright notice
  *
@@ -38,7 +39,6 @@ use Slub\SlubEvents\Domain\Model\Subscriber;
 use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Helper\EventHelper;
 use Slub\SlubEvents\Utility\TextUtility;
-use Symfony\Component\Mime\Email;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -547,7 +547,7 @@ class SubscriberController extends AbstractController
             $this->addFlashMessage('No events found.', 'Error', FlashMessage::ERROR);
         }
 
-        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
         $this->view->assign('categories', $categories);

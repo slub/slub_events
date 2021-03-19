@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +25,6 @@ namespace Slub\SlubEvents\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  *
  *
@@ -32,6 +32,6 @@ namespace Slub\SlubEvents\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class LocationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class LocationRepository extends Repository
 {
 }

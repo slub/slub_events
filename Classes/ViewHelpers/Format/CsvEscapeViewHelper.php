@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Format;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,14 +25,13 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Remove not allowed signs (like """) from csv-Export
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class CsvEscapeViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class CsvEscapeViewHelper extends AbstractViewHelper
 {
     /**
      * Return the number of subscribers for a given event

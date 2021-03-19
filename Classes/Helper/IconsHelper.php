@@ -122,7 +122,7 @@ class IconsHelper
 
             $hideLink = '';
             $quoteLink = "'";
-            $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
+            $hideLink = BackendUtility::getLinkToDataHandlerAction($params);
 
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
                 $this->iconFactory->getIcon('actions-edit-unhide', Icon::SIZE_SMALL)->render() .
@@ -134,7 +134,7 @@ class IconsHelper
 
             $hideLink = '';
             $quoteLink = "'";
-            $hideLink = \TYPO3\CMS\Backend\Utility\BackendUtility::getLinkToDataHandlerAction($params);
+            $hideLink = BackendUtility::getLinkToDataHandlerAction($params);
 
             $icon = '<a href="#" onclick="' . htmlspecialchars('return jumpToUrl(' . $quoteLink . $hideLink . $quoteLink . ');') . '" title="' . $title . '">' .
                 $this->iconFactory->getIcon('actions-edit-hide', Icon::SIZE_SMALL)->render() .

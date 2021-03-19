@@ -1,6 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***************************************************************
  *  Copyright notice
  *
@@ -34,7 +36,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Category extends AbstractEntity
 {
 
     /**
@@ -131,7 +133,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
          * It will be rewritten on each save in the extension builder
          * You may modify the constructor of this class instead
          */
-        $this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->parent = new ObjectStorage();
     }
 
     /**
@@ -175,7 +177,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent)
+    public function setParent(ObjectStorage $parent)
     {
         $this->parent = $parent;
     }

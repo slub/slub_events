@@ -1,5 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Task;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,9 +34,7 @@ namespace Slub\SlubEvents\Task;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Task\Enumeration\Action;
 
@@ -53,7 +54,7 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
     public function getAdditionalFields(
         array &$taskInfo,
         $task,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
         $additionalFields = [];
         $currentSchedulerModuleAction = $schedulerModule->getCurrentAction();
@@ -126,7 +127,7 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
      */
     public function validateAdditionalFields(
         array &$submittedData,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
         $isValid = true;
 
@@ -134,7 +135,7 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             $isValid = false;
             $this->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidStoragePid') . ': ' . $submittedData['slub_events']['cleanupDays'],
-                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+                FlashMessage::ERROR
             );
         }
 
@@ -142,7 +143,7 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             $isValid = false;
             $this->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidCleanupDays') . ': ' . $submittedData['slub_events']['cleanupDays'],
-                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+                FlashMessage::ERROR
             );
         }
 
@@ -150,7 +151,7 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             $isValid = false;
             $this->addMessage(
                 $GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.cleanup.invalidCleanupDaysEvents') . ': ' . $submittedData['slub_events']['cleanupDaysEvents'],
-                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+                FlashMessage::ERROR
             );
         }
 
@@ -166,7 +167,7 @@ class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
      *
      * @return void
      */
-    public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         /** @var $task CleanUpTask */
         $task->setStoragePid($submittedData['slub_events']['storagePid']);

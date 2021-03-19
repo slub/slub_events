@@ -1,6 +1,10 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -148,7 +152,7 @@ class EventController extends AbstractController
             $shortDescription = trim(substr($shortDescription , 0, strrpos($shortDescription, ' ')));
 
             // fill registers to be used in ts
-            $cObj = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
+            $cObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
             $cObj->cObjGetSingle('LOAD_REGISTER',
                 [
                     'eventPageTitle' =>
@@ -332,7 +336,7 @@ class EventController extends AbstractController
             $searchParameter['recurring']
         );
 
-        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
@@ -353,12 +357,12 @@ class EventController extends AbstractController
      */
     public function beCopyAction(Event $event)
     {
-        $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($event);
+        $availableProperties = ObjectAccess::getGettablePropertyNames($event);
         /** @var Event $newEvent */
         $newEvent = $this->objectManager->get(Event::class);
 
         foreach ($availableProperties as $propertyName) {
-            if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
+            if (ObjectAccess::isPropertySettable($newEvent, $propertyName)
                 && !in_array($propertyName, [
                     'uid',
                     'pid',
@@ -371,12 +375,12 @@ class EventController extends AbstractController
                     'parent'
                 ])
             ) {
-                $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($event, $propertyName);
+                $propertyValue = ObjectAccess::getProperty($event, $propertyName);
                 // special handling for onlinesurvey field to remove trailing timestamp with sent date
                 if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
                     $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
                 }
-                \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
+                ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
             }
         }
 
@@ -587,7 +591,7 @@ class EventController extends AbstractController
 
             $childDateTimes = $this->getChildDateTimes($parentEvent);
 
-            $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($parentEvent);
+            $availableProperties = ObjectAccess::getGettablePropertyNames($parentEvent);
 
             // delete all present child events which are not requested (e.g. from former settings)
             $this->eventRepository->deleteAllNotAllowedChildren($childDateTimes, $parentEvent);
@@ -608,7 +612,7 @@ class EventController extends AbstractController
                 }
 
                 foreach ($availableProperties as $propertyName) {
-                    if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($childEvent, $propertyName)
+                    if (ObjectAccess::isPropertySettable($childEvent, $propertyName)
                         && !in_array($propertyName, [
                             'uid',
                             'pid',
@@ -627,12 +631,12 @@ class EventController extends AbstractController
                             'discipline',
                         ])
                     ) {
-                        $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($parentEvent, $propertyName);
+                        $propertyValue = ObjectAccess::getProperty($parentEvent, $propertyName);
                         // special handling for onlinesurvey field to remove trailing timestamp with sent date
                         if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
                             $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
                         }
-                        \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($childEvent, $propertyName, $propertyValue);
+                        ObjectAccess::setProperty($childEvent, $propertyName, $propertyValue);
                     }
                 }
 
@@ -668,7 +672,7 @@ class EventController extends AbstractController
 
             }
 
-            $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+            $persistenceManager = $this->objectManager->get(PersistenceManager::class);
             $persistenceManager->persistAll();
         }
 
@@ -694,7 +698,7 @@ class EventController extends AbstractController
             // delete all present child events
             $this->eventRepository->deleteAllNotAllowedChildren(array(), $parentEvent);
 
-            $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+            $persistenceManager = $this->objectManager->get(PersistenceManager::class);
             $persistenceManager->persistAll();
 
         }

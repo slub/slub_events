@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Format;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -40,7 +41,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class BookedPlacesViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class BookedPlacesViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 

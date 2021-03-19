@@ -1,6 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Task;
 
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 /***************************************************************
      *  Copyright notice
      *
@@ -54,7 +56,7 @@ class StatisticsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvi
     public function getAdditionalFields(
         array &$taskInfo,
         $task,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
         $additionalFields = [];
         $currentSchedulerModuleAction = $schedulerModule->getCurrentAction();
@@ -141,7 +143,7 @@ class StatisticsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvi
      */
     public function validateAdditionalFields(
         array &$submittedData,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
         $isValid = true;
 
@@ -153,17 +155,17 @@ class StatisticsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvi
             );
         }
 
-        if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
+        if (!GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
             $isValid = false;
             $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail'),
                 FlashMessage::ERROR);
         }
 
         if (!empty($submittedData['slub_events']['receiverEmailAddress'])) {
-            $emailList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('|',
+            $emailList = GeneralUtility::trimExplode('|',
                 preg_replace('/[\n,\s]+/', '|', $submittedData['slub_events']['receiverEmailAddress']));
             foreach ($emailList as $emailAdd) {
-                if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($emailAdd)) {
+                if (!GeneralUtility::validEmail($emailAdd)) {
                     $isValid = false;
                     $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail') . ': ' . $emailAdd,
                         FlashMessage::ERROR);
@@ -183,11 +185,11 @@ class StatisticsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvi
      *
      * @return void
      */
-    public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         /** @var $task StatisticsTask */
         $task->setStoragePid($submittedData['slub_events']['storagePid']);
-        $task->setReceiverEmailAddress(\TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',',
+        $task->setReceiverEmailAddress(GeneralUtility::trimExplode(',',
             preg_replace('/[\n\s]+/', ',', $submittedData['slub_events']['receiverEmailAddress'])));
         $task->setSenderEmailAddress($submittedData['slub_events']['senderEmailAddress']);
     }

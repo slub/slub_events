@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Format;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -33,7 +34,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderS
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class TrimViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class TrimViewHelper extends AbstractViewHelper
 {
     use CompileWithContentArgumentAndRenderStatic;
 

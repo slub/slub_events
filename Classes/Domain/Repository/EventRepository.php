@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Domain\Repository;
 
+    use TYPO3\CMS\Extbase\Persistence\Repository;
     /***************************************************************
      *  Copyright notice
      *
@@ -36,7 +37,7 @@ namespace Slub\SlubEvents\Domain\Repository;
     use TYPO3\CMS\Core\Utility\GeneralUtility;
     use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
-    class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+    class EventRepository extends Repository
     {
 
     /**
@@ -61,7 +62,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            array('start_date_time' => QueryInterface::ORDER_ASCENDING)
         );
 
         return $query->execute();
@@ -100,7 +101,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            ['start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
@@ -134,7 +135,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            array('start_date_time' => QueryInterface::ORDER_ASCENDING)
         );
 
         return $query->execute();

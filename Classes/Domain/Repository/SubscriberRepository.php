@@ -1,6 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Slub\SlubEvents\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  *
  *
@@ -32,7 +33,7 @@ namespace Slub\SlubEvents\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class SubscriberRepository extends Repository
 {
 
     /**
@@ -135,7 +136,7 @@ class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            ['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]
+            ['crdate' => QueryInterface::ORDER_DESCENDING]
         );
 
         return $query->execute();

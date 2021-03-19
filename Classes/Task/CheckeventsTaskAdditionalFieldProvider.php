@@ -1,5 +1,7 @@
 <?php
 namespace Slub\SlubEvents\Task;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 /***************************************************************
  *  Copyright notice
  *
@@ -53,7 +55,7 @@ class CheckeventsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProv
     public function getAdditionalFields(
         array &$taskInfo,
         $task,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
         $additionalFields = [];
         $currentSchedulerModuleAction = $schedulerModule->getCurrentAction();
@@ -131,7 +133,7 @@ class CheckeventsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProv
      */
     public function validateAdditionalFields(
         array &$submittedData,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
         $isValid = true;
 
@@ -143,7 +145,7 @@ class CheckeventsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProv
             );
         }
 
-        if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
+        if (!GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
             $isValid = false;
             $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail'),
                 FlashMessage::ERROR);
@@ -161,7 +163,7 @@ class CheckeventsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProv
      *
      * @return void
      */
-    public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         /** @var $task CheckeventTask */
         $task->storagePid = $submittedData['slub_events']['storagePid'];

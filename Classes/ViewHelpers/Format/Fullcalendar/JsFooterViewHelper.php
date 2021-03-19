@@ -1,6 +1,7 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Format\Fullcalendar;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -38,7 +39,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @api
  * @scope prototype
  */
-class JsFooterViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class JsFooterViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 

@@ -1,6 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***************************************************************
  *  Copyright notice
  *
@@ -34,7 +36,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Discipline extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Discipline extends AbstractEntity
 {
 
     /**
@@ -115,7 +117,7 @@ class Discipline extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent)
+    public function setParent(ObjectStorage $parent)
     {
         $this->parent = $parent;
     }

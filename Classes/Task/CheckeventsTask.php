@@ -1,5 +1,8 @@
 <?php
 namespace Slub\SlubEvents\Task;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -40,7 +43,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
-class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class CheckeventsTask extends AbstractTask
 {
     /**
      * eventRepository
@@ -95,14 +98,14 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     protected function initializeAction()
     {
 
-        $objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         $this->subscriberRepository = $objectManager->get(
-            \Slub\SlubEvents\Domain\Repository\SubscriberRepository::class
+            SubscriberRepository::class
         );
 
         $this->eventRepository = $objectManager->get(
-            \Slub\SlubEvents\Domain\Repository\EventRepository::class
+            EventRepository::class
         );
 
         $this->configurationManager = $objectManager->get(
@@ -110,7 +113,7 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         );
 
         $this->persistenceManager = $objectManager->get(
-            \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
+            PersistenceManager::class
         );
 
         switch ($this->language) {
