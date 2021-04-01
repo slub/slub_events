@@ -28,5 +28,10 @@
     "psr-4": {
       "Slub\\SlubEvents\\Tests\\": "Tests"
     }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "slub_events"
+    }
   }
 }
