@@ -1,8 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Task;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,13 +25,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * Scheduler Task to check for events with subscription end reached.
- *
- * @package slub_events
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
 use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Domain\Repository\EventRepository;
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
@@ -42,7 +33,17 @@ use Slub\SlubEvents\Utility\TextUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
+/**
+ * Scheduler Task to check for events with subscription end reached.
+ *
+ * @package slub_events
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ *
+ */
 class CheckeventsTask extends AbstractTask
 {
     /**

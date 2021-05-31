@@ -1,11 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController as ExtbaseActionController;
-use TYPO3\CMS\Core\Utility\ArrayUtility;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -30,6 +25,10 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController as ExtbaseActionController;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use Slub\SlubEvents\Domain\Repository\EventRepository;
 use Slub\SlubEvents\Domain\Repository\CategoryRepository;
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;

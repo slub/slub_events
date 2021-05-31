@@ -1,10 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Slots;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use Slub\SlubEvents\Controller\EventController;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use Slub\SlubEvents\Domain\Repository\EventRepository;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,16 +24,21 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use Slub\SlubEvents\Controller\EventController;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Core\Environment;
+
 /**
  * This hook extends the tcemain class.
  * It preselects the author field with the current be_user id.
  *
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Core\Environment;
-
 class HookPostProcessing
 {
 

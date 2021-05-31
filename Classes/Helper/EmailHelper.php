@@ -1,7 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Helper;
 
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,17 +24,16 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+
 /**
  * Scheduler Task for Statistics
  *
- *
- *
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-
 class EmailHelper
 {
 

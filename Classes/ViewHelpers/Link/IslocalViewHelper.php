@@ -1,8 +1,6 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Link;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Core\Utility\MathUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,7 +25,9 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**

@@ -1,8 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Domain\Validator;
 
-use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,13 +26,12 @@ use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
  ***************************************************************/
 
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

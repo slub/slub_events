@@ -1,8 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Task;
-use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,17 +25,17 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- *
- *
- * @package slub_events
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Task\Enumeration\Action;
 
+/**
+ * @package slub_events
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class CleanUpTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
 

@@ -14,7 +14,6 @@ namespace Slub\SlubEvents\Helper;
  * The TYPO3 project - inspiring people to share!
  */
 
-
 use Slub\SlubEvents\Domain\Model\Event;
 
 class EventHelper

@@ -1,7 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
-use Slub\SlubEvents\Domain\Model\Contact;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,12 +24,12 @@ use Slub\SlubEvents\Domain\Model\Contact;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use Slub\SlubEvents\Domain\Model\Contact;
+
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class ContactController extends AbstractController
 {

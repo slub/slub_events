@@ -1,9 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Task;
 
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,18 +24,19 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * Scheduler Task for Statistics
- *
- *
- *
- * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
- */
 use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Domain\Repository\EventRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
+/**
+ * Scheduler Task for Statistics
+ *
+ * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
+ */
 class StatisticsTask extends AbstractTask
 {
 

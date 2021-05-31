@@ -1,5 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Slots;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,16 +24,16 @@ namespace Slub\SlubEvents\Slots;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * This hook extends the tcemain class.
  * It preselects the author field with the current be_user id.
  *
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Messaging\FlashMessageService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 class HookPreProcessing
 {
     /**

@@ -1,8 +1,6 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Format;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,7 +25,9 @@ use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**

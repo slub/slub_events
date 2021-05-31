@@ -1,8 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Domain\Model;
 
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,13 +26,12 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class Contact extends AbstractEntity
 {

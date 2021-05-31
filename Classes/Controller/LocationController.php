@@ -1,7 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,12 +24,12 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class LocationController extends ActionController
 {

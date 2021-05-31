@@ -1,11 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Task;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
-use Slub\SlubEvents\Domain\Repository\EventRepository;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,15 +25,19 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- *
- *
- * @package slub_events
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
+
+/**
+ * @package slub_events
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 
 class CleanUpTask extends AbstractTask
 {

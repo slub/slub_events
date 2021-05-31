@@ -1,7 +1,6 @@
 <?php
 namespace Slub\SlubEvents\ViewHelpers\Be;
-use TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper;
-use Slub\SlubEvents\Helper\IconsHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -26,6 +25,8 @@ use Slub\SlubEvents\Helper\IconsHelper;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper;
+use Slub\SlubEvents\Helper\IconsHelper;
 use \Slub\SlubEvents\Domain\Model\Event;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;

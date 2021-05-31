@@ -1,10 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Helper\Form\Element;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use Slub\SlubEvents\Domain\Repository\EventRepository;
-use Slub\SlubEvents\Helper\IconsHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,6 +26,11 @@ use Slub\SlubEvents\Helper\IconsHelper;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use Slub\SlubEvents\Helper\IconsHelper;
 
 class RecurringEventsElement extends AbstractFormElement
 {

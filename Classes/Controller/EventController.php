@@ -1,10 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Controller;
 
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -29,25 +25,25 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- *
- *
- * @package slub_events
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
-
-use Slub\SlubEvents\Domain\Model\Event;
-use Slub\SlubEvents\Helper\EmailHelper;
-use Slub\SlubEvents\Helper\EventHelper;
-use Slub\SlubEvents\Utility\TextUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Slub\SlubEvents\Domain\Model\Event;
+use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Helper\EventHelper;
+use Slub\SlubEvents\Utility\TextUtility;
 
+/**
+ * @package slub_events
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class EventController extends AbstractController
 {
 
