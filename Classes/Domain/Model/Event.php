@@ -26,15 +26,14 @@ namespace Slub\SlubEvents\Domain\Model;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Event extends AbstractEntity
 {
 
     /**
@@ -331,11 +330,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
          * It will be rewritten on each save in the extension builder
          * You may modify the constructor of this class instead
          */
-        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->categories = new ObjectStorage();
 
-        $this->discipline = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->discipline = new ObjectStorage();
 
-        $this->subscribers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->subscribers = new ObjectStorage();
     }
 
     /**
@@ -433,7 +432,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function addSubscriber(\Slub\SlubEvents\Domain\Model\Subscriber $subscriber)
+    public function addSubscriber(Subscriber $subscriber)
     {
         $this->subscribers->attach($subscriber);
     }
@@ -445,7 +444,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function removeSubscriber(\Slub\SlubEvents\Domain\Model\Subscriber $subscriberToRemove)
+    public function removeSubscriber(Subscriber $subscriberToRemove)
     {
         $this->subscribers->detach($subscriberToRemove);
     }
@@ -467,7 +466,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setSubscribers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $subscribers)
+    public function setSubscribers(ObjectStorage $subscribers)
     {
         $this->subscribers = $subscribers;
     }
@@ -501,7 +500,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setDiscipline(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $discipline)
+    public function setDiscipline(ObjectStorage $discipline)
     {
         $this->discipline = $discipline;
     }
@@ -523,7 +522,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function addDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $discipline)
+    public function addDiscipline(Discipline $discipline)
     {
         $this->discipline->attach($discipline);
     }
@@ -535,7 +534,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function removeDiscipline(\Slub\SlubEvents\Domain\Model\Discipline $disciplineToRemove)
+    public function removeDiscipline(Discipline $disciplineToRemove)
     {
         $this->discipline->detach($disciplineToRemove);
     }
@@ -557,7 +556,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setLocation(\Slub\SlubEvents\Domain\Model\Location $location)
+    public function setLocation(Location $location)
     {
         $this->location = $location;
     }
@@ -589,7 +588,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setContact(\Slub\SlubEvents\Domain\Model\Contact $contact)
+    public function setContact(Contact $contact)
     {
         $this->contact = $contact;
     }
@@ -755,7 +754,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function addCategory(\Slub\SlubEvents\Domain\Model\Category $category)
+    public function addCategory(Category $category)
     {
         $this->categories->attach($category);
     }
@@ -767,7 +766,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> categories
      */
-    public function removeCategory(\Slub\SlubEvents\Domain\Model\Category $categoryToBeRemoved)
+    public function removeCategory(Category $categoryToBeRemoved)
     {
         $this->categories->detach($categoryToBeRemoved);
     }
@@ -789,7 +788,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories)
     {
         $this->categories = $categories;
     }

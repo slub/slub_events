@@ -1,5 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Helper\Form\Element;
+
 /***************************************************************
  *  Copyright notice
  *

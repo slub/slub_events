@@ -25,23 +25,23 @@ namespace Slub\SlubEvents\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- *
- *
- * @package slub_events
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
 use Slub\SlubEvents\Domain\Model\Category;
 use Slub\SlubEvents\Domain\Model\Event;
 use Slub\SlubEvents\Domain\Model\Subscriber;
 use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Helper\EventHelper;
+use Slub\SlubEvents\Utility\TextUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
+/**
+ * @package slub_events
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class SubscriberController extends AbstractController
 {
 
@@ -229,17 +229,11 @@ class SubscriberController extends AbstractController
         // send email(s)
         $helper['now'] = time();
         // rfc2445.txt: lines SHOULD NOT be longer than 75 octets --> line folding
-        $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
-        // location may be empty...
-        if (is_object($event->getLocation())) {
-            if (is_object($event->getLocation()->getParent()->current())) {
-                $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] = $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-            }
-            $helper['location'] .= $event->getLocation()->getName();
-            $helper['locationics'] .= $this->foldline($event->getLocation()->getName());
-        }
-        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $newSubscriber->getName()));
+        $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
+        $helper['location'] = EventHelper::getLocationNameWithParent($event);
+        $helper['locationics'] = TextUtility::foldline($helper['location']);
+        $nameTo = EmailHelper::prepareNameTo($newSubscriber->getName());
+
 
         // startDateTime may never be empty
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
@@ -277,7 +271,7 @@ class SubscriberController extends AbstractController
         if ($this->settings['emailToContact']['sendEmailOnMaximumReached'] &&
             ($this->subscriberRepository->countAllByEvent($event) + $newSubscriber->getNumber()) == $event->getMaxSubscriber()
         ) {
-            $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+            $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
             // email to event owner
             EmailHelper::sendTemplateEmail(
@@ -306,7 +300,7 @@ class SubscriberController extends AbstractController
         } // send to contact, on every booking if TS setting is present:
         else {
             if ($this->settings['emailToContact']['sendEmailOnEveryBooking']) {
-                $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+                $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
                 // email to event owner
                 EmailHelper::sendTemplateEmail(
@@ -408,18 +402,10 @@ class SubscriberController extends AbstractController
         // some helper timestamps for ics-file
         $helper['now'] = time();
         $helper['isdelete'] = 1;
-        $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
-        // location may be empty...
-        if (is_object($event->getLocation())) {
-            if (is_object($event->getLocation()->getParent()->current())) {
-                $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                $helper['locationics'] =
-                    $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-            }
-            $helper['location'] = $event->getLocation()->getName();
-            $helper['locationics'] = $this->foldline($event->getLocation()->getName());
-        }
-        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $subscriber->getName()));
+        $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
+        $helper['location'] = EventHelper::getLocationNameWithParent($event);
+        $helper['locationics'] = TextUtility::foldline($helper['location']);
+        $nameTo = EmailHelper::prepareNameTo($subscriber->getName());
 
         $helper['start'] = $event->getStartDateTime()->getTimestamp();
 
@@ -444,7 +430,7 @@ class SubscriberController extends AbstractController
             ($this->subscriberRepository->countAllByEvent($event) >= $event->getMinSubscriber()) &&
             ($this->subscriberRepository->countAllByEvent($event) - $subscriber->getNumber()) < $event->getMinSubscriber()
         ) {
-            $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+            $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
             // email to event owner
             EmailHelper::sendTemplateEmail(
@@ -558,7 +544,7 @@ class SubscriberController extends AbstractController
             $this->addFlashMessage('No events found.', 'Error', FlashMessage::ERROR);
         }
 
-        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
         $this->view->assign('categories', $categories);
@@ -606,17 +592,9 @@ class SubscriberController extends AbstractController
 
         if ($step == 1) {
             $helper['now'] = time();
-            $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
-            // location may be empty...
-            if (is_object($event->getLocation())) {
-                if (is_object($event->getLocation()->getParent()->current())) {
-                    $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                    $helper['locationics'] =
-                        $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-                }
-                $helper['location'] = $event->getLocation()->getName();
-                $helper['locationics'] = $this->foldline($event->getLocation()->getName());
-            }
+            $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
+            $helper['location'] = EventHelper::getLocationNameWithParent($event);
+            $helper['locationics'] = TextUtility::foldline($helper['location']);
 
             $allSubscribers = $event->getSubscribers();
             foreach ($allSubscribers as $uid => $subscriber) {

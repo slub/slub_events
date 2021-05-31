@@ -26,15 +26,14 @@ namespace Slub\SlubEvents\Domain\Model;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Location extends AbstractEntity
 {
 
     /**
@@ -153,7 +152,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
          * It will be rewritten on each save in the extension builder
          * You may modify the constructor of this class instead
          */
-        $this->parent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->parent = new ObjectStorage();
     }
 
     /**
@@ -197,7 +196,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent)
+    public function setParent(ObjectStorage $parent)
     {
         $this->parent = $parent;
     }

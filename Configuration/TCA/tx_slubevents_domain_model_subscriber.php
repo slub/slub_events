@@ -24,7 +24,7 @@ return [
         'showRecordFieldList' => 'hidden, name, email, telephone, institution, customerid, number, message, editcode, crdate',
     ],
     'types'     => [
-        '1' => ['showitem' => 'hidden, --palette--;;1, name, email, telephone, institution, customerid, number, message, editcode, acceptpp, crdate,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'hidden, --palette--;;1, name, email, telephone, institution, customerid, number, message, editcode, acceptpp, crdate,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime, endtime'],
     ],
     'palettes'  => [
         '1' => ['showitem' => ''],
@@ -32,7 +32,7 @@ return [
     'columns'   => [
         'hidden'           => [
             'exclude' => 1,
-            'label'   => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'label'   => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config'  => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
@@ -41,7 +41,7 @@ return [
         'starttime'        => [
             'exclude'   => 1,
             'l10n_mode' => 'exclude',
-            'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
+            'label'     => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config'    => [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
@@ -56,7 +56,7 @@ return [
         'endtime'          => [
             'exclude'   => 1,
             'l10n_mode' => 'exclude',
-            'label'     => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
+            'label'     => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config'    => [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
