@@ -32,8 +32,6 @@ use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Helper\EventHelper;
 use Slub\SlubEvents\Utility\TextUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
@@ -346,9 +344,6 @@ class SubscriberController extends AbstractController
         $this->view->assign('newSubscriber', $newSubscriber);
     }
 
-
-
-
     /**
      * Clear cache of all pages with cached slubevents content.
      * This way the plugin may stay cached but on every delete or insert
@@ -483,154 +478,6 @@ class SubscriberController extends AbstractController
         }
         $this->view->assign('event', $event);
         $this->view->assign('subscriber', $subscriber);
-    }
-
-
-    /**
-     * action beList
-     *
-     * @return void
-     */
-    public function beListAction()
-    {
-        // get data from BE session
-        $searchParameter = $this->getSessionData('tx_slubevents');
-
-        // set the startDateStamp
-        if (empty($searchParameter['selectedStartDateStamp'])) {
-            $searchParameter['selectedStartDateStamp'] = date('d-m-Y');
-        }
-
-        // if search was triggered
-        $submittedSearchParams = $this->getParametersSafely('searchParameter');
-        if (is_array($submittedSearchParams)) {
-
-            $searchParameter = $submittedSearchParams;
-
-            // save session data
-            $this->setSessionData('tx_slubevents', $searchParameter);
-        }
-
-        // Categories
-        // ------------------------------------------------------------------------------------
-
-        // get the categories
-        $categories = $this->categoryRepository->findAllTree();
-
-        // check which categories have been selected
-        if (!is_array($submittedSearchParams['category'])) {
-            $allCategories = $this->categoryRepository->findAll()->toArray();
-            foreach ($allCategories as $category) {
-                $searchParameter['category'][$category->getUid()] = $category->getUid();
-            }
-        }
-        $this->view->assign('categoriesSelected', $searchParameter['category']);
-
-        // Events
-        // ------------------------------------------------------------------------------------
-        // get the events to show
-        $events = $this->eventRepository->findAllByCategoriesAndDate(
-            $searchParameter['category'],
-            strtotime($searchParameter['selectedStartDateStamp'])
-        );
-
-
-        // Subscribers
-        // ------------------------------------------------------------------------------------
-        if (sizeof($events->toArray()) > 0) {
-            $subscribers = $this->subscriberRepository->findAllByEvents($events);
-            $this->view->assign('subscribers', $subscribers);
-        } else {
-            $this->addFlashMessage('No events found.', 'Error', FlashMessage::ERROR);
-        }
-
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
-
-        $this->view->assign('categories', $categories);
-        $this->view->assign('events', $events);
-        $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
-
-    }
-
-    /**
-     * action beOnlineSurveyAction
-     *
-     * --> see ics template in Resources/Private/Backend/Templates/Email/
-     *
-     * @param Event   $event
-     * @param integer $step
-     * @Extbase\IgnoreValidation("event")
-     *
-     * @return void
-     */
-    public function beOnlineSurveyAction(Event $event, $step = 0)
-    {
-        // get the onlineSurveyLink and potential timestamp of last sent
-        $onlineSurveyLink = GeneralUtility::trimExplode('|', $event->getOnlinesurvey(), true);
-
-        // set the link to the current object to get access inside the email
-        $event->setOnlinesurvey($onlineSurveyLink[0]);
-
-        if ($step == 0) {
-            /** @var \TYPO3Fluid\Fluid\View\StandaloneView $emailViewHTML */
-            $emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-
-            $emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
-            $emailViewHTML->setFormat('html');
-            $emailViewHTML->assign('onlineSurveyLink', $onlineSurveyLink[0]);
-            $emailViewHTML->assign('event', $event);
-            $emailViewHTML->assign('subscriber', ['name' => '###Name wird automatisch ausgefüllt###']);
-
-            $emailViewHTML->setTemplateRootPaths(EmailHelper::resolveTemplateRootPaths($this->configurationManager));
-            $emailViewHTML->setPartialRootPaths(EmailHelper::resolvePartialRootPaths($this->configurationManager));
-
-            $emailViewHTML->setTemplate('Email/' . 'OnlineSurvey.html');
-
-            $emailTextHTML = $emailViewHTML->render();
-        }
-
-        if ($step == 1) {
-            $helper['now'] = time();
-            $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
-            $helper['location'] = EventHelper::getLocationNameWithParent($event);
-            $helper['locationics'] = TextUtility::foldline($helper['location']);
-
-            $allSubscribers = $event->getSubscribers();
-            foreach ($allSubscribers as $uid => $subscriber) {
-                EmailHelper::sendTemplateEmail(
-                    [$subscriber->getEmail() => $subscriber->getName()],
-                    [$event->getContact()->getEmail() => $event->getContact()->getName()],
-                    'Online-Umfrage zu ' . $event->getTitle(),
-                    'OnlineSurvey',
-                    [
-                        'event'      => $event,
-                        'subscriber' => $subscriber,
-                        'helper'     => $helper,
-                        'settings'   => $this->settings,
-                        'attachCsv'  => false,
-                        'attachIcs'  => false,
-                    ],
-                    $this->configurationManager
-                );
-            }
-
-            // change the onlineSurvey link to see, that we sent it already
-            $event->setOnlinesurvey($onlineSurveyLink[0] . '|' . time());
-            // we changed the event inside the repository and have to
-            // update the repo manually as of TYPO3 6.1
-            $this->eventRepository->update($event);
-        }
-
-        $this->view->assign('event', $event);
-
-        if (isset($onlineSurveyLink[1])) {
-            $this->view->assign('onlineSurveyLastSent', $onlineSurveyLink[1]);
-        }
-
-        $this->view->assign('subscribers', $event->getSubscribers());
-        $this->view->assign('step', $step);
-        $this->view->assign('emailText', $emailTextHTML);
     }
 
     /**
