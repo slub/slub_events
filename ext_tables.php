@@ -17,10 +17,8 @@ if (TYPO3_MODE === 'BE') {
         'slubevents',    // Submodule key
         '',              // Position
         [
-            'Event'      => 'beList, beCopy, beIcsInvitation, show, new, create, edit, update, delete, listOwn',
-            'Category'   => '',
-            'Subscriber' => 'list, beList, beOnlineSurvey',
-            'Location'   => '',
+            'Backend\Event'      => 'beList, beCopy, beIcsInvitation',
+            'Backend\Subscriber' => 'beList, beOnlineSurvey',
         ],
         [
             'access' => 'user,group',
