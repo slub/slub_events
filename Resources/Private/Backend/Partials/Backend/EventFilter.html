@@ -1,0 +1,88 @@
+<div class="filter-panel">
+	<f:form action="beList" section="results" name="searchParameter" method="post">
+
+		<div class="row">
+			<div class="col-sm-3">
+				<h4>
+					<f:translate key="be.searchConstraints"/>
+				</h4>
+
+				<div class="form-group">
+					<label for="datetimepicker1" class="control-label">
+						<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
+					</label>
+					<div class='input-group'>
+						<f:form.textfield id="datetimepicker1"
+															property="selectedStartDateStamp"
+															size="12"
+															data="{date-type:'date'}"
+															value="{selectedStartDateStamp}"
+															class="form-control t3js-datetimepicker t3js-clearable"
+						/>
+						<span class="input-group-btn">
+										<label class="btn btn-default" for="datetimepicker1">
+												<span class="fa fa-calendar"></span>
+										</label>
+								</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="searchString" class="control-label">
+						<f:translate key="be.searchString"/>
+					</label>
+					<f:form.textfield id="searchString" class="form-control" property="searchString"
+														placeholder="<f:translate key='be.searchInTitle' />"
+														value="{searchString}"/>
+				</div>
+				<div class="form-group">
+					<label for="checkbox-only-recurring">
+						<f:form.checkbox id="checkbox-only-recurring"
+														 property="recurring"
+														 checked="{f:if(condition:'{recurring} == 1', then: '1')}"
+														 value="1"/>
+						<f:translate key="be.searchOnlyRecurring"/>
+					</label>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<h4>
+					<f:translate key="tx_slubevents_domain_model_category"/>
+				</h4>
+				<div class="foldtree">
+					<f:render partial="Event/CategoryTree"
+										section="categoryTree"
+										arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<h4>
+					<f:translate key="be.searchContacts"/>
+				</h4>
+
+				<div class="form-group">
+					<f:form.checkbox id="checkbox-all-contacts"
+													 name="checkbox-all-contacts"
+													 value="1"
+													 onclick="checkBoxContacts(this)"/>
+					<label for="checkbox-all-contacts">
+						<f:translate key="be.searchAllContacts"/>
+					</label>
+					<f:form.select id="field-contact-search"
+												 property="contacts"
+												 options="{contacts}"
+												 optionValueField="uid"
+												 optionLabelField="name"
+												 multiple="1"
+												 size="15"
+												 class="form-control"
+												 value="{contactsSelected}"/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<f:form.submit class="btn btn-primary" value="Suchen..."/>
+			</div>
+		</div>
+	</f:form>
+</div>
