@@ -14,7 +14,6 @@ namespace Slub\SlubEvents\Controller\Backend;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Slub\SlubEvents\Controller\AbstractController;
 use Slub\SlubEvents\Domain\Model\Event;
 use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Helper\EventHelper;
@@ -28,7 +27,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SubscriberController extends AbstractController
+class SubscriberController extends BaseController
 {
     /**
      * action beList

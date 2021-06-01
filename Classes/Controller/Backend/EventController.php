@@ -14,7 +14,6 @@ namespace Slub\SlubEvents\Controller\Backend;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Slub\SlubEvents\Controller\AbstractController;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -29,7 +28,7 @@ use Slub\SlubEvents\Utility\TextUtility;
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventController extends AbstractController
+class EventController extends BaseController
 {
     /**
      * action beList
