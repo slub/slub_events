@@ -65,10 +65,12 @@ class BaseController extends AbstractController
     {
         /** @var BackendTemplateView $view */
         parent::initializeView($view);
-        $view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation([]);
+        if ($view->getModuleTemplate()) {
+            $view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation([]);
 
-        $this->createMenu();
-        $this->createButtons();
+            $this->createMenu();
+            $this->createButtons();
+        }
     }
 
     /**
