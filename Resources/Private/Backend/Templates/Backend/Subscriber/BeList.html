@@ -46,67 +46,34 @@
 
 		<f:flashMessages/>
 
-		<div class="filter-panel">
-			<f:form action="beList" section="results" name="searchParameter" method="post">
-				<div class="row">
-					<div class="col-sm-3">
-            <div class="form-group">
-							<label for="datetimepicker1" class="control-label">
-								<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
-							</label>
-              <div class='input-group'>
-                <f:form.textfield id="datetimepicker1"
-                          property="selectedStartDateStamp"
-                          size="12"
-                          data="{date-type:'date'}"
-                          value="{selectedStartDateStamp}"
-                          class="form-control t3js-datetimepicker t3js-clearable"
-                           />
-                <span class="input-group-btn">
-                    <label class="btn btn-default" for="datetimepicker1">
-                      <span class="fa fa-calendar"></span>
-                    </label>
-                </span>
-              </div>
-            </div>
-					</div>
-					<div class="col-sm-6">
-						<f:translate key="tx_slubevents_domain_model_category"/>
-						<div class="foldtree">
-							<f:render partial="Event/CategoryTree"
-												section="categoryTree"
-												arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
-						</div>
-					</div>
-				</div>
+		<f:if condition="{settings.storagePid}">
+			<f:then>
+				<f:render partial="Backend/SubscriberFilter" arguments="{_all}" />
 
-				<div class="row">
-					<div class="col-xs-12">
-						<f:form.submit class="btn btn-primary" value="Suchen..."/>
-					</div>
-				</div>
-			</f:form>
-		</div>
-
-    <div id="results">&nbsp;</div>
-
-    <f:if condition="{subscribers}">
-      <f:then>
-          <f:if condition="{settings.hidePagination}">
-              <f:then>
-                  <f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
-              </f:then>
-              <f:else>
-                  <f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
-                      configuration="{settings.list.paginate}">
-                  <f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
-                </f:widget.paginate>
-              </f:else>
-          </f:if>
-      </f:then>
-      <f:else>
-          <f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
-      </f:else>
-    </f:if>
+				<f:if condition="{subscribers}">
+					<f:then>
+						<f:if condition="{settings.hidePagination}">
+							<f:then>
+								<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
+							</f:then>
+							<f:else>
+								<f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
+																	 configuration="{settings.list.paginate}">
+									<f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
+								</f:widget.paginate>
+							</f:else>
+						</f:if>
+					</f:then>
+					<f:else>
+						<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
+					</f:else>
+				</f:if>
+			</f:then>
+			<f:else>
+				<f:be.infobox title="{f:translate(key: 'tx_slubevents.be.eventmanagement')}" state="2">
+					{f:translate(key: 'be.error.nofolderselected') -> f:format.raw()}
+				</f:be.infobox>
+			</f:else>
+		</f:if>
 	</div>
 </f:section>
