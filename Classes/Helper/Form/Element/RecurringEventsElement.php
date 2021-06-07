@@ -1,5 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Helper\Form\Element;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,6 +26,11 @@ namespace Slub\SlubEvents\Helper\Form\Element;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use Slub\SlubEvents\Helper\IconsHelper;
 
 class RecurringEventsElement extends AbstractFormElement
 {
@@ -34,8 +40,8 @@ class RecurringEventsElement extends AbstractFormElement
         // parameters are available in $this->data['parameterArray']['fieldConf']['config']['parameters']
         $result = $this->initializeResultArray();
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $configurationManager = $objectManager->get(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $configurationManager = $objectManager->get(ConfigurationManager::class);
 
         $configurationArray = [
             'persistence' => [
@@ -44,7 +50,7 @@ class RecurringEventsElement extends AbstractFormElement
         ];
         $configurationManager->setConfiguration($configurationArray);
 
-        $eventRepository = $objectManager->get(\Slub\SlubEvents\Domain\Repository\EventRepository::class);
+        $eventRepository = $objectManager->get(EventRepository::class);
 
         $childEvents = $eventRepository->findFutureByParent($this->data['databaseRow']['uid']);
 
@@ -76,7 +82,7 @@ class RecurringEventsElement extends AbstractFormElement
             $output .= '<div class="table-fit">';
             $output .= '<table data-table="'.$table.'" class="table table-striped table-hover">';
 
-            $iconHelper = $objectManager->get(\Slub\SlubEvents\Helper\IconsHelper::class);
+            $iconHelper = $objectManager->get(IconsHelper::class);
             foreach ($childEvents as $childEvent) {
               $output .= '<tr class="t3js-entity" data-table="tx_slubevents_domain_model_event" title="id='.$childEvent->getUid().'" data-uid="'.$childEvent->getUid().'" style="opacity: 1;">';
               $output .= $iconHelper->getHiddenRecordIcon('tx_slubevents_domain_model_event', $childEvent->getUid(), $childEvent->getHidden());

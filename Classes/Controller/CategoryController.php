@@ -25,18 +25,14 @@ namespace Slub\SlubEvents\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- *
- *
- * @package slub_events
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
-
 use Slub\SlubEvents\Domain\Model\Category;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
+/**
+ * @package slub_events
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class CategoryController extends AbstractController
 {
     /**

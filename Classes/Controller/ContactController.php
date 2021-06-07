@@ -25,12 +25,11 @@ namespace Slub\SlubEvents\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Slub\SlubEvents\Domain\Model\Contact;
+
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class ContactController extends AbstractController
 {
@@ -52,7 +51,7 @@ class ContactController extends AbstractController
      *
      * @return void
      */
-    public function showAction(\Slub\SlubEvents\Domain\Model\Contact $contact)
+    public function showAction(Contact $contact)
     {
         $this->view->assign('contact', $contact);
     }

@@ -24,17 +24,16 @@ namespace Slub\SlubEvents\Helper;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+
 /**
  * Scheduler Task for Statistics
  *
- *
- *
  * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-
 class EmailHelper
 {
 
@@ -62,7 +61,7 @@ class EmailHelper
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-        if (version_compare(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getNumericTypo3Version(), '10.0.0', '<')) {
+        if (version_compare(VersionNumberUtility::getNumericTypo3Version(), '10.0.0', '<')) {
             $useSimfonyMailer = false;
         } else {
             $useSimfonyMailer = true;
@@ -253,4 +252,15 @@ class EmailHelper
         return $partialRootPaths;
     }
 
+    /**
+     * Prepare name to use it in emails
+     *
+     * @param string Name string
+     *
+     * @return string Manipulated string
+     */
+    public static function prepareNameTo($name)
+    {
+        return strtolower(str_replace([',', ' '], ['', '-'], $name));
+    }
 }

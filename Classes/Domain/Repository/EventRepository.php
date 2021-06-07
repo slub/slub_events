@@ -1,43 +1,42 @@
 <?php
 namespace Slub\SlubEvents\Domain\Repository;
 
-    /***************************************************************
-     *  Copyright notice
-     *
-     *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2012 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
+use Slub\SlubEvents\Domain\Model\Category;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-    use Slub\SlubEvents\Domain\Model\Category;
-    use TYPO3\CMS\Core\Utility\GeneralUtility;
-    use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
-    class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
-    {
+class EventRepository extends Repository
+{
 
     /**
      * Finds all datasets by MM relation categories
@@ -61,7 +60,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            array('start_date_time' => QueryInterface::ORDER_ASCENDING)
         );
 
         return $query->execute();
@@ -100,7 +99,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            ['start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]
+            ['start_date_time' => QueryInterface::ORDER_ASCENDING]
         );
 
         return $query->execute();
@@ -134,7 +133,7 @@ namespace Slub\SlubEvents\Domain\Repository;
 
         // order by start_date -> start_time...
         $query->setOrderings(
-            array('start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING)
+            array('start_date_time' => QueryInterface::ORDER_ASCENDING)
         );
 
         return $query->execute();

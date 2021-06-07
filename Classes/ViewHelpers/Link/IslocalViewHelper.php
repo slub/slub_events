@@ -25,7 +25,9 @@ namespace Slub\SlubEvents\ViewHelpers\Link;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
@@ -44,7 +46,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class IslocalViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class IslocalViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 
@@ -72,6 +74,6 @@ class IslocalViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHe
             return false;
         }
 
-        return \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($link) ? true : false;
+        return MathUtility::canBeInterpretedAsInteger($link) ? true : false;
     }
 }

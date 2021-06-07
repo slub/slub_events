@@ -26,17 +26,16 @@ namespace Slub\SlubEvents\Domain\Validator;
  ***************************************************************/
 
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+class SubscriberValidator extends AbstractValidator
 {
 
     /**
@@ -64,7 +63,7 @@ class SubscriberValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstra
 	/**
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }

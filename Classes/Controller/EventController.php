@@ -25,23 +25,25 @@ namespace Slub\SlubEvents\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- *
- *
- * @package slub_events
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
-
-use Slub\SlubEvents\Domain\Model\Event;
-use Slub\SlubEvents\Helper\EmailHelper;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Slub\SlubEvents\Domain\Model\Event;
+use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Helper\EventHelper;
+use Slub\SlubEvents\Utility\TextUtility;
 
+/**
+ * @package slub_events
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class EventController extends AbstractController
 {
 
@@ -79,33 +81,11 @@ class EventController extends AbstractController
     public function listAction()
     {
         if (!empty($this->settings['categorySelection'])) {
-            $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);
-
-            if ($this->settings['categorySelectionRecursive']) {
-                // add somehow the other categories...
-                foreach ($categoriesIds as $category) {
-                    $foundRecusiveCategories = $this->categoryRepository->findAllChildCategories($category);
-                    if (count($foundRecusiveCategories) > 0) {
-                        $categoriesIds = array_merge($foundRecusiveCategories, $categoriesIds);
-                    }
-                }
-            }
-            $this->settings['categoryList'] = $categoriesIds;
+            $this->settings['categoryList'] = $this->getCategoryIdsFromSettings();
         }
 
         if (!empty($this->settings['disciplineSelection'])) {
-            $disciplineIds = GeneralUtility::intExplode(',', $this->settings['disciplineSelection'], true);
-
-            if ($this->settings['disciplineSelectionRecursive']) {
-                // add somehow the other categories...
-                foreach ($disciplineIds as $discipline) {
-                    $foundRecusiveDisciplines = $this->disciplineRepository->findAllChildDisciplines($discipline);
-                    if (count($foundRecusiveDisciplines) > 0) {
-                        $disciplineIds = array_merge($foundRecusiveDisciplines, $disciplineIds);
-                    }
-                }
-            }
-            $this->settings['disciplineList'] = $disciplineIds;
+            $this->settings['disciplineList'] = $this->getDisciplineIdsFromSettings();
         }
 
         $events = $this->eventRepository->findAllBySettings($this->settings);
@@ -121,33 +101,11 @@ class EventController extends AbstractController
     public function listUpcomingAction()
     {
         if (!empty($this->settings['categorySelection'])) {
-            $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);
-
-            if ($this->settings['categorySelectionRecursive']) {
-                // add somehow the other categories...
-                foreach ($categoriesIds as $category) {
-                    $foundRecusiveCategories = $this->categoryRepository->findAllChildCategories($category);
-                    if (count($foundRecusiveCategories) > 0) {
-                        $categoriesIds = array_merge($foundRecusiveCategories, $categoriesIds);
-                    }
-                }
-            }
-            $this->settings['categoryList'] = $categoriesIds;
+            $this->settings['categoryList'] = $this->getCategoryIdsFromSettings();
         }
 
         if (!empty($this->settings['disciplineSelection'])) {
-            $disciplineIds = GeneralUtility::intExplode(',', $this->settings['disciplineSelection'], true);
-
-            if ($this->settings['disciplineSelectionRecursive']) {
-                // add somehow the other categories...
-                foreach ($disciplineIds as $discipline) {
-                    $foundRecusiveDisciplines = $this->disciplineRepository->findAllChildDisciplines($discipline);
-                    if (count($foundRecusiveDisciplines) > 0) {
-                        $disciplineIds = array_merge($foundRecusiveDisciplines, $disciplineIds);
-                    }
-                }
-            }
-            $this->settings['disciplineList'] = $disciplineIds;
+            $this->settings['disciplineList'] = $this->getDisciplineIdsFromSettings();
         }
 
         $events = $this->eventRepository->findAllBySettings($this->settings);
@@ -190,7 +148,7 @@ class EventController extends AbstractController
             $shortDescription = trim(substr($shortDescription , 0, strrpos($shortDescription, ' ')));
 
             // fill registers to be used in ts
-            $cObj = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
+            $cObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
             $cObj->cObjGetSingle('LOAD_REGISTER',
                 [
                     'eventPageTitle' =>
@@ -374,7 +332,7 @@ class EventController extends AbstractController
             $searchParameter['recurring']
         );
 
-        $pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
@@ -395,12 +353,12 @@ class EventController extends AbstractController
      */
     public function beCopyAction(Event $event)
     {
-        $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($event);
+        $availableProperties = ObjectAccess::getGettablePropertyNames($event);
         /** @var Event $newEvent */
         $newEvent = $this->objectManager->get(Event::class);
 
         foreach ($availableProperties as $propertyName) {
-            if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($newEvent, $propertyName)
+            if (ObjectAccess::isPropertySettable($newEvent, $propertyName)
                 && !in_array($propertyName, [
                     'uid',
                     'pid',
@@ -413,12 +371,12 @@ class EventController extends AbstractController
                     'parent'
                 ])
             ) {
-                $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($event, $propertyName);
+                $propertyValue = ObjectAccess::getProperty($event, $propertyName);
                 // special handling for onlinesurvey field to remove trailing timestamp with sent date
                 if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
                     $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
                 }
-                \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
+                ObjectAccess::setProperty($newEvent, $propertyName, $propertyValue);
             }
         }
 
@@ -490,24 +448,15 @@ class EventController extends AbstractController
             }
 
             $helper['now'] = time();
-            $helper['description'] = $this->foldline($this->html2rest($singleEvent->getDescription()));
-            // location may be empty...
-            if (is_object($singleEvent->getLocation())) {
-                if (is_object($singleEvent->getLocation()->getParent()->current())) {
-                    $helper['location'] = $singleEvent->getLocation()->getParent()->current()->getName() . ', ';
-
-                    $helper['locationics'] =
-                        $this->foldline($singleEvent->getLocation()->getParent()->current()->getName()) . ', ';
-                }
-                $helper['location'] = $singleEvent->getLocation()->getName();
-                $helper['locationics'] = $this->foldline($singleEvent->getLocation()->getName());
-            }
+            $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($singleEvent->getDescription()));
+            $helper['location'] = EventHelper::getLocationNameWithParent($singleEvent);
+            $helper['locationics'] = TextUtility::foldline($helper['location']);
             $helper['eventuid'] = $singleEvent->getUid();
 
             $icsHelpers[] = $helper;
         }
 
-        $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
+        $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
 
         EmailHelper::sendTemplateEmail(
             [$event->getContact()->getEmail() => $event->getContact()->getName()],
@@ -562,33 +511,13 @@ class EventController extends AbstractController
     public function listMonthAction()
     {
         if (!empty($this->settings['categorySelection'])) {
-            $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);
-
-            if ($this->settings['categorySelectionRecursive']) {
-                // add somehow the other categories...
-                foreach ($categoriesIds as $category) {
-                    $foundRecusiveCategories = $this->categoryRepository->findAllChildCategories($category);
-                    if (count($foundRecusiveCategories) > 0) {
-                        $categoriesIds = array_merge($foundRecusiveCategories, $categoriesIds);
-                    }
-                }
-            }
+            $categoriesIds = $this->getCategoryIdsFromSettings();
             $this->settings['categoryList'] = $categoriesIds;
             $categories = $this->categoryRepository->findAllByUidsTree($this->settings['categoryList']);
         }
 
         if (!empty($this->settings['disciplineSelection'])) {
-            $disciplineIds = GeneralUtility::intExplode(',', $this->settings['disciplineSelection'], true);
-
-            if ($this->settings['disciplineSelectionRecursive']) {
-                // add somehow the other categories...
-                foreach ($disciplineIds as $discipline) {
-                    $foundRecusiveDisciplines = $this->disciplineRepository->findAllChildDisciplines($discipline);
-                    if (count($foundRecusiveDisciplines) > 0) {
-                        $disciplineIds = array_merge($foundRecusiveDisciplines, $disciplineIds);
-                    }
-                }
-            }
+            $disciplineIds = $this->getDisciplineIdsFromSettings();
             $this->settings['disciplineList'] = $disciplineIds;
             $disciplines = $this->disciplineRepository->findAllByUidsTree($this->settings['disciplineList']);
         }
@@ -658,7 +587,7 @@ class EventController extends AbstractController
 
             $childDateTimes = $this->getChildDateTimes($parentEvent);
 
-            $availableProperties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($parentEvent);
+            $availableProperties = ObjectAccess::getGettablePropertyNames($parentEvent);
 
             // delete all present child events which are not requested (e.g. from former settings)
             $this->eventRepository->deleteAllNotAllowedChildren($childDateTimes, $parentEvent);
@@ -679,7 +608,7 @@ class EventController extends AbstractController
                 }
 
                 foreach ($availableProperties as $propertyName) {
-                    if (\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertySettable($childEvent, $propertyName)
+                    if (ObjectAccess::isPropertySettable($childEvent, $propertyName)
                         && !in_array($propertyName, [
                             'uid',
                             'pid',
@@ -698,12 +627,12 @@ class EventController extends AbstractController
                             'discipline',
                         ])
                     ) {
-                        $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($parentEvent, $propertyName);
+                        $propertyValue = ObjectAccess::getProperty($parentEvent, $propertyName);
                         // special handling for onlinesurvey field to remove trailing timestamp with sent date
                         if ($propertyName == 'onlinesurvey' && (strpos($propertyValue, '|') > 0)) {
                             $propertyValue = substr($propertyValue, 0, strpos($propertyValue, '|'));
                         }
-                        \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($childEvent, $propertyName, $propertyValue);
+                        ObjectAccess::setProperty($childEvent, $propertyName, $propertyValue);
                     }
                 }
 
@@ -739,7 +668,7 @@ class EventController extends AbstractController
 
             }
 
-            $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+            $persistenceManager = $this->objectManager->get(PersistenceManager::class);
             $persistenceManager->persistAll();
         }
 
@@ -765,7 +694,7 @@ class EventController extends AbstractController
             // delete all present child events
             $this->eventRepository->deleteAllNotAllowedChildren(array(), $parentEvent);
 
-            $persistenceManager = $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+            $persistenceManager = $this->objectManager->get(PersistenceManager::class);
             $persistenceManager->persistAll();
 
         }
@@ -929,17 +858,9 @@ class EventController extends AbstractController
                 $helper['allDay'] = 1;
                 $helper['end'] = $helper['start'];
             }
-            $helper['description'] = $this->foldline($this->html2rest($event->getDescription()));
-            // location may be empty...
-            if (is_object($event->getLocation())) {
-                if (is_object($event->getLocation()->getParent()->current())) {
-                    $helper['location'] = $event->getLocation()->getParent()->current()->getName() . ', ';
-                    $helper['locationics'] =
-                        $this->foldline($event->getLocation()->getParent()->current()->getName()) . ', ';
-                }
-                $helper['location'] = $event->getLocation()->getName();
-                $helper['locationics'] = $this->foldline($event->getLocation()->getName());
-            }
+            $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
+            $helper['location'] = EventHelper::getLocationNameWithParent($event);
+            $helper['locationics'] = TextUtility::foldline($helper['location']);
             $this->view->assign('helper', $helper);
             $this->view->assign('event', $event);
         }
@@ -1159,5 +1080,43 @@ class EventController extends AbstractController
       } else if ($offset < 0) {
           $dateTimeValue->sub(new \DateInterval('PT'.(-1) * $offset.'S'));
       }
+    }
+
+    /**
+     * @return array|int[]
+     */
+    protected function getCategoryIdsFromSettings(): array
+    {
+        $categoriesIds = GeneralUtility::intExplode(',', $this->settings['categorySelection'], true);
+
+        if ($this->settings['categorySelectionRecursive']) {
+            // add somehow the other categories...
+            foreach ($categoriesIds as $category) {
+                $foundRecusiveCategories = $this->categoryRepository->findAllChildCategories($category);
+                if (count($foundRecusiveCategories) > 0) {
+                    $categoriesIds = array_merge($foundRecusiveCategories, $categoriesIds);
+                }
+            }
+        }
+        return $categoriesIds;
+    }
+
+    /**
+     * @return array|int[]
+     */
+    protected function getDisciplineIdsFromSettings(): array
+    {
+        $disciplineIds = GeneralUtility::intExplode(',', $this->settings['disciplineSelection'], true);
+
+        if ($this->settings['disciplineSelectionRecursive']) {
+            // add somehow the other categories...
+            foreach ($disciplineIds as $discipline) {
+                $foundRecusiveDisciplines = $this->disciplineRepository->findAllChildDisciplines($discipline);
+                if (count($foundRecusiveDisciplines) > 0) {
+                    $disciplineIds = array_merge($foundRecusiveDisciplines, $disciplineIds);
+                }
+            }
+        }
+        return $disciplineIds;
     }
 }
