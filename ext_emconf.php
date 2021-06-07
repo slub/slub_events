@@ -19,15 +19,9 @@ This extension is developped and used in production at the Saxony State and Univ
     'author'           => 'Alexander Bigga',
     'author_email'     => 'typo3@slub-dresden.de',
     'author_company'   => 'SLUB Dresden',
-    'shy'              => '',
-    'priority'         => '',
     'state'            => 'stable',
-    'internal'         => '',
-    'uploadfolder'     => 1,
+    'uploadfolder'     => true,
     'createDirs'       => 'typo3temp/tx_slubevents/',
-    'modify_tables'    => '',
-    'clearCacheOnLoad' => 0,
-    'lockType'         => '',
     'version'          => '5.0.2',
     'constraints'      => [
         'depends'   => [

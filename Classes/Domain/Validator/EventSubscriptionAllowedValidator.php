@@ -26,15 +26,13 @@ namespace Slub\SlubEvents\Domain\Validator;
  ***************************************************************/
 
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-class EventSubscriptionAllowedValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+class EventSubscriptionAllowedValidator extends AbstractValidator
 {
 
     /**

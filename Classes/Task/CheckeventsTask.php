@@ -1,5 +1,6 @@
 <?php
 namespace Slub\SlubEvents\Task;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -24,6 +25,18 @@ namespace Slub\SlubEvents\Task;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Slub\SlubEvents\Helper\EmailHelper;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
+use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
+use Slub\SlubEvents\Helper\EventHelper;
+use Slub\SlubEvents\Utility\TextUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+
 /**
  * Scheduler Task to check for events with subscription end reached.
  *
@@ -31,14 +44,7 @@ namespace Slub\SlubEvents\Task;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-use Slub\SlubEvents\Helper\EmailHelper;
-use Slub\SlubEvents\Domain\Repository\EventRepository;
-use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-
-class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class CheckeventsTask extends AbstractTask
 {
     /**
      * eventRepository
@@ -93,14 +99,14 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     protected function initializeAction()
     {
 
-        $objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         $this->subscriberRepository = $objectManager->get(
-            \Slub\SlubEvents\Domain\Repository\SubscriberRepository::class
+            SubscriberRepository::class
         );
 
         $this->eventRepository = $objectManager->get(
-            \Slub\SlubEvents\Domain\Repository\EventRepository::class
+            EventRepository::class
         );
 
         $this->configurationManager = $objectManager->get(
@@ -108,7 +114,7 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         );
 
         $this->persistenceManager = $objectManager->get(
-            \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
+            PersistenceManager::class
         );
 
         switch ($this->language) {
@@ -168,13 +174,10 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                 }
                 $helper['now'] = time();
                 // used to name the csv file...
-                $nameTo = strtolower(str_replace([',', ' '], ['', '-'], $event->getContact()->getName()));
-                $helper['description'] = $this->foldline($event->getDescription());
-                // location may be empty...
-                if (is_object($event->getLocation())) {
-                    $helper['location'] = $event->getLocation()->getName();
-                    $helper['locationics'] = $this->foldline($event->getLocation()->getName());
-                }
+                $nameTo = EmailHelper::prepareNameTo($event->getContact()->getName());
+                $helper['description'] = TextUtility::foldline($event->getDescription());
+                $helper['location'] = EventHelper::getLocationNameWithParent($event);
+                $helper['locationics'] = TextUtility::foldline($helper['location']);
 
                 // check if we have to cancel the event
                 if ($this->subscriberRepository->countAllByEvent($event) < $event->getMinSubscriber()) {
@@ -249,42 +252,5 @@ class CheckeventsTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         }
 
         return $successfullyExecuted;
-    }
-
-
-    /**
-     * Function foldline folds the line after 73 signs
-     * rfc2445.txt: lines SHOULD NOT be longer than 75 octets
-     *
-     * @param string $content : Anystring
-     *
-     * @return string        $content: Manipulated string
-     */
-    private function foldline($content)
-    {
-        $text = trim(strip_tags(html_entity_decode($content), '<br>,<p>,<li>'));
-        $text = preg_replace('/<p[\ \w\=\"]{0,}>/', '', $text);
-        $text = preg_replace('/<li[\ \w\=\"]{0,}>/', '- ', $text);
-        // make newline formated (yes, really write \n into the text!
-        $text = str_replace('</p>', '\n', $text);
-        $text = str_replace('</li>', '\n', $text);
-        // remove tabs
-        $text = str_replace("\t", ' ', $text);
-        // remove multiple spaces
-        $text = preg_replace('/[\ ]{2,}/', '', $text);
-        $text = str_replace('<br />', '\n', $text);
-        // remove more than one empty line
-        $text = preg_replace('/[\n]{3,}/', '\n\n', $text);
-        // remove windows linkebreak
-        $text = preg_replace('/[\r]/', '', $text);
-        // newlines are not allowed
-        $text = str_replace("\n", '\n', $text);
-        // semicolumns are not allowed
-        $text = str_replace(';', '\;', $text);
-
-        $firstline = substr($text, 0, (75 - 12));
-        $restofline = implode("\n ", str_split(trim(substr($text, (75 - 12), strlen($text))), 73));
-
-        return $firstline . "\n " . $restofline;
     }
 }

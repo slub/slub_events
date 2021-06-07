@@ -26,15 +26,14 @@ namespace Slub\SlubEvents\Domain\Model;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
- *
- *
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Contact extends AbstractEntity
 {
 
     /**
@@ -179,7 +178,7 @@ class Contact extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setPhoto(\TYPO3\CMS\Extbase\Domain\Model\FileReference $photo)
+    public function setPhoto(FileReference $photo)
     {
         $this->photo = $photo;
     }
