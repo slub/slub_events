@@ -152,44 +152,42 @@
 
   <f:section name="content">
 
-    <div class="container">
-      <h1>
-        <f:translate key="tx_slubevents.be.eventmanagement"/>
-      </h1>
+		<h1>
+			<f:translate key="tx_slubevents.be.eventmanagement"/>
+		</h1>
 
-      <f:flashMessages/>
+		<f:flashMessages/>
 
-			<f:if condition="{settings.storagePid}">
-				<f:then>
-					<f:render partial="Backend/EventFilter" arguments="{_all}" />
+		<f:if condition="{settings.storagePid}">
+			<f:then>
+				<f:render partial="Backend/EventFilter" arguments="{_all}" />
 
-					<f:if condition="{events}">
-						<f:then>
-							<f:if condition="{settings.hidePagination}">
-								<f:then>
-									<f:render section="eventListing" arguments="{events: events}"/>
-								</f:then>
-								<f:else>
-									<f:be.widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-										<f:render section="eventListing" arguments="{events: paginatedEvents, currentActiveEvent: currentActiveEvent}"/>
-									</f:be.widget.paginate>
-								</f:else>
-							</f:if>
-						</f:then>
-						<f:else>
-							<f:be.infobox state="2">{f:translate(key: 'be.nothingFoundForGivenSearch')}</f:be.infobox>
-							<f:render section="eventListing" arguments="{events: events, currentActiveEvent: currentActiveEvent}"/>
-						</f:else>
-					</f:if>
-				</f:then>
-				<f:else>
-					<f:be.infobox title="{f:translate(key: 'tx_slubevents.be.eventmanagement')}" state="2">
-						{f:translate(key: 'be.error.nofolderselected') -> f:format.raw()}
-					</f:be.infobox>
-				</f:else>
-			</f:if>
+				<f:if condition="{events}">
+					<f:then>
+						<f:if condition="{settings.hidePagination}">
+							<f:then>
+								<f:render section="eventListing" arguments="{events: events}"/>
+							</f:then>
+							<f:else>
+								<f:be.widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
+									<f:render section="eventListing" arguments="{events: paginatedEvents, currentActiveEvent: currentActiveEvent}"/>
+								</f:be.widget.paginate>
+							</f:else>
+						</f:if>
+					</f:then>
+					<f:else>
+						<f:be.infobox state="2">{f:translate(key: 'be.nothingFoundForGivenSearch')}</f:be.infobox>
+						<f:render section="eventListing" arguments="{events: events, currentActiveEvent: currentActiveEvent}"/>
+					</f:else>
+				</f:if>
+			</f:then>
+			<f:else>
+				<f:be.infobox title="{f:translate(key: 'tx_slubevents.be.eventmanagement')}" state="2">
+					{f:translate(key: 'be.error.nofolderselected') -> f:format.raw()}
+				</f:be.infobox>
+			</f:else>
+		</f:if>
 
-    </div>
   </f:section>
 </div>
 

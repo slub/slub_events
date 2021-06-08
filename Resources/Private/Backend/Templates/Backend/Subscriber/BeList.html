@@ -38,42 +38,40 @@
 
 <f:section name="content">
 
-	<div class="container">
+	<h1>
+		<f:translate key="tx_slubevents.be.subscriberlist"/>
+	</h1>
 
-		<h1>
-			<f:translate key="tx_slubevents.be.subscriberlist"/>
-		</h1>
+	<f:flashMessages/>
 
-		<f:flashMessages/>
+	<f:if condition="{settings.storagePid}">
+		<f:then>
+			<f:render partial="Backend/SubscriberFilter" arguments="{_all}" />
 
-		<f:if condition="{settings.storagePid}">
-			<f:then>
-				<f:render partial="Backend/SubscriberFilter" arguments="{_all}" />
+			<f:if condition="{subscribers}">
+				<f:then>
+					<f:if condition="{settings.hidePagination}">
+						<f:then>
+							<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
+						</f:then>
+						<f:else>
+							<f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
+																 configuration="{settings.list.paginate}">
+								<f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
+							</f:widget.paginate>
+						</f:else>
+					</f:if>
+				</f:then>
+				<f:else>
+					<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			<f:be.infobox title="{f:translate(key: 'tx_slubevents.be.eventmanagement')}" state="2">
+				{f:translate(key: 'be.error.nofolderselected') -> f:format.raw()}
+			</f:be.infobox>
+		</f:else>
+	</f:if>
 
-				<f:if condition="{subscribers}">
-					<f:then>
-						<f:if condition="{settings.hidePagination}">
-							<f:then>
-								<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
-							</f:then>
-							<f:else>
-								<f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
-																	 configuration="{settings.list.paginate}">
-									<f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
-								</f:widget.paginate>
-							</f:else>
-						</f:if>
-					</f:then>
-					<f:else>
-						<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
-					</f:else>
-				</f:if>
-			</f:then>
-			<f:else>
-				<f:be.infobox title="{f:translate(key: 'tx_slubevents.be.eventmanagement')}" state="2">
-					{f:translate(key: 'be.error.nofolderselected') -> f:format.raw()}
-				</f:be.infobox>
-			</f:else>
-		</f:if>
-	</div>
 </f:section>
