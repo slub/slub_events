@@ -99,9 +99,6 @@ class EventController extends BaseController
             $searchParameter['recurring']
         );
 
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
-
         $this->view->assign('selectedStartDateStamp', $searchParameter['selectedStartDateStamp']);
         $this->view->assign('searchString', $searchParameter['searchString']);
         $this->view->assign('categories', $categories);
