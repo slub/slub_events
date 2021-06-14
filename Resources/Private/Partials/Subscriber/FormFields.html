@@ -33,8 +33,6 @@
 	<span class="required">*</span>
 </label>
 
-<f:form.checkbox value="1" property="acceptpp" id="acceptpp"/> <label for="acceptpp"> <f:translate key="tx_slubevents_domain_model_subscriber.acceptpp"/> <span class="required">*</span> </label>
-
 <f:if condition="{event.maxNumber} >= {se:format.freePlacesLeft(event:'{event}')} || {event.maxNumber} == 0">
 	<f:then>
 		<f:form.textfield id="number" property="number" type="number"
@@ -47,5 +45,7 @@
 		required="required"/>
 	</f:else>
 </f:if>
+<f:form.checkbox value="1" property="acceptpp" id="acceptpp"/> <label for="acceptpp"> <f:translate key="tx_slubevents_domain_model_subscriber.acceptpp"/> <span class="required">*</span> </label>
+
 <f:form.hidden property="editcode" value="<se:format.editCode event='{event}' />"/>
 <f:form.hidden property="message" value=""/>

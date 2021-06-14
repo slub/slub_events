@@ -45,6 +45,11 @@ plugin.tx_slubevents {
             sendEmailOnEveryBooking = 0
         }
 
+        email {
+            # Keep ICS and html files sent to contacts for debugging purpose. DON'T USE IN PRODUCTION!
+            keepLocalFilesForDebugging = 0
+        }
+
         # --------------
         #  List
         # --------------

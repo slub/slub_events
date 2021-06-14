@@ -67,6 +67,9 @@ class EmailHelper
             $useSimfonyMailer = true;
         }
 
+        // array of files to unlink after email has been sent
+        $unlinkFiles = [];
+
         /** @var \TYPO3Fluid\Fluid\View\StandaloneView $emailViewHTML */
         $emailViewHTML = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
@@ -93,8 +96,7 @@ class EmailHelper
         } else {
             $message->setBody(EmailHelper::html2rest($emailTextHTML));
             $message->addPart($emailTextHTML, 'text/html');
-    }
-
+        }
 
         // attach ics-File
         if ($variables['attachIcs'] == true) {
@@ -117,10 +119,13 @@ class EmailHelper
                     20
                 )
                 . '-' . strtolower($templateName) . '-' . $variables['event']->getUid() . '.ics';
+
             GeneralUtility::writeFileToTypo3tempDir(
                 $eventIcsFile,
                 implode("\r\n", array_filter(explode("\r\n", $ics->render())))
             );
+
+            $unlinkFiles[] = $eventIcsFile;
 
             // attach additionally ics as file
             if ($useSimfonyMailer) {
@@ -130,6 +135,17 @@ class EmailHelper
                     ->setContentType('text/calendar'));
                 // add ics as part
                 $message->addPart(implode("\r\n", array_filter(explode("\r\n", $ics->render()))), 'text/calendar', 'utf-8');
+            }
+
+            if ($variables['settings']['email']['keepLocalFilesForDebugging']) {
+                $debugFile = Environment::getPublicPath() . 'typo3temp/tx_slubevents/' .
+                    substr(
+                        preg_replace('/[^\w]/', '', strtolower($variables['nameTo'])),
+                        0,
+                        20
+                    )
+                    . '-' . strtolower($templateName) . (isset($variables['event']) ? '-' . $variables['event']->getUid() : '' ) . '.html';
+                GeneralUtility::writeFileToTypo3tempDir($debugFile, $emailViewHTML->render());
             }
 
         }
@@ -156,6 +172,8 @@ class EmailHelper
                 . '-' . strtolower($templateName) . '.csv';
             GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
 
+            $unlinkFiles[] = $eventCsvFile;
+
             // attach CSV-File
             if ($useSimfonyMailer) {
                 $message->attachFromPath($eventCsvFile);
@@ -165,7 +183,25 @@ class EmailHelper
             }
         }
 
+        if ($variables['settings']['email']['keepLocalFilesForDebugging']) {
+            $debugFile = Environment::getPublicPath() . '/typo3temp/tx_slubevents/' .
+                substr(
+                    preg_replace('/[^\w]/', '', strtolower($variables['nameTo'])),
+                    0,
+                    20
+                )
+                . '-' . strtolower($templateName) . (isset($variables['event']) ? '-' . $variables['event']->getUid() : '' ) . '.html';
+            GeneralUtility::writeFileToTypo3tempDir($debugFile, $emailTextHTML);
+        }
+
         $message->send();
+
+        // remove files from typo3temp if not kept for debuggin purpose
+        if (empty($variables['settings']['email']['keepLocalFilesForDebugging'])) {
+            foreach ($unlinkFiles as $file) {
+                GeneralUtility::unlink_tempfile($file);
+            }
+        }
 
         return $message->isSent();
     }
