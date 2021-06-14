@@ -80,6 +80,23 @@ Configure Email Handling
 .. container:: table-row
 
    Property
+         email.keepLocalFilesForDebugging
+
+   Data type
+         string
+
+   Description
+         Keep files (.ics, .csv, .html) sent by email for debugging purpose.
+         The files are stored in :code:`typo3temp/tx_slubevents/`.
+
+         **Do not use this setting on production environment!**
+
+   Default
+         0 - Do not keep files.
+
+.. container:: table-row
+
+   Property
          emailToContact.sendEmailOnMaximumReached
 
    Data type
