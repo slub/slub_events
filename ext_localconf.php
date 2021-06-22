@@ -52,6 +52,14 @@ if (!defined('TYPO3_MODE')) {
     ]
 );
 
+/**
+ * Set storagePid by default to detect not configured page tree sections
+ */
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+    plugin.tx_slubevents.persistence.storagePid =
+    module.tx_slubevents.persistence.storagePid < plugin.tx_slubevents.persistence.storagePid
+');
+
 ## EXTENSION BUILDER DEFAULTS END TOKEN -
 # Everything BEFORE this line is overwritten with the defaults of the extension builder
 
