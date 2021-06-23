@@ -27,6 +27,7 @@ namespace Slub\SlubEvents\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use Slub\SlubEvents\Domain\Model\Event;
 
 /**
  * @package slub_events
