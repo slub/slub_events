@@ -131,7 +131,7 @@ class SubscriberController extends BaseController
 
         if ($step == 1) {
             $helper['now'] = time();
-            $helper['description'] = TextUtility::foldline(TextUtility::html2rest($event->getDescription()));
+            $helper['description'] = TextUtility::foldline(EmailHelper::html2rest($event->getDescription()));
             $helper['location'] = EventHelper::getLocationNameWithParent($event);
             $helper['locationics'] = TextUtility::foldline($helper['location']);
 
