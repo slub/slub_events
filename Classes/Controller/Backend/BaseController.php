@@ -68,6 +68,13 @@ class BaseController extends AbstractController
         if ($view->getModuleTemplate()) {
             $view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation([]);
 
+            $view->getModuleTemplate()->addJavaScriptCode('jumpUrl', '
+                function jumpToUrl(URL) {
+                    window.location.href = URL;
+                    return false;
+                }
+            ');
+
             $this->createMenu();
             $this->createButtons();
         }
