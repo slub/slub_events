@@ -264,7 +264,7 @@ class EmailHelper
             );
             $templateRootPaths = $extbaseFrameworkConfiguration['view']['templateRootPaths'];
         } else {
-            $templateRootPaths = [Environment::getPublicPath() . '/typo3conf/ext/slub_events/Resources/Private/Backend/Templates/'];
+            $templateRootPaths = [Environment::getPublicPath() . '/typo3conf/ext/slub_events/Resources/Private/Templates/'];
         }
 
         return $templateRootPaths;
@@ -282,7 +282,7 @@ class EmailHelper
             );
             $partialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
         } else {
-            $partialRootPaths = [Environment::getPublicPath() . '/typo3conf/ext/slub_events/Resources/Private/Backend/Partials/'];
+            $partialRootPaths = [Environment::getPublicPath() . '/typo3conf/ext/slub_events/Resources/Private/Partials/'];
         }
 
         return $partialRootPaths;

@@ -176,7 +176,7 @@ class EventController extends BaseController
     /**
      * action beIcsInvitation
      *
-     * --> see ics template in Resources/Private/Backend/Templates/Email/
+     * --> see ics template in Resources/Private/Templates/Email/
      *
      * @param Event $event
      * @Extbase\IgnoreValidation("event")

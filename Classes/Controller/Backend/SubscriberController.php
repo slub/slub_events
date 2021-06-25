@@ -95,7 +95,7 @@ class SubscriberController extends BaseController
     /**
      * action beOnlineSurveyAction
      *
-     * --> see ics template in Resources/Private/Backend/Templates/Email/
+     * --> see ics template in Resources/Private/Templates/Email/
      *
      * @param Event   $event
      * @param integer $step

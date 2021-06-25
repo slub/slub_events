@@ -1,1 +1,1 @@
-<f:render partial="Subscriber/CsvAll" arguments="{subscribers: subscribers}"/>
+<f:render partial="Email/CsvAll" arguments="{subscribers: subscribers}"/>
