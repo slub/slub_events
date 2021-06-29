@@ -1,5 +1,6 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 <f:section name="locationLink">
+    <f:debug>{_all}</f:debug>
 	<f:if condition="{doLink}">
 		<f:then>
 		<f:if condition="{location.link}">
@@ -35,7 +36,7 @@
 	<f:then>
 		<f:for each="{location.parent}" as="parentLocation" iteration="i">
 			<f:if condition='{i.isFirst}'>
-				<se:format.trim><f:render section="locationLink" arguments="{location: parentLocation, doLink: doLink}" /></se:format.trim><f:if condition="{onlyParent}"><f:else>,</f:else></f:if>
+				<f:spaceless><f:render section="locationLink" arguments="{location: parentLocation, doLink: doLink}" /></f:spaceless><f:if condition="{onlyParent}"><f:else>,</f:else></f:if>
 			</f:if>
 		</f:for>
 		<f:if condition="{onlyParent}">
