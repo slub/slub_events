@@ -17,11 +17,11 @@ plugin.tx_slubevents {
 module.tx_slubevents {
     view {
         # cat=module.tx_slubevents/file; type=string; label=Path to template root (BE)
-        templateRootPath = EXT:slub_events/Resources/Private/Backend/Templates/
+        templateRootPath = EXT:slub_events/Resources/Private/Templates/
         # cat=module.tx_slubevents/file; type=string; label=Path to template partials (BE)
-        partialRootPath = EXT:slub_events/Resources/Private/Backend/Partials/
+        partialRootPath = EXT:slub_events/Resources/Private/Partials/
         # cat=module.tx_slubevents/file; type=string; label=Path to template layouts (BE)
-        layoutRootPath = EXT:slub_events/Resources/Private/Backend/Layouts/
+        layoutRootPath = EXT:slub_events/Resources/Private/Layouts/
     }
 
     persistence {

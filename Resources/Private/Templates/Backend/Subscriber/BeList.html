@@ -1,0 +1,77 @@
+{namespace se=Slub\SlubEvents\ViewHelpers}
+<f:layout name="Backend/Default"/>
+
+<f:section name="subscriberListing">
+	<table class="tx_slubevents table table-striped table-hover">
+		<tr>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_subscriber.name"/>
+			</th>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_subscriber.crdate"/>
+			</th>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_event.title"/>
+			</th>
+			<th>
+				<f:translate key="tx_slubevents_domain_model_subscriber.number"/>
+			</th>
+		</tr>
+		<f:for each="{subscribers}" as="subscriber" iteration="subscriberIterator">
+			<tr class="{f:if(condition: subscriberIterator.isEven, then: 'Even')} {f:if(condition: subscriberIterator.isOdd, then: 'Odd')} {f:if(condition: subscriberIterator.isFirst, then: 'First')} {f:if(condition: subscriberIterator.isLast, then: 'Last')}">
+				<td><span class="subscriber"><f:link.email email="{subscriber.email}">{subscriber.name}
+				</f:link.email></span></td>
+				<td>
+					<f:format.date date="{subscriber.crdate}" format="%d.%m.%Y %H:%M"/>
+				</td>
+				<td>
+					<se:be.functionBar icon="geniusbar" event="{subscriber.event}"/>
+					<span class="eventtitle" title="<f:format.date date='{subscriber.event.startDateTime}' format='%d.%m.%Y %H:%M' />">
+						{subscriber.event.title}
+					</span>
+				</td>
+				<td>{subscriber.number}</td>
+			</tr>
+		</f:for>
+	</table>
+</f:section>
+
+<f:section name="content">
+
+	<h1>
+		<f:translate key="tx_slubevents.be.subscriberlist"/>
+	</h1>
+
+	<f:flashMessages/>
+
+	<f:if condition="{settings.storagePid}">
+		<f:then>
+			<f:render partial="Backend/SubscriberFilter" arguments="{_all}" />
+
+			<f:if condition="{subscribers}">
+				<f:then>
+					<f:if condition="{settings.hidePagination}">
+						<f:then>
+							<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
+						</f:then>
+						<f:else>
+							<f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
+																 configuration="{settings.list.paginate}">
+								<f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
+							</f:widget.paginate>
+						</f:else>
+					</f:if>
+				</f:then>
+				<f:else>
+					<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			<f:be.infobox title="{f:translate(key: 'tx_slubevents.be.eventmanagement')}" state="2">
+				{f:translate(key: 'be.error.nofolderselected') -> f:format.raw()}
+			</f:be.infobox>
+		</f:else>
+	</f:if>
+
+</f:section>

@@ -1,0 +1,41 @@
+<div class="filter-panel">
+	<f:form action="beList" section="results" name="searchParameter" method="post">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label for="datetimepicker1" class="control-label">
+						<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
+					</label>
+					<div class='input-group'>
+						<f:form.textfield id="datetimepicker1"
+															property="selectedStartDateStamp"
+															size="12"
+															data="{date-type:'date'}"
+															value="{selectedStartDateStamp}"
+															class="form-control t3js-datetimepicker t3js-clearable"
+						/>
+						<span class="input-group-btn">
+                    <label class="btn btn-default" for="datetimepicker1">
+                      <span class="fa fa-calendar"></span>
+                    </label>
+                </span>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<f:translate key="tx_slubevents_domain_model_category"/>
+				<div class="foldtree">
+					<f:render partial="Backend/Event/CategoryTree"
+										section="categoryTree"
+										arguments="{categories: categories, categoriesSelected : categoriesSelected}"/>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<f:form.submit class="btn btn-primary" value="Suchen..."/>
+			</div>
+		</div>
+	</f:form>
+</div>

@@ -14,14 +14,12 @@ if (TYPO3_MODE === 'BE') {
         'slubevents',    // Submodule key
         '',              // Position
         [
-            'Event'      => 'beList, beCopy, beIcsInvitation, show, new, create, edit, update, delete, listOwn',
-            'Category'   => '',
-            'Subscriber' => 'list, beList, beOnlineSurvey',
-            'Location'   => '',
+            'Backend\Event'      => 'beList, beCopy, beIcsInvitation',
+            'Backend\Subscriber' => 'beList, beOnlineSurvey',
         ],
         [
             'access' => 'user,group',
-            'icon'   => 'EXT:slub_events/ext_icon.gif',
+            'icon'   => 'EXT:slub_events/Resources/Public/Icons/Extension.svg',
             'labels' => 'LLL:EXT:slub_events/Resources/Private/Language/locallang_slubevents.xlf',
         ]
     );

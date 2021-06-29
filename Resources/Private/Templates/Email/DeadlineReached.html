@@ -23,7 +23,7 @@
 <p><b>Teilnehmerliste</b><br/>
 	<f:if condition="{subscribers}">
 		<f:then>
-			<f:render partial="Subscriber/ListAll" arguments="{subscribers: subscribers}"/>
+			<f:render partial="Email/ListAll" arguments="{subscribers: subscribers}"/>
 		</f:then>
 		<f:else>--> Es gibt keine Anmeldungen.</f:else>
 	</f:if>

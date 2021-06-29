@@ -53,17 +53,19 @@ CheckBoxContacts.init = function () {
     var chkbox = document.getElementById("checkbox-all-contacts");
     var selectlist = document.getElementById('field-contact-search');
     var selected = 0;
-    for (var i = 0; i < selectlist.length; i++) {
-        if (selectlist.options[i].selected == true)
-            selected++;
-    }
-    if (selected == selectlist.length) {
-        chkbox.checked = true;
-        selectlist.disabled = "disabled";
-    }
-    else {
-        chkbox.checked = false;
-        selectlist.disabled = false;
+    if (selectlist != null) {
+      for (var i = 0; i < selectlist.length; i++) {
+          if (selectlist.options[i].selected == true)
+              selected++;
+      }
+      if (selected == selectlist.length) {
+          chkbox.checked = true;
+          selectlist.disabled = "disabled";
+      }
+      else {
+          chkbox.checked = false;
+          selectlist.disabled = false;
+      }
     }
 };
 
