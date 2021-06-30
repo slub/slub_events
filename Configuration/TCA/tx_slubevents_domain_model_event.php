@@ -294,6 +294,7 @@ return [
                     ],
                 ],
                 'enableRichtext' => true,
+                'default' => ''
             ],
         ],
         'description'              => [
