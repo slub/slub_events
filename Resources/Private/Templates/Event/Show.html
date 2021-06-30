@@ -7,10 +7,10 @@
 		<f:if condition="{event}">
 			<f:then>
 				<h3>{event.title}</h3>
-				<strong><se:format.trim><f:render partial="Event/DateFromTo" arguments="{event : event}" /></se:format.trim></strong>,
-				<se:format.trim>
+				<strong><f:spaceless><f:render partial="Event/DateFromTo" arguments="{event : event}" /></f:spaceless></strong>,
+				<f:spaceless>
 					<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}" />
-				</se:format.trim>, {event.contact.name}
+				</f:spaceless>, {event.contact.name}
 
 				<f:format.html>{event.description}</f:format.html>
 
