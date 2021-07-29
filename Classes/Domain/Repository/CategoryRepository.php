@@ -54,7 +54,6 @@ class CategoryRepository extends Repository
         $query = $this->createQuery();
 
         // we have to ignore sys_language here
-        // --> https://forge.typo3.org/issues/37696
         $query->getQuerySettings()->setRespectSysLanguage(false);
 
         $constraints = [];
@@ -207,10 +206,6 @@ class CategoryRepository extends Repository
     private function findChildCategories($startCategory = 0)
     {
         $query = $this->createQuery();
-
-        // we have to ignore sys_language here
-        // --> https://forge.typo3.org/issues/37696
-        $query->getQuerySettings()->setRespectSysLanguage(false);
 
         $constraints = [];
 
