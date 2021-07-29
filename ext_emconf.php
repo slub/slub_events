@@ -22,10 +22,10 @@ This extension is developped and used in production at the Saxony State and Univ
     'state'            => 'stable',
     'uploadfolder'     => true,
     'createDirs'       => 'typo3temp/tx_slubevents/',
-    'version'          => '5.0.4',
+    'version'          => '5.0.5',
     'constraints'      => [
         'depends'   => [
-            'typo3'   => '9.5.27-10.4.99',
+            'typo3'   => '9.5.28-10.4.99',
         ],
         'conflicts' => [
         ],
