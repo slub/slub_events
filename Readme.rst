@@ -13,3 +13,10 @@ HowTo Start
 * contribute by creating a pull request
 
 .. _read the manual: https://docs.typo3.org/p/slub/slub-events/master/en-us/
+
+Api
+---
+
+There exists an api to get all the events as json format. You can call this api with a special type. Just attach
+"?type=1452982642" to your url and typoscript will handle the rest like calling the extension "slubevents" and the
+plugin "apieventlist".
