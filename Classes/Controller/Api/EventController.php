@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Controller\Api;
 
 /***************************************************************
@@ -27,6 +28,8 @@ namespace Slub\SlubEvents\Controller\Api;
 
 use Slub\SlubEvents\Controller\AbstractController;
 use Slub\SlubEvents\Mvc\View\JsonView;
+use Slub\SlubEvents\Service\ApiService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @package slub_events
@@ -49,7 +52,11 @@ class EventController extends AbstractController
      */
     public function listAction(): void
     {
+        /** @var ApiService $apiService */
+        $apiService = GeneralUtility::makeInstance(ApiService::class);
+        $settings = $apiService->getSettings($this->request->getArguments());
+
         $this->view->setVariablesToRender(['events']);
-        $this->view->assign('events', $this->eventRepository->findAll());
+        $this->view->assign('events', $this->eventRepository->findAllBySettings($settings));
     }
 }

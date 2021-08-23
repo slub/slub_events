@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Mvc\View;
 
 /***************************************************************
@@ -25,6 +26,7 @@ namespace Slub\SlubEvents\Mvc\View;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use DateTime;
 use TYPO3\CMS\Extbase\Mvc\View\JsonView as ExtbaseJsonView;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -55,9 +57,16 @@ class JsonView extends ExtbaseJsonView
                             '_exclude' => ['pid']
                         ],
                     ],
+                    'endDateTime' => [],
                     'location' => [
                         '_exclude' => ['pid']
                     ],
+                    'parent' => [
+                        '_only' => ['uid', 'title']
+                    ],
+                    'recurringOptions' => [],
+                    'recurringEndDateTime' => [],
+                    'startDateTime' => [],
                     'subscribers' => [
                         '_descendAll' => [
                             '_only' => ['uid', 'customerid']
@@ -77,9 +86,26 @@ class JsonView extends ExtbaseJsonView
      */
     protected function transformValue($value, array $configuration): ?array
     {
-        return parent::transformValue(
-            $value instanceof ObjectStorage ? $value->toArray() : $value,
-            $configuration
-        );
+        if ($value instanceof ObjectStorage) {
+            $value = $value->toArray();
+        }
+
+        if ($value instanceof DateTime) {
+            return [
+                'format' => $value->format('c'),
+                'timestamp' => $value->getTimestamp()
+            ];
+        }
+
+        // "recurringOptions" is written as serialized string with "weekday" and "interval".
+        // Use them as key words to identify and return as array. If not it fails
+        if (is_array($value) && (isset($value['weekday'], $value['interval']))) {
+            return [
+                'weekday' => $value['weekday'],
+                'interval' => $value['interval']
+            ];
+        }
+
+        return parent::transformValue($value, $configuration);
     }
 }
