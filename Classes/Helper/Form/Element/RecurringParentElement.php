@@ -30,6 +30,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class RecurringParentElement extends AbstractFormElement
@@ -41,7 +43,11 @@ class RecurringParentElement extends AbstractFormElement
         $result = $this->initializeResultArray();
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-        ->getQueryBuilderForTable('tx_slubevents_domain_model_event');
+            ->getQueryBuilderForTable('tx_slubevents_domain_model_event');
+
+        $queryBuilder
+            ->getRestrictions()
+            ->removeByType(HiddenRestriction::class);
 
         $resultQuery = $queryBuilder
             ->select('uid', 'title')
