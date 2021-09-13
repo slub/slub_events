@@ -183,6 +183,18 @@ class EventRepository extends Repository
         // we don't want genius_bar events here
         $constraints[] = $query->equals('genius_bar', $geniusBar);
 
+        // is user / subscriber given
+        if ((int)$settings['user'] > 0) {
+            $constraints[] = $query->logicalAnd(
+                [
+                    $query->equals('subscribers.customerid', $settings['user']),
+                    $query->logicalNot(
+                        $query->equals('subscribers.editcode', '')
+                    )
+                ]
+            );
+        }
+
         // are categories selected?
         if (is_array($settings['categoryList']) && count($settings['categoryList']) > 0) {
             $constraints[] = $query->in('categories.uid', $settings['categoryList']);
@@ -359,7 +371,6 @@ class EventRepository extends Repository
 
         return $query->execute();
     }
-
 
     /**
      * Finds all datasets by MM relation categories

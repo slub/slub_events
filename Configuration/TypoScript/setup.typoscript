@@ -121,6 +121,10 @@ module.tx_slubevents {
     }
 }
 
+plugin.tx_slubevents_apieventlistuser {
+    settings.unsubscribePid = {$plugin.tx_slubevents_apieventlistuser.settings.unsubscribePid}
+}
+
 # iCal export
 printCal = PAGE
 printCal {
@@ -154,4 +158,11 @@ apiEventList {
     typeNum = 1452982642
     config.disableAllHeaderCode = 1
     10 < tt_content.list.20.slubevents_apieventlist
+}
+
+apiEventListUser = PAGE
+apiEventListUser {
+    typeNum = 1452982643
+    config.disableAllHeaderCode = 1
+    10 < tt_content.list.20.slubevents_apieventlistuser
 }

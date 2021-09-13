@@ -223,6 +223,13 @@ class Event extends AbstractEntity
     protected $recurringOptions;
 
     /**
+     * The unsubscribe url
+     *
+     * @var string
+     */
+    protected $unsubscribeUrl;
+
+    /**
      * The recurring end dateTime
      *
      * @var \DateTime
@@ -945,4 +952,25 @@ class Event extends AbstractEntity
         $this->recurringEndDateTime = $recurringEndDateTime;
     }
 
+    /**
+     * Returns the unsubscribe url value
+     *
+     * @return string $unsubscribeUrl
+     */
+    public function getUnsubscribeUrl()
+    {
+        return $this->unsubscribeUrl;
+    }
+
+    /**
+     * Sets the unsubscribe url state
+     *
+     * @param string $unsubscribeUrl
+     *
+     * @return void
+     */
+    public function setUnsubscribeUrl($unsubscribeUrl)
+    {
+        $this->unsubscribeUrl = $unsubscribeUrl;
+    }
 }

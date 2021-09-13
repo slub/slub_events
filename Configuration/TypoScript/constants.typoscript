@@ -14,6 +14,11 @@ plugin.tx_slubevents {
     }
 }
 
+plugin.tx_slubevents_apieventlistuser {
+    # cat=plugin.tx_slubevents_apieventlistuser/settings; type=int; label=Unsubscribe PID
+    settings.unsubscribePid = 12
+}
+
 module.tx_slubevents {
     view {
         # cat=module.tx_slubevents/file; type=string; label=Path to template root (BE)

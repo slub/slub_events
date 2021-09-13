@@ -27,6 +27,7 @@ namespace Slub\SlubEvents\Service;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * @package slub_events
@@ -60,56 +61,79 @@ class ApiService
      * @param array $arguments
      * @return array
      */
-    public function getSettings($arguments = []): array
+    public function prepareArgumentsDefault($arguments = []): array
     {
-        $settings = [];
+        $preparedArguments = [];
+
+        if (count($arguments) === 0) {
+            return $preparedArguments;
+        }
 
         if ($arguments['category']) {
-            $settings['categoryList'] = $this->categoryService->getCategoryIds(
+            $preparedArguments['categoryList'] = $this->categoryService->getCategoryIds(
                 $arguments['category'],
                 (bool)$arguments['categoryRecursive']
             );
         }
 
         if ($arguments['discipline']) {
-            $settings['disciplineList'] = $this->disciplineService->getDisciplineIds(
+            $preparedArguments['disciplineList'] = $this->disciplineService->getDisciplineIds(
                 $arguments['discipline'],
                 (bool)$arguments['disciplineRecursive']
             );
         }
 
         if ($arguments['contact']) {
-            $settings['contactsSelection'] = $arguments['contact'];
+            $preparedArguments['contactsSelection'] = $arguments['contact'];
         }
 
         if ($arguments['showPastEvents']) {
-            $settings['showPastEvents'] = (bool)$arguments['showPastEvents'];
+            $preparedArguments['showPastEvents'] = (bool)$arguments['showPastEvents'];
         }
 
         if ($arguments['showEventsFromNow']) {
-            $settings['showEventsFromNow'] = (bool)$arguments['showEventsFromNow'];
+            $preparedArguments['showEventsFromNow'] = (bool)$arguments['showEventsFromNow'];
         }
 
         if ($arguments['limitByNextWeeks']) {
-            $settings['limitByNextWeeks'] = (int)$arguments['limitByNextWeeks'];
+            $preparedArguments['limitByNextWeeks'] = (int)$arguments['limitByNextWeeks'];
         }
 
         if ($arguments['startTimestamp']) {
-            $settings['startTimestamp'] = (int)$arguments['startTimestamp'];
+            $preparedArguments['startTimestamp'] = (int)$arguments['startTimestamp'];
         }
 
         if ($arguments['stopTimestamp']) {
-            $settings['stopTimestamp'] = (int)$arguments['stopTimestamp'];
+            $preparedArguments['stopTimestamp'] = (int)$arguments['stopTimestamp'];
         }
 
         if ($arguments['sorting'] === 'desc') {
-            $settings['eventOrdering'] = 'DESC';
+            $preparedArguments['eventOrdering'] = 'DESC';
         }
 
         if ($arguments['limit']) {
-            $settings['limit'] = (int)$arguments['limit'];
+            $preparedArguments['limit'] = (int)$arguments['limit'];
         }
 
-        return $settings;
+        return $preparedArguments;
+    }
+
+    /**
+     * @param array $arguments
+     * @return array
+     */
+    public function prepareArgumentsUser($arguments = []): array
+    {
+        if (count($arguments) === 0) {
+            return [];
+        }
+
+        $preparedArguments = $this->prepareArgumentsDefault($arguments);
+
+        if ($arguments['user']) {
+            $preparedArguments['user'] = (int)$arguments['user'];
+        }
+
+        return $preparedArguments;
     }
 }
