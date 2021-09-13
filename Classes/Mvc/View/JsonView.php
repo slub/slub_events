@@ -74,6 +74,36 @@ class JsonView extends ExtbaseJsonView
                     ]
                 ]
             ]
+        ],
+        'eventsUser' => [
+            '_descendAll' => [
+                '_exclude' => ['pid'],
+                '_descend' => [
+                    'categories' => [
+                        '_descendAll' => [
+                            '_only' => ['uid', 'title']
+                        ]
+                    ],
+                    'contact' => [
+                        '_exclude' => ['pid']
+                    ],
+                    'discipline' => [
+                        '_descendAll' => [
+                            '_exclude' => ['pid']
+                        ],
+                    ],
+                    'endDateTime' => [],
+                    'location' => [
+                        '_exclude' => ['pid']
+                    ],
+                    'parent' => [
+                        '_only' => ['uid', 'title']
+                    ],
+                    'recurringOptions' => [],
+                    'recurringEndDateTime' => [],
+                    'startDateTime' => []
+                ]
+            ]
         ]
     ];
 

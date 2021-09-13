@@ -62,6 +62,18 @@ defined('TYPO3_MODE') || die();
     ]
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Slub.SlubEvents',
+    'Apieventlistuser',
+    [
+        'Api\Event' => 'listUser',
+    ],
+    // non-cacheable actions
+    [
+        'Api\Event' => 'listUser',
+    ]
+);
+
 /**
  * Set storagePid by default to detect not configured page tree sections
  */
