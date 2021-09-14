@@ -27,7 +27,6 @@ namespace Slub\SlubEvents\Service;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * @package slub_events
@@ -125,7 +124,7 @@ class ApiService
     public function prepareArgumentsUser($arguments = []): array
     {
         if (count($arguments) === 0) {
-            return [];
+            return ['user' => 0];
         }
 
         $preparedArguments = $this->prepareArgumentsDefault($arguments);
