@@ -117,12 +117,13 @@ class SubscriberService
             return null;
         }
 
-        return http_build_query([
-            $this->argumentPrefix => [
+        return GeneralUtility::implodeArrayForUrl(
+            $this->argumentPrefix,
+            [
                 'editcode' => $editCode,
                 'event' => $event->getUid()
             ]
-        ]);
+        );
     }
 
     /**
