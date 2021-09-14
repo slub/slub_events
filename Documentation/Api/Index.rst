@@ -40,5 +40,35 @@ tx_slubevents_apieventlist[sorting]           String (asc|desc)    Default value
 tx_slubevents_apieventlist[limit]             Integer              Limit quantity of result data
 ============================================= ==================== ================================================
 
-If you use these parameter add "tx_slubevents_apieventlist" in [FE][cacheHash][cachedParametersWhiteList] and
+If you use these parameter and have trouble add "tx_slubevents_apieventlist" in [FE][cacheHash][cachedParametersWhiteList] and
+[FE][cacheHash][excludedParameters].
+
+Event list user
+---------------
+
+The API delivers a json formatted list with events subscribed by a specific user. You can manipulate the list with additional parameter.
+
+As extra parameter you have to specify the user. This api is in general separated from event list to be more flexible.
+It has her own result structure. Compared with event list, a user event does not show the subscribers (it is the given user) but
+has an unsubscribe link.
+
+You have to call this API with a special page type. Just attach "?type=1452982643" to your project url and
+typoscript calls the extension "slubevents" and the plugin "apieventlist".
+
+Additional parameter
+^^^^^^^^^^^^^^^^^^^^
+
+You can manipulate the list with the same additional parameter like "event list". Just use different prefix
+"tx_slubevents_apieventlist**user**" instead of "tx_slubevents_apieventlist".
+
+Necessary parameter
+^^^^^^^^^^^^^^^^^^^
+
+============================================= ==================== ================================================
+Parameter                                     Type                 Comment
+============================================= ==================== ================================================
+tx_slubevents_apieventlistuser[user]          Integer              Event -> subscribers -> customerid
+============================================= ==================== ================================================
+
+If you use these parameter and have trouble add "tx_slubevents_apieventlistuser" in [FE][cacheHash][cachedParametersWhiteList] and
 [FE][cacheHash][excludedParameters].
