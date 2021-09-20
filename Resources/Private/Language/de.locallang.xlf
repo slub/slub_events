@@ -118,8 +118,8 @@
 				<target><![CDATA[Bitte Thema wählen]]></target>
 			</trans-unit>
 			<trans-unit id="register.pleaseloginfirst" approved="yes">
-				<source><![CDATA[Do you have a SLUB user account? Please login to your account %s first. %s You will be redirected to this event registration automatically.]]></source>
-				<target><![CDATA[Haben Sie bereits ein SLUB-Nutzerkonto? Dann melden Sie sich bitte %s zunächst in Ihrem Konto an.%s Sie werden automatisch zur Veranstaltungsanmeldung zurückgeleitet.]]></target>
+				<source><![CDATA[Do you have a SLUB user account? Please login to your account %s first%s. You will be redirected to this event registration automatically.<br />Alternatively, you can simply register for our events with your name and email address. We look forward to you!]]></source>
+				<target><![CDATA[Haben Sie bereits ein SLUB-Nutzerkonto? Dann melden Sie sich bitte %s zunächst in Ihrem Konto an%s. Sie werden automatisch zur Veranstaltungsanmeldung zurückgeleitet.<br />Alternativ können Sie sich einfach mit Ihrem Namen und Ihrer E-Mailadresse für unsere Veranstaltungen anmelden. Wir freuen uns auf Sie!]]></target>
 			</trans-unit>
 			<trans-unit id="selecttopictobook" approved="yes">
 				<source><![CDATA[Please select a topic.]]></source>
