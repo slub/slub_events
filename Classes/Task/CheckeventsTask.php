@@ -182,29 +182,25 @@ class CheckeventsTask extends AbstractTask
                 // check if we have to cancel the event
                 if ($this->subscriberRepository->countAllByEvent($event) < $event->getMinSubscriber()) {
                     // --> ok, we have to cancel the event because not enough subscriber were found
-
+                    $out = true;
                     // email to all subscribers
                     foreach ($event->getSubscribers() as $subscriber) {
-                        $cronLog .= 'Absage an Teilnehmer: ' . $event->getTitle() . ': ' . strftime('%x %H:%M',
-                                $event->getStartDateTime()->getTimestamp()) . ' --> ' . $subscriber->getEmail() . "\n";
-                        $out = EmailHelper::sendTemplateEmail(
+                        $out = $out && EmailHelper::sendTemplateEmail(
                             [$subscriber->getEmail() => $subscriber->getName()],
                             [$event->getContact()->getEmail() => $event->getContact()->getName()],
                             'Absage der Veranstaltung: ' . $event->getTitle(),
-                            'CancellEvent',
+                            'CancellEventSubscriber',
                             [
                                 'event' => $event,
-                                'subscribers' => '',
+                                'subscriber' => $subscriber,
                                 'helper' => $helper,
                                 'attachIcs' => true,
                             ]
                         );
                     }
 
-                    $cronLog .= 'Absage an Veranstalter: ' . $event->getTitle() . ': ' . strftime('%x %H:%M',
-                            $event->getStartDateTime()->getTimestamp()) . ' --> ' . $event->getContact()->getEmail() . "\n";
                     // email to event owner
-                    $out = EmailHelper::sendTemplateEmail(
+                    $out = $out && EmailHelper::sendTemplateEmail(
                         [$event->getContact()->getEmail() => $event->getContact()->getName()],
                         [$this->senderEmailAddress => 'SLUB Veranstaltungen - noreply'],
                         'Absage der Veranstaltung: ' . $event->getTitle(),
@@ -225,8 +221,6 @@ class CheckeventsTask extends AbstractTask
                 } else {
                     // event takes place but subscription is not possible anymore...
                     // email to event owner
-                    $cronLog .= 'Anmeldefrist abgelaufen an Veranstalter: ' . $event->getTitle() . ': ' . strftime('%x %H:%M',
-                            $event->getStartDateTime()->getTimestamp()) . ' --> ' . $event->getContact()->getEmail() . "\n";
                     $out = EmailHelper::sendTemplateEmail(
                         [$event->getContact()->getEmail() => $event->getContact()->getName()],
                         [$this->senderEmailAddress => 'SLUB Veranstaltungen - noreply'],
