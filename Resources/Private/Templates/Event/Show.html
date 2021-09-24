@@ -14,6 +14,11 @@
 
 				<f:format.html>{event.description}</f:format.html>
 
+				<f:if condition="{event.contentElements}">
+					<!-- content elements -->
+					<f:cObject typoscriptObjectPath="lib.tx_slubevents.contentElementRendering">{event.contentElementIdList}</f:cObject>
+				</f:if>
+
 				<f:if condition="{event.contact.photo}">
 					<f:then>
 						<div class="single-contact">

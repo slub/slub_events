@@ -77,6 +77,14 @@ plugin.tx_slubevents {
     }
 }
 
+# Rendering of content elements in detail view
+lib.tx_slubevents.contentElementRendering = RECORDS
+lib.tx_slubevents.contentElementRendering {
+	tables = tt_content
+	source.current = 1
+	dontCheckPid = 1
+}
+
 module.tx_slubevents < plugin.tx_slubevents
 module.tx_slubevents {
 #    view {

@@ -101,6 +101,12 @@ class Event extends AbstractEntity
     protected $description;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\TtContent>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $contentElements;
+
+    /**
      * Minimum of Subscribers
      *
      * @var integer
@@ -230,6 +236,36 @@ class Event extends AbstractEntity
     protected $recurringEndDateTime;
 
     /**
+     * Event constructor.
+     */
+    public function __construct()
+    {
+        //Do not remove the next line: It would break the functionality
+        $this->initStorageObjects();
+    }
+
+    /**
+     * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+     *
+     * @return void
+     */
+    protected function initStorageObjects()
+    {
+        /**
+         * Do not modify this method!
+         * It will be rewritten on each save in the extension builder
+         * You may modify the constructor of this class instead
+         */
+        $this->categories = new ObjectStorage();
+
+        $this->contentElements = new ObjectStorage();
+
+        $this->discipline = new ObjectStorage();
+
+        $this->subscribers = new ObjectStorage();
+    }
+
+    /**
      * Returns hidden
      *
      * @return boolean $hidden
@@ -310,31 +346,63 @@ class Event extends AbstractEntity
     }
 
     /**
-     * Event constructor.
+     * Get content elements
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
-    public function __construct()
+    public function getContentElements()
     {
-        //Do not remove the next line: It would break the functionality
-        $this->initStorageObjects();
+        return $this->contentElements;
     }
 
     /**
-     * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+     * Set content element list
      *
-     * @return void
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $contentElements content elements
      */
-    protected function initStorageObjects()
+    public function setContentElements($contentElements)
     {
-        /**
-         * Do not modify this method!
-         * It will be rewritten on each save in the extension builder
-         * You may modify the constructor of this class instead
-         */
-        $this->categories = new ObjectStorage();
+        $this->contentElements = $contentElements;
+    }
 
-        $this->discipline = new ObjectStorage();
+    /**
+     * Get id list of content elements
+     *
+     * @return string
+     */
+    public function getContentElementIdList()
+    {
+        return $this->getIdOfContentElements();
+    }
 
-        $this->subscribers = new ObjectStorage();
+    /**
+     * Get translated id list of content elements
+     *
+     * @return string
+     */
+    public function getTranslatedContentElementIdList()
+    {
+        return $this->getIdOfContentElements(false);
+    }
+
+    /**
+     * Collect id list
+     *
+     * @param bool $original
+     * @return string
+     */
+    protected function getIdOfContentElements($original = true)
+    {
+        $idList = [];
+        $contentElements = $this->getContentElements();
+        if ($contentElements) {
+            foreach ($this->getContentElements() as $contentElement) {
+                if ($contentElement->getColPos() >= 0) {
+                    $idList[] = $original ? $contentElement->getUid() : $contentElement->_getProperty('_localizedUid');
+                }
+            }
+        }
+        return implode(',', $idList);
     }
 
     /**

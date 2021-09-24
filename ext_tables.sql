@@ -14,6 +14,7 @@ CREATE TABLE tx_slubevents_domain_model_event (
     sub_end_date_time int(11) DEFAULT '0' NOT NULL,
     teaser text NOT NULL,
     description text NOT NULL,
+	content_elements int(11) DEFAULT '0' NOT NULL,
     min_subscriber int(11) DEFAULT '0' NOT NULL,
     max_subscriber int(11) DEFAULT '0' NOT NULL,
     max_number int(11) DEFAULT '0' NOT NULL,
@@ -301,4 +302,12 @@ CREATE TABLE tx_slubevents_event_discipline_mm (
 
     KEY uid_local (uid_local),
     KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tt_content'
+#
+CREATE TABLE tt_content (
+	tx_slubevents_related_content int(11) DEFAULT '0' NOT NULL,
+	KEY index_eventscontent (tx_slubevents_related_content)
 );

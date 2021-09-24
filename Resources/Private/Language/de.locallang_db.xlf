@@ -105,6 +105,10 @@
 				<source><![CDATA[Categories]]></source>
 				<target><![CDATA[Kategorie]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.content_elements" approved="yes">
+				<source><![CDATA[Content Elements]]></source>
+				<target><![CDATA[Inhaltselemente]]></target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.contact" approved="yes">
 				<source><![CDATA[Contact]]></source>
 				<target><![CDATA[Ansprechpartner]]></target>
