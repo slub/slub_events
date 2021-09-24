@@ -383,7 +383,7 @@
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_location" approved="yes">
 				<source><![CDATA[Location]]></source>
-				<target><![CDATA[Ort]]></target>
+				<target><![CDATA[Veranstaltungsort]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes">
 				<source><![CDATA[Subscriber Details]]></source>
