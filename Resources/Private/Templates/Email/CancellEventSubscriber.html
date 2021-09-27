@@ -1,10 +1,7 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
-<p>
-	<f:translate key='text.salutation'/>
-	{event.contact.name},
-</p>
+<p>{f:translate(key: 'text.salutation')} {subscriber.name},</p>
 
-<p>für folgende Veranstaltung ist die Anmeldefrist abgelaufen.</p>
+<p>leider müssen wir folgende Veranstaltung absagen, da die Mindestteilnehmerzahl nicht erreicht wurde:</p>
 
 <p><strong>{event.title}</strong></p>
 
@@ -19,22 +16,12 @@
 	</f:then>
 </f:if>
 
-
-<p><b>Teilnehmerliste</b><br/>
-	<f:if condition="{subscribers}">
-		<f:then>
-			<f:render partial="Email/ListAll" arguments="{subscribers: subscribers}"/>
-		</f:then>
-		<f:else>--> Es gibt keine Anmeldungen.</f:else>
-	</f:if>
-</p>
-
 <p>Anmeldungen sind nicht mehr möglich.</p>
 
 <p>
 	<f:translate key='text.closing'/>
 </p>
 <p>&nbsp;</p>
-<p>
+<p>{event.contact.name} <br/>
 	<f:translate key='text.signature'/>
 </p>

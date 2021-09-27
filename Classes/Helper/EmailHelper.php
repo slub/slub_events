@@ -47,7 +47,7 @@ class EmailHelper
      * @param array                         $variables    variables to be passed to the Fluid view
      * @param ConfigurationManagerInterface $configurationManager
      *
-     * @return boolean TRUE on success, otherwise false
+     * @return boolean true on success, otherwise false
      */
     public static function sendTemplateEmail(
         array $recipient,
