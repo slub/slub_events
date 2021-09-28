@@ -107,16 +107,19 @@
 		<trans-unit id="tx_slubevents_domain_model_event.external_registration">
 			<source>External Registration Link</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.image">
+			<source>Event Image</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.genius_bar">
 			<source>Knowledge Bar</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.parent">
+		<trans-unit id="tx_slubevents_domain_model_event.parent">
 			<source>Parent Event</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.recurring">
+		<trans-unit id="tx_slubevents_domain_model_event.recurring">
 			<source>Recurring Event</source>
 		</trans-unit>
-    <trans-unit id="tx_slubevents_domain_model_event.recurring_events">
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_events">
 			<source>Recurring Events</source>
 		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.recurring_options">

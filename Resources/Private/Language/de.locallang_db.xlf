@@ -149,6 +149,10 @@
 				<source><![CDATA[Knowledge Bar]]></source>
 				<target><![CDATA[Wissensbar-Veranstaltung]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.image" approved="yes">
+				<source><![CDATA[Event Image]]></source>
+				<target><![CDATA[Veranstaltungs-Bild]]></target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.location" approved="yes">
 				<source><![CDATA[Location]]></source>
 				<target><![CDATA[Ort]]></target>

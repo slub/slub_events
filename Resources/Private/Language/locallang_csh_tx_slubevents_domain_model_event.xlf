@@ -74,14 +74,17 @@
 		<trans-unit id="title.description" xml:space="preserve">
 			<source>Title</source>
 		</trans-unit>
-    <trans-unit id="recurring.description" xml:space="preserve">
+		<trans-unit id="recurring.description" xml:space="preserve">
 			<source>Is this a recurring event? On activating this option you configure the recurring interval and create child events.</source>
 		</trans-unit>
-    <trans-unit id="recurring_options.description" xml:space="preserve">
+		<trans-unit id="recurring_options.description" xml:space="preserve">
 			<source>This event get's cloned multiple times depending on the recurring settings below.</source>
 		</trans-unit>
-    <trans-unit id="recurring_end_date_time.description" xml:space="preserve">
+		<trans-unit id="recurring_end_date_time.description" xml:space="preserve">
 			<source>The recurring ends on the given date.</source>
+		</trans-unit>
+		<trans-unit id="image.description" xml:space="preserve">
+			<source>Image to be used in social media sharing</source>
 		</trans-unit>
 		</body>
 	</file>

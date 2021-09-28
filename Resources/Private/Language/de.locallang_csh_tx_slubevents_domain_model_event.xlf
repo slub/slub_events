@@ -67,7 +67,7 @@
 		</trans-unit>
 		<trans-unit id="recurring.description" approved="yes" xml:space="preserve">
 			<source>Is this a recurring event? On activating this option you configure the recurring interval and create child events.</source>
-			<target>Ist dies eine Termin-Serie? 
+			<target>Ist dies eine Termin-Serie?
 Mit Aktivierung dieser Option können Sie die Wiederholungseinstellungen bearbeiten und legen die Einzelveranstaltungen der Serie an.</target>
 		</trans-unit>
 		<trans-unit id="recurring_end_date_time.description" approved="yes">
@@ -109,6 +109,10 @@ Mit Aktivierung dieser Option können Sie die Wiederholungseinstellungen bearbei
 		<trans-unit id="title.description" approved="yes">
 			<source>Title</source>
 			<target>Titel der Veranstaltung</target>
+		</trans-unit>
+		<trans-unit id="image.description" xml:space="preserve">
+			<source>Image to be used in social media sharing</source>
+			<target>Bild zur Verwendung beim Teilen in Social Media</target>
 		</trans-unit>
 		</body>
 	</file>

@@ -25,7 +25,7 @@ return [
         'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, content_elements, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, contact',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, content_elements, image, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, contact',
     ],
     'types'     => [
         // Single event
@@ -40,6 +40,7 @@ return [
                 'description,' .
                 '--div--;' . $LL . 'tx_slubevents_domain_model_event.content_elements,' .
                 'content_elements,' .
+                'image,' .
                 '--div--;Anmeldebedingungen,' .
                 'contact,' .
                 'external_registration,' .
@@ -344,6 +345,27 @@ return [
                     'allowLanguageSynchronization' => true,
                 ],
             ]
+        ],
+        'image' => [
+            'exclude' => true,
+            'label'   => $LL . 'tx_slubevents_domain_model_event.image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'maxitems' => 1,
+                    'appearance' => [
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
+                        'fileUploadAllowed' => false
+                    ],
+                    'foreign_match_fields' => [
+                        'fieldname' => 'image',
+                        'tablenames' => 'tx_slubevents_domain_model_event',
+                        'table_local' => 'sys_file',
+                    ],
+                    'default' => 0,
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            )
         ],
         'min_subscriber'           => [
             'displayCond' => 'FIELD:external_registration:REQ:false',

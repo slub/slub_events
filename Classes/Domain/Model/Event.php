@@ -107,23 +107,31 @@ class Event extends AbstractEntity
     protected $contentElements;
 
     /**
+     * Fal media items
+     *
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     */
+    protected $image;
+
+
+    /**
      * Minimum of Subscribers
      *
-     * @var integer
+     * @var int
      */
     protected $minSubscriber = 0;
 
     /**
      * Maximum of Subscribers
      *
-     * @var integer
+     * @var int
      */
     protected $maxSubscriber = 0;
 
     /**
      * Maximum amount of Persons per Subscription
      *
-     * @var integer
+     * @var int
      */
     protected $maxNumber = 0;
 
@@ -131,7 +139,7 @@ class Event extends AbstractEntity
      * Target Audience
      *
      * @Extbase\Validate("NotEmpty")
-     * @var integer
+     * @var int
      */
     protected $audience = 0;
 
@@ -403,6 +411,26 @@ class Event extends AbstractEntity
             }
         }
         return implode(',', $idList);
+    }
+
+    /**
+     * Returns the image
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Sets the image
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
     /**

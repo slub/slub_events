@@ -14,6 +14,7 @@ CREATE TABLE tx_slubevents_domain_model_event (
     sub_end_date_time int(11) DEFAULT '0' NOT NULL,
     teaser text NOT NULL,
     description text NOT NULL,
+	image int(11) unsigned DEFAULT '0',
 	content_elements int(11) DEFAULT '0' NOT NULL,
     min_subscriber int(11) DEFAULT '0' NOT NULL,
     max_subscriber int(11) DEFAULT '0' NOT NULL,
