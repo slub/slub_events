@@ -105,6 +105,10 @@
 				<source><![CDATA[Categories]]></source>
 				<target><![CDATA[Kategorie]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.content_elements" approved="yes">
+				<source><![CDATA[Content Elements]]></source>
+				<target><![CDATA[Inhaltselemente]]></target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.contact" approved="yes">
 				<source><![CDATA[Contact]]></source>
 				<target><![CDATA[Ansprechpartner]]></target>
@@ -144,6 +148,10 @@
 			<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes">
 				<source><![CDATA[Knowledge Bar]]></source>
 				<target><![CDATA[Wissensbar-Veranstaltung]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.image" approved="yes">
+				<source><![CDATA[Event Image]]></source>
+				<target><![CDATA[Veranstaltungs-Bild]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.location" approved="yes">
 				<source><![CDATA[Location]]></source>

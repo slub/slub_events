@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	  xmlns:se="http://typo3.org/ns/Slub/SlubEvents/ViewHelpers"
+	  data-namespace-typo3-fluid="true">
+
+<se:metaTag property="og:url" content="" useCurrentDomain="1" />
+<f:if condition="{event.image}">
+    <se:metaTag
+        property="og:image"
+        content="{f:uri.image(image:'{event.image}', maxWidth:'1200')}"
+        forceAbsoluteUrl="1" />
+</f:if>
+<f:if condition="{event.description}">
+	<f:then>
+		<se:metaTag name="description" content="{event.description}" />
+		<se:metaTag property="og:description" content="{event.description}" />
+	</f:then>
+	<f:else>
+		<se:metaTag name="description" content="{event.teaser -> f:format.stripTags()}" />
+		<se:metaTag property="og:description" content="{event.teaser -> f:format.stripTags()}" />
+	</f:else>
+</f:if>
+</html>

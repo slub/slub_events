@@ -6,13 +6,20 @@
 	<div class="slub-event-show">
 		<f:if condition="{event}">
 			<f:then>
-				<h3>{event.title}</h3>
+                <f:render partial="Event/Opengraph" arguments="{event: event, settings:settings}" />
+
+                <h3>{event.title}</h3>
 				<strong><f:spaceless><f:render partial="Event/DateFromTo" arguments="{event : event}" /></f:spaceless></strong>,
 				<f:spaceless>
 					<f:render partial="Location/Link" arguments="{location: event.location, doLink: 'false', onlyParent: 'true'}" />
 				</f:spaceless>, {event.contact.name}
 
 				<f:format.html>{event.description}</f:format.html>
+
+				<f:if condition="{event.contentElements}">
+					<!-- content elements -->
+					<f:cObject typoscriptObjectPath="lib.tx_slubevents.contentElementRendering">{event.contentElementIdList}</f:cObject>
+				</f:if>
 
 				<f:if condition="{event.contact.photo}">
 					<f:then>
