@@ -9,22 +9,22 @@
 	                <li class="heading"><h4><f:format.date date="<se:format.newMonthTitle events='{wibas}' index='{label}' />" format="%B %Y" /></h4></li>
 	            </f:then>
 	        </f:if>
-			<f:if condition="<se:condition.IsSubscriptionAllowed event='{wiba}' />">
-				<f:then>
-                    <f:if condition="{kind} == 1">
-                        <f:comment>Wissensbar</f:comment>
-                        <f:render partial="Event/GbItemKind1" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
-                    </f:if>
-                    <f:if condition="{kind} == 2">
-                        <f:comment>Veranstaltungen</f:comment>
-                        <f:render partial="Event/GbItemKind2" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
-                    </f:if>
-                    <f:if condition="{kind} == 3">
-                        <f:comment>Sprechstunden</f:comment>
-                        <f:render partial="Event/GbItem" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
-                    </f:if>
-				</f:then>
-			</f:if>
+            <f:if condition="{kind} == 1">
+                <f:comment>Wissensbar</f:comment>
+                <f:if condition="<se:condition.IsSubscriptionAllowed event='{wiba}' />">
+                    <f:render partial="Event/GbItemKind1" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+                </f:if>
+            </f:if>
+            <f:if condition="{kind} == 2">
+                <f:comment>Veranstaltungen</f:comment>
+                <f:render partial="Event/GbItemKind2" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+            </f:if>
+            <f:if condition="{kind} == 3">
+                <f:comment>Sprechstunden</f:comment>
+                <f:if condition="<se:condition.IsSubscriptionAllowed event='{wiba}' />">
+                    <f:render partial="Event/GbItem" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+                </f:if>
+            </f:if>
 		</f:for>
 	</ul>
 
@@ -32,7 +32,6 @@
 
 <f:section name="main">
 
-<f:debug>{_all}</f:debug>
 <div class="slub-event-gblist" id="book-me-now">
 
 	<f:if condition="{contactSelectionWarning}">

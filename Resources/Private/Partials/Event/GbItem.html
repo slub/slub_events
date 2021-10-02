@@ -5,7 +5,7 @@
 	<f:render partial="Event/DateFromTo" arguments="{event : event}"/>
 
 	<div class="subscription">
-		<f:link.action action="new" class="button submit" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"
+		<f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"
 					   title="Anmelden bei {event.contact.name}" arguments="{event : event, category: category}">
 			<f:translate key="tx_slubevents_domain_model_event.subscribe"/>
 		</f:link.action>
