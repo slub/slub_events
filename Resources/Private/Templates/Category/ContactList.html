@@ -11,22 +11,18 @@
 	        </f:if>
 			<f:if condition="<se:condition.IsSubscriptionAllowed event='{wiba}' />">
 				<f:then>
-					<f:if condition="<se:format.freePlacesLeft event='{wiba}' /> >= 1">
-						<f:then>
-							<f:if condition="{kind} == 1">
-								<f:comment>Wissensbar</f:comment>
-								<f:render partial="Event/GbItemKind1" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
-							</f:if>
-							<f:if condition="{kind} == 2">
-								<f:comment>Veranstaltungen</f:comment>
-								<f:render partial="Event/GbItemKind2" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
-							</f:if>
-							<f:if condition="{kind} == 3">
-								<f:comment>Sprechstunden</f:comment>
-								<f:render partial="Event/GbItem" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
-							</f:if>
-						</f:then>
-					</f:if>
+                    <f:if condition="{kind} == 1">
+                        <f:comment>Wissensbar</f:comment>
+                        <f:render partial="Event/GbItemKind1" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+                    </f:if>
+                    <f:if condition="{kind} == 2">
+                        <f:comment>Veranstaltungen</f:comment>
+                        <f:render partial="Event/GbItemKind2" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+                    </f:if>
+                    <f:if condition="{kind} == 3">
+                        <f:comment>Sprechstunden</f:comment>
+                        <f:render partial="Event/GbItem" arguments="{event: wiba, category: category, eventIterator:wibaIterator}"/>
+                    </f:if>
 				</f:then>
 			</f:if>
 		</f:for>
@@ -36,6 +32,7 @@
 
 <f:section name="main">
 
+<f:debug>{_all}</f:debug>
 <div class="slub-event-gblist" id="book-me-now">
 
 	<f:if condition="{contactSelectionWarning}">
@@ -43,7 +40,6 @@
 			Bitte wählen Sie einen Ansprechpartner im Backend!
 		</f:then>
 		<f:else>
-
 			<div class="contacts">
 				<p><f:translate key="tx_slubevents.gb.i_consult_you" /></p>
 				<f:for each="{contacts}" as="contact">
@@ -65,7 +61,7 @@
 				<f:then>
 					<f:if condition="{wibas}">
 						<f:then>
-              <h3><f:translate key="tx_slubevents_domain_model_event.genius_bar" /></h3>
+                            <h3><f:translate key="tx_slubevents_domain_model_event.genius_bar" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: wibas, category: category, kind: 1}" />
@@ -92,7 +88,7 @@
 									}
 								}
 							</script>
-              <br style="clear:both">
+                            <br style="clear:both">
 						</f:then>
 					</f:if>
 				</f:then>
@@ -103,7 +99,7 @@
 				<f:then>
 					<f:if condition="{events}">
 						<f:then>
-              <h3><f:translate key="persEvents" /></h3>
+                            <h3><f:translate key="persEvents" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: events, category: category, kind: 2}" />
@@ -114,7 +110,7 @@
 									</f:widget.paginate>
 								</f:else>
 							</f:if>
-              <br style="clear:both">
+                            <br style="clear:both">
 						</f:then>
 					</f:if>
 				</f:then>
@@ -125,7 +121,7 @@
 				<f:then>
 					<f:if condition="{consultation}">
 						<f:then>
-              <h3><f:translate key="persConsultingHours" /></h3>
+                            <h3><f:translate key="persConsultingHours" /></h3>
 							<f:if condition="{settings.hidePagination}">
 								<f:then>
 									<f:render section="wibaListing" arguments="{wibas: consultation, category: category, kind: 3}" />

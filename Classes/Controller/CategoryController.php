@@ -115,10 +115,6 @@ class CategoryController extends AbstractController
             }
         }
 
-        #if ($category != NULL) {
-        #	$events = $this->eventRepository->findAllGbByCategory($category);
-        #}
-
         // get Default Category
         if (is_null($category)) {
             $category = $this->categoryRepository->findDefaultGeniusbarCategory();
