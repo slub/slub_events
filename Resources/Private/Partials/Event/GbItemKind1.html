@@ -6,9 +6,9 @@
 	<div class="subscription">
 
     <f:form name="subscribe_{event.uid}" object="{subscriber}" pageUid="{settings.pidSubscribeForm}" action="new" controller="Subscriber" arguments="{event : event}">
-        <f:comment><f:form.select name="category" style="width:200px;" class="form-control" options="{event.categories}" /></f:comment>
+        <f:comment><f:form.select name="category" class="form-control" options="{event.categories}" /></f:comment>
 
-        <select style="width:200px;" class="form-control" id="sel_{event.uid}" name="tx_slubevents_eventsubscribe[category]" onchange="check_wiba({event.uid});">
+        <select class="form-control" id="sel_{event.uid}" name="tx_slubevents_eventsubscribe[category]" onchange="check_wiba({event.uid});">
             <option value="-1"><f:translate key="persSelectTopic" /></option>
             <f:for each="{event.categories}" as="cat" key="key" iteration="singleEventIterator">
                 <option value="{cat.uid}">{cat.title}</option>
