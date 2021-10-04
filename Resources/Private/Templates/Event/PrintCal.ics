@@ -20,8 +20,8 @@ TZOFFSETTO:+0100
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-ORGANIZER;CN="{event.contact.0.name}":MAILTO:{event.contact.0.email}
-DESCRIPTION:{helper.description}
+ORGANIZER;CN="{event.contact.name}":MAILTO:{event.contact.email}
+DESCRIPTION:<f:format.raw>{helper.description}</f:format.raw>
 SUMMARY:{event.title}
 UID:{event.uid}-event-dav-ke
 <f:if condition="{helper.allDay} == 1"><f:then>
