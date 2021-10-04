@@ -6,9 +6,9 @@
 	<div class="subscription">
 
     <f:form name="subscribe_{event.uid}" object="{subscriber}" pageUid="{settings.pidSubscribeForm}" action="new" controller="Subscriber" arguments="{event : event}">
-        <f:comment><f:form.select name="category" style="width:200px;" class="form-control" options="{event.categories}" /></f:comment>
+        <f:comment><f:form.select name="category" class="form-control" options="{event.categories}" /></f:comment>
 
-        <select style="width:200px;" class="form-control" id="sel_{event.uid}" name="tx_slubevents_eventsubscribe[category]" onchange="check_wiba({event.uid});">
+        <select class="form-control" id="sel_{event.uid}" name="tx_slubevents_eventsubscribe[category]" onchange="check_wiba({event.uid});">
             <option value="-1"><f:translate key="persSelectTopic" /></option>
             <f:for each="{event.categories}" as="cat" key="key" iteration="singleEventIterator">
                 <option value="{cat.uid}">{cat.title}</option>
@@ -16,14 +16,14 @@
         </select>
         <label style="display:none;" for="sel_{event.uid}" class="error" id="slub-forms-select-{event.uid}-error"><f:translate key="selecttopictobook"/></label>
 
-        <f:comment><f:form.submit class="button submit" value="{f:translate(key: 'tx_slubevents_domain_model_event.subscribe')}" style="margin-top:0px" /></f:comment>
+        <f:comment><f:form.submit class="button subscribe" value="{f:translate(key: 'tx_slubevents_domain_model_event.subscribe')}" style="margin-top:0px" /></f:comment>
         <a href="javascript:;" onclick="reg_wiba({event.uid});" class="button submit"><f:translate key="tx_slubevents_domain_model_event.subscribe"/></a>
     </f:form>
 
 
 
         <f:comment>
-        <f:link.action action="new" class="button submit" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"
+        <f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"
                        title="Anmelden bei {event.contact.name}" arguments="{event : event, category: category}">
             <f:translate key="tx_slubevents_domain_model_event.subscribe"/>
         </f:link.action>

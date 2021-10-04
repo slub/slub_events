@@ -124,7 +124,6 @@ class EventRepository extends Repository
         if ($category != null) {
             $constraints[] = $query->in('categories.uid', explode(',', $category));
         }
-        $constraints[] = $query->greaterThan('max_subscriber', 'subscribers');
         $constraints[] = $query->greaterThan('start_date_time', strtotime('today'));
 
         if (count($constraints)) {

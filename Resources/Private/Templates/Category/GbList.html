@@ -13,11 +13,7 @@
                 </f:if>
 				<f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
 					<f:then>
-						<f:if condition="<se:format.freePlacesLeft event='{event}' /> >= 1">
-							<f:then>
-								<f:render partial="Event/GbItem" arguments="{event: event, category: category, eventIterator:eventIterator}"/>
-							</f:then>
-						</f:if>
+                        <f:render partial="Event/GbItem" arguments="{event: event, category: category, eventIterator:eventIterator}"/>
 					</f:then>
 				</f:if>
 			</f:then>
