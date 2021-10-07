@@ -16,7 +16,7 @@ plugin.tx_slubevents {
 
 plugin.tx_slubevents_apieventlistuser {
     # cat=plugin.tx_slubevents_apieventlistuser/settings; type=int; label=Unsubscribe PID
-    settings.unsubscribePid = 12
+    settings.unsubscribePid =
 }
 
 module.tx_slubevents {
