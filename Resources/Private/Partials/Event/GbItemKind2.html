@@ -4,11 +4,23 @@
 <li class="{f:if(condition: eventIterator.isEven, then: 'Even')} {f:if(condition: eventIterator.isOdd, then: 'Odd')} {f:if(condition: eventIterator.isFirst, then: 'First')} {f:if(condition: eventIterator.isLast, then: 'Last')}">
 	<f:render partial="Event/DateFromTo" arguments="{event : event}"/> - <f:link.action action="show" controller="Event" pluginName="Eventlist" title="{event.description -> f:format.stripTags()}" pageUid="{settings.pidDetails}" arguments="{event : event}">{event.title}</f:link.action>
     <div class="subscription">
-		<f:link.action action="new" class="button submit" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"
-					   title="Anmelden bei {event.contact.name}" arguments="{event : event, category: category}">
-			<f:translate key="tx_slubevents_domain_model_event.subscribe"/>
-		</f:link.action>
-
+        <f:if condition="<se:condition.IsSubscriptionAllowed event='{event}' />">
+            <f:then>
+                <f:link.action action="new" class="button subscribe" controller="Subscriber" pageUid="{settings.pidSubscribeForm}"
+                title="Anmelden bei {event.contact.name}" arguments="{event : event, category: category}">
+                <f:translate key="tx_slubevents_domain_model_event.subscribe"/>
+            </f:link.action>
+            </f:then>
+            <f:else>
+                <f:if condition="{event.externalRegistration}">
+                    <f:then>
+                        <f:link.external uri="{event.externalRegistration}" class="button subscribe external" target="_blank">
+                            <f:translate key="tx_slubevents_domain_model_event.external_registration" />
+                        </f:link.external>
+                    </f:then>
+                </f:if>
+            </f:else>
+        </f:if>
 	</div>
 	<div class="clear"></div>
 </li>
