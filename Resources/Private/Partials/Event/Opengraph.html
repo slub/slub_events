@@ -11,8 +11,8 @@
 </f:if>
 <f:if condition="{event.description}">
 	<f:then>
-		<se:metaTag name="description" content="{event.description}" />
-		<se:metaTag property="og:description" content="{event.description}" />
+		<se:metaTag name="description" content="{event.description -> f:format.stripTags()}" />
+		<se:metaTag property="og:description" content="{event.description -> f:format.stripTags()}" />
 	</f:then>
 	<f:else>
 		<se:metaTag name="description" content="{event.teaser -> f:format.stripTags()}" />
