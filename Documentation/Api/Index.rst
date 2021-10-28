@@ -49,7 +49,8 @@ Typoscript constants
 ============================================= ==================== ================================================
 Parameter                                     Type                 Comment
 ============================================= ==================== ================================================
-settings.unsubscribePid                       Integer              Set the page to unsubscribe an event. If not set, link to unsibscribe not generated
+settings.unsubscribePid                       Integer              Set the page to unsubscribe an event. If not set, link to unsubscribe not generated
+============================================= ==================== ================================================
 
 Event list user
 ---------------
