@@ -56,6 +56,10 @@ class SubscriberService
      */
     public function addUnsubscribeUrl(int $user, array $events, int $unsubscribePid): array
     {
+        if ($unsubscribePid === 0) {
+            return $events;
+        }
+
         $preparedEvents = [];
         $unsubscribeUrl = $this->getUnsubscribeUrl($unsubscribePid);
 
@@ -67,7 +71,7 @@ class SubscriberService
                 continue;
             }
 
-            $event->setUnsubscribeUrl($unsubscribeUrl . '&' . $preparedUnsubscribeParameter);
+            $event->setUnsubscribeUrl($unsubscribeUrl . $preparedUnsubscribeParameter);
 
             $preparedEvents[] = $event;
         }

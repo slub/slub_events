@@ -43,6 +43,15 @@ tx_slubevents_apieventlist[limit]             Integer              Limit quantit
 If you use these parameter and have trouble add "tx_slubevents_apieventlist" in [FE][cacheHash][cachedParametersWhiteList] and
 [FE][cacheHash][excludedParameters].
 
+Typoscript constants
+^^^^^^^^^^^^^^^^^^^^
+
+============================================= ==================== ================================================
+Parameter                                     Type                 Comment
+============================================= ==================== ================================================
+settings.unsubscribePid                       Integer              Set the page to unsubscribe an event. If not set, link to unsubscribe not generated
+============================================= ==================== ================================================
+
 Event list user
 ---------------
 

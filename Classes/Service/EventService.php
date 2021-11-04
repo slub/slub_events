@@ -55,7 +55,7 @@ class EventService
         return $this->subscriberService->addUnsubscribeUrl(
             $user,
             $events,
-            $settings['unsubscribePid']
+            (int)$settings['unsubscribePid']
         );
     }
 }
