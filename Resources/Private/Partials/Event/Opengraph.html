@@ -11,12 +11,12 @@
 </f:if>
 <f:if condition="{event.description}">
 	<f:then>
-		<se:metaTag name="description" content="{event.description}" />
-		<se:metaTag property="og:description" content="{event.description}" />
+		<se:metaTag name="description" content="{event.description -> f:format.stripTags() -> f:format.crop(maxCharacters:255, append:'...')}" />
+		<se:metaTag property="og:description" content="{event.description -> f:format.stripTags() -> f:format.crop(maxCharacters:255, append:'...')}" />
 	</f:then>
 	<f:else>
-		<se:metaTag name="description" content="{event.teaser -> f:format.stripTags()}" />
-		<se:metaTag property="og:description" content="{event.teaser -> f:format.stripTags()}" />
+		<se:metaTag name="description" content="{event.teaser -> f:format.stripTags() -> f:format.crop(maxCharacters:255, append:'...')}" />
+		<se:metaTag property="og:description" content="{event.teaser -> f:format.stripTags() -> f:format.crop(maxCharacters:255, append:'...')}" />
 	</f:else>
 </f:if>
 </html>

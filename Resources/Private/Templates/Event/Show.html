@@ -7,7 +7,6 @@
 		<f:if condition="{event}">
 			<f:then>
                 <f:render partial="Event/Opengraph" arguments="{event: event, settings:settings}" />
-
                 <h3>{event.title}</h3>
 				<strong><f:spaceless><f:render partial="Event/DateFromTo" arguments="{event : event}" /></f:spaceless></strong>,
 				<f:spaceless>
