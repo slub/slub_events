@@ -15,6 +15,8 @@ namespace Slub\SlubEvents\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Slub\SlubEvents\Domain\Model\Event;
+use Slub\SlubEvents\Domain\Repository\EventRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -25,9 +27,19 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 class EventService
 {
     /**
+     * @var CategoryService
+     */
+    protected $categoryService;
+
+    /**
      * @var SubscriberService
      */
     protected $subscriberService;
+
+    /**
+     * @var EventRepository
+     */
+    protected $eventRepository;
 
     /**
      * EventService constructor.
@@ -37,7 +49,20 @@ class EventService
         /** @var ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
+        $this->categoryService = $objectManager->get(CategoryService::class);
         $this->subscriberService = $objectManager->get(SubscriberService::class);
+        $this->eventRepository = $objectManager->get(EventRepository::class);
+    }
+
+    /**
+     * @param array $arguments
+     * @return array
+     */
+    public function findAllBySettings(array $arguments): array
+    {
+        $events = $this->eventRepository->findAllBySettings($arguments)->toArray();
+
+        return $this->addRootCategoriesToEvents($events);
     }
 
     /**
@@ -57,5 +82,37 @@ class EventService
             $events,
             (int)$settings['unsubscribePid']
         );
+    }
+
+    /**
+     * @param array $events
+     * @return array
+     */
+    protected function addRootCategoriesToEvents(array $events): array
+    {
+        $withRootCategory = [];
+
+        if (count($events) > 0) {
+            /** @var Event $event */
+            foreach ($events as $event) {
+                $withRootCategory[] = $this->addRootCategoriesToEvent($event);
+            }
+        }
+
+        return $withRootCategory;
+    }
+
+    /**
+     * @param Event $event
+     * @return Event
+     */
+    protected function addRootCategoriesToEvent(Event $event): Event
+    {
+        $categories = $event->getCategories()->toArray();
+        $rootCategories = $this->categoryService->getRoots($categories);
+
+        $event->setRootCategories($rootCategories);
+
+        return $event;
     }
 }

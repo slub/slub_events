@@ -55,6 +55,11 @@ class JsonView extends ExtbaseJsonView
                     ],
                     'recurringOptions' => [],
                     'recurringEndDateTime' => [],
+                    'rootCategories' => [
+                        '_descendAll' => [
+                            '_only' => ['uid', 'title']
+                        ]
+                    ],
                     'startDateTime' => [],
                     'subscribers' => [
                         '_descendAll' => [
@@ -90,6 +95,11 @@ class JsonView extends ExtbaseJsonView
                     ],
                     'recurringOptions' => [],
                     'recurringEndDateTime' => [],
+                    'rootCategories' => [
+                        '_descendAll' => [
+                            '_only' => ['uid', 'title']
+                        ]
+                    ],
                     'startDateTime' => []
                 ]
             ]
