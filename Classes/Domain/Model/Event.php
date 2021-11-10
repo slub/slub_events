@@ -58,6 +58,11 @@ class Event extends AbstractEntity
     protected $parent;
 
     /**
+     * @var array
+     */
+    protected $rootCategories = [];
+
+    /**
      * startDateTime
      *
      * @Extbase\Validate("NotEmpty")
@@ -460,6 +465,22 @@ class Event extends AbstractEntity
     public function setParent(\Slub\SlubEvents\Domain\Model\Event $parent)
     {
         $this->parent = $parent;
+    }
+
+    /**
+     * @return array $rootCategories
+     */
+    public function getRootCategories(): array
+    {
+        return $this->rootCategories;
+    }
+
+    /**
+     * @param array $rootCategories
+     */
+    public function setRootCategories(array $rootCategories): void
+    {
+        $this->rootCategories = $rootCategories;
     }
 
     /**

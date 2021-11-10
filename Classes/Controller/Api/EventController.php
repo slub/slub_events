@@ -21,6 +21,7 @@ use Slub\SlubEvents\Service\ApiService;
 use Slub\SlubEvents\Service\EventService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * @package slub_events
@@ -68,7 +69,7 @@ class EventController extends AbstractController
     public function listAction(): void
     {
         $arguments = $this->apiService->prepareArgumentsDefault($this->request->getArguments());
-        $events = $this->eventRepository->findAllBySettings($arguments);
+        $events = $this->eventService->findAllBySettings($arguments);
 
         $this->view->setVariablesToRender(['events']);
         $this->view->assign('events', $events);
@@ -80,7 +81,7 @@ class EventController extends AbstractController
     public function listUserAction(): void
     {
         $arguments = $this->apiService->prepareArgumentsUser($this->request->getArguments());
-        $events = $arguments['user'] === 0 ? [] : $this->eventRepository->findAllBySettings($arguments)->toArray();
+        $events = $arguments['user'] === 0 ? [] : $this->eventService->findAllBySettings($arguments);
         $eventsUser = $this->eventService->prepareForUser($arguments['user'], $events, $this->settings);
 
         $this->view->setVariablesToRender(['eventsUser']);
