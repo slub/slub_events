@@ -74,6 +74,11 @@ plugin.tx_slubevents {
 
         # set baseURL in Emails - needed for images in description field
         #baseURL = http://www.example.com/
+
+        api.users.0 {
+            username = {$plugin.tx_slubevents.settings.api.users.0.username}
+            password = {$plugin.tx_slubevents.settings.api.users.0.password}
+        }
     }
 }
 
@@ -130,7 +135,9 @@ module.tx_slubevents {
 }
 
 plugin.tx_slubevents_apieventlistuser {
-    settings.unsubscribePid = {$plugin.tx_slubevents_apieventlistuser.settings.unsubscribePid}
+    settings {
+        unsubscribePid = {$plugin.tx_slubevents_apieventlistuser.settings.unsubscribePid}
+    }
 }
 
 # iCal export

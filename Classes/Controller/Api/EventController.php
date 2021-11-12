@@ -15,13 +15,14 @@ namespace Slub\SlubEvents\Controller\Api;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Slub\SlubEvents\Authentication\ApiAuthentication;
 use Slub\SlubEvents\Controller\AbstractController;
 use Slub\SlubEvents\Mvc\View\JsonView;
 use Slub\SlubEvents\Service\ApiService;
 use Slub\SlubEvents\Service\EventService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * @package slub_events
@@ -33,6 +34,11 @@ class EventController extends AbstractController
      * @var ApiService
      */
     protected $apiService;
+
+    /**
+     * @var ApiAuthentication
+     */
+    protected $apiAuthentication;
 
     /**
      * @var EventService
@@ -50,6 +56,11 @@ class EventController extends AbstractController
     protected $defaultViewObjectName = JsonView::class;
 
     /**
+     * @var bool
+     */
+    protected $allowApiAccess = false;
+
+    /**
      * EventController constructor.
      */
     public function __construct()
@@ -60,7 +71,22 @@ class EventController extends AbstractController
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         $this->apiService = $objectManager->get(ApiService::class);
+        $this->apiAuthentication = $objectManager->get(ApiAuthentication::class);
         $this->eventService = $objectManager->get(EventService::class);
+
+        $this->allowApiAccess = $this->apiAuthentication->authenticateUser();
+    }
+
+    /**
+     * @param ViewInterface $view
+     */
+    public function initializeView(ViewInterface $view): void
+    {
+        parent::initializeView($view);
+
+        if (!$this->allowApiAccess) {
+            $this->view = $this->apiAuthentication->getError($this->view, 401);
+        }
     }
 
     /**
@@ -68,11 +94,13 @@ class EventController extends AbstractController
      */
     public function listAction(): void
     {
-        $arguments = $this->apiService->prepareArgumentsDefault($this->request->getArguments());
-        $events = $this->eventService->findAllBySettings($arguments);
+        if ($this->allowApiAccess) {
+            $arguments = $this->apiService->prepareArgumentsDefault($this->request->getArguments());
+            $events = $this->eventService->findAllBySettings($arguments);
 
-        $this->view->setVariablesToRender(['events']);
-        $this->view->assign('events', $events);
+            $this->view->setVariablesToRender(['events']);
+            $this->view->assign('events', $events);
+        }
     }
 
     /**
@@ -80,11 +108,13 @@ class EventController extends AbstractController
      */
     public function listUserAction(): void
     {
-        $arguments = $this->apiService->prepareArgumentsUser($this->request->getArguments());
-        $events = $arguments['user'] === 0 ? [] : $this->eventService->findAllBySettings($arguments);
-        $eventsUser = $this->eventService->prepareForUser($arguments['user'], $events, $this->settings);
+        if ($this->allowApiAccess) {
+            $arguments = $this->apiService->prepareArgumentsUser($this->request->getArguments());
+            $events = $arguments['user'] === 0 ? [] : $this->eventService->findAllBySettings($arguments);
+            $eventsUser = $this->eventService->prepareForUser($arguments['user'], $events, $this->settings);
 
-        $this->view->setVariablesToRender(['eventsUser']);
-        $this->view->assign('eventsUser', $eventsUser);
+            $this->view->setVariablesToRender(['eventsUser']);
+            $this->view->assign('eventsUser', $eventsUser);
+        }
     }
 }
