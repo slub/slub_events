@@ -1,21 +1,22 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 <f:if condition="<se:condition.HasSubcategories category='{category.item}' />">
     <f:then>
-        <li class="teaser-geniusbar has-submenu" id="category-{category.item.uid}" tabindex="0" aria-haspopup="true"
-            aria-expanded="false">
+        <li class="geniusbar-category has-submenu" id="category-{category.item.uid}">
+            <button type="button" aria-haspopup="true" aria-expanded="false">
             {category.item.title}
+            </button>
     </f:then>
     <f:else>
         <f:if condition="<se:condition.gbEventsOfCategory category='{category.item}' />">
             <f:then>
-                <li class="teaser-geniusbar" id="category-{category.item.uid}">
+                <li class="geniusbar-category" id="category-{category.item.uid}">
                     <f:link.action action="gbList" controller="Category"
                                    title="{category.item.description -> f:format.stripTags()}"
                                    arguments="{category : category.item}" section="book-me-now">{category.item.title}
                     </f:link.action>
             </f:then>
             <f:else>
-                <li class="teaser-geniusbar nooffer" id="category-{category.item.uid}">{category.item.title}
+                <li class="geniusbar-category no-event" id="category-{category.item.uid}">{category.item.title}
             </f:else>
         </f:if>
     </f:else>
