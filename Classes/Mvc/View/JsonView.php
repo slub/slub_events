@@ -33,7 +33,7 @@ class JsonView extends ExtbaseJsonView
         ],
         'events' => [
             '_descendAll' => [
-                '_exclude' => ['pid'],
+                '_exclude' => ['pid', 'recurring', 'recurringOptions', 'recurringEndDateTime'],
                 '_descend' => [
                     'categories' => [
                         '_descendAll' => [
@@ -41,7 +41,7 @@ class JsonView extends ExtbaseJsonView
                         ]
                     ],
                     'contact' => [
-                        '_exclude' => ['pid']
+                        '_only' => ['name', 'email']
                     ],
                     'discipline' => [
                         '_descendAll' => [
@@ -55,8 +55,6 @@ class JsonView extends ExtbaseJsonView
                     'parent' => [
                         '_only' => ['uid', 'title']
                     ],
-                    'recurringOptions' => [],
-                    'recurringEndDateTime' => [],
                     'rootCategories' => [
                         '_descendAll' => [
                             '_only' => ['uid', 'title']
@@ -65,7 +63,7 @@ class JsonView extends ExtbaseJsonView
                     'startDateTime' => [],
                     'subscribers' => [
                         '_descendAll' => [
-                            '_only' => ['uid', 'customerid']
+                            '_only' => ['uid', 'customerid', 'number']
                         ]
                     ]
                 ]
