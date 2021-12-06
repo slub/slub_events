@@ -74,6 +74,11 @@ plugin.tx_slubevents {
 
         # set baseURL in Emails - needed for images in description field
         #baseURL = http://www.example.com/
+
+        api.users.0 {
+            username = {$plugin.tx_slubevents.settings.api.users.0.username}
+            password = {$plugin.tx_slubevents.settings.api.users.0.password}
+        }
     }
 }
 
@@ -130,7 +135,9 @@ module.tx_slubevents {
 }
 
 plugin.tx_slubevents_apieventlistuser {
-    settings.unsubscribePid = {$plugin.tx_slubevents_apieventlistuser.settings.unsubscribePid}
+    settings {
+        unsubscribePid = {$plugin.tx_slubevents_apieventlistuser.settings.unsubscribePid}
+    }
 }
 
 # iCal export
@@ -164,13 +171,23 @@ printCal {
 apiEventList = PAGE
 apiEventList {
     typeNum = 1452982642
-    config.disableAllHeaderCode = 1
+    config {
+        # deactivate Standard-Header
+        disableAllHeaderCode = 1
+        # disable cache notice
+        debug = 0
+    }
     10 < tt_content.list.20.slubevents_apieventlist
 }
 
 apiEventListUser = PAGE
 apiEventListUser {
     typeNum = 1452982643
-    config.disableAllHeaderCode = 1
+    config {
+        # deactivate Standard-Header
+        disableAllHeaderCode = 1
+        # disable cache notice
+        debug = 0
+    }
     10 < tt_content.list.20.slubevents_apieventlistuser
 }

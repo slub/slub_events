@@ -14,6 +14,22 @@ API
 	:local:
 	:depth: 1
 
+Authorization
+-------------
+
+To have access to the api, an authorization is required. You can configure users via typoscript. This configuration
+is set global (plugin.tx_slubevents.settings.api.users) in the plugin and not for a specific plugin.
+
+============================================= ==================== ================================================
+Constants                                     Type                 Comment
+============================================= ==================== ================================================
+settings.api.users.0.username                 String               Username to authorize access
+settings.api.users.0.password                 String               Password to authorize access
+============================================= ==================== ================================================
+
+Feel free to add further users. If you have one user with empty username or empty password, the authorization will fail.
+``In default these values are empty for security.`` So, if you get no data, check this configuration.
+
 Event list
 ----------
 
@@ -47,7 +63,7 @@ Typoscript constants
 ^^^^^^^^^^^^^^^^^^^^
 
 ============================================= ==================== ================================================
-Parameter                                     Type                 Comment
+Constant                                      Type                 Comment
 ============================================= ==================== ================================================
 settings.unsubscribePid                       Integer              Set the page to unsubscribe an event. If not set, link to unsubscribe not generated
 ============================================= ==================== ================================================

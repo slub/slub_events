@@ -12,11 +12,20 @@ plugin.tx_slubevents {
         # cat=plugin.tx_slubevents/100/a; type=int+; label=Default storage PID
         storagePid =
     }
+
+    settings.api.users.0 {
+        # cat=plugin.tx_slubevents/api; type=string; label=Api username (0)
+        username =
+        # cat=plugin.tx_slubevents/api; type=string; label=Api password (0)
+        password =
+    }
 }
 
 plugin.tx_slubevents_apieventlistuser {
-    # cat=plugin.tx_slubevents_apieventlistuser/settings; type=int; label=Unsubscribe PID
-    settings.unsubscribePid =
+    settings {
+        # cat=plugin.tx_slubevents_apieventlistuser/settings; type=int; label=Unsubscribe PID
+        unsubscribePid =
+    }
 }
 
 module.tx_slubevents {

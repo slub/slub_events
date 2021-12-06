@@ -29,9 +29,11 @@ class JsonView extends ExtbaseJsonView
      * @var array
      */
     protected $configuration = [
+        'error' => [
+        ],
         'events' => [
             '_descendAll' => [
-                '_exclude' => ['pid'],
+                '_exclude' => ['pid', 'recurring', 'recurringOptions', 'recurringEndDateTime'],
                 '_descend' => [
                     'categories' => [
                         '_descendAll' => [
@@ -39,7 +41,7 @@ class JsonView extends ExtbaseJsonView
                         ]
                     ],
                     'contact' => [
-                        '_exclude' => ['pid']
+                        '_only' => ['name', 'email']
                     ],
                     'discipline' => [
                         '_descendAll' => [
@@ -53,8 +55,6 @@ class JsonView extends ExtbaseJsonView
                     'parent' => [
                         '_only' => ['uid', 'title']
                     ],
-                    'recurringOptions' => [],
-                    'recurringEndDateTime' => [],
                     'rootCategories' => [
                         '_descendAll' => [
                             '_only' => ['uid', 'title']
@@ -63,7 +63,7 @@ class JsonView extends ExtbaseJsonView
                     'startDateTime' => [],
                     'subscribers' => [
                         '_descendAll' => [
-                            '_only' => ['uid', 'customerid']
+                            '_only' => ['uid', 'customerid', 'number']
                         ]
                     ]
                 ]
@@ -111,9 +111,9 @@ class JsonView extends ExtbaseJsonView
      *
      * @param mixed $value
      * @param array $configuration
-     * @return array|null
+     * @return mixed
      */
-    protected function transformValue($value, array $configuration): ?array
+    protected function transformValue($value, array $configuration)
     {
         if ($value instanceof ObjectStorage) {
             $value = $value->toArray();
