@@ -2,6 +2,7 @@
 # ==============================================
 # Persistence object mapping configuration
 # ==============================================
+# TODO: remove this file if dropping support for TYPO3 less than version 10.4
 config.tx_extbase.persistence.classes {
 
 	Slub\SlubEvents\Domain\Model\TtContent {
