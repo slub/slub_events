@@ -28,7 +28,7 @@ to report issues and feature requests. This helps us and others.
 Email
 -----
 
-Of course you can mail me at `alexander.bigga@slub-dresden.de <mailto:alexander.bigga@slub-dresden.de>`_.
+Of course you can mail me at `typo3@slub-dresden.de <mailto:typo3@slub-dresden.de>`_.
 But don't expect a fast answer...
 
 

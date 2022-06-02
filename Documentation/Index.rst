@@ -36,7 +36,7 @@ slub_events
   	Alexander Bigga (SLUB Dresden)
 
   :Email:
-  	alexander.bigga@slub-dresden.de
+  	typo3@slub-dresden.de
 
   :License:
   	This document is published under the Open Content License
