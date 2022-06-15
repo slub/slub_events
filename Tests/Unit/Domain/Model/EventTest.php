@@ -14,7 +14,7 @@ use Slub\SlubEvents\Domain\Model\Subscriber;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -45,7 +45,7 @@ use Slub\SlubEvents\Domain\Model\Subscriber;
  * @package    TYPO3
  * @subpackage SLUB: Event Registration
  *
- * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @author     Alexander Bigga <typo3@slub-dresden.de>
  */
 class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {

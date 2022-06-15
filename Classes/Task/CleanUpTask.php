@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Task;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2017 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2017 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *

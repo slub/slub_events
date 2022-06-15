@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\ViewHelpers\Format;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -39,7 +39,7 @@ class CsvEscapeViewHelper extends AbstractViewHelper
      * Return the number of subscribers for a given event
      *
      * @return string
-     * @author Alexander Bigga <alexander.bigga@slub-dresden.de>
+     * @author Alexander Bigga <typo3@slub-dresden.de>
      * @api
      */
     public function render()
