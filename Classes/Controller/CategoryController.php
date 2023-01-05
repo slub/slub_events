@@ -47,7 +47,7 @@ class CategoryController extends AbstractController
      *
      * @return void
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
 
         // Only do this in Frontend Context
@@ -71,7 +71,7 @@ class CategoryController extends AbstractController
      *
      * @return void
      */
-    public function listAction()
+    public function listAction(): void
     {
         // take the root category of the flexform
         $category = $this->categoryRepository->findAllByUids(
@@ -98,7 +98,7 @@ class CategoryController extends AbstractController
      * @Extbase\IgnoreValidation("category")
      * @return void
      */
-    public function contactListAction(\Slub\SlubEvents\Domain\Model\Category $category = null)
+    public function contactListAction(\Slub\SlubEvents\Domain\Model\Category $category = null): void
     {
         if (!($this->settings['contactSelection'] > 0)) {
             $this->view->assign('contactSelectionWarning', 1);
@@ -140,7 +140,7 @@ class CategoryController extends AbstractController
      * @Extbase\IgnoreValidation("category")
      * @return void
      */
-    public function gbListAction(Category $category = null)
+    public function gbListAction(Category $category = null): void
     {
         $events = [];
         $parentcategory = null;
@@ -162,7 +162,7 @@ class CategoryController extends AbstractController
      *
      * @return void
      */
-    public function showAction(Category $category)
+    public function showAction(Category $category): void
     {
         $this->view->assign('category', $category);
     }

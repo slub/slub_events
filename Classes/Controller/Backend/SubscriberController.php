@@ -34,7 +34,7 @@ class SubscriberController extends BaseController
      *
      * @return void
      */
-    public function beListAction()
+    public function beListAction(): void
     {
         // get data from BE session
         $searchParameter = $this->getSessionData('tx_slubevents');
@@ -103,7 +103,7 @@ class SubscriberController extends BaseController
      *
      * @return void
      */
-    public function beOnlineSurveyAction(Event $event, $step = 0)
+    public function beOnlineSurveyAction(Event $event, $step = 0): void
     {
         // get the onlineSurveyLink and potential timestamp of last sent
         $onlineSurveyLink = GeneralUtility::trimExplode('|', $event->getOnlinesurvey(), true);

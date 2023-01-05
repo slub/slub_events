@@ -54,7 +54,7 @@ class AbstractController extends ExtbaseActionController
 	/**
      * @param \Slub\SlubEvents\Domain\Repository\EventRepository $eventRepository
      */
-    public function injectEventRepository(EventRepository $eventRepository)
+    public function injectEventRepository(EventRepository $eventRepository): void
     {
         $this->eventRepository = $eventRepository;
     }
@@ -69,7 +69,7 @@ class AbstractController extends ExtbaseActionController
 	/**
      * @param \Slub\SlubEvents\Domain\Repository\CategoryRepository $categoryRepository
      */
-    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
     {
         $this->categoryRepository = $categoryRepository;
     }
@@ -84,7 +84,7 @@ class AbstractController extends ExtbaseActionController
 	/**
      * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
      */
-    public function injectSubscriberRepository(SubscriberRepository $subscriberRepository)
+    public function injectSubscriberRepository(SubscriberRepository $subscriberRepository): void
     {
         $this->subscriberRepository = $subscriberRepository;
     }
@@ -99,7 +99,7 @@ class AbstractController extends ExtbaseActionController
 	/**
      * @param \Slub\SlubEvents\Domain\Repository\ContactRepository $contactRepository
      */
-    public function injectContactRepository(ContactRepository $contactRepository)
+    public function injectContactRepository(ContactRepository $contactRepository): void
     {
         $this->contactRepository = $contactRepository;
     }
@@ -114,7 +114,7 @@ class AbstractController extends ExtbaseActionController
 	/**
      * @param \Slub\SlubEvents\Domain\Repository\DisciplineRepository $disciplineRepository
      */
-    public function injectDisciplineRepository(DisciplineRepository $disciplineRepository)
+    public function injectDisciplineRepository(DisciplineRepository $disciplineRepository): void
     {
         $this->disciplineRepository = $disciplineRepository;
     }
@@ -130,7 +130,8 @@ class AbstractController extends ExtbaseActionController
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
      * @return void
      */
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager) {
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
+    {
 
         $this->configurationManager = $configurationManager;
 
@@ -167,7 +168,7 @@ class AbstractController extends ExtbaseActionController
      * @param string $data
      * @param boolean $persist
      */
-    public function setSessionData($key, $data, $persist = null)
+    public function setSessionData($key, $data, $persist = null): void
     {
         $userGlobals = $this->getUserGlobals();
 
@@ -184,8 +185,6 @@ class AbstractController extends ExtbaseActionController
         }
 
         $userGlobals->setAndSaveSessionData($key, $data);
-
-        return;
     }
 
     /**
@@ -230,7 +229,7 @@ class AbstractController extends ExtbaseActionController
      * initializeAction
      *
      */
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
         if (TYPO3_MODE === 'BE') {
             global $BE_USER;
@@ -268,7 +267,7 @@ class AbstractController extends ExtbaseActionController
      *
      * @param mixed $param
      *
-     * @return string
+     * @return string|array
      */
     protected function filterSafelyParameters($param)
     {
@@ -277,8 +276,8 @@ class AbstractController extends ExtbaseActionController
                 $param[$key] = $this->filterSafelyParameters($item);
             }
             return $param;
-        } else {
-            return htmlspecialchars($param);
         }
+
+        return htmlspecialchars($param);
     }
 }

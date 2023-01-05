@@ -48,7 +48,7 @@ class SubscriberController extends AbstractController
      *
      * @return void
      */
-    public function listAction()
+    public function listAction(): void
     {
         $subscribers = $this->subscriberRepository->findAll();
         $this->view->assign('subscribers', $subscribers);
@@ -61,7 +61,7 @@ class SubscriberController extends AbstractController
      *
      * @return void
      */
-    public function showAction(Subscriber $subscriber)
+    public function showAction(Subscriber $subscriber): void
     {
         $this->view->assign('subscriber', $subscriber);
     }
@@ -71,7 +71,7 @@ class SubscriberController extends AbstractController
      *
      * @return void
      */
-    public function eventNotFoundAction()
+    public function eventNotFoundAction(): void
     {
     }
 
@@ -80,62 +80,9 @@ class SubscriberController extends AbstractController
      *
      * @return void
      */
-    public function subscriberNotFoundAction()
+    public function subscriberNotFoundAction(): void
     {
     }
-
-    /**
-     * action initializeNew
-     *
-     * This is necessary to precheck the given event id. If the event
-     * is not found the object is NULL and the newAction is not called.
-     * Otherwise the newAction will use the propertyMapper to convert
-     * the event id to and object. If this object doesn't exist or is
-     * hidden, an exception is thrown (TYPO3 4.7.x)
-     *
-     * @return void
-     */
-//	public function initializeNewAction() {
-//
-//		$eventId = $this->getParametersSafely('event');
-//		$event = NULL;
-//
-//		if ($eventId != NULL) {
-//			$event = $this->eventRepository->findByUid($eventId);
-//		}
-//
-//		if ($event === NULL) {
-//			$this->redirect('eventNotFound');
-//		}
-//
-//	}
-
-
-    /**
-     * action initializeDelete
-     *
-     * This is necessary to precheck the given event id. If the event
-     * is not found the object is NULL and the newAction is not called.
-     * Otherwise the newAction will use the propertyMapper to convert
-     * the event id to and object. If this object doesn't exist or is
-     * hidden, an exception is thrown (TYPO3 4.7.x)
-     *
-     * @return void
-     */
-//	public function initializeDeleteAction() {
-//
-//		$eventId = $this->getParametersSafely('event');
-//		$event = NULL;
-//
-//		if ($eventId != NULL) {
-//			$event = $this->eventRepository->findByUid($eventId);
-//		}
-//
-//		if ($event === NULL) {
-//			$this->redirect('eventNotFound');
-//		}
-//
-//	}
 
     /**
      * action new
@@ -153,7 +100,8 @@ class SubscriberController extends AbstractController
         Subscriber $newSubscriber = null,
         Event $event = null,
         Category $category = null
-    ) {
+    ): void
+    {
 
         // somebody is calling the action without giving an event --> useless
         if ($event === null) {
@@ -211,10 +159,11 @@ class SubscriberController extends AbstractController
         Subscriber $newSubscriber,
         Event $event,
         Category $category = null
-    ) {
+    ): void
+    {
 
         // add subscriber to event
-        $editcode = hash('sha256', rand() . $newSubscriber->getEmail() . time());
+        $editcode = hash('sha256', mt_rand() . $newSubscriber->getEmail() . time());
         $newSubscriber->setEditcode($editcode);
         $event->addSubscriber($newSubscriber);
 
@@ -351,7 +300,7 @@ class SubscriberController extends AbstractController
      *
      * @param bool $isGeniusBar
      */
-    public function clearAllEventListCache($isGeniusBar = false)
+    public function clearAllEventListCache($isGeniusBar = false): void
     {
         if ($isGeniusBar) {
             $cacheTag = 'tx_slubevents_cat_' . $this->settings['storagePid'];
@@ -370,7 +319,7 @@ class SubscriberController extends AbstractController
      *
      * @return void
      */
-    public function deleteAction(Event $event = null, $editcode = null)
+    public function deleteAction(Event $event = null, $editcode = null): void
     {
         // somebody is calling the action without giving an event --> useless
         if ($event === null || $editcode === null) {
@@ -485,7 +434,7 @@ class SubscriberController extends AbstractController
      *
      * @return CacheManager
      */
-    protected function getCacheManager()
+    protected function getCacheManager(): CacheManager
     {
         return GeneralUtility::makeInstance(CacheManager::class);
     }

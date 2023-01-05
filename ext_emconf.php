@@ -25,7 +25,7 @@ This extension is developped and used in production at the Saxony State and Univ
     'version'          => '5.1.2',
     'constraints'      => [
         'depends'   => [
-            'typo3'   => '9.5.31-10.4.99',
+            'typo3'   => '9.5.31-11.5.99',
         ],
         'conflicts' => [
         ],
