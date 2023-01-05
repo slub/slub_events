@@ -22,7 +22,6 @@ plugin.tx_slubevents {
             10 = EXT:slub_events/Resources/Private/Layouts/
             20 = {$plugin.tx_slubevents.view.layoutRootPath}
         }
-        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
     }
 
     features {
@@ -59,12 +58,6 @@ plugin.tx_slubevents {
                 itemsPerPage = 10
                 insertAbove = TRUE
                 insertBelow = TRUE
-                lessPages = TRUE
-                forcedNumberOfLinks = 5
-                pagesBefore = 3
-                pagesAfter = 3
-                # section works as of TYPO3 7.6
-                section = book-me-now
             }
         }
 
@@ -87,22 +80,6 @@ lib.tx_slubevents.contentElementRendering {
 
 module.tx_slubevents < plugin.tx_slubevents
 module.tx_slubevents {
-#    view {
-#        templateRootPaths {
-#            10 = EXT:slub_events/Resources/Private/Templates/
-#            20 = {$module.tx_slubevents.view.templateRootPath}
-#        }
-#        partialRootPaths {
-#            10 = EXT:slub_events/Resources/Private/Partials/
-#            20 = {$module.tx_slubevents.view.partialRootPath}
-#        }
-#        layoutRootPaths {
-#            10 = EXT:slub_events/Resources/Private/Layouts/
-#            20 = {$module.tx_slubevents.view.layoutRootPath}
-#        }
-#        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = {$plugin.tx_slubevents.view.templateRootPath}
-#    }
-
     features {
     }
 
@@ -119,11 +96,6 @@ module.tx_slubevents {
                 itemsPerPage = 25
                 insertAbove = TRUE
                 insertBelow = TRUE
-                lessPages = TRUE
-                forcedNumberOfLinks = 5
-                pagesBefore = 3
-                pagesAfter = 3
-                section = results
             }
         }
     }

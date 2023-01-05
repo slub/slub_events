@@ -43,11 +43,11 @@
 						<td>
 							<f:if condition="{event.parent}">
 									<f:then>
-											<img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
+											<img title="<f:translate key='tx_slubevents_domain_model_event.recurring' />" src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-circle.png'/>
 									</f:then>
 									<f:else>
 											<f:if condition="{event.recurring}">
-													<img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
+													<img title="<f:translate key='tx_slubevents_domain_model_event.recurring_parent' />" src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/arrow-repeat.png'/>
 											</f:if>
 									</f:else>
 							</f:if>
@@ -110,7 +110,7 @@
 													 arguments="{event : event}"
 													 addQueryString="1">
 										<img
-											src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/calendar-import.png'/>
+											src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/calendar-import.png'/>
 									</f:link.action>
 								</f:then>
 							</f:if>
@@ -125,20 +125,20 @@
 													<f:link.action action="beOnlineSurvey" controller="Backend\Subscriber"
 																	 title="<f:translate key='be.sendOnlineSurvey' />"
 																	 arguments="{event : event}">
-														<img src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+														<img src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
 													</f:link.action>
 												</f:then>
 												<f:else>
 													<img class="inactive"
 														 title="<f:translate key='be.sendOnlineSurveyNoSubscribers' />"
-														 src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+														 src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
 												</f:else>
 											</f:if>
 										</f:then>
 										<f:else>
 											<img class="inactive"
 												 title="<f:translate key='be.sendOnlineSurveyNotYetPossible' />"
-												 src='../typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+												 src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
 										</f:else>
 									</f:if>
 								</f:then>
@@ -169,9 +169,17 @@
 								<f:render section="eventListing" arguments="{events: events}"/>
 							</f:then>
 							<f:else>
-								<f:be.widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-									<f:render section="eventListing" arguments="{events: paginatedEvents, currentActiveEvent: currentActiveEvent}"/>
-								</f:be.widget.paginate>
+                                <se:pagination.paginate objects="{events}" as="eventsPaginator" itemsPerPage="{settings.list.paginate.itemsPerPage}">
+                                    <f:if condition="{settings.list.paginate.insertAbove}">
+                                        <f:render partial="Miscellaneous/Pagination" arguments="{pagination:eventsPaginator.pagination, paginator:eventsPaginator.paginator, name:eventsPaginator.name}" />
+                                    </f:if>
+
+                                    <f:render section="eventListing" arguments="{events: eventsPaginator.paginator.paginatedItems, currentActiveEvent: currentActiveEvent}"/>
+
+                                    <f:if condition="{settings.list.paginate.insertBelow}">
+                                        <f:render partial="Miscellaneous/Pagination" arguments="{pagination:eventsPaginator.pagination, paginator:eventsPaginator.paginator, name:eventsPaginator.name}" />
+                                    </f:if>
+                                </se:pagination.paginate>
 							</f:else>
 						</f:if>
 					</f:then>
