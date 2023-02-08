@@ -90,6 +90,9 @@
 		<trans-unit id="flexforms.show_past_events">
 			<source>Show Past Events</source>
 		</trans-unit>
+		<trans-unit id="flexforms.hide_cancelled_events">
+			<source>Hide Cancelled Events</source>
+		</trans-unit>
 		<trans-unit id="flexforms.show_events_from_now">
 			<source>Show Events from Now and Not from Start of Today</source>
 		</trans-unit>
