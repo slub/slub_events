@@ -140,7 +140,7 @@
 			</trans-unit>
 			<trans-unit id="flexforms.hide_cancelled_events">
 				<source><![CDATA[Hide Cancelled Events]]></source>
-				<target><![CDATA[Verstecke abgesagte Events]]></target>
+				<target><![CDATA[Abgesagte Events ausblenden]]></target>
 			</trans-unit>
 			<trans-unit id="flexforms.showconsultations" approved="yes">
 				<source><![CDATA[Show consultations]]></source>
