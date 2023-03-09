@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Repository;
 
 /***************************************************************
@@ -225,6 +226,11 @@ class EventRepository extends Repository
         if (!empty($settings['startTimestamp']) && !empty($settings['stopTimestamp'])) {
             $constraints[] = $query->greaterThanOrEqual('start_date_time', $settings['startTimestamp']);
             $constraints[] = $query->lessThanOrEqual('start_date_time', $settings['stopTimestamp']);
+        }
+
+        // Hide events that are cancelled (default is 'show cancelled events')
+        if ($settings['hideCancelledEvents']) {
+            $constraints[] = $query->equals('cancelled', '0');
         }
 
         // AND all constraints together
@@ -495,7 +501,6 @@ class EventRepository extends Repository
         }
 
         return $query->execute()->getFirst();
-
     }
 
     /**
@@ -533,10 +538,9 @@ class EventRepository extends Repository
 
         $eventsToBeRemoved = $query->execute();
 
-        foreach($eventsToBeRemoved as $eventRemove) {
+        foreach ($eventsToBeRemoved as $eventRemove) {
             $this->remove($eventRemove);
         }
-
     }
 
     /**
@@ -569,12 +573,13 @@ class EventRepository extends Repository
     }
 
     /**
-	 * Find all events older than given days
-	 *
-	 * @param integer $days
-	 * @return objects found old events
-	 */
-	public function findOlderThan($days) {
+     * Find all events older than given days
+     *
+     * @param integer $days
+     * @return objects found old events
+     */
+    public function findOlderThan($days)
+    {
 
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
@@ -589,7 +594,6 @@ class EventRepository extends Repository
         }
 
         return $query->execute();
-
     }
 
     /**
