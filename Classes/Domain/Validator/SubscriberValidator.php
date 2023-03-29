@@ -103,12 +103,6 @@ class SubscriberValidator extends AbstractValidator
 			$this->addError('val_email', 1100);
             $this->isValid = false;
         }
-        if (strlen($newSubscriber->getCustomerid()) > 0 &&
-            filter_var($newSubscriber->getCustomerid(), FILTER_VALIDATE_INT) === false
-        ) {
-			$this->addError('val_customerid', 1110);
-            $this->isValid = false;
-        }
         if (strlen($newSubscriber->getNumber()) == 0 ||
             filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === false ||
             $newSubscriber->getNumber() < 1
