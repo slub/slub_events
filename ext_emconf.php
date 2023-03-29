@@ -22,7 +22,7 @@ This extension is developped and used in production at the Saxony State and Univ
     'state'            => 'stable',
     'uploadfolder'     => true,
     'createDirs'       => 'typo3temp/tx_slubevents/',
-    'version'          => '5.1.2',
+    'version'          => '5.1.3',
     'constraints'      => [
         'depends'   => [
             'typo3'   => '9.5.31-10.4.99',
