@@ -16,8 +16,8 @@
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="0">
+                                <items type="array">
+                                    <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.userpanel_view</numIndex>
                                         <numIndex index="1">Event->listOwn;Event->show</numIndex>
                                     </numIndex>

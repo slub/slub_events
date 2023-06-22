@@ -17,12 +17,12 @@
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="0">
+                                <items type="array">
+                                    <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.knowledgebar_view</numIndex>
                                         <numIndex index="1">Category->list;Category->gbList;Category->contactList</numIndex>
                                     </numIndex>
-                                    <numIndex index="1">
+                                    <numIndex index="1" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.contact_view</numIndex>
                                         <numIndex index="1">Category->contactList;Category->list;Category->gbList</numIndex>
                                     </numIndex>
