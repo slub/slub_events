@@ -245,6 +245,10 @@
 				<source><![CDATA[Event Category]]></source>
 				<target><![CDATA[Kategorie]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_category_stats" approved="yes">
+				<source><![CDATA[Statistic]]></source>
+				<target><![CDATA[Statistik]]></target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_category.no_search" approved="yes">
 				<source><![CDATA[Exclude from search]]></source>
 				<target><![CDATA[Aus Suche ausschließen]]></target>

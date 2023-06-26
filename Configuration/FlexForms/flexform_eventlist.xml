@@ -35,6 +35,7 @@
                                         <numIndex index="1">Event->listUpcoming</numIndex>
                                     </numIndex>
                                 </items>
+                                <default></default>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>

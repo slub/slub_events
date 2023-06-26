@@ -27,6 +27,7 @@
                                         <numIndex index="1">Category->contactList;Category->list;Category->gbList</numIndex>
                                     </numIndex>
                                 </items>
+                                <default></default>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>

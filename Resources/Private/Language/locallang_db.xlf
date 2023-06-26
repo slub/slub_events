@@ -1,238 +1,244 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-17T14:03:45Z">
-		<header>
-			<generator>LFEditor</generator>
-		</header>
-		<body>
-		<trans-unit id="tx_slubevents_domain_model_category">
-			<source>Category</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.description">
-			<source>Description</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.genius_bar">
-			<source>Knowledge Bar Category</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.parent">
-			<source>Parent Category</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category.title">
-			<source>Title</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_contact">
-			<source>Contact Details</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_contact.description">
-			<source>Description</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_contact.email">
-			<source>Email</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_contact.name">
-			<source>Name</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_contact.photo">
-			<source>Photo</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_contact.telephone">
-			<source>Telephone</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_discipline">
-			<source>Discipline</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_discipline.name">
-			<source>Name</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_discipline.parent">
-			<source>Parent discipline</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event">
-			<source>Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.all_day">
-			<source>Is Allday</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience">
-			<source>Audience</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.0">
-			<source>Öffentlichkeit</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.1">
-			<source>SchülerInnen</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.2">
-			<source>Studierende</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.3">
-			<source>WissenschaftlerInnen</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.4">
-			<source>LehrerInnen</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.audience.I.5">
-			<source>SLUB-Mitarbeiter</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.cancelled">
-			<source>Is cancelled</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.categories">
-			<source>Categories</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.content_elements">
-			<source>Contente Elements</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.contact">
-			<source>Contact</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.description">
-			<source>Description</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.discipline">
-			<source>Discipline</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.end">
-			<source>End of Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.end_date_time">
-			<source>End of Event (Date and Time)</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select">
-			<source>End of Event (relative to Start of Event)</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select_value">
-			<source>Time after Start of Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.external_registration">
-			<source>External Registration Link</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.image">
-			<source>Event Image</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.genius_bar">
-			<source>Knowledge Bar</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.parent">
-			<source>Parent Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.recurring">
-			<source>Recurring Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.recurring_events">
-			<source>Recurring Events</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.recurring_options">
-			<source>Recurring Options</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.recurring_end_date_time">
-			<source>Recurring End (Date and Time)</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.location">
-			<source>Location</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.max_subscriber">
-			<source>Max Subscriber</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.max_number">
-			<source>Maximal Amount of Persons per Subscription</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.min_subscriber">
-			<source>Min Subscriber</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.no_search">
-			<source>Exclude from search</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.onlinesurvey">
-			<source>Online Survey</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.externalevent">
-			<source>External Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.selecttopic">
-			<source>Please select topic</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.start">
-			<source>Start of Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.start_date_time">
-			<source>Start of Event (Date and Time)</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.sub_end">
-			<source>End of Subscription</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_info_sent">
-			<source>End of Subscription Information is already sent.</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time">
-			<source>End of Subscription (Date and Time)</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select">
-			<source>End of Subscription (relative to Start of Event)</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select_value">
-			<source>Time before Start of Event</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.subscribers">
-			<source>Subscribers</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.teaser">
-			<source>Teaser</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.title">
-			<source>Title</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_location">
-			<source>Location</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_location.description">
-			<source>Description</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_location.link">
-			<source>Link</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_location.name">
-			<source>Name</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_location.parent">
-			<source>Parent Location</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber">
-			<source>Subscriber</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.crdate">
-			<source>Subscription Date</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.customerid">
-			<source>Customer ID</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.editcode">
-			<source>Editcode</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp">
-			<source>Privacy Policy</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp.accepted">
-			<source>Accepted</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.email">
-			<source>Email</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.institution">
-			<source>Institution</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.message">
-			<source>Message</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.name">
-			<source>Name</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.number">
-			<source>Number</source>
-		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_subscriber.telephone">
-			<source>Telephone</source>
-		</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" datatype="plaintext" original="messages" date="2017-03-17T14:03:45Z">
+        <header>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+            <trans-unit id="tx_slubevents_domain_model_category">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.genius_bar">
+                <source>Knowledge Bar Category</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.parent">
+                <source>Parent Category</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact">
+                <source>Contact Details</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.photo">
+                <source>Photo</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.telephone">
+                <source>Telephone</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_discipline">
+                <source>Discipline</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_discipline.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_discipline.parent">
+                <source>Parent discipline</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event">
+                <source>Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.all_day">
+                <source>Is Allday</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience">
+                <source>Audience</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.0">
+                <source>Öffentlichkeit</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.1">
+                <source>SchülerInnen</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.2">
+                <source>Studierende</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.3">
+                <source>WissenschaftlerInnen</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.4">
+                <source>LehrerInnen</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.5">
+                <source>SLUB-Mitarbeiter</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.cancelled">
+                <source>Is cancelled</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.categories">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.categories_stats">
+                <source>Categories for Statistic</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.content_elements">
+                <source>Contente Elements</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.contact">
+                <source>Contact</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.discipline">
+                <source>Discipline</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.discipline">
+                <source>Discipline for Statistic</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end">
+                <source>End of Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end_date_time">
+                <source>End of Event (Date and Time)</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end_date_time_select">
+                <source>End of Event (relative to Start of Event)</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end_date_time_select_value">
+                <source>Time after Start of Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.external_registration">
+                <source>External Registration Link</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.image">
+                <source>Event Image</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.genius_bar">
+                <source>Knowledge Bar</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.parent">
+                <source>Parent Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring">
+                <source>Recurring Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring_events">
+                <source>Recurring Events</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring_options">
+                <source>Recurring Options</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring_end_date_time">
+                <source>Recurring End (Date and Time)</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.location">
+                <source>Location</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.max_subscriber">
+                <source>Max Subscriber</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.max_number">
+                <source>Maximal Amount of Persons per Subscription</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.min_subscriber">
+                <source>Min Subscriber</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.no_search">
+                <source>Exclude from search</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.onlinesurvey">
+                <source>Online Survey</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.externalevent">
+                <source>External Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.selecttopic">
+                <source>Please select topic</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.start">
+                <source>Start of Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.start_date_time">
+                <source>Start of Event (Date and Time)</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end">
+                <source>End of Subscription</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_info_sent">
+                <source>End of Subscription Information is already sent.</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time">
+                <source>End of Subscription (Date and Time)</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select">
+                <source>End of Subscription (relative to Start of Event)</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select_value">
+                <source>Time before Start of Event</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.subscribers">
+                <source>Subscribers</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.teaser">
+                <source>Teaser</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location">
+                <source>Location</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.link">
+                <source>Link</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.parent">
+                <source>Parent Location</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber">
+                <source>Subscriber</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.crdate">
+                <source>Subscription Date</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.customerid">
+                <source>Customer ID</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.editcode">
+                <source>Editcode</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp">
+                <source>Privacy Policy</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp.accepted">
+                <source>Accepted</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.institution">
+                <source>Institution</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.message">
+                <source>Message</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.number">
+                <source>Number</source>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.telephone">
+                <source>Telephone</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

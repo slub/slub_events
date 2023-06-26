@@ -13,6 +13,7 @@
                     <switchableControllerActions>
                         <TCEforms>
                             <label>LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.select_function</label>
+                            <onChange>reload</onChange>
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
@@ -22,6 +23,7 @@
                                         <numIndex index="1">Event->listOwn;Event->show</numIndex>
                                     </numIndex>
                                 </items>
+                                <default></default>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>

@@ -27,6 +27,7 @@
                                         <numIndex index="1">Subscriber->delete;Subscriber->eventNotFound;Subscriber->subscriberNotFound;</numIndex>
                                     </numIndex>
                                 </items>
+                                <default></default>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>
