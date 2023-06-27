@@ -80,7 +80,7 @@
             <trans-unit id="tx_slubevents_domain_model_event.categories">
                 <source>Categories</source>
             </trans-unit>
-            <trans-unit id="tx_slubevents_domain_model_event.categories_stats">
+            <trans-unit id="tx_slubevents_domain_model_event.category_stats">
                 <source>Categories for Statistic</source>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.content_elements">
@@ -95,7 +95,7 @@
             <trans-unit id="tx_slubevents_domain_model_event.discipline">
                 <source>Discipline</source>
             </trans-unit>
-            <trans-unit id="tx_slubevents_domain_model_event.discipline">
+            <trans-unit id="tx_slubevents_domain_model_event.discipline_stats">
                 <source>Discipline for Statistic</source>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.end">

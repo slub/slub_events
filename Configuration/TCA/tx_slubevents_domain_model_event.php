@@ -662,7 +662,7 @@ return [
         'category_stats'               => [
             'exclude'   => 0,
             'l10n_mode' => 'exclude',
-            'label'     => $LL . 'tx_slubevents_domain_model_event.categories_stats',
+            'label'     => $LL . 'tx_slubevents_domain_model_event.category_stats',
             'config'    => [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true

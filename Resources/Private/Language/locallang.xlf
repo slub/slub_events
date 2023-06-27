@@ -197,9 +197,9 @@
 		<trans-unit id="tx_slubevents_domain_model_category">
 			<source>Event Category</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_category_stats">
-			<source>Statistic</source>
-		</trans-unit>
+        <trans-unit id="tx_slubevents_domain_model_event.discipline">
+            <source>Discipline</source>
+        </trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_category.no_search">
 			<source>Exclude from search</source>
 		</trans-unit>
@@ -388,6 +388,9 @@
 		</trans-unit>
 		<trans-unit id="register.pleaseloginfirst">
 			<source>Do you have a SLUB user account? Please login to your account %s first%s. You will be redirected to this event registration automatically.<br />Alternatively, you can simply register for our events with your name and email address. We look forward to you!</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.category_stats">
+			<source>Categories for Statistic</source>
 		</trans-unit>
 		</body>
 	</file>

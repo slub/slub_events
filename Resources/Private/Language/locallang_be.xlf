@@ -144,7 +144,15 @@
 		<trans-unit id="flexforms.dont_clear_cached_events">
 			<source>Don't clear cached event plugins</source>
 		</trans-unit>
-
+		<trans-unit id="tx_slubevents_domain_model_category">
+			<source>Event Category</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.discipline">
+			<source>Discipline</source>
+		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.category_stats">
+			<source>Categories for Statistic</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

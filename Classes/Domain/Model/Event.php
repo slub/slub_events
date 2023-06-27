@@ -985,30 +985,38 @@ class Event extends AbstractEntity {
     }
 
     /**
-     * @return Category
+     * Get CategoryStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Category $categoryStats
      */
-    public function getCategoryStats(): Category {
+    public function getCategoryStats() {
         return $this->categoryStats;
     }
 
     /**
-     * @param Category $categoryStats
+     * Set CategoryStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Category $categoryStats
      */
-    public function setCategoryStats( Category $categoryStats ): void {
+    public function setCategoryStats( $categoryStats ) {
         $this->categoryStats = $categoryStats;
     }
 
     /**
-     * @return Discipline
+     * Get DisciplineStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Discipline $disciplineStats
      */
-    public function getDisciplineStats(): Discipline {
+    public function getDisciplineStats() {
         return $this->disciplineStats;
     }
 
     /**
-     * @param Discipline $disciplineStats
+     * Set DisciplineStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Discipline $disciplineStats
      */
-    public function setDisciplineStats( Discipline $disciplineStats ): void {
+    public function setDisciplineStats( $disciplineStats ) {
         $this->disciplineStats = $disciplineStats;
     }
 
