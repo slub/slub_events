@@ -111,11 +111,11 @@ class SubscriberController extends AbstractController
         // this is a little stupid with the rewritten property mapper from
         // extbase 1.4, because the object is never NULL!
         // anyway we can set default values here which are overwritten if
-        // already POST values exists. extbase vodoo ;-)
+        // already POST values exists. extbase voodoo ;-)
         if ($newSubscriber === null) {
 
             /** @var \Slub\SlubEvents\Domain\Model\Subscriber $newSubscriber */
-            $newSubscriber = GeneralUtility::makeInstance('Slub\\SlubEvents\\Domain\\Model\\Subscriber');
+            $newSubscriber = GeneralUtility::makeInstance(Subscriber::class);
             $newSubscriber->setNumber(1);
 
             if (!empty($GLOBALS['TSFE']->fe_user->user['username'])) {

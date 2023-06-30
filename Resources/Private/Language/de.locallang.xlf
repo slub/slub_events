@@ -81,6 +81,10 @@
 				<source><![CDATA[Sending of Online Survey not possible as no subscribers are present.]]></source>
 				<target><![CDATA[Das Versenden der Online-Umfrage ist nicht möglich, da es keine Teilnehmer gibt.]]></target>
 			</trans-unit>
+			<trans-unit id="be.sendNotification" approved="yes">
+				<source><![CDATA[Send a notification email to all subscribers.]]></source>
+				<target><![CDATA[Eine E-Mail an alle Teilnehmer senden.]]></target>
+			</trans-unit>
 			<trans-unit id="be.sendOnlineSurveyNotYetPossible" approved="yes">
 				<source><![CDATA[Sending of Online Survey not yet possible.]]></source>
 				<target><![CDATA[Das Versenden der Online-Umfrage ist noch nicht möglich.]]></target>

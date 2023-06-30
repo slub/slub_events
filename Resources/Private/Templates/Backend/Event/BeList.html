@@ -32,7 +32,7 @@
 					<f:translate key='be.free'/>
 					/ max
 				</th>
-				<th colspan="4"></th>
+				<th colspan="5"></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -158,6 +158,22 @@
 							</f:then>
 						</f:if>
 					</td>
+                    <td class="be-icon">
+                        <f:if condition="<f:count subject='{event.subscribers}' />">
+                            <f:then>
+                                <f:link.action action="beWriteNotification" controller="Backend\Subscriber"
+                                               title="<f:translate key='be.sendNotification' />"
+                                               arguments="{event : event}">
+                                    <img src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+                                </f:link.action>
+                            </f:then>
+                            <f:else>
+                                <img class="inactive"
+                                     title="<f:translate key='be.sendOnlineSurveyNoSubscribers' />"
+                                     src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+                            </f:else>
+                        </f:if>
+                    </td>
 				</tr>
 			</f:for>
 			</tbody>

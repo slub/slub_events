@@ -15,7 +15,7 @@ if (TYPO3_MODE === 'BE') {
         '',              // Position
         [
             \Slub\SlubEvents\Controller\Backend\EventController::class      => 'beList, beCopy, beIcsInvitation',
-            \Slub\SlubEvents\Controller\Backend\SubscriberController::class => 'beList, beOnlineSurvey',
+            \Slub\SlubEvents\Controller\Backend\SubscriberController::class => 'beList, beOnlineSurvey, beWriteNotification, beSendNotification',
         ],
         [
             'access' => 'user,group',
