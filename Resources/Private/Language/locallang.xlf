@@ -59,12 +59,18 @@
 		<trans-unit id="be.sendOnlineSurvey">
 			<source>Send Online Survey Request to Subscribers</source>
 		</trans-unit>
+			<trans-unit id="be.sendCircularMail">
+				<source>Send circular mail to Subscribers</source>
+			</trans-unit>
 		<trans-unit id="be.sendNotification">
 			<source>Send a notification email to all subscribers.</source>
 		</trans-unit>
 		<trans-unit id="be.sendOnlineSurveyNoSubscribers">
 			<source>Sending of Online Survey not possible as no subscribers are present.</source>
 		</trans-unit>
+			<trans-unit id="be.sendCircularMailNoSubscribers">
+				<source>Sending of circular mail not possible as no subscribers are present.</source>
+			</trans-unit>
 		<trans-unit id="be.sendOnlineSurveyNotYetPossible">
 			<source>Sending of Online Survey not yet possible.</source>
 		</trans-unit>

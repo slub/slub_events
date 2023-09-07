@@ -89,6 +89,14 @@
 				<source><![CDATA[Sending of Online Survey not yet possible.]]></source>
 				<target><![CDATA[Das Versenden der Online-Umfrage ist noch nicht möglich.]]></target>
 			</trans-unit>
+			<trans-unit id="be.sendCircularMail" approved="yes">
+				<source><![CDATA[Send circular mail to Subscribers]]></source>
+				<target><![CDATA[Rundmail an Teilnehmer senden.]]></target>
+			</trans-unit>
+			<trans-unit id="be.sendCircularMailNoSubscribers" approved="yes">
+				<source><![CDATA[Sending of circular mail not possible as no subscribers are present.]]></source>
+				<target><![CDATA[Das Versenden der Rundmail ist nicht möglich, da es keine Teilnehmer gibt.]]></target>
+			</trans-unit>
 			<trans-unit id="be.sentTo" approved="yes">
 				<source><![CDATA[sent to]]></source>
 				<target><![CDATA[gesendet an]]></target>
@@ -489,6 +497,21 @@
 				<source><![CDATA[Categories for Statistic]]></source>
 				<target><![CDATA[Kategorien für Statistik]]></target>
 			</trans-unit>
+
+
+			<trans-unit id="be.writeNotificationPhraseStart" approved="yes">
+				<source><![CDATA[Send on behalf of]]></source>
+				<target><![CDATA[Senden Sie im Namen von]]></target>
+			</trans-unit>
+			<trans-unit id="be.writeNotificationPhraseEnd" approved="yes">
+				<source><![CDATA[following message to all participants]]></source>
+				<target><![CDATA[folgende Nachricht an alle Teilnehmer]]></target>
+			</trans-unit>
+			<trans-unit id="be.writeNotificationHeading" approved="yes">
+				<source><![CDATA[Send circular mail to all participants.]]></source>
+				<target><![CDATA[Rundmail an alle Teilnehmer versenden.]]></target>
+			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

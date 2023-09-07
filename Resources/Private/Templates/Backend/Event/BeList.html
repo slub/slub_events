@@ -162,15 +162,19 @@
                         <f:if condition="<f:count subject='{event.subscribers}' />">
                             <f:then>
                                 <f:link.action action="beWriteNotification" controller="Backend\Subscriber"
-                                               title="<f:translate key='be.sendNotification' />"
+                                               title="<f:translate key='be.sendCircularMail' />"
                                                arguments="{event : event}">
-                                    <img src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+                                    <img
+										alt="<f:translate key='be.sendCircularMail' />"
+										src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
                                 </f:link.action>
                             </f:then>
                             <f:else>
                                 <img class="inactive"
-                                     title="<f:translate key='be.sendOnlineSurveyNoSubscribers' />"
+                                     title="<f:translate key='be.sendCircularMailNoSubscribers' />"
+                                     alt="<f:translate key='be.sendCircularMailNoSubscribers' />"
                                      src='/typo3conf/ext/slub_events/Resources/Public/Icons/fugue-icons/mail-send.png'/>
+								<f:translate key='be.sendCircularMailNoSubscribers' />
                             </f:else>
                         </f:if>
                     </td>

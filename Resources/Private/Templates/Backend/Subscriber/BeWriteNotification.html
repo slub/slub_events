@@ -4,14 +4,16 @@
 <f:section name="content">
     <f:flashMessages/>
 
-    <h1>Rundmail an alle Teilnehmer versenden.</h1>
+    <h1><f:translate key='be.writeNotificationHeading' /></h1>
 
     <div class="tx_slubevents">
         <f:form action="beSendNotification" controller="Backend\Subscriber" name="beSendNotification" method="post">
             <div class="emailtext">
-                <p>Senden Sie im Namen von
+                <p>
+                    <f:translate key='be.onlineSurveyIntroPhrase' />
                     <b>{event.contact.name} ({event.contact.email})</b>
-                    folgende Einladung zu einer Online-Umfrage an alle Teilnehmer:</p>
+                    <f:translate key='be.onlineSurveyIntroPhraseEnd' />:
+                </p>
                 <ul>
                     <f:for each="{event.subscribers}" as="subscriber">
                         <li>{subscriber.name} --> {subscriber.email}, {subscriber.number}
