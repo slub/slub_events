@@ -180,6 +180,23 @@ class SubscriberController extends BaseController
     /** Actually sends the notification email to all subscribers of the given event. */
     public function beSendNotificationAction(Event $event, string $emailSubject, string $emailBody): void
     {
+        $hasErrors = false;
+        if (empty($emailSubject)) {
+            $this->addFlashMessage('Bitte einen Betreff eingeben.', 'Fehler', FlashMessage::ERROR);
+            $hasErrors = true;
+        }
+        if (empty($emailBody)) {
+            $this->addFlashMessage('Bitte einen Text eingeben.', 'Fehler', FlashMessage::ERROR);
+            $hasErrors = true;
+        }
+        if ($hasErrors) {
+            $this->redirect('beWriteNotification', null, null, [
+                'event' => $event,
+                'emailSubject' => $emailSubject,
+                'emailBody' => $emailBody
+            ]);
+        }
+
         $successCount = 0;
         $allSubscribers = $event->getSubscribers();
         foreach ($allSubscribers as $subscriber) {
