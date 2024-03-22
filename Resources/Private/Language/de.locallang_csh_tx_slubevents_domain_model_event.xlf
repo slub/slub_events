@@ -14,11 +14,11 @@
 			<target>Zielgruppe</target>
 		</trans-unit>
 		<trans-unit id="cancelled.description" approved="yes">
-			<source><![CDATA[This will mark the event as cancelled. This flag is automatically set by cronjob. The cronjob sents a cancellation email to all subscribers.]]></source>
+			<source><![CDATA[This will mark the event as cancelled. This flag is automatically set by cronjob. The cronjob sends a cancellation email to all subscribers.]]></source>
 			<target><![CDATA[Dies markiert die Veranstaltung als abgesagt.<br />Diese Option wird automatisch vom Cronjob gesetzt, wenn bis Ende der Anmeldefrist nicht ausreichend Teilnehmer angemeldet sind. Alle bereits angemeldeten Teilnehmer erhalten eine Email mit der Terminabsage.]]></target>
 		</trans-unit>
 		<trans-unit id="categories.description" approved="yes">
-			<source><![CDATA[Select one ore more categories. At least one category is requried. This can be used to filter events in frontend plugins.]]></source>
+			<source><![CDATA[Select one or more categories. At least one category is required. This can be used to filter events in frontend plugins.]]></source>
 			<target><![CDATA[Bitte wählen Sie EINE Kategorie.<br /><br />Wenn bereits eine Kategorie gewählt ist, entfernen Sie zunächst das Häkchen. Erst dann können Sie eine neue Kategorie wählen.]]></target>
 		</trans-unit>
 		<trans-unit id="contact.description" approved="yes">
@@ -30,7 +30,7 @@
 			<target>Beschreibung der Veranstaltung.</target>
 		</trans-unit>
 		<trans-unit id="discipline.description" approved="yes">
-			<source><![CDATA[Select one ore more discipline. This can be used to filter events in frontend plugins.]]></source>
+			<source><![CDATA[Select one or more discipline. This can be used to filter events in frontend plugins.]]></source>
 			<target><![CDATA[Auswahl einer oder mehrerer Fachdisziplinen. Dies kann als Filter in Frontend-Plugins verwendet werden.<br />]]></target>
 		</trans-unit>
 		<trans-unit id="end_date_time.description" approved="yes">
@@ -42,8 +42,8 @@
 			<target>Sie können das Ende der Veranstaltung relativ zum Beginn wählen. Nach dem Speichern der Veranstaltung wird diese Auswahlliste nicht mehr angezeigt.</target>
 		</trans-unit>
 		<trans-unit id="external_registration.description" approved="yes">
-			<source>Enter a full URI (http://...) to an external registration. All local registration settings will be ignored.</source>
-			<target>Eingabe eines vollständigen Links zu einer Online-Umfrage (http://...). Alle lokalen Registrierungseinstellungen werden ignoriert.</target>
+			<source>Enter a full URI (https://...) to an external registration. All local registration settings will be ignored.</source>
+			<target>Eingabe eines vollständigen Links zu einer Online-Umfrage (https://...). Alle lokalen Registrierungseinstellungen werden ignoriert.</target>
 		</trans-unit>
 		<trans-unit id="location.description" approved="yes">
 			<source>Select one location where the event takes place. This location is set in the ics-invitation.</source>
@@ -62,8 +62,8 @@
 			<target>Setzten Sie die den Haken um dieses Event aus der Suchmaschinenindexierung auszuschließen.</target>
 		</trans-unit>
 		<trans-unit id="onlinesurvey.description" approved="yes">
-			<source><![CDATA[Enter a full URI (http://...) to an online survey.]]></source>
-			<target><![CDATA[Geben Sie einen vollständigen Link (http:// ...) zu einem Online-Fragebogen ein.<br /><br />Eine Mail an die Teilnehmer kann _nach_ der Veranstaltung versendet werden. Dies wird manuell im Backend ausgelöst. ]]></target>
+			<source><![CDATA[Enter a full URI (https://...) to an online survey.]]></source>
+			<target><![CDATA[Geben Sie einen vollständigen Link (https:// ...) zu einem Online-Fragebogen ein.<br /><br />Eine Mail an die Teilnehmer kann _nach_ der Veranstaltung versendet werden. Dies wird manuell im Backend ausgelöst. ]]></target>
 		</trans-unit>
 		<trans-unit id="recurring.description" approved="yes" xml:space="preserve">
 			<source>Is this a recurring event? On activating this option you configure the recurring interval and create child events.</source>
@@ -75,7 +75,7 @@ Mit Aktivierung dieser Option können Sie die Wiederholungseinstellungen bearbei
 			<target>Die Wiederholung der Veranstaltung endet am vorgegebenen Datum.</target>
 		</trans-unit>
 		<trans-unit id="recurring_options.description" approved="yes">
-			<source>This event get's cloned multiple times depending on the recurring settings below.</source>
+			<source>This event gets cloned multiple times depending on the recurring settings below.</source>
 			<target>Diese Veranstaltung wird kopiert und als Einzelveranstaltungen entsprechend der vorgenommenen Einstellungen angelegt.</target>
 		</trans-unit>
 		<trans-unit id="start_date_time.description" approved="yes">

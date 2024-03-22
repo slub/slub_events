@@ -28,6 +28,7 @@ CREATE TABLE tx_slubevents_domain_model_event (
     cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
     onlinesurvey varchar(255) DEFAULT '' NOT NULL,
     categories int(11) unsigned DEFAULT '0' NOT NULL,
+    category_for_stats int(11) unsigned DEFAULT '0' NOT NULL,
     subscribers int(11) unsigned DEFAULT '0' NOT NULL,
     location int(11) unsigned DEFAULT '0' NOT NULL,
     discipline int(11) unsigned DEFAULT '0' NOT NULL,
