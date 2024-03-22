@@ -1,314 +1,322 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-04-19T18:16:40Z">
-		<header>
-			<generator>LFEditor</generator>
-		</header>
-		<body>
-			<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
-				<source><![CDATA[Category]]></source>
-				<target><![CDATA[Kategorie]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_category.description" approved="yes">
-				<source><![CDATA[Description]]></source>
-				<target><![CDATA[Beschreibung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_category.genius_bar" approved="yes">
-				<source><![CDATA[Knowledge Bar Category]]></source>
-				<target><![CDATA[Wissensbar-Kategorie]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_category.parent" approved="yes">
-				<source><![CDATA[Parent Category]]></source>
-				<target><![CDATA[Eltern-Kategorie]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_category.title" approved="yes">
-				<source><![CDATA[Title]]></source>
-				<target><![CDATA[Titel]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_contact" approved="yes">
-				<source><![CDATA[Contact Details]]></source>
-				<target><![CDATA[Ansprechpartner]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_contact.description" approved="yes">
-				<source><![CDATA[Description]]></source>
-				<target><![CDATA[Beschreibung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_contact.email" approved="yes">
-				<source><![CDATA[Email]]></source>
-				<target><![CDATA[Email]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_contact.name" approved="yes">
-				<source><![CDATA[Name]]></source>
-				<target><![CDATA[Name]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_contact.photo" approved="yes">
-				<source><![CDATA[Photo]]></source>
-				<target><![CDATA[Foto]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_contact.telephone" approved="yes">
-				<source><![CDATA[Telephone]]></source>
-				<target><![CDATA[Telefon]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_discipline" approved="yes">
-				<source><![CDATA[Discipline]]></source>
-				<target><![CDATA[Fachdisziplin]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_discipline.name" approved="yes">
-				<source><![CDATA[Name]]></source>
-				<target><![CDATA[Bezeichnung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_discipline.parent" approved="yes">
-				<source><![CDATA[Parent discipline]]></source>
-				<target><![CDATA[Übergeordnete Fachdisziplin]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event" approved="yes">
-				<source><![CDATA[Event]]></source>
-				<target><![CDATA[Veranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.all_day" approved="yes">
-				<source><![CDATA[Is Allday]]></source>
-				<target><![CDATA[ganztägig]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.audience" approved="yes">
-				<source><![CDATA[Audience]]></source>
-				<target><![CDATA[Zielgruppe]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.audience.I.0" approved="yes">
-				<source><![CDATA[Öffentlichkeit]]></source>
-				<target><![CDATA[Öffentlichkeit]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.audience.I.1" approved="yes">
-				<source><![CDATA[SchülerInnen]]></source>
-				<target><![CDATA[SchülerInnen]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.audience.I.2" approved="yes">
-				<source><![CDATA[Studierende]]></source>
-				<target><![CDATA[Studierende]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.audience.I.3" approved="yes">
-				<source><![CDATA[WissenschaftlerInnen]]></source>
-				<target><![CDATA[WissenschaftlerInnen]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.audience.I.4" approved="yes">
-				<source><![CDATA[LehrerInnen]]></source>
-				<target><![CDATA[LehrerInnen]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.audience.I.5" approved="yes">
-				<source><![CDATA[SLUB-Mitarbeiter]]></source>
-				<target><![CDATA[SLUB-Mitarbeiter]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.cancelled" approved="yes">
-				<source><![CDATA[Is cancelled]]></source>
-				<target><![CDATA[abgesagt]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes">
-				<source><![CDATA[Categories]]></source>
-				<target><![CDATA[Kategorie]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.content_elements" approved="yes">
-				<source><![CDATA[Content Elements]]></source>
-				<target><![CDATA[Inhaltselemente]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.contact" approved="yes">
-				<source><![CDATA[Contact]]></source>
-				<target><![CDATA[Ansprechpartner]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.description" approved="yes">
-				<source><![CDATA[Description]]></source>
-				<target><![CDATA[Beschreibungstext (lang)]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.discipline" approved="yes">
-				<source><![CDATA[Discipline]]></source>
-				<target><![CDATA[Fachdisziplin]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.end" approved="yes">
-				<source><![CDATA[End of Event]]></source>
-				<target><![CDATA[Ende]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.end_date_time" approved="yes">
-				<source><![CDATA[End of Event (Date and Time)]]></source>
-				<target><![CDATA[Ende der Veranstaltung (Datum + Uhrzeit)]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select" approved="yes">
-				<source><![CDATA[End of Event (relative to Start of Event)]]></source>
-				<target><![CDATA[Ende der Veranstaltung relativ zum Beginn (Dauer)]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.end_date_time_select_value" approved="yes">
-				<source><![CDATA[Time after Start of Event]]></source>
-				<target><![CDATA[Dauer der Veranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.external_registration" approved="yes">
-				<source><![CDATA[External Registration Link]]></source>
-				<target><![CDATA[Link zur externen Anmeldung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.externalevent" approved="yes">
-				<source><![CDATA[External Event]]></source>
-				<target><![CDATA[Externe Veranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes">
-				<source><![CDATA[Knowledge Bar]]></source>
-				<target><![CDATA[Wissensbar-Veranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.image" approved="yes">
-				<source><![CDATA[Event Image]]></source>
-				<target><![CDATA[Veranstaltungs-Bild]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.location" approved="yes">
-				<source><![CDATA[Location]]></source>
-				<target><![CDATA[Ort]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.max_number" approved="yes">
-				<source><![CDATA[Maximal Amount of Persons per Subscription]]></source>
-				<target><![CDATA[Maximale Anzahl an Personen pro Anmeldung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.max_subscriber" approved="yes">
-				<source><![CDATA[Max Subscriber]]></source>
-				<target><![CDATA[Maximale Teilnehmerzahl]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes">
-				<source><![CDATA[Min Subscriber]]></source>
-				<target><![CDATA[Mindesteilnehmerzahl]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.no_search" approved="yes">
-				<source><![CDATA[Exclude from search]]></source>
-				<target><![CDATA[Aus Suche ausschließen]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.onlinesurvey" approved="yes">
-				<source><![CDATA[Online Survey]]></source>
-				<target><![CDATA[Online Umfrage]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.parent" approved="yes">
-				<source><![CDATA[Parent Event]]></source>
-				<target><![CDATA[Hauptveranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
-				<source><![CDATA[Recurring Event]]></source>
-				<target><![CDATA[Wiederholende Veranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.recurring_end_date_time" approved="yes">
-				<source><![CDATA[Recurring End (Date and Time)]]></source>
-				<target><![CDATA[Ende der Wiederholung (Tag und Uhrzeit)]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.recurring_events" approved="yes">
-				<source><![CDATA[Recurring Events]]></source>
-				<target><![CDATA[Wiederholende Veranstaltungen]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.recurring_options" approved="yes">
-				<source><![CDATA[Recurring Options]]></source>
-				<target><![CDATA[Wiederholungsoptionen]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.selecttopic" approved="yes">
-				<source><![CDATA[Please select topic]]></source>
-				<target><![CDATA[Bitte Thema wählen]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.start" approved="yes">
-				<source><![CDATA[Start of Event]]></source>
-				<target><![CDATA[Beginn]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes">
-				<source><![CDATA[Start of Event (Date and Time)]]></source>
-				<target><![CDATA[Beginn]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.sub_end" approved="yes">
-				<source><![CDATA[End of Subscription]]></source>
-				<target><![CDATA[Anmeldefrist]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_info_sent" approved="yes">
-				<source><![CDATA[End of Subscription Information is already sent.]]></source>
-				<target><![CDATA[Benachrichtigung über abgelaufene Anmeldefrist wurde bereits versendet.]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time" approved="yes">
-				<source><![CDATA[End of Subscription (Date and Time)]]></source>
-				<target><![CDATA[Anmeldefrist (Datum + Uhrzeit)]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select" approved="yes">
-				<source><![CDATA[End of Subscription (relative to Start of Event)]]></source>
-				<target><![CDATA[Ende des Anmeldezeitraums relativ zum Beginn der Veranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select_value" approved="yes">
-				<source><![CDATA[Time before Start of Event]]></source>
-				<target><![CDATA[Zeit vor Beginn der Veranstaltung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.subscribers" approved="yes">
-				<source><![CDATA[Subscribers]]></source>
-				<target><![CDATA[Teilnehmer]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes">
-				<source><![CDATA[Teaser]]></source>
-				<target><![CDATA[Kurzankündigung (Teaser)]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.title" approved="yes">
-				<source><![CDATA[Title]]></source>
-				<target><![CDATA[Titel]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_location" approved="yes">
-				<source><![CDATA[Location]]></source>
-				<target><![CDATA[Ort]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_location.description" approved="yes">
-				<source><![CDATA[Description]]></source>
-				<target><![CDATA[Beschreibung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_location.link" approved="yes">
-				<source><![CDATA[Link]]></source>
-				<target><![CDATA[Link]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_location.name" approved="yes">
-				<source><![CDATA[Name]]></source>
-				<target><![CDATA[Bezeichnung]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_location.parent" approved="yes">
-				<source><![CDATA[Parent Location]]></source>
-				<target><![CDATA[Übergeordneter Ort]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes">
-				<source><![CDATA[Subscriber]]></source>
-				<target><![CDATA[Teilnehmer]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes">
-				<source><![CDATA[Subscription Date]]></source>
-				<target><![CDATA[Anmeldezeitpunkt]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes">
-				<source><![CDATA[Customer ID]]></source>
-				<target><![CDATA[Benutzernummer]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.editcode" approved="yes">
-				<source><![CDATA[Editcode]]></source>
-				<target><![CDATA[Bearbeitungscode]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp" approved="yes">
-				<source><![CDATA[Privacy Policy]]></source>
-				<target><![CDATA[Datenschutzerklärung]]></target>
-			</trans-unit>
-				<trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp.accepted" approved="yes">
-				<source><![CDATA[Accepted]]></source>
-				<target><![CDATA[Akzeptiert]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes">
-				<source><![CDATA[Email]]></source>
-				<target><![CDATA[Email-Adresse]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes">
-				<source><![CDATA[Institution]]></source>
-				<target><![CDATA[Institution]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.message" approved="yes">
-				<source><![CDATA[Message]]></source>
-				<target><![CDATA[Nachricht]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes">
-				<source><![CDATA[Name]]></source>
-				<target><![CDATA[Name]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes">
-				<source><![CDATA[Number]]></source>
-				<target><![CDATA[Anzahl]]></target>
-			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_subscriber.telephone" approved="yes">
-				<source><![CDATA[Telephone]]></source>
-				<target><![CDATA[Telefonnummer]]></target>
-			</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-04-19T18:16:40Z">
+        <header>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+            <trans-unit id="tx_slubevents_domain_model_category" approved="yes">
+                <source><![CDATA[Category]]></source>
+                <target><![CDATA[Kategorie]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.description" approved="yes">
+                <source><![CDATA[Description]]></source>
+                <target><![CDATA[Beschreibung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.genius_bar" approved="yes">
+                <source><![CDATA[Knowledge Bar Category]]></source>
+                <target><![CDATA[Wissensbar-Kategorie]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.parent" approved="yes">
+                <source><![CDATA[Parent Category]]></source>
+                <target><![CDATA[Eltern-Kategorie]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_category.title" approved="yes">
+                <source><![CDATA[Title]]></source>
+                <target><![CDATA[Titel]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact" approved="yes">
+                <source><![CDATA[Contact Details]]></source>
+                <target><![CDATA[Ansprechpartner]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.description" approved="yes">
+                <source><![CDATA[Description]]></source>
+                <target><![CDATA[Beschreibung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.email" approved="yes">
+                <source><![CDATA[Email]]></source>
+                <target><![CDATA[Email]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.name" approved="yes">
+                <source><![CDATA[Name]]></source>
+                <target><![CDATA[Name]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.photo" approved="yes">
+                <source><![CDATA[Photo]]></source>
+                <target><![CDATA[Foto]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_contact.telephone" approved="yes">
+                <source><![CDATA[Telephone]]></source>
+                <target><![CDATA[Telefon]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_discipline" approved="yes">
+                <source><![CDATA[Discipline]]></source>
+                <target><![CDATA[Fachdisziplin]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_discipline.name" approved="yes">
+                <source><![CDATA[Name]]></source>
+                <target><![CDATA[Bezeichnung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_discipline.parent" approved="yes">
+                <source><![CDATA[Parent discipline]]></source>
+                <target><![CDATA[Übergeordnete Fachdisziplin]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event" approved="yes">
+                <source><![CDATA[Event]]></source>
+                <target><![CDATA[Veranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.all_day" approved="yes">
+                <source><![CDATA[Is Allday]]></source>
+                <target><![CDATA[ganztägig]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience" approved="yes">
+                <source><![CDATA[Audience]]></source>
+                <target><![CDATA[Zielgruppe]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.0" approved="yes">
+                <source><![CDATA[Öffentlichkeit]]></source>
+                <target><![CDATA[Öffentlichkeit]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.1" approved="yes">
+                <source><![CDATA[SchülerInnen]]></source>
+                <target><![CDATA[SchülerInnen]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.2" approved="yes">
+                <source><![CDATA[Studierende]]></source>
+                <target><![CDATA[Studierende]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.3" approved="yes">
+                <source><![CDATA[WissenschaftlerInnen]]></source>
+                <target><![CDATA[WissenschaftlerInnen]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.4" approved="yes">
+                <source><![CDATA[LehrerInnen]]></source>
+                <target><![CDATA[LehrerInnen]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.audience.I.5" approved="yes">
+                <source><![CDATA[SLUB-Mitarbeiter]]></source>
+                <target><![CDATA[SLUB-Mitarbeiter]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.cancelled" approved="yes">
+                <source><![CDATA[Is cancelled]]></source>
+                <target><![CDATA[abgesagt]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.categories" approved="yes">
+                <source><![CDATA[Categories]]></source>
+                <target><![CDATA[Kategorie]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
+                <source><![CDATA[Categories for Statistic]]></source>
+                <target><![CDATA[Kategorien für Statistik]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.content_elements" approved="yes">
+                <source><![CDATA[Content Elements]]></source>
+                <target><![CDATA[Inhaltselemente]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.contact" approved="yes">
+                <source><![CDATA[Contact]]></source>
+                <target><![CDATA[Ansprechpartner]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.description" approved="yes">
+                <source><![CDATA[Description]]></source>
+                <target><![CDATA[Beschreibungstext (lang)]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.discipline" approved="yes">
+                <source><![CDATA[Discipline]]></source>
+                <target><![CDATA[Fachdisziplin]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.discipline_stats" approved="yes">
+                <source><![CDATA[Discipline for Statistic]]></source>
+                <target><![CDATA[Fachdisziplin für Statistik]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end" approved="yes">
+                <source><![CDATA[End of Event]]></source>
+                <target><![CDATA[Ende]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end_date_time" approved="yes">
+                <source><![CDATA[End of Event (Date and Time)]]></source>
+                <target><![CDATA[Ende der Veranstaltung (Datum + Uhrzeit)]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end_date_time_select" approved="yes">
+                <source><![CDATA[End of Event (relative to Start of Event)]]></source>
+                <target><![CDATA[Ende der Veranstaltung relativ zum Beginn (Dauer)]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.end_date_time_select_value" approved="yes">
+                <source><![CDATA[Time after Start of Event]]></source>
+                <target><![CDATA[Dauer der Veranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.external_registration" approved="yes">
+                <source><![CDATA[External Registration Link]]></source>
+                <target><![CDATA[Link zur externen Anmeldung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.externalevent" approved="yes">
+                <source><![CDATA[External Event]]></source>
+                <target><![CDATA[Externe Veranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.genius_bar" approved="yes">
+                <source><![CDATA[Knowledge Bar]]></source>
+                <target><![CDATA[Wissensbar-Veranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.image" approved="yes">
+                <source><![CDATA[Event Image]]></source>
+                <target><![CDATA[Veranstaltungs-Bild]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.location" approved="yes">
+                <source><![CDATA[Location]]></source>
+                <target><![CDATA[Ort]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.max_number" approved="yes">
+                <source><![CDATA[Maximal Amount of Persons per Subscription]]></source>
+                <target><![CDATA[Maximale Anzahl an Personen pro Anmeldung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.max_subscriber" approved="yes">
+                <source><![CDATA[Max Subscriber]]></source>
+                <target><![CDATA[Maximale Teilnehmerzahl]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.min_subscriber" approved="yes">
+                <source><![CDATA[Min Subscriber]]></source>
+                <target><![CDATA[Mindesteilnehmerzahl]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.no_search" approved="yes">
+                <source><![CDATA[Exclude from search]]></source>
+                <target><![CDATA[Aus Suche ausschließen]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.onlinesurvey" approved="yes">
+                <source><![CDATA[Online Survey]]></source>
+                <target><![CDATA[Online Umfrage]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.parent" approved="yes">
+                <source><![CDATA[Parent Event]]></source>
+                <target><![CDATA[Hauptveranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring" approved="yes">
+                <source><![CDATA[Recurring Event]]></source>
+                <target><![CDATA[Wiederholende Veranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring_end_date_time" approved="yes">
+                <source><![CDATA[Recurring End (Date and Time)]]></source>
+                <target><![CDATA[Ende der Wiederholung (Tag und Uhrzeit)]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring_events" approved="yes">
+                <source><![CDATA[Recurring Events]]></source>
+                <target><![CDATA[Wiederholende Veranstaltungen]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.recurring_options" approved="yes">
+                <source><![CDATA[Recurring Options]]></source>
+                <target><![CDATA[Wiederholungsoptionen]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.selecttopic" approved="yes">
+                <source><![CDATA[Please select topic]]></source>
+                <target><![CDATA[Bitte Thema wählen]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.start" approved="yes">
+                <source><![CDATA[Start of Event]]></source>
+                <target><![CDATA[Beginn]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.start_date_time" approved="yes">
+                <source><![CDATA[Start of Event (Date and Time)]]></source>
+                <target><![CDATA[Beginn]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end" approved="yes">
+                <source><![CDATA[End of Subscription]]></source>
+                <target><![CDATA[Anmeldefrist]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_info_sent" approved="yes">
+                <source><![CDATA[End of Subscription Information is already sent.]]></source>
+                <target><![CDATA[Benachrichtigung über abgelaufene Anmeldefrist wurde bereits versendet.]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time" approved="yes">
+                <source><![CDATA[End of Subscription (Date and Time)]]></source>
+                <target><![CDATA[Anmeldefrist (Datum + Uhrzeit)]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select" approved="yes">
+                <source><![CDATA[End of Subscription (relative to Start of Event)]]></source>
+                <target><![CDATA[Ende des Anmeldezeitraums relativ zum Beginn der Veranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.sub_end_date_time_select_value" approved="yes">
+                <source><![CDATA[Time before Start of Event]]></source>
+                <target><![CDATA[Zeit vor Beginn der Veranstaltung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.subscribers" approved="yes">
+                <source><![CDATA[Subscribers]]></source>
+                <target><![CDATA[Teilnehmer]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.teaser" approved="yes">
+                <source><![CDATA[Teaser]]></source>
+                <target><![CDATA[Kurzankündigung (Teaser)]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_event.title" approved="yes">
+                <source><![CDATA[Title]]></source>
+                <target><![CDATA[Titel]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location" approved="yes">
+                <source><![CDATA[Location]]></source>
+                <target><![CDATA[Ort]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.description" approved="yes">
+                <source><![CDATA[Description]]></source>
+                <target><![CDATA[Beschreibung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.link" approved="yes">
+                <source><![CDATA[Link]]></source>
+                <target><![CDATA[Link]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.name" approved="yes">
+                <source><![CDATA[Name]]></source>
+                <target><![CDATA[Bezeichnung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_location.parent" approved="yes">
+                <source><![CDATA[Parent Location]]></source>
+                <target><![CDATA[Übergeordneter Ort]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber" approved="yes">
+                <source><![CDATA[Subscriber]]></source>
+                <target><![CDATA[Teilnehmer]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.crdate" approved="yes">
+                <source><![CDATA[Subscription Date]]></source>
+                <target><![CDATA[Anmeldezeitpunkt]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.customerid" approved="yes">
+                <source><![CDATA[Customer ID]]></source>
+                <target><![CDATA[Benutzernummer]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.editcode" approved="yes">
+                <source><![CDATA[Editcode]]></source>
+                <target><![CDATA[Bearbeitungscode]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp" approved="yes">
+                <source><![CDATA[Privacy Policy]]></source>
+                <target><![CDATA[Datenschutzerklärung]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.acceptpp.accepted" approved="yes">
+                <source><![CDATA[Accepted]]></source>
+                <target><![CDATA[Akzeptiert]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.email" approved="yes">
+                <source><![CDATA[Email]]></source>
+                <target><![CDATA[Email-Adresse]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.institution" approved="yes">
+                <source><![CDATA[Institution]]></source>
+                <target><![CDATA[Institution]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.message" approved="yes">
+                <source><![CDATA[Message]]></source>
+                <target><![CDATA[Nachricht]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.name" approved="yes">
+                <source><![CDATA[Name]]></source>
+                <target><![CDATA[Name]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.number" approved="yes">
+                <source><![CDATA[Number]]></source>
+                <target><![CDATA[Anzahl]]></target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_subscriber.telephone" approved="yes">
+                <source><![CDATA[Telephone]]></source>
+                <target><![CDATA[Telefonnummer]]></target>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

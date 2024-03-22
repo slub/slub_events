@@ -55,10 +55,17 @@
 							<f:render section="subscriberListing" arguments="{subscribers: subscribers}"/>
 						</f:then>
 						<f:else>
-							<f:widget.paginate objects="{subscribers}" as="paginatedSubscribers"
-																 configuration="{settings.list.paginate}">
-								<f:render section="subscriberListing" arguments="{subscribers: paginatedSubscribers}"/>
-							</f:widget.paginate>
+                            <se:pagination.paginate objects="{subscribers}" as="paginator" itemsPerPage="{settings.list.paginate.itemsPerPage}">
+                                <f:if condition="{settings.list.paginate.insertAbove}">
+                                    <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                </f:if>
+
+                                <f:render section="subscriberListing" arguments="{subscribers: paginator.paginator.paginatedItems}"/>
+
+                                <f:if condition="{settings.list.paginate.insertBelow}">
+                                    <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                </f:if>
+                            </se:pagination.paginate>
 						</f:else>
 					</f:if>
 				</f:then>

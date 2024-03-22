@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\SlubEvents\Domain\Model;
 
 /***************************************************************
@@ -33,8 +34,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Event extends AbstractEntity
-{
+class Event extends AbstractEntity {
 
     /**
      * title
@@ -179,6 +179,13 @@ class Event extends AbstractEntity
     protected $categories;
 
     /**
+     * Category Stats ID
+     *
+     * @var \Slub\SlubEvents\Domain\Model\Category
+     */
+    protected $categoryStats;
+
+    /**
      * Subscriber Ids
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber>
@@ -192,7 +199,7 @@ class Event extends AbstractEntity
      *
      * @var \Slub\SlubEvents\Domain\Model\Location
      */
-    protected $location = NULL;
+    protected $location = null;
 
     /**
      * Discipline IDs
@@ -202,11 +209,18 @@ class Event extends AbstractEntity
     protected $discipline;
 
     /**
+     * Discipline Stats ID
+     *
+     * @var \Slub\SlubEvents\Domain\Model\Discipline
+     */
+    protected $disciplineStats;
+
+    /**
      * Contact ID
      *
      * @var \Slub\SlubEvents\Domain\Model\Contact
      */
-    protected $contact = NULL;
+    protected $contact = null;
 
     /**
      * onlinesurvey
@@ -246,8 +260,7 @@ class Event extends AbstractEntity
     /**
      * Event constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
@@ -257,8 +270,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    protected function initStorageObjects()
-    {
+    protected function initStorageObjects() {
         /**
          * Do not modify this method!
          * It will be rewritten on each save in the extension builder
@@ -278,8 +290,7 @@ class Event extends AbstractEntity
      *
      * @return boolean $hidden
      */
-    public function getHidden()
-    {
+    public function getHidden() {
         return $this->hidden;
     }
 
@@ -288,8 +299,7 @@ class Event extends AbstractEntity
      *
      * @param boolean $hidden
      */
-    public function setHidden($hidden)
-    {
+    public function setHidden( $hidden ) {
         $this->hidden = $hidden;
     }
 
@@ -298,8 +308,7 @@ class Event extends AbstractEntity
      *
      * @return string $title
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -308,8 +317,7 @@ class Event extends AbstractEntity
      *
      * @param string $title
      */
-    public function setTitle($title)
-    {
+    public function setTitle( $title ) {
         $this->title = $title;
     }
 
@@ -318,8 +326,7 @@ class Event extends AbstractEntity
      *
      * @return string $teaser
      */
-    public function getTeaser()
-    {
+    public function getTeaser() {
         return $this->teaser;
     }
 
@@ -328,8 +335,7 @@ class Event extends AbstractEntity
      *
      * @param string $teaser
      */
-    public function setTeaser($teaser)
-    {
+    public function setTeaser( $teaser ) {
         $this->teaser = $teaser;
     }
 
@@ -338,8 +344,7 @@ class Event extends AbstractEntity
      *
      * @return string $description
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -348,8 +353,7 @@ class Event extends AbstractEntity
      *
      * @param string $description
      */
-    public function setDescription($description)
-    {
+    public function setDescription( $description ) {
         $this->description = $description;
     }
 
@@ -358,8 +362,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
-    public function getContentElements()
-    {
+    public function getContentElements() {
         return $this->contentElements;
     }
 
@@ -368,8 +371,7 @@ class Event extends AbstractEntity
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $contentElements content elements
      */
-    public function setContentElements($contentElements)
-    {
+    public function setContentElements( $contentElements ) {
         $this->contentElements = $contentElements;
     }
 
@@ -378,8 +380,7 @@ class Event extends AbstractEntity
      *
      * @return string
      */
-    public function getContentElementIdList()
-    {
+    public function getContentElementIdList() {
         return $this->getIdOfContentElements();
     }
 
@@ -388,29 +389,29 @@ class Event extends AbstractEntity
      *
      * @return string
      */
-    public function getTranslatedContentElementIdList()
-    {
-        return $this->getIdOfContentElements(false);
+    public function getTranslatedContentElementIdList() {
+        return $this->getIdOfContentElements( false );
     }
 
     /**
      * Collect id list
      *
      * @param bool $original
+     *
      * @return string
      */
-    protected function getIdOfContentElements($original = true)
-    {
-        $idList = [];
+    protected function getIdOfContentElements( $original = true ) {
+        $idList          = [];
         $contentElements = $this->getContentElements();
-        if ($contentElements) {
-            foreach ($this->getContentElements() as $contentElement) {
-                if ($contentElement->getColPos() >= 0) {
-                    $idList[] = $original ? $contentElement->getUid() : $contentElement->_getProperty('_localizedUid');
+        if ( $contentElements ) {
+            foreach ( $this->getContentElements() as $contentElement ) {
+                if ( $contentElement->getColPos() >= 0 ) {
+                    $idList[] = $original ? $contentElement->getUid() : $contentElement->_getProperty( '_localizedUid' );
                 }
             }
         }
-        return implode(',', $idList);
+
+        return implode( ',', $idList );
     }
 
     /**
@@ -418,8 +419,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
      */
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
     }
 
@@ -428,8 +428,7 @@ class Event extends AbstractEntity
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
      */
-    public function setImage($image)
-    {
+    public function setImage( $image ) {
         $this->image = $image;
     }
 
@@ -438,8 +437,7 @@ class Event extends AbstractEntity
      *
      * @return \Slub\SlubEvents\Domain\Model\Event $parent
      */
-    public function getParent()
-    {
+    public function getParent() {
         return $this->parent;
     }
 
@@ -450,8 +448,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setParent(\Slub\SlubEvents\Domain\Model\Event $parent)
-    {
+    public function setParent( \Slub\SlubEvents\Domain\Model\Event $parent ) {
         $this->parent = $parent;
     }
 
@@ -460,8 +457,7 @@ class Event extends AbstractEntity
      *
      * @return integer $minSubscriber
      */
-    public function getMinSubscriber()
-    {
+    public function getMinSubscriber() {
         return $this->minSubscriber;
     }
 
@@ -472,8 +468,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setMinSubscriber($minSubscriber)
-    {
+    public function setMinSubscriber( $minSubscriber ) {
         $this->minSubscriber = $minSubscriber;
     }
 
@@ -482,8 +477,7 @@ class Event extends AbstractEntity
      *
      * @return integer $maxSubscriber
      */
-    public function getMaxSubscriber()
-    {
+    public function getMaxSubscriber() {
         return $this->maxSubscriber;
     }
 
@@ -494,8 +488,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setMaxSubscriber($maxSubscriber)
-    {
+    public function setMaxSubscriber( $maxSubscriber ) {
         $this->maxSubscriber = $maxSubscriber;
     }
 
@@ -504,8 +497,7 @@ class Event extends AbstractEntity
      *
      * @return integer $maxNumber
      */
-    public function getMaxNumber()
-    {
+    public function getMaxNumber() {
         return $this->maxNumber;
     }
 
@@ -516,8 +508,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setMaxNumber($maxNumber)
-    {
+    public function setMaxNumber( $maxNumber ) {
         $this->maxNumber = $maxNumber;
     }
 
@@ -528,9 +519,8 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function addSubscriber(Subscriber $subscriber)
-    {
-        $this->subscribers->attach($subscriber);
+    public function addSubscriber( Subscriber $subscriber ) {
+        $this->subscribers->attach( $subscriber );
     }
 
     /**
@@ -540,9 +530,8 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function removeSubscriber(Subscriber $subscriberToRemove)
-    {
-        $this->subscribers->detach($subscriberToRemove);
+    public function removeSubscriber( Subscriber $subscriberToRemove ) {
+        $this->subscribers->detach( $subscriberToRemove );
     }
 
     /**
@@ -550,8 +539,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber> $subscribers
      */
-    public function getSubscribers()
-    {
+    public function getSubscribers() {
         return $this->subscribers;
     }
 
@@ -562,8 +550,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setSubscribers(ObjectStorage $subscribers)
-    {
+    public function setSubscribers( ObjectStorage $subscribers ) {
         $this->subscribers = $subscribers;
     }
 
@@ -572,8 +559,7 @@ class Event extends AbstractEntity
      *
      * @return integer $audience
      */
-    public function getAudience()
-    {
+    public function getAudience() {
         return $this->audience;
     }
 
@@ -584,8 +570,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setAudience($audience)
-    {
+    public function setAudience( $audience ) {
         $this->audience = $audience;
     }
 
@@ -596,8 +581,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setDiscipline(ObjectStorage $discipline)
-    {
+    public function setDiscipline( ObjectStorage $discipline ) {
         $this->discipline = $discipline;
     }
 
@@ -606,8 +590,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Discipline> $discipline
      */
-    public function getDiscipline()
-    {
+    public function getDiscipline() {
         return $this->discipline;
     }
 
@@ -618,9 +601,8 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function addDiscipline(Discipline $discipline)
-    {
-        $this->discipline->attach($discipline);
+    public function addDiscipline( Discipline $discipline ) {
+        $this->discipline->attach( $discipline );
     }
 
     /**
@@ -630,9 +612,8 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function removeDiscipline(Discipline $disciplineToRemove)
-    {
-        $this->discipline->detach($disciplineToRemove);
+    public function removeDiscipline( Discipline $disciplineToRemove ) {
+        $this->discipline->detach( $disciplineToRemove );
     }
 
     /**
@@ -640,8 +621,7 @@ class Event extends AbstractEntity
      *
      * @return \Slub\SlubEvents\Domain\Model\Location $location
      */
-    public function getLocation()
-    {
+    public function getLocation() {
         return $this->location;
     }
 
@@ -652,8 +632,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setLocation(Location $location)
-    {
+    public function setLocation( Location $location ) {
         $this->location = $location;
     }
 
@@ -662,8 +641,7 @@ class Event extends AbstractEntity
      *
      * @return \Slub\SlubEvents\Domain\Model\Event $event
      */
-    public function getEvent()
-    {
+    public function getEvent() {
         return $this->event;
     }
 
@@ -672,8 +650,7 @@ class Event extends AbstractEntity
      *
      * @return \Slub\SlubEvents\Domain\Model\Contact $contact
      */
-    public function getContact()
-    {
+    public function getContact() {
         return $this->contact;
     }
 
@@ -684,8 +661,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setContact(Contact $contact)
-    {
+    public function setContact( Contact $contact ) {
         $this->contact = $contact;
     }
 
@@ -694,8 +670,7 @@ class Event extends AbstractEntity
      *
      * @return boolean allDay
      */
-    public function getAllDay()
-    {
+    public function getAllDay() {
         return $this->allDay;
     }
 
@@ -706,8 +681,7 @@ class Event extends AbstractEntity
      *
      * @return boolean allDay
      */
-    public function setAllDay($allDay)
-    {
+    public function setAllDay( $allDay ) {
         $this->allDay = $allDay;
     }
 
@@ -716,8 +690,7 @@ class Event extends AbstractEntity
      *
      * @return boolean allDay
      */
-    public function isAllDay()
-    {
+    public function isAllDay() {
         return $this->getAllDay();
     }
 
@@ -726,8 +699,7 @@ class Event extends AbstractEntity
      *
      * @return \DateTime startDateTime
      */
-    public function getStartDateTime()
-    {
+    public function getStartDateTime() {
         return $this->startDateTime;
     }
 
@@ -736,8 +708,7 @@ class Event extends AbstractEntity
      *
      * @param \DateTime $startDateTime
      */
-    public function setStartDateTime($startDateTime)
-    {
+    public function setStartDateTime( $startDateTime ) {
         $this->startDateTime = $startDateTime;
     }
 
@@ -746,8 +717,7 @@ class Event extends AbstractEntity
      *
      * @return \DateTime endDateTime
      */
-    public function getEndDateTime()
-    {
+    public function getEndDateTime() {
         return $this->endDateTime;
     }
 
@@ -756,8 +726,7 @@ class Event extends AbstractEntity
      *
      * @param \DateTime $endDateTime
      */
-    public function setEndDateTime($endDateTime)
-    {
+    public function setEndDateTime( $endDateTime ) {
         $this->endDateTime = $endDateTime;
     }
 
@@ -766,8 +735,7 @@ class Event extends AbstractEntity
      *
      * @return DateTime subEndDateTime
      */
-    public function getSubEndDateTime()
-    {
+    public function getSubEndDateTime() {
         return $this->subEndDateTime;
     }
 
@@ -776,8 +744,7 @@ class Event extends AbstractEntity
      *
      * @param \DateTime $subEndDateTime
      */
-    public function setSubEndDateTime($subEndDateTime)
-    {
+    public function setSubEndDateTime( $subEndDateTime ) {
         $this->subEndDateTime = $subEndDateTime;
     }
 
@@ -786,8 +753,7 @@ class Event extends AbstractEntity
      *
      * @return \DateTime subEndDateTime
      */
-    public function getSubEndDateInfoSent()
-    {
+    public function getSubEndDateInfoSent() {
         return $this->subEndDateInfoSent;
     }
 
@@ -796,8 +762,7 @@ class Event extends AbstractEntity
      *
      * @param \DateTime $subEndDateInfoSent
      */
-    public function setSubEndDateInfoSent($subEndDateInfoSent)
-    {
+    public function setSubEndDateInfoSent( $subEndDateInfoSent ) {
         $this->subEndDateInfoSent = $subEndDateInfoSent;
     }
 
@@ -806,8 +771,7 @@ class Event extends AbstractEntity
      *
      * @return boolean $noSearch
      */
-    public function getNoSearch()
-    {
+    public function getNoSearch() {
         return $this->noSearch;
     }
 
@@ -816,8 +780,7 @@ class Event extends AbstractEntity
      *
      * @param boolean $noSearch
      */
-    public function setNoSearch($noSearch)
-    {
+    public function setNoSearch( $noSearch ) {
         $this->noSearch = $noSearch;
     }
 
@@ -826,8 +789,7 @@ class Event extends AbstractEntity
      *
      * @return boolean $geniusBar
      */
-    public function getGeniusBar()
-    {
+    public function getGeniusBar() {
         return $this->geniusBar;
     }
 
@@ -838,8 +800,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setGeniusBar($geniusBar)
-    {
+    public function setGeniusBar( $geniusBar ) {
         $this->geniusBar = $geniusBar;
     }
 
@@ -850,9 +811,8 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function addCategory(Category $category)
-    {
-        $this->categories->attach($category);
+    public function addCategory( Category $category ) {
+        $this->categories->attach( $category );
     }
 
     /**
@@ -862,9 +822,8 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> categories
      */
-    public function removeCategory(Category $categoryToBeRemoved)
-    {
-        $this->categories->detach($categoryToBeRemoved);
+    public function removeCategory( Category $categoryToBeRemoved ) {
+        $this->categories->detach( $categoryToBeRemoved );
     }
 
     /**
@@ -872,8 +831,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Category> $categories
      */
-    public function getCategories()
-    {
+    public function getCategories() {
         return $this->categories;
     }
 
@@ -884,8 +842,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setCategories(ObjectStorage $categories)
-    {
+    public function setCategories( ObjectStorage $categories ) {
         $this->categories = $categories;
     }
 
@@ -895,8 +852,7 @@ class Event extends AbstractEntity
      *
      * @return boolean $cancelled
      */
-    public function getCancelled()
-    {
+    public function getCancelled() {
         return $this->cancelled;
     }
 
@@ -907,8 +863,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setCancelled($cancelled)
-    {
+    public function setCancelled( $cancelled ) {
         $this->cancelled = $cancelled;
     }
 
@@ -917,8 +872,7 @@ class Event extends AbstractEntity
      *
      * @return boolean
      */
-    public function isCancelled()
-    {
+    public function isCancelled() {
         return $this->getCancelled();
     }
 
@@ -927,8 +881,7 @@ class Event extends AbstractEntity
      *
      * @return string $onlinesurvey
      */
-    public function getOnlinesurvey()
-    {
+    public function getOnlinesurvey() {
         return $this->onlinesurvey;
     }
 
@@ -939,8 +892,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setOnlinesurvey($onlinesurvey)
-    {
+    public function setOnlinesurvey( $onlinesurvey ) {
         $this->onlinesurvey = $onlinesurvey;
     }
 
@@ -949,8 +901,7 @@ class Event extends AbstractEntity
      *
      * @return string $externalRegistration
      */
-    public function getExternalRegistration()
-    {
+    public function getExternalRegistration() {
         return $this->externalRegistration;
     }
 
@@ -961,8 +912,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setExternalRegistration($externalRegistration)
-    {
+    public function setExternalRegistration( $externalRegistration ) {
         $this->externalRegistration = $externalRegistration;
     }
 
@@ -972,8 +922,7 @@ class Event extends AbstractEntity
      *
      * @return boolean $recurring
      */
-    public function getRecurring()
-    {
+    public function getRecurring() {
         return $this->recurring;
     }
 
@@ -984,8 +933,7 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setRecurring($recurring)
-    {
+    public function setRecurring( $recurring ) {
         $this->recurring = $recurring;
     }
 
@@ -994,8 +942,7 @@ class Event extends AbstractEntity
      *
      * @return boolean recurring
      */
-    public function isRecurring()
-    {
+    public function isRecurring() {
         return $this->getRecurring();
     }
 
@@ -1004,9 +951,8 @@ class Event extends AbstractEntity
      *
      * @return array $recurringOptions
      */
-    public function getRecurringOptions()
-    {
-        return unserialize($this->recurringOptions);
+    public function getRecurringOptions() {
+        return unserialize( $this->recurringOptions );
     }
 
     /**
@@ -1016,9 +962,8 @@ class Event extends AbstractEntity
      *
      * @return void
      */
-    public function setRecurringOptions($recurringOptions)
-    {
-        $this->recurringOptions = serialize($recurringOptions);
+    public function setRecurringOptions( $recurringOptions ) {
+        $this->recurringOptions = serialize( $recurringOptions );
     }
 
     /**
@@ -1026,8 +971,7 @@ class Event extends AbstractEntity
      *
      * @return \DateTime recurringEndDateTime
      */
-    public function getRecurringEndDateTime()
-    {
+    public function getRecurringEndDateTime() {
         return $this->recurringEndDateTime;
     }
 
@@ -1036,9 +980,44 @@ class Event extends AbstractEntity
      *
      * @param \DateTime $recurringEndDateTime
      */
-    public function setRecurringEndDateTime($recurringEndDateTime)
-    {
+    public function setRecurringEndDateTime( $recurringEndDateTime ) {
         $this->recurringEndDateTime = $recurringEndDateTime;
+    }
+
+    /**
+     * Get CategoryStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Category $categoryStats
+     */
+    public function getCategoryStats() {
+        return $this->categoryStats;
+    }
+
+    /**
+     * Set CategoryStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Category $categoryStats
+     */
+    public function setCategoryStats( $categoryStats ) {
+        $this->categoryStats = $categoryStats;
+    }
+
+    /**
+     * Get DisciplineStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Discipline $disciplineStats
+     */
+    public function getDisciplineStats() {
+        return $this->disciplineStats;
+    }
+
+    /**
+     * Set DisciplineStats
+     *
+     * @return \Slub\SlubEvents\Domain\Model\Discipline $disciplineStats
+     */
+    public function setDisciplineStats( $disciplineStats ) {
+        $this->disciplineStats = $disciplineStats;
     }
 
 }

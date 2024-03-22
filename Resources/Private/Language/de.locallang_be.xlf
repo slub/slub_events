@@ -194,6 +194,18 @@
 				<source><![CDATA[SLUB: Events: User Panel]]></source>
 				<target><![CDATA[SLUB: Veranstaltungen: Meine Veranstaltung]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
+				<source><![CDATA[Event Category]]></source>
+				<target><![CDATA[Kategorie]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.discipline" approved="yes">
+				<source><![CDATA[Discipline]]></source>
+				<target><![CDATA[Fachdisziplin]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
+				<source><![CDATA[Categories for Statistic]]></source>
+				<target><![CDATA[Kategorien für Statistik]]></target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

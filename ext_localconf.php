@@ -5,11 +5,11 @@ defined('TYPO3_MODE') || die();
     'Slub.SlubEvents',
     'Eventlist',
     [
-        'Event' => 'list, show, showNotFound, listUpcoming, new, update, create, delete, printCal',
+        \Slub\SlubEvents\Controller\EventController::class => 'list, show, showNotFound, listUpcoming, new, update, create, delete, printCal',
     ],
     // non-cacheable actions
     [
-        'Event' => 'new, update, create, delete',
+        \Slub\SlubEvents\Controller\EventController::class => 'new, update, create, delete',
     ]
 );
 
@@ -17,11 +17,11 @@ defined('TYPO3_MODE') || die();
     'Slub.SlubEvents',
     'Eventsubscribe',
     [
-        'Subscriber' => 'new, create, delete, eventNotFound, subscriberNotFound',
+        \Slub\SlubEvents\Controller\SubscriberController::class => 'new, create, delete, eventNotFound, subscriberNotFound',
     ],
     // non-cacheable actions
     [
-        'Subscriber' => 'new, create, delete',
+        \Slub\SlubEvents\Controller\SubscriberController::class => 'new, create, delete',
     ]
 );
 
@@ -29,12 +29,12 @@ defined('TYPO3_MODE') || die();
     'Slub.SlubEvents',
     'Eventuserpanel',
     [
-        'Event'      => 'listOwn, show',
-        'Subscriber' => 'list, show',
+        \Slub\SlubEvents\Controller\EventController::class      => 'listOwn, show',
+        \Slub\SlubEvents\Controller\SubscriberController::class => 'list, show',
     ],
     // non-cacheable actions
     [
-        'Event' => 'listOwn',
+        \Slub\SlubEvents\Controller\EventController::class => 'listOwn',
     ]
 );
 
@@ -42,11 +42,11 @@ defined('TYPO3_MODE') || die();
     'Slub.SlubEvents',
     'Eventgeniusbar',
     [
-        'Category' => 'list, gbList',
+        \Slub\SlubEvents\Controller\CategoryController::class => 'list, gbList',
     ],
     // non-cacheable actions
     [
-        'Category' => '',
+        \Slub\SlubEvents\Controller\CategoryController::class => '',
     ]
 );
 

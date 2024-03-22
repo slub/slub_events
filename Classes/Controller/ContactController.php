@@ -38,7 +38,7 @@ class ContactController extends AbstractController
      *
      * @return void
      */
-    public function listAction()
+    public function listAction(): void
     {
         $contacts = $this->contactRepository->findAll();
         $this->view->assign('contacts', $contacts);
@@ -51,7 +51,7 @@ class ContactController extends AbstractController
      *
      * @return void
      */
-    public function showAction(Contact $contact)
+    public function showAction(Contact $contact): void
     {
         $this->view->assign('contact', $contact);
     }

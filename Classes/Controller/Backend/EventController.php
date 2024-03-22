@@ -33,7 +33,7 @@ class EventController extends BaseController
     /**
      * action beList
      */
-    public function beListAction()
+    public function beListAction(): void
     {
         // get current event of last beIcsInvitationAction
         $currentActiveEvent = $this->getParametersSafely('currentActiveEvent');
@@ -115,7 +115,7 @@ class EventController extends BaseController
      *
      * @return void
      */
-    public function beCopyAction(Event $event)
+    public function beCopyAction(Event $event): void
     {
         $availableProperties = ObjectAccess::getGettablePropertyNames($event);
         /** @var Event $newEvent */
@@ -183,7 +183,7 @@ class EventController extends BaseController
      *
      * @return void
      */
-    public function beIcsInvitationAction(Event $event)
+    public function beIcsInvitationAction(Event $event): void
     {
         $allEvents = [];
 

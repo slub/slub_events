@@ -17,24 +17,25 @@
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="0">
+                                <items type="array">
+                                    <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_view</numIndex>
                                         <numIndex index="1">Event->list;Event->show;Event->showNotFound</numIndex>
                                     </numIndex>
-                                    <numIndex index="1">
+                                    <numIndex index="1" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.single_view</numIndex>
                                         <numIndex index="1">Event->show;Event->showNotFound</numIndex>
                                     </numIndex>
-                                    <numIndex index="2">
+                                    <numIndex index="2" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_month_view</numIndex>
                                         <numIndex index="1">Event->listMonth</numIndex>
                                     </numIndex>
-                                    <numIndex index="3">
+                                    <numIndex index="3" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.list_view_upcoming</numIndex>
                                         <numIndex index="1">Event->listUpcoming</numIndex>
                                     </numIndex>
                                 </items>
+                                <default></default>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>

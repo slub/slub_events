@@ -1,0 +1,56 @@
+{namespace se=Slub\SlubEvents\ViewHelpers}
+<f:layout name="Backend/Default"/>
+
+<f:section name="content">
+    <f:flashMessages/>
+
+    <h1><f:translate key='be.writeNotificationHeading' /></h1>
+
+    <div class="tx_slubevents">
+        <f:form action="beSendNotification" controller="Backend\Subscriber" name="beSendNotification" method="post">
+            <div class="emailtext">
+                <p>
+                    <f:translate key='be.onlineSurveyIntroPhrase' />
+                    <b>{event.contact.name} ({event.contact.email})</b>
+                    <f:translate key='be.onlineSurveyIntroPhraseEnd' />:
+                </p>
+                <ul>
+                    <f:for each="{event.subscribers}" as="subscriber">
+                        <li>{subscriber.name} --> {subscriber.email}, {subscriber.number}
+                            <f:if condition="{subscriber.number} == 1">
+                                <f:then>Person</f:then>
+                                <f:else>Personen</f:else>
+                            </f:if>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+
+            <div class="emailtext">
+                <f:format.html>
+                    {emailTextPreview}
+                </f:format.html>
+            </div>
+
+            <div class="emailtext">
+                <div class="form-group">
+                    <label for="emailSubject" class="control-label">
+                        E-Mail Betreff
+                    </label>
+                    <f:form.textfield name="emailSubject" id="emailSubject" value="{emailSubject}" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="emailBody" class="control-label">
+                        E-Mail Text
+                    </label>
+                    <f:form.textarea name="emailBody" id="emailBody" value="{emailBody}" class="form-control" rows="15" />
+                </div>
+                <div class="form-group">
+                    <f:form.hidden name="event" value="{event}"/>
+                    <f:form.submit value="Sende <f:count subject='{event.subscribers}' /> Email(s)" class="btn btn-primary"/>
+                </div>
+            </div>
+        </f:form>
+    </div>
+
+</f:section>

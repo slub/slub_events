@@ -66,9 +66,17 @@
 									<f:render section="wibaListing" arguments="{wibas: wibas, category: category, kind: 1}" />
 								</f:then>
 								<f:else>
-									<f:widget.paginate objects="{wibas}" as="paginatedWibas" configuration="{settings.list.paginate}">
-										<f:render section="wibaListing" arguments="{wibas: paginatedWibas, category: category, kind: 1}" />
-									</f:widget.paginate>
+                                    <se:pagination.paginate objects="{wibas}" as="paginator" itemsPerPage="{settings.list.paginate.itemsPerPage}">
+                                        <f:if condition="{settings.list.paginate.insertAbove}">
+                                            <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                        </f:if>
+
+                                        <f:render section="wibaListing" arguments="{wibas: paginator.paginator.paginatedItems, category: category, kind: 1}" />
+
+                                        <f:if condition="{settings.list.paginate.insertBelow}">
+                                            <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                        </f:if>
+                                    </se:pagination.paginate>
 								</f:else>
 							</f:if>
 							<script type="text/javascript">
@@ -104,9 +112,17 @@
 									<f:render section="wibaListing" arguments="{wibas: events, category: category, kind: 2}" />
 								</f:then>
 								<f:else>
-									<f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{settings.list.paginate}">
-										<f:render section="wibaListing" arguments="{wibas: paginatedEvents, category: category, kind: 2}" />
-									</f:widget.paginate>
+                                    <se:pagination.paginate objects="{events}" as="paginator" itemsPerPage="{settings.list.paginate.itemsPerPage}">
+                                        <f:if condition="{settings.list.paginate.insertAbove}">
+                                            <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                        </f:if>
+
+                                        <f:render section="wibaListing" arguments="{wibas: paginator.paginator.paginatedItems, category: category, kind: 2}" />
+
+                                        <f:if condition="{settings.list.paginate.insertBelow}">
+                                            <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                        </f:if>
+                                    </se:pagination.paginate>
 								</f:else>
 							</f:if>
                             <br style="clear:both">
@@ -126,9 +142,17 @@
 									<f:render section="wibaListing" arguments="{wibas: consultation, category: category, kind: 3}" />
 								</f:then>
 								<f:else>
-									<f:widget.paginate objects="{consultation}" as="paginatedConsultation" configuration="{settings.list.paginate}">
-										<f:render section="wibaListing" arguments="{wibas: paginatedConsultation, category: category, kind: 3}" />
-									</f:widget.paginate>
+                                    <se:pagination.paginate objects="{consultation}" as="paginator" itemsPerPage="{settings.list.paginate.itemsPerPage}">
+                                        <f:if condition="{settings.list.paginate.insertAbove}">
+                                            <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                        </f:if>
+
+                                        <f:render section="wibaListing" arguments="{wibas: paginator.paginator.paginatedItems, category: category, kind: 3}" />
+
+                                        <f:if condition="{settings.list.paginate.insertBelow}">
+                                            <f:render partial="Miscellaneous/Pagination" arguments="{pagination:paginator.pagination, paginator:paginator.paginator, name:paginator.name}" />
+                                        </f:if>
+                                    </se:pagination.paginate>
 								</f:else>
 							</f:if>
 						</f:then>

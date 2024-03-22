@@ -81,9 +81,21 @@
 				<source><![CDATA[Sending of Online Survey not possible as no subscribers are present.]]></source>
 				<target><![CDATA[Das Versenden der Online-Umfrage ist nicht möglich, da es keine Teilnehmer gibt.]]></target>
 			</trans-unit>
+			<trans-unit id="be.sendNotification" approved="yes">
+				<source><![CDATA[Send a notification email to all subscribers.]]></source>
+				<target><![CDATA[Eine E-Mail an alle Teilnehmer senden.]]></target>
+			</trans-unit>
 			<trans-unit id="be.sendOnlineSurveyNotYetPossible" approved="yes">
 				<source><![CDATA[Sending of Online Survey not yet possible.]]></source>
 				<target><![CDATA[Das Versenden der Online-Umfrage ist noch nicht möglich.]]></target>
+			</trans-unit>
+			<trans-unit id="be.sendCircularMail" approved="yes">
+				<source><![CDATA[Send circular mail to Subscribers]]></source>
+				<target><![CDATA[Rundmail an Teilnehmer senden.]]></target>
+			</trans-unit>
+			<trans-unit id="be.sendCircularMailNoSubscribers" approved="yes">
+				<source><![CDATA[Sending of circular mail not possible as no subscribers are present.]]></source>
+				<target><![CDATA[Das Versenden der Rundmail ist nicht möglich, da es keine Teilnehmer gibt.]]></target>
 			</trans-unit>
 			<trans-unit id="be.sentTo" approved="yes">
 				<source><![CDATA[sent to]]></source>
@@ -244,6 +256,10 @@
 			<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
 				<source><![CDATA[Event Category]]></source>
 				<target><![CDATA[Kategorie]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.discipline" approved="yes">
+				<source><![CDATA[Discipline]]></source>
+				<target><![CDATA[Fachdisziplin]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_category.no_search" approved="yes">
 				<source><![CDATA[Exclude from search]]></source>
@@ -477,6 +493,25 @@
 				<source><![CDATA[My Events]]></source>
 				<target><![CDATA[Meine Veranstaltungen]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
+				<source><![CDATA[Categories for Statistic]]></source>
+				<target><![CDATA[Kategorien für Statistik]]></target>
+			</trans-unit>
+
+
+			<trans-unit id="be.writeNotificationPhraseStart" approved="yes">
+				<source><![CDATA[Send on behalf of]]></source>
+				<target><![CDATA[Senden Sie im Namen von]]></target>
+			</trans-unit>
+			<trans-unit id="be.writeNotificationPhraseEnd" approved="yes">
+				<source><![CDATA[following message to all participants]]></source>
+				<target><![CDATA[folgende Nachricht an alle Teilnehmer]]></target>
+			</trans-unit>
+			<trans-unit id="be.writeNotificationHeading" approved="yes">
+				<source><![CDATA[Send circular mail to all participants.]]></source>
+				<target><![CDATA[Rundmail an alle Teilnehmer versenden.]]></target>
+			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

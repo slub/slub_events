@@ -49,7 +49,7 @@ class BaseController extends AbstractController
      * Function will be called before every other action
      *
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->pageUid = (int)GeneralUtility::_GET('id');
         $this->pageInformation = BackendUtility::readPageAccess($this->pageUid, '');
@@ -61,7 +61,7 @@ class BaseController extends AbstractController
      *
      * @param ViewInterface $view
      */
-    protected function initializeView(ViewInterface $view)
+    protected function initializeView(ViewInterface $view): void
     {
         /** @var BackendTemplateView $view */
         parent::initializeView($view);
@@ -83,7 +83,7 @@ class BaseController extends AbstractController
     /**
      * Create menu
      */
-    protected function createMenu()
+    protected function createMenu(): void
     {
         $uriBuilder = $this->objectManager->get(UriBuilder::class);
         $uriBuilder->setRequest($this->request);
@@ -120,7 +120,7 @@ class BaseController extends AbstractController
     /**
      * Create the panel of buttons
      */
-    protected function createButtons()
+    protected function createButtons(): void
     {
         $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
 
@@ -139,7 +139,7 @@ class BaseController extends AbstractController
      *
      * @return BackendUserAuthentication
      */
-    protected function getBackendUser()
+    protected function getBackendUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
     }
