@@ -1,7 +1,7 @@
 Extension Manual
 ================
 
-**slub_events** is an TYPO3 Extbase/Fluid based tool for event registration and experts booking. It is developed and used in
+**slub_events** is a TYPO3 Extbase/Fluid based tool for event registration and experts booking. It is developed and used in
 production at the Saxony State and University Library (SLUB) Dresden, Germany.
 
 HowTo Start
