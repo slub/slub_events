@@ -84,7 +84,7 @@
                 <source>Categories for Statistic</source>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.content_elements">
-                <source>Contente Elements</source>
+                <source>Content Elements</source>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.contact">
                 <source>Contact</source>
