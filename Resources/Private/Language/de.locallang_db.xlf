@@ -106,8 +106,8 @@
                 <target><![CDATA[Kategorie]]></target>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
-                <source><![CDATA[Categories for Statistic]]></source>
-                <target><![CDATA[Kategorien für Statistik]]></target>
+                <source><![CDATA[Optional category for statistics]]></source>
+                <target><![CDATA[Optionale Kategorie für Statistik]]></target>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.content_elements" approved="yes">
                 <source><![CDATA[Content Elements]]></source>
@@ -126,8 +126,8 @@
                 <target><![CDATA[Fachdisziplin]]></target>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.discipline_stats" approved="yes">
-                <source><![CDATA[Discipline for Statistic]]></source>
-                <target><![CDATA[Fachdisziplin für Statistik]]></target>
+                <source><![CDATA[Optional discipline for statistics]]></source>
+                <target><![CDATA[Optionale Fachdisziplin für Statistik]]></target>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.end" approved="yes">
                 <source><![CDATA[End of Event]]></source>
