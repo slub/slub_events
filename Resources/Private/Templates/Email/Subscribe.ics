@@ -21,7 +21,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 ORGANIZER;CN="{event.contact.name}":MAILTO:{event.contact.email}
-DESCRIPTION:{helper.description}
+DESCRIPTION:<f:format.raw>{helper.description}</f:format.raw>
 SUMMARY:{event.title}
 UID:{event.uid}-event-slub-dresden
 <f:if condition="{helper.allDay} == 1"><f:then>
