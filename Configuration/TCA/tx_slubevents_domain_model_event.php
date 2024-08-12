@@ -569,24 +569,6 @@ return [
                 'maxitems'            => 30,
             ],
         ],
-        'category_for_stats'      => [
-            'exclude'   => 0,
-            'l10n_mode' => 'exclude',
-            'label'     => $LL . 'tx_slubevents_domain_model_event.category_for_stats',
-            'config'    => [
-                'behaviour'           => [
-                    'allowLanguageSynchronization' => true
-                ],
-                'type'                => 'select',
-                'foreign_table'       => 'tx_slubevents_domain_model_category',
-                'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
-                'renderType'          => 'selectSingle',
-                'size'                => 1,
-                'minitems'            => 1,
-                'maxitems'            => 1,
-                'eval'                => 'required'
-            ],
-        ],
         'subscribers'             => [
             'exclude'   => 0,
             'l10n_mode' => 'exclude',
@@ -673,7 +655,7 @@ return [
                     ],
                 ],
                 'size'                => 10,
-                'minitems'            => 1,
+                'minitems'            => 0,
                 'maxitems'            => 1,
                 'default' => 0
             ],
@@ -699,7 +681,7 @@ return [
                     ],
                 ],
                 'size'                => 10,
-                'minitems'            => 1,
+                'minitems'            => 0,
                 'maxitems'            => 1,
                 'default' => 0
             ],
