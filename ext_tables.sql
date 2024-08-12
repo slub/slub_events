@@ -11,7 +11,10 @@ CREATE TABLE tx_slubevents_domain_model_event (
     start_date_time int(11) DEFAULT '0' NOT NULL,
     all_day tinyint(1) unsigned DEFAULT '0' NOT NULL,
     end_date_time int(11) DEFAULT '0' NOT NULL,
+    end_date_time_select int(11) DEFAULT '0',
     sub_end_date_time int(11) DEFAULT '0' NOT NULL,
+    sub_end_date_time_select int(11) DEFAULT '0',
+    recurring_events int(11) DEFAULT '0',
     teaser text NOT NULL,
     description text NOT NULL,
 	image int(11) unsigned DEFAULT '0',
@@ -28,7 +31,6 @@ CREATE TABLE tx_slubevents_domain_model_event (
     cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
     onlinesurvey varchar(255) DEFAULT '' NOT NULL,
     categories int(11) unsigned DEFAULT '0' NOT NULL,
-    category_for_stats int(11) unsigned DEFAULT '0' NOT NULL,
     subscribers int(11) unsigned DEFAULT '0' NOT NULL,
     location int(11) unsigned DEFAULT '0' NOT NULL,
     discipline int(11) unsigned DEFAULT '0' NOT NULL,
@@ -61,6 +63,7 @@ CREATE TABLE tx_slubevents_domain_model_event (
     sys_language_uid int(11) DEFAULT '0' NOT NULL,
     l10n_parent int(11) DEFAULT '0' NOT NULL,
     l10n_diffsource mediumblob,
+    l10n_state text,
 
     PRIMARY KEY (uid),
     KEY parent (pid),
@@ -107,6 +110,7 @@ CREATE TABLE tx_slubevents_domain_model_category (
     sys_language_uid int(11) DEFAULT '0' NOT NULL,
     l10n_parent int(11) DEFAULT '0' NOT NULL,
     l10n_diffsource mediumblob,
+    l10n_state text,    
 
     PRIMARY KEY (uid),
     KEY parent (pid),
@@ -142,6 +146,7 @@ CREATE TABLE tx_slubevents_domain_model_subscriber (
     hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
     starttime int(11) unsigned DEFAULT '0' NOT NULL,
     endtime int(11) unsigned DEFAULT '0' NOT NULL,
+    l10n_state text,    
 
     PRIMARY KEY (uid),
     KEY parent (pid),
@@ -185,6 +190,7 @@ CREATE TABLE tx_slubevents_domain_model_location (
     sys_language_uid int(11) DEFAULT '0' NOT NULL,
     l10n_parent int(11) DEFAULT '0' NOT NULL,
     l10n_diffsource mediumblob,
+    l10n_state text,
 
     PRIMARY KEY (uid),
     KEY parent (pid),
@@ -229,6 +235,7 @@ CREATE TABLE tx_slubevents_domain_model_discipline (
     sys_language_uid int(11) DEFAULT '0' NOT NULL,
     l10n_parent int(11) DEFAULT '0' NOT NULL,
     l10n_diffsource mediumblob,
+    l10n_state text,
 
     PRIMARY KEY (uid),
     KEY parent (pid),
@@ -274,6 +281,7 @@ CREATE TABLE tx_slubevents_domain_model_contact (
     sys_language_uid int(11) DEFAULT '0' NOT NULL,
     l10n_parent int(11) DEFAULT '0' NOT NULL,
     l10n_diffsource mediumblob,
+    l10n_state text,
 
     PRIMARY KEY (uid),
     KEY parent (pid),
