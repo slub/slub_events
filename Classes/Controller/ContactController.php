@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -38,7 +38,7 @@ class ContactController extends AbstractController
      *
      * @return void
      */
-    public function listAction()
+    public function listAction(): void
     {
         $contacts = $this->contactRepository->findAll();
         $this->view->assign('contacts', $contacts);
@@ -51,7 +51,7 @@ class ContactController extends AbstractController
      *
      * @return void
      */
-    public function showAction(Contact $contact)
+    public function showAction(Contact $contact): void
     {
         $this->view->assign('contact', $contact);
     }

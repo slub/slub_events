@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\ViewHelpers\Be;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013-2014 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *

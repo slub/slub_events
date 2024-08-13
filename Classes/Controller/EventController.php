@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012-2014 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2012-2014 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -53,7 +53,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
 
         // Only do this in Frontend Context
@@ -77,7 +77,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function listAction()
+    public function listAction(): void
     {
         if (!empty($this->settings['categorySelection'])) {
             $this->settings['categoryList'] = $this->getCategoryIdsFromSettings();
@@ -97,7 +97,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function listUpcomingAction()
+    public function listUpcomingAction(): void
     {
         if (!empty($this->settings['categorySelection'])) {
             $this->settings['categoryList'] = $this->getCategoryIdsFromSettings();
@@ -113,23 +113,6 @@ class EventController extends AbstractController
     }
 
     /**
-     * action initializeShow
-     *
-     * @return void
-     */
-//	public function initializeShowAction() {
-//
-//		$eventId = $this->getParametersSafely('event');
-//		$event = NULL;
-//
-//		if ($eventId != NULL)
-//			$event = $this->eventRepository->findByUid($eventId);
-//
-//		if ($event === NULL)
-//			$this->redirect('showNotFound');
-//	}
-
-    /**
      * action show
      *
      * @param Event $event
@@ -137,10 +120,10 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function showAction(Event $event = null)
+    public function showAction(Event $event = null): void
     {
         if ($event !== null) {
-            $shortDescription = $event->getTeaser() ? $event->getTeaser() : $event->getDescription();
+            $shortDescription = $event->getTeaser() ?: $event->getDescription();
             // get description and cut to 200 chars, strip tags its an rte field
             $shortDescription = substr( strip_tags( $shortDescription ) , 0, 200);
             // cut it at last space
@@ -172,7 +155,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function showNotFoundAction()
+    public function showNotFoundAction(): void
     {
     }
 
@@ -184,7 +167,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function newAction(Event $newEvent = null)
+    public function newAction(Event $newEvent = null): void
     {
         $this->view->assign('newEvent', $newEvent);
     }
@@ -196,7 +179,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function createAction(Event $newEvent)
+    public function createAction(Event $newEvent): void
     {
         $this->eventRepository->add($newEvent);
         $this->addFlashMessage('Your new Event was created.');
@@ -211,7 +194,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function editAction(Event $event)
+    public function editAction(Event $event): void
     {
         $this->view->assign('event', $event);
     }
@@ -223,7 +206,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function updateAction(Event $event)
+    public function updateAction(Event $event): void
     {
         $this->eventRepository->update($event);
         $this->addFlashMessage('Your Event was updated.');
@@ -237,7 +220,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function deleteAction(Event $event)
+    public function deleteAction(Event $event): void
     {
         $this->eventRepository->remove($event);
         $this->addFlashMessage('Your Event was removed.');
@@ -249,7 +232,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function listOwnAction()
+    public function listOwnAction(): void
     {
 
         // + the user is logged in
@@ -267,7 +250,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function listMonthAction()
+    public function listMonthAction(): void
     {
         if (!empty($this->settings['categorySelection'])) {
             $categoriesIds = $this->getCategoryIdsFromSettings();
@@ -293,7 +276,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function initializeCreateChildsAction($id)
+    public function initializeCreateChildsAction($id): void
     {
         // this does not work reliable in this context (--> has to be verified again!)
         // as the childs must be on the same storage pid as the parent, we take
@@ -334,15 +317,13 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function createChildsAction($id)
+    public function createChildsAction($id): void
     {
         $this->initializeCreateChildsAction($id);
 
         $parentEvent = $this->eventRepository->findOneByUidIncludeHidden($id);
 
         if ($parentEvent) {
-
-            $allChildren = $this->eventRepository->findByParent($parentEvent);
 
             $childDateTimes = $this->getChildDateTimes($parentEvent);
 
@@ -440,15 +421,13 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function deleteChildsAction($id)
+    public function deleteChildsAction($id): void
     {
         $this->initializeCreateChildsAction($id);
 
         $parentEvent = $this->eventRepository->findOneByUid($id);
 
         if ($parentEvent) {
-
-            $allChildren = $this->eventRepository->findByParent($parentEvent);
 
             // delete all present child events
             $this->eventRepository->deleteAllNotAllowedChildren(array(), $parentEvent);
@@ -465,7 +444,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function errorAction()
+    public function errorAction(): void
     {
     }
 
@@ -477,7 +456,7 @@ class EventController extends AbstractController
      *
      * @return string
      */
-    public function ajaxAction()
+    public function ajaxAction(): string
     {
         $jsonevent = [];
 
@@ -603,7 +582,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function printCalAction(Event $event = null)
+    public function printCalAction(Event $event = null): void
     {
 		if ($event === null) {
             $this->redirect('showNotFound');
@@ -630,9 +609,9 @@ class EventController extends AbstractController
      *
      * @param Event $parentEvent
      *
-     * @return void
+     * @return array
      */
-    public function getChildDateTimes($parentEvent)
+    public function getChildDateTimes($parentEvent): array
     {
         $recurring_options = $parentEvent->getRecurringOptions();
         $recurringEndDateTime = $parentEvent->getRecurringEndDateTime();
@@ -832,7 +811,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    private function daylightOffset($dateTimeValue, $offset)
+    private function daylightOffset($dateTimeValue, $offset): void
     {
       if ($offset > 0) {
           $dateTimeValue->add(new \DateInterval('PT'.$offset.'S'));

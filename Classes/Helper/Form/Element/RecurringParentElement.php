@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Helper\Form\Element;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2020 Alexander Bigga <alexander.bigga@slub-dresden.de>
+ *  (c) 2020 Alexander Bigga <typo3@slub-dresden.de>
  *  All rights reserved
  *
  *  This script is part of the Typo3 project. The Typo3 project is

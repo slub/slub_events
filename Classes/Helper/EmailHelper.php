@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Helper;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Alexander Bigga <alexander.bigga@slub-dresden.de>
+ *  (c) 2015 Alexander Bigga <typo3@slub-dresden.de>
  *  All rights reserved
  *
  *  This script is part of the Typo3 project. The Typo3 project is
@@ -25,14 +25,16 @@ namespace Slub\SlubEvents\Helper;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * Scheduler Task for Statistics
  *
- * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @author    Alexander Bigga <typo3@slub-dresden.de>
  */
 class EmailHelper
 {
@@ -42,74 +44,37 @@ class EmailHelper
      *
      * @param array                         $recipient    recipient of the email in the format array('recipient@domain.tld' => 'Recipient Name')
      * @param array                         $sender       sender of the email in the format array('sender@domain.tld' => 'Sender Name')
-     * @param string                        $subject      subject of the email
-     * @param string                        $templateName template name (UpperCamelCase)
+     * @param string $subject      subject of the email
+     * @param string $templateName template name (UpperCamelCase)
      * @param array                         $variables    variables to be passed to the Fluid view
-     * @param ConfigurationManagerInterface $configurationManager
+     * @param ConfigurationManagerInterface|null $configurationManager
      *
      * @return boolean true on success, otherwise false
      */
     public static function sendTemplateEmail(
         array $recipient,
         array $sender,
-        $subject,
-        $templateName,
+        string $subject,
+        string $templateName,
         array $variables = [],
-        $configurationManager = null
-    ) {
-
-        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-
-        if (version_compare(VersionNumberUtility::getNumericTypo3Version(), '10.0.0', '<')) {
-            $useSimfonyMailer = false;
-        } else {
-            $useSimfonyMailer = true;
-        }
-
+        ConfigurationManagerInterface $configurationManager = null
+    ): bool {
         // array of files to unlink after email has been sent
         $unlinkFiles = [];
-
-        /** @var \TYPO3Fluid\Fluid\View\StandaloneView $emailViewHTML */
-        $emailViewHTML = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-        $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
-        $emailViewHTML->setFormat('html');
-        $emailViewHTML->assignMultiple($variables);
-
-        $emailViewHTML->setTemplateRootPaths(self::resolveTemplateRootPaths($configurationManager));
-        $emailViewHTML->setPartialRootPaths(self::resolvePartialRootPaths($configurationManager));
-
-        $emailViewHTML->setTemplate('Email/' . $templateName . '.html');
+        $emailTextHTML = self::renderEmailTemplate($templateName, $variables, $configurationManager);
 
         /** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
-        $message = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+        $message = GeneralUtility::makeInstance(MailMessage::class);
         $message->setTo($recipient)
             ->setFrom($sender)
             ->setSubject($subject);
 
-        // Plain text example
-        $emailTextHTML = $emailViewHTML->render();
-
-        if ($useSimfonyMailer) {
-            $message->text(EmailHelper::html2rest($emailTextHTML));
-            $message->html($emailTextHTML);
-        } else {
-            $message->setBody(EmailHelper::html2rest($emailTextHTML));
-            $message->addPart($emailTextHTML, 'text/html');
-        }
+        $message->text(EmailHelper::html2rest($emailTextHTML));
+        $message->html($emailTextHTML);
 
         // attach ics-File
         if ($variables['attachIcs'] == true) {
-            /** @var \TYPO3Fluid\Fluid\View\StandaloneView $ics */
-            $ics = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-            $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
-            $ics->setFormat('ics');
-            $ics->assignMultiple($variables);
-
-            $ics->setTemplateRootPaths(self::resolveTemplateRootPaths($configurationManager));
-            $ics->setPartialRootPaths(self::resolvePartialRootPaths($configurationManager));
-
-            $ics->setTemplate('Email/' . $templateName . '.ics');
+            $renderedIcs = self::renderEmailTemplate($templateName, $variables, $configurationManager, 'ics');
 
             // the total basename length must not be more than 60 characters --> see writeFileToTypo3tempDir()
             $eventIcsFile = Environment::getPublicPath() . '/typo3temp/tx_slubevents/' .
@@ -122,20 +87,13 @@ class EmailHelper
 
             GeneralUtility::writeFileToTypo3tempDir(
                 $eventIcsFile,
-                implode("\r\n", array_filter(explode("\r\n", $ics->render())))
+                implode("\r\n", array_filter(explode("\r\n", $renderedIcs)))
             );
 
             $unlinkFiles[] = $eventIcsFile;
 
             // attach additionally ics as file
-            if ($useSimfonyMailer) {
-                $message->attachFromPath($eventIcsFile);
-            } else {
-                $message->attach(\Swift_Attachment::fromPath($eventIcsFile)
-                    ->setContentType('text/calendar'));
-                // add ics as part
-                $message->addPart(implode("\r\n", array_filter(explode("\r\n", $ics->render()))), 'text/calendar', 'utf-8');
-            }
+            $message->attachFromPath($eventIcsFile);
 
             if ($variables['settings']['email']['keepLocalFilesForDebugging']) {
                 $debugFile = Environment::getPublicPath() . 'typo3temp/tx_slubevents/' .
@@ -145,23 +103,13 @@ class EmailHelper
                         20
                     )
                     . '-' . strtolower($templateName) . (isset($variables['event']) ? '-' . $variables['event']->getUid() : '' ) . '.html';
-                GeneralUtility::writeFileToTypo3tempDir($debugFile, $emailViewHTML->render());
+                GeneralUtility::writeFileToTypo3tempDir($debugFile, $emailTextHTML);
             }
 
         }
         // attach CSV-File
         if ($variables['attachCsv'] == true) {
-
-            /** @var \TYPO3Fluid\Fluid\View\StandaloneView $csv */
-            $csv = $objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-            $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
-            $csv->setFormat('csv');
-            $csv->assignMultiple($variables);
-
-            $csv->setTemplateRootPaths(self::resolveTemplateRootPaths($configurationManager));
-            $csv->setPartialRootPaths(self::resolvePartialRootPaths($configurationManager));
-
-            $csv->setTemplate('Email/' . $templateName . '.csv');
+            $renderedCsv = self::renderEmailTemplate($templateName, $variables, $configurationManager, 'csv');
 
             $eventCsvFile = Environment::getPublicPath() . '/typo3temp/tx_slubevents/' .
                 substr(
@@ -170,17 +118,12 @@ class EmailHelper
                     20
                 )
                 . '-' . strtolower($templateName) . '.csv';
-            GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $csv->render());
+            GeneralUtility::writeFileToTypo3tempDir($eventCsvFile, $renderedCsv);
 
             $unlinkFiles[] = $eventCsvFile;
 
             // attach CSV-File
-            if ($useSimfonyMailer) {
-                $message->attachFromPath($eventCsvFile);
-            } else {
-                $message->attach(\Swift_Attachment::fromPath($eventCsvFile)
-                    ->setContentType('text/csv'));
-            }
+            $message->attachFromPath($eventCsvFile);
         }
 
         if ($variables['settings']['email']['keepLocalFilesForDebugging']) {
@@ -215,7 +158,7 @@ class EmailHelper
      *
      * @return string
      */
-    public static function html2rest($text)
+    public static function html2rest($text): string
     {
         $text = strip_tags(
             html_entity_decode($text, ENT_COMPAT, 'UTF-8'),
@@ -253,10 +196,11 @@ class EmailHelper
     }
 
     /**
-     * @param ConfigurationManagerInterface $configurationManager
+     * @param ConfigurationManagerInterface|null $configurationManager
+     *
      * @return string[]
      */
-    public static function resolveTemplateRootPaths($configurationManager = null)
+    public static function resolveTemplateRootPaths(ConfigurationManagerInterface $configurationManager = null): array
     {
         if ($configurationManager) {
             $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
@@ -271,10 +215,11 @@ class EmailHelper
     }
 
     /**
-     * @param ConfigurationManagerInterface $configurationManager
+     * @param ConfigurationManagerInterface|null $configurationManager
+     *
      * @return string[]
      */
-    public static function resolvePartialRootPaths($configurationManager = null)
+    public static function resolvePartialRootPaths(ConfigurationManagerInterface $configurationManager = null): array
     {
         if ($configurationManager) {
             $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
@@ -295,8 +240,31 @@ class EmailHelper
      *
      * @return string Manipulated string
      */
-    public static function prepareNameTo($name)
+    public static function prepareNameTo($name): string
     {
         return strtolower(str_replace([',', ' '], ['', '-'], $name));
+    }
+
+    public static function renderEmailTemplate(
+        string $templateName,
+        array $variables,
+        ?ConfigurationManagerInterface $configurationManager,
+        $format = 'html'
+    ): string {
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+        /** @var StandaloneView $emailViewHTML */
+        $emailViewHTML = $objectManager->get(StandaloneView::class);
+        $emailViewHTML->getRequest()->setControllerExtensionName('SlubEvents');
+        $emailViewHTML->setFormat($format);
+        $emailViewHTML->assignMultiple($variables);
+
+        $emailViewHTML->setTemplateRootPaths(self::resolveTemplateRootPaths($configurationManager));
+        $emailViewHTML->setPartialRootPaths(self::resolvePartialRootPaths($configurationManager));
+
+        $emailViewHTML->setTemplate('Email/' . $templateName . '.' . $format);
+
+        return $emailViewHTML->render();
     }
 }

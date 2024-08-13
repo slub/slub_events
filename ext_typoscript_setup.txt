@@ -2,17 +2,18 @@
 # ==============================================
 # Persistence object mapping configuration
 # ==============================================
-config.tx_extbase.persistence.classes {
-
-	Slub\SlubEvents\Domain\Model\TtContent {
-		mapping {
-			tableName = tt_content
-			columns {
-				altText.mapOnProperty = altText
-				titleText.mapOnProperty = titleText
-				colPos.mapOnProperty = colPos
-				CType.mapOnProperty = CType
-			}
-		}
-	}
-}
+# TODO: remove this file if dropping support for TYPO3 less than version 10.4
+#config.tx_extbase.persistence.classes {
+#
+#	Slub\SlubEvents\Domain\Model\TtContent {
+#		mapping {
+#			tableName = tt_content
+#			columns {
+#				altText.mapOnProperty = altText
+#				titleText.mapOnProperty = titleText
+#				colPos.mapOnProperty = colPos
+#				CType.mapOnProperty = CType
+#			}
+#		}
+#	}
+#}

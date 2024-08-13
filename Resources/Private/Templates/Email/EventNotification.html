@@ -1,0 +1,21 @@
+{namespace se=Slub\SlubEvents\ViewHelpers}
+<p>
+	<f:translate key='text.salutation'/>
+	{subscriber.name},
+</p>
+
+<p>Sie haben kürzlich an folgender Veranstaltung angemeldet:</p>
+
+<p><strong>{event.title}</strong> <br/>
+	<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />"/>
+</p>
+
+<f:format.raw>{emailBody}</f:format.raw>
+
+<p>
+	<f:translate key='text.closing'/>
+</p>
+<p>&nbsp;</p>
+<p>
+	<f:translate key='text.signature'/>
+</p>

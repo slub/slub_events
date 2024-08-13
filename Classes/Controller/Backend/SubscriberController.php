@@ -19,7 +19,6 @@ use Slub\SlubEvents\Helper\EmailHelper;
 use Slub\SlubEvents\Helper\EventHelper;
 use Slub\SlubEvents\Utility\TextUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
@@ -34,7 +33,7 @@ class SubscriberController extends BaseController
      *
      * @return void
      */
-    public function beListAction()
+    public function beListAction(): void
     {
         // get data from BE session
         $searchParameter = $this->getSessionData('tx_slubevents');
@@ -103,7 +102,7 @@ class SubscriberController extends BaseController
      *
      * @return void
      */
-    public function beOnlineSurveyAction(Event $event, $step = 0)
+    public function beOnlineSurveyAction(Event $event, $step = 0): void
     {
         // get the onlineSurveyLink and potential timestamp of last sent
         $onlineSurveyLink = GeneralUtility::trimExplode('|', $event->getOnlinesurvey(), true);
@@ -112,21 +111,13 @@ class SubscriberController extends BaseController
         $event->setOnlinesurvey($onlineSurveyLink[0]);
 
         if ($step == 0) {
-            /** @var \TYPO3Fluid\Fluid\View\StandaloneView $emailViewHTML */
-            $emailViewHTML = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+            $variables = [
+                'onlineSurveyLink' => $onlineSurveyLink[0],
+                'event' => $event,
+                'subscriber' => ['name' => '###Name wird automatisch ausgefüllt###']
+            ];
 
-            $emailViewHTML->getRequest()->setControllerExtensionName($this->extensionName);
-            $emailViewHTML->setFormat('html');
-            $emailViewHTML->assign('onlineSurveyLink', $onlineSurveyLink[0]);
-            $emailViewHTML->assign('event', $event);
-            $emailViewHTML->assign('subscriber', ['name' => '###Name wird automatisch ausgefüllt###']);
-
-            $emailViewHTML->setTemplateRootPaths(EmailHelper::resolveTemplateRootPaths($this->configurationManager));
-            $emailViewHTML->setPartialRootPaths(EmailHelper::resolvePartialRootPaths($this->configurationManager));
-
-            $emailViewHTML->setTemplate('Email/' . 'OnlineSurvey.html');
-
-            $emailTextHTML = $emailViewHTML->render();
+            $emailTextHTML = EmailHelper::renderEmailTemplate('OnlineSurvey', $variables, $this->configurationManager);
         }
 
         if ($step == 1) {
@@ -170,5 +161,61 @@ class SubscriberController extends BaseController
         $this->view->assign('subscribers', $event->getSubscribers());
         $this->view->assign('step', $step);
         $this->view->assign('emailText', $emailTextHTML);
+    }
+
+    /** Shows the form to send an email notification to all subscribers of the given event. */
+    public function beWriteNotificationAction(Event $event): void
+    {
+        $templateVariables = [
+            'event' => $event,
+            'subscriber' => ['name' => '###Name wird automatisch ausgefüllt###'],
+            'emailBody' => '###Text bitte unten eingeben###'
+        ];
+        $emailTextHTML = EmailHelper::renderEmailTemplate('EventNotification', $templateVariables, $this->configurationManager);
+
+        $this->view->assign('event', $event);
+        $this->view->assign('emailTextPreview', $emailTextHTML);
+    }
+
+    /** Actually sends the notification email to all subscribers of the given event. */
+    public function beSendNotificationAction(Event $event, string $emailSubject, string $emailBody): void
+    {
+        $hasErrors = false;
+        if (empty($emailSubject)) {
+            $this->addFlashMessage('Bitte einen Betreff eingeben.', 'Fehler', FlashMessage::ERROR);
+            $hasErrors = true;
+        }
+        if (empty($emailBody)) {
+            $this->addFlashMessage('Bitte einen Text eingeben.', 'Fehler', FlashMessage::ERROR);
+            $hasErrors = true;
+        }
+        if ($hasErrors) {
+            $this->redirect('beWriteNotification', null, null, [
+                'event' => $event,
+                'emailSubject' => $emailSubject,
+                'emailBody' => $emailBody
+            ]);
+        }
+
+        $successCount = 0;
+        $allSubscribers = $event->getSubscribers();
+        foreach ($allSubscribers as $subscriber) {
+            $successCount += EmailHelper::sendTemplateEmail(
+                [$subscriber->getEmail() => $subscriber->getName()],
+                [$event->getContact()->getEmail() => $event->getContact()->getName()],
+                $emailSubject,
+                'EventNotification',
+                [
+                    'event'      => $event,
+                    'emailBody'  => nl2br($emailBody),
+                    'subscriber' => $subscriber,
+                    'settings'   => $this->settings,
+                ],
+                $this->configurationManager
+            );
+        }
+
+        $this->addFlashMessage("{$successCount} Rundmails wurde gesendet.", 'Mails gesendet.', FlashMessage::OK);
+        $this->redirect('beList');
     }
 }

@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Domain\Validator;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -27,6 +27,7 @@ namespace Slub\SlubEvents\Domain\Validator;
 
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @package slub_events
@@ -42,12 +43,9 @@ class EventSubscriptionAllowedValidator extends AbstractValidator
      */
     protected $subscriberRepository;
 
-	/**
-     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
-     */
-    public function injectSubscriberRepository(SubscriberRepository $subscriberRepository)
+    public function __construct()
     {
-        $this->subscriberRepository = $subscriberRepository;
+        $this->subscriberRepository = GeneralUtility::makeInstance(subscriberRepository::class);
     }
 
     /**

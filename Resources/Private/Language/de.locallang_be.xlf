@@ -138,6 +138,10 @@
 				<source><![CDATA[Show Past Events]]></source>
 				<target><![CDATA[Zeige vergangene Veranstaltungen]]></target>
 			</trans-unit>
+			<trans-unit id="flexforms.hide_cancelled_events">
+				<source><![CDATA[Hide Cancelled Events]]></source>
+				<target><![CDATA[Abgesagte Events ausblenden]]></target>
+			</trans-unit>
 			<trans-unit id="flexforms.showconsultations" approved="yes">
 				<source><![CDATA[Show consultations]]></source>
 				<target><![CDATA[Sprechstunden anzeigen]]></target>
@@ -189,6 +193,18 @@
 			<trans-unit id="plugin.Eventuserpanel" approved="yes">
 				<source><![CDATA[SLUB: Events: User Panel]]></source>
 				<target><![CDATA[SLUB: Veranstaltungen: Meine Veranstaltung]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_category" approved="yes">
+				<source><![CDATA[Event Category]]></source>
+				<target><![CDATA[Kategorie]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.discipline" approved="yes">
+				<source><![CDATA[Discipline]]></source>
+				<target><![CDATA[Fachdisziplin]]></target>
+			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
+				<source><![CDATA[Categories for Statistic]]></source>
+				<target><![CDATA[Kategorien für Statistik]]></target>
 			</trans-unit>
 		</body>
 	</file>

@@ -17,16 +17,17 @@
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="0">
+                                <items type="array">
+                                    <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.subscribe_view</numIndex>
                                         <numIndex index="1">Subscriber->new;Subscriber->create;Subscriber->eventNotFound;</numIndex>
                                     </numIndex>
-                                    <numIndex index="1">
+                                    <numIndex index="1" type="array">
                                         <numIndex index="0">LLL:EXT:slub_events/Resources/Private/Language/locallang_be.xlf:flexforms.unsubscribe_view</numIndex>
                                         <numIndex index="1">Subscriber->delete;Subscriber->eventNotFound;Subscriber->subscriberNotFound;</numIndex>
                                     </numIndex>
                                 </items>
+                                <default></default>
                             </config>
                         </TCEforms>
                     </switchableControllerActions>

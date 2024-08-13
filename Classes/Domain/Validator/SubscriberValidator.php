@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Domain\Validator;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -27,13 +27,12 @@ namespace Slub\SlubEvents\Domain\Validator;
 
 use Slub\SlubEvents\Domain\Repository\SubscriberRepository;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @package slub_events
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class SubscriberValidator extends AbstractValidator
 {
@@ -45,27 +44,9 @@ class SubscriberValidator extends AbstractValidator
      */
     protected $subscriberRepository;
 
-	/**
-     * @param \Slub\SlubEvents\Domain\Repository\SubscriberRepository $subscriberRepository
-     */
-    public function injectSubscriberRepository(SubscriberRepository $subscriberRepository)
+    public function __construct()
     {
-        $this->subscriberRepository = $subscriberRepository;
-    }
-
-    /**
-     * Object Manager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
-    protected $objectManager;
-
-	/**
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     */
-    public function injectObjectManager(ObjectManagerInterface $objectManager)
-    {
-        $this->objectManager = $objectManager;
+        $this->subscriberRepository = GeneralUtility::makeInstance(subscriberRepository::class);
     }
 
     /**
@@ -101,12 +82,6 @@ class SubscriberValidator extends AbstractValidator
         }
         if (!GeneralUtility::validEmail($newSubscriber->getEmail())) {
 			$this->addError('val_email', 1100);
-            $this->isValid = false;
-        }
-        if (strlen($newSubscriber->getCustomerid()) > 0 &&
-            filter_var($newSubscriber->getCustomerid(), FILTER_VALIDATE_INT) === false
-        ) {
-			$this->addError('val_customerid', 1110);
             $this->isValid = false;
         }
         if (strlen($newSubscriber->getNumber()) == 0 ||

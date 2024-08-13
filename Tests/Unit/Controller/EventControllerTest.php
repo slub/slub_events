@@ -8,7 +8,7 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>, SLUB Dresden
+ *  (c) 2013 Alexander Bigga <typo3@slub-dresden.de>, SLUB Dresden
  *
  *  All rights reserved
  *
@@ -39,7 +39,7 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
  * @package    TYPO3
  * @subpackage SLUB: Event Registration
  *
- * @author     Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @author     Alexander Bigga <typo3@slub-dresden.de>
  */
 class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {

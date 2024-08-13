@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Slots;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alexander Bigga <alexander.bigga@slub-dresden.de>
+ *  (c) 2013 Alexander Bigga <typo3@slub-dresden.de>
  *  All rights reserved
  *
  *  This script is part of the Typo3 project. The Typo3 project is
@@ -37,7 +37,7 @@ use TYPO3\CMS\Core\Core\Environment;
  * This hook extends the tcemain class.
  * It preselects the author field with the current be_user id.
  *
- * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @author    Alexander Bigga <typo3@slub-dresden.de>
  */
 class HookPostProcessing
 {

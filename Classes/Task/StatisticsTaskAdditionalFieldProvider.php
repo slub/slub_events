@@ -4,7 +4,7 @@ namespace Slub\SlubEvents\Task;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Alexander Bigga <alexander.bigga@slub-dresden.de>
+ *  (c) 2015 Alexander Bigga <typo3@slub-dresden.de>
  *  All rights reserved
  *
  *  This script is part of the Typo3 project. The Typo3 project is
@@ -36,7 +36,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 /**
  * Scheduler Task for Statistics, Additional Field Provider
  *
- * @author    Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @author    Alexander Bigga <typo3@slub-dresden.de>
  */
 class StatisticsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
