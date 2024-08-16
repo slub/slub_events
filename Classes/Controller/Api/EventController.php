@@ -65,8 +65,6 @@ class EventController extends AbstractController
      */
     public function __construct()
     {
-        parent::__construct();
-
         /** @var ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 

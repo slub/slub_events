@@ -54,11 +54,11 @@ defined('TYPO3_MODE') || die();
     'Slub.SlubEvents',
     'Apieventlist',
     [
-        'Api\Event' => 'list',
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'list',
     ],
     // non-cacheable actions
     [
-        'Api\Event' => 'list',
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'list',
     ]
 );
 
@@ -66,11 +66,11 @@ defined('TYPO3_MODE') || die();
     'Slub.SlubEvents',
     'Apieventlistuser',
     [
-        'Api\Event' => 'listUser',
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'listUser',
     ],
     // non-cacheable actions
     [
-        'Api\Event' => 'listUser',
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'listUser',
     ]
 );
 

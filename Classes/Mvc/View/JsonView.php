@@ -113,7 +113,7 @@ class JsonView extends ExtbaseJsonView
      * @param array $configuration
      * @return mixed
      */
-    protected function transformValue($value, array $configuration)
+    protected function transformValue($value, array $configuration, $firstLevel = false)
     {
         if ($value instanceof ObjectStorage) {
             $value = $value->toArray();
