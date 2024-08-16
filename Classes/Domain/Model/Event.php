@@ -58,6 +58,11 @@ class Event extends AbstractEntity {
     protected $parent;
 
     /**
+     * @var array
+     */
+    protected $rootCategories = [];
+
+    /**
      * startDateTime
      *
      * @Extbase\Validate("NotEmpty")
@@ -249,6 +254,13 @@ class Event extends AbstractEntity {
      * @var string
      */
     protected $recurringOptions;
+
+    /**
+     * The unsubscribe url
+     *
+     * @var string
+     */
+    protected $unsubscribeUrl;
 
     /**
      * The recurring end dateTime
@@ -450,6 +462,22 @@ class Event extends AbstractEntity {
      */
     public function setParent( \Slub\SlubEvents\Domain\Model\Event $parent ) {
         $this->parent = $parent;
+    }
+
+    /**
+     * @return array $rootCategories
+     */
+    public function getRootCategories(): array
+    {
+        return $this->rootCategories;
+    }
+
+    /**
+     * @param array $rootCategories
+     */
+    public function setRootCategories(array $rootCategories): void
+    {
+        $this->rootCategories = $rootCategories;
     }
 
     /**
@@ -984,6 +1012,28 @@ class Event extends AbstractEntity {
         $this->recurringEndDateTime = $recurringEndDateTime;
     }
 
+    /**
+     * Returns the unsubscribe url value
+     *
+     * @return string $unsubscribeUrl
+     */
+    public function getUnsubscribeUrl()
+    {
+        return $this->unsubscribeUrl;
+    }
+
+    /**
+     * Sets the unsubscribe url state
+     *
+     * @param string $unsubscribeUrl
+     *
+     * @return void
+     */
+    public function setUnsubscribeUrl($unsubscribeUrl)
+    {
+        $this->unsubscribeUrl = $unsubscribeUrl;
+    }
+  
     /**
      * Get CategoryStats
      *

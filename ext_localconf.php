@@ -50,6 +50,35 @@ defined('TYPO3_MODE') || die();
     ]
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Slub.SlubEvents',
+    'Apieventlist',
+    [
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'list',
+    ],
+    // non-cacheable actions
+    [
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'list',
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Slub.SlubEvents',
+    'Apieventlistuser',
+    [
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'listUser',
+    ],
+    // non-cacheable actions
+    [
+        \Slub\SlubEvents\Controller\Api\EventController::class => 'listUser',
+    ]
+);
+
+// Custom cache for category
+if (empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['slubevents_category'])) {
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['slubevents_category'] = [];
+}
+
 /**
  * Set storagePid by default to detect not configured page tree sections
  */
@@ -114,5 +143,4 @@ if (TYPO3_MODE === 'BE') {
     // register update wizard
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['slubEventsFileLocationUpdater']
             = Slub\SlubEvents\Updates\FileLocationUpdater::class;
-
 }

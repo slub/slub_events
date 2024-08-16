@@ -58,6 +58,7 @@ slub_events
 	Introduction/Index
 	UsersManual/Index
 	Plugins/Index
+   Api/Index
 	AdministratorManual/Index
 	KnownProblems/Index
 	Support/Index
