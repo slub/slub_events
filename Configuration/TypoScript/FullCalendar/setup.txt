@@ -19,9 +19,9 @@ page {
 
 // assume L=0: default == German; L=1: English
 page.includeJSFooterlibs.js-fullcalendar-l18n = EXT:slub_events/Resources/Public/Js/Contrib/Fullcalendar/lang/de.js
-[globalVar = GP:L=1]
+[siteLanguage("languageId") == "1"]
 page.includeJSFooterlibs.js-fullcalendar-l18n = EXT:slub_events/Resources/Public/Js/Contrib/Fullcalendar/lang/en-gb.js
-[global]
+[END]
 
 
 # ajax for fullcalendar
