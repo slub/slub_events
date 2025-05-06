@@ -209,6 +209,70 @@
 				<source><![CDATA[Dear]]></source>
 				<target><![CDATA[Sehr geehrte(r)]]></target>
 			</trans-unit>
+			<trans-unit id="text.notification.intro" approved="yes">
+				<source>You have recently registered for the following event:</source>
+				<target>Sie haben sich kürzlich an folgender Veranstaltung angemeldet:</target>
+			</trans-unit>
+			<trans-unit id="text.cancelation.notenoughparticipants" approved="yes">
+				<source>unfortunately we have to cancel the following event because the minimal number of participants has not been reached:</source>
+				<target>leider müssen wir folgende Veranstaltung absagen, da die Mindestteilnehmerzahl nicht erreicht wurde:</target>
+			</trans-unit>
+			<trans-unit id="text.cancelation.outro" approved="yes">
+				<source>Registration is no longer possible. The participants were informed about the cancelation simultanuously.</source>
+				<target>Anmeldungen sind nicht mehr möglich. Die Teilnehmer wurden gleichzeitig über die Absage informiert.</target>
+			</trans-unit>
+			<trans-unit id="text.cancelation.outro.short" approved="yes">
+				<source>Registration is no longer possible.</source>
+				<target>Anmeldungen sind nicht mehr möglich.</target>
+			</trans-unit>
+			<trans-unit id="text.cancelation.deadline" approved="yes">
+				<source>the registration deadline has expired for the following event.</source>
+				<target>für folgende Veranstaltung ist die Anmeldefrist abgelaufen.</target>
+			</trans-unit>
+			<trans-unit id="text.participants" approved="yes">
+				<source>Participants</source>
+				<target>Teilnehmerliste</target>
+			</trans-unit>
+			<trans-unit id="text.participants.current" approved="yes">
+				<source>Current participants</source>
+				<target>Aktuelle Teilnehmerliste</target>
+			</trans-unit>
+			<trans-unit id="text.noregistrations" approved="yes">
+				<source>There are no registrations.</source>
+				<target>Es gibt keine Anmeldungen.</target>
+			</trans-unit>
+			<trans-unit id="text.participants.hint" approved="yes">
+				<source>Please bear in mind that the list of participants may still change due to cancellations and registrations.</source>
+				<target>Bitte bedenken Sie, dass sich die Teilnehmerliste durch Ab- und Anmeldungen noch ändern kann.</target>
+			</trans-unit>
+			<trans-unit id="text.maximumreached" approved="yes">
+				<source>The following event has reached the maximum number of %1$s participants and is now fully booked:</source>
+				<target>die folgende Veranstaltung hat die maximale Teilnehmerzahl von %1$s erreicht und ist jetzt ausgebucht:</target>
+			</trans-unit>
+			<trans-unit id="text.minimumreachedagain" approved="yes">
+				<source>the following event only has %1$s and is therefore below the minimum number of participants of %2$s:</source>
+				<target>die folgende Veranstaltung hat nur noch %1$s und liegt damit unter der minimalen Teilnehmerzahl von	%2$s:</target>
+			</trans-unit>
+			<trans-unit id="text.newsubscriber" approved="yes">
+				<source>the following event has just been booked by</source>
+				<target>die folgende Veranstaltung wurde soeben gebucht von</target>
+			</trans-unit>
+			<trans-unit id="text.subscribe" approved="yes">
+				<source>thank you for registering for the following event:</source>
+				<target>vielen Dank für Ihre Anmeldung zu folgender Veranstaltung:</target>
+			</trans-unit>
+			<trans-unit id="text.subscribe.data" approved="yes">
+				<source>We have saved the following data from you:</source>
+				<target>Folgende Daten haben wir von Ihnen gespeichert:</target>
+			</trans-unit>
+			<trans-unit id="text.subscribe.unsubscribe" approved="yes">
+				<source>You can unsubscribe using the following link:</source>
+				<target>Sie können sich über folgenden Link wieder abmelden:</target>
+			</trans-unit>
+			<trans-unit id="text.unsubscribe" approved="yes">
+				<source>You have successfully deregistered from the following event:</source>
+				<target>Sie haben sich erfolgreich von der folgenden Veranstaltung abgemeldet:</target>
+			</trans-unit>
 			<trans-unit id="text.save_to_your_calendar" approved="yes">
 				<source><![CDATA[Save event to your local calendar.]]></source>
 				<target><![CDATA[Veranstaltung in Kalender übernehmen.]]></target>
@@ -494,7 +558,7 @@
 				<target><![CDATA[Meine Veranstaltungen]]></target>
 			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
-				<source><![CDATA[Categories for Statistic]]></source>
+				<source><![CDATA[Categories for statistics]]></source>
 				<target><![CDATA[Kategorien für Statistik]]></target>
 			</trans-unit>
 

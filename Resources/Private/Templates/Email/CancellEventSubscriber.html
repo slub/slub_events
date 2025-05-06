@@ -1,7 +1,7 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 <p>{f:translate(key: 'text.salutation')} {subscriber.name},</p>
 
-<p>leider müssen wir folgende Veranstaltung absagen, da die Mindestteilnehmerzahl nicht erreicht wurde:</p>
+<p><f:translate key='text.cancelation.notenoughparticipants'/></p>
 
 <p><strong>{event.title}</strong></p>
 
@@ -16,7 +16,7 @@
 	</f:then>
 </f:if>
 
-<p>Anmeldungen sind nicht mehr möglich.</p>
+<p><f:translate key='text.cancelation.outro.short'/></p>
 
 <p>
 	<f:translate key='text.closing'/>

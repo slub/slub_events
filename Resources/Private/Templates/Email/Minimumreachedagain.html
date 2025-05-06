@@ -1,8 +1,7 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 <p>{f:translate(key: 'text.salutation')} {event.contact.name},</p>
 
-<p>die folgende Veranstaltung hat nur noch {subscriberCount} und liegt damit unter der minimalen Teilnehmerzahl von
-	{event.minSubscriber}:</p>
+<p><f:translate key='text.minimumreachedagain' arguments="{0: subscriberCount, 1: event.minSubscriber}"/></p>
 
 <p><strong>{event.title}</strong></p>
 
@@ -18,7 +17,7 @@
 </f:if>
 
 
-<p><b>Aktuelle Teilnehmerliste</b><br/>
+<p><b><f:translate key='text.participants.current'/></b><br/>
 <ol>
 	<f:for each="{subscribers}" as="subscriber">
 		<f:if condition="{subscriber.number} == 1">
@@ -38,7 +37,7 @@
 	</f:for>
 </ol>
 
-<p>Bitte bedenken Sie, dass sich die Teilnehmerliste durch Ab- und Anmeldungen noch ändern kann.</p>
+<p><f:translate key='text.participants.hint'/></p>
 
 <p>{f:translate(key: 'text.closing')}</p>
 
