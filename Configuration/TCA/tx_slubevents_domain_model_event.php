@@ -655,9 +655,9 @@ return [
                     ],
                 ],
                 'size'                => 10,
-                'minitems'            => 0,
+                'minitems'            => 1,
                 'maxitems'            => 1,
-                'default' => 0
+                'default'             => 0
             ],
         ],
         'category_stats'               => [
@@ -681,9 +681,9 @@ return [
                     ],
                 ],
                 'size'                => 10,
-                'minitems'            => 0,
+                'minitems'            => 1,
                 'maxitems'            => 1,
-                'default' => 0
+                'default'             => 0
             ],
         ],
         'contact'                  => [
