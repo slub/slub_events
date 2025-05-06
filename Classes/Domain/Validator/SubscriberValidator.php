@@ -77,18 +77,22 @@ class SubscriberValidator extends AbstractValidator
     public function isValid($newSubscriber)
     {
         if (strlen($newSubscriber->getName()) < 3) {
-			$this->addError('val_name', 1000);
+			//$this->addError('val_name', 1000);
+            $this->addErrorForProperty("name", "val_name", 1000);
             $this->isValid = false;
         }
         if (!GeneralUtility::validEmail($newSubscriber->getEmail())) {
-			$this->addError('val_email', 1100);
+			//$this->addError('val_email', 1100);
+            $this->addErrorForProperty("email", "val_email", 1100);
             $this->isValid = false;
         }
         if (strlen($newSubscriber->getNumber()) == 0 ||
             filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === false ||
-            $newSubscriber->getNumber() < 1
+            $newSubscriber->getNumber() < 1 ||
+            $newSubscriber->getNumber() > $newSubscriber->getEvent()->getMaxNumber()
         ) {
-			$this->addError('val_number', 1120);
+			//$this->addError('val_number', 1120);
+            $this->addErrorForProperty("number", "val_number", 1120);
             $this->isValid = false;
         }
         $currentSessionData = $this->getSessionData('editcode');
