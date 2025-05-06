@@ -170,6 +170,55 @@
 		<trans-unit id="text.salutation">
 			<source>Dear</source>
 		</trans-unit>
+		<trans-unit id="text.notification.intro">
+			<source>You have recently registered for the following event:</source>
+		</trans-unit>
+		<trans-unit id="text.cancelation.notenoughparticipants">
+			<source>unfortunately we have to cancel the following event because the minimal number of participants has not been reached:</source>
+		</trans-unit>
+		<trans-unit id="text.cancelation.outro">
+			<source>Registration is no longer possible. The participants were informed about the cancelation simultanuously.</source>
+		</trans-unit>
+		<trans-unit id="text.cancelation.outro.short">
+			<source>Registration is no longer possible.</source>
+		</trans-unit>
+		<trans-unit id="text.cancelation.deadline">
+			<source>the registration deadline has expired for the following event.</source>
+		</trans-unit>
+		<trans-unit id="text.participants">
+			<source>Participants</source>
+		</trans-unit>
+		<trans-unit id="text.participants.current">
+			<source>Current participants</source>
+		</trans-unit>
+		<trans-unit id="text.noregistrations">
+			<source>There are no registrations.</source>
+		</trans-unit>
+		<trans-unit id="text.participants.hint">
+			<source>Please bear in mind that the list of participants may still change due to cancellations and registrations.</source>
+		</trans-unit>
+		<trans-unit id="text.maximumreached">
+			<source>The following event has reached the maximum number of %1$s participants and is now fully booked:</source>
+		</trans-unit>
+		<trans-unit id="text.minimumreachedagain">
+			<source>the following event only has %1$s and is therefore below the minimum number of participants of %2$s:</source>
+		</trans-unit>
+		<trans-unit id="text.newsubscriber">
+			<source>the following event has just been booked by</source>
+		</trans-unit>
+		<trans-unit id="text.subscribe">
+			<source>thank you for registering for the following event:</source>
+		</trans-unit>
+		<trans-unit id="text.subscribe.data">
+			<source>We have saved the following data from you:</source>
+		</trans-unit>
+		<trans-unit id="text.subscribe.unsubscribe">
+			<source>You can unsubscribe using the following link:</source>
+		</trans-unit>
+		<trans-unit id="text.unsubscribe">
+			<source>You have successfully deregistered from the following event:</source>
+		</trans-unit>
+
     <trans-unit id="text.subscriber.please_ask_your_question">
 			<source>Please ask your question(s) or describe your needs. Your message helps us very much to prepare the appointment as well as possible.</source>
 		</trans-unit>

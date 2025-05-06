@@ -8,7 +8,7 @@
 </f:if>
 <p>{f:translate(key: 'text.salutation')} {subscriber.name},</p>
 
-<p>vielen Dank für Ihre Anmeldung zu folgender Veranstaltung:</p>
+<p><f:translate key='text.subscribe'/></p>
 
 <p><strong>{event.title}</strong></p>
 
@@ -23,7 +23,7 @@
 	</f:then>
 </f:if>
 
-<p><b>Folgende Daten haben wir von Ihnen gespeichert:</b></p>
+<p><b><f:translate key='text.subscribe.data'/></b></p>
 
 <ul>
 	<li>
@@ -66,7 +66,7 @@
 </f:if>
 
 
-<p>Sie können sich über folgenden Link wieder abmelden: <br/>
+<p><f:translate key='text.subscribe.unsubscribe'/><br/>
 	<f:link.action absolute="1" class="slub-event-link" action="delete" controller="Subscriber"
 				   pageUid="{settings.pidUnSubscribeForm}" pluginName="Eventsubscribe"
 				   arguments="{event : event, editcode : subscriber.editcode}">
