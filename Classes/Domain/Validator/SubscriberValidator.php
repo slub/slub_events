@@ -89,7 +89,8 @@ class SubscriberValidator extends AbstractValidator
         if (strlen($newSubscriber->getNumber()) == 0 ||
             filter_var($newSubscriber->getNumber(), FILTER_VALIDATE_INT) === false ||
             $newSubscriber->getNumber() < 1 ||
-            $newSubscriber->getNumber() > $newSubscriber->getEvent()->getMaxNumber()
+            $newSubscriber->getNumber() > $newSubscriber->getEvent()->getMaxNumber() ||
+            $newSubscriber->getNumber() + $this->subscriberRepository->countAllByEvent($newSubscriber->getEvent()) > $newSubscriber->getEvent()->getMaxSubscriber()
         ) {
 			//$this->addError('val_number', 1120);
             $this->addErrorForProperty("number", "val_number", 1120);
