@@ -93,7 +93,7 @@ class EmailHelper
             $unlinkFiles[] = $eventIcsFile;
 
             // attach additionally ics as file
-            $message->attachFromPath($eventIcsFile);
+            $message->attachFromPath($eventIcsFile, null, "text/calendar");
 
             if ($variables['settings']['email']['keepLocalFilesForDebugging']) {
                 $debugFile = Environment::getPublicPath() . 'typo3temp/tx_slubevents/' .
@@ -123,7 +123,7 @@ class EmailHelper
             $unlinkFiles[] = $eventCsvFile;
 
             // attach CSV-File
-            $message->attachFromPath($eventCsvFile);
+            $message->attachFromPath($eventCsvFile, null, 'text/csv');
         }
 
         if ($variables['settings']['email']['keepLocalFilesForDebugging']) {
