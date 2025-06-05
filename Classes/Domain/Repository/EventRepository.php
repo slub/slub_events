@@ -261,11 +261,27 @@ class EventRepository extends Repository
             );
         }
 
-        if (!empty($settings['limit']) && (int)$settings['limit'] > 0) {
-            $query->setLimit((int)$settings['limit']);
+        if ($settings['hideFullyBookedEvents']) {
+            // Fully booked events are not to be returned
+            // In this case it is not feasible to enforce the limit using the Extbase query.
+            // Thus, we query all matching events, filter the fully booked ones, and finally enforce the limit
+            $events = $query->execute();
+            $results = [];
+            foreach ($events as $event) {
+                if ($event->getMaxSubscriber() === 0 || $event->getMaxSubscriber() > count($event->getSubscribers())) {
+                    $results[]= $event;
+                }
+            }
+            if (!empty($settings['limit']) && (int)$settings['limit'] > 0) {
+                $results = array_slice($results, 0, (int)$settings['limit']);
+            }
+            return $results;
+        } else {
+            if (!empty($settings['limit']) && (int)$settings['limit'] > 0) {
+                $query->setLimit((int)$settings['limit']);
+            }
+            return $query->execute();
         }
-
-        return $query->execute();
     }
 
     /**

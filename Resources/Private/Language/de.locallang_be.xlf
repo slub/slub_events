@@ -138,9 +138,13 @@
 				<source><![CDATA[Show Past Events]]></source>
 				<target><![CDATA[Zeige vergangene Veranstaltungen]]></target>
 			</trans-unit>
-			<trans-unit id="flexforms.hide_cancelled_events">
+			<trans-unit id="flexforms.hide_cancelled_events" approved="yes">
 				<source><![CDATA[Hide Cancelled Events]]></source>
 				<target><![CDATA[Abgesagte Events ausblenden]]></target>
+			</trans-unit>
+			<trans-unit id="flexforms.hide_fully_booked_events" approved="yes">
+				<source>Hide fully booked events</source>
+				<target>Ausgebuchte Veranstaltungen ausblenden</target>
 			</trans-unit>
 			<trans-unit id="flexforms.showconsultations" approved="yes">
 				<source><![CDATA[Show consultations]]></source>
