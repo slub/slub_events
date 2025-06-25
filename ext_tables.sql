@@ -146,6 +146,11 @@ CREATE TABLE tx_slubevents_domain_model_subscriber (
     hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
     starttime int(11) unsigned DEFAULT '0' NOT NULL,
     endtime int(11) unsigned DEFAULT '0' NOT NULL,
+
+    t3_origuid int(11) DEFAULT '0' NOT NULL,
+    sys_language_uid int(11) DEFAULT '0' NOT NULL,
+    l10n_parent int(11) DEFAULT '0' NOT NULL,
+    l10n_diffsource mediumblob,
     l10n_state text,    
 
     PRIMARY KEY (uid),
