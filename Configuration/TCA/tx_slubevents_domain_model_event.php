@@ -168,6 +168,7 @@ return [
             'displayCond' => 'FIELD:genius_bar:<:1',
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.title',
+            'l10n_mode'   => 'prefixLangTitle',
             'config'      => [
                 'type' => 'input',
                 'size' => 30,
@@ -288,6 +289,7 @@ return [
             'displayCond' => 'FIELD:genius_bar:<:1',
             'exclude'     => 1,
             'label'       => $LL . 'tx_slubevents_domain_model_event.teaser',
+            'l10n_mode'   => 'prefixLangTitle',
             'config'      => [
                 'type'           => 'text',
                 'cols'           => 40,
@@ -306,6 +308,7 @@ return [
             'displayCond' => 'FIELD:genius_bar:<:1',
             'exclude'     => 0,
             'label'       => $LL . 'tx_slubevents_domain_model_event.description',
+            'l10n_mode'   => 'prefixLangTitle',
             'config'      => [
                 'type'           => 'text',
                 'cols'           => 40,
