@@ -11,6 +11,9 @@ return [
         'cruser_id'                => 'cruser_id',
         'sortby'                   => 'tstamp',
         'origUid'                  => 't3_origuid',
+        'languageField'            => 'sys_language_uid',
+        'transOrigPointerField'    => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',        
         'delete'                   => 'deleted',
         'enablecolumns'            => [
             'disabled'  => 'hidden',
