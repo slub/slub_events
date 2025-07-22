@@ -206,10 +206,10 @@
 				<source><![CDATA[Discipline]]></source>
 				<target><![CDATA[Fachdisziplin]]></target>
 			</trans-unit>
-			<trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
-				<source><![CDATA[Categories for Statistic]]></source>
-				<target><![CDATA[Kategorien für Statistik]]></target>
-			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_topic" approved="yes">
+                <source>Topic for statistics</source>
+                <target>Thema für Statistik</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

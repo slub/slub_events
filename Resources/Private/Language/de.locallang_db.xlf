@@ -61,6 +61,14 @@
                 <source><![CDATA[Parent discipline]]></source>
                 <target><![CDATA[Übergeordnete Fachdisziplin]]></target>
             </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_topic" approved="yes">
+                <source>Topic for statistics</source>
+                <target>Thema für Statistik</target>
+            </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_topic.name" approved="yes">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event" approved="yes">
                 <source><![CDATA[Event]]></source>
                 <target><![CDATA[Veranstaltung]]></target>
@@ -105,9 +113,9 @@
                 <source><![CDATA[Categories]]></source>
                 <target><![CDATA[Kategorie]]></target>
             </trans-unit>
-            <trans-unit id="tx_slubevents_domain_model_event.category_stats" approved="yes">
-                <source><![CDATA[Category for statistics]]></source>
-                <target><![CDATA[Kategorie für Statistik]]></target>
+            <trans-unit id="tx_slubevents_domain_model_event.topic" approved="yes">
+                <source>Topic for statistics</source>
+                <target>Thema für Statistik (bitte ein inhaltlich passendes Element auswählen)</target>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.content_elements" approved="yes">
                 <source><![CDATA[Content Elements]]></source>
@@ -124,10 +132,6 @@
             <trans-unit id="tx_slubevents_domain_model_event.discipline" approved="yes">
                 <source><![CDATA[Discipline]]></source>
                 <target><![CDATA[Fachdisziplin]]></target>
-            </trans-unit>
-            <trans-unit id="tx_slubevents_domain_model_event.discipline_stats" approved="yes">
-                <source><![CDATA[Discipline for statistics]]></source>
-                <target><![CDATA[Fachdisziplin für Statistik]]></target>
             </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event.end" approved="yes">
                 <source><![CDATA[End of Event]]></source>
