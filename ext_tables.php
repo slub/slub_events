@@ -55,6 +55,11 @@ if (TYPO3_MODE === 'BE') {
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    'tx_slubevents_domain_model_topic',
+    'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_topic.xlf'
+);
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_slubevents_domain_model_contact',
     'EXT:slub_events/Resources/Private/Language/locallang_csh_tx_slubevents_domain_model_contact.xlf'
 );

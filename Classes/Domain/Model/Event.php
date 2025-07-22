@@ -184,13 +184,6 @@ class Event extends AbstractEntity {
     protected $categories;
 
     /**
-     * Category Stats ID
-     *
-     * @var \Slub\SlubEvents\Domain\Model\Category
-     */
-    protected $categoryStats;
-
-    /**
      * Subscriber Ids
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Subscriber>
@@ -214,11 +207,11 @@ class Event extends AbstractEntity {
     protected $discipline;
 
     /**
-     * Discipline Stats ID
+     * Topic for stats ID
      *
-     * @var \Slub\SlubEvents\Domain\Model\Discipline
+     * @var \Slub\SlubEvents\Domain\Model\Topic
      */
-    protected $disciplineStats;
+    protected $topic;
 
     /**
      * Contact ID
@@ -1035,39 +1028,20 @@ class Event extends AbstractEntity {
     }
   
     /**
-     * Get CategoryStats
+     * Get Topic
      *
-     * @return \Slub\SlubEvents\Domain\Model\Category $categoryStats
+     * @return \Slub\SlubEvents\Domain\Model\Topic $topic
      */
-    public function getCategoryStats() {
-        return $this->categoryStats;
+    public function getTopic() {
+        return $this->topic;
     }
 
     /**
-     * Set CategoryStats
+     * Set Topic
      *
-     * @return \Slub\SlubEvents\Domain\Model\Category $categoryStats
+     * @return \Slub\SlubEvents\Domain\Model\Topic $topic
      */
-    public function setCategoryStats( $categoryStats ) {
-        $this->categoryStats = $categoryStats;
+    public function setTopic( $topic ) {
+        $this->topic = $topic;
     }
-
-    /**
-     * Get DisciplineStats
-     *
-     * @return \Slub\SlubEvents\Domain\Model\Discipline $disciplineStats
-     */
-    public function getDisciplineStats() {
-        return $this->disciplineStats;
-    }
-
-    /**
-     * Set DisciplineStats
-     *
-     * @return \Slub\SlubEvents\Domain\Model\Discipline $disciplineStats
-     */
-    public function setDisciplineStats( $disciplineStats ) {
-        $this->disciplineStats = $disciplineStats;
-    }
-
 }

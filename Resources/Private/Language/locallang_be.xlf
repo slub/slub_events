@@ -156,8 +156,8 @@
 		<trans-unit id="tx_slubevents_domain_model_event.discipline">
 			<source>Discipline</source>
 		</trans-unit>
-		<trans-unit id="tx_slubevents_domain_model_event.category_stats">
-			<source>Categories for Statistic</source>
+		<trans-unit id="tx_slubevents_domain_model_topic">
+			<source>Topic for statistics</source>
 		</trans-unit>
 		</body>
 	</file>

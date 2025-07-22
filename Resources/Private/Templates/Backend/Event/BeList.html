@@ -23,7 +23,7 @@
 					<f:translate key="tx_slubevents_domain_model_category"/>
 				</th>
 				<th>
-					<f:translate key="tx_slubevents_domain_model_event.category_stats"/>
+					<f:translate key="tx_slubevents_domain_model_topic"/>
 				</th>
 				<th>
 					<f:translate key="tx_slubevents_domain_model_event.start_date_time"/>
@@ -77,11 +77,8 @@
 
 					</td>
 					<td>
-						<f:if condition="{event.categoryStats.title}">
-							<p><strong><f:translate key="tx_slubevents_domain_model_category"/>:</strong> {event.categoryStats.title}</p>
-						</f:if>
-						<f:if condition="{event.disciplineStats.name}">
-							<p><strong><f:translate key="tx_slubevents_domain_model_event.discipline"/>:</strong> {event.disciplineStats.name}</p>
+						<f:if condition="{event.topic.name}">
+							<p>{event.topic.name}</p>
 						</f:if>
 					</td>
 					<td>

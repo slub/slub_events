@@ -21,11 +21,11 @@ return [
             'starttime' => 'starttime',
             'endtime'   => 'endtime',
         ],
-        'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,discipline,categories_stats,discipline_stats,',
+        'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,discipline,topic,',
         'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, content_elements, image, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, category_stats, discipline_stats, contact',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, content_elements, image, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, topic, contact',
     ],
     'types'     => [
         // Single event
@@ -50,8 +50,7 @@ return [
                           'audience,' .
                           'categories,' .
                           'discipline,' .
-                          'category_stats,' .
-                          'discipline_stats,' .
+                          'topic,' .
                           '--div--;Angemeldete Teilnehmer,' .
                           'subscribers,' .
                           '--div--;Wiederholung,' .
@@ -639,48 +638,23 @@ return [
                 'default'             => 0
             ],
         ],
-        'discipline_stats'               => [
+        'topic'                     => [
             'displayCond' => 'FIELD:genius_bar:<:1',
             'exclude'     => 0,
-            'l10n_mode' => 'exclude',
-            'label'       => $LL . 'tx_slubevents_domain_model_event.discipline_stats',
+            'l10n_mode'   => 'exclude',
+            'label'       => $LL . 'tx_slubevents_domain_model_event.topic',
             'config'      => [
                 'type'                => 'select',
-                'foreign_table'       => 'tx_slubevents_domain_model_discipline',
-                'foreign_table_where' => ' AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) AND tx_slubevents_domain_model_discipline.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_discipline.deleted = 0 AND tx_slubevents_domain_model_discipline.hidden = 0 ORDER BY tx_slubevents_domain_model_discipline.sorting',
+                'foreign_table'       => 'tx_slubevents_domain_model_topic',
+                'foreign_table_where' => ' AND (tx_slubevents_domain_model_topic.sys_language_uid = 0 OR tx_slubevents_domain_model_topic.l10n_parent = 0) AND tx_slubevents_domain_model_topic.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_topic.deleted = 0 AND tx_slubevents_domain_model_topic.hidden = 0 ORDER BY tx_slubevents_domain_model_topic.sorting',
+                'MM'                  => 'tx_slubevents_event_topic_mm',
                 'renderType'          => 'selectTree',
                 'subType'             => 'db',
                 'treeConfig'          => [
                     'parentField' => 'parent',
                     'appearance'  => [
-                        'expandAll'          => true,
-                        'showHeader'         => true,
-                    ],
-                ],
-                'size'                => 10,
-                'minitems'            => 1,
-                'maxitems'            => 1,
-                'default'             => 0
-            ],
-        ],
-        'category_stats'               => [
-            'exclude'   => 0,
-            'l10n_mode' => 'exclude',
-            'label'     => $LL . 'tx_slubevents_domain_model_event.category_stats',
-            'config'    => [
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ],
-                'type'                => 'select',
-                'foreign_table'       => 'tx_slubevents_domain_model_category',
-                'foreign_table_where' => 'AND tx_slubevents_domain_model_category.genius_bar = ###REC_FIELD_genius_bar### AND tx_slubevents_domain_model_category.pid = ###CURRENT_PID### AND (tx_slubevents_domain_model_category.sys_language_uid = 0 OR tx_slubevents_domain_model_category.l10n_parent = 0) AND tx_slubevents_domain_model_category.hidden = 0 ORDER BY tx_slubevents_domain_model_category.sorting ASC',
-                'renderType'          => 'selectTree',
-                'subType'             => 'db',
-                'treeConfig'          => [
-                    'parentField' => 'parent',
-                    'appearance'  => [
-                        'expandAll'          => true,
-                        'showHeader'         => true,
+                        'expandAll'  => true,
+                        'showHeader' => true,
                     ],
                 ],
                 'size'                => 10,
