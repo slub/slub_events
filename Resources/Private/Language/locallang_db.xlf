@@ -53,6 +53,9 @@
             <trans-unit id="tx_slubevents_domain_model_topic.name">
                 <source>Name</source>
             </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_topic.parent">
+                <source>Parent topic</source>
+            </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event">
                 <source>Event</source>
             </trans-unit>

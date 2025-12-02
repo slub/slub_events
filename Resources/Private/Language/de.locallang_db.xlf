@@ -69,6 +69,10 @@
                 <source>Name</source>
                 <target>Name</target>
             </trans-unit>
+            <trans-unit id="tx_slubevents_domain_model_topic.parent" approved="yes">
+                <source>Parent topic</source>
+                <target>Übergeordnetes Thema</target>
+            </trans-unit>
             <trans-unit id="tx_slubevents_domain_model_event" approved="yes">
                 <source><![CDATA[Event]]></source>
                 <target><![CDATA[Veranstaltung]]></target>
