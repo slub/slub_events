@@ -17,7 +17,7 @@ This extension is developped and used in production at the Saxony State and Univ
     'state'            => 'stable',
     'uploadfolder'     => true,
     'createDirs'       => 'typo3temp/tx_slubevents/',
-    'version'          => '6.3.0',
+    'version'          => '6.3.1',
     'constraints'      => [
         'depends'   => [
             'typo3'   => '11.5.0-11.5.99',
