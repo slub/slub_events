@@ -21,11 +21,11 @@ return [
             'starttime' => 'starttime',
             'endtime'   => 'endtime',
         ],
-        'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,topic,',
+        'searchFields'             => 'title,start_date_time,all_day,end_date_time,sub_end_date_time,teaser,description,min_subscriber,max_subscriber,audience,categories,subscribers,location,discipline,topic,',
         'iconfile'                 => 'EXT:slub_events/Resources/Public/Icons/tx_slubevents_domain_model_event.gif',
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, content_elements, image, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, topic, contact',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start_date_time, all_day, end_date_time, sub_end_date_time, teaser, description, content_elements, image, min_subscriber, max_subscriber, audience, sub_end_date_info_sent, no_search, genius_bar, parent, recurring, recurring_options, recurring_end_date_time, cancelled, categories, subscribers, location, discipline, topic, contact',
     ],
     'types'     => [
         // Single event
@@ -49,6 +49,7 @@ return [
                           '--div--;Kategorisierung,' .
                           'audience,' .
                           'categories,' .
+                          'discipline,' .
                           'topic,' .
                           '--div--;Angemeldete Teilnehmer,' .
                           'subscribers,' .
@@ -612,9 +613,34 @@ return [
                 'default'             => 0
             ],
         ],
+        'discipline'              => [
+            'displayCond' => 'FIELD:genius_bar:<:1',
+            'exclude'     => 1,
+            'l10n_mode'   => 'exclude',
+            'label'       => $LL . 'tx_slubevents_domain_model_event.discipline',
+            'config'      => [
+                'type'                => 'select',
+                'foreign_table'       => 'tx_slubevents_domain_model_discipline',
+                'foreign_table_where' => ' AND (tx_slubevents_domain_model_discipline.sys_language_uid = 0 OR tx_slubevents_domain_model_discipline.l10n_parent = 0) AND tx_slubevents_domain_model_discipline.pid = ###CURRENT_PID### AND tx_slubevents_domain_model_discipline.deleted = 0 AND tx_slubevents_domain_model_discipline.hidden = 0 ORDER BY tx_slubevents_domain_model_discipline.sorting',
+                'MM'                  => 'tx_slubevents_event_discipline_mm',
+                'renderType'          => 'selectTree',
+                'subType'             => 'db',
+                'treeConfig'          => [
+                    'parentField' => 'parent',
+                    'appearance'  => [
+                        'expandAll'  => true,
+                        'showHeader' => true,
+                    ],
+                ],
+                'size'                => 10,
+                'minitems'            => 0,
+                'maxitems'            => 10,
+                'default'             => 0
+            ],
+        ],
         'topic'                     => [
             'displayCond' => 'FIELD:genius_bar:<:1',
-            'exclude'     => 0,
+            'exclude'     => 1,
             'l10n_mode'   => 'exclude',
             'label'       => $LL . 'tx_slubevents_domain_model_event.topic',
             'config'      => [
