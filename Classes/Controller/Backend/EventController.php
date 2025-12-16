@@ -132,7 +132,8 @@ class EventController extends BaseController
                     'subEndDateInfoSent',
                     'categories',
                     'discipline',
-                    'parent'
+                    'parent',
+                    'topic',
                 ])
             ) {
                 $propertyValue = ObjectAccess::getProperty($event, $propertyName);
@@ -150,6 +151,10 @@ class EventController extends BaseController
 
         foreach ($event->getDiscipline() as $discipline) {
             $newEvent->addDiscipline($discipline);
+        }
+
+        foreach ($event->getTopic() as $topic) {
+            $newEvent->addTopic($topic);
         }
 
         if ($event->getGeniusBar()) {

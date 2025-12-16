@@ -365,6 +365,7 @@ class EventController extends AbstractController
                             'subEndDateInfoSent',
                             'categories',
                             'discipline',
+                            'topic',
                         ])
                     ) {
                         $propertyValue = ObjectAccess::getProperty($parentEvent, $propertyName);
@@ -392,6 +393,10 @@ class EventController extends AbstractController
 
                 foreach ($parentEvent->getDiscipline() as $discipline) {
                     $childEvent->addDiscipline($discipline);
+                }
+
+                foreach ($parentEvent->getTopic() as $topic) {
+                    $childEvent->addTopic($topic);
                 }
 
                 if ($parentEvent->getGeniusBar()) {
