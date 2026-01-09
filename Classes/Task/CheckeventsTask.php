@@ -195,6 +195,7 @@ class CheckeventsTask extends AbstractTask
                                 'subscriber' => $subscriber,
                                 'helper' => $helper,
                                 'attachIcs' => true,
+                                'language' => $this->language,
                             ]
                         );
                     }
@@ -211,6 +212,7 @@ class CheckeventsTask extends AbstractTask
                             'helper' => $helper,
                             'attachCsv' => true,
                             'attachIcs' => true,
+                            'language' => $this->language,
                         ]
                     );
                     if ($out === true) {
@@ -233,6 +235,7 @@ class CheckeventsTask extends AbstractTask
                             'helper' => $helper,
                             'attachCsv' => true,
                             'attachIcs' => true,
+                            'language' => $this->language,
                         ]
                     );
                     if ($out === true) {
