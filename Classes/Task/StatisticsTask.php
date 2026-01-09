@@ -254,6 +254,7 @@ class StatisticsTask extends AbstractTask
                 'nameTo'    => $nameTo,
                 'attachCsv' => true,
                 'attachIcs' => false,
+                'language'  => 'de',
             ]
         );
 
