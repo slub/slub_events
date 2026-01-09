@@ -1,6 +1,6 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 <p>
-	<f:translate key='text.salutation'/>
+	<f:translate key='text.salutation' languageKey="{language}"/>
 	{event.contact.name},
 </p>
 
@@ -12,21 +12,21 @@
 
 <f:if condition="{helper.location}">
 	<f:then>
-		<p><strong>{f:translate(key: 'tx_slubevents_domain_model_location')}:</strong><br/>{helper.location}</p>
+		<p><strong>{f:translate(key: 'tx_slubevents_domain_model_location', languageKey: language)}:</strong><br/>{helper.location}</p>
 		<f:format.html>{event.location.description}</f:format.html>
 	</f:then>
 </f:if>
 
 
-<p><b><f:translate key='text.participants'/> </b><br/>
+<p><b><f:translate key='text.participants' languageKey="{language}"/> </b><br/>
 	<f:render partial="Email/ListAll" arguments="{subscribers: subscribers}"/>
 </p>
-<p><f:translate key='text.participants.hint'/></p>
+<p><f:translate key='text.participants.hint' languageKey="{language}"/></p>
 
 <p>
-	<f:translate key='text.closing'/>
+	<f:translate key='text.closing' languageKey="{language}"/>
 </p>
 <p>&nbsp;</p>
 <p>
-	<f:translate key='text.signature'/>
+	<f:translate key='text.signature' languageKey="{language}"/>
 </p>

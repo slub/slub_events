@@ -1,7 +1,7 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
-<p>{f:translate(key: 'text.salutation')} {subscriber.name},</p>
+<p>{f:translate(key: 'text.salutation', languageKey: language)} {subscriber.name},</p>
 
-<p><f:translate key='text.cancelation.notenoughparticipants'/></p>
+<p><f:translate key='text.cancelation.notenoughparticipants' languageKey="{language}"/></p>
 
 <p><strong>{event.title}</strong></p>
 
@@ -11,17 +11,17 @@
 
 <f:if condition="{helper.location}">
 	<f:then>
-		<p><strong>{f:translate(key: 'tx_slubevents_domain_model_location')}:</strong><br/>{helper.location}</p>
+		<p><strong>{f:translate(key: 'tx_slubevents_domain_model_location', languageKey: language)}:</strong><br/>{helper.location}</p>
 		<f:format.html parseFuncTSPath="">{event.location.description}</f:format.html>
 	</f:then>
 </f:if>
 
-<p><f:translate key='text.cancelation.outro.short'/></p>
+<p><f:translate key='text.cancelation.outro.short' languageKey="{language}"/></p>
 
 <p>
-	<f:translate key='text.closing'/>
+	<f:translate key='text.closing' languageKey="{language}"/>
 </p>
 <p>&nbsp;</p>
 <p>{event.contact.name} <br/>
-	<f:translate key='text.signature'/>
+	<f:translate key='text.signature' languageKey="{language}"/>
 </p>
