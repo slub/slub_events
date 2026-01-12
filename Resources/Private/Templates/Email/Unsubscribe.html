@@ -1,7 +1,7 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
-<p>{f:translate(key: 'text.salutation')} {subscriber.name},</p>
+<p>{f:translate(key: 'text.salutation', languageKey: language)} {subscriber.name},</p>
 
-<p><f:translate key='text.unsubscribe'/></p>
+<p><f:translate key='text.unsubscribe' languageKey="{language}"/></p>
 
 <p><strong>{event.title}</strong></p>
 
@@ -11,25 +11,25 @@
 
 <f:if condition="{helper.location}">
 	<f:then>
-		<p><strong>{f:translate(key: 'tx_slubevents_domain_model_location')}:</strong><br/>{helper.location}</p>
+		<p><strong>{f:translate(key: 'tx_slubevents_domain_model_location', languageKey: language)}:</strong><br/>{helper.location}</p>
 		<f:format.html>{event.location.description}</f:format.html>
 	</f:then>
 </f:if>
 
 <f:if condition="{subscriber.customerid}">
 	<f:then>
-		<p>{f:translate(key: 'text.my_events.intro')}:<br/>
+		<p>{f:translate(key: 'text.my_events.intro', languageKey: language)}:<br/>
 			<f:link.action absolute="1" action="listOwn" controller="Event" pageUid="{settings.pidListOwn}"
 						   pluginName="Eventuserpanel">
-				<f:translate key="view_my_events"/>
+				<f:translate key="view_my_events" languageKey="{language}"/>
 			</f:link.action>
 		</p>
 	</f:then>
 </f:if>
 
 
-<p>{f:translate(key: 'text.closing')}</p>
+<p>{f:translate(key: 'text.closing', languageKey: language)}</p>
 
 <p>&nbsp;</p>
 
-<p>{event.contact.name} <br/>{f:translate(key: 'text.signature')}</p>
+<p>{event.contact.name} <br/>{f:translate(key: 'text.signature', languageKey: language)}</p>

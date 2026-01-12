@@ -1,10 +1,10 @@
 {namespace se=Slub\SlubEvents\ViewHelpers}
 <p>
-	<f:translate key='text.salutation'/>
+	<f:translate key='text.salutation' languageKey="{language}"/>
 	{subscriber.name},
 </p>
 
-<p><f:translate key='text.notification.intro'/></p>
+<p><f:translate key='text.notification.intro' languageKey="{language}"/></p>
 
 <p><strong>{event.title}</strong> <br/>
 	<se:format.oneLine htmlString="<f:render partial='Event/DateFromTo' arguments='{event : event}' />"/>
@@ -13,9 +13,9 @@
 <f:format.raw>{emailBody}</f:format.raw>
 
 <p>
-	<f:translate key='text.closing'/>
+	<f:translate key='text.closing' languageKey="{language}"/>
 </p>
 <p>&nbsp;</p>
 <p>
-	<f:translate key='text.signature'/>
+	<f:translate key='text.signature' languageKey="{language}"/>
 </p>

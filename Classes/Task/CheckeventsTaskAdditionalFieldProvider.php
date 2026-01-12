@@ -146,7 +146,7 @@ class CheckeventsTaskAdditionalFieldProvider extends AbstractAdditionalFieldProv
         if (!GeneralUtility::validEmail($submittedData['slub_events']['senderEmailAddress'])) {
             $isValid = false;
             $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:slub_events/Resources/Private/Language/locallang.xlf:tasks.statistics.invalidEmail'),
-                FlashMessage::ERROR);
+                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
         }
 
         return $isValid;
