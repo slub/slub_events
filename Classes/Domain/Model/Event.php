@@ -209,7 +209,7 @@ class Event extends AbstractEntity {
     /**
      * Topic for stats ID
      *
-     * @var \Slub\SlubEvents\Domain\Model\Topic
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Topic>
      */
     protected $topic;
 
@@ -288,6 +288,8 @@ class Event extends AbstractEntity {
         $this->discipline = new ObjectStorage();
 
         $this->subscribers = new ObjectStorage();
+
+        $this->topic = new ObjectStorage();
     }
 
     /**
@@ -1029,8 +1031,8 @@ class Event extends AbstractEntity {
   
     /**
      * Get Topic
-     *
-     * @return \Slub\SlubEvents\Domain\Model\Topic $topic
+     * 
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Topic> $topic
      */
     public function getTopic() {
         return $this->topic;
@@ -1038,10 +1040,32 @@ class Event extends AbstractEntity {
 
     /**
      * Set Topic
-     *
-     * @return \Slub\SlubEvents\Domain\Model\Topic $topic
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Slub\SlubEvents\Domain\Model\Topic> $topic
+     * @return void
      */
     public function setTopic( $topic ) {
         $this->topic = $topic;
+    }
+
+    /**
+     * Adds a topic
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Topic $topic
+     *
+     * @return void
+     */
+    public function addTopic( $topic ) {
+        $this->topic->attach( $topic );
+    }
+
+    /**
+     * Removes a topic
+     *
+     * @param \Slub\SlubEvents\Domain\Model\Topic $topic
+     *
+     * @return void
+     */
+    public function removeTopic( $topicToBeRemoved ) {
+        $this->topic->detach( $topicToBeRemoved );
     }
 }
