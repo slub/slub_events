@@ -661,6 +661,82 @@ class EventController extends AbstractController
         if ($parentSubEndDateTime) {
             $eventSubEndDateTime = clone $parentSubEndDateTime;
         }
+
+        //  we need to calculate the transitions out of a new DateTimeZone object
+        $timeZone = new \DateTimeZone(date_default_timezone_get());
+
+        // special handling of interval setting "last %weekday% of month"
+        if ($recurring_options['interval'] == "lastOfMonth") {
+            $dl= [1=>"monday", 2=>"tuesday",3=>"wednesday",4=>"thursday",5=>"friday",6=>"saturday",7=>"sunday"];
+
+            $weekday = $parentStartDateTime->format('N');
+            
+            $lastOfMonth = clone $parentStartDateTime;
+
+            $dlsrHandeled = false;
+
+            $oneWeek = new \DateInterval("P1W");
+            do {
+                $lastOfMonth->modify("last ".$dl[$weekday]." of this month");
+                $hour= (int)$eventStartDateTime->format("H");
+                $minute= (int)$eventStartDateTime->format("i");
+                $seconds= (int)$eventStartDateTime->format("s");
+
+                $lastOfMonth->setTime($hour, $minute, $seconds);
+
+                $changedDate = false;
+
+                // add one week until we match the last of month
+                while ($eventStartDateTime < $lastOfMonth) {
+                    $eventStartDateTime->add($oneWeek);
+                    $eventEndDateTime->add($oneWeek);
+                    if ($eventSubEndDateTime) {
+                        $eventSubEndDateTime->add($oneWeek);
+                    }
+                    $changedDate = true;
+                }
+
+                // handle Daylight Saving Rule
+                $transitions = $timeZone->getTransitions($parentStartDateTime->getTimestamp(), $eventStartDateTime->getTimestamp());
+                
+                // there seems to be a daylight saving switch
+                if ($transitions && count($transitions) > 1 && !$dlsrHandeled) {
+                    $dlsrHandeled = true;
+
+                    $last_transition = array_pop($transitions);
+                    $previous_transition = array_pop($transitions);
+                    $daylightOffset = $previous_transition['offset'] - $last_transition['offset'];
+                    if ($daylightOffset != 0) {
+                        $this->daylightOffset($eventStartDateTime, $daylightOffset);
+                        $this->daylightOffset($eventEndDateTime, $daylightOffset);
+                        $this->daylightOffset($lastOfMonth, $daylightOffset);
+                        if ($parentSubEndDateTime) {
+                            $this->daylightOffset($eventSubEndDateTime, $daylightOffset);
+                        }
+                    }
+                }
+
+                // switch to next month
+                $lastOfMonth->add($oneWeek);
+                
+                if ($changedDate) {
+                    // add child date time if it is before the parent end time
+                    if ($eventStartDateTime <= $recurringEndDateTime){
+                        $childDateTime = [];
+                        $childDateTime['startDateTime'] = clone $eventStartDateTime;
+                        $childDateTime['endDateTime'] = clone $eventEndDateTime;
+                        if ($eventSubEndDateTime) {
+                            $childDateTime['subEndDateTime'] = clone $eventSubEndDateTime;
+                        }
+
+                        $childDateTimes[] = $childDateTime;
+                    }
+                }
+            } while ($eventStartDateTime <= $recurringEndDateTime);
+
+            return $childDateTimes;
+        }
+
         switch ($recurring_options['interval']) {
             case 'weekly':
                   $dateTimeInterval = new \DateInterval("P1W");
@@ -680,8 +756,6 @@ class EventController extends AbstractController
         }
         $adjustDlstRun = 1;
 
-        //  we need to calculate the transitions out of a new DateTimeZone object
-        $timeZone = new \DateTimeZone(date_default_timezone_get());
 
         // first make events within the first week
         // create the child days within a week

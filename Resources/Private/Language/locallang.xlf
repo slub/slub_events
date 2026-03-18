@@ -324,6 +324,9 @@
 		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.yearly">
 			<source>yearly</source>
 		</trans-unit>
+		<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.lastOfMonth">
+			<source>Every last of the month</source>
+		</trans-unit>
 		<trans-unit id="tx_slubevents_domain_model_event.individual_appointment">
 			<source>Indivdual Appointment</source>
 		</trans-unit>
