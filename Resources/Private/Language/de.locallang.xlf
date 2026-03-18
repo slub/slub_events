@@ -429,6 +429,10 @@
 				<source><![CDATA[yearly]]></source>
 				<target><![CDATA[jährlich]]></target>
 			</trans-unit>
+			<trans-unit id="tx_slubevents_domain_model_event.recurring_options.interval.lastOfMonth" approved="yes">
+				<source>Every last of the month</source>
+				<target>Jeden letzten des Monats</target>
+			</trans-unit>
 			<trans-unit id="tx_slubevents_domain_model_event.recurring_parent" approved="yes">
 				<source><![CDATA[Recurring Parent Event]]></source>
 				<target><![CDATA[Terminserie]]></target>

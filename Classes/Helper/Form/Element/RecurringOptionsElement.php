@@ -183,6 +183,24 @@ class RecurringOptionsElement extends AbstractFormElement
         $formField .= LocalizationUtility::translate(
             'tx_slubevents_domain_model_event.recurring_options.interval.yearly',
             'slub_events') . '</label>';
+
+        // --- last of month
+        if ($recurring_options['interval'] == 'lastOfMonth') {
+          $active = 'active';
+          $checked = 'checked="checked"';
+        } else {
+          $active = '';
+          $checked = '';
+        }
+        $formField .= '<label for="interval-lastOfMonth" class="btn btn-primary '.$active.'">';
+        $formField .= '<input type="radio" id="interval-lastOfMonth" name="' . $this->data['parameterArray']['itemFormElName'] . '[interval]"';
+        $formField .= ' value="lastOfMonth" '.$checked;
+        $formField .= ' onchange="' . htmlspecialchars(implode('', $this->data['parameterArray']['fieldChangeFunc'])) . '"';
+        $formField .= ' />';
+        $formField .= LocalizationUtility::translate(
+            'tx_slubevents_domain_model_event.recurring_options.interval.lastOfMonth',
+            'slub_events') . '</label>';
+        
         $formField .= '</div>';
 
         $result['html'] = $formField;
